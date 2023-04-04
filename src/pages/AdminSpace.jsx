@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Row } from "../components/Flex";
 import Test1 from "./Test1";
+import Test2 from "./Test2";
+import Test3 from "./Test3";
 
 const AdminSpace = () => {
   const [boxes, setBoxes] = useState([
@@ -11,7 +13,7 @@ const AdminSpace = () => {
   ]);
   const elRef = useRef([]);
 
-  const handleMouseDown = (e, boxIndex) => {
+  const spaceMouseDownHandler = (e, boxIndex) => {
     const currentBox = boxes[boxIndex];
     const mouseX = e.clientX;
     const mouseY = e.clientY;
@@ -19,8 +21,7 @@ const AdminSpace = () => {
     const diffX = mouseX - currentBox.left;
     const diffY = mouseY - currentBox.top;
 
-    let hasMoved = false; // 마우스가 이동했는지 여부
-    const handleMouseMove = (e) => {
+    const spaceMouseMoveHandler = (e) => {
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
@@ -30,38 +31,33 @@ const AdminSpace = () => {
       setBoxes((prevBoxes) => {
         const newBoxes = [...prevBoxes];
         newBoxes[boxIndex] = { ...currentBox, left: newLeft, top: newTop };
+        console.log("111111111");
         return newBoxes;
       });
-
-      // 일정 이상 이동하면 hasMoved를 true로 설정
-      if (
-        !hasMoved &&
-        (Math.abs(newMouseX - mouseX) > 5 || Math.abs(newMouseY - mouseY) > 5)
-      ) {
-        hasMoved = true;
-      }
     };
 
-    const handleMouseUp = (e) => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+    const spaceMouseUpHandler = (e) => {
+      document.removeEventListener("mousemove", spaceMouseMoveHandler);
+      document.removeEventListener("mouseup", spaceMouseUpHandler);
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", spaceMouseMoveHandler);
+    document.addEventListener("mouseup", spaceMouseUpHandler);
     console.log(mouseX, mouseY);
   };
 
   return (
     <>
-      <Test1 />
+      {/* <Test1 /> */}
+      {/* <Test2 /> */}
+      <Test3 />
       {/* <Row>
         <StSelect>
           {boxes.map((box, index) => (
             <StBox
               key={box.id}
               ref={(el) => (elRef.current[index] = el)}
-              onMouseDown={(e) => handleMouseDown(e, index)}
+              onMouseDown={(e) => spaceMouseDownHandler(e, index)}
               style={{ transform: `translate(${box.left}px, ${box.top}px)` }}
             >
               {box.id}
