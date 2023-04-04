@@ -2,7 +2,7 @@ import axios from 'axios'
 import { cookies } from '../shared/cookies'
 
 
-const instance = axios.create({
+const api = axios.create({
     // baseURL:process.env.REACT_APP_SERVER_URL,
     // baseURL: 'http:/http://localhost:3000/users',
     baseURL: 'http://13.209.66.183',
@@ -13,32 +13,32 @@ const instance = axios.create({
 })
 
 
+api.interceptors.request.use(
+  // 요청을 보내기 전 수행되는 함수
+  function (config) {
+    const token = cookies.get("token")
+    config.headers["authorization"] = `Bearer ${token}`;
+    return config
+  },
 
-// instance.interceptors.request.use(
-//   // 요청을 보내기 전 수행되는 함수
-//   function (config) {
-//     const token = cookies.get("token")
-//     config.headers["authorization"] = `Bearer ${token}`;
-//     return config
-//   },
+  // 오류 요청을 보내기 전 수행되는 함수
+  function (error) {
+    return Promise.reject(error)
+    // return error 가 아님 !! 꼭 프로미스.리젝트 여야만 함
+  }
+)
 
-//   // 오류 요청을 보내기 전 수행되는 함수
-//   function (error) {
-//     return Promise.reject(error)
-//     // return error 가 아님 !! 꼭 프로미스.리젝트 여야만 함
-//   }
-// )
+api.interceptors.response.use(
+  // 응답을 내보내기 전 수행되는 함수
+  function (response) {
+    return response
+  },
 
-// instance.interceptors.response.use(
-//   // 응답을 내보내기 전 수행되는 함수
-//   function (response) {
-//     return response
-//   },
+  // 오류 응답을 내보내기 전 수행되는 함수
+  function (error) {
+    return Promise.reject(error)
+  }
+)
 
-//   // 오류 응답을 내보내기 전 수행되는 함수
-//   function (error) {
-//     return Promise.reject(error)
-//   }
-// )
 
-export default instance
+export default api
