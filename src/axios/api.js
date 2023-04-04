@@ -3,14 +3,14 @@ import { cookies } from '../shared/cookies'
 
 
 const api = axios.create({
-    baseURL:process.env.REACT_APP_SERVER_URL,
+    // baseURL:process.env.REACT_APP_SERVER_URL,
+    // baseURL: 'http:/http://localhost:3000/users',
+    baseURL: 'http://13.209.66.183',
     // headers:{
     //   "Access-Control-Allow-Origin": "*",
     // },
     // timeout: 1,
-    // 오류 확인 가능한지 테스트.. 1밀리세컨드.. 내에 응답을 못받으면 에러처리 하도록 돼 있음.
 })
-
 
 
 api.interceptors.request.use(
@@ -39,5 +39,6 @@ api.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
 
 export default api
