@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
-import instance from '../../axios/api';
+import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
@@ -32,11 +32,11 @@ function Login() {
   const onsumbitHandler = async e => {
     e.preventDefault();
 
-    //  const responce = await dispatch(__login(user));
+    //  const response = await dispatch(__login(user));
     //  console.log(user);
     //  navi('/')
-    //  console.log(responce);
-    //  if (responce.type === "LOGIN/fulfilled") {
+    //  console.log(response);
+    //  if (response.type === "LOGIN/fulfilled") {
     //   dispatch();
     //   alert("로그인 되었습니다.");
     //   // 머지하고 바꾸기
@@ -46,31 +46,36 @@ function Login() {
     //  }
 
     // try {
-    //   const responce = await instance.post('/login', user);
-    //   console.log(responce.headers.authorization);
-    //   // const payload = jwt_decode(responce.data.token);
-    //   const payload = jwt_decode(responce.headers.authorization);
+    //   const response = await api.post('/login', user);
+    //   console.log(response.headers.authorization);
+    //   // const payload = jwt_decode(response.data.token);
+    //   const payload = jwt_decode(response.headers.authorization);
 
-    //   // cookies.set("token", responce.data.token, { path: "/" });
-    //   cookies.set('token', responce.headers.authorization, { path: '/' });
+    //   // cookies.set("token", response.data.token, { path: "/" });
+    //   cookies.set('token', response.headers.authorization, { path: '/' });
     //   navi('/');
     // } catch (e) {
     //   alert('로그인 실패하였습니다.');
     // }
-      const responce = await instance.post('/users/login', user);
-      console.log(responce.headers.authorization);
-
-      // const payload = jwt_decode(responce.data.token);
-      const payload = jwt_decode(responce.headers.authorization);
+      const response = await api.post('/users/login', user);
+      // console.log(response.headers.authorization);
+      console.log(response.data.message);
+      // const payload = jwt_decode(response.data.token);
+      const token = response.headers.authorization
+      const newtoken = token.split(" ")[1]
+      // userId값이 token에 담겨온다! 근데 토큰값을 어떻게 id로 빼줄것인가..?!
+      console.log(newtoken);
+    
+      const payload = jwt_decode(newtoken);
     try {
-      // cookies.set("token", responce.data.token, { path: "/" });
-      cookies.set('token', responce.headers.authorization, { path: '/' });
-      cookies.set('userId', responce.headers.id, { path: '/' });
-
+      // cookies.set("token", response.data.token, { path: "/" });
+      cookies.set('token', response.headers.authorization, { path: '/' });
+      cookies.set('userId', response.headers.id, { path: '/' });
+  
       navi('/');
     } catch (e) {
-      console.log(responce);
-      // alert(responce.data);
+      const errorMsg = e.response.data.message
+      alert(`${errorMsg}`);
     }
   };
 

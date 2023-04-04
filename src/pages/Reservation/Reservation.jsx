@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { __addReservation } from "../../redux/modules/reservation";
+import { __addReservation, __getReservation } from "../../redux/modules/reservation";
 
 function Reservation() {
   const [isCheckOut, setIsCheckOut] = useState("false");

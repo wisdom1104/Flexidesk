@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import instance from '../../axios/api';
+import api from '../../axios/api';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
@@ -23,35 +23,27 @@ function SignUpAdmin() {
 
   const navi = useNavigate();
 
-// 인증하기 form태그
-  const certifiedBtnHandler = async (e) =>{
-    e.preventDefault();
-    const responce = await instance.post('/signup/admin', admin);
-    console.log(responce);
-    console.log(responce.data.message);
-    alert(`${responce.data.message}`)
-    // return responce
-    }
-
   // form태그 핸들러
   const sumbitBtnHandler = async (e) => {
     e.preventDefault();
     try {
-      if (admin.password === admin.passwordCheck) {
         console.log('유저 !!!', admin);
-        const responce = await instance.post('/users/signup/admin', admin);
-        console.log(responce);
-        console.log(responce.data);
+        const response = await api.post('/users/signup/admin', admin);
+        console.log(response);
+        console.log(response.data);
+        console.log(response.data.message);
+
         alert(`${admin.userName}님 회원가입을 축하합니다.`)
         navi('/login');
-        return responce;
-      }
+        return response;
     } 
     catch (error) {
       // alert('비밀번호가 일치하지 않습니다.');
-      const errorMsg = error.responce.data.msg;
+      const errorMsg = error.response.data.message;
+      console.log(error);
+      console.log(error.response);
+
       alert(`${errorMsg}`);
-      setAdmin('');
       return error;
   }
 }
@@ -66,7 +58,7 @@ function SignUpAdmin() {
 
   return (
     <>
-      <form onSubmit={certifiedBtnHandler}>
+      <form onSubmit={sumbitBtnHandler}>
         <h3>관리자 회원가입</h3>
 
         <p>회사 이메일</p>
@@ -79,9 +71,7 @@ function SignUpAdmin() {
           required
         />
         <button type="button">인증하기</button>
-      </form>
-
-      <form onSubmit={sumbitBtnHandler}>        
+    
       <p>이메일 인증</p>
         <Input
           type="text"
