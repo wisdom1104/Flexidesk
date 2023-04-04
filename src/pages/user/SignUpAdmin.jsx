@@ -37,10 +37,9 @@ function SignUpAdmin() {
       if (admin.password === admin.passwordCheck) {
         console.log('유저 !!!', admin);
         await instance.post('/signup/admin', admin);
+
         alert(`${admin.userName}님 회원가입을 축하합니다.`)
         navi('/login');
-        // 인풋값 비우기 왜 안되니????
-        setAdmin('');
       }
     } catch (e) {
       // console.log('비밀번호가 일치하지 않다!!!!');

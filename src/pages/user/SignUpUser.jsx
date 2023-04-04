@@ -28,17 +28,32 @@ function SignUpUser() {
   const navi = useNavigate();
 
   // form태그 핸들러
-  const sumbitHandler = async (e) => {
+  // const sumbitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try{
+  //     if(user.password === user.passwordCheck) {
+  //       console.log("확인안에 있는 유저 ->",user);
+  //       await instance.post('/signup/user',user)
+  //       navi('/login');
+  //     }
+  //   }
+  //   catch (e) {
+  //     alert('비밀번호가 일치하지 않습니다.')
+  //   }
+  // };
+
+  const sumbitBtnHandler = async (e) => {
     e.preventDefault();
-    try{
-      if(user.password === user.passwordCheck) {
-        console.log("확인안에 있는 유저 ->",user);
-        await instance.post('/signup/user',user)
+    try {
+      if (user.password === user.passwordCheck) {
+        console.log('직원 유저 !!!', user);
+        await instance.post('/signup/user', user);
+        alert(`${user.userName}님 회원가입을 축하합니다.`)
         navi('/login');
       }
-    }
-    catch (e) {
-      alert('비밀번호가 일치하지 않습니다.')
+    } catch (e) {
+      alert('비밀번호가 일치하지 않습니다.');
+      setUser('');
     }
   };
 
@@ -56,7 +71,7 @@ useEffect(() => {
 }, []);
 
   return (
-      <form onSubmit={sumbitHandler}>
+      <form onSubmit={sumbitBtnHandler}>
       <h3>회원가입</h3>
 
       <p>회사 이메일</p>
