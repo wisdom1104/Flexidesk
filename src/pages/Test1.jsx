@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Row } from "../components/Flex";
 
-const AdminSpace = () => {
+const Test1 = () => {
   const [boxes, setBoxes] = useState([
     { id: 1, left: 20, top: 20 },
     { id: 2, left: 20, top: 50 },
@@ -15,23 +15,25 @@ const AdminSpace = () => {
   //마우스 클릭한 위치와 박스 요소의 현재 위치를 계산하여, 마우스 이동에 따라 박스 요소를 이동
   const handleMouseDown = (e, boxIndex) => {
     const currentBox = boxes[boxIndex];
+    //마우스 시작점의 좌표
     const mouseX = e.clientX;
     const mouseY = e.clientY;
-
+// 현재 박스의 위치 정보
     const diffX = mouseX - currentBox.left;
     const diffY = mouseY - currentBox.top;
     //현재 마우스 위치와 클릭한 박스의 초기 위치를 이용하여 새로운 박스의 위치를 계산
     //이후 setBoxes 함수를 이용하여 새로운 상태를 업데이트
     //마우스가 움직일때마다 호출됨.
     const handleMouseMove = (e) => {
-      const newMouseX = e.clientX; //브라우저 윈도우에서 마우스 커서의 X 좌표값
-      const newMouseY = e.clientY; //브라우저 윈도우에서 마우스 커서의 Y 좌표값
-
-      const newLeft = newMouseX - diffX; //기존에 선택한 요소의 위치와 마우스 커서 위치 간의 차이 구함
+      //현재 마우스의 좌표값
+      const newMouseX = e.clientX;
+      const newMouseY = e.clientY; 
+//기존에 선택한 요소의 위치와 마우스 커서 위치 간의 차이 구함
+      const newLeft = newMouseX - diffX; 
       const newTop = newMouseY - diffY;
 
       setMoveBoxes((prevBoxes) => {
-        // const newBoxes = [...prevBoxes]; //이전 상태의 박스 배열을 복사하여 새로운 배열을 생성
+        // const moveBoxes = [...prevBoxes]; //이전 상태의 박스 배열을 복사하여 새로운 배열을 생성
         moveBoxes[boxIndex] = { ...currentBox, left: newLeft, top: newTop };
         //현재 선택한 박스의 인덱스에 해당하는 요소의 위치 정보를 새로 계산한 위치로 갱신하여 새로운 상태로 설정
         console.log("-----------------------");
@@ -39,16 +41,15 @@ const AdminSpace = () => {
       });
       return;
     };
-    document.addEventListener("mousemove", handleMouseMove);
 
     // 이벤트 리스너를 제거
     const handleMouseUp = (e) => {
       document.removeEventListener("mousemove", handleMouseMove);
-      // document.removeEventListener("mouseup", handleMouseUp);
-      console.log("dmdhjsodkjsldskdj");
+      document.removeEventListener("mouseup", handleMouseUp);
+      console.log("222222222222222");
     };
 
-    // document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     return;
   };
@@ -85,6 +86,7 @@ const AdminSpace = () => {
     <>
       <Row>
         <StSelect>
+          <span>test1</span>
           {boxes.map((box, index) => (
             <StBox
               key={box.id}
@@ -117,7 +119,7 @@ const AdminSpace = () => {
   );
 };
 
-export default AdminSpace;
+export default Test1;
 
 const StBox = styled.div`
   background: steelblue;
