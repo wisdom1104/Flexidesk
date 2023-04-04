@@ -45,18 +45,32 @@ function Login() {
     //   alert('로그인 실패하였습니다. 다시 !!!')
     //  }
 
-    try {
-      const responce = await instance.post('/login', user);
+    // try {
+    //   const responce = await instance.post('/login', user);
+    //   console.log(responce.headers.authorization);
+    //   // const payload = jwt_decode(responce.data.token);
+    //   const payload = jwt_decode(responce.headers.authorization);
+
+    //   // cookies.set("token", responce.data.token, { path: "/" });
+    //   cookies.set('token', responce.headers.authorization, { path: '/' });
+    //   navi('/');
+    // } catch (e) {
+    //   alert('로그인 실패하였습니다.');
+    // }
+      const responce = await instance.post('/users/login', user);
       console.log(responce.headers.authorization);
+
       // const payload = jwt_decode(responce.data.token);
       const payload = jwt_decode(responce.headers.authorization);
-
+    try {
       // cookies.set("token", responce.data.token, { path: "/" });
       cookies.set('token', responce.headers.authorization, { path: '/' });
+      cookies.set('userId', responce.headers.id, { path: '/' });
 
       navi('/');
     } catch (e) {
-      alert('로그인 실패하였습니다.');
+      console.log(responce);
+      // alert(responce.data);
     }
   };
 

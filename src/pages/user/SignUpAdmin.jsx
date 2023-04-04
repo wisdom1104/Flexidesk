@@ -14,8 +14,6 @@ function SignUpAdmin() {
     certification: '',
   });
 
-  console.log(admin);
-
   const onChangeHandler = e => {
     const { value, name } = e.target;
     setAdmin(old => {
@@ -25,9 +23,14 @@ function SignUpAdmin() {
 
   const navi = useNavigate();
 
-  const certifiedBtnHandler =  (e) =>{
+// 인증하기 form태그
+  const certifiedBtnHandler = async (e) =>{
     e.preventDefault();
-     
+    const responce = await instance.post('/signup/admin', admin);
+    console.log(responce);
+    console.log(responce.data.message);
+    alert(`${responce.data.message}`)
+    // return responce
     }
 
   // form태그 핸들러
@@ -36,17 +39,22 @@ function SignUpAdmin() {
     try {
       if (admin.password === admin.passwordCheck) {
         console.log('유저 !!!', admin);
-        await instance.post('/signup/admin', admin);
-
+        const responce = await instance.post('/users/signup/admin', admin);
+        console.log(responce);
+        console.log(responce.data);
         alert(`${admin.userName}님 회원가입을 축하합니다.`)
         navi('/login');
+        return responce;
       }
-    } catch (e) {
-      // console.log('비밀번호가 일치하지 않다!!!!');
-      alert('비밀번호가 일치하지 않습니다.');
+    } 
+    catch (error) {
+      // alert('비밀번호가 일치하지 않습니다.');
+      const errorMsg = error.responce.data.msg;
+      alert(`${errorMsg}`);
       setAdmin('');
-    }
-  };
+      return error;
+  }
+}
 
   // 토큰값으로 페이지 위치조절 (가드)
   useEffect(() => {
@@ -70,13 +78,11 @@ function SignUpAdmin() {
           placeholder="이메일을 입력하세요."
           required
         />
-
-        <button>인증하기</button>
+        <button type="button">인증하기</button>
       </form>
 
-
-      <form onSubmit={sumbitBtnHandler}>
-        <p>이메일 인증</p>
+      <form onSubmit={sumbitBtnHandler}>        
+      <p>이메일 인증</p>
         <Input
           type="text"
           value={admin.certification}
@@ -85,7 +91,6 @@ function SignUpAdmin() {
           placeholder="인증번호를 입력하세요."
           required
         />
-
         <p>비밀번호</p>
         <Input
           type="password"
@@ -126,7 +131,7 @@ function SignUpAdmin() {
           required
         />
 
-        <button>시작하기</button>
+        <button type="submit">시작하기</button>
       </form>
     </>
   );

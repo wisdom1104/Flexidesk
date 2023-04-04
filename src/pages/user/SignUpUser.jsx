@@ -47,7 +47,8 @@ function SignUpUser() {
     try {
       if (user.password === user.passwordCheck) {
         console.log('직원 유저 !!!', user);
-        await instance.post('/signup/user', user);
+
+        await instance.post('/users/signup/user', user);
         alert(`${user.userName}님 회원가입을 축하합니다.`)
         navi('/login');
       }
@@ -55,12 +56,8 @@ function SignUpUser() {
       alert('비밀번호가 일치하지 않습니다.');
       setUser('');
     }
-  };
-
-  // 인증버튼
-  const onBtnHandler = () => {
-
   }
+
 
 // 토큰값으로 페이지 위치조절 (가드)
 useEffect(() => {
@@ -90,7 +87,7 @@ useEffect(() => {
         placeholder='비밀번호를 입력하세요.'
       required/>
 
-      <p onClick={onBtnHandler}>비밀번호 확인</p>
+      <p>비밀번호 확인</p>
       <Input type="password" 
         value={user.passwordCheck}
         onChange={onChangeHandler}
