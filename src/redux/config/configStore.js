@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import itemSlice from '../modules/itemSlice'
-
+import reservation from '../modules/reservation'
 const store = configureStore({
   reducer: {
-item:itemSlice
+reservation,
   },
 })
 

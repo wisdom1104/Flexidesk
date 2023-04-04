@@ -1,0 +1,20 @@
+{
+  "reservation": [
+    {
+    "mrId": 3,
+    "username": "이민재",
+    "start": "2023-04-02T14:00",
+    "end": "2023-04-02T15:00"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
