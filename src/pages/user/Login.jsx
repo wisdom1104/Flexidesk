@@ -31,50 +31,18 @@ function Login() {
 
   const onsumbitHandler = async e => {
     e.preventDefault();
-
-    //  const response = await dispatch(__login(user));
-    //  console.log(user);
-    //  navi('/')
-    //  console.log(response);
-    //  if (response.type === "LOGIN/fulfilled") {
-    //   dispatch();
-    //   alert("로그인 되었습니다.");
-    //   // 머지하고 바꾸기
-    //   navi('/')
-    //  } else {
-    //   alert('로그인 실패하였습니다. 다시 !!!')
-    //  }
-
-    // try {
-    //   const response = await api.post('/login', user);
-    //   console.log(response.headers.authorization);
-    //   // const payload = jwt_decode(response.data.token);
-    //   const payload = jwt_decode(response.headers.authorization);
-
-    //   // cookies.set("token", response.data.token, { path: "/" });
-    //   cookies.set('token', response.headers.authorization, { path: '/' });
-    //   navi('/');
-    // } catch (e) {
-    //   alert('로그인 실패하였습니다.');
-    // }
+    try {     
       const response = await api.post('/users/login', user);
-      // console.log(response.headers.authorization);
-      console.log(response.data.message);
-      // const payload = jwt_decode(response.data.token);
       const token = response.headers.authorization
       const newtoken = token.split(" ")[1]
-      // userId값이 token에 담겨온다! 근데 토큰값을 어떻게 id로 빼줄것인가..?!
-      console.log(newtoken);
-    
       const payload = jwt_decode(newtoken);
-    try {
-      // cookies.set("token", response.data.token, { path: "/" });
+      console.log(payload);
+      console.log("너 토큰이야!!!!!!!!",newtoken);
       cookies.set('token', response.headers.authorization, { path: '/' });
-      cookies.set('userId', response.headers.id, { path: '/' });
-  
+      cookies.set('userId', payload.id, { path: '/' });
       navi('/');
     } catch (e) {
-      const errorMsg = e.response.data.message
+      const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
