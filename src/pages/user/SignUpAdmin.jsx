@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import instance from '../../axios/api';
+import api from '../../axios/api';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
@@ -23,44 +23,43 @@ function SignUpAdmin() {
 
   const navi = useNavigate();
 
-// 인증하기 form태그
-  const certifiedBtnHandler = async (e) =>{
+  // 인증하기 form태그
+  const certifiedBtnHandler = async e => {
     e.preventDefault();
-    const responce = await instance.post('/signup/admin', admin);
+    const responce = await api.post('/signup/admin', admin);
     console.log(responce);
     console.log(responce.data.message);
-    alert(`${responce.data.message}`)
+    alert(`${responce.data.message}`);
     // return responce
-    }
+  };
 
   // form태그 핸들러
-  const sumbitBtnHandler = async (e) => {
+  const sumbitBtnHandler = async e => {
     e.preventDefault();
     try {
       if (admin.password === admin.passwordCheck) {
         console.log('유저 !!!', admin);
-        const responce = await instance.post('/users/signup/admin', admin);
+        const responce = await api.post('/users/signup/admin', admin);
         console.log(responce);
         console.log(responce.data);
-        alert(`${admin.userName}님 회원가입을 축하합니다.`)
+        alert(`${admin.userName}님 회원가입을 축하합니다.`);
         navi('/login');
         return responce;
       }
-    } 
-    catch (error) {
+    } catch (error) {
       // alert('비밀번호가 일치하지 않습니다.');
       const errorMsg = error.responce.data.msg;
       alert(`${errorMsg}`);
       setAdmin('');
       return error;
-  }
-}
+    }
+  };
 
   // 토큰값으로 페이지 위치조절 (가드)
   useEffect(() => {
-    const token = cookies.get("token");
+    const token = cookies.get('token');
     if (token) {
-      navi("/");
+      navi('/');
     }
   }, []);
 
@@ -81,8 +80,8 @@ function SignUpAdmin() {
         <button type="button">인증하기</button>
       </form>
 
-      <form onSubmit={sumbitBtnHandler}>        
-      <p>이메일 인증</p>
+      <form onSubmit={sumbitBtnHandler}>
+        <p>이메일 인증</p>
         <Input
           type="text"
           value={admin.certification}

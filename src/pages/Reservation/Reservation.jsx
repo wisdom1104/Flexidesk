@@ -1,13 +1,27 @@
-import React, { createContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { __addReservation } from "../../redux/modules/reservation";
+import React, { createContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  __addReservation,
+  __getReservation,
+} from '../../redux/modules/reservation';
+import { cookies } from '../../shared/cookies';
 
 function Reservation() {
-  const [isCheckOut, setIsCheckOut] = useState("false");
+  const now = new Date();
+  const date = `${now.getFullYear()}-0${now.getMonth()}-0${now.getDay()}T`;
+  const param = useParams();
+  console.log(param);
+  const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
   const [count, setCount] = useState(1);
+  const reqData = { start: clickReservation[0], userList: [] };
   const dispatch = useDispatch();
-  // const reservationData = {mrid: }
+
+  const { reservation } = useSelector(state => state.reservation);
+  const { mrId, timeList } = reservation;
+  const userId = cookies.get('userId');
+  const navi = useNavigate();
 
   const addCount = () => {
     setCount(count + 1);
@@ -21,22 +35,20 @@ function Reservation() {
     }
   };
 
-  const onclickHandler = (e) => {
-    if (clickReservation.find((item) => item === e.target.value)) {
+  const onclickHandler = e => {
+    if (clickReservation.find(item => item === e.target.value)) {
       return setClickReservation(
-        clickReservation.filter((item) => item !== e.target.value)
+        clickReservation.filter(item => item !== e.target.value),
       );
     } else {
       setClickReservation([...clickReservation, e.target.value]);
     }
     setIsCheckOut(!isCheckOut);
   };
-
   console.log(clickReservation);
-
   useEffect(() => {
-    dispatch(__getReservation);
-  });
+    dispatch(__getReservation(param.id));
+  }, []);
 
   return (
     <div>
@@ -44,39 +56,16 @@ function Reservation() {
       <div>
         예약시간
         <div>
-          <button onClick={onclickHandler} disabled={isCheckOut} value="09:00">
-            09:00~9:59
-          </button>
-          <button onClick={onclickHandler} value="10:00">
-            10:00~10:59
-          </button>
-          <button onClick={onclickHandler} value="11:00">
-            11:00~11:59
-          </button>
-          <button onClick={onclickHandler} value="12:00">
-            12:00~12:59
-          </button>
-          <button onClick={onclickHandler} value="13:00">
-            13:00~13:59
-          </button>
-          <button onClick={onclickHandler} value="14:00">
-            14:00~14:59
-          </button>
-          <button onClick={onclickHandler} value="15:00">
-            15:00~15:59
-          </button>
-          <button onClick={onclickHandler} value="16:00">
-            16:00~16:59
-          </button>
-          <button onClick={onclickHandler} value="17:00">
-            17:00~17:59
-          </button>
-          <button onClick={onclickHandler} value="18:00">
-            18:00~18:59
-          </button>
-          <button onClick={onclickHandler} value="19:00">
-            19:00~19:59
-          </button>
+          {timeList?.map(item => (
+            <button
+              key={item.start}
+              onClick={onclickHandler}
+              disabled={item.isCheckOut === true}
+              value={`${date}${item.start}`}
+            >
+              {item.start} ~ {item.end}
+            </button>
+          ))}
         </div>
         예약 인원
         <div>
@@ -87,7 +76,8 @@ function Reservation() {
         <div>
           <button
             onClick={() => {
-              dispatch(__addReservation(clickReservation));
+              dispatch(__addReservation(reqData));
+              navi(`/detail/${userId}`);
             }}
           >
             예약 완료

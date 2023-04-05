@@ -14,7 +14,13 @@ export const __getReservation = createAsyncThunk(
   async(payload,thunk) =>{
     try{
       const token = cookies.get('token')
-      await api.get("/reservation/1")
+      const data = await api.get(`/reservations/${payload}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      console.log(data);
+      return thunk.fulfillWithValue(data.data)
     }catch(error){
       return thunk.rejectWithValue(error)
     }
@@ -27,7 +33,7 @@ export const __addReservation=createAsyncThunk(
     console.log(payload)
     try{
       const token = cookies.get('token')
-      await api.post("/reservation/1 ", payload,
+      await api.post("/reservations/1 ", payload,
      { headers : {
         Authorization: `Bearer ${token}`
       }
@@ -46,6 +52,9 @@ export const reservationSlice = createSlice({
   reducers:{
   },
   extraReducers:{
+    [__getReservation.fulfilled] : (state, action) =>{
+      state.reservation = action.payload.data
+    }
 
   }
 })
