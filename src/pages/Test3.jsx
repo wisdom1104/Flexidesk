@@ -1,122 +1,254 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { Row } from "../components/Flex";
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import { Column, Row } from '../components/Flex';
 
 const Test3 = () => {
-  const [boxes, setBoxes] = useState([
-    { id: 1, left: 20, top: 20 },
-    { id: 2, left: 20, top: 50 },
-  ]);
-  // const [moveBoxes, setMoveBoxes] = useState([]);
+  const [mrBoxes] = useState([{ mrId: 1, left: 20, top: 20, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, left: 20, top: 50, inner: '박스' }]);
+  const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
 
   const elRef = useRef([]);
+  const boardEl = useRef(null);
 
-//----------------------------------------------------------
-const handleDrop = (e) => {
-  e.preventDefault();
-  const boxId = e.dataTransfer.getData("boxId");
-  const boxIndex = boxes.findIndex((box) => box.id === Number(boxId));
-  const currentBox = boxes[boxIndex];
-  const newBox = {
-    ...currentBox,
-    id: newBoxes.length + 1,
-    left: e.clientX - e.target.offsetLeft,
-    top: e.clientY - e.target.offsetTop,
+  //------------------------모든 상자 드롭----------------------------------
+  const HandleDrop = e => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('boxId');
+    const targetRect = e.target.getBoundingClientRect();
+    if (Number(id) === 1) {
+      const newBox = {
+        // ...currentBox,
+        mrId: Number(id) + Number(newMrBoxes.length),
+        left: e.clientX - targetRect.left - 50,
+        top: e.clientY - targetRect.top - 50,
+        inner: 'new 회의실',
+      };
+      setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+    }
+    if (Number(id) === 2) {
+      const newBox = {
+        boxId: Number(id) - 1 + Number(newBoxes.length),
+        left: e.clientX - targetRect.left - 50,
+        top: e.clientY - targetRect.top - 50,
+        inner: 'new 박스',
+      };
+      setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+    }
   };
-  setNewBoxes((prevBoxes) => [...prevBoxes, newBox]);
-};
 
-
-
-  const handleDragOver = (e) => {
+  const handleDragOver = e => {
     e.preventDefault();
   };
 
   const handleDragStart = (e, boxId) => {
-    e.dataTransfer.setData("boxId", boxId);
+    e.dataTransfer.setData('boxId', boxId);
   };
 
-//----------------------------------------------------------
+  //--------------------------회의실 드래그 앤 드롭--------------------------------
 
-  const spaceMouseDownHandler = (e, boxIndex) => {
-    const currentBox = newBoxes[boxIndex];
+  const mrBoxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    const diffX = mouseX - currentBox.left;
-    const diffY = mouseY - currentBox.top;
+    const mrBoxMoveHandler = e => {
+      const currentMrBox = newMrBoxes[boxIndex];
 
-    const spaceMouseMoveHandler = (e) => {
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
-      const newLeft = newMouseX - diffX;
-      const newTop = newMouseY - diffY;
+      const mrDiffX = mouseX - currentMrBox.left;
+      const mrDiffY = mouseY - currentMrBox.top;
 
-      setNewBoxes((prevBoxes) => {
+      const newLeft = newMouseX - mrDiffX;
+      const newTop = newMouseY - mrDiffY;
+
+      const boardRect = boardEl.current.getBoundingClientRect();
+
+      const boxRect = elRef.current[boxIndex].getBoundingClientRect();
+
+      const limitedLeft = Math.max(
+        boardRect.left - (boardRect.left + 10),
+        Math.min(
+          newLeft,
+          boardRect.right - (boxRect.width + (boardRect.left + 10)),
+        ),
+      );
+      const limitedTop = Math.max(
+        boardRect.top - (boardRect.top + 10),
+        Math.min(
+          newTop,
+          boardRect.bottom - (boxRect.height + (boardRect.top + 10)),
+        ),
+      );
+      setNewMrBoxes(prevBoxes => {
+        const newMrBoxes = [...prevBoxes];
+        newMrBoxes[boxIndex] = {
+          ...currentMrBox,
+          left: limitedLeft,
+          top: limitedTop,
+        };
+        return newMrBoxes;
+      });
+    };
+
+    const spaceMouseUpHandler = e => {
+      document.removeEventListener('mousemove', mrBoxMoveHandler);
+      document.removeEventListener('mouseup', spaceMouseUpHandler);
+    };
+
+    document.addEventListener('mousemove', mrBoxMoveHandler);
+    document.addEventListener('mouseup', spaceMouseUpHandler);
+  };
+
+  //--------------------------박스 드래그 앤 드롭--------------------------------
+
+  const boxMouseDownHandler = (e, boxIndex) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const boxMoveHandler = e => {
+      const currentBox = newBoxes[boxIndex];
+
+      const newMouseX = e.clientX;
+      const newMouseY = e.clientY;
+
+      const boxDiffY = mouseY - currentBox.top;
+      const boxDiffX = mouseX - currentBox.left;
+
+      const newLeft = newMouseX - boxDiffX;
+      const newTop = newMouseY - boxDiffY;
+
+      const boardRect = boardEl.current.getBoundingClientRect();
+
+      const boxRect = elRef.current[boxIndex].getBoundingClientRect();
+
+      const limitedLeft = Math.max(
+        boardRect.left - (boardRect.left + 10),
+        Math.min(
+          newLeft,
+          boardRect.right - (boxRect.width + (boardRect.left + 10)),
+        ),
+      );
+      const limitedTop = Math.max(
+        boardRect.top - (boardRect.top + 10),
+        Math.min(
+          newTop,
+          boardRect.bottom - (boxRect.height + (boardRect.top + 10)),
+        ),
+      );
+
+      setNewBoxes(prevBoxes => {
         const newBoxes = [...prevBoxes];
-        newBoxes[boxIndex] = { ...currentBox, left: newLeft, top: newTop };
-        console.log("111111111");
-        document.addEventListener("mouseup", spaceMouseUpHandler);
+        newBoxes[boxIndex] = {
+          ...currentBox,
+          left: limitedLeft,
+          top: limitedTop,
+        };
+        document.addEventListener('mouseup', spaceMouseUpHandler);
         return newBoxes;
       });
     };
 
-    const spaceMouseUpHandler = (e) => {
-      document.removeEventListener("mousemove", spaceMouseMoveHandler);
-      document.removeEventListener("mouseup", spaceMouseUpHandler);
+    const spaceMouseUpHandler = e => {
+      document.removeEventListener('mousemove', boxMoveHandler);
+      document.removeEventListener('mouseup', spaceMouseUpHandler);
     };
 
-    document.addEventListener("mousemove", spaceMouseMoveHandler);
-    document.addEventListener("mouseup", spaceMouseUpHandler);
-    console.log(mouseX, mouseY);
-    console.log("boxes", boxes);
-    console.log("newBoxes", newBoxes);
+    document.addEventListener('mousemove', boxMoveHandler);
+    document.addEventListener('mouseup', spaceMouseUpHandler);
   };
 
-  // console.log("boxes", boxes);
-  // console.log("moveBoxes", moveBoxes);
-  // console.log("newBoxes", newBoxes);
-//----------------------------------------------------------
-
+  //-------------------------------------------------------------------------------
   return (
     <>
       <Row>
+        {/* ------------------------셀렉터 영역--------------------------------- */}
         <StSelect>
           <span>test3</span>
-          {boxes.map((box, i) => (
+          {/* ------------------------회의실 셀렉터--------------------------------- */}
+          {mrBoxes.map((box, i) => (
             <StBox
-              key={box.id}
-              ref={(el) => (elRef.current[i] = el)}
+              key={box.mrId}
+              ref={el => (elRef.current[i] = el)}
               draggable={true}
-              onDragStart={(e) => handleDragStart(e, box.id)}
+              onDragStart={e => handleDragStart(e, box.mrId)}
               left={box.left}
               top={box.top}
             >
-              {box.id}
+              {box.inner} {box.mrId}
+            </StBox>
+          ))}
+          {/* ------------------------박스 셀렉터--------------------------------- */}
+          {boxes.map((box, i) => (
+            <StBox
+              key={box.boxId}
+              ref={el => (elRef.current[i] = el)}
+              draggable={true}
+              onDragStart={e => handleDragStart(e, box.boxId)}
+              left={box.left}
+              top={box.top}
+            >
+              {box.inner} {box.boxId}
             </StBox>
           ))}
         </StSelect>
-        <StBoard
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          left={200}
-          top={20}
-        >
-          {newBoxes.map((box, index) => (
-            <StBox
-              key={box.id}
-              ref={(el) => (elRef.current[index] = el)}
-              onMouseDown={(e) => spaceMouseDownHandler(e, index)}
-              onDragStart={(e) => handleDragStart(e, box.id)}
-              style={{ transform: `translate(${box.left}px, ${box.top}px)` }}
-            >
-              {box.id}
-            </StBox>
-          ))}
-        </StBoard>
+        {/* ------------------------리스트 영역--------------------------------- */}
+        <StList>Space List</StList>
+        <Column>
+          <h2>Space Name</h2>
+          {/* ------------------------보드 영역--------------------------------- */}
+          <StBoard
+            ref={boardEl}
+            onDrop={HandleDrop}
+            onDragOver={handleDragOver}
+          >
+            {/* ------------------------회의실 드롭--------------------------------- */}
+            {newMrBoxes.map((box, index) => (
+              <StDropBox
+                onDrop={HandleDrop}
+                onDragOver={handleDragOver}
+                key={box.mrId}
+                ref={el => (elRef.current[index] = el)}
+                onMouseDown={e => mrBoxMouseDownHandler(e, index)}
+                onDragStart={e => handleDragStart(e, box.mrId)}
+                style={{ transform: `translate(${box.left}px, ${box.top}px)` }}
+              >
+                <div>
+                  {box.inner} {box.mrId}
+                </div>
+                <StBtnBox>
+                  <button>수정</button>
+                  <button>삭제</button>
+                </StBtnBox>
+              </StDropBox>
+            ))}
+            {/* ------------------------박스 드롭--------------------------------- */}
+            {newBoxes.map((box, index) => (
+              <StDropBox
+                key={box.boxId}
+                ref={el => (elRef.current[index] = el)}
+                onMouseDown={e => boxMouseDownHandler(e, index)}
+                onDragStart={e => handleDragStart(e, box.boxId)}
+                style={{ transform: `translate(${box.left}px, ${box.top}px)` }}
+              >
+                <div>
+                  {box.inner} {box.boxId}
+                </div>
+                <StBtnBox>
+                  <button>수정</button>
+                  <button>삭제</button>
+                </StBtnBox>
+              </StDropBox>
+            ))}
+          </StBoard>
+        </Column>
       </Row>
+      {/* ------------------------스페이스 추가/완료 버튼--------------------------------- */}
+      <StBtn>
+        <button>Space 추가</button>
+        <button>완료</button>
+      </StBtn>
     </>
   );
 };
@@ -129,10 +261,35 @@ const StBox = styled.div`
   height: 100px;
   margin: 10px;
   cursor: grab;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StDropBox = styled.div`
+  background: #c0a55c;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
 
 const StSelect = styled.div`
   background: #759573;
+  width: 150px;
+  height: 700px;
+  padding: 10px;
+`;
+
+const StList = styled.div`
+  background: #80b166;
   width: 150px;
   height: 700px;
   padding: 10px;
@@ -145,4 +302,20 @@ const StBoard = styled.div`
   width: 700px;
   height: 700px;
   margin: 10px;
+  position: relative;
+  overflow: hidden;
+`;
+
+const StBtnBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 5px;
+`;
+
+const StBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
 `;

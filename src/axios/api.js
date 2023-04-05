@@ -5,7 +5,7 @@ import { cookies } from '../shared/cookies'
 const api = axios.create({
     // baseURL:process.env.REACT_APP_SERVER_URL,
     // baseURL: 'http:/http://localhost:3000/users',
-    baseURL: 'http://13.209.66.183',
+    baseURL: 'process.env.REACT_APP_SERVER_URL',
     // headers:{
     //   "Access-Control-Allow-Origin": "*",
     // },
