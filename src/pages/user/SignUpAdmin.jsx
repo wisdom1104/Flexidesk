@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
 
+// 유효성검사 라이브러리
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
     email: '',
@@ -27,22 +33,13 @@ function SignUpAdmin() {
   const sumbitBtnHandler = async (e) => {
     e.preventDefault();
     try {
-        console.log('유저 !!!', admin);
         const response = await api.post('/users/signup/admin', admin);
-        console.log(response);
-        console.log(response.data);
-        console.log(response.data.message);
-
         alert(`${admin.userName}님 회원가입을 축하합니다.`)
         navi('/login');
         return response;
     } 
     catch (error) {
-      // alert('비밀번호가 일치하지 않습니다.');
       const errorMsg = error.response.data.message;
-      console.log(error);
-      console.log(error.response);
-
       alert(`${errorMsg}`);
       return error;
   }
@@ -55,6 +52,18 @@ function SignUpAdmin() {
       navi("/");
     }
   }, []);
+
+  // 정규식 유효성 검사를 수행
+  const schema = yup.object().shape({
+    userName: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string().required().min(8).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
+    "비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다."),
+    passwordCheck: yup.string().oneOf([yup.ref("password"), null]).min(8).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
+    "비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.")
+  });  
+
+  const {formState: { errors },} = useForm({resolver: yupResolver(schema),});
 
   return (
     <>
@@ -70,8 +79,9 @@ function SignUpAdmin() {
           placeholder="이메일을 입력하세요."
           required
         />
+        {errors.email && <spen>이메일을 입력하세요.</spen>}
         <button type="button">인증하기</button>
-    
+
       <p>이메일 인증</p>
         <Input
           type="text"
@@ -100,7 +110,6 @@ function SignUpAdmin() {
           placeholder="비밀번호를 한번 더 입력해주세요."
           required
         />
-
         <p>이름</p>
         <Input
           type="text"
