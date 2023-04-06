@@ -1,6 +1,5 @@
-import axios from 'axios'
-import { cookies } from '../shared/cookies'
-
+import axios from 'axios';
+import { cookies } from '../shared/cookies';
 
 const api = axios.create({
     // baseURL:process.env.REACT_APP_SERVER_URL,
@@ -40,5 +39,4 @@ const api = axios.create({
 //   }
 // )
 
-
-export default api
+export default api;
