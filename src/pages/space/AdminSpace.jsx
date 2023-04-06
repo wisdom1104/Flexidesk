@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Column, Row } from '../components/Flex';
+import Test3 from './Test3';
 
-const Test3 = () => {
+const AdminSpace = () => {
   const [mrBoxes] = useState([{ mrId: 1, left: 20, top: 20, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, left: 20, top: 50, inner: '박스' }]);
   const [newMrBoxes, setNewMrBoxes] = useState([]);
@@ -16,24 +16,96 @@ const Test3 = () => {
     e.preventDefault();
     const id = e.dataTransfer.getData('boxId');
     const targetRect = e.target.getBoundingClientRect();
+
+    //------------------------회의실드롭----------------------------------
     if (Number(id) === 1) {
       const newBox = {
-        // ...currentBox,
         mrId: Number(id) + Number(newMrBoxes.length),
         left: e.clientX - targetRect.left - 50,
         top: e.clientY - targetRect.top - 50,
         inner: 'new 회의실',
+        zIndex: 1,
       };
-      setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+      if (Number(newMrBoxes.length) !== 0 || Number(newBoxes.length) !== 0) {
+        const isOverlap = (draggedBox, existingBox) => {
+          const draggedLeft = draggedBox.left;
+          const draggedRight = draggedBox.left + 80;
+          const draggedTop = draggedBox.top;
+          const draggedBottom = draggedBox.top + 80;
+
+          const existingLeft = existingBox.left;
+          const existingRight = existingBox.left + 80;
+          const existingTop = existingBox.top;
+          const existingBottom = existingBox.top + 80;
+
+          if (
+            draggedLeft < existingRight &&
+            draggedRight > existingLeft &&
+            draggedTop < existingBottom &&
+            draggedBottom > existingTop
+          ) {
+            return true;
+          }
+          return false;
+        };
+
+        const isOverlapping = mrBoxes.some(box => isOverlap(newBox, box));
+        const isNewBoxOverlapping = newMrBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        const isNewBoxesOverlapping = newBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
+          setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+        }
+      } else {
+        setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+      }
     }
+
+    //------------------------박스 드롭----------------------------------
     if (Number(id) === 2) {
       const newBox = {
-        boxId: Number(id) - 1 + Number(newBoxes.length),
+        boxId: Number(id) + Number(newBoxes.length) - 1,
         left: e.clientX - targetRect.left - 50,
         top: e.clientY - targetRect.top - 50,
         inner: 'new 박스',
+        zIndex: 1,
       };
-      setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+      if (Number(newBoxes.length) !== 0 || Number(newMrBoxes.length) !== 0) {
+        const isOverlap = (draggedBox, existingBox) => {
+          const draggedLeft = draggedBox.left;
+          const draggedRight = draggedBox.left + 80;
+          const draggedTop = draggedBox.top;
+          const draggedBottom = draggedBox.top + 80;
+
+          const existingLeft = existingBox.left;
+          const existingRight = existingBox.left + 80;
+          const existingTop = existingBox.top;
+          const existingBottom = existingBox.top + 80;
+
+          if (
+            draggedLeft < existingRight &&
+            draggedRight > existingLeft &&
+            draggedTop < existingBottom &&
+            draggedBottom > existingTop
+          ) {
+            return true;
+          }
+          return false;
+        };
+        const isOverlapping = boxes.some(box => isOverlap(newBox, box));
+        const isNewBoxOverlapping = boxes.some(box => isOverlap(newBox, box));
+        const isNewBoxesOverlapping = mrBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
+          setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+        }
+      } else {
+        setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+      }
     }
   };
 
@@ -165,7 +237,7 @@ const Test3 = () => {
       <Row>
         {/* ------------------------셀렉터 영역--------------------------------- */}
         <StSelect>
-          <span>test3</span>
+          <span>AdminSpace</span>
           {/* ------------------------회의실 셀렉터--------------------------------- */}
           {mrBoxes.map((box, i) => (
             <StBox
@@ -253,7 +325,7 @@ const Test3 = () => {
   );
 };
 
-export default Test3;
+export default AdminSpace;
 
 const StBox = styled.div`
   background: steelblue;
@@ -318,4 +390,13 @@ const StBtn = styled.div`
   justify-content: center;
   align-items: flex-end;
   gap: 10px;
+`;
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

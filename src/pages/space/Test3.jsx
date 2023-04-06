@@ -1,10 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Column, Row } from '../components/Flex';
-import Test3 from './Test3';
-import Test1 from './Test1';
 
-const AdminSpace = () => {
+function Test3() {
   const [mrBoxes] = useState([{ mrId: 1, left: 20, top: 20, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, left: 20, top: 50, inner: '박스' }]);
   const [newMrBoxes, setNewMrBoxes] = useState([]);
@@ -18,24 +15,96 @@ const AdminSpace = () => {
     e.preventDefault();
     const id = e.dataTransfer.getData('boxId');
     const targetRect = e.target.getBoundingClientRect();
+
+    //------------------------회의실드롭----------------------------------
     if (Number(id) === 1) {
       const newBox = {
-        // ...currentBox,
         mrId: Number(id) + Number(newMrBoxes.length),
         left: e.clientX - targetRect.left - 50,
         top: e.clientY - targetRect.top - 50,
         inner: 'new 회의실',
+        zIndex: 1,
       };
-      setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+      if (Number(newMrBoxes.length) !== 0 || Number(newBoxes.length) !== 0) {
+        const isOverlap = (draggedBox, existingBox) => {
+          const draggedLeft = draggedBox.left;
+          const draggedRight = draggedBox.left + 80;
+          const draggedTop = draggedBox.top;
+          const draggedBottom = draggedBox.top + 80;
+
+          const existingLeft = existingBox.left;
+          const existingRight = existingBox.left + 80;
+          const existingTop = existingBox.top;
+          const existingBottom = existingBox.top + 80;
+
+          if (
+            draggedLeft < existingRight &&
+            draggedRight > existingLeft &&
+            draggedTop < existingBottom &&
+            draggedBottom > existingTop
+          ) {
+            return true;
+          }
+          return false;
+        };
+
+        const isOverlapping = mrBoxes.some(box => isOverlap(newBox, box));
+        const isNewBoxOverlapping = newMrBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        const isNewBoxesOverlapping = newBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
+          setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+        }
+      } else {
+        setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+      }
     }
+
+    //------------------------박스 드롭----------------------------------
     if (Number(id) === 2) {
       const newBox = {
-        boxId: Number(id) - 1 + Number(newBoxes.length),
+        boxId: Number(id) + Number(newBoxes.length) - 1,
         left: e.clientX - targetRect.left - 50,
         top: e.clientY - targetRect.top - 50,
         inner: 'new 박스',
+        zIndex: 1,
       };
-      setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+      if (Number(newBoxes.length) !== 0 || Number(newMrBoxes.length) !== 0) {
+        const isOverlap = (draggedBox, existingBox) => {
+          const draggedLeft = draggedBox.left;
+          const draggedRight = draggedBox.left + 80;
+          const draggedTop = draggedBox.top;
+          const draggedBottom = draggedBox.top + 80;
+
+          const existingLeft = existingBox.left;
+          const existingRight = existingBox.left + 80;
+          const existingTop = existingBox.top;
+          const existingBottom = existingBox.top + 80;
+
+          if (
+            draggedLeft < existingRight &&
+            draggedRight > existingLeft &&
+            draggedTop < existingBottom &&
+            draggedBottom > existingTop
+          ) {
+            return true;
+          }
+          return false;
+        };
+        const isOverlapping = boxes.some(box => isOverlap(newBox, box));
+        const isNewBoxOverlapping = boxes.some(box => isOverlap(newBox, box));
+        const isNewBoxesOverlapping = mrBoxes.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
+          setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+        }
+      } else {
+        setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+      }
     }
   };
 
@@ -164,13 +233,11 @@ const AdminSpace = () => {
   //-------------------------------------------------------------------------------
   return (
     <>
-      <Test1 />
-      {/* <Test3 /> */}
-      {/* <Row>
-        ------------------------셀렉터 영역---------------------------------
+      <Row>
+        {/* ------------------------셀렉터 영역--------------------------------- */}
         <StSelect>
-          <span>AdminSpace</span>
-          ------------------------회의실 셀렉터---------------------------------
+          <span>test3</span>
+          {/* ------------------------회의실 셀렉터--------------------------------- */}
           {mrBoxes.map((box, i) => (
             <StBox
               key={box.mrId}
@@ -183,7 +250,7 @@ const AdminSpace = () => {
               {box.inner} {box.mrId}
             </StBox>
           ))}
-          ------------------------박스 셀렉터---------------------------------
+          {/* ------------------------박스 셀렉터--------------------------------- */}
           {boxes.map((box, i) => (
             <StBox
               key={box.boxId}
@@ -197,17 +264,17 @@ const AdminSpace = () => {
             </StBox>
           ))}
         </StSelect>
-        ------------------------리스트 영역---------------------------------
+        {/* ------------------------리스트 영역--------------------------------- */}
         <StList>Space List</StList>
         <Column>
           <h2>Space Name</h2>
-          ------------------------보드 영역---------------------------------
+          {/* ------------------------보드 영역--------------------------------- */}
           <StBoard
             ref={boardEl}
             onDrop={HandleDrop}
             onDragOver={handleDragOver}
           >
-            ------------------------회의실 드롭---------------------------------
+            {/* ------------------------회의실 드롭--------------------------------- */}
             {newMrBoxes.map((box, index) => (
               <StDropBox
                 onDrop={HandleDrop}
@@ -227,7 +294,7 @@ const AdminSpace = () => {
                 </StBtnBox>
               </StDropBox>
             ))}
-            ------------------------박스 드롭---------------------------------
+            {/* ------------------------박스 드롭--------------------------------- */}
             {newBoxes.map((box, index) => (
               <StDropBox
                 key={box.boxId}
@@ -248,16 +315,16 @@ const AdminSpace = () => {
           </StBoard>
         </Column>
       </Row>
-      ------------------------스페이스 추가/완료 버튼---------------------------------
+      {/* ------------------------스페이스 추가/완료 버튼--------------------------------- */}
       <StBtn>
         <button>Space 추가</button>
         <button>완료</button>
-      </StBtn> */}
+      </StBtn>
     </>
   );
-};
+}
 
-export default AdminSpace;
+export default Test3;
 
 const StBox = styled.div`
   background: steelblue;
@@ -322,4 +389,13 @@ const StBtn = styled.div`
   justify-content: center;
   align-items: flex-end;
   gap: 10px;
+`;
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
