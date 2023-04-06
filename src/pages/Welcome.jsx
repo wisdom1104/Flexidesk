@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { cookies } from '../shared/cookies';
+import styled from 'styled-components';
+import Slider from '../features/Slider';
 
 function Welcome() {
     
@@ -23,9 +25,11 @@ function Welcome() {
           <button onClick={()=> {
             navi('/signupuser')
           }}>일반</button>
+
+          <Slider/>
+          
         </div>
       )
 }
 
 export default Welcome
-

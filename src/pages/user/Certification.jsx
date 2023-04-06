@@ -4,7 +4,10 @@ import api from '../../axios/api';
 
 function Certification({admin}) {
 
-    const [number,setNumber] = useState('');
+    const [number,setNumber] = useState({
+        email:''
+    });
+
     console.log(setNumber);
 
     const onChangeHandler = e => {
@@ -38,7 +41,7 @@ return (
       <p>회사 이메일</p>
       <Input
         type="email"
-        value={admin.email}
+        value={number.email}
         onChange={onChangeHandler}
         name="email"
         placeholder="이메일을 입력하세요."
