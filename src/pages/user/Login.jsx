@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import api from '../../axios/api';
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
@@ -35,6 +36,7 @@ function Login() {
       cookies.set('userId', payload.id, { path: '/' });
       console.log(payload.companyName);
       cookies.set('companyName', String(payload.companyName), { path: '/' });
+
 
       navi('/');
     } catch (e) {
