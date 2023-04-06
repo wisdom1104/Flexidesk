@@ -8,7 +8,7 @@ import api from '../../axios/api';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+import Certification from './Certification';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
@@ -30,7 +30,7 @@ function SignUpAdmin() {
   const navi = useNavigate();
 
   // form태그 핸들러
-  const sumbitBtnHandler = async (e) => {
+  const submitBtnHandler = async (e) => {
     e.preventDefault();
     try {
         const response = await api.post('/users/signup/admin', admin);
@@ -67,20 +67,10 @@ function SignUpAdmin() {
 
   return (
     <>
-      <form onSubmit={sumbitBtnHandler}>
+      <form onSubmit={submitBtnHandler}>
         <h3>관리자 회원가입</h3>
 
-        <p>회사 이메일</p>
-        <Input
-          type="email"
-          value={admin.email}
-          onChange={onChangeHandler}
-          name="email"
-          placeholder="이메일을 입력하세요."
-          required
-        />
-        {errors.email && <spen>이메일을 입력하세요.</spen>}
-        <button type="button">인증하기</button>
+        <Certification onChangeHandler={onChangeHandler} admin={admin} />
 
       <p>이메일 인증</p>
         <Input

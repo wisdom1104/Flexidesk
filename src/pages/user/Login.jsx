@@ -27,9 +27,7 @@ function Login() {
 
   const navi = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const onsumbitHandler = async e => {
+  const onsubmitHandler = async e => {
     e.preventDefault();
     try {     
       const response = await api.post('/users/login', user);
@@ -57,7 +55,7 @@ function Login() {
 
   return (
     <div>
-      <form onSubmit={onsumbitHandler}>
+      <form onSubmit={onsubmitHandler}>
         <p>이메일</p>
         <Input
           type="email"
