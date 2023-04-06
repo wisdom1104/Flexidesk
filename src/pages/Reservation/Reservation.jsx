@@ -9,7 +9,7 @@ import { cookies } from '../../shared/cookies';
 
 function Reservation() {
   const now = new Date();
-  const date = `${now.getFullYear()}-0${now.getMonth()}-0${now.getDay()}T`;
+  const date = `${now.getFullYear()}-0${now.getMonth() + 1}-0${now.getDate()}T`;
   const param = useParams();
   console.log(param);
   const [isCheckOut, setIsCheckOut] = useState('false');
@@ -48,6 +48,7 @@ function Reservation() {
   console.log(clickReservation);
   useEffect(() => {
     dispatch(__getReservation(param.id));
+    console.log(date);
   }, []);
 
   return (
