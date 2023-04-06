@@ -31,7 +31,7 @@ function Login() {
       const newtoken = token.split(' ')[1];
       const payload = jwt_decode(newtoken);
 
-      cookies.set('token', response.headers.authorization, { path: '/' });
+      cookies.set('token', newtoken, { path: '/' });
       cookies.set('userId', payload.id, { path: '/' });
       console.log(payload.companyName);
       cookies.set('companyName', String(payload.companyName), { path: '/' });
