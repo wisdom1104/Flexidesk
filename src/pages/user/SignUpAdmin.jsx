@@ -84,6 +84,16 @@ function SignUpAdmin() {
         <h3>관리자 회원가입</h3>
 
         <Certification onChangeHandler={onChangeHandler} admin={admin} />
+        {/* <p>회사 이메일</p>
+      <Input
+        type="email"
+        value={admin.email}
+        onChange={onChangeHandler}
+        name="email"
+        placeholder="이메일을 입력하세요."
+        required
+      />
+      <button type="submit">인증하기</button> */}
 
         <p>이메일 인증</p>
         <Input

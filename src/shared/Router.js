@@ -13,11 +13,11 @@ import { useEffect, useState } from 'react';
 
 function Router() {
   const [loginStatus, setLoginStatus] = useState(false);
-  // const isLogin = useSelector(state => state.login.isLogin);
+  const isLogin = useSelector(state => state.login?.isLogin);
 
-  // useEffect(() => {
-  //   setLoginStatus(isLogin);
-  // }, [isLogin]);
+  useEffect(() => {
+    setLoginStatus(isLogin);
+  }, [isLogin]);
 
   return (
     <BrowserRouter>
@@ -25,18 +25,23 @@ function Router() {
         {/* 토큰이 있는지 없는지 조절가능 설정은 loginSlice에서 해줌 */}
         <Route path="/" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
+
         {!loginStatus ? (
+          <>        
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUpAdmin />} />
+          <Route path="/signupuser" element={<SignUpUser />} />
+          </>
+          
+        ) : (
           <>
             <Route path="/reservation/:id" element={<Reservation />} />
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUpAdmin />} />
-            <Route path="/signupuser" element={<SignUpUser />} />
             <Route path="/adminspace" element={<AdminSpace />} />
             <Route path="/space" element={<Space />} />
             <Route path="/detail/:userId" element={<ReservationDetail />} />
           </>
-        ) : null}
+        )
+        }
       </Routes>
     </BrowserRouter>
   );
