@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import instance from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import api from '../../axios/api';
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
@@ -57,16 +58,17 @@ function Login() {
     // } catch (e) {
     //   alert('로그인 실패하였습니다.');
     // }
-      const responce = await instance.post('/users/login', user);
-      console.log(responce.headers.authorization);
+    const responce = await api.post('/users/login', user);
+    console.log(responce.headers.authorization);
 
-      // const payload = jwt_decode(responce.data.token);
-      const payload = jwt_decode(responce.headers.authorization);
+    // const payload = jwt_decode(responce.data.token);
+    const token = responce.headers.authorization.split(' ')[1];
+    const payload = jwt_decode(token);
     try {
+      console.log(responce);
       // cookies.set("token", responce.data.token, { path: "/" });
-      cookies.set('token', responce.headers.authorization, { path: '/' });
-      cookies.set('userId', responce.headers.id, { path: '/' });
-
+      cookies.set('token', token, { path: '/' });
+      cookies.set('userId', payload.id, { path: '/' });
       navi('/');
     } catch (e) {
       console.log(responce);
