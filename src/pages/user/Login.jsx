@@ -8,17 +8,13 @@ import jwt_decode from 'jwt-decode';
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
-  // navigate로 메인페이지 보내주기
-  // const { users } = useSelector((state) => state.users);
 
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  console.log('로그인 유저->>>>>>', user);
-
-  const onChangeHandler = e => {
+  const loginChangeHandler = e => {
     const { value, name } = e.target;
     setUser(old => {
       return { ...old, [name]: value };
@@ -34,10 +30,12 @@ function Login() {
       const token = response.headers.authorization
       const newtoken = token.split(" ")[1]
       const payload = jwt_decode(newtoken);
-      console.log(payload);
-      console.log("너 토큰이야!!!!!!!!",newtoken);
+
       cookies.set('token', response.headers.authorization, { path: '/' });
       cookies.set('userId', payload.id, { path: '/' });
+      console.log(payload.companyName);
+      cookies.set('companyName', payload.companyName, { path: '/' });
+
       navi('/');
     } catch (e) {
       const errorMsg = e.response.data.message;
@@ -60,7 +58,7 @@ function Login() {
         <Input
           type="email"
           value={user.email}
-          onChange={onChangeHandler}
+          onChange={loginChangeHandler}
           name="email"
           placeholder="이메일을 입력하세요."
           required
@@ -70,7 +68,7 @@ function Login() {
         <Input
           type="password"
           value={user.password}
-          onChange={onChangeHandler}
+          onChange={loginChangeHandler}
           name="password"
           placeholder="비밀번호를 입력하세요."
           required

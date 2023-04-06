@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Slider from '../features/Slider';
 
 function Welcome() {
+
     
     const navi = useNavigate();
     
@@ -26,8 +27,8 @@ function Welcome() {
             navi('/signupuser')
           }}>일반</button>
 
-          <Slider/>
-          
+          {/* <Slider/> */}
+
         </div>
       )
 }
