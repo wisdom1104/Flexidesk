@@ -34,7 +34,7 @@ function Login() {
       cookies.set('token', response.headers.authorization, { path: '/' });
       cookies.set('userId', payload.id, { path: '/' });
       console.log(payload.companyName);
-      cookies.set('companyName', payload.companyName, { path: '/' });
+      cookies.set('companyName', String(payload.companyName), { path: '/' });
 
       navi('/');
     } catch (e) {
