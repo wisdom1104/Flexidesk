@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
 
+// 유효성검사 라이브러리
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import Certification from './Certification';
+
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
     email: '',
@@ -23,34 +29,17 @@ function SignUpAdmin() {
 
   const navi = useNavigate();
 
-  // 인증하기 form태그
-  const certifiedBtnHandler = async e => {
-    e.preventDefault();
-    const responce = await api.post('/signup/admin', admin);
-    console.log(responce);
-    console.log(responce.data.message);
-    alert(`${responce.data.message}`);
-    // return responce
-  };
-
   // form태그 핸들러
-  const sumbitBtnHandler = async e => {
+  const submitBtnHandler = async e => {
     e.preventDefault();
     try {
-      if (admin.password === admin.passwordCheck) {
-        console.log('유저 !!!', admin);
-        const responce = await api.post('/users/signup/admin', admin);
-        console.log(responce);
-        console.log(responce.data);
-        alert(`${admin.userName}님 회원가입을 축하합니다.`);
-        navi('/login');
-        return responce;
-      }
+      const response = await api.post('/users/signup/admin', admin);
+      alert(`${admin.userName}님 회원가입을 축하합니다.`);
+      navi('/login');
+      return response;
     } catch (error) {
-      // alert('비밀번호가 일치하지 않습니다.');
-      const errorMsg = error.responce.data.msg;
+      const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
-      setAdmin('');
       return error;
     }
   };
@@ -63,24 +52,39 @@ function SignUpAdmin() {
     }
   }, []);
 
+  // 정규식 유효성 검사를 수행
+  const schema = yup.object().shape({
+    userName: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup
+      .string()
+      .required()
+      .min(8)
+      .matches(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
+        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+      ),
+    passwordCheck: yup
+      .string()
+      .oneOf([yup.ref('password'), null])
+      .min(8)
+      .matches(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
+        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+      ),
+  });
+
+  const {
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
   return (
     <>
-      <form onSubmit={certifiedBtnHandler}>
+      <form onSubmit={submitBtnHandler}>
         <h3>관리자 회원가입</h3>
 
-        <p>회사 이메일</p>
-        <Input
-          type="email"
-          value={admin.email}
-          onChange={onChangeHandler}
-          name="email"
-          placeholder="이메일을 입력하세요."
-          required
-        />
-        <button type="button">인증하기</button>
-      </form>
+        <Certification onChangeHandler={onChangeHandler} admin={admin} />
 
-      <form onSubmit={sumbitBtnHandler}>
         <p>이메일 인증</p>
         <Input
           type="text"
@@ -90,15 +94,18 @@ function SignUpAdmin() {
           placeholder="인증번호를 입력하세요."
           required
         />
+        {errors.certification && <span>인증번호를 입력하세요.</span>}
+
         <p>비밀번호</p>
         <Input
           type="password"
           value={admin.password}
           onChange={onChangeHandler}
           name="password"
-          placeholder="비밀번호를 입력하세요."
+          placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
           required
         />
+        {errors.password && <span>비밀번호 형식에 맞게 입력하세요.</span>}
 
         <p>비밀번호 확인</p>
         <Input
@@ -106,9 +113,10 @@ function SignUpAdmin() {
           value={admin.passwordCheck}
           onChange={onChangeHandler}
           name="passwordCheck"
-          placeholder="비밀번호를 한번 더 입력해주세요."
+          placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
           required
         />
+        {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
         <p>이름</p>
         <Input
@@ -119,6 +127,7 @@ function SignUpAdmin() {
           placeholder="사용하실 이름을 입력하세요."
           required
         />
+        {errors.userName && <span>사용하실 이름을 입력하세요.</span>}
 
         <p>회사</p>
         <Input
@@ -126,9 +135,10 @@ function SignUpAdmin() {
           value={admin.companyName}
           onChange={onChangeHandler}
           name="companyName"
-          placeholder="회사를 알려주세요."
+          placeholder="회사를 입력하세요."
           required
         />
+        {errors.companyName && <span>회사를 입력하세요.</span>}
 
         <button type="submit">시작하기</button>
       </form>

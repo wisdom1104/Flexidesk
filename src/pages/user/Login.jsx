@@ -2,24 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
-import instance from '../../axios/api';
+import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import api from '../../axios/api';
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
-  // navigate로 메인페이지 보내주기
-  // const { users } = useSelector((state) => state.users);
 
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  console.log('로그인 유저->>>>>>', user);
-
-  const onChangeHandler = e => {
+  const loginChangeHandler = e => {
     const { value, name } = e.target;
     setUser(old => {
       return { ...old, [name]: value };
@@ -28,51 +24,24 @@ function Login() {
 
   const navi = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const onsumbitHandler = async e => {
+  const onsubmitHandler = async e => {
     e.preventDefault();
+    try {     
+      const response = await api.post('/users/login', user);
+      const token = response.headers.authorization
+      const newtoken = token.split(" ")[1]
+      const payload = jwt_decode(newtoken);
 
-    //  const responce = await dispatch(__login(user));
-    //  console.log(user);
-    //  navi('/')
-    //  console.log(responce);
-    //  if (responce.type === "LOGIN/fulfilled") {
-    //   dispatch();
-    //   alert("로그인 되었습니다.");
-    //   // 머지하고 바꾸기
-    //   navi('/')
-    //  } else {
-    //   alert('로그인 실패하였습니다. 다시 !!!')
-    //  }
-
-    // try {
-    //   const responce = await instance.post('/login', user);
-    //   console.log(responce.headers.authorization);
-    //   // const payload = jwt_decode(responce.data.token);
-    //   const payload = jwt_decode(responce.headers.authorization);
-
-    //   // cookies.set("token", responce.data.token, { path: "/" });
-    //   cookies.set('token', responce.headers.authorization, { path: '/' });
-    //   navi('/');
-    // } catch (e) {
-    //   alert('로그인 실패하였습니다.');
-    // }
-    const responce = await api.post('/users/login', user);
-    console.log(responce.headers.authorization);
-
-    // const payload = jwt_decode(responce.data.token);
-    const token = responce.headers.authorization.split(' ')[1];
-    const payload = jwt_decode(token);
-    try {
-      console.log(responce);
-      // cookies.set("token", responce.data.token, { path: "/" });
-      cookies.set('token', token, { path: '/' });
+      cookies.set('token', response.headers.authorization, { path: '/' });
       cookies.set('userId', payload.id, { path: '/' });
+      console.log(payload.companyName);
+      cookies.set('companyName', String(payload.companyName), { path: '/' });
+
+
       navi('/');
     } catch (e) {
-      console.log(responce);
-      // alert(responce.data);
+      const errorMsg = e.response.data.message;
+      alert(`${errorMsg}`);
     }
   };
 
@@ -86,12 +55,12 @@ function Login() {
 
   return (
     <div>
-      <form onSubmit={onsumbitHandler}>
+      <form onSubmit={onsubmitHandler}>
         <p>이메일</p>
         <Input
           type="email"
           value={user.email}
-          onChange={onChangeHandler}
+          onChange={loginChangeHandler}
           name="email"
           placeholder="이메일을 입력하세요."
           required
@@ -101,7 +70,7 @@ function Login() {
         <Input
           type="password"
           value={user.password}
-          onChange={onChangeHandler}
+          onChange={loginChangeHandler}
           name="password"
           placeholder="비밀번호를 입력하세요."
           required
