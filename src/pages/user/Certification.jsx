@@ -20,9 +20,7 @@ function Certification({ admin }) {
   // 로딩 띄우기 -> 로딩 이쁜걸로 ~~~
   const submitBtnHandler = async e => {
     e.preventDefault();
-    console.log('여긴 되려나?????????????');
     try {
-      console.log('여긴 되려나???');
       const response = await api.post('/users/signup/email', number);
       console.log('인증번호를 찾아라', response.data);
       const data = response.data

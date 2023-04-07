@@ -39,6 +39,7 @@ function SignUpAdmin() {
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
+      console.log(errorMsg);
       alert(`${errorMsg}`);
       return error;
     }
@@ -61,17 +62,18 @@ function SignUpAdmin() {
       .required()
       .min(8)
       .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
-        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
       ),
     passwordCheck: yup
       .string()
       .oneOf([yup.ref('password'), null])
       .min(8)
       .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
-        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
       ),
+    certification: yup.string().required(),
   });
 
   const {
@@ -84,16 +86,6 @@ function SignUpAdmin() {
         <h3>관리자 회원가입</h3>
 
         <Certification onChangeHandler={onChangeHandler} admin={admin} />
-        {/* <p>회사 이메일</p>
-      <Input
-        type="email"
-        value={admin.email}
-        onChange={onChangeHandler}
-        name="email"
-        placeholder="이메일을 입력하세요."
-        required
-      />
-      <button type="submit">인증하기</button> */}
 
         <p>이메일 인증</p>
         <Input
