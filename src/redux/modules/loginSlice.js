@@ -24,6 +24,8 @@ export const loginSlice  = createSlice({
         logout(state){
             state.isLogin = false;
             cookies.remove("token");
+            cookies.remove("userId");
+            cookies.remove("companyName");
         },
     },
     extraReducers: {},

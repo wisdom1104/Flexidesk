@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import api from '../../axios/api';
 
-function Certification({ admin }) {
+function Certification() {
   const [number, setNumber] = useState({
     email: '',
   });

@@ -32,7 +32,6 @@ function Router() {
           <Route path="/signup" element={<SignUpAdmin />} />
           <Route path="/signupuser" element={<SignUpUser />} />
           </>
-          
         ) : (
           <>
             <Route path="/reservation/:id" element={<Reservation />} />

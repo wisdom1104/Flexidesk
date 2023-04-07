@@ -76,16 +76,16 @@ function SignUpAdmin() {
     certification: yup.string().required(),
   });
 
-  const {
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
+  const { register, handleSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+  
   return (
     <>
       <form onSubmit={submitBtnHandler}>
         <h3>관리자 회원가입</h3>
 
-        <Certification onChangeHandler={onChangeHandler} admin={admin} />
+        <Certification />
 
         <p>이메일 인증</p>
         <Input

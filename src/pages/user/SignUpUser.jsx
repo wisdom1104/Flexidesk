@@ -77,9 +77,9 @@ function SignUpUser() {
     certification: yup.string().required(),
   });
 
-  const {
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
 
   return (
     <form onSubmit={submitBtnHandler}>
