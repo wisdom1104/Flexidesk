@@ -39,6 +39,7 @@ function SignUpAdmin() {
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
+      console.log(errorMsg);
       alert(`${errorMsg}`);
       return error;
     }
@@ -61,29 +62,30 @@ function SignUpAdmin() {
       .required()
       .min(8)
       .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
-        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
       ),
     passwordCheck: yup
       .string()
       .oneOf([yup.ref('password'), null])
       .min(8)
       .matches(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/i,
-        '비밀번호는 숫자, 소문자, 특수문자를 모두 포함해야 합니다.',
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
       ),
+    certification: yup.string().required(),
   });
 
-  const {
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
+  const { register, handleSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+  
   return (
     <>
       <form onSubmit={submitBtnHandler}>
         <h3>관리자 회원가입</h3>
 
-        <Certification onChangeHandler={onChangeHandler} admin={admin} />
+        <Certification />
 
         <p>이메일 인증</p>
         <Input

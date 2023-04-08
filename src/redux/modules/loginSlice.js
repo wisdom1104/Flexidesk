@@ -14,7 +14,7 @@ if(cookies.get("token")) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const loginSlice  = createSlice({
+const loginSlice  = createSlice({
     name: "login",
     initialState,
     reducers: {
@@ -24,6 +24,8 @@ export const loginSlice  = createSlice({
         logout(state){
             state.isLogin = false;
             cookies.remove("token");
+            cookies.remove("userId");
+            cookies.remove("companyName");
         },
     },
     extraReducers: {},
