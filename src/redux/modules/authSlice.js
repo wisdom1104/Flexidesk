@@ -7,7 +7,7 @@ const initialState = {
     isError: null
   };
   
-  const authSlice = createSlice({
+const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
@@ -17,12 +17,10 @@ const initialState = {
     logout(state) {
         state.isLogin = false;
         cookies.remove("token");
+        cookies.remove("userId");
+        cookies.remove("companyName");
     },
     }
   });
   
-  export const { setToken, setUser, setError } = authSlice.actions;
-  
-  export const selectAuth = state => state.auth;
   export default authSlice.reducer;
-  

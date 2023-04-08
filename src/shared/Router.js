@@ -19,49 +19,33 @@ import { cookies } from './cookies';
 function Router() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const token = useSelector(state => state.auth?.token);
-  // const token = cookies.get('token')
-  
-  useEffect( ()=> {
-    if(token) {
-       setLoginStatus(!loginStatus);
-      const decodedToken = jwt_decode(token);
-      setIsAdmin(decodedToken?.isAdmin || false); // token이 undefined이면 false를 반환
-    } else {
-      setLoginStatus(false);
-      setIsAdmin(false)
-    }
-  },[token])
 
   return (
     <BrowserRouter>
-    <Header/>
-      <Routes>
+        <Header/>
+        <Routes>
         {/* 토큰이 있는지 없는지 조절가능 설정은 loginSlice에서 해줌 */}
         <Route path="/" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
 
         {/* 로그인하지 않은 사용자만 접근 가능 */}
-        {!loginStatus && (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUpAdmin />} />
             <Route path="/signupuser" element={<SignUpUser />} />
           </>
-        )}
+
 
         {/* 로그인한 사용자만 접근 가능 */}
-        {loginStatus && (
           <>
             {/* 일반 사용자 권한만 접근 가능 */}
             <Route path="/reservation/:id" element={<Reservation />} />
             <Route path="/detail/:userId" element={<ReservationDetail />} />
 
             {/* 관리자 권한만 접근 가능 */}
-            {isAdmin && <Route path="/adminspace" element={<AdminSpace />} />}
+            <Route path="/adminspace" element={<AdminSpace />} />
             <Route path="/space" element={<Space />} />
           </>
-        )}
             <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

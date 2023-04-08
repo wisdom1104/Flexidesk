@@ -14,7 +14,7 @@ if(cookies.get("token")) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const loginSlice  = createSlice({
+const loginSlice  = createSlice({
     name: "login",
     initialState,
     reducers: {
