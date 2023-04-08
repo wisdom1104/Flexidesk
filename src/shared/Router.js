@@ -28,7 +28,6 @@ function Router() {
         {!loginStatus ? (
           <>
             <Route path="/reservation/:id" element={<Reservation />} />
-            <Route path="/welcome" element={<Welcome />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUpAdmin />} />
             <Route path="/signupuser" element={<SignUpUser />} />
