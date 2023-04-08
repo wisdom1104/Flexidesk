@@ -31,9 +31,9 @@ function Login() {
       const newtoken = token.split(' ')[1];
       const payload = jwt_decode(newtoken);
 
-      cookies.set('token', newtoken, { path: '/' });
-      cookies.set('userId', payload.id, { path: '/' });
-      cookies.set('companyName', String(payload.companyName), { path: '/' });
+      cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
+      cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
+      cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
 
       navi('/');
     } catch (e) {
