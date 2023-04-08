@@ -1,60 +1,100 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
-import axios from 'axios';
+import { __getSpaces } from './spacesSlice';
 
 const initialState = {
-  spaces: [],
+  space: [],
+  isLoading: false,
+  error: null,
 };
 
-//space 전체 조회
-// export const __getSpaces = createAsyncThunk(
-//   'getSpaces',
-//   async (payload, thunkAPI) => {
-//     try {
-//       const token = cookies.get('token');
-//       const response = await api.get('/space', {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       // console.log(response);
-//       return thunkAPI.fulfillWithValue(response.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   },
-// );
-const token =
-  'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiQURNSU4iLCJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiY29tcGFueU5hbWUiOiJ0ZXN0IiwiZXhwIjoxNjgwNzg0MjEyLCJpYXQiOjE2ODA3ODA2MTJ9.VI3iw0MH7wqgtAQTTN2CU_WsFYe2oWOPGYSzS1eMak4';
-
-//space 하나 조회
+// space 부분 조회
 export const __getSpace = createAsyncThunk(
   '__getSpace',
-  async (spaceId, thunkAPI) => {
+  async (spaceId, thunk) => {
     try {
-      // const token = cookies.get('token');
-      // const companyName = cookies.get('companyName');
-      const response = await api.get('/test/space/16', {
-        // const response = await api.get('/{companyName}/space/{spaceId}', {
-        // /{companyName}/space/{spaceId}
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
+      const response = await api.get(`/${companyName}/space/${spaceId}`, {
         headers: {
-          Authorization: `${token}`,
-          // Authorization: ``,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
-      return thunkAPI.fulfillWithValue(response.data);
+      // console.log(response.data.data);
+      return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return error;
     }
   },
 );
 
-export const spacesSlice = createSlice({
-  name: 'spaces',
+// space 삭제
+export const __deleteSpace = createAsyncThunk(
+  '__deleteSpace',
+  async (spaceId, thunk) => {
+    try {
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
+      const response = await api.delete(`/${companyName}/space/${spaceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(response.data.data);
+      thunk.dispatch(__getSpaces());
+      return thunk.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return error;
+    }
+  },
+);
+
+// space name 수정
+export const __editSpace = createAsyncThunk(
+  '__editSpace',
+  async (payload, thunk) => {
+    console.log(payload);
+    try {
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
+      const response = await api.patch(
+        `/${companyName}/space/${payload.spaceId}`,
+        {
+          spaceName: payload.spaceName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      // console.log(response.data.data);
+      thunk.dispatch(__getSpaces());
+      return thunk.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return error;
+    }
+  },
+);
+
+export const spaceSlice = createSlice({
+  name: 'space',
   initialState,
   reducers: {},
-  extraReducers: {},
+  extraReducers: {
+    //space 부분 조회
+    [__getSpace.pending]: state => {
+      state.isLoading = true;
+    },
+    [__getSpace.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.space = action.payload;
+    },
+    [__getSpace.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
 });
-export default spacesSlice.reducer;
+export default spaceSlice.reducer;

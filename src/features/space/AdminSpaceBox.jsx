@@ -1,16 +1,38 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { __editSpace, __getSpace } from '../../redux/modules/spaceSlice';
+import { __addMr } from '../../redux/modules/spaceMrSlice';
 
-function Test3() {
+function AdminSpaceBox({ spaceId, selectedSpace }) {
   const [mrBoxes] = useState([{ mrId: 1, x: 20, y: 20, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 20, y: 50, inner: '박스' }]);
-  const [newMrBoxes, setNewMrBoxes] = useState([]);
-  const [newBoxes, setNewBoxes] = useState([]);
 
   const elRef = useRef([]);
   const boardEl = useRef(null);
 
-  //------------------------모든 상자 드롭----------------------------------
+  const [newMrBoxes, setNewMrBoxes] = useState([]);
+  const [newBoxes, setNewBoxes] = useState([]);
+  const dispatch = useDispatch();
+  const { space } = useSelector(state => state.space);
+  const mrList = space.map(item => item.mrlist[0]);
+  console.log(mrList);
+  // useEffect(() => {
+  //   dispatch(__getSpace(spaceId));
+  //   // console.log(space);
+  // }, [selectedSpace]);
+  useEffect(() => {
+    dispatch(__getSpace(spaceId));
+    // console.log(space);
+  }, [{ mrList, selectedSpace }]);
+
+  // space name 수정
+  const [editSpaceName, setEditSpaceName] = useState('');
+  useEffect(() => {
+    const spaceName = space?.[0]?.spaceName;
+    setEditSpaceName(spaceName || '');
+  }, [space]);
+
   const HandleDrop = e => {
     e.preventDefault();
     const id = e.dataTransfer.getData('boxId');
@@ -19,13 +41,12 @@ function Test3() {
     //------------------------회의실드롭----------------------------------
     if (Number(id) === 1) {
       const newBox = {
-        mrId: Number(id) + Number(newMrBoxes.length),
+        spaceId,
+        mrName: 'new mr',
         x: e.clientX - targetRect.x - 50,
         y: e.clientY - targetRect.y - 50,
-        inner: 'new 회의실',
-        zIndex: 1,
       };
-      if (Number(newMrBoxes.length) !== 0 || Number(newBoxes.length) !== 0) {
+      if (Number(mrList.length) !== 0 || Number(newBoxes.length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
           const draggedRight = draggedBox.x + 80;
@@ -49,17 +70,23 @@ function Test3() {
         };
 
         const isOverlapping = mrBoxes.some(box => isOverlap(newBox, box));
+        // const isNewBoxOverlapping = mrList.some(box => isOverlap(newBox, box));
         const isNewBoxOverlapping = newMrBoxes.some(box =>
           isOverlap(newBox, box),
         );
         const isNewBoxesOverlapping = newBoxes.some(box =>
           isOverlap(newBox, box),
         );
+        console.log(isOverlapping);
+        console.log(isNewBoxOverlapping);
+        console.log(isNewBoxesOverlapping);
         if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
-          setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+          dispatch(__addMr(newBox));
+        } else {
+          console.log('겹쳐져');
         }
       } else {
-        setNewMrBoxes(prevBoxes => [...prevBoxes, newBox]);
+        dispatch(__addMr(newBox));
       }
     }
 
@@ -115,7 +142,6 @@ function Test3() {
   const handleDragStart = (e, boxId) => {
     e.dataTransfer.setData('boxId', boxId);
   };
-
   //--------------------------회의실 드래그 앤 드롭--------------------------------
 
   const mrBoxMouseDownHandler = (e, boxIndex) => {
@@ -223,115 +249,138 @@ function Test3() {
     document.addEventListener('mousemove', boxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
-  console.log(newMrBoxes);
-  //-------------------------------------------------------------------------------
+  // console.log(newMrBoxes);
+  //수정
+  const [edit, setEdit] = useState(false);
+  // console.log(edit);
+  const onEditSpaceNameHandler = async spaceId => {
+    const payload = {
+      spaceId,
+      spaceName: editSpaceName,
+    };
+    dispatch(__editSpace(payload));
+    setEdit(!edit);
+  };
+
   return (
     <>
-      <Row>
-        {/* ------------------------셀렉터 영역--------------------------------- */}
-        <StSelect>
-          <span>Test3</span>
-          {/* ------------------------회의실 셀렉터--------------------------------- */}
-          {mrBoxes.map((box, i) => (
-            <StBox
-              key={box.mrId}
-              ref={el => (elRef.current[i] = el)}
-              draggable={true}
-              onDragStart={e => handleDragStart(e, box.mrId)}
-              x={box.x}
-              y={box.y}
-            >
-              {box.inner} {box.mrId}
-            </StBox>
-          ))}
-          {/* ------------------------박스 셀렉터--------------------------------- */}
-          {boxes.map((box, i) => (
-            <StBox
-              key={box.boxId}
-              ref={el => (elRef.current[i] = el)}
-              draggable={true}
-              onDragStart={e => handleDragStart(e, box.boxId)}
-              x={box.x}
-              y={box.y}
-            >
-              {box.inner} {box.boxId}
-            </StBox>
-          ))}
-        </StSelect>
-        {/* ------------------------리스트 영역--------------------------------- */}
-        <StList>Space List</StList>
-        <Column>
-          <h2>Space Name</h2>
-          {/* ------------------------보드 영역--------------------------------- */}
-          <StBoard
-            ref={boardEl}
+      {/* space name 부분 */}
+      {!edit ? (
+        <div>
+          {space?.map(item => {
+            if (item)
+              return (
+                <span style={{ margin: '10px' }} key={item.spaceId}>
+                  {item.spaceName}
+                  {/* {item.spaceId} */}
+                  <button
+                    onClick={() => {
+                      setEdit(!edit);
+                    }}
+                  >
+                    수정하기
+                  </button>
+                </span>
+              );
+          })}
+        </div>
+      ) : (
+        <div>
+          {space?.map(item => {
+            if (item)
+              return (
+                <div key={item.spaceId}>
+                  <input
+                    style={{ padding: '10px' }}
+                    type="text"
+                    value={editSpaceName}
+                    onChange={e => {
+                      setEditSpaceName(e.target.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      onEditSpaceNameHandler(item.spaceId);
+                    }}
+                  >
+                    수정 완료
+                  </button>
+                </div>
+              );
+          })}
+        </div>
+      )}
+      {/* board 부분 */}
+      <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
+        {/*예시 드래그 앤 드롭 */}
+        {newMrBoxes.map((box, index) => (
+          <StDropBox
             onDrop={HandleDrop}
             onDragOver={handleDragOver}
+            key={box.mrId}
+            ref={el => (elRef.current[index] = el)}
+            onMouseDown={e => mrBoxMouseDownHandler(e, index)}
+            onDragStart={e => handleDragStart(e, box.mrId)}
+            style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
           >
-            {/* ------------------------회의실 드롭--------------------------------- */}
-            {newMrBoxes.map((box, index) => (
-              <StDropBox
-                onDrop={HandleDrop}
-                onDragOver={handleDragOver}
-                key={box.mrId}
-                ref={el => (elRef.current[index] = el)}
-                onMouseDown={e => mrBoxMouseDownHandler(e, index)}
-                onDragStart={e => handleDragStart(e, box.mrId)}
-                style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-              >
-                <div>
-                  {box.inner} {box.mrId}
-                </div>
-                <StBtnBox>
-                  <button>수정</button>
-                  <button>삭제</button>
-                </StBtnBox>
-              </StDropBox>
-            ))}
-            {/* ------------------------박스 드롭--------------------------------- */}
-            {newBoxes.map((box, index) => (
-              <StDropBox
-                key={box.boxId}
-                ref={el => (elRef.current[index] = el)}
-                onMouseDown={e => boxMouseDownHandler(e, index)}
-                onDragStart={e => handleDragStart(e, box.boxId)}
-                style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-              >
-                <div>
-                  {box.inner} {box.boxId}
-                </div>
-                <StBtnBox>
-                  <button>수정</button>
-                  <button>삭제</button>
-                </StBtnBox>
-              </StDropBox>
-            ))}
-          </StBoard>
-        </Column>
-      </Row>
-      {/* ------------------------스페이스 추가/완료 버튼--------------------------------- */}
-      <StBtn>
-        <button>Space 추가</button>
-        <button>완료</button>
-      </StBtn>
+            <div>
+              {box.inner} {box.mrId}
+            </div>
+          </StDropBox>
+        ))}
+        {/* 박스 드래그 앤 드롭 */}
+        <div>
+          {space?.map(item =>
+            item.boxlist?.length > 0
+              ? item.boxlist.map((box, index) => (
+                  <StDropBox
+                    key={box.boxId}
+                    onDrop={HandleDrop}
+                    onDragOver={handleDragOver}
+                    ref={el => (elRef.current[index] = el)}
+                    onMouseDown={e => mrBoxMouseDownHandler(e, index)}
+                    onDragStart={e => handleDragStart(e, box.mrId)}
+                    style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+                  >
+                    <div>
+                      {box.boxName}/{box.boxId}
+                    </div>
+                    <StBtnBox>
+                      <button>수정</button>
+                      <button>삭제</button>
+                    </StBtnBox>
+                  </StDropBox>
+                ))
+              : null,
+          )}
+        </div>
+        {/* 회의실 드래그 앤 드롭 */}
+        <div>
+          {space?.map(item =>
+            item.mrlist?.length > 0
+              ? item.mrlist.map(mr => (
+                  <StDropMr
+                    key={mr.mrId}
+                    style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
+                  >
+                    <div>
+                      {mr.mrName}/{mr.mrId}
+                    </div>
+                    <StBtnBox>
+                      <button>수정</button>
+                      <button>삭제</button>
+                    </StBtnBox>
+                  </StDropMr>
+                ))
+              : null,
+          )}
+        </div>
+      </StBoard>
     </>
   );
 }
 
-export default Test3;
-
-const StBox = styled.div`
-  background: steelblue;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
+export default AdminSpaceBox;
 const StDropBox = styled.div`
   background: #c0a55c;
   width: 100px;
@@ -345,19 +394,18 @@ const StDropBox = styled.div`
   align-items: center;
   gap: 20px;
 `;
-
-const StSelect = styled.div`
-  background: #759573;
-  width: 150px;
-  height: 700px;
-  padding: 10px;
-`;
-
-const StList = styled.div`
-  background: #80b166;
-  width: 150px;
-  height: 700px;
-  padding: 10px;
+const StDropMr = styled.div`
+  background: #c478a4;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
 
 const StBoard = styled.div`
@@ -371,19 +419,6 @@ const StBoard = styled.div`
   overflow: hidden;
 `;
 
-const StBtnBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  gap: 5px;
-`;
-
-const StBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
-`;
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -392,4 +427,10 @@ export const Column = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+`;
+const StBtnBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 5px;
 `;
