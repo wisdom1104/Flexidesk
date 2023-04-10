@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { __editSpace, __getSpace } from '../../redux/modules/spaceSlice';
-import { __addMr, __deleteMr } from '../../redux/modules/spaceMrSlice';
+import {
+  __addMr,
+  __deleteMr,
+  __editMr,
+} from '../../redux/modules/spaceMrSlice';
 import { __addBox, __deleteBox } from '../../redux/modules/spaceBoxSlice';
 
 function AdminSpaceBox({ spaceId, selectedSpace }) {
@@ -38,6 +42,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   });
   // console.log('boxList', boxList);
 
+  // 모든 요소 드롭
   const HandleDrop = async e => {
     e.preventDefault();
     // const boxList = space?.map(item => item.boxlist);
@@ -151,47 +156,80 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     e.dataTransfer.setData('boxId', boxId);
   };
   //--------------------------회의실 드래그 앤 드롭--------------------------------
+  // mr 삭제
+  const onClickDeleteMrHandler = async mrId => {
+    const payload = {
+      mrId,
+      spaceId,
+    };
+    dispatch(__deleteMr(payload));
+  };
 
+  //mr name 수정
+  const [mrEdit, setMrEdit] = useState(false);
+  const [editMrName, setEditMrName] = useState(mrList.mrName);
+
+  const onEditMrNameHandler = async mr => {
+    console.log('mr', mr);
+    // const payload = {
+    //   spaceId,
+    //   mrId: mr.mrId,
+    //   mrName: editMrName,
+    //   x: mr.x,
+    //   y: mr.y,
+    // };
+    // dispatch(__editMr(payload));
+    // setMrEdit(!mrEdit);
+  };
+  // mr 좌표 수정 (드래그 앤 드롭)
+  const [editMrXY, setEditMrXY] = useState({
+    spaceId,
+    currentMrId: 0,
+    mrName: editMrName,
+    x: 0,
+    y: 0,
+  });
   const mrBoxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
+    const currentMr = mrList[0];
+    const currentMrBox = currentMr[0];
+    const mrId = currentMr[0].mrId;
+    console.log('currentMrBox', currentMrBox);
 
     const mrBoxMoveHandler = e => {
-      const currentMrBox = mrList[boxIndex];
-
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
-
-      const mrDiffX = mouseX - currentMrBox.x;
-      const mrDiffY = mouseY - currentMrBox.y;
-
-      const newx = newMouseX - mrDiffX;
-      const newy = newMouseY - mrDiffY;
-
-      const boardRect = boardEl.current.getBoundingClientRect();
-
-      const boxRect = elRef.current[boxIndex].getBoundingClientRect();
+      const boardRect = boardEl.current.getBoundingClientRect(); // 이동 가능한 영역(board)의 위치와 크기 정보 가져오기
+      const boxRect = elRef.current[boxIndex].getBoundingClientRect(); // 이동 대상 상자(box)의 위치와 크기 정보 가져오기
+      const mrDiffX = mouseX - currentMrBox.x; // 현재 이동 중인 상자의 시작 위치와 마우스 위치 사이의 X축 차이
+      const mrDiffY = mouseY - currentMrBox.y; // 현재 이동 중인 상자의 시작 위치와 마우스 위치 사이의 Y축 차이
+      const newx = newMouseX - mrDiffX; // 새로운 X 위치 계산
+      const newy = newMouseY - mrDiffY; // 새로운 Y 위치 계산
 
       const limitedx = Math.max(
-        boardRect.x - (boardRect.x + 10),
-        Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))),
+        // X 위치 제한 범위 설정
+        boardRect.x - (boardRect.x + 10), // board 영역에서 왼쪽 끝으로 이동하는 경우
+        Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))), // board 영역에서 오른쪽 끝으로 이동하는 경우
       );
       const limitedy = Math.max(
-        boardRect.y - (boardRect.y + 10),
+        // Y 위치 제한 범위 설정
+        boardRect.y - (boardRect.y + 10), // board 영역에서 위쪽 끝으로 이동하는 경우
         Math.min(
           newy,
-          boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
+          boardRect.bottom - (boxRect.height + (boardRect.y + 10)), // board 영역에서 아래쪽 끝으로 이동하는 경우
         ),
       );
-      setNewMrBoxes(prevBoxes => {
-        const newMrBoxes = [...prevBoxes];
-        newMrBoxes[boxIndex] = {
-          ...currentMrBox,
-          x: limitedx,
-          y: limitedy,
-        };
-        return newMrBoxes;
-      });
+
+      const payload = {
+        spaceId,
+        mrId,
+        mrName: 'test',
+        x: Number(limitedx),
+        y: Number(limitedy),
+      };
+      console.log('payload1', payload);
+      // dispatch(__editMr(payload)); // 새로운 위치로 이동
     };
 
     const spaceMouseUpHandler = e => {
@@ -262,24 +300,16 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   //---------------------------------------------------
 
   //space name 수정
-  const [edit, setEdit] = useState(false);
-  // console.log(edit);
+  const [spaceEdit, setSpaceEdit] = useState(false);
   const onEditSpaceNameHandler = async spaceId => {
     const payload = {
       spaceId,
       spaceName: editSpaceName,
     };
     dispatch(__editSpace(payload));
-    setEdit(!edit);
+    setSpaceEdit(!spaceEdit);
   };
-  // mr 삭제
-  const onClickDeleteMrHandler = async mrId => {
-    const payload = {
-      mrId,
-      spaceId,
-    };
-    dispatch(__deleteMr(payload));
-  };
+
   //box 삭제
   const onClickDeleteBoxHandler = async boxId => {
     const payload = {
@@ -291,7 +321,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   return (
     <>
       {/* space name 부분 */}
-      {!edit ? (
+      {!spaceEdit ? (
         <div>
           {space?.map(item => {
             if (item)
@@ -301,7 +331,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
                   {/* {item.spaceId} */}
                   <button
                     onClick={() => {
-                      setEdit(!edit);
+                      setSpaceEdit(!spaceEdit);
                     }}
                   >
                     수정하기
@@ -384,19 +414,27 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
                     onDragStart={e => handleDragStart(e, mr.mrId)}
                     style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                   >
-                    <div>
-                      {mr.mrName}/{mr.mrId}
-                    </div>
-                    <StBtnBox>
-                      <button>수정</button>
-                      <button
-                        onClick={() => {
-                          onClickDeleteMrHandler(mr.mrId);
-                        }}
-                      >
-                        삭제
-                      </button>
-                    </StBtnBox>
+                    <>
+                      <div>
+                        {mr.mrName}/{mr.mrId}
+                      </div>
+                      <StBtnBox>
+                        <button
+                          onClick={() => {
+                            setMrEdit(!mrEdit);
+                          }}
+                        >
+                          수정
+                        </button>
+                        <button
+                          onClick={() => {
+                            onClickDeleteMrHandler(mr);
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </StBtnBox>
+                    </>
                   </StDropMr>
                 ))
               : null,

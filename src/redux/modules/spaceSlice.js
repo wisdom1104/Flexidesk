@@ -54,7 +54,7 @@ export const __deleteSpace = createAsyncThunk(
 export const __editSpace = createAsyncThunk(
   '__editSpace',
   async (payload, thunk) => {
-    console.log(payload);
+    // console.log(payload);
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
