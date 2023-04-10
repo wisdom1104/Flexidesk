@@ -7,13 +7,17 @@ import {
   __getReservation,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
+import Calendar from './Calendar';
 import RenderCells from './RenderCells';
 import RenderDays from './RenderDays';
 import RenderHeader from './RenderHeader';
 
 function Reservation() {
   const now = new Date();
-  const date = `${now.getFullYear()}-0${now.getMonth() + 1}-0${now.getDate()}T`;
+  const date = `${now.getFullYear()}-${(now.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
+
   const param = useParams();
   console.log(param);
   const [isCheckOut, setIsCheckOut] = useState('false');
@@ -118,6 +122,7 @@ function Reservation() {
           onDateClick={onDateClick}
         />
       </div>
+      <Calendar />
     </>
   );
 }
