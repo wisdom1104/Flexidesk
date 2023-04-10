@@ -7,10 +7,22 @@ function FalseGuard() {
 
     useEffect(()=> {
         const token = cookies.get("token");
-        if(!token) {
-            navi('/login')
+        const roll = cookies.get("roll");
+
+        if(token && roll) {
+            //일반 사용자만 접근가능
+            navi('/space')
+        } else if(token && !roll) {
+            //사업자만 접근가능
+            // navi('/adminspace')
+            navi([
+                {pathname:'/adminspace'},
+                {pathname:'/reservation/:id'},
+                {pathname:'/detail/:userId'},
+            ])
         }
     },[])
+
   return ;
 }
 

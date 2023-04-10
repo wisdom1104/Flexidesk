@@ -12,6 +12,7 @@ import RenderCells from './RenderCells';
 import RenderDays from './RenderDays';
 import RenderHeader from './RenderHeader';
 import FalseGuard from '../../hooks/FalseGuard';
+import AllReservation from './AllReservation';
 
 function Reservation() {
   FalseGuard();
@@ -125,7 +126,13 @@ function Reservation() {
           onDateClick={onDateClick}
         />
       </div>
+
       <Calendar />
+      <br />      
+      <div>
+        전체 예약 조회
+        <AllReservation/>
+      </div>
     </>
   );
 }

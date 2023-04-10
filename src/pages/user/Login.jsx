@@ -35,6 +35,7 @@ function Login() {
       cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
+      cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
       navi('/');
     } catch (e) {
       const errorMsg = e.response.data.message;
