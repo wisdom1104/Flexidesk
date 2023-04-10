@@ -49,7 +49,7 @@ function SignUpAdmin() {
   };
 
   // 토큰값으로 페이지 위치조절 (가드)
-  // TrueGuard();
+  TrueGuard();
 
   // 정규식 유효성 검사를 수행
   const schema = yup.object().shape({
@@ -99,7 +99,7 @@ function SignUpAdmin() {
           placeholder="인증번호를 입력하세요."
           required
         />
-        
+
         <p>비밀번호</p>
         <Input
           type="password"

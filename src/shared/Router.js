@@ -10,6 +10,7 @@ import Space from '../pages/space/Space';
 import ReservationDetail from '../pages/Reservation/ReservationDetail';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
+import React from 'react';
 
 function Router() {
 
@@ -22,11 +23,12 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
-        <Route path="/reservation/:id" element={<Reservation />} />
-        <Route path="/detail/:userId" element={<ReservationDetail />} />
-        <Route path="/adminspace" element={<AdminSpace />} />
-        <Route path="/space" element={<Space />} />
-        <Route path="/*" element={<NotFound />} />
+
+          <Route path="/reservation/:id" element={ <Reservation />}/>
+          <Route path="/detail/:userId" element={<ReservationDetail />} />
+          <Route path="/adminspace" element={<AdminSpace />} />
+          <Route path="/space" element={<Space />} />
+          <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

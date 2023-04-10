@@ -8,7 +8,7 @@ function TrueGuard() {
     useEffect(()=> {
         const token = cookies.get("token");
         if(token) {
-            navi('/welcome')
+            navi('/')
         }
     },[])
   return ;

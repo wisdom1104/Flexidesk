@@ -49,7 +49,7 @@ function SignUpUser() {
   };
 
   // 토큰값으로 페이지 위치조절 (가드)
-  // TrueGuard();
+  TrueGuard();
 
   // 정규식 유효성 검사를 수행
   const schema = yup.object().shape({
