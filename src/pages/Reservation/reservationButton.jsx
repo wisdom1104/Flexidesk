@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "../utils/context";
-import Button, { btnStyle } from "./Button";
+import React, { useContext } from 'react';
+import { ThemeContext } from '../utils/context';
+import Button, { btnStyle } from './Button';
 
 function DarkMode() {
   const { isDark, setIsDark } = useContext(ThemeContext);
@@ -15,14 +15,14 @@ function DarkMode() {
         height={40}
         onClick={toggleTheme}
       >
-        {isDark ? "화이트" : "다크"}
+        {isDark ? '화이트' : '다크'}
       </Button>
     </>
   );
 }
 
-export const darkMode = (isDark) => {
-  let color = "";
+export const darkMode = isDark => {
+  let color = '';
   if (isDark) {
     color = darkModeColor.dark;
   } else {
@@ -32,8 +32,8 @@ export const darkMode = (isDark) => {
 };
 
 export const darkModeColor = {
-  dark: "#333333",
-  white: "#fff",
+  dark: '#333333',
+  white: '#fff',
 };
 
 export default DarkMode;

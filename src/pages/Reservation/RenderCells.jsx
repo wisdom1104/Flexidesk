@@ -34,28 +34,28 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, 'd');
+      formattedDate = format(day, 'dd');
       const cloneDay = day;
       days.push(
         <ColCell
-          className={`col cell ${
-            !isSameMonth(day, monthStart)
-              ? 'disabled'
-              : isSameDay(day, selectedDate)
-              ? 'selected'
-              : format(currentMonth, 'M') !== format(day, 'M')
-              ? 'not-valid'
-              : 'valid'
-          }`}
+          // className={`col cell ${
+          //   !isSameMonth(day, monthStart)
+          //     ? 'disabled'
+          //     : isSameDay(day, selectedDate)
+          //     ? 'selected'
+          //     : format(currentMonth, 'M') !== format(day, 'M')
+          //     ? 'not-valid'
+          //     : 'valid'
+          // }`}
           key={day}
-          onClick={() => onDateClick(parse(cloneDay))}
+          onClick={() => onDateClick(parse(cloneDay))} //여기에서 데이터를 받고 넘겨..?
         >
           <span
-            className={
-              format(currentMonth, 'M') !== format(day, 'M')
-                ? 'text not-valid'
-                : ''
-            }
+          // className={
+          //   format(currentMonth, 'M') !== format(day, 'M')
+          //     ? 'text not-valid'
+          //     : ''
+          // }
           >
             {formattedDate}
           </span>
