@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
+import FalseGuard from '../../hooks/FalseGuard';
 
 function Space() {
+  FalseGuard();
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
 
