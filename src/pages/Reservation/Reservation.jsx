@@ -11,9 +11,11 @@ import Calendar from './Calendar';
 import RenderCells from './RenderCells';
 import RenderDays from './RenderDays';
 import RenderHeader from './RenderHeader';
+import FalseGuard from '../../hooks/FalseGuard';
 
 function Reservation() {
-  
+  FalseGuard();
+
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
