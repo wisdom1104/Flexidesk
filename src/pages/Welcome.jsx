@@ -3,19 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { cookies } from '../shared/cookies';
 import styled from 'styled-components';
 import Slider from '../features/Slider';
+import TrueGrard from '../hooks/TrueGuard'
 
 function Welcome() {
 
     
     const navi = useNavigate();
-    
-    // 가드
-    useEffect(() => {
-    const token = cookies.get("token");
-    if (token) {
-      navi("/");
-    }
-  }, []);
 
     return (
         <div>

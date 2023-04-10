@@ -3,6 +3,8 @@ import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
+import TrueGuard from '../../hooks/TrueGuard'
+import CertificationCkeck from '../user/CertificationCkeck'
 
 // 유효성검사 라이브러리
 import { useForm } from 'react-hook-form';
@@ -47,12 +49,7 @@ function SignUpUser() {
   };
 
   // 토큰값으로 페이지 위치조절 (가드)
-  useEffect(() => {
-    const token = cookies.get('token');
-    if (token) {
-      navi('/');
-    }
-  }, []);
+  // TrueGuard();
 
   // 정규식 유효성 검사를 수행
   const schema = yup.object().shape({
@@ -88,7 +85,7 @@ function SignUpUser() {
       <p>회사 이메일</p>
       <Input
         type="email"
-        value={user.email}
+        value={user.email|| ''}
         onChange={onChangeHandler}
         name="email"
         placeholder="이메일을 입력하세요."
@@ -99,7 +96,7 @@ function SignUpUser() {
       <p>비밀번호</p>
       <Input
         type="password"
-        value={user.password}
+        value={user.password|| ''}
         onChange={onChangeHandler}
         name="password"
         placeholder="비밀번호를 입력하세요."
@@ -110,7 +107,7 @@ function SignUpUser() {
       <p>비밀번호 확인</p>
       <Input
         type="password"
-        value={user.passwordCheck}
+        value={user.passwordCheck|| ''}
         onChange={onChangeHandler}
         name="passwordCheck"
         placeholder="비밀번호를 한번 더 입력해주세요."
@@ -118,21 +115,17 @@ function SignUpUser() {
       />
       {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
-      <p>회사 인증번호</p>
-      <Input
-        type="text"
-        value={user.certification}
-        onChange={onChangeHandler}
-        name="certification"
-        placeholder="인증번호를 입력해주세요."
-        required
+      <CertificationCkeck 
+      certification={user.certification} 
+      onChange={onChangeHandler}
+      user={user}
+      setUser={setUser}
       />
-      {errors.certification && <span>인증번호를 입력하세요.</span>}
 
       <p>이름</p>
       <Input
         type="text"
-        value={user.userName}
+        value={user.userName|| ''}
         onChange={onChangeHandler}
         name="userName"
         placeholder="사용하실 이름을 입력하세요."

@@ -2,34 +2,23 @@ import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import api from '../../axios/api';
 
-function Certification() {
-  const [number, setNumber] = useState({
-    email: '',
-  });
+function Certification({email,onChange,admin,setAdmin}) {
 
-  console.log(number);
-
-  const onChangeHandler = e => {
-    const { value, name } = e.target;
-    setNumber(old => {
-      return { ...old, [name]: value };
-    });
-  };
 
   // form태그 핸들러
   // 로딩 띄우기 -> 로딩 이쁜걸로 ~~~
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/signup/email', number);
-      console.log('인증번호를 찾아라', response.data);
+      const response = await api.post('/users/signup/email', admin);
+      console.log('인증번호--->>>>>>', response.data.split(':')[1]);
       const data = response.data
       alert(`${data}`)
-      return response.data;
+      return data;
     } catch (error) {
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
-      setNumber('');
+      setAdmin('');
       return error;
     }
   };
@@ -39,15 +28,15 @@ function Certification() {
       <p>회사 이메일</p>
       <Input
         type="email"
-        value={number.email}
-        onChange={onChangeHandler}
+        value={email}
+        onChange={onChange}
         name="email"
         placeholder="이메일을 입력하세요."
         required
       />
       <button 
       type='button'
-      onClick={submitBtnHandler}>인증하기</button>
+      onClick={submitBtnHandler}>클릭시 인증번호가 나올예정</button>
     </div>
   );
 }
