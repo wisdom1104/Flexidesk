@@ -8,12 +8,9 @@ import {
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
 import Calendar from './Calendar';
-import RenderCells from './RenderCells';
-import RenderDays from './RenderDays';
-import RenderHeader from './RenderHeader';
 import FalseGuard from '../../hooks/FalseGuard';
 
-function Reservation() {
+function Reservation({ param, selectDay }) {
   FalseGuard();
 
   const now = new Date();
@@ -21,12 +18,9 @@ function Reservation() {
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
-  const param = useParams();
-  console.log(param);
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const [count, setCount] = useState(1);
   const reqData = { start: clickReservation[0], userList: [] };
   const dispatch = useDispatch();
@@ -35,14 +29,6 @@ function Reservation() {
   const { mrId, timeList } = reservation;
   const userId = cookies.get('userId');
   const navi = useNavigate();
-
-  //달력 월 추가 조회
-  const prevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-  };
-  const nextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
 
   const addCount = () => {
     setCount(count + 1);
@@ -68,13 +54,14 @@ function Reservation() {
   };
   console.log(clickReservation);
 
-  const onDateClick = day => {
-    setSelectedDate(day);
-  };
   useEffect(() => {
-    dispatch(__getReservation(param.id));
-    console.log(date);
-  }, []);
+    if (selectDay) {
+      dispatch(__getReservation({ param, selectDay }));
+      console.log(date);
+    } else {
+      dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
+    }
+  }, [selectDay]);
 
   return (
     <>
@@ -112,20 +99,6 @@ function Reservation() {
           </div>
         </div>
       </div>
-      <div className="calendar">
-        <RenderHeader
-          currentMonth={currentMonth}
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
-        />
-        <RenderDays />
-        <RenderCells
-          currentMonth={currentMonth}
-          selectedDate={selectedDate}
-          onDateClick={onDateClick}
-        />
-      </div>
-      <Calendar />
     </>
   );
 }

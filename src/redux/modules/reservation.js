@@ -13,9 +13,10 @@ const initialState = {
 export const __getReservation = createAsyncThunk(
   "getreservation",
   async(payload,thunk) =>{
+    console.log('페이로드',payload)
     try{
       const token = cookies.get('token')
-      const data = await api.get(`/reservations/${payload}`,{
+      const data = await api.get(`/reservations/${payload.param}?selDate=${payload.selectDay}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }

@@ -11,6 +11,7 @@ import ReservationDetail from '../pages/Reservation/ReservationDetail';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
 import React from 'react';
+import Calendar from '../pages/Reservation/Calendar';
 
 function Router() {
 
@@ -24,7 +25,7 @@ function Router() {
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
 
-          <Route path="/reservation/:id" element={ <Reservation />}/>
+          <Route path="/calender/:id" element={ <Calendar/>}/>
           <Route path="/detail/:userId" element={<ReservationDetail />} />
           <Route path="/adminspace" element={<AdminSpace />} />
           <Route path="/space" element={<Space />} />
