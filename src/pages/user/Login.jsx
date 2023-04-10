@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import TrueGuard from '../../hooks/TrueGuard'
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
@@ -34,7 +35,6 @@ function Login() {
       cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
-
       navi('/');
     } catch (e) {
       const errorMsg = e.response.data.message;
@@ -43,12 +43,7 @@ function Login() {
   };
 
   // 가드
-  useEffect(() => {
-    const token = cookies.get('token');
-    if (token) {
-      navi('/');
-    }
-  }, []);
+  TrueGuard();
 
   return (
     <div>
@@ -56,7 +51,7 @@ function Login() {
         <p>이메일</p>
         <Input
           type="email"
-          value={user.email}
+          value={user.email|| ''}
           onChange={loginChangeHandler}
           name="email"
           placeholder="이메일을 입력하세요."
@@ -66,7 +61,7 @@ function Login() {
         <p>비밀번호</p>
         <Input
           type="password"
-          value={user.password}
+          value={user.password|| ''}
           onChange={loginChangeHandler}
           name="password"
           placeholder="비밀번호를 입력하세요."

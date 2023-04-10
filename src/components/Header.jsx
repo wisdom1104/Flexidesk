@@ -14,6 +14,7 @@ function Header() {
     alert('로그아웃 되었습니다.');
     navi('/login');
   };
+  
   return (
     <StHeader>
       <h2>Header</h2>
