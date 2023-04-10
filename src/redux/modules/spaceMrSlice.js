@@ -10,32 +10,19 @@ const initialState = {
   error: null,
 };
 
-// mr 부분 조회
-export const __getmr = createAsyncThunk('__getmr', async (mrId, thunk) => {
-  try {
-    const token = cookies.get('token');
-    const companyName = cookies.get('companyName');
-    const response = await api.get(`/${companyName}/mr/${mrId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    // console.log(response.data.data);
-    return thunk.fulfillWithValue(response.data.data);
-  } catch (error) {
-    return error;
-  }
-});
-
 // mr 추가
-export const __addMr = createAsyncThunk('__addMr', async (payload, thunk) => {
-  console.log(payload);
+export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
+  console.log('payload', payload);
   try {
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
     const response = await api.post(
       `/mr/${companyName}/${payload.spaceId}`,
-      payload,
+      {
+        mrName: payload.mrName,
+        x: payload.x,
+        y: payload.y,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,8 +30,60 @@ export const __addMr = createAsyncThunk('__addMr', async (payload, thunk) => {
       },
     );
     // console.log(response.data.data);
-    thunk.dispatch(__getSpace());
-    thunk.dispatch(__getSpaces());
+    // thunk.dispatch(__getSpaces(payload.spaceId));
+    thunk.dispatch(__getSpace(payload.spaceId));
+    return thunk.fulfillWithValue(response.data.data);
+  } catch (error) {
+    return error;
+  }
+});
+
+// mr 삭제
+export const __deleteMr = createAsyncThunk(
+  'deleteMr',
+  async (payload, thunk) => {
+    console.log(payload.mrId);
+    try {
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
+      // /mr/{companyName}/{mrId}
+      const response = await api.delete(`/mr/${companyName}/${payload.mrId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(response.data.data);
+      // thunk.dispatch(__getSpaces(payload.spaceId));
+      thunk.dispatch(__getSpace(payload.spaceId));
+      return thunk.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return error;
+    }
+  },
+);
+
+// mr 수정
+export const __editMr = createAsyncThunk('editMr', async (payload, thunk) => {
+  console.log('payload', payload);
+  try {
+    const token = cookies.get('token');
+    const companyName = cookies.get('companyName');
+    const response = await api.patch(
+      `/mr/${companyName}/${payload.mrId}`,
+      {
+        mrName: payload.mrName,
+        x: payload.x,
+        y: payload.y,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    // console.log(response.data.data);
+    // thunk.dispatch(__getSpaces(payload.spaceId));
+    thunk.dispatch(__getSpace(payload.spaceId));
     return thunk.fulfillWithValue(response.data.data);
   } catch (error) {
     return error;
