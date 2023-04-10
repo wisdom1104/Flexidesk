@@ -35,11 +35,16 @@ export const __addSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.post(`/${companyName}/space`, newSpace, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      // /spaces/{companyName}/space
+      const response = await api.post(
+        `/spaces/${companyName}/space`,
+        newSpace,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       // console.log(response.data.data);
       thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);

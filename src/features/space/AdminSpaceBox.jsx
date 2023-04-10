@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { __editSpace, __getSpace } from '../../redux/modules/spaceSlice';
-import { __addMr } from '../../redux/modules/spaceMrSlice';
+import { __addMr, __deleteMr } from '../../redux/modules/spaceMrSlice';
+import { __addBox, __deleteBox } from '../../redux/modules/spaceBoxSlice';
 
 function AdminSpaceBox({ spaceId, selectedSpace }) {
-  const [mrBoxes] = useState([{ mrId: 1, x: 20, y: 20, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, x: 20, y: 50, inner: '박스' }]);
+  const [mrBoxes] = useState([{ mrId: 1, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, inner: '박스' }]);
 
   const elRef = useRef([]);
   const boardEl = useRef(null);
@@ -14,17 +15,13 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
   const dispatch = useDispatch();
+
   const { space } = useSelector(state => state.space);
-  const mrList = space.map(item => item.mrlist[0]);
-  console.log(mrList);
-  // useEffect(() => {
-  //   dispatch(__getSpace(spaceId));
-  //   // console.log(space);
-  // }, [selectedSpace]);
+  // console.log('space', space);
+  // const mrList = [];
   useEffect(() => {
     dispatch(__getSpace(spaceId));
-    // console.log(space);
-  }, [{ mrList, selectedSpace }]);
+  }, [selectedSpace]);
 
   // space name 수정
   const [editSpaceName, setEditSpaceName] = useState('');
@@ -32,9 +29,18 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     const spaceName = space?.[0]?.spaceName;
     setEditSpaceName(spaceName || '');
   }, [space]);
+  const mrList = space?.map(item => item.mrlist?.map(box => box));
+  const boxList = [];
+  space?.forEach(item => {
+    item.boxlist?.forEach(box => {
+      boxList.push(box);
+    });
+  });
+  // console.log('boxList', boxList);
 
-  const HandleDrop = e => {
+  const HandleDrop = async e => {
     e.preventDefault();
+    // const boxList = space?.map(item => item.boxlist);
     const id = e.dataTransfer.getData('boxId');
     const targetRect = e.target.getBoundingClientRect();
 
@@ -46,7 +52,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
         x: e.clientX - targetRect.x - 50,
         y: e.clientY - targetRect.y - 50,
       };
-      if (Number(mrList.length) !== 0 || Number(newBoxes.length) !== 0) {
+      if (Number(mrList.length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
           const draggedRight = draggedBox.x + 80;
@@ -70,17 +76,18 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
         };
 
         const isOverlapping = mrBoxes.some(box => isOverlap(newBox, box));
-        // const isNewBoxOverlapping = mrList.some(box => isOverlap(newBox, box));
-        const isNewBoxOverlapping = newMrBoxes.some(box =>
-          isOverlap(newBox, box),
-        );
-        const isNewBoxesOverlapping = newBoxes.some(box =>
+        const isMrListOverlapping = mrList.some(box => isOverlap(newBox, box));
+        const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
         console.log(isOverlapping);
-        console.log(isNewBoxOverlapping);
-        console.log(isNewBoxesOverlapping);
-        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
+        console.log(isMrListOverlapping);
+        // console.log(isBoxListOverlapping);
+        if (
+          !isOverlapping &&
+          !isMrListOverlapping
+          //  && !isBoxListOverlapping
+        ) {
           dispatch(__addMr(newBox));
         } else {
           console.log('겹쳐져');
@@ -93,11 +100,10 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     //------------------------박스 드롭----------------------------------
     if (Number(id) === 2) {
       const newBox = {
-        boxId: Number(id) + Number(newBoxes.length) - 1,
+        spaceId,
+        boxName: 'new box',
         x: e.clientX - targetRect.x - 50,
         y: e.clientY - targetRect.y - 50,
-        inner: 'new 박스',
-        zIndex: 1,
       };
       if (Number(newBoxes.length) !== 0 || Number(newMrBoxes.length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
@@ -122,15 +128,17 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
           return false;
         };
         const isOverlapping = boxes.some(box => isOverlap(newBox, box));
-        const isNewBoxOverlapping = boxes.some(box => isOverlap(newBox, box));
-        const isNewBoxesOverlapping = mrBoxes.some(box =>
+        const isMrListOverlapping = mrList.some(box => isOverlap(newBox, box));
+        const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        if (!isOverlapping && !isNewBoxOverlapping && !isNewBoxesOverlapping) {
-          setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+        if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
+          dispatch(__addBox(newBox));
+        } else {
+          console.log('겹쳐져');
         }
       } else {
-        setNewBoxes(prevBoxes => [...prevBoxes, newBox]);
+        dispatch(__addBox(newBox));
       }
     }
   };
@@ -149,7 +157,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     const mouseY = e.clientY;
 
     const mrBoxMoveHandler = e => {
-      const currentMrBox = newMrBoxes[boxIndex];
+      const currentMrBox = mrList[boxIndex];
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
@@ -250,7 +258,10 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
   // console.log(newMrBoxes);
-  //수정
+
+  //---------------------------------------------------
+
+  //space name 수정
   const [edit, setEdit] = useState(false);
   // console.log(edit);
   const onEditSpaceNameHandler = async spaceId => {
@@ -261,7 +272,22 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     dispatch(__editSpace(payload));
     setEdit(!edit);
   };
-
+  // mr 삭제
+  const onClickDeleteMrHandler = async mrId => {
+    const payload = {
+      mrId,
+      spaceId,
+    };
+    dispatch(__deleteMr(payload));
+  };
+  //box 삭제
+  const onClickDeleteBoxHandler = async boxId => {
+    const payload = {
+      boxId,
+      spaceId,
+    };
+    dispatch(__deleteBox(payload));
+  };
   return (
     <>
       {/* space name 부분 */}
@@ -312,27 +338,11 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
       )}
       {/* board 부분 */}
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
-        {/*예시 드래그 앤 드롭 */}
-        {newMrBoxes.map((box, index) => (
-          <StDropBox
-            onDrop={HandleDrop}
-            onDragOver={handleDragOver}
-            key={box.mrId}
-            ref={el => (elRef.current[index] = el)}
-            onMouseDown={e => mrBoxMouseDownHandler(e, index)}
-            onDragStart={e => handleDragStart(e, box.mrId)}
-            style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-          >
-            <div>
-              {box.inner} {box.mrId}
-            </div>
-          </StDropBox>
-        ))}
         {/* 박스 드래그 앤 드롭 */}
         <div>
           {space?.map(item =>
             item.boxlist?.length > 0
-              ? item.boxlist.map((box, index) => (
+              ? item.boxlist?.map((box, index) => (
                   <StDropBox
                     key={box.boxId}
                     onDrop={HandleDrop}
@@ -347,7 +357,13 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
                     </div>
                     <StBtnBox>
                       <button>수정</button>
-                      <button>삭제</button>
+                      <button
+                        onClick={() => {
+                          onClickDeleteBoxHandler(box.boxId);
+                        }}
+                      >
+                        삭제
+                      </button>
                     </StBtnBox>
                   </StDropBox>
                 ))
@@ -358,9 +374,14 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
         <div>
           {space?.map(item =>
             item.mrlist?.length > 0
-              ? item.mrlist.map(mr => (
+              ? item.mrlist?.map((mr, index) => (
                   <StDropMr
                     key={mr.mrId}
+                    onDrop={HandleDrop}
+                    onDragOver={handleDragOver}
+                    ref={el => (elRef.current[index] = el)}
+                    onMouseDown={e => mrBoxMouseDownHandler(e, index)}
+                    onDragStart={e => handleDragStart(e, mr.mrId)}
                     style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                   >
                     <div>
@@ -368,7 +389,13 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
                     </div>
                     <StBtnBox>
                       <button>수정</button>
-                      <button>삭제</button>
+                      <button
+                        onClick={() => {
+                          onClickDeleteMrHandler(mr.mrId);
+                        }}
+                      >
+                        삭제
+                      </button>
                     </StBtnBox>
                   </StDropMr>
                 ))
