@@ -3,7 +3,7 @@ import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
-import TrueGuard from '../../hooks/TrueGuard'
+import useTrueHook from '../../hooks/useTrueHook'
 import CertificationCkeck from '../user/CertificationCkeck'
 
 // 유효성검사 라이브러리
@@ -49,7 +49,7 @@ function SignUpUser() {
   };
 
   // 토큰값으로 페이지 위치조절 (가드)
-  TrueGuard();
+  useTrueHook();
 
   // 정규식 유효성 검사를 수행
   const schema = yup.object().shape({

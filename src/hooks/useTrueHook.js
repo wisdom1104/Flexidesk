@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cookies } from '../shared/cookies';
 
-function TrueGuard() {
+function useTrueHook() {
     const navi = useNavigate();
 
     useEffect(()=> {
@@ -14,4 +14,4 @@ function TrueGuard() {
   return ;
 }
 
-export default TrueGuard
+export default useTrueHook

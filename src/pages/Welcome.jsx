@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { cookies } from '../shared/cookies';
 import styled from 'styled-components';
 import Slider from '../features/Slider';
-import TrueGrard from '../hooks/TrueGuard'
 
 function Welcome() {
 

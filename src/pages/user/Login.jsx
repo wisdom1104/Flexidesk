@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import TrueGuard from '../../hooks/TrueGuard'
+import useTrueHook from '../../hooks/useTrueHook'
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
@@ -44,7 +44,7 @@ function Login() {
   };
 
   // 가드
-  TrueGuard();
+  useTrueHook();
 
   return (
     <div>
