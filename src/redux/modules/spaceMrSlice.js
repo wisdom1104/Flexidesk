@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
-import { __getSpaces } from './spacesSlice';
 import { __getSpace } from './spaceSlice';
 
 const initialState = {
@@ -12,7 +11,6 @@ const initialState = {
 
 // mr 추가
 export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
-  console.log('payload', payload);
   try {
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
@@ -29,8 +27,6 @@ export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
         },
       },
     );
-    // console.log(response.data.data);
-    // thunk.dispatch(__getSpaces(payload.spaceId));
     thunk.dispatch(__getSpace(payload.spaceId));
     return thunk.fulfillWithValue(response.data.data);
   } catch (error) {
@@ -42,7 +38,6 @@ export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
 export const __deleteMr = createAsyncThunk(
   'deleteMr',
   async (payload, thunk) => {
-    console.log(payload.mrId);
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
@@ -52,8 +47,6 @@ export const __deleteMr = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(response.data.data);
-      // thunk.dispatch(__getSpaces(payload.spaceId));
       thunk.dispatch(__getSpace(payload.spaceId));
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
@@ -64,7 +57,6 @@ export const __deleteMr = createAsyncThunk(
 
 // mr 수정
 export const __editMr = createAsyncThunk('editMr', async (payload, thunk) => {
-  console.log('payload', payload);
   try {
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
@@ -81,8 +73,6 @@ export const __editMr = createAsyncThunk('editMr', async (payload, thunk) => {
         },
       },
     );
-    // console.log(response.data.data);
-    // thunk.dispatch(__getSpaces(payload.spaceId));
     thunk.dispatch(__getSpace(payload.spaceId));
     return thunk.fulfillWithValue(response.data.data);
   } catch (error) {

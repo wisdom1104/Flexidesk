@@ -21,7 +21,6 @@ export const __getSpace = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(response.data.data);
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -41,7 +40,6 @@ export const __deleteSpace = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(response.data.data);
       thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
@@ -69,7 +67,6 @@ export const __editSpace = createAsyncThunk(
           },
         },
       );
-      // console.log(response.data.data);
       thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
