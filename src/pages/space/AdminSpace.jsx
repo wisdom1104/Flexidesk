@@ -9,7 +9,7 @@ import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 
 function AdminSpace() {
-  useFalseHook();
+  // useFalseHook();
   const [mrBoxes] = useState([{ mrId: 1, x: 20, y: 20, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 20, y: 50, inner: '박스' }]);
 
