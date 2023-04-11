@@ -69,6 +69,6 @@ function Welcome4() {
 
     </>
   )
-}
+};
 
 export default Welcome4
