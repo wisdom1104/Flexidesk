@@ -5,12 +5,13 @@ import {
   __getReservationDetail,
 } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
+import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
-
 function ReservationDetail() {
   useFalseHook();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
+
   const deleteHandler = id => {
     dispatch(__deleteRervation(id));
     console.log('패치보내기전', id);
@@ -44,6 +45,7 @@ function ReservationDetail() {
           </div>
         ))}
       </div>
+      <UserSchedules />
     </>
   );
 }

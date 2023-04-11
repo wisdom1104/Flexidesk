@@ -5,6 +5,8 @@ import { __addSpace, __getSpaces } from '../../redux/modules/spacesSlice';
 import AdminSpaceBox from '../../features/space/AdminSpaceBox';
 import { __deleteSpace } from '../../redux/modules/spaceSlice';
 import useFalseHook from '../../hooks/useFalseHook';
+import { cookies } from '../../shared/cookies';
+import { useNavigate } from 'react-router-dom';
 
 function AdminSpace() {
   useFalseHook();
@@ -21,8 +23,15 @@ function AdminSpace() {
 
   const { spaces } = useSelector(state => state.spaces);
 
+  const token = cookies.get('role');
+  const navi = useNavigate();
+
   useEffect(() => {
-    dispatch(__getSpaces());
+    if (token === 'ADMIN') {
+      dispatch(__getSpaces());
+    } else {
+      navi('/space');
+    }
   }, [dispatch]);
   //추가
   const onClickAddSpaceHandler = async () => {

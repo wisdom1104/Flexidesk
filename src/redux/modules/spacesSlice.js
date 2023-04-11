@@ -20,7 +20,6 @@ export const __getSpaces = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(response.data.data);
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -35,7 +34,6 @@ export const __addSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      // /spaces/{companyName}/space
       const response = await api.post(
         `/spaces/${companyName}/space`,
         newSpace,
@@ -45,7 +43,6 @@ export const __addSpace = createAsyncThunk(
           },
         },
       );
-      // console.log(response.data.data);
       thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
