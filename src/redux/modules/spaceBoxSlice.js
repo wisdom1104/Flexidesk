@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
-import { __getSpaces } from './spacesSlice';
 import { __getSpace } from './spaceSlice';
 
 const initialState = {
@@ -12,7 +11,6 @@ const initialState = {
 
 // box 추가
 export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
-  console.log('payload', payload);
   try {
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
@@ -29,8 +27,6 @@ export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
         },
       },
     );
-    // console.log(response.data.data);
-    thunk.dispatch(__getSpaces(payload.spaceId));
     thunk.dispatch(__getSpace(payload.spaceId));
     return thunk.fulfillWithValue(response.data.data);
   } catch (error) {
@@ -42,11 +38,9 @@ export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
 export const __deleteBox = createAsyncThunk(
   '__deleteBox',
   async (payload, thunk) => {
-    console.log(payload.boxId);
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      ///box/{companyName}/{boxId}
       const response = await api.delete(
         `/box/${companyName}/${payload.boxId}`,
         {
@@ -55,8 +49,6 @@ export const __deleteBox = createAsyncThunk(
           },
         },
       );
-      // console.log(response.data.data);
-      thunk.dispatch(__getSpaces(payload.spaceId));
       thunk.dispatch(__getSpace(payload.spaceId));
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
@@ -64,6 +56,31 @@ export const __deleteBox = createAsyncThunk(
     }
   },
 );
+
+// box 수정
+export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
+  try {
+    const token = cookies.get('token');
+    const companyName = cookies.get('companyName');
+    const response = await api.patch(
+      `/box/${companyName}/${payload.boxId}`,
+      {
+        boxName: payload.boxName,
+        x: payload.x,
+        y: payload.y,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    thunk.dispatch(__getSpace(payload.spaceId));
+    return thunk.fulfillWithValue(response.data.data);
+  } catch (error) {
+    return error;
+  }
+});
 
 export const spaceBoxSlice = createSlice({
   name: 'box',

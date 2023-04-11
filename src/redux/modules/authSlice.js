@@ -20,6 +20,7 @@ const authSlice = createSlice({
         cookies.remove("token");
         cookies.remove("userId");
         cookies.remove("companyName");
+        cookies.remove("roll");
     },
     }
   });

@@ -50,7 +50,7 @@ export const __addReservation=createAsyncThunk(
 export const reservationSlice = createSlice({
   name:'reservation',
   initialState,
-  reducers:{
+  reducers:{ 
   },
   extraReducers:{
     [__getReservation.fulfilled] : (state, action) =>{

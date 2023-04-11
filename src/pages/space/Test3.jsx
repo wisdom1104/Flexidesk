@@ -177,6 +177,7 @@ function Test3() {
 
     const boxMoveHandler = e => {
       const currentBox = newBoxes[boxIndex];
+      console.log('currentBox', currentBox);
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
@@ -223,7 +224,7 @@ function Test3() {
     document.addEventListener('mousemove', boxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
-  console.log(newMrBoxes);
+  // console.log(newMrBoxes);
   //-------------------------------------------------------------------------------
   return (
     <>
