@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-// 전체 슬라이드 개수(총3개. 배열로 계산)
-const TOTAL_SLIDES = 2; 
 
-export default function Slider() {
+const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
+  const TOTAL_SLIDES = 2; // 전체 슬라이드 개수
 
   // Next 버튼 클릭 시
   const NextSlide = () => {
@@ -33,14 +32,22 @@ export default function Slider() {
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 에니메이션을 만듭니다.
   }, [currentSlide]);
 
+  // 사진 클릭 시 문구 나오기
+  const photoClickBtn = () => {
+    console.log('사진 클릭되랏');
+  }
+
   return (
     <Container>
       <Text>
-        <h1>소개</h1>
-        <p>{currentSlide + 1}번 째</p>
+        <p>Flexidesk는 회사생활을 어떻게 쉽게 만들어주나요?</p>
+        {/* <p>{currentSlide + 1}번 째</p> */}
       </Text>
       <SliderContainer ref={slideRef}>
-      <StImg key="cat1.jpg" src="img/cat1.jpg" />
+      <StImg key="cat1.jpg" src="img\photo (1).jpg" onClick={photoClickBtn} />
+      <StImg key="cat2.jpg" src="img\photo (2).jpg" onClick={photoClickBtn} />
+      <StImg key="cat3.jpg" src="img\photo (3).jpg" />
+      <StImg key="cat4.jpg" src="img\photo (4).jpg" />
 
       </SliderContainer>
       <Center>
@@ -50,6 +57,8 @@ export default function Slider() {
     </Container>
   );
 }
+export default Slider;
+
 const Container = styled.div`
   width: 500px;
   margin: auto;
@@ -60,12 +69,12 @@ const Button = styled.div`
   all: unset;
   padding: 1em 2em;
   margin: 2em 2em;
-  color: burlywood;
+  color: #D2ECE9;
   border-radius: 10px;
-  border: 1px solid burlywood;
+  border: 1px solid #D2ECE9;
   cursor: pointer;
   &:hover {
-    background-color: burlywood;
+    background-color: #D2ECE9;
     color: #fff;
   }
 `;
@@ -76,11 +85,11 @@ const SliderContainer = styled.div`
 `;
 const Text = styled.div`
   text-align: center;
-  color: burlywood;
+  color: #D2ECE9;
   p {
     color: #fff;
     font-size: 20px;
-    background-color: burlywood;
+    background-color: #D2ECE9;
     display: inline-block;
     border-radius: 50px;
     padding: 0.5em 1em;
@@ -91,6 +100,15 @@ const Center = styled.div`
 `;
 
 const StImg = styled.img`
-  width: 500px;
-  height: 500px;
+  /* position: absolute; */
+  width: 481px;
+  height: 380px;
+  left: 480px;
+  top: 8718px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 16px 40px rgba(140, 159, 157, 0.2);
+  border-radius: 8px;
+  border: 1px solid #D2ECE9;
+
 `
