@@ -1,7 +1,5 @@
-import React from 'react'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { cookies } from '../../shared/cookies'
-import axios from 'axios'
 import api from '../../axios/api'
 import { __getReservationDetail } from './detail'
 

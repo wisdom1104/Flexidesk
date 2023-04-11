@@ -52,7 +52,7 @@ function Reservation({ param, selectDay }) {
     }
     setIsCheckOut(!isCheckOut);
   };
-  console.log(clickReservation);
+  console.log('클릭', clickReservation);
 
   useEffect(() => {
     if (selectDay) {
@@ -75,7 +75,7 @@ function Reservation({ param, selectDay }) {
                 key={item.start}
                 onClick={onclickHandler}
                 disabled={item.isCheckOut === true}
-                value={`${date}${item.start}`}
+                value={`${selectDay}T${item.start}`}
               >
                 {item.start} ~ {item.end}
               </button>

@@ -6,6 +6,7 @@ import {
 } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
 import FalseGuard from '../../hooks/FalseGuard';
+import UserSchedules from '../Schedules/UserSchedules';
 
 function ReservationDetail() {
   FalseGuard();
@@ -44,6 +45,7 @@ function ReservationDetail() {
           </div>
         ))}
       </div>
+      <UserSchedules />
     </>
   );
 }

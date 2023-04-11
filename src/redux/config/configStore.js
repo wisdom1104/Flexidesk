@@ -6,6 +6,7 @@ import mr from '../modules/spaceMrSlice';
 import box from '../modules/spaceBoxSlice';
 import detail from '../modules/detail';
 import loginSlice from '../modules/loginSlice';
+import userSchedules from '../modules/userSchedules';
 const store = configureStore({
   reducer: {
     reservation,
@@ -15,6 +16,7 @@ const store = configureStore({
     loginSlice,
     mr,
     box,
+    userSchedules,
   },
 });
 
