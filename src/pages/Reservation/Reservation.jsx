@@ -14,7 +14,7 @@ import RenderHeader from './RenderHeader';
 import useFalseHook from '../../hooks/useFalseHook';
 import AllReservation from './AllReservation';
 
-function Reservation() {
+function Reservation({ param, selectDay }) {
   useFalseHook();
 
   const now = new Date();
@@ -22,12 +22,9 @@ function Reservation() {
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
-  const param = useParams();
-  console.log(param);
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const [count, setCount] = useState(1);
   const reqData = { start: clickReservation[0], userList: [] };
   const dispatch = useDispatch();
@@ -36,14 +33,6 @@ function Reservation() {
   const { mrId, timeList } = reservation;
   const userId = cookies.get('userId');
   const navi = useNavigate();
-
-  //달력 월 추가 조회
-  const prevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-  };
-  const nextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
 
   const addCount = () => {
     setCount(count + 1);
@@ -67,15 +56,16 @@ function Reservation() {
     }
     setIsCheckOut(!isCheckOut);
   };
-  console.log(clickReservation);
+  console.log('클릭', clickReservation);
 
-  const onDateClick = day => {
-    setSelectedDate(day);
-  };
   useEffect(() => {
-    dispatch(__getReservation(param.id));
-    console.log(date);
-  }, []);
+    if (selectDay) {
+      dispatch(__getReservation({ param, selectDay }));
+      console.log(date);
+    } else {
+      dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
+    }
+  }, [selectDay]);
 
   return (
     <>
@@ -89,7 +79,7 @@ function Reservation() {
                 key={item.start}
                 onClick={onclickHandler}
                 disabled={item.isCheckOut === true}
-                value={`${date}${item.start}`}
+                value={`${selectDay}T${item.start}`}
               >
                 {item.start} ~ {item.end}
               </button>

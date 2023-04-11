@@ -5,7 +5,9 @@ import {
   __getReservationDetail,
 } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
+import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
+
 
 function ReservationDetail() {
   useFalseHook();
@@ -44,6 +46,7 @@ function ReservationDetail() {
           </div>
         ))}
       </div>
+      <UserSchedules />
     </>
   );
 }
