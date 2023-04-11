@@ -122,8 +122,6 @@ function SignUpAdmin() {
         />
         {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
-
-
         <p>이름</p>
         <Input
           type="text"

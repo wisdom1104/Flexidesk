@@ -21,9 +21,6 @@ const initialState = {
             Authorization:`Bearer ${token}`
           }
         })
-        console.log('전체조회 slice->>>>',data);
-        console.log('전체조회 slice2->>>>',data.data.data.reservationList);
-
         return thunk.fulfillWithValue(data.data.data.reservationList)
       }catch(error){
         return thunk.rejectWithValue(error)
@@ -44,9 +41,7 @@ const initialState = {
       [__getAllReservation.fulfilled] : (state, action) =>{
         state.isLoading = true;
         state.isError = false;        
-        // 체크해보기
         state.reservationList = action.payload;
-        console.log(action);
       },
       [__getAllReservation.rejected] : (state, action) => {
         state.isLoading = true;

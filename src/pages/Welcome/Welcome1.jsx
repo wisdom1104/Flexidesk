@@ -1,9 +1,11 @@
 import React from 'react'
 import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StSmallFont } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
+import { cookies } from '../../shared/cookies';
 
 function Welcome1() {
     const navi = useNavigate();
+
   return (
     <>
     <StBackground>

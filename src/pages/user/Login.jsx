@@ -10,6 +10,19 @@ import useTrueHook from '../../hooks/useTrueHook'
 function Login() {
   // alert 에러메세지 띄어주기!!!
 
+  const role = cookies.get("role");
+
+    // 가드
+    // useTrueHook();
+
+    useEffect(() => {
+      if (role === 'USER') {
+        navi('/space');
+      } else if (role === "ADMIN"){
+        navi('/adminspace');
+      }
+    }, [role]);
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -36,15 +49,19 @@ function Login() {
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
       cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
-      navi('/');
+      
+      navi('/adminspace')
+      // if (role === 'USER') {
+      //   navi('/space');
+      // } else if (role === "ADMIN"){
+      //   navi('/adminspace');
+      // }
+
     } catch (e) {
       const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
-
-  // 가드
-  useTrueHook();
 
   return (
     <div>
