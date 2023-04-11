@@ -24,7 +24,6 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
-
           <Route path="/calender/:id" element={ <Calendar/>}/>
           <Route path="/detail/:userId" element={<ReservationDetail />} />
           <Route path="/adminspace" element={<AdminSpace />} />

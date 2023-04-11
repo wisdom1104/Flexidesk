@@ -7,16 +7,9 @@ import {
   __getReservation,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
-import Calendar from './Calendar';
-import RenderCells from './RenderCells';
-import RenderDays from './RenderDays';
-import RenderHeader from './RenderHeader';
-import useFalseHook from '../../hooks/useFalseHook';
 import AllReservation from './AllReservation';
 
 function Reservation({ param, selectDay }) {
-  useFalseHook();
-
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
@@ -103,25 +96,8 @@ function Reservation({ param, selectDay }) {
           </div>
         </div>
       </div>
-      <div className="calendar">
-        <RenderHeader
-          currentMonth={currentMonth}
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
-        />
-        <RenderDays />
-        <RenderCells
-          currentMonth={currentMonth}
-          selectedDate={selectedDate}
-          onDateClick={onDateClick}
-        />
-      </div>
-
-      <Calendar />
-      <br />      
       <div>
-        전체 예약 조회
-        <AllReservation/>
+        <AllReservation />
       </div>
     </>
   );
