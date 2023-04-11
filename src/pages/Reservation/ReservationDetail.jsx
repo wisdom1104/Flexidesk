@@ -5,10 +5,10 @@ import {
   __getReservationDetail,
 } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
-import FalseGuard from '../../hooks/FalseGuard';
+import useFalseHook from '../../hooks/useFalseHook';
 
 function ReservationDetail() {
-  FalseGuard();
+  useFalseHook();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
   const deleteHandler = id => {

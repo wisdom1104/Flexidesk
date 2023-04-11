@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import TrueGuard from '../../hooks/TrueGuard'
+import useTrueHook from '../../hooks/useTrueHook'
 
 function Login() {
   // alert 에러메세지 띄어주기!!!
@@ -35,6 +35,7 @@ function Login() {
       cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
+      cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
       navi('/');
     } catch (e) {
       const errorMsg = e.response.data.message;
@@ -43,7 +44,7 @@ function Login() {
   };
 
   // 가드
-  TrueGuard();
+  useTrueHook();
 
   return (
     <div>

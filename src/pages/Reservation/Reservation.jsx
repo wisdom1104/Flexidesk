@@ -11,10 +11,11 @@ import Calendar from './Calendar';
 import RenderCells from './RenderCells';
 import RenderDays from './RenderDays';
 import RenderHeader from './RenderHeader';
-import FalseGuard from '../../hooks/FalseGuard';
+import useFalseHook from '../../hooks/useFalseHook';
+import AllReservation from './AllReservation';
 
 function Reservation() {
-  FalseGuard();
+  useFalseHook();
 
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
@@ -125,7 +126,13 @@ function Reservation() {
           onDateClick={onDateClick}
         />
       </div>
+
       <Calendar />
+      <br />      
+      <div>
+        전체 예약 조회
+        <AllReservation/>
+      </div>
     </>
   );
 }
