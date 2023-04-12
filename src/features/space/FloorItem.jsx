@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
 import InnerSpaceList from './InnerSpaceList';
@@ -21,6 +21,10 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
     dispatch(__editFloor(payload));
     setFloorEdit(!floorEdit);
   };
+  console.log('floor', floor);
+  console.log('spaceList', floor.spaceList);
+  const [isMd, setIsMd] = useState(false);
+
   return (
     <>
       <div>
@@ -51,6 +55,13 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
                 }}
               >
                 삭제
+              </button>
+              <button
+                onClick={() => {
+                  setIsMd(!isMd);
+                }}
+              >
+                열기
               </button>
             </div>
           </Row>
@@ -83,7 +94,7 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
           </Row>
         )}
       </div>
-      <InnerSpaceList />
+      {isMd ? <InnerSpaceList floor={floor} /> : null}
     </>
   );
 }

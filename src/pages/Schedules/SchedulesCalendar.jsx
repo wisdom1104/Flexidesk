@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import SchedulesTime from './SchedulesTime';
-import ReservationTime from '../Reservation/ReservationTime';
 
 function SchedulesCalendar() {
   const param = useParams();

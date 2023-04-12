@@ -12,9 +12,9 @@ import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
 import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
+import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 
 function Router() {
-
   return (
     <BrowserRouter>
       <Header />
@@ -24,11 +24,15 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
-          <Route path="/calender/:id" element={ <Calendar/>}/>
-          <Route path="/detail/:userId" element={<ReservationDetail />} />
-          <Route path="/adminspace" element={<AdminSpace />} />
-          <Route path="/space" element={<Space />} />
-          <Route path="/*" element={<NotFound />} />
+        <Route path="/calender/:id" element={<Calendar />} />
+        <Route
+          path="/schedulescalendar/:userId"
+          element={<SchedulesCalendar />}
+        />
+        <Route path="/detail/:userId" element={<ReservationDetail />} />
+        <Route path="/adminspace" element={<AdminSpace />} />
+        <Route path="/space" element={<Space />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

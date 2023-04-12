@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { __addSpace } from '../../redux/modules/spacesSlice';
 import { __deleteSpace } from '../../redux/modules/spaceSlice';
+import SpaceItem from './SpaceItem';
 
 function SpaceList({ spaces, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
@@ -24,27 +25,25 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
       <br />
       <button onClick={onClickAddSpaceHandler}>Space 추가</button>
       {spaces?.map(space => {
-        if (space)
-          return (
-            <span
-              style={{ cursor: 'pointer' }}
-              key={space.spaceId}
-              onClick={() => onClickSpaceListHandler(space.spaceId)}
-            >
-              {space.spaceName}/{space.spaceId}-----
-              <button
-                onClick={() => {
-                  const confirmDelete =
-                    window.confirm('정말 삭제하시겠습니까?');
-                  if (confirmDelete) {
-                    onDeleteSpaceHandler(space.spaceId);
-                  }
-                }}
-              >
-                X
-              </button>
-            </span>
-          );
+        if (space) return;
+        // <SpaceItem />
+        <span
+          style={{ cursor: 'pointer' }}
+          key={space.spaceId}
+          onClick={() => onClickSpaceListHandler(space.spaceId)}
+        >
+          {space.spaceName}/{space.spaceId}-----
+          <button
+            onClick={() => {
+              const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+              if (confirmDelete) {
+                onDeleteSpaceHandler(space.spaceId);
+              }
+            }}
+          >
+            X
+          </button>
+        </span>;
       })}
     </>
   );
