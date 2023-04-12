@@ -16,7 +16,7 @@ export const __getFloor = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.get(`/floors/${companyName}/${floorId}`, {
+      const response = await api.get(`/floor/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +35,7 @@ export const __deleteFloor = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.delete(`/floors/${companyName}/${floorId}`, {
+      const response = await api.delete(`/floor/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,7 +57,7 @@ export const __editFloor = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(
-        `/floors/${companyName}/${payload.floorId}`,
+        `/floor/${companyName}/${payload.floorId}`,
         {
           floorName: payload.floorName,
         },

@@ -10,7 +10,6 @@ import {
 import { StSubHeader } from './AdminSpaceBox';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import styled from 'styled-components';
 
 function SpaceBox({ spaceId, selectedSpace }) {
   const dispatch = useDispatch();
@@ -48,12 +47,12 @@ function SpaceBox({ spaceId, selectedSpace }) {
           {space?.map(item =>
             item.boxlist?.length > 0
               ? item.boxlist.map(box => (
-                  <StBox
+                  <StDropBox
                     key={box.boxId}
                     style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
                   >
                     <div>{box.boxName}</div>
-                  </StBox>
+                  </StDropBox>
                 ))
               : null,
           )}
@@ -62,13 +61,13 @@ function SpaceBox({ spaceId, selectedSpace }) {
           {space?.map(item =>
             item.mrlist?.length > 0
               ? item.mrlist.map(mr => (
-                  <StMr
+                  <StDropMr
                     key={mr.mrId}
                     style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                     onClick={() => navi(`/calender/${mr.mrId}`)}
                   >
                     <div>{mr.mrName}</div>
-                  </StMr>
+                  </StDropMr>
                 ))
               : null,
           )}
@@ -79,37 +78,3 @@ function SpaceBox({ spaceId, selectedSpace }) {
 }
 
 export default SpaceBox;
-
-export const StMr = styled.div`
-  background: #dd92be;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: pointer;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #c478a4;
-  }
-`;
-
-export const StBox = styled.div`
-  background: #f0ce73;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: pointer;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #c0a55c;
-  }
-`;
