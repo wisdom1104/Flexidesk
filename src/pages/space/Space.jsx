@@ -5,21 +5,16 @@ import SpaceBox from '../../features/space/SpaceBox';
 import useFalseHook from '../../hooks/useFalseHook';
 import { StList } from './AdminSpace';
 import { Column, Row } from '../../components/Flex';
-import { cookies } from '../../shared/cookies';
-import { useNavigate } from 'react-router-dom';
 
 function Space() {
   // useFalseHook('/adminspace');
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
-  const navi = useNavigate();
   const { spaces } = useSelector(state => state.spaces);
 
-  // token 유무에 따른 가드
-  const token = cookies.get('token');
   useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getSpaces());
-  }, []);
+    dispatch(__getSpaces());
+  }, [dispatch]);
 
   const [selectedSpace, setSelectedSpace] = useState(null);
 

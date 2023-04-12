@@ -15,7 +15,7 @@ export const __getFloors = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.get(`/floors/${companyName}`, {
+      const response = await api.get(`/${companyName}/floor`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ export const __addFloor = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.post(`/floors/${companyName}`, newFloor, {
+      const response = await api.post(`/${companyName}/floor`, newFloor, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
