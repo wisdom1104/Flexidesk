@@ -101,7 +101,7 @@ function SchedulesCalendar() {
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
       </Calcontain>
-      <ReservationTime />
+      <SchedulesTime />
     </>
   );
 }
