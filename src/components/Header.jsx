@@ -1,17 +1,42 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { isLoginActions } from '../redux/modules/loginSlice';
+import { cookies } from '../shared/cookies';
 
 function Header() {
+  const dispatch = useDispatch();
+  const navi = useNavigate();
+
+  const logout = () => {
+    dispatch(isLoginActions.logout());
+    alert('로그아웃 되었습니다.');
+    navi('/login');
+  };
+  
   return (
     <StHeader>
-      <h2>여기에 페이지 제목이 들어갑니다.</h2>
+      <h2>Header</h2>
+      {cookies.get("token") ? (
+              <p type="button" onClick={logout}>
+                Logout
+              </p>
+            ) : (
+              <p
+                type="button"
+                onClick={() => navi("/login")}
+              >
+                LogIn
+              </p>
+            )}
     </StHeader>
   );
 }
 
 const StHeader = styled.div`
-  height: 100px;
-  width: 95%;
+  height: 80px;
+  width: 98%;
   display: flex;
   justify-content: center;
   align-items: center;
