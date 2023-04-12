@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import Reservation from '../pages/Reservation/ReservationTime';
+import Reservation from '../pages/Reservation/Reservation';
 import Welcome from '../pages/Welcome/Welcome';
 import Login from '../pages/user/Login';
 import SignUpAdmin from '../pages/user/SignUpAdmin';
@@ -12,7 +12,6 @@ import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
 import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
-import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 
 function Router() {
 
@@ -27,7 +26,6 @@ function Router() {
         <Route path="/signupuser" element={<SignUpUser />} />
           <Route path="/calender/:id" element={ <Calendar/>}/>
           <Route path="/detail/:userId" element={<ReservationDetail />} />
-          <Route path="/schedules/:userId" element={ <SchedulesCalendar/>}/>
           <Route path="/adminspace" element={<AdminSpace />} />
           <Route path="/space" element={<Space />} />
           <Route path="/*" element={<NotFound />} />
