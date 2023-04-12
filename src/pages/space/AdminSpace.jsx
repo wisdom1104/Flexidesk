@@ -28,11 +28,17 @@ function AdminSpace() {
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
 
+  // token 유무에 따른 가드
+  const token = cookies.get('token');
+  useEffect(() => {
+    token === undefined ? navi('/') : dispatch(__getSpaces());
+  }, []);
+
   // 관리자 가드
-  const token = cookies.get('role');
+  const role = cookies.get('role');
 
   useEffect(() => {
-    if (token === 'ADMIN') {
+    if (role === 'ADMIN') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
     } else {
