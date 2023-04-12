@@ -6,7 +6,7 @@ import SpaceBox from '../../features/space/SpaceBox';
 import useFalseHook from '../../hooks/useFalseHook';
 
 function Space() {
-  useFalseHook('/adminspace');
+  // useFalseHook('/adminspace');
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
 

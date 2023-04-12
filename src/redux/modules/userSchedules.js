@@ -10,7 +10,6 @@ const initialState = {
 export const __getUserSchedules = createAsyncThunk(
   "getuserschedules",
   async(payload,thunk) =>{
-    console.log('페이로드',payload)
     try{
       const token = cookies.get('token')
       const data = await api.get(`/schedules`,{
@@ -18,8 +17,7 @@ export const __getUserSchedules = createAsyncThunk(
           Authorization:`Bearer ${token}`
         }
       })
-      console.log(data);
-      return thunk.fulfillWithValue(data.data)
+      return thunk.fulfillWithValue(data.data.data.scList)
     }catch(error){
       return thunk.rejectWithValue(error)
     }
@@ -33,7 +31,7 @@ export const userSchedulesSlice = createSlice({
   },
   extraReducers:{
     [__getUserSchedules.fulfilled] : (state, action) =>{
-      state.reservation = action.payload.data
+      state.userSchedules = action.payload
     }
 
   }

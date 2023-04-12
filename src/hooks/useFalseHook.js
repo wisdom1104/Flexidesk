@@ -15,12 +15,12 @@ function useFalseHook(url) {
             console.log('일반 사용자!!!');
             //일반 사용자만 접근가능
             if(navi("/adminspace"))
-            {return navi("/space")}
+            {navi("/space")}
         } else if(token && role==='ADMIN') {
             console.log('관리자!!!');
             //사업자만 접근가능
             // navi(url)
-            return redirect(url)
+            redirect(url)
         }
     },[url])
     return null;
