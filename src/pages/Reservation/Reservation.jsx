@@ -7,8 +7,9 @@ import {
   __getReservation,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
+import AllReservation from './AllReservation';
 
-function ReservationTime({ param, selectDay }) {
+function Reservation({ param, selectDay }) {
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
@@ -18,23 +19,11 @@ function ReservationTime({ param, selectDay }) {
   const [clickReservation, setClickReservation] = useState([]);
 
   const [count, setCount] = useState(1);
-  // const reqData = { start: clickReservation[0], userList: [] };
-
-  //연속되는 시간 추가하기 위한 request정리
-  let reqData = [];
-  const dataList = () => {
-    for (let i = 0; i < clickReservation.length; i++) {
-      reqData.push({ start: clickReservation[i] });
-    }
-    console.log('동작', reqData);
-    return reqData;
-  };
-  const reqDatas = { startList: dataList(), useList: [] };
-
+  const reqData = { start: clickReservation[0], userList: [] };
   const dispatch = useDispatch();
 
   const { reservation } = useSelector(state => state.reservation);
-  const { timeList } = reservation;
+  const { mrId, timeList } = reservation;
   const userId = cookies.get('userId');
   const navi = useNavigate();
 
@@ -98,7 +87,7 @@ function ReservationTime({ param, selectDay }) {
           <div>
             <button
               onClick={() => {
-                dispatch(__addReservation({ reqDatas, param, selectDay }));
+                dispatch(__addReservation(reqData));
                 navi(`/detail/${userId}`);
               }}
             >
@@ -107,8 +96,11 @@ function ReservationTime({ param, selectDay }) {
           </div>
         </div>
       </div>
+      <div>
+        <AllReservation />
+      </div>
     </>
   );
 }
 
-export default ReservationTime;
+export default Reservation;

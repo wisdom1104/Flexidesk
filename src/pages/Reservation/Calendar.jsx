@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import ReservationTime from './ReservationTime';
+import Reservation from './Reservation';
 import { useParams } from 'react-router-dom';
 import useFalseHook from '../../hooks/useFalseHook';
 
@@ -43,7 +43,7 @@ const Calendar = () => {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log('날짜선택', e.target.value);
+    console.log(e.target.value);
     setDate(e.target.value);
   };
 
@@ -102,7 +102,7 @@ const Calendar = () => {
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
       </Calcontain>
-      <ReservationTime param={param.id} selectDay={date} />
+      <Reservation param={param.id} selectDay={date} />
     </>
   );
 };
