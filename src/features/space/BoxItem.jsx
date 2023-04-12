@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { StBtnBox } from './AdminSpaceBox';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
+import { StBtnBox, StDropBox } from '../../pages/space/AdminSpace';
 
 function BoxItem({
   box,
@@ -106,16 +105,3 @@ function BoxItem({
 }
 
 export default BoxItem;
-const StDropBox = styled.div`
-  background: #c0a55c;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: grab;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;

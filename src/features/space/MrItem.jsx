@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { StBtnBox, StDropMr } from './AdminSpaceBox';
 import { useDispatch } from 'react-redux';
 import { __deleteMr, __editMr } from '../../redux/modules/spaceMrSlice';
+import { StBtnBox, StDropMr } from '../../pages/space/AdminSpace';
 
 function MrItem({
   mr,

@@ -8,7 +8,7 @@ import { getCookie } from '../../shared/cookies';
 import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
 function ReservationDetail() {
-  useFalseHook();
+  // useFalseHook();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
 
