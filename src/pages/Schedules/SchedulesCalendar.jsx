@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import ReservationTime from './ReservationTime';
 import { useParams } from 'react-router-dom';
-import useFalseHook from '../../hooks/useFalseHook';
+import SchedulesTime from './SchedulesTime';
+import ReservationTime from '../Reservation/ReservationTime';
 
-const Calendar = () => {
-  // useFalseHook();
+function SchedulesCalendar() {
   const param = useParams();
   const today = {
     year: new Date().getFullYear(),
@@ -102,12 +101,11 @@ const Calendar = () => {
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
       </Calcontain>
-      <ReservationTime param={param.id} selectDay={date} />
+      <ReservationTime />
     </>
   );
-};
-
-export default Calendar;
+}
+export default SchedulesCalendar;
 
 const Calcontain = styled.div`
   width: 500px;
