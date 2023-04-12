@@ -96,9 +96,6 @@ function Reservation({ param, selectDay }) {
           </div>
         </div>
       </div>
-      <div>
-        <AllReservation />
-      </div>
     </>
   );
 }

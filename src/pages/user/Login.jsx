@@ -6,6 +6,7 @@ import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import useTrueHook from '../../hooks/useTrueHook'
+import { StBackground, StForm, StFormContainer, StLoginForm, StLongButton } from './UserStyled';
 
 function Login() {
 
@@ -45,30 +46,30 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={onsubmitHandler}>
-        <p>이메일</p>
+    <StBackground>
+      <StLoginForm onSubmit={onsubmitHandler}>
+        <StForm>
         <Input
           type="email"
           value={user.email|| ''}
           onChange={loginChangeHandler}
           name="email"
-          placeholder="이메일을 입력하세요."
+          placeholder="이메일"
           required
         />
 
-        <p>비밀번호</p>
         <Input
           type="password"
           value={user.password|| ''}
           onChange={loginChangeHandler}
           name="password"
-          placeholder="비밀번호를 입력하세요."
+          placeholder="비밀번호"
           required
         />
-        <button> 확인 </button>
-      </form>
-    </div>
+        <StLongButton> 로그인 </StLongButton>
+        </StForm>
+      </StLoginForm>
+    </StBackground>
   );
 }
 

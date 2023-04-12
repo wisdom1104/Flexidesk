@@ -16,7 +16,8 @@ const initialState = {
         const token = cookies.get('token')
         const companyName = cookies.get('companyName');
         console.log(companyName);
-        const data = await api.get(`/${companyName}/reservations/all`,{
+        const data = await api.get(`/reservation/${companyName}/all
+        `,{
           headers:{
             Authorization:`Bearer ${token}`
           }

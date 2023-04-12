@@ -8,7 +8,7 @@ import useFalseHook from '../../hooks/useFalseHook';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import { Column, Row } from '../../components/Flex';
-import CreateSpace from '../../features/space/CreateSpace';
+import CreateSpace from '../../features/space/CreateSpace'
 import { __getFloors } from '../../redux/modules/floorsSlice';
 
 function AdminSpace() {
