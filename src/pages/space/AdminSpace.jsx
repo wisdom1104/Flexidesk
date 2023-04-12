@@ -8,7 +8,7 @@ import useFalseHook from '../../hooks/useFalseHook';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import { Column, Row } from '../../components/Flex';
-import CreateSpace from '../../features/space/CreateSpace'
+import CreateSpace from '../../features/space/CreateSpace';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 
 function AdminSpace() {
@@ -28,11 +28,17 @@ function AdminSpace() {
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
 
+  // token 유무에 따른 가드
+  const token = cookies.get('token');
+  useEffect(() => {
+    token === undefined ? navi('/') : dispatch(__getSpaces());
+  }, []);
+
   // 관리자 가드
-  const token = cookies.get('role');
+  const role = cookies.get('role');
 
   useEffect(() => {
-    if (token === 'ADMIN') {
+    if (role === 'ADMIN') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
     } else {
