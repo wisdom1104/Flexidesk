@@ -1,20 +1,17 @@
 import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StSmallFont } from './WelcomeStyled';
+import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StFont } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
-import { cookies } from '../../shared/cookies';
 
-function Welcome1() {
+function Welcome6() {
     const navi = useNavigate();
 
   return (
     <>
-    <StBackground>
-        <StColumnDiv>
-          <StSmallFont>
-            취업을 넘어, 10년 뒤에도 살아남는 개발자로 턱걸이로 취업하는 것은
-            우리의 목표가 아닙니다. 자유롭게 커리어를 이어나갈 수 있도록 최고의
-            교육을 제공합니다. 항해99는 다릅니다.
-          </StSmallFont>
+    <StBackground background="#fff">
+      <StColumnDiv>
+          <StFont>
+          간단한 회원가입으로 Flexidesk의 솔루션 만나보세요.
+          </StFont>
           <StButtonGap>
             <StBlueButton
               onClick={() => {
@@ -38,5 +35,4 @@ function Welcome1() {
   )
 }
 
-export default Welcome1
-
+export default Welcome6

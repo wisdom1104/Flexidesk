@@ -4,6 +4,7 @@ import Welcome2 from './Welcome2';
 import Welcome3 from './Welcome3';
 import Welcome4 from './Welcome4';
 import Welcome5 from './Welcome5';
+import Welcome6 from './Welcome6';
 
 function Welcome() {
   return (
@@ -18,9 +19,9 @@ function Welcome() {
       {/* ////////////////////////////////////////////////////////////////////////////////////// */}
       <Welcome5 />
       {/* ////////////////////////////////////////////////////////////////////////////////////// */}
-
+      <Welcome6 />
       {/* 푸터 */}
-    </>
+    </> 
   );
 }
 

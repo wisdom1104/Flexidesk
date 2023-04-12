@@ -1,42 +1,63 @@
-import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StFont } from './WelcomeStyled';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import {
+  StBackground,
+  StCard,
+  StCard2,
+  StCard3,
+  StColumnDiv,
+  StFont,
+} from './WelcomeStyled';
+import { Card, Carousel } from '../../features/Carousel';
+import Slider from '../../features/Slider'
+import CarouselTest from '../../features/CarouselTest';
 
 function Welcome5() {
-    const navi = useNavigate();
+  const CARDS = 3;
+
   return (
     <>
-    <StBackground>
+      <StBackground>
         <StFont>Flexidesk는 회사생활을 어떻게 쉽게 만들어주나요?</StFont>
-        {/* 캐러셀 구현 */}
-      </StBackground>
+        </StBackground>
 
-      <StBackground background="#fff">
-      <StColumnDiv>
-          <StFont>
-          간단한 회원가입으로 Flexidesk의 솔루션 만나보세요.
-          </StFont>
-          <StButtonGap>
-            <StBlueButton
-              onClick={() => {
-                navi('/signupuser');
-              }}
-            >
-              일반 회원가입
-            </StBlueButton>
+        {/* <CarouselTest>
+        {[...new Array(CARDS)].map((_, i) => (
+                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
+              ))}
+        </CarouselTest> */}
 
-            <StBlueButton
-              onClick={() => {
-                navi('/signup');
-              }}
-            >
-              관리자 회원가입
-            </StBlueButton>
-          </StButtonGap>
+
+        <StColumnDiv direction="row">
+        <StCard2/>
+
+          <StCard>
+            <Carousel>
+              {[...new Array(CARDS)].map((_, i) => (
+                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
+              ))}
+            </Carousel>
+          </StCard>
+
+          <StCard3/> 
+
+          {/* <StCard2>
+            <Carousel>
+              {[...new Array(CARDS)].map((_, i) => (
+                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
+              ))}
+            </Carousel>
+          </StCard2> 
+
+           <StCard3>
+            <Carousel>
+              {[...new Array(CARDS)].map((_, i) => (
+                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
+              ))}
+            </Carousel>
+          </StCard3> */}
         </StColumnDiv>
-      </StBackground>
     </>
-  )
+  );
 }
 
-export default Welcome5
+export default Welcome5;

@@ -66,7 +66,6 @@ function Welcome4() {
           <StSpacePhoto>사진</StSpacePhoto>
         </StColumnDiv>
       </StBackground>
-
     </>
   )
 };

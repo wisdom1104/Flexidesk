@@ -127,3 +127,29 @@ export const StSpacePhoto = styled.div`
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
 `;
+
+////////////////////캐러셀//////////////////////////
+export const StCard = styled.div`
+  border: 2px solid #995454;
+  width: 600px;
+  height: 300px;
+  background-color: #efadad;
+  font-size: 32px;
+  
+`
+
+export const StCard2 = styled.div`
+  border: 2px solid #1d5e25;
+  width: 600px;
+  height: 300px;
+  background-color: #adefb5;
+  font-size: 32px;
+`
+
+export const StCard3 = styled.div`
+  border: 2px solid #1d2d5e;
+  width: 600px;
+  height: 300px;
+  background-color: #c7ccfe;
+  font-size: 32px;
+`
