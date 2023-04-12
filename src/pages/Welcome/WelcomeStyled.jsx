@@ -12,8 +12,6 @@ export const StBackground = styled.div`
   justify-content: center;
 
   background: ${props => props.background || '#d2ece9'};
-
-  border: 5px solid red;
 `;
 
 export const StColumnDiv = styled.div`
@@ -23,7 +21,7 @@ export const StColumnDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+// 버튼
 export const StButtonGap = styled.div`
   gap: 60px;
   display: flex;
@@ -50,7 +48,7 @@ export const StBlueButton = styled.button`
   font-weight: 700;
   line-height: 34px;
 `;
-
+// 폰트
 export const StFont = styled.p`
   width: ${props => props.width || '750px'};
   height: ${props => props.height || '144px'};
@@ -68,16 +66,16 @@ export const StFont = styled.p`
 
 export const StSmallFont = styled.p`
   width: ${props => props.width || '280px'};
-  height: ${props => props.height || '108px'};
+  /* height: ${props => props.height || '108px'}; */
   max-width: 1200px;
   min-width: 800px;
   left: ${props => props.left || '597px'};
   /* top: ${props => props.top || '1105px'}; */
+  /* padding: 50px; */
 
   font-weight: ${props => props.weight || '500'};
   font-size: 18px;
   line-height: 150%;
-  /* or 27px */
 
   text-align: ${props => props.align || 'center'};
 

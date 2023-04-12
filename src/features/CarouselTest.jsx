@@ -1,72 +1,83 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 import styled from 'styled-components';
 
-export const MAX_VISIBILITY = 3;
+export const MAX_VISIBILITY = 1;
 ///////////////////////////////////////////////////////////////////
 export const Card = ({ title, content }) => {
   return (
-    <div className='card'>
+    <div>
       <h2>{title}</h2>
-      <p>{content}</p>
+      <p>{content.content}</p>
     </div>
   );
 };
+
 ///////////////////////////////////////////////////////////////////
-const CarouselTest = ({children}) => {
-    const [current, setCurrent] = useState(0);
+const CarouselTest = ({ children }) => {
+  const [current, setCurrent] = useState(0);
 
-    const onPrevClickHandler = () => {
-        setCurrent((current - 1 + children.length) % children.length);
-    };
+  const onPrevClickHandler = () => {
+    setCurrent((current - 1 + children.length) % children.length);
+  };
 
-    const onNextClickHandler = () => {
-        setCurrent((current + 1) % children.length);
-    };
+  const onNextClickHandler = () => {
+    setCurrent((current + 1) % children.length);
+  };
 
-    // map
+  // map
   const visibleCards = [];
-  const leftIndex = (current - Math.floor(MAX_VISIBILITY / 2) + children.length) % children.length;
+  const leftIndex =
+    (current - Math.floor(MAX_VISIBILITY / 2) + children.length) %
+    children.length;
   for (let i = 0; i < MAX_VISIBILITY; i++) {
     visibleCards.push(children[(leftIndex + i) % children.length]);
   }
 
   return (
-<StCarousel>
+    <StCarousel>
       <StButton onClick={onPrevClickHandler}>
         <TiChevronLeftOutline />
       </StButton>
+
+      {/* 왼쪽캐러셀 */}
+      <StCardsRight>
+        {React.cloneElement(visibleCards[0], { key: 0 })}
+      </StCardsRight>
+      
       <StCards>
         <div>
           {visibleCards.map((child, index) => {
             return (
-              <div key={index} className='card-wrapper'>
-                {React.cloneElement(child, { key: index })}
-              </div>
+              <div key={index}>{React.cloneElement(child, { key: index })}</div>
             );
           })}
         </div>
-        <StCard>
-          {children.slice(leftIndex - 1, leftIndex)}
-          {children.slice(leftIndex + MAX_VISIBILITY, leftIndex + MAX_VISIBILITY + 1)}
-        </StCard>
       </StCards>
+
+      {/* 오른쪽 캐러셀 */}
+      <StCardsLeft>
+        {React.cloneElement(visibleCards[visibleCards.length - 1], {
+          key: MAX_VISIBILITY - 1,
+        })}
+      </StCardsLeft>
+
       <StButton onClick={onNextClickHandler}>
         <TiChevronRightOutline />
       </StButton>
     </StCarousel>
-  )
+  );
 };
 
 export default CarouselTest;
 
 const StCarousel = styled.div`
-    display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   margin-top: 20px;
-`
+`;
 
 const StButton = styled.button`
   background-color: transparent;
@@ -74,38 +85,64 @@ const StButton = styled.button`
   font-size: 2rem;
   color: #ccc;
   cursor: pointer;
-`
+`;
 
 const StCards = styled.div`
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 481px;
+  height: 380px;
+  z-index: 1000;
   padding: 2rem;
   background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border-radius: 1rem;
-  color: $color-gray;
-  text-align: justify;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
   transition: all 0.3s ease-out;
-`
 
-const StCard = styled.div`
-      /* position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center; */
+  :hover {
+    transform: perspective(150px) translateZ(30px);
+  }
 
+  background: #efff84;
+`;
 
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: 
-    rotateY(calc(var(--offset) * 50deg)) 
-    scaleY(calc(1 + var(--abs-offset) * -0.4))
-    translateZ(calc(var(--abs-offset) * -30rem))
-    translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 1rem));
+const StCardsLeft = styled.div`
+  position: relative;
+  width: 331px;
+  height: 262px;
+  z-index: 990;
+  left: -50px;
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 1rem;
+  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
   transition: all 0.3s ease-out;
-`
+
+  background: #0d3d08;
+`;
+
+const StCardsRight = styled.div`
+  position: relative;
+  width: 331px;
+  height: 262px;
+  z-index: 990;
+  right: -50px;
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 1rem;
+  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  transition: all 0.3s ease-out;
+
+  background: #151c14;
+`;

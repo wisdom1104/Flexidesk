@@ -23,13 +23,21 @@ export const Input = ({type, value, onChange, name, placeholder}) => {
   // }
 
   const StInput = styled.input`
-  width:100%;
-  height:30px;
+  width: 400px;
+  height: 60px;
   display: block;
   height: ${props => props.heigth};
   padding: 0 10px;
   background: #FCF5F6;
-  font-size: .8rem;
+  
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A6AEBB;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 `
 
 // const StyledButton = styled.button`

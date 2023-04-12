@@ -1,61 +1,32 @@
-import React from 'react';
-import {
-  StBackground,
-  StCard,
-  StCard2,
-  StCard3,
-  StColumnDiv,
-  StFont,
-} from './WelcomeStyled';
-import { Card, Carousel } from '../../features/Carousel';
-import Slider from '../../features/Slider'
+import React, { useState } from 'react';
+import { StBackground, StFont } from './WelcomeStyled';
+import { Card } from '../../features/CarouselTest'
 import CarouselTest from '../../features/CarouselTest';
 
 function Welcome5() {
   const CARDS = 3;
 
+  const [contents, setContents] = useState([
+    { id: 1, content: '회의실 예약' },
+    { id: 2, content: '스페이스' },
+    { id: 3, content: '스케줄 관리' },
+  ]);
+
   return (
     <>
-      <StBackground>
-        <StFont>Flexidesk는 회사생활을 어떻게 쉽게 만들어주나요?</StFont>
+      <StBackground height='300px'>
+        <StFont>Flexidesk는 회사생활을 <br/> 어떻게 쉽게 만들어주나요?</StFont>
         </StBackground>
 
-        {/* <CarouselTest>
+        <StBackground>
+        <CarouselTest>
         {[...new Array(CARDS)].map((_, i) => (
-                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
-              ))}
-        </CarouselTest> */}
-
-
-        <StColumnDiv direction="row">
-        <StCard2/>
-
-          <StCard>
-            <Carousel>
-              {[...new Array(CARDS)].map((_, i) => (
-                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
-              ))}
-            </Carousel>
-          </StCard>
-
-          <StCard3/> 
-
-          {/* <StCard2>
-            <Carousel>
-              {[...new Array(CARDS)].map((_, i) => (
-                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
-              ))}
-            </Carousel>
-          </StCard2> 
-
-           <StCard3>
-            <Carousel>
-              {[...new Array(CARDS)].map((_, i) => (
-                <Card title={'Card ' + (i + 1)} content="안녕하세요" />
-              ))}
-            </Carousel>
-          </StCard3> */}
-        </StColumnDiv>
+          <div key={contents[i].id}>
+            <Card title={'Card ' + (i + 1)} content={contents[i]} />
+          </div>
+        ))}
+      </CarouselTest>
+      </StBackground>
     </>
   );
 }

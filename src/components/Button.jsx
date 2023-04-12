@@ -9,6 +9,8 @@ function Button({ children, style, onClick }) {
   );
 }
 
+export default Button;
+
 const StButton = styled.button`
   background-color: white;
   border: 1px solid lightgray;
@@ -17,5 +19,3 @@ const StButton = styled.button`
   margin: 2.5px;
   cursor: pointer;
 `;
-
-export default Button;
