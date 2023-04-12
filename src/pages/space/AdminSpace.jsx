@@ -7,6 +7,9 @@ import { __deleteSpace } from '../../redux/modules/spaceSlice';
 import useFalseHook from '../../hooks/useFalseHook';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
+import { Column, Row } from '../../components/Flex';
+import CreateSpace from '../../features/space/CreateSpace';
+import { __getFloors } from '../../redux/modules/floorsSlice';
 
 function AdminSpace() {
   // useFalseHook();
@@ -20,48 +23,66 @@ function AdminSpace() {
   };
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
+  const navi = useNavigate();
 
   const { spaces } = useSelector(state => state.spaces);
+  const { floors } = useSelector(state => state.floors);
 
+  // 관리자 가드
   const token = cookies.get('role');
-  const navi = useNavigate();
 
   useEffect(() => {
     if (token === 'ADMIN') {
       dispatch(__getSpaces());
+      dispatch(__getFloors());
     } else {
       navi('/space');
     }
   }, [dispatch]);
-  //추가
-  const onClickAddSpaceHandler = async () => {
-    const newSpace = {
-      spaceName: 'New Space',
-    };
-
-    dispatch(__addSpace(newSpace));
-    // console.log(newSpace);
-  };
-
-  //삭제
-  const onDeleteSpaceHandler = async spaceId => {
-    dispatch(__deleteSpace(spaceId));
-    // dispatch(__getSpaces())
-  };
-  //
+  // console.log(floors);
+  // space 선택
   const [selectedSpace, setSelectedSpace] = useState(null);
   useEffect(() => {
+    // 초기 space 설정
     setSelectedSpace(spaces[0]);
   }, [spaces]);
 
+  // floor 선택
+  const [selectedFloor, setSelectedFloor] = useState(null);
+  useEffect(() => {
+    // 초기 floor 설정
+    setSelectedFloor(floors[0]);
+  }, [floors]);
+
+  // //space 선택
   const onClickSpaceListHandler = spaceId => {
     const space = spaces.find(space => space.spaceId === spaceId);
     setSelectedSpace(space);
+    setIsModal(!isModal);
   };
+
+  // //space 선택
+  const onClickFloorListHandler = floorId => {
+    const floor = floors.find(floor => floor.floorId === floorId);
+    setSelectedFloor(floor);
+    setIsModal(!isModal);
+  };
+
+  const [isModal, setIsModal] = useState(false);
 
   return (
     <>
       <Row>
+        {/* 리스트 영역 */}
+        <CreateSpace
+          isModal={isModal}
+          setIsModal={setIsModal}
+          spaces={spaces}
+          floors={floors}
+          onClickSpaceListHandler={onClickSpaceListHandler}
+          onClickFloorListHandler={onClickFloorListHandler}
+        />
+
         {/* ------------------------셀렉터 영역--------------------------------- */}
         <StSelect>
           <span>AdminSpace</span>
@@ -92,47 +113,21 @@ function AdminSpace() {
             </StBox>
           ))}
         </StSelect>
-        {/* ------------------------리스트 영역--------------------------------- */}
-        <StList>
-          Space List
-          <br />
-          {spaces?.map(space => {
-            if (space)
-              return (
-                <span
-                  style={{ cursor: 'pointer' }}
-                  key={space.spaceId}
-                  onClick={() => onClickSpaceListHandler(space.spaceId)}
-                >
-                  {space.spaceName}/{space.spaceId}-----
-                  <button
-                    onClick={() => {
-                      const confirmDelete =
-                        window.confirm('정말 삭제하시겠습니까?');
-                      if (confirmDelete) {
-                        onDeleteSpaceHandler(space.spaceId);
-                      }
-                    }}
-                  >
-                    X
-                  </button>
-                </span>
-              );
-          })}
-        </StList>
         <Column>
-          {selectedSpace && (
+          {selectedSpace && selectedFloor && (
             <AdminSpaceBox
               spaceId={selectedSpace.spaceId}
+              floorId={selectedFloor.floorId}
               selectedSpace={selectedSpace}
+              selectedFloor={selectedFloor}
+              handleDragStart={handleDragStart}
+              isModal={isModal}
+              setIsModal={setIsModal}
+              floors={floors}
             />
           )}
         </Column>
       </Row>
-      <StBtn>
-        <button onClick={onClickAddSpaceHandler}>Space 추가</button>
-        <button>완료</button>
-      </StBtn>
     </>
   );
 }
@@ -158,7 +153,7 @@ const StSelect = styled.div`
   padding: 10px;
 `;
 
-const StList = styled.div`
+export const StList = styled.div`
   background: #80b166;
   width: 200px;
   height: 725px;
@@ -169,18 +164,55 @@ const StList = styled.div`
   overflow: scroll;
 `;
 
-const StBtn = styled.div`
+export const StBtn = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: center;
   gap: 10px;
 `;
-export const Column = styled.div`
+
+export const StBoard = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  background: #867395;
+  width: 700px;
+  height: 700px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
 `;
 
-export const Row = styled.div`
+export const StBtnBox = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 5px;
+`;
+
+export const StDropMr = styled.div`
+  background: #c478a4;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const StDropBox = styled.div`
+  background: #c0a55c;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
