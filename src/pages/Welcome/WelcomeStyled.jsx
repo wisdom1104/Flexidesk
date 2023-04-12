@@ -66,7 +66,7 @@ export const StFont = styled.p`
 
 export const StSmallFont = styled.p`
   width: ${props => props.width || '280px'};
-  /* height: ${props => props.height || '108px'}; */
+  height: ${props => props.height || ''};
   max-width: 1200px;
   min-width: 800px;
   left: ${props => props.left || '597px'};
@@ -74,7 +74,7 @@ export const StSmallFont = styled.p`
   /* padding: 50px; */
 
   font-weight: ${props => props.weight || '500'};
-  font-size: 18px;
+  font-size: ${props => props.fontSize || '18px'};
   line-height: 150%;
 
   text-align: ${props => props.align || 'center'};

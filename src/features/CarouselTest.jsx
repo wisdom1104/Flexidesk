@@ -1,118 +1,167 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import styled from 'styled-components';
 
-export const MAX_VISIBILITY = 1;
-///////////////////////////////////////////////////////////////////
-export const Card = ({ title, content }) => {
+const Button = ({ children, dir, disabled, onClick }) => {
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>{content.content}</p>
-    </div>
+    <Stbutton disabled={disabled} dir={dir} onClick={onClick}>
+      {children}
+    </Stbutton>
   );
 };
 
-///////////////////////////////////////////////////////////////////
-const CarouselTest = ({ children }) => {
-  const [current, setCurrent] = useState(0);
+const Stbutton = styled.button`
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
 
-  const onPrevClickHandler = () => {
-    setCurrent((current - 1 + children.length) % children.length);
-  };
-
-  const onNextClickHandler = () => {
-    setCurrent((current + 1) % children.length);
-  };
-
-  // map
-  const visibleCards = [];
-  const leftIndex =
-    (current - Math.floor(MAX_VISIBILITY / 2) + children.length) %
-    children.length;
-  for (let i = 0; i < MAX_VISIBILITY; i++) {
-    visibleCards.push(children[(leftIndex + i) % children.length]);
-  }
-
-  return (
-    <StCarousel>
-      <StButton onClick={onPrevClickHandler}>
-        <TiChevronLeftOutline />
-      </StButton>
-
-      {/* 왼쪽캐러셀 */}
-      <StCardsRight>
-        {React.cloneElement(visibleCards[0], { key: 0 })}
-      </StCardsRight>
-      
-      <StCards>
-        <div>
-          {visibleCards.map((child, index) => {
-            return (
-              <div key={index}>{React.cloneElement(child, { key: index })}</div>
-            );
-          })}
-        </div>
-      </StCards>
-
-      {/* 오른쪽 캐러셀 */}
-      <StCardsLeft>
-        {React.cloneElement(visibleCards[visibleCards.length - 1], {
-          key: MAX_VISIBILITY - 1,
-        })}
-      </StCardsLeft>
-
-      <StButton onClick={onNextClickHandler}>
-        <TiChevronRightOutline />
-      </StButton>
-    </StCarousel>
-  );
-};
-
-export default CarouselTest;
-
-const StCarousel = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-`;
-
-const StButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 2rem;
   color: #ccc;
   cursor: pointer;
+
+  ${({ dir }) => {
+    if (dir === "left") {
+      return css`
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+
+    if (dir === "right") {
+      return css`
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+  }}
 `;
 
-const StCards = styled.div`
-  top: 50%;
-  left: 50%;
-  width: 481px;
-  height: 380px;
-  z-index: 1000;
-  padding: 2rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-radius: 1rem;
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  transition: all 0.3s ease-out;
+const A = () => {
+  return <div>회의실 예약</div>;
+};
 
-  :hover {
-    transform: perspective(150px) translateZ(30px);
-  }
+const B = () => {
+  return <div>스페이스</div>;
+};
 
-  background: #efff84;
+const C = () => {
+  return <div>스케줄 관리</div>;
+};
+
+const CarouselTest = () => {
+  const [components] = useState([
+    {
+      id: 1,
+      Component: A
+    },
+    {
+      id: 2,
+      Component: B
+    },
+    {
+      id: 3,
+      Component: C
+    }
+  ]);
+
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState({
+    on: false,
+    dir: ""
+  });
+  const [disabled, setDisabled] = useState(false);
+
+  const genCarousesArray = (target) => {
+    return [target - 1, target, target + 1].map((el) => {
+      if (el === 3) {
+        return components.at(0);
+      }
+      return components.at(el);
+    });
+  };
+
+  const clickLeftHandler = () => {
+    setDisabled(true);
+    setAnimate(() => ({ on: true, dir: "left" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, value: "left" }));
+
+      if (index === 2) {
+        setDisabled(false);
+        return setIndex(0);
+      }
+
+      setDisabled(false);
+      return setIndex((pre) => pre + 1);
+    }, 400);
+  };
+
+  const clickRightHandler = () => {
+    setDisabled(true);
+    setAnimate(() => ({ on: true, dir: "right" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, dir: "right" }));
+
+      if (index === -2) {
+        setDisabled(false);
+        return setIndex(0);
+      }
+
+      setDisabled(false);
+      setIndex((pre) => pre - 1);
+    }, 400);
+  };
+
+  return (
+    <Container>
+      <CarouseContainer>
+        <Button dir="left" onClick={clickLeftHandler} disabled={disabled}><TiChevronLeftOutline />
+</Button>
+        <Button dir="right" onClick={clickRightHandler} disabled={disabled}><TiChevronRightOutline />
+</Button>
+        <Carouses>
+          {genCarousesArray(index).map(({ id, Component }) => (
+            <Carouse src={id} key={id} animate={animate}>
+              <Component />
+            </Carouse>
+          ))}
+        </Carouses>
+      </CarouseContainer>
+    </Container>
+  );
+};
+
+export default CarouselTest;
+
+const Container = styled.div`
+  padding: 100px;
 `;
 
-const StCardsLeft = styled.div`
+const CarouseContainer = styled.div`
+  width: 1090px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 331px;
-  height: 262px;
+  overflow-x: hidden;
+`;
+
+const Carouses = styled.div`
+  height: 200px;
+  display: flex;
+  gap: 10px;
+`;
+
+const Carouse = styled.div`
+  position: relative;
+  width: 200px;
+  height: 180px;
   z-index: 990;
   left: -50px;
   padding: 2rem;
@@ -125,24 +174,61 @@ const StCardsLeft = styled.div`
   font-weight: 700;
   transition: all 0.3s ease-out;
 
-  background: #0d3d08;
-`;
+  background: #fff;
 
-const StCardsRight = styled.div`
-  position: relative;
-  width: 331px;
-  height: 262px;
-  z-index: 990;
-  right: -50px;
-  padding: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-radius: 1rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
-  border-radius: 1rem;
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  transition: all 0.3s ease-out;
+  &:nth-child(1) {
+    ${({ animate }) => {
+      if (animate.on) {
+        if (animate.dir === "right") {
+          return css`
+            z-index: 1;
+            transform: translate(310px) scale(1.5);
+            transition: transform 400ms ease-in-out;
+          `;
+        }
+        return css`
+          transform: translate(620px);
+          transition: transform 400ms ease-in-out;
+        `;
+      }
+    }};
+  }
 
-  background: #151c14;
+  &:nth-child(2) {
+    // 결과
+
+    transform: scale(1.5);
+    ${({ animate }) => {
+      if (animate.on) {
+        if (animate.dir === "right") {
+          return css`
+            transform: translate(310px) scale(1);
+            transition: transform 400ms ease-in-out;
+          `;
+        }
+        return css`
+          transform: translate(-310px) scale(1);
+          transition: transform 400ms ease-in-out;
+        `;
+      }
+    }};
+  }
+
+  &:nth-child(3) {
+    ${({ animate }) => {
+      if (animate.on) {
+        if (animate.dir === "right") {
+          return css`
+            z-index: -1;
+            transform: translate(-620px) scale(1);
+            transition: transform 400ms ease-in-out;
+          `;
+        }
+        return css`
+          transform: translate(-310px) scale(1.5);
+          transition: transform 400ms ease-in-out;
+        `;
+      }
+    }};
+  }
 `;

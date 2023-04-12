@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import useTrueHook from '../../hooks/useTrueHook'
 import { StBackground, StForm, StFormContainer, StLoginForm, StLongButton } from './UserStyled';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 
 function Login() {
 
@@ -47,6 +48,12 @@ function Login() {
 
   return (
     <StBackground>
+      <StFont width='78px' height='34px' align='start' fontSize='28px' >
+        로그인
+      </StFont>
+      <StSmallFont width='480px' height='19px' fontSize='16px'>
+      이메일 주소와 비밀번호를 입력해주세요.
+      </StSmallFont>
       <StLoginForm onSubmit={onsubmitHandler}>
         <StForm>
         <Input

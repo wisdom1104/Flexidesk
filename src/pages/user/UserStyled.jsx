@@ -20,16 +20,17 @@ export const StBackground = styled.div`
 export const StForm = styled.div`
 display: flex;
 flex-direction: column;
-align-items: flex-start;
+align-items: center;
 padding: 0px;
 gap: 16px;
 
-width: 400px;
-height: 136px;
+width: 480px;
+height: 393px;
 left: 560px;
 top: 348px;
+margin-top: 100px;
 
-background: #46e3c9;
+/* background: #46e3c9; */
 `
 
 export const StLoginForm = styled.form`
