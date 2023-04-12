@@ -18,7 +18,7 @@ function AllReservation() {
   return (
     <div>
       {reservationList.map(item => (
-        <div key={item.id}>
+        <div key={item.reservationId}>
           이름:
           {item.username} <br />
           예약:
