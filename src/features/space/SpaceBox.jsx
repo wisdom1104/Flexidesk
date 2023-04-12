@@ -1,10 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { __getSpace } from '../../redux/modules/spaceSlice';
+import {
+  StBoard,
+  StBtn,
+  StDropBox,
+  StDropMr,
+} from '../../pages/space/AdminSpace';
+import { StSubHeader } from './AdminSpaceBox';
+import { useNavigate } from 'react-router-dom';
+import { cookies } from '../../shared/cookies';
 
 function SpaceBox({ spaceId, selectedSpace }) {
   const dispatch = useDispatch();
+  const navi = useNavigate();
+
+  // 관리자 가드
+  const token = cookies.get('role');
+
   const { space } = useSelector(state => state.space);
 
   useEffect(() => {
@@ -14,14 +27,21 @@ function SpaceBox({ spaceId, selectedSpace }) {
 
   return (
     <>
-      {space?.map(item => {
-        if (item)
-          return (
-            <span style={{ margin: '10px' }} key={item.spaceId}>
-              {item.spaceName}
-            </span>
-          );
-      })}
+      <StSubHeader>
+        {space?.map(item => {
+          if (item)
+            return (
+              <span style={{ margin: '10px' }} key={item.spaceId}>
+                {item.spaceName}
+              </span>
+            );
+        })}
+        {token === 'ADMIN' ? (
+          <StBtn>
+            <button onClick={() => navi('/adminSpace')}>Space 관리</button>
+          </StBtn>
+        ) : null}
+      </StSubHeader>
       <StBoard>
         <div>
           {space?.map(item =>
@@ -44,6 +64,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
                   <StDropMr
                     key={mr.mrId}
                     style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
+                    onClick={() => navi(`/calender/${mr.mrId}`)}
                   >
                     <div>{mr.mrName}</div>
                   </StDropMr>
@@ -57,51 +78,3 @@ function SpaceBox({ spaceId, selectedSpace }) {
 }
 
 export default SpaceBox;
-
-const StDropBox = styled.div`
-  background: #c0a55c;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: pointer;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-const StDropMr = styled.div`
-  background: #c478a4;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: pointer;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-const StBoard = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  background: #867395;
-  width: 700px;
-  height: 700px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
-`;
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;

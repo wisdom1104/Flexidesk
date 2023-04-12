@@ -8,6 +8,8 @@ import detail from '../modules/detail';
 import loginSlice from '../modules/loginSlice';
 import userSchedules from '../modules/userSchedules';
 import reservationList from '../modules/allReservationSlice';
+import floors from '../modules/floorsSlice';
+import floor from '../modules/floorSlice';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     mr,
     box,
     userSchedules,
+    floors,
+    floor,
   },
 });
 

@@ -1,13 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { __editSpace, __getSpace } from '../../redux/modules/spaceSlice';
+import {
+  __deleteSpace,
+  __editSpace,
+  __getSpace,
+} from '../../redux/modules/spaceSlice';
 import { __addMr, __editMr } from '../../redux/modules/spaceMrSlice';
 import { __addBox, __editBox } from '../../redux/modules/spaceBoxSlice';
 import MrItem from './MrItem';
 import BoxItem from './BoxItem';
+import { StBoard, StBtn } from '../../pages/space/AdminSpace';
+import { __addSpace } from '../../redux/modules/spacesSlice';
+import { useNavigate } from 'react-router-dom';
+import CreateSpace from './CreateSpace';
+import { Row } from '../../components/Flex';
+import { __editFloor, __getFloor } from '../../redux/modules/floorSlice';
 
-function AdminSpaceBox({ spaceId, selectedSpace }) {
+function AdminSpaceBox({
+  spaceId,
+  floorId,
+  selectedSpace,
+  selectedFloor,
+  handleDragStart,
+  isModal,
+  setIsModal,
+}) {
   const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
 
@@ -17,31 +35,25 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
   const dispatch = useDispatch();
+  const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
-  // console.log('space', space);
-  // const mrList = [];
+  const { floor } = useSelector(state => state.floor);
+
+  //floor, space 조회
   useEffect(() => {
     dispatch(__getSpace(spaceId));
   }, [selectedSpace]);
-
-  // space name 수정
-  const [editSpaceName, setEditSpaceName] = useState('');
   useEffect(() => {
-    const spaceName = space?.[0]?.spaceName;
-    setEditSpaceName(spaceName || '');
-  }, [space]);
+    dispatch(__getFloor(floorId));
+  }, [selectedFloor]);
+
   const mrList = space?.map(item => item.mrlist);
   const boxList = space?.map(item => item.boxlist);
-
-  // console.log('space', space);
-  // console.log('boxList', boxList[0]);
-  // console.log('mrList', mrList[0]);
 
   // 모든 요소 드롭
   const HandleDrop = async e => {
     e.preventDefault();
-    // const boxList = space?.map(item => item.boxlist);
     const id = e.dataTransfer.getData('boxId');
     const targetRect = e.target.getBoundingClientRect();
 
@@ -151,45 +163,35 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     e.preventDefault();
   };
 
-  const handleDragStart = (e, boxId) => {
-    e.dataTransfer.setData('boxId', boxId);
-  };
   //--------------------------회의실 드래그 앤 드롭--------------------------------
-
-  // mr 좌표 수정 (드래그 앤 드롭)
   const mrBoxMouseDownHandler = (e, boxIndex) => {
-    // console.log(boxIndex);
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
     const mrBoxMoveHandler = e => {
       const currentMrBox = mrList[0].find(mrBox => mrBox.mrId === boxIndex);
-      // console.log('currentMrBox', currentMrBox);
-      // console.log('mrList', mrList[0]);
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
-      const mrDiffX = mouseX - currentMrBox.x; // 현재 이동 중인 상자의 시작 위치와 마우스 위치 사이의 X축 차이
-      const mrDiffY = mouseY - currentMrBox.y; // 현재 이동 중인 상자의 시작 위치와 마우스 위치 사이의 Y축 차이
+      const mrDiffX = mouseX - currentMrBox.x;
+      const mrDiffY = mouseY - currentMrBox.y;
 
-      const newx = newMouseX - mrDiffX; // 새로운 X 위치 계산
-      const newy = newMouseY - mrDiffY; // 새로운 Y 위치 계산
+      const newx = newMouseX - mrDiffX;
+      const newy = newMouseY - mrDiffY;
 
-      const boardRect = boardEl.current.getBoundingClientRect(); // 이동 가능한 영역(board)의 위치와 크기 정보 가져오기
-      const boxRect = elRef.current[boxIndex].getBoundingClientRect(); // 이동 대상 상자(box)의 위치와 크기 정보 가져오기
+      const boardRect = boardEl.current.getBoundingClientRect();
+      const boxRect = elRef.current[boxIndex].getBoundingClientRect();
 
       const limitedx = Math.max(
-        // X 위치 제한 범위 설정
-        boardRect.x - (boardRect.x + 10), // board 영역에서 왼쪽 끝으로 이동하는 경우
-        Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))), // board 영역에서 오른쪽 끝으로 이동하는 경우
+        boardRect.x - (boardRect.x + 10),
+        Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))),
       );
       const limitedy = Math.max(
-        // Y 위치 제한 범위 설정
-        boardRect.y - (boardRect.y + 10), // board 영역에서 위쪽 끝으로 이동하는 경우
+        boardRect.y - (boardRect.y + 10),
         Math.min(
           newy,
-          boardRect.bottom - (boxRect.height + (boardRect.y + 10)), // board 영역에서 아래쪽 끝으로 이동하는 경우
+          boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
         ),
       );
 
@@ -200,33 +202,29 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
         x: Number(limitedx),
         y: Number(limitedy),
       };
-      // console.log('payload1', payload);
+      setNewMrBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
-
     const spaceMouseUpHandler = (e, boxIndex) => {
       document.removeEventListener('mousemove', mrBoxMoveHandler);
       document.removeEventListener('mouseup', spaceMouseUpHandler);
       const result = mrBoxMoveHandler(e, boxIndex);
-      // console.log('payload2', result);
-      dispatch(__editMr(result)); // 새로운 위치로 이동
+      dispatch(__editMr(result));
+      setNewMrBoxes([]);
     };
 
     document.addEventListener('mousemove', mrBoxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
+  // console.log(newMrBoxes);
 
   //--------------------------박스 드래그 앤 드롭--------------------------------
-
-  // box 좌표 수정 (드래그 앤 드롭)
-
   const boxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
     const boxMoveHandler = e => {
       const currentBox = boxList[0].find(box => box.boxId === boxIndex);
-      // console.log(currentBox);
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
@@ -260,7 +258,7 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
         x: Number(limitedx),
         y: Number(limitedy),
       };
-      // console.log('payload1', payload);
+      setNewBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
 
@@ -268,8 +266,8 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
       document.removeEventListener('mousemove', boxMoveHandler);
       document.removeEventListener('mouseup', spaceMouseUpHandler);
       const result = boxMoveHandler(e, boxIndex);
-      // console.log('payload2', result);
-      dispatch(__editBox(result)); // 새로운 위치로 이동
+      dispatch(__editBox(result));
+      setNewBoxes([]);
     };
 
     document.addEventListener('mousemove', boxMoveHandler);
@@ -277,9 +275,15 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
   };
 
   //---------------------------------------------------
-
   //space name 수정
+  const [editSpaceName, setEditSpaceName] = useState('');
   const [spaceEdit, setSpaceEdit] = useState(false);
+
+  useEffect(() => {
+    const spaceName = space?.[0]?.spaceName;
+    setEditSpaceName(spaceName || '');
+  }, [space]);
+  //space name 수정 핸들러
   const onEditSpaceNameHandler = async spaceId => {
     const payload = {
       spaceId,
@@ -289,58 +293,136 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
     setSpaceEdit(!spaceEdit);
   };
 
+  //floor name 수정
+  const [editFloorName, setEditFloorName] = useState('');
+  const [floorEdit, setFloorEdit] = useState(false);
+
+  useEffect(() => {
+    const floorName = floor?.[0]?.floorName;
+    setEditFloorName(floorName || '');
+  }, [floor]);
+  //floor name 수정 핸들러
+  const onEditFloorNameHandler = async floorId => {
+    const payload = {
+      floorId,
+      floorName: editFloorName,
+    };
+    dispatch(__editFloor(payload));
+    setFloorEdit(!floorEdit);
+  };
+
   return (
     <>
-      {/* space name 부분 */}
-      {!spaceEdit ? (
-        <div>
-          {space?.map(item => {
-            if (item)
-              return (
-                <span style={{ margin: '10px' }} key={item.spaceId}>
-                  {item.spaceName}
-                  {/* {item.spaceId} */}
-                  <button
-                    onClick={() => {
-                      setSpaceEdit(!spaceEdit);
-                    }}
-                  >
-                    수정하기
-                  </button>
-                </span>
-              );
-          })}
-        </div>
-      ) : (
-        <div>
-          {space?.map(item => {
-            if (item)
-              return (
-                <div key={item.spaceId}>
-                  <input
-                    style={{ padding: '10px' }}
-                    type="text"
-                    value={editSpaceName}
-                    onChange={e => {
-                      setEditSpaceName(e.target.value);
-                    }}
-                  />
-                  <button
-                    onClick={() => {
-                      onEditSpaceNameHandler(item.spaceId);
-                    }}
-                  >
-                    수정 완료
-                  </button>
-                </div>
-              );
-          })}
-        </div>
-      )}
+      <StSubHeader>
+        <Row>
+          {/* floor name 부분 */}
+          {!floorEdit ? (
+            <div>
+              {floor?.map(item => {
+                if (item)
+                  return (
+                    <span style={{ margin: '10px' }} key={item.floorId}>
+                      {item.floorName}
+                      {/* {item.floorId} */}
+                      <button
+                        onClick={() => {
+                          setFloorEdit(!floorEdit);
+                        }}
+                      >
+                        수정하기
+                      </button>
+                    </span>
+                  );
+              })}
+            </div>
+          ) : (
+            <div>
+              {floor?.map(item => {
+                if (item)
+                  return (
+                    <div key={item.floorId}>
+                      <input
+                        style={{ padding: '10px' }}
+                        type="text"
+                        value={editFloorName}
+                        onChange={e => {
+                          setEditFloorName(e.target.value);
+                        }}
+                      />
+                      <button
+                        onClick={() => {
+                          onEditFloorNameHandler(item.floorId);
+                        }}
+                      >
+                        수정 완료
+                      </button>
+                    </div>
+                  );
+              })}
+            </div>
+          )}
+          /{/* space name 부분 */}
+          {!spaceEdit ? (
+            <div>
+              {space?.map(item => {
+                if (item)
+                  return (
+                    <span style={{ margin: '10px' }} key={item.spaceId}>
+                      {item.spaceName}
+                      {/* {item.spaceId} */}
+                      <button
+                        onClick={() => {
+                          setSpaceEdit(!spaceEdit);
+                        }}
+                      >
+                        수정하기
+                      </button>
+                    </span>
+                  );
+              })}
+            </div>
+          ) : (
+            <div>
+              {space?.map(item => {
+                if (item)
+                  return (
+                    <div key={item.spaceId}>
+                      <input
+                        style={{ padding: '10px' }}
+                        type="text"
+                        value={editSpaceName}
+                        onChange={e => {
+                          setEditSpaceName(e.target.value);
+                        }}
+                      />
+                      <button
+                        onClick={() => {
+                          onEditSpaceNameHandler(item.spaceId);
+                        }}
+                      >
+                        수정 완료
+                      </button>
+                    </div>
+                  );
+              })}
+            </div>
+          )}
+        </Row>
+        <StBtn>
+          <button
+            onClick={() => {
+              setIsModal(!isModal);
+            }}
+          >
+            Space 관리
+          </button>
+          <button onClick={() => navi('/space')}>완료</button>
+        </StBtn>
+      </StSubHeader>
       {/* board 부분 */}
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
         {newMrBoxes.map((box, index) => (
-          <StDropMr
+          <StDragMr
             onDrop={HandleDrop}
             onDragOver={handleDragOver}
             key={box.mrId}
@@ -349,14 +431,19 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
             onDragStart={e => handleDragStart(e, box.mrId)}
             style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
           >
-            <div>
-              {box.inner} {box.mrId}
-            </div>
-            <StBtnBox>
-              <button>수정</button>
-              <button>삭제</button>
-            </StBtnBox>
-          </StDropMr>
+            <div>{box.mrName}</div>
+          </StDragMr>
+        ))}
+        {newBoxes.map((box, index) => (
+          <StDragBox
+            key={box.boxId}
+            ref={el => (elRef.current[index] = el)}
+            onMouseDown={e => boxMouseDownHandler(e, index)}
+            onDragStart={e => handleDragStart(e, box.boxId)}
+            style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+          >
+            <div>{box.boxName}</div>
+          </StDragBox>
         ))}
         {/* 회의실 드래그 앤 드롭 */}
         <div>
@@ -405,26 +492,31 @@ function AdminSpaceBox({ spaceId, selectedSpace }) {
 
 export default AdminSpaceBox;
 
-const StBoard = styled.div`
+export const StSubHeader = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  background: #867395;
-  width: 700px;
-  height: 700px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
 `;
 
-export const StBtnBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  gap: 5px;
-`;
-
-export const StDropMr = styled.div`
+export const StDragMr = styled.div`
   background: #c478a4;
+  opacity: 0.2;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const StDragBox = styled.div`
+  background: #c0a55c;
+  opacity: 0.2;
   width: 100px;
   height: 100px;
   margin: 10px;
