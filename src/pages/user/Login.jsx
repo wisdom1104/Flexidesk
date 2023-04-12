@@ -8,7 +8,6 @@ import jwt_decode from 'jwt-decode';
 import useTrueHook from '../../hooks/useTrueHook'
 
 function Login() {
-  // alert 에러메세지 띄어주기!!!
 
   const [user, setUser] = useState({
     email: '',
@@ -36,15 +35,14 @@ function Login() {
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
       cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
-      navi('/');
+      
+      navi('/adminspace')
+
     } catch (e) {
       const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
-
-  // 가드
-  useTrueHook();
 
   return (
     <div>

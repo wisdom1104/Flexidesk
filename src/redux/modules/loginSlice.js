@@ -27,7 +27,7 @@ const loginSlice  = createSlice({
             cookies.remove("token");
             cookies.remove("userId");
             cookies.remove("companyName");
-            cookies.remove("roll");
+            cookies.remove("role");
         },
     },
     extraReducers: {},

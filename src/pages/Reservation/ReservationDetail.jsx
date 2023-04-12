@@ -7,6 +7,8 @@ import {
 import { getCookie } from '../../shared/cookies';
 import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
+import AllReservation from './AllReservation'
+
 function ReservationDetail() {
   // useFalseHook();
   const dispatch = useDispatch();
@@ -44,6 +46,10 @@ function ReservationDetail() {
             --------------------------------
           </div>
         ))}
+      </div>
+      <div>
+        <p>전체 조회</p>
+        <AllReservation />
       </div>
       <UserSchedules />
     </>
