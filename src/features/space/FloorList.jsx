@@ -14,7 +14,6 @@ function FloorList({ floors, onClickFloorListHandler }) {
     };
     dispatch(__addFloor(newFloor));
   };
-  // console.log('floors', floors);
   return (
     <>
       Floor List

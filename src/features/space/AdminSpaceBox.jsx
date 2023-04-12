@@ -26,20 +26,19 @@ function AdminSpaceBox({
   isModal,
   setIsModal,
 }) {
+  const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
+
+  const elRef = useRef([]);
+  const boardEl = useRef(null);
+
+  const [newMrBoxes, setNewMrBoxes] = useState([]);
+  const [newBoxes, setNewBoxes] = useState([]);
   const dispatch = useDispatch();
   const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
   const { floor } = useSelector(state => state.floor);
-
-  const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
-
-  const [newMrBoxes, setNewMrBoxes] = useState([]);
-  const [newBoxes, setNewBoxes] = useState([]);
-
-  const elRef = useRef([]);
-  const boardEl = useRef(null);
 
   //floor, space 조회
   useEffect(() => {
@@ -94,9 +93,9 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        // console.log(isOverlapping);
-        // console.log(isMrListOverlapping);
-        // console.log(isBoxListOverlapping);
+        console.log(isOverlapping);
+        console.log(isMrListOverlapping);
+        console.log(isBoxListOverlapping);
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addMr(newBox));
         } else {

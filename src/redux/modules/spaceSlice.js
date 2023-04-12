@@ -16,15 +16,11 @@ export const __getSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.get(
-        `/spaces/${companyName}/${spaceId}
-      `,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await api.get(`/${companyName}/space/${spaceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -39,7 +35,7 @@ export const __deleteSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.delete(`/spaces/${companyName}/${spaceId}`, {
+      const response = await api.delete(`/${companyName}/space/${spaceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,7 +48,7 @@ export const __deleteSpace = createAsyncThunk(
   },
 );
 
-// space 수정
+// space name 수정
 export const __editSpace = createAsyncThunk(
   '__editSpace',
   async (payload, thunk) => {
@@ -61,7 +57,7 @@ export const __editSpace = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(
-        `/spaces/${companyName}/${payload.spaceId}`,
+        `/${companyName}/space/${payload.spaceId}`,
         {
           spaceName: payload.spaceName,
         },
