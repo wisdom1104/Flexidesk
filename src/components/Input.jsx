@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components'
 
 export const Input = ({type, value, onChange, name, placeholder}) => {
+  
     return (
       <>
       <StInput 

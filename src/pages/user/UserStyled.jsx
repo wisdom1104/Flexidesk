@@ -18,17 +18,17 @@ export const StBackground = styled.div`
 
 // 로그인 폼 감싸는 div
 export const StForm = styled.div`
+width: ${props => props.width || '480px'};
+height: ${props => props.height || '480px'};
+left: 560px;
+top: 348px;
+margin-top: ${props => props.margintop || '100px'};
+
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 0px;
+padding: ${props => props.padding || '0px'};
 gap: 16px;
-
-width: 480px;
-height: 393px;
-left: 560px;
-top: 348px;
-margin-top: 100px;
 
 /* background: #46e3c9; */
 `

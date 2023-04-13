@@ -4,14 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
 import useTrueHook from '../../hooks/useTrueHook'
-
-// 유효성검사 라이브러리
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import Certification from './Certification';
 
-function SignUpAdmin() {
+function SignUpAdmin() {  
+
+  // 가드
+  useTrueHook();
+
   const [admin, setAdmin] = useState({
     email: '',
     password: '',
@@ -48,35 +47,7 @@ function SignUpAdmin() {
     }
   };
 
-  // 토큰값으로 페이지 위치조절 (가드)
-  useTrueHook();
 
-  // 정규식 유효성 검사를 수행
-  const schema = yup.object().shape({
-    userName: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup
-      .string()
-      .required()
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    passwordCheck: yup
-      .string()
-      .oneOf([yup.ref('password'), null])
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    certification: yup.string().required(),
-  });
-
-  const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
-  });
   
   return (
     <>
@@ -109,7 +80,6 @@ function SignUpAdmin() {
           placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
           required
         />
-        {errors.password && <span>비밀번호 형식에 맞게 입력하세요.</span>}
     
         <p>비밀번호 확인</p>
         <Input
@@ -120,7 +90,6 @@ function SignUpAdmin() {
           placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
           required
         />
-        {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
         <p>이름</p>
         <Input
@@ -131,7 +100,6 @@ function SignUpAdmin() {
           placeholder="사용하실 이름을 입력하세요."
           required
         />
-        {errors.userName && <span>사용하실 이름을 입력하세요.</span>}
 
         <p>회사</p>
         <Input
@@ -142,7 +110,6 @@ function SignUpAdmin() {
           placeholder="회사를 입력하세요."
           required
         />
-        {errors.companyName && <span>회사를 입력하세요.</span>}
 
         <button type="submit">시작하기</button>
       </form>
