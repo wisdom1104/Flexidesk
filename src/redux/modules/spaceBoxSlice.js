@@ -15,7 +15,7 @@ export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
     const response = await api.post(
-      `/box/${companyName}/${payload.spaceId}`,
+      `/boxes/${companyName}/${payload.spaceId}`,
       {
         boxName: payload.boxName,
         x: payload.x,
@@ -42,7 +42,7 @@ export const __deleteBox = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.delete(
-        `/box/${companyName}/${payload.boxId}`,
+        `/boxes/${companyName}/${payload.boxId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,12 +60,14 @@ export const __deleteBox = createAsyncThunk(
 // box 수정
 export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
   try {
+    console.log('payload', payload);
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
     const response = await api.patch(
-      `/box/${companyName}/${payload.boxId}`,
+      `/boxes/${companyName}/${payload.boxId}`,
       {
         boxName: payload.boxName,
+        username: payload.username,
         x: payload.x,
         y: payload.y,
       },
@@ -81,6 +83,38 @@ export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
     return error;
   }
 });
+
+// /boxes/{companyName}/{fromBoxId}/move/{toBoxId}/user
+
+// box user 수정
+export const __editBoxUser = createAsyncThunk(
+  'editBoxUser',
+  async (payload, thunk) => {
+    try {
+      console.log('payload', payload);
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
+      const response = await api.patch(
+        `/boxes/${companyName}/${payload.fromBoxId}/move/${payload.toBoxId}/user`,
+        {
+          boxName: payload.boxName,
+          username: payload.username,
+          x: payload.x,
+          y: payload.y,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      thunk.dispatch(__getSpace(payload.spaceId));
+      return thunk.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return error;
+    }
+  },
+);
 
 export const spaceBoxSlice = createSlice({
   name: 'box',

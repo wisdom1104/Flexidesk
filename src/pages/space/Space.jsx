@@ -7,6 +7,7 @@ import { StList } from './AdminSpace';
 import { Column, Row } from '../../components/Flex';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -34,7 +35,7 @@ function Space() {
   };
 
   return (
-    <>
+    <StSpace>
       <Row>
         {/* ------------------------리스트 영역--------------------------------- */}
         <StList>
@@ -62,8 +63,17 @@ function Space() {
           )}
         </Column>
       </Row>
-    </>
+    </StSpace>
   );
 }
 
 export default Space;
+
+const StSpace = styled.div`
+  position: relative;
+  /* max-width: 1440px; */
+  min-width: 1430px;
+  min-width: 760px;
+  /* height: 810px; */
+  background-color: #ffffff;
+`;

@@ -32,6 +32,8 @@ function AdminSpaceBox({
   const { space } = useSelector(state => state.space);
   const { floor } = useSelector(state => state.floor);
 
+  console.log('space', space);
+
   const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
 
@@ -51,6 +53,8 @@ function AdminSpaceBox({
 
   const mrList = space?.map(item => item.mrlist);
   const boxList = space?.map(item => item.boxlist);
+  // const mrList = 0;
+  // const boxList = 0;
 
   // 모든 요소 드롭
   const HandleDrop = async e => {
@@ -138,16 +142,14 @@ function AdminSpaceBox({
           return false;
         };
         const isOverlapping = boxes.some(box => isOverlap(newBox, box));
-        const isMrListOverlapping = mrList[0].some(box =>
+        const isMrListOverlapping = mrList.some(box => isOverlap(newBox, box));
+        const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        const isBoxListOverlapping = boxList[0].some(box =>
-          isOverlap(newBox, box),
-        );
-        console.log('mrList[0]', mrList[0]);
-        console.log('isOverlapping', isOverlapping);
-        console.log('isMrListOverlapping', isMrListOverlapping);
-        console.log('isBoxListOverlapping', isBoxListOverlapping);
+        // console.log('mrList[0]', mrList[0]);
+        // console.log('isOverlapping', isOverlapping);
+        // console.log('isMrListOverlapping', isMrListOverlapping);
+        // console.log('isBoxListOverlapping', isBoxListOverlapping);
 
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addBox(newBox));
@@ -259,7 +261,7 @@ function AdminSpaceBox({
         x: Number(limitedx),
         y: Number(limitedy),
       };
-      setNewBoxes(prevBoxes => [...prevBoxes, payload]);
+      // setNewBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
 
@@ -422,6 +424,7 @@ function AdminSpaceBox({
       </StSubHeader>
       {/* board 부분 */}
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
+        {/* 가짜 회의실 */}
         {newMrBoxes.map((box, index) => (
           <StDragMr
             onDrop={HandleDrop}
@@ -432,9 +435,10 @@ function AdminSpaceBox({
             onDragStart={e => handleDragStart(e, box.mrId)}
             style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
           >
-            <div>{box.mrName}</div>
+            {/* <div>{box.mrName}</div> */}
           </StDragMr>
         ))}
+        {/* 가짜 박스 */}
         {newBoxes.map((box, index) => (
           <StDragBox
             key={box.boxId}

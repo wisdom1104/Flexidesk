@@ -39,6 +39,7 @@ function BoxItem({
     dispatch(__editBox(payload));
     setBoxEdit(!boxEdit);
   };
+
   return (
     <>
       <StDropBox

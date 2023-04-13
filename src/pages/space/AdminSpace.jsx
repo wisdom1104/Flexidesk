@@ -27,6 +27,7 @@ function AdminSpace() {
 
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
+  console.log('spaces', spaces);
 
   // token 유무에 따른 가드
   const token = cookies.get('token');
@@ -46,12 +47,20 @@ function AdminSpace() {
     }
   }, [dispatch]);
   // console.log(floors);
+
   // space 선택
   const [selectedSpace, setSelectedSpace] = useState(null);
   useEffect(() => {
     // 초기 space 설정
     setSelectedSpace(spaces[0]);
   }, [spaces]);
+  //space 선택 핸들러
+  const onClickSpaceListHandler = spaceId => {
+    const space = spaces.find(space => space.spaceId === spaceId);
+    setSelectedSpace(space);
+    setIsModal(!isModal);
+    console.log(selectedSpace);
+  };
 
   // floor 선택
   const [selectedFloor, setSelectedFloor] = useState(null);
@@ -59,15 +68,7 @@ function AdminSpace() {
     // 초기 floor 설정
     setSelectedFloor(floors[0]);
   }, [floors]);
-
-  // //space 선택
-  const onClickSpaceListHandler = spaceId => {
-    const space = spaces.find(space => space.spaceId === spaceId);
-    setSelectedSpace(space);
-    setIsModal(!isModal);
-  };
-
-  // //space 선택
+  //floor 선택 핸들러
   const onClickFloorListHandler = floorId => {
     const floor = floors.find(floor => floor.floorId === floorId);
     setSelectedFloor(floor);
@@ -88,11 +89,10 @@ function AdminSpace() {
           onClickSpaceListHandler={onClickSpaceListHandler}
           onClickFloorListHandler={onClickFloorListHandler}
         />
-
-        {/* ------------------------셀렉터 영역--------------------------------- */}
+        {/* 셀렉터 영역 */}
         <StSelect>
           <span>AdminSpace</span>
-          {/* ------------------------회의실 셀렉터--------------------------------- */}
+          {/* 회의실 셀렉터 */}
           {mrBoxes.map((box, i) => (
             <StBox
               key={box.mrId}
@@ -105,7 +105,7 @@ function AdminSpace() {
               {box.inner} {box.mrId}
             </StBox>
           ))}
-          {/* ------------------------박스 셀렉터--------------------------------- */}
+          {/* 박스 셀렉터 */}
           {boxes.map((box, i) => (
             <StBox
               key={box.boxId}
@@ -120,18 +120,26 @@ function AdminSpace() {
           ))}
         </StSelect>
         <Column>
-          {selectedSpace && selectedFloor && (
-            <AdminSpaceBox
-              spaceId={selectedSpace.spaceId}
-              floorId={selectedFloor.floorId}
-              selectedSpace={selectedSpace}
-              selectedFloor={selectedFloor}
-              handleDragStart={handleDragStart}
-              isModal={isModal}
-              setIsModal={setIsModal}
-              floors={floors}
-            />
-          )}
+          {/* 보더 영역 */}
+          {/* {spaces.length < 0 ? (
+            <div>11</div>
+          ) : (
+            <div>22</div>
+          )} */}
+          <div>
+            {selectedSpace && selectedFloor && (
+              <AdminSpaceBox
+                spaceId={selectedSpace.spaceId}
+                floorId={selectedFloor.floorId}
+                selectedSpace={selectedSpace}
+                selectedFloor={selectedFloor}
+                handleDragStart={handleDragStart}
+                isModal={isModal}
+                setIsModal={setIsModal}
+                floors={floors}
+              />
+            )}
+          </div>
         </Column>
       </Row>
     </>
@@ -181,11 +189,13 @@ export const StBoard = styled.div`
   display: flex;
   flex-wrap: wrap;
   background: #867395;
-  width: 700px;
-  height: 700px;
   margin: 10px;
   position: relative;
   overflow: hidden;
+  width: 1162px;
+  height: 686px;
+  background: #f4fbf9;
+  border-radius: 8px;
 `;
 
 export const StBtnBox = styled.div`

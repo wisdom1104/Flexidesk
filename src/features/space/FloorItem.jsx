@@ -3,7 +3,12 @@ import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
 import InnerSpaceList from './InnerSpaceList';
 
-function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
+function FloorItem({
+  floor,
+  onClickFloorListHandler,
+  dispatch,
+  onClickSpaceListHandler,
+}) {
   // floor 삭제
   const onDeleteFloorHandler = async floorId => {
     dispatch(__deleteFloor(floorId));
@@ -21,8 +26,8 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
     dispatch(__editFloor(payload));
     setFloorEdit(!floorEdit);
   };
-  console.log('floor', floor);
-  console.log('spaceList', floor.spaceList);
+  // console.log('floor', floor);
+  // console.log('spaceList', floor.spaceList);
   const [isMd, setIsMd] = useState(false);
 
   return (
@@ -94,7 +99,13 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
           </Row>
         )}
       </div>
-      {isMd ? <InnerSpaceList floor={floor} /> : null}
+
+      {isMd ? (
+        <InnerSpaceList
+          floor={floor}
+          onClickSpaceListHandler={onClickSpaceListHandler}
+        />
+      ) : null}
     </>
   );
 }

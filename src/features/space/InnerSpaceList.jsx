@@ -2,10 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { __addInnerSpace } from '../../redux/modules/spacesSlice';
-import { __deleteSpace } from '../../redux/modules/spaceSlice';
-import { Row } from '../../components/Flex';
+import InnerSpaceItem from './InnerSpaceItem';
 
-function InnerSpaceList({ floor }) {
+function InnerSpaceList({ floor, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
 
   // 그냥 space 추가
@@ -17,30 +16,17 @@ function InnerSpaceList({ floor }) {
     dispatch(__addInnerSpace(payload));
   };
 
-  // space 삭제
-  const onDeleteSpaceHandler = async spaceId => {
-    dispatch(__deleteSpace(spaceId));
-  };
-
   return (
     <InnerList>
       <button onClick={onClickAddSpaceHandler}>Space 추가</button>
       {floor.spaceList?.length > 0
         ? floor.spaceList.map(space => (
-            <Row>
-              <div>{space.spaceName}------</div>
-              <button
-                onClick={() => {
-                  const confirmDelete =
-                    window.confirm('정말 삭제하시겠습니까?');
-                  if (confirmDelete) {
-                    onDeleteSpaceHandler(space.spaceId);
-                  }
-                }}
-              >
-                X
-              </button>
-            </Row>
+            <InnerSpaceItem
+              key={space.spaceId}
+              dispatch={dispatch}
+              space={space}
+              onClickSpaceListHandler={onClickSpaceListHandler}
+            />
           ))
         : null}
     </InnerList>
@@ -52,6 +38,6 @@ export default InnerSpaceList;
 const InnerList = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
+  padding-left: 15px;
   gap: 20px;
 `;
