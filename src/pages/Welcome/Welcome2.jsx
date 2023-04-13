@@ -30,7 +30,7 @@ function Welcome2() {
           <StWrapDiv>
           <div 
           style={{
-            marginTop:'200px',
+            marginTop:'90px',
           }}
           >
           <StFont>

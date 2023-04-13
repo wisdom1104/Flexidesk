@@ -13,12 +13,14 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
+
+  border: 2px solid red;
 `
 
 // 폰트
 export const StFont = styled.p`
   width: ${props => props.width || '48vw'};
-  height: ${props => props.height || '6vw'};
+  /* height: ${props => props.height || '6vw'}; */
 
   font-weight: 700;
   font-size: ${props => props.fontSize || '3rem'};
@@ -29,7 +31,6 @@ export const StFont = styled.p`
 
   padding-top: ${props => props.paddingtop || ''};
 
-  /* background: #a8a8a8; */
 `;
 
 export const StSmallFont = styled.p`
@@ -52,7 +53,7 @@ export const StButtonGap = styled.div`
   position: absolute;
   width: 600px;
   height: 110px;
-  bottom:10px;
+  margin-top: 250px;
 
   display: flex;
   flex-direction: row;
@@ -60,6 +61,9 @@ export const StButtonGap = styled.div`
   align-items: center;
   padding: 10px;
   gap: 60px;
+
+  border: 2px solid red;
+
 `;
 
 export const StBlueButton = styled.button`
@@ -84,10 +88,14 @@ export const StBlueButton = styled.button`
 `;
 
 export const StWrapDiv = styled.div`
-  /* height: ${props=>props.height || '100vh'}; */
+  /* height: ${props=>props.height || '50vh'}; */
   display: flex;
   /* flex-direction: ${props => props.direction || 'column'}; */
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  width: 500px;
+
+  border: 2px solid yellow;
 `;

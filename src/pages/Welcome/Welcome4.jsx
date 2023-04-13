@@ -1,5 +1,14 @@
-import React from 'react'
-import { StBackground, StColumnDiv, StFont, StGrid, StIntroDiv, StIntroPhoto, StIntroWrite } from './WelcomeStyled'
+import React from 'react';
+import {
+  StBackground,
+  StColumnDiv,
+  StFont,
+  StGrid,
+  StIntroDiv,
+  StIntroPhoto,
+  StIntroWrite,
+  StOverall,
+} from './WelcomeStyled';
 
 function Welcome4() {
   return (
@@ -28,8 +37,31 @@ function Welcome4() {
     </StColumnDiv>
     </StGrid>
   </StBackground> */}
+
+      <StBackground background="#07133B">
+        <StOverall>
+          <div
+          style={{
+            marginTop:'200px',
+          }}
+          >
+        <StFont color="#fff">Why flexidesk?</StFont>
+        </div>
+          <div>
+            전체틀
+            <div>
+              박스 정렬
+              <div>
+                박스세트
+                <div>사진</div>
+                <div>글</div>
+              </div>
+            </div>
+          </div>
+        </StOverall>
+      </StBackground>
     </>
   );
 }
 
-export default Welcome4
+export default Welcome4;
