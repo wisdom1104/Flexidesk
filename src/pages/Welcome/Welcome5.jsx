@@ -4,7 +4,7 @@ import { StBackground, StColumnDiv, StFont, StGrid, StSmallFont, StSpacePhoto } 
 function Welcome5() {
   return (
     <>
-    <StBackground background="#fff">
+    {/* <StBackground background="#fff">
       <StGrid>
         <StFont paddingtop='150px'>
           이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
@@ -67,7 +67,7 @@ function Welcome5() {
           </div>
           <StSpacePhoto>사진</StSpacePhoto>
         </StColumnDiv>
-      </StBackground>
+      </StBackground> */}
     </>
   )
 };

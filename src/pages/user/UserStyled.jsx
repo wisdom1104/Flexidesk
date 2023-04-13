@@ -30,19 +30,10 @@ align-items: center;
 padding: ${props => props.padding || '0px'};
 gap: 16px;
 
-/* background: #46e3c9; */
+background: #46e3c9;
 `
 
 export const StLoginForm = styled.form`
-  /* width: 480px;
-  height: 393px;
-  left: 480px;
-  top: 215px;
-
-  background: #ffffff;
-  box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
-  border-radius: 8px; */
-
   width: 480px;
   height: 393px;
   background: #ffffff;
@@ -51,23 +42,6 @@ export const StLoginForm = styled.form`
 `;
 
 export const StLongButton = styled.button`
-    /* position: absolute;
-    width: 400px;
-    height: 60px;
-    left: 560px;
-
-    top: 508px;
-
-  align-items: center;
-
-  color: #fff;
-  background: #07133b;
-  border-radius: 8px;
-
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 22px; */
-
   width: 400px;
   height: 60px;
   align-items: center;

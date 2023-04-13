@@ -7,7 +7,7 @@ function Welcome6() {
 
   return (
     <>
-      <StBackground>
+      {/* <StBackground>
         <StGrid>
         <StFont paddingtop='150px'>Flexidesk는 회사생활을 <br/> 어떻게 쉽게 만들어주나요?</StFont>
       </StGrid>
@@ -17,7 +17,7 @@ function Welcome6() {
         <StGrid>
         <Carousel/>
         </StGrid>
-      </StBackground>
+      </StBackground> */}
     </>
   );
 }

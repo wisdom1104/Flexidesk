@@ -7,7 +7,7 @@ function Welcome7() {
 
   return (
     <>
-    <StBackground>
+    {/* <StBackground>
       <StColumnDiv>
           <StFont>
           간단한 회원가입으로 Flexidesk의 솔루션 만나보세요.
@@ -30,7 +30,7 @@ function Welcome7() {
             </StBlueButton>
           </StButtonGap>
         </StColumnDiv>
-      </StBackground>
+      </StBackground> */}
     </>
   )
 }

@@ -4,7 +4,7 @@ import { StBackground, StColumnDiv, StFont, StGrid, StIntroDiv, StIntroPhoto, St
 function Welcome4() {
   return (
     <>
-        <StBackground background="#07133B">
+      {/* <StBackground background="#07133B">
                 <StFont color="#fff">Why flexidesk?</StFont>
         </StBackground>
     <StBackground background="#07133B">
@@ -27,9 +27,9 @@ function Welcome4() {
     </StIntroDiv>
     </StColumnDiv>
     </StGrid>
-  </StBackground>
-</>
-  )
+  </StBackground> */}
+    </>
+  );
 }
 
 export default Welcome4
