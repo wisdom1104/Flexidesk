@@ -1,12 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import Reservation from './Reservation';
-import { useParams } from 'react-router-dom';
+import ReservationTime from './ReservationTime';
+import { useNavigate, useParams } from 'react-router-dom';
 import useFalseHook from '../../hooks/useFalseHook';
-
+import { useSelector } from 'react-redux';
+import {
+  MainContain,
+  ReservationTitle,
+  StMrNameBox,
+  StMrName,
+} from './CalendarStyled';
 const Calendar = () => {
   // useFalseHook();
   const param = useParams();
+  const navi = useNavigate();
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -21,6 +28,8 @@ const Calendar = () => {
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
+  const { reservation } = useSelector(state => state.reservation);
+  const { mrId } = reservation;
 
   //이전달
   const preMonth = useCallback(() => {
@@ -43,7 +52,7 @@ const Calendar = () => {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log(e.target.value);
+    console.log('날짜선택', e.target.value);
     setDate(e.target.value);
   };
 
@@ -77,32 +86,50 @@ const Calendar = () => {
   return (
     <>
       <Calcontain>
-        <Header>
-          <button
+        <ReservationTitle>
+          <div
             onClick={() => {
-              preMonth();
+              navi('/space');
             }}
           >
-            이전달
-          </button>
-          <div>{selectYear}</div>
-          <div>-{selectMonth}</div>
-          <button
-            onClick={() => {
-              nextMonth();
-            }}
-          >
-            다음달
-          </button>
-        </Header>
-        <DayContain>
-          {week?.map(item => {
-            return <Day key={item}>{item}</Day>;
-          })}
-        </DayContain>
-        <DayContain>{returnDay()}</DayContain>
+            ←
+          </div>
+          <h2>회의실 예약하기</h2>
+        </ReservationTitle>
+
+        <MainContain>
+          <StMrNameBox>
+            <div>회의실 이름</div>
+            <StMrName>회의실 {mrId}</StMrName>
+          </StMrNameBox>
+
+          <Header>
+            <button
+              onClick={() => {
+                preMonth();
+              }}
+            >
+              이전달
+            </button>
+            <div>{selectYear}</div>
+            <div>-{selectMonth}</div>
+            <button
+              onClick={() => {
+                nextMonth();
+              }}
+            >
+              다음달
+            </button>
+          </Header>
+          <DayContain>
+            {week?.map(item => {
+              return <Day key={item}>{item}</Day>;
+            })}
+          </DayContain>
+          <DayContain>{returnDay()}</DayContain>
+          <ReservationTime param={param.id} selectDay={date} />
+        </MainContain>
       </Calcontain>
-      <Reservation param={param.id} selectDay={date} />
     </>
   );
 };
@@ -110,7 +137,8 @@ const Calendar = () => {
 export default Calendar;
 
 const Calcontain = styled.div`
-  width: 500px;
+  width: 75vw;
+  height: 63vh;
 `;
 
 const Header = styled.div`

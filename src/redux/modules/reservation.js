@@ -30,10 +30,10 @@ export const __getReservation = createAsyncThunk(
 export const __addReservation=createAsyncThunk(
   "addreservation",
   async (payload, thunk) =>{
-    console.log(payload)
+    console.log('예약:',payload)
     try{
       const token = cookies.get('token')
-      await api.post("/reservations/1 ", payload,
+      await api.post(`/reservations/${payload.param} `, payload.reqDatas,
      { headers : {
         Authorization: `Bearer ${token}`
       }
