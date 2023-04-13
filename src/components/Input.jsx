@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components'
 
 export const Input = ({type, value, onChange, name, placeholder}) => {
+  
     return (
       <>
       <StInput 
@@ -28,7 +29,9 @@ export const Input = ({type, value, onChange, name, placeholder}) => {
   display: block;
   height: ${props => props.heigth};
   padding: 0 10px;
-  background: #FCF5F6;
+  background: #e1f8f8;
+
+  border: none;
   
   font-weight: 700;
   font-size: 14px;

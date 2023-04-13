@@ -18,18 +18,19 @@ export const StBackground = styled.div`
 
 // 로그인 폼 감싸는 div
 export const StForm = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 16px;
-
-width: 400px;
-height: 136px;
+width: ${props => props.width || '480px'};
+height: ${props => props.height || '480px'};
 left: 560px;
 top: 348px;
+margin-top: ${props => props.margintop || '100px'};
 
-background: #46e3c9;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: ${props => props.padding || '0px'};
+gap: 16px;
+
+/* background: #46e3c9; */
 `
 
 export const StLoginForm = styled.form`

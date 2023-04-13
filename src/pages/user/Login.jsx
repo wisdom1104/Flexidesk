@@ -7,15 +7,19 @@ import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import useTrueHook from '../../hooks/useTrueHook'
 import { StBackground, StForm, StFormContainer, StLoginForm, StLongButton } from './UserStyled';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
+import { useValidEmail, useValidPassword, usePasswordCheck, useSignUp } from '../../hooks/useSignUpHook';
 
 function Login() {
 
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  });
+  const [user,setUser,onSubmitHandler] = useSignUp('');
 
-  const loginChangeHandler = e => {
+  const [emailMsg, validEmail] = useValidEmail();
+  const [passwordMsg, validPassword] = useValidPassword();
+  const [passwordCheckMsg, validPasswordCheck] = usePasswordCheck();
+
+
+  const onChangeHandler = e => {
     const { value, name } = e.target;
     setUser(old => {
       return { ...old, [name]: value };
@@ -35,6 +39,7 @@ function Login() {
       cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
       cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
       cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
+      cookies.set('username', String(payload.username), { path: '/' , maxAge:3540, });
       cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
       
       navi('/adminspace')
@@ -45,23 +50,37 @@ function Login() {
     }
   };
 
+
   return (
     <StBackground>
+
       <StLoginForm onSubmit={onsubmitHandler}>
+        <StForm  width='480px' height='10px' margintop='0' padding='20px'>
+      <StFont width='480px' height='34px' align='start' fontSize='28px' >
+        로그인
+      </StFont>
+      <StSmallFont width='100px' height='19px' align='start' fontSize='16px' >
+      이메일 주소와 비밀번호를 입력해주세요.
+      </StSmallFont>
+      </StForm>
         <StForm>
         <Input
           type="email"
           value={user.email|| ''}
-          onChange={loginChangeHandler}
+          onChange={e => {
+            validEmail(e);
+            setUser({...user, email: e.target.value})
+          }}
           name="email"
           placeholder="이메일"
           required
         />
 
+
         <Input
           type="password"
           value={user.password|| ''}
-          onChange={loginChangeHandler}
+          onChange={onChangeHandler}
           name="password"
           placeholder="비밀번호"
           required
@@ -69,6 +88,7 @@ function Login() {
         <StLongButton> 로그인 </StLongButton>
         </StForm>
       </StLoginForm>
+
     </StBackground>
   );
 }

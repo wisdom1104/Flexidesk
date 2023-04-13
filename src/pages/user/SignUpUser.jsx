@@ -6,14 +6,11 @@ import api from '../../axios/api';
 import useTrueHook from '../../hooks/useTrueHook'
 import CertificationCkeck from '../user/CertificationCkeck'
 
-// 유효성검사 라이브러리
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
 function SignUpUser() {
-  // alert 에러메세지 띄어주기!!!
   // maxlength 설정
+  
+  // 가드
+  useTrueHook();
 
   const [user, setUser] = useState({
     email: '',
@@ -22,8 +19,6 @@ function SignUpUser() {
     userName: '',
     certification: '',
   });
-
-  console.log('유저!!!!!!->', user);
 
   const onChangeHandler = e => {
     const { value, name } = e.target;
@@ -48,35 +43,7 @@ function SignUpUser() {
     }
   };
 
-  // 토큰값으로 페이지 위치조절 (가드)
-  useTrueHook();
 
-  // 정규식 유효성 검사를 수행
-  const schema = yup.object().shape({
-    userName: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup
-      .string()
-      .required()
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    passwordCheck: yup
-      .string()
-      .oneOf([yup.ref('password'), null])
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    certification: yup.string().required(),
-  });
-
-  const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
-  });
 
   return (
     <form onSubmit={submitBtnHandler}>
@@ -91,7 +58,6 @@ function SignUpUser() {
         placeholder="이메일을 입력하세요."
         required
       />
-      {errors.certification && <span>인증번호를 입력하세요.</span>}
 
       <p>비밀번호</p>
       <Input
@@ -102,7 +68,6 @@ function SignUpUser() {
         placeholder="비밀번호를 입력하세요."
         required
       />
-      {errors.password && <span>비밀번호 형식에 맞게 입력하세요.</span>}
 
       <p>비밀번호 확인</p>
       <Input
@@ -113,7 +78,6 @@ function SignUpUser() {
         placeholder="비밀번호를 한번 더 입력해주세요."
         required
       />
-      {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
       <CertificationCkeck 
       certification={user.certification} 
@@ -131,7 +95,6 @@ function SignUpUser() {
         placeholder="사용하실 이름을 입력하세요."
         required
       />
-      {errors.userName && <span>사용하실 이름을 입력하세요.</span>}
 
       <button>시작하기</button>
     </form>

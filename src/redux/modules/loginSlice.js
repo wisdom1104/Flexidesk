@@ -3,8 +3,8 @@ import { cookies } from "../../shared/cookies";
 
 const initialState = {
     users: [],
-    // isLogin: false,
-    isLogin: cookies.get("token") ? true : false,
+    isLogin: false,
+    // isLogin: cookies.get("token") ? true : false,
     isLoading: false,
     isError: null,
 };
@@ -27,6 +27,7 @@ const loginSlice  = createSlice({
             cookies.remove("token");
             cookies.remove("userId");
             cookies.remove("companyName");
+            cookies.remove("username");
             cookies.remove("role");
         },
     },
