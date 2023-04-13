@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   StBackground,
-  StColumnDiv,
   StFont,
-  StGrid,
   StIntroArray,
   StIntroDiv,
   StIntroPhoto,
@@ -29,7 +27,6 @@ function Welcome4() {
 
         <StOverall>
           <div>
-            전체틀
             <StIntroArray>
               <StIntroDiv>
                 <StIntroPhoto>사진1</StIntroPhoto>

@@ -18,6 +18,8 @@ function Welcome6() {
         <Carousel/>
         </StGrid>
       </StBackground> */}
+
+      
     </>
   );
 }

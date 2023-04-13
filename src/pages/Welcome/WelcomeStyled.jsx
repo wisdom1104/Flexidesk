@@ -30,8 +30,9 @@ export const StFont = styled.p`
 
   color: ${props => props.color || '#07133b'};
 
+  padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingtop || ''};
-
+  /* background: blue; */
 `;
 
 export const StSmallFont = styled.p`
@@ -100,7 +101,7 @@ export const StWrapDiv = styled.div`
 
   border: 2px solid yellow;
 `;
-
+// welcome 4
 export const StIntroArray = styled.div`
   display:flex;
   flex-direction: column;
@@ -137,4 +138,18 @@ export const StIntroWrite = styled.div`
   display: inline-block;
 
   background: #fdffdc;
+`;
+
+// welcome 5
+export const StSpaceDiv = styled.div`
+  margin-bottom: 100px;
+`
+
+export const StSpacePhoto = styled.div`
+  width: 62vw;
+  height: 37vw;
+
+  background: #eeeded;
+  box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
+  border-radius: 8px;
 `;
