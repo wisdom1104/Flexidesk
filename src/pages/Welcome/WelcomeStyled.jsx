@@ -14,8 +14,6 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-
-  border: 2px solid red;
 `
 
 // 폰트
@@ -32,7 +30,6 @@ export const StFont = styled.p`
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingtop || ''};
-  /* background: blue; */
 `;
 
 export const StSmallFont = styled.p`
@@ -46,8 +43,6 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
-
-  background: black;
 `;
 
 // 버튼
@@ -63,9 +58,6 @@ export const StButtonGap = styled.div`
   align-items: center;
   padding: 10px;
   gap: 60px;
-
-  border: 2px solid red;
-
 `;
 
 export const StBlueButton = styled.button`
@@ -90,17 +82,15 @@ export const StBlueButton = styled.button`
 `;
 
 export const StWrapDiv = styled.div`
-  /* height: ${props=>props.height || '50vh'}; */
   display: flex;
-  /* flex-direction: ${props => props.direction || 'column'}; */
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
-  width: 500px;
+  width: 1000px;
 
-  border: 2px solid yellow;
 `;
+
 // welcome 4
 export const StIntroArray = styled.div`
   display:flex;
@@ -148,6 +138,8 @@ export const StSpaceDiv = styled.div`
 export const StSpacePhoto = styled.div`
   width: 62vw;
   height: 37vw;
+
+  margin-top: 15px;
 
   background: #eeeded;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
