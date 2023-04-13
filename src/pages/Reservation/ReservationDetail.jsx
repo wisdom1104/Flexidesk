@@ -5,9 +5,10 @@ import {
   __getReservationDetail,
 } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
+import SchedulesDetail from '../Schedules/SchedulesDetail';
 import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
-import AllReservation from './AllReservation'
+import AllReservation from './AllReservation';
 
 function ReservationDetail() {
   // useFalseHook();
@@ -51,7 +52,7 @@ function ReservationDetail() {
         <p>전체 조회</p>
         <AllReservation />
       </div>
-      <UserSchedules />
+      <SchedulesDetail />
     </>
   );
 }
