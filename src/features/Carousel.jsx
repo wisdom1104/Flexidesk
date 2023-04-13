@@ -1,98 +1,149 @@
-import React, { useState } from 'react';
-import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 
-export const MAX_VISIBILITY = 3;
+const images = [
+  {
+    id: 1,
+    text: '안녕1'
+  },
+  {
+    id: 2,
+    text: '안녕2'
+  },
+  {
+    id: 3,
+    text: '안녕3'
+},
+];
 
-export const Card = ({ title, content }) => {
+console.log(images[0].text);
+console.log(images[1].text);
+console.log(images[2].text);
+
+const Button = ({ children, dir, onClick }) => {
   return (
-    <div className='card'>
-      <h2>{title}</h2>
-      <p>{content}</p>
-    </div>
+    <Stbutton dir={dir} onClick={onClick}>
+      {children}
+    </Stbutton>
   );
 };
 
-export const Carousel = ({ children }) => {
-  const [current, setCurrent] = useState(0);
+const Stbutton = styled.button`
+  background-color: red;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
 
-  const handlePrev = () => {
-    setCurrent((current - 1 + children.length) % children.length);
+  ${({ dir }) => {
+    if (dir === "left") {
+      return css`
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+
+    if (dir === "right") {
+      return css`
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+  }}
+`;
+
+const Carousel = () => {
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState({
+    on: false,
+    value: "310px"
+  });
+
+  const genImagesArray = (target) => {
+    if (target === 4) {
+      return [3, target, 0].map((el) => images.at(el));
+    }
+    if (target === -4) {
+      return [0, target, -3].map((el) => images.at(el));
+    }
+    return [target - 1, target, target + 1].map((el) => images.at(el));
   };
 
-  const handleNext = () => {
-    setCurrent((current + 1) % children.length);
+  const clickLeftHandler = () => {
+    setAnimate(() => ({ on: true, value: "310px" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, value: "310px" }));
+      setIndex((pre) => {
+        if (pre === -4) return (pre = 0);
+        else return pre - 1;
+      });
+    }, 350);
   };
 
-  const visibleCards = [];
-  const leftIndex = (current - Math.floor(MAX_VISIBILITY / 2) + children.length) % children.length;
-  for (let i = 0; i < MAX_VISIBILITY; i++) {
-    visibleCards.push(children[(leftIndex + i) % children.length]);
-  }
+  const clickRightHandler = () => {
+    setAnimate(() => ({ on: true, value: "-310px" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, value: "-310px" }));
+      setIndex((pre) => {
+        if (pre === 4) return (pre = 0);
+        else return pre + 1;
+      });
+    }, 400);
+  };
 
   return (
-    <StCarousel>
-      <StButton onClick={handlePrev}>
-        <TiChevronLeftOutline />
-      </StButton>
-      <StCards>
-        <div>
-          {visibleCards.map((child, index) => {
-            return (
-              <div key={index} className='card-wrapper'>
-                {React.cloneElement(child, { key: index })}
-              </div>
-            );
-          })}
-        </div>
-        <StCard>
-          {children.slice(leftIndex - 1, leftIndex)}
-          {children.slice(leftIndex + MAX_VISIBILITY, leftIndex + MAX_VISIBILITY + 1)}
-        </StCard>
-      </StCards>
-      <StButton onClick={handleNext}>
-        <TiChevronRightOutline />
-      </StButton>
-    </StCarousel>
+    <Container>
+      <SliderContainer>
+        <Button dir="left" onClick={clickLeftHandler} />
+        <Button dir="right" onClick={clickRightHandler} />
+        <Images animate={animate}>
+          {genImagesArray(index).map((el,i) => (
+            <Image text={el.images[i].text} key={el.id}></Image>
+          ))}
+        </Images>
+      </SliderContainer>
+    </Container>
   );
 };
 
-const StCarousel = styled.div`
-    display: flex;
+export default Carousel;
+
+const Container = styled.div`
+  padding: 100px;
+`;
+
+const SliderContainer = styled.div`
+  width: 490px;
+  height: 300px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-`
+  position: relative;
+  overflow-x: hidden;
+`;
 
-const StButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-`
+const Images = styled.div`
+  height: 200px;
+  display: flex;
+  gap: 10px;
 
-const StCards = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
-  border-radius: 1rem;
-  color: $color-gray;
-  text-align: justify;
-  transition: all 0.3s ease-out;
-`
+  ${({ animate }) => {
+    if (animate.on) {
+      return css`
+        transform: translate(${({ animate }) => animate.value});
+        transition: transform 350ms ease-in-out;
+      `;
+    }
+  }};
+`;
 
-const StCard = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: 
-    rotateY(calc(var(--offset) * 50deg)) 
-    scaleY(calc(1 + var(--abs-offset) * -0.4))
-    translateZ(calc(var(--abs-offset) * -30rem))
-    translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 1rem));
-  transition: all 0.3s ease-out;
-`
+const Image = styled.div`
+  width: 300px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+  background: #921919;
+  color: #fff;
+`;

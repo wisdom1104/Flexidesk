@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StBackground, StFont } from './WelcomeStyled';
 import { Card } from '../../features/CarouselTest'
-import CarouselTest from '../../features/CarouselTest';
+import Carousel from '../../features/Carousel';
 
 function Welcome5() {
 
@@ -12,7 +12,7 @@ function Welcome5() {
       </StBackground>
 
       <StBackground>
-        <CarouselTest/>
+        {/* <Carousel/> */}
       </StBackground>
     </>
   );

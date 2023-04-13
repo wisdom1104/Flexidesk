@@ -4,7 +4,6 @@ import { cookies } from '../shared/cookies';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
-
 export const useSignUp = (payload) => {
 
   const navi = useNavigate();
@@ -43,40 +42,40 @@ export const useSignUp = (payload) => {
     certification: '',
   });
 
-// 일반 회원가입
-const [user, setUser] = useState({
-  email: '',
-  password: '',
-  passwordCheck: '',
-  userName: '',
-  certification: '',
-});
+  // 일반 회원가입
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    passwordCheck: '',
+    userName: '',
+    certification: '',
+  });
 
-const submitHandler = (e) => {
-  e.preventDefault();
-  if(
-    admin.email === "" ||
-    admin.password === "" ||
-    admin.passwordCheck === "" ||
-    admin.userName === "" ||
-    admin.companyName === "" ||
-    admin.certification === "" ||
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (
+      admin.email === "" ||
+      admin.password === "" ||
+      admin.passwordCheck === "" ||
+      admin.userName === "" ||
+      admin.companyName === "" ||
+      admin.certification === "" ||
+      user.email === "" ||
+      user.password === "" ||
+      user.passwordCheck === "" ||
+      user.userName === "" ||
+      user.certification === ""
+    ) {
+      alert("빈 칸을 작성해 주세요.");
+      return;
+    }
+    if (payload.probableEmail && payload.probableNick) {
+      await signUpApi(user);
+      navi("/");
+    }
+  };
 
-    user.email === "" ||
-    user.password === "" ||
-    user.passwordCheck === "" ||
-    user.userName === "" ||
-    user.certification === "" ||
-  ) {
-    alert("빈 칸을 작성해 주세요.");
-    return;
-  }
-  if (payload.probableEmail && payload.probableNick) {
-    await signUpApi(user);
-    navigate("/");
-  }
-};
-return [user, setUser, submitHandler];
+  return [user, setUser, submitHandler];
 };
 
 // 이메일 유효성 검사

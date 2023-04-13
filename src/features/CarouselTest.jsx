@@ -11,11 +11,12 @@ const Button = ({ children, dir, disabled, onClick }) => {
 };
 
 const Stbutton = styled.button`
+  background-color: red;
   width: 40px;
   height: 40px;
   position: absolute;
   z-index: 1;
-
+  
   background-color: transparent;
   border: none;
   font-size: 2rem;
