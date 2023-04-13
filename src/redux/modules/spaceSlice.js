@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpaces } from './spacesSlice';
+import { __getFloors } from './floorsSlice';
 
 const initialState = {
   space: [],
@@ -45,6 +46,7 @@ export const __deleteSpace = createAsyncThunk(
         },
       });
       thunk.dispatch(__getSpaces());
+      thunk.dispatch(__getFloors());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -72,6 +74,7 @@ export const __editSpace = createAsyncThunk(
         },
       );
       thunk.dispatch(__getSpaces());
+      thunk.dispatch(__getFloors());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;

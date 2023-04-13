@@ -14,10 +14,6 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
     };
     dispatch(__addSpace(newSpace));
   };
-  // space 삭제
-  const onDeleteSpaceHandler = async spaceId => {
-    dispatch(__deleteSpace(spaceId));
-  };
 
   return (
     <>
@@ -25,25 +21,15 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
       <br />
       <button onClick={onClickAddSpaceHandler}>Space 추가</button>
       {spaces?.map(space => {
-        if (space) return;
-        // <SpaceItem />
-        <span
-          style={{ cursor: 'pointer' }}
-          key={space.spaceId}
-          onClick={() => onClickSpaceListHandler(space.spaceId)}
-        >
-          {space.spaceName}/{space.spaceId}-----
-          <button
-            onClick={() => {
-              const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
-              if (confirmDelete) {
-                onDeleteSpaceHandler(space.spaceId);
-              }
-            }}
-          >
-            X
-          </button>
-        </span>;
+        if (space)
+          return (
+            <SpaceItem
+              key={space.spaceId}
+              space={space}
+              onClickSpaceListHandler={onClickSpaceListHandler}
+              dispatch={dispatch}
+            />
+          );
       })}
     </>
   );

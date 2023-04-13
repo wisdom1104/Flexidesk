@@ -50,6 +50,7 @@ function CreateSpace({
               <FloorList
                 floors={floors}
                 onClickFloorListHandler={onClickFloorListHandler}
+                onClickSpaceListHandler={onClickSpaceListHandler}
               />
               <SpaceList
                 spaces={spaces}
