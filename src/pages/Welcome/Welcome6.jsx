@@ -1,38 +1,25 @@
-import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StFont } from './WelcomeStyled';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { StBackground, StFont, StGrid } from './WelcomeStyled';
+import { Card } from '../../features/CarouselTest'
+import Carousel from '../../features/Carousel';
 
 function Welcome6() {
-    const navi = useNavigate();
 
   return (
     <>
-    <StBackground background="#fff">
-      <StColumnDiv>
-          <StFont>
-          간단한 회원가입으로 Flexidesk의 솔루션 만나보세요.
-          </StFont>
-          <StButtonGap>
-            <StBlueButton
-              onClick={() => {
-                navi('/signupuser');
-              }}
-            >
-              일반 회원가입
-            </StBlueButton>
+      <StBackground>
+        <StGrid>
+        <StFont paddingtop='150px'>Flexidesk는 회사생활을 <br/> 어떻게 쉽게 만들어주나요?</StFont>
+      </StGrid>
+      </StBackground>
 
-            <StBlueButton
-              onClick={() => {
-                navi('/signup');
-              }}
-            >
-              관리자 회원가입
-            </StBlueButton>
-          </StButtonGap>
-        </StColumnDiv>
+      <StBackground>
+        <StGrid>
+        <Carousel/>
+        </StGrid>
       </StBackground>
     </>
-  )
+  );
 }
 
-export default Welcome6
+export default Welcome6;

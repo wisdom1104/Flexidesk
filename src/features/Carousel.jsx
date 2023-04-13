@@ -53,7 +53,7 @@ const C = () => {
   return <div>스케줄 관리</div>;
 };
 
-const App = () => {
+const Carousel = () => {
   
    const [components] = useState([
     {
@@ -75,7 +75,6 @@ const App = () => {
     on: false,
     value: "310px"
   });
-
 
   const genImagesArray = (target) => {
     return [target - 1, target, target + 1].map((el) => {
@@ -112,7 +111,6 @@ const App = () => {
   };
 
   return (
-    <Container>
       <SliderContainer>
         <Button dir="left" onClick={clickLeftHandler}>
         <TiChevronLeftOutline />
@@ -121,30 +119,25 @@ const App = () => {
         <TiChevronRightOutline />
         </Button>
 
-          <Images>
+          <StSliders>
           {genImagesArray(index).map(({ id, Component }) => (
-            <Image key={id} animate={animate}>
+            <StSlider key={id} animate={animate}>
               <Component />
-            </Image>
+            </StSlider>
           ))}
-        </Images>
+        </StSliders>
 
       </SliderContainer>
-    </Container>
   );
 };
 
-export default App;
-
-const Container = styled.div`
-  padding: 100px;
-`;
+export default Carousel;
 
 const SliderContainer = styled.div`
   /* width: 490px;
   height: 300px; */
   width: 690px;
-  height: 500px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,7 +145,7 @@ const SliderContainer = styled.div`
   overflow-x: hidden;
 `;
 
-const Images = styled.div`
+const StSliders = styled.div`
   display: flex;
   gap: 10px;
 
@@ -170,7 +163,7 @@ const Images = styled.div`
   }};
 `;
 
-const Image = styled.div`
+const StSlider = styled.div`
   width: 400px;
   height: 300px;
   background: #fff;

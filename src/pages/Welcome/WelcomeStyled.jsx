@@ -14,6 +14,8 @@ export const StGrid = styled.div`
 
   display: flex;
   justify-content: center;
+
+  /* background: #466d47; */
 `;
 
 export const StColumnDiv = styled.div`
@@ -26,9 +28,10 @@ export const StColumnDiv = styled.div`
 
 // 버튼
 export const StButtonGap = styled.div`
-  /* gap: 60px;
-  display: flex;
-  justify-content: center; */
+  position: absolute;
+  width: 600px;
+  height: 110px;
+  bottom:10px;
 
   display: flex;
   flex-direction: row;
@@ -36,12 +39,6 @@ export const StButtonGap = styled.div`
   align-items: center;
   padding: 10px;
   gap: 60px;
-
-  position: absolute;
-  width: 600px;
-  height: 110px;
-  left: 444px;
-  top: 450px;
 `;
 
 export const StBlueButton = styled.button`
@@ -66,7 +63,7 @@ export const StBlueButton = styled.button`
 `;
 // 폰트
 export const StFont = styled.p`
-  width: ${props => props.width || '39vw'};
+  width: ${props => props.width || '48vw'};
   height: ${props => props.height || '6vw'};
 
   font-weight: 700;
@@ -76,7 +73,9 @@ export const StFont = styled.p`
 
   color: ${props => props.color || '#07133b'};
 
-  background: aquamarine;
+  padding-top: ${props => props.paddingtop || ''};
+
+  /* background: #a8a8a8; */
 `;
 
 export const StSmallFont = styled.p`
@@ -87,7 +86,6 @@ export const StSmallFont = styled.p`
   font-weight: ${props => props.weight || '500'};
   font-size: ${props => props.fontSize || '1.125rem'};
   line-height: 150%;
-
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
@@ -96,11 +94,8 @@ export const StSmallFont = styled.p`
 `;
 
 export const StIntroDiv = styled.div`
-  width: 1280px;
-  height: 363px;
-  left: 80px;
-  top: 2593px;
-  margin-top: 300px;
+  /* height: 363px; */
+  margin-top: 100px;
 
   display: grid;
   grid-template-columns: 1fr 1fr; /* 두 개의 열로 구성 */
@@ -111,7 +106,7 @@ export const StIntroDiv = styled.div`
 export const StIntroPhoto = styled.div`
   width: 363px;
   height: 363px;
-  
+
   background: #d9d9d9;
 `;
 
@@ -121,44 +116,40 @@ export const StIntroWrite = styled.div`
   width: 770px;
   height: 363px;
 
-  background: #d9d9d9;
+  background: #fdffdc;
 `;
 
 export const StSpacePhoto = styled.div`
-  /* width: 1280px; */  
-  /* height: 720px; */
+  width: 62vw;
+  height: 37vw;
 
-  width: 1200px;
-  height: 720px;
-  left: 80px;
-
-  background: #d9d9d9;
+  background: #eeeded;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
 `;
 
 ////////////////////캐러셀//////////////////////////
-export const StCard = styled.div`
-  border: 2px solid #995454;
-  width: 600px;
-  height: 300px;
-  background-color: #efadad;
-  font-size: 32px;
+// export const StCard = styled.div`
+//   border: 2px solid #995454;
+//   width: 600px;
+//   height: 300px;
+//   background-color: #efadad;
+//   font-size: 32px;
   
-`
+// `
 
-export const StCard2 = styled.div`
-  border: 2px solid #1d5e25;
-  width: 600px;
-  height: 300px;
-  background-color: #adefb5;
-  font-size: 32px;
-`
+// export const StCard2 = styled.div`
+//   border: 2px solid #1d5e25;
+//   width: 600px;
+//   height: 300px;
+//   background-color: #adefb5;
+//   font-size: 32px;
+// `
 
-export const StCard3 = styled.div`
-  border: 2px solid #1d2d5e;
-  width: 600px;
-  height: 300px;
-  background-color: #c7ccfe;
-  font-size: 32px;
-`
+// export const StCard3 = styled.div`
+//   border: 2px solid #1d2d5e;
+//   width: 600px;
+//   height: 300px;
+//   background-color: #c7ccfe;
+//   font-size: 32px;
+// `
