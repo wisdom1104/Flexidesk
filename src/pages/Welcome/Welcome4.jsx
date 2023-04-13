@@ -4,6 +4,7 @@ import {
   StColumnDiv,
   StFont,
   StGrid,
+  StIntroArray,
   StIntroDiv,
   StIntroPhoto,
   StIntroWrite,
@@ -13,50 +14,39 @@ import {
 function Welcome4() {
   return (
     <>
-      {/* <StBackground background="#07133B">
-                <StFont color="#fff">Why flexidesk?</StFont>
-        </StBackground>
-    <StBackground background="#07133B">
-    <StGrid height='1987px'>
-    <StColumnDiv>
-
-    <StIntroDiv>
-      <StIntroPhoto>사진</StIntroPhoto>
-      <StIntroWrite>글</StIntroWrite>
-    </StIntroDiv>
-    
-    <StIntroDiv>
-        <StIntroPhoto>사진</StIntroPhoto>
-        <StIntroWrite>글</StIntroWrite>
-    </StIntroDiv>
-
-    <StIntroDiv>
-        <StIntroPhoto>사진</StIntroPhoto>
-        <StIntroWrite>글</StIntroWrite>
-    </StIntroDiv>
-    </StColumnDiv>
-    </StGrid>
-  </StBackground> */}
-
-      <StBackground background="#07133B">
-        <StOverall>
-          <div
+        <StBackground background="#07133B" height='1987px'>
+        <div
           style={{
-            marginTop:'200px',
+            display: 'flex',
+            justifyContent: 'center'
           }}
           >
-        <StFont color="#fff">Why flexidesk?</StFont>
+        <StFont 
+        color="#fff"
+        paddingtop='200px'
+        >Why flexidesk?</StFont>
         </div>
+
+        <StOverall>
           <div>
             전체틀
-            <div>
-              박스 정렬
-              <div>
-                박스세트
-                <div>사진</div>
-                <div>글</div>
-              </div>
-            </div>
+            <StIntroArray>
+              <StIntroDiv>
+                <StIntroPhoto>사진1</StIntroPhoto>
+                <StIntroWrite>글1</StIntroWrite>
+              </StIntroDiv>
+
+              <StIntroDiv>
+              <StIntroWrite>글2</StIntroWrite>
+                <StIntroPhoto>사진2</StIntroPhoto>
+              </StIntroDiv>
+
+              <StIntroDiv>
+                <StIntroPhoto>사진3</StIntroPhoto>
+                <StIntroWrite>글3</StIntroWrite>
+              </StIntroDiv>
+
+            </StIntroArray>
           </div>
         </StOverall>
       </StBackground>

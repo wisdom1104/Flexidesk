@@ -3,6 +3,7 @@ import styled from "styled-components";
 //배경
 export const StBackground = styled.div`
   background: ${props => props.background || '#d2ece9'};
+  height: ${props => props.height || ''};
 `
 
 // 전체 공통 스타일
@@ -98,4 +99,42 @@ export const StWrapDiv = styled.div`
   width: 500px;
 
   border: 2px solid yellow;
+`;
+
+export const StIntroArray = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 100px;
+
+  border: 5px solid green;
+`
+
+export const StIntroDiv = styled.div`
+  width: 166vh;
+  height: 360px;
+  display:flex;
+  gap: 100px;
+
+  align-items: center;
+
+  border: 2px solid yellow;
+`;
+
+export const StIntroPhoto = styled.div`
+  width: 363px;
+  height: 363px;
+  display: inline-block;
+
+  background: #d9d9d9;
+`;
+
+export const StIntroWrite = styled.div`
+  width: 770px;
+  height: 363px;
+  display: inline-block;
+
+  background: #fdffdc;
 `;
