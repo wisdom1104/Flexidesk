@@ -1,13 +1,15 @@
 import React from 'react'
-import { StBackground, StColumnDiv, StFont, StSmallFont, StSpacePhoto } from './WelcomeStyled'
+import { StBackground, StColumnDiv, StFont, StGrid, StSmallFont, StSpacePhoto } from './WelcomeStyled'
 
 function Welcome4() {
   return (
     <>
-    <StBackground background="#fff" height='300px'>
+    <StBackground background="#fff">
+      <StGrid>
         <StFont>
           이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
         </StFont>
+        </StGrid>
       </StBackground>
 
       <StBackground background="#fff" height='1987px'>

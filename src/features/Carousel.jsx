@@ -1,24 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-
-const images = [
-  {
-    id: 1,
-    text: '안녕1'
-  },
-  {
-    id: 2,
-    text: '안녕2'
-  },
-  {
-    id: 3,
-    text: '안녕3'
-},
-];
-
-console.log(images[0].text);
-console.log(images[1].text);
-console.log(images[2].text);
+import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 
 const Button = ({ children, dir, onClick }) => {
   return (
@@ -29,11 +11,16 @@ const Button = ({ children, dir, onClick }) => {
 };
 
 const Stbutton = styled.button`
-  background-color: red;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   z-index: 1;
+  
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
 
   ${({ dir }) => {
     if (dir === "left") {
@@ -54,22 +41,53 @@ const Stbutton = styled.button`
   }}
 `;
 
-const Carousel = () => {
+const A = () => {
+  return <div>회의실 예약</div>;
+};
+
+const B = () => {
+  return <div>스페이스</div>;
+};
+
+const C = () => {
+  return <div>스케줄 관리</div>;
+};
+
+const App = () => {
+  
+   const [components] = useState([
+    {
+      id: 1,
+      Component: A,
+    },
+    {
+      id: 2,
+      Component: B,
+    },
+    {
+      id: 3,
+      Component: C,
+    },
+  ]);
+
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
     value: "310px"
   });
 
+
   const genImagesArray = (target) => {
-    if (target === 4) {
-      return [3, target, 0].map((el) => images.at(el));
-    }
-    if (target === -4) {
-      return [0, target, -3].map((el) => images.at(el));
-    }
-    return [target - 1, target, target + 1].map((el) => images.at(el));
+    return [target - 1, target, target + 1].map((el) => {
+      if (el === 3) {
+        console.log('1');
+        return components.at(0);
+      }
+      console.log('2');
+      return components.at(el);
+    });
   };
+
 
   const clickLeftHandler = () => {
     setAnimate(() => ({ on: true, value: "310px" }));
@@ -96,27 +114,37 @@ const Carousel = () => {
   return (
     <Container>
       <SliderContainer>
-        <Button dir="left" onClick={clickLeftHandler} />
-        <Button dir="right" onClick={clickRightHandler} />
-        <Images animate={animate}>
-          {genImagesArray(index).map((el,i) => (
-            <Image text={el.images[i].text} key={el.id}></Image>
+        <Button dir="left" onClick={clickLeftHandler}>
+        <TiChevronLeftOutline />
+        </Button>
+        <Button dir="right" onClick={clickRightHandler}>
+        <TiChevronRightOutline />
+        </Button>
+
+          <Images>
+          {genImagesArray(index).map(({ id, Component }) => (
+            <Image key={id} animate={animate}>
+              <Component />
+            </Image>
           ))}
         </Images>
+
       </SliderContainer>
     </Container>
   );
 };
 
-export default Carousel;
+export default App;
 
 const Container = styled.div`
   padding: 100px;
 `;
 
 const SliderContainer = styled.div`
-  width: 490px;
-  height: 300px;
+  /* width: 490px;
+  height: 300px; */
+  width: 690px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,11 +153,14 @@ const SliderContainer = styled.div`
 `;
 
 const Images = styled.div`
-  height: 200px;
   display: flex;
   gap: 10px;
 
-  ${({ animate }) => {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  ${( animate ) => {
     if (animate.on) {
       return css`
         transform: translate(${({ animate }) => animate.value});
@@ -140,10 +171,13 @@ const Images = styled.div`
 `;
 
 const Image = styled.div`
-  width: 300px;
+  width: 400px;
+  height: 300px;
+  background: #fff;
   background-position: center center;
   background-size: cover;
   border-radius: 10px;
-  background: #921919;
-  color: #fff;
-`;
+
+  text-align: center;
+  line-height : 200px;
+  `;

@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 
 export const StBackground = styled.div`
+  background: ${props => props.background || '#d2ece9'};
+`
+export const StGrid = styled.div`
   max-width: 1200px;
   min-width: 800px;
-  height: ${props=>props.height || '800px'};
+  width:75vw;
+  height: ${props=>props.height || '68vh'};
   margin: 0 auto;
   left: 0px;
   top: 0px;
 
   display: flex;
   justify-content: center;
-
-  background: ${props => props.background || '#d2ece9'};
 `;
 
 export const StColumnDiv = styled.div`
@@ -21,41 +23,54 @@ export const StColumnDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 // 버튼
 export const StButtonGap = styled.div`
-  gap: 60px;
+  /* gap: 60px;
   display: flex;
+  justify-content: center; */
+
+  display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 60px;
+
+  position: absolute;
+  width: 600px;
+  height: 110px;
+  left: 444px;
+  top: 450px;
 `;
 
 export const StBlueButton = styled.button`
+  width: 50vw;
+  height: 12vh;
+  left: 28.7vw;
+  top: 50vh;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 30px 60px;
 
-  width: 307px;
-  height: 94px;
-  left: 386px;
-  top: 450px;
-
   background: #07133b;
   border-radius: 50px;
 
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   line-height: 34px;
 `;
 // 폰트
 export const StFont = styled.p`
-  width: ${props => props.width || '750px'};
-  height: ${props => props.height || '144px'};
-  left: 459px;
+  width: ${props => props.width || '39vw'};
+  height: ${props => props.height || '6vw'};
 
   font-weight: 700;
-  font-size: ${props => props.fontSize || '48px'};
+  font-size: ${props => props.fontSize || '3rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
 
@@ -65,16 +80,12 @@ export const StFont = styled.p`
 `;
 
 export const StSmallFont = styled.p`
-  width: ${props => props.width || '280px'};
+  width: ${props => props.width || '35vw'};
   height: ${props => props.height || ''};
-  max-width: 1200px;
-  min-width: 800px;
   left: ${props => props.left || '597px'};
-  /* top: ${props => props.top || '1105px'}; */
-  /* padding: 50px; */
 
   font-weight: ${props => props.weight || '500'};
-  font-size: ${props => props.fontSize || '18px'};
+  font-size: ${props => props.fontSize || '1.125rem'};
   line-height: 150%;
 
   text-align: ${props => props.align || 'center'};
@@ -100,7 +111,7 @@ export const StIntroDiv = styled.div`
 export const StIntroPhoto = styled.div`
   width: 363px;
   height: 363px;
-
+  
   background: #d9d9d9;
 `;
 

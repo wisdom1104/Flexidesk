@@ -1,5 +1,5 @@
 import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StSmallFont } from './WelcomeStyled';
+import { StBackground, StBlueButton, StButtonGap, StColumnDiv, StGrid, StSmallFont } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 
