@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 
+//배경
 export const StBackground = styled.div`
+  background: ${props => props.background || '#d2ece9'};
+  height: ${props => props.height || ''};
+`
+
+// 전체 공통 스타일
+export const StOverall = styled.div`
   max-width: 1200px;
   min-width: 800px;
-  margin: 0 auto;
-  left: 0px;
-  top: 0px;
-  height: 100vh;
-
+  height: 40vw;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-
-  background: #d2ece9;
-`;
+  margin: 0 auto;
+`
 
 // 로그인 폼 감싸는 div
 export const StForm = styled.div`
 width: ${props => props.width || '480px'};
-height: ${props => props.height || '480px'};
+height: ${props => props.height || '380px'};
 left: 560px;
 top: 348px;
 margin-top: ${props => props.margintop || '100px'};
@@ -29,10 +29,7 @@ flex-direction: column;
 align-items: center;
 padding: ${props => props.padding || '0px'};
 gap: 16px;
-
-background: #46e3c9;
 `
-
 export const StLoginForm = styled.form`
   width: 480px;
   height: 393px;
