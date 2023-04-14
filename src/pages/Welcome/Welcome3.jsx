@@ -13,9 +13,10 @@ function Welcome3() {
       <StBackground>
         <StOverall>
           <StWrapDiv>
-            <StFont fontSize="38px">업무 트렌드</StFont>
+            <StFont fontSize="2rem">업무 트렌드</StFont>
+            <StFont>👨‍💻</StFont> <br /> 
             <StFont>
-              좌율 좌석제 <br /> 👨‍💻
+              좌율 좌석제 
             </StFont>
 
             <StSmallFont>

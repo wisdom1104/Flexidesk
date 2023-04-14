@@ -9,7 +9,6 @@ import useTrueHook from '../../hooks/useTrueHook';
 import {
   StBackground,
   StForm,
-  StFormContainer,
   StLoginForm,
   StLongButton,
   StOverall,
@@ -82,7 +81,7 @@ function Login() {
             >
               로그인
             </StFont>
-            <StSmallFont width="450px" align="start" fontSize="16px">
+            <StSmallFont width="450px" align="start" fontSize="1rem">
               이메일 주소와 비밀번호를 입력해주세요.
             </StSmallFont>
           </StForm>

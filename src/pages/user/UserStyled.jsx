@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 //배경
 export const StBackground = styled.div`
-  background: ${props => props.background || '#d2ece9'};
+  background: ${props => props.background || '#F5F5F5'};
   height: ${props => props.height || ''};
 `
 
 // 전체 공통 스타일
 export const StOverall = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
+  max-width: 62vw;
+  min-width: 41vw;
   height: 40vw;
   display: flex;
   justify-content: center;
@@ -18,17 +18,17 @@ export const StOverall = styled.div`
 
 // 로그인 폼 감싸는 div
 export const StForm = styled.div`
-width: ${props => props.width || '480px'};
-height: ${props => props.height || '380px'};
-left: 560px;
-top: 348px;
-margin-top: ${props => props.margintop || '100px'};
+  width: ${props => props.width || '480px'};
+  height: ${props => props.height || '380px'};
+  left: 560px;
+  top: 348px;
+  margin-top: ${props => props.margintop || '100px'};
 
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: ${props => props.padding || '0px'};
-gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${props => props.padding || '0px'};
+  gap: 16px;
 `
 export const StLoginForm = styled.form`
   width: 480px;
@@ -45,7 +45,7 @@ export const StLongButton = styled.button`
   color: #fff;
   background: #07133b;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   line-height: 22px;
 `;

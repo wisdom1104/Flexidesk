@@ -1,45 +1,14 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
+import { SliderContainer, StSlider, StSliderButton, StSliders } from "../pages/Welcome/WelcomeStyled";
 
 const Button = ({ children, dir, onClick }) => {
   return (
-    <Stbutton dir={dir} onClick={onClick}>
+    <StSliderButton dir={dir} onClick={onClick}>
       {children}
-    </Stbutton>
+    </StSliderButton>
   );
 };
-
-const Stbutton = styled.button`
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  z-index: 1;
-  
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-
-  ${({ dir }) => {
-    if (dir === "left") {
-      return css`
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      `;
-    }
-
-    if (dir === "right") {
-      return css`
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      `;
-    }
-  }}
-`;
 
 const A = () => {
   return <div>회의실 예약</div>;
@@ -56,18 +25,9 @@ const C = () => {
 const Carousel = () => {
   
    const [components] = useState([
-    {
-      id: 1,
-      Component: A,
-    },
-    {
-      id: 2,
-      Component: B,
-    },
-    {
-      id: 3,
-      Component: C,
-    },
+    { id: 1,Component: A},
+    {id: 2,Component: B},
+    {id: 3,Component: C},
   ]);
 
   const [index, setIndex] = useState(0);
@@ -132,45 +92,3 @@ const Carousel = () => {
 };
 
 export default Carousel;
-
-const SliderContainer = styled.div`
-  /* width: 490px;
-  height: 300px; */
-  width: 690px;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow-x: hidden;
-`;
-
-const StSliders = styled.div`
-  display: flex;
-  gap: 10px;
-
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  ${( animate ) => {
-    if (animate.on) {
-      return css`
-        transform: translate(${({ animate }) => animate.value});
-        transition: transform 350ms ease-in-out;
-      `;
-    }
-  }};
-`;
-
-const StSlider = styled.div`
-  width: 400px;
-  height: 300px;
-  background: #fff;
-  background-position: center center;
-  background-size: cover;
-  border-radius: 10px;
-
-  text-align: center;
-  line-height : 200px;
-  `;

@@ -15,16 +15,19 @@ function Welcome2() {
           <StWrapDiv>
           <div 
           style={{
-            marginTop:'90px',
+            marginTop:'100px',
           }}
           >
+            <StFont>🤔</StFont> <br />
+
           <StFont>
-            🤔 <br />
             이런 고민을 하고 있다면, Flexidesk를 시작하세요!
           </StFont>
           </div>
 
-          <StSmallFont>
+          <StSmallFont 
+          marginbottom='100px'
+          >
               사장님이 어디갔는지 모르겠다면 내 선배가 어디갔는지 모르겠다면 내
               후배가 어디갔는지 모르겠다면 Flexidesk을 사용해보세요
           </StSmallFont>

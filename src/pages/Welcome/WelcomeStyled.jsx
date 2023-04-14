@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 //배경
 export const StBackground = styled.div`
@@ -8,9 +8,9 @@ export const StBackground = styled.div`
 
 // 전체 공통 스타일
 export const StOverall = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  height: 40vw;
+  max-width: 62vw;
+  min-width: 41vw;
+  height: 50vw;
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -33,9 +33,10 @@ export const StFont = styled.p`
 `;
 
 export const StSmallFont = styled.p`
-  width: ${props => props.width || '35vw'};
+  width: ${props => props.width || '38vw'};
   height: ${props => props.height || ''};
   left: ${props => props.left || '597px'};
+  margin-bottom: ${props => props.marginbottom || ''};
 
   font-weight: ${props => props.weight || '500'};
   font-size: ${props => props.fontSize || '1.125rem'};
@@ -87,8 +88,9 @@ export const StWrapDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 1000px;
+  margin: 120px;
 
+  width: 1000px;
 `;
 
 // welcome 4
@@ -136,7 +138,7 @@ export const StSpaceDiv = styled.div`
 `
 
 export const StSpacePhoto = styled.div`
-  width: 62vw;
+  width: 168vh;
   height: 37vw;
 
   margin-top: 15px;
@@ -144,4 +146,78 @@ export const StSpacePhoto = styled.div`
   background: #eeeded;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
+`;
+
+//캐러셀 슬라이드
+export const SliderContainer = styled.div`
+  /* width: 490px;
+  height: 300px; */
+  width: 690px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+`;
+
+export const StSliders = styled.div`
+display: flex;
+gap: 10px;
+
+display : flex;
+justify-content : center;
+align-items : center;
+
+${( animate ) => {
+  if (animate.on) {
+    return css`
+      transform: translate(${({ animate }) => animate.value});
+      transition: transform 350ms ease-in-out;
+    `;
+  }
+}};
+`;
+
+export const StSlider = styled.div`
+  width: 400px;
+  height: 300px;
+  background: #fff;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+
+  text-align: center;
+  line-height : 200px;
+  `;
+
+export const StSliderButton = styled.button`
+width: 20px;
+height: 20px;
+position: absolute;
+z-index: 1;
+
+background-color: transparent;
+border: none;
+font-size: 2rem;
+color: #ccc;
+cursor: pointer;
+
+${({ dir }) => {
+  if (dir === "left") {
+    return css`
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    `;
+  }
+
+  if (dir === "right") {
+    return css`
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    `;
+  }
+}}
 `;

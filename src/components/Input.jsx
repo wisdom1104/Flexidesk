@@ -29,7 +29,7 @@ export const Input = ({type, value, onChange, name, placeholder}) => {
   display: block;
   height: ${props => props.heigth};
   padding: 0 10px;
-  background: #e1f8f8;
+  background: #f2fafa;
 
   border: none;
   
