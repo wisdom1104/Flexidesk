@@ -21,7 +21,7 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
       <br />
       <button onClick={onClickAddSpaceHandler}>Space 추가</button>
       {spaces?.map(space => {
-        if (space)
+        if (space && space.floorId === null)
           return (
             <SpaceItem
               key={space.spaceId}
@@ -30,6 +30,7 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
               dispatch={dispatch}
             />
           );
+        if (space && space.floorId !== null) return null;
       })}
     </>
   );

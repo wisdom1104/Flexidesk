@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { __deleteSpace, __editSpace } from '../../redux/modules/spaceSlice';
 import { Row } from '../../components/Flex';
+import { EditInput, ListItem } from './SpaceStyles';
 
 function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
   // space 삭제
@@ -30,13 +31,12 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
         {!spaceEdit ? (
           <Row>
             {' '}
-            <span
-              style={{ cursor: 'pointer' }}
+            <ListItem
               key={space.spaceId}
               onClick={() => onClickSpaceListHandler(space.spaceId)}
             >
               {space.spaceName}/{space.spaceId}-----
-            </span>
+            </ListItem>
             <div>
               <button
                 onClick={() => {
@@ -61,8 +61,7 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
         ) : (
           <Row>
             {' '}
-            <input
-              style={{ padding: '10px' }}
+            <EditInput
               type="text"
               value={editSpaceName}
               onChange={e => {
