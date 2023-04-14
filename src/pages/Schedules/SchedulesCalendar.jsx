@@ -5,6 +5,7 @@ import SchedulesTime from './SchedulesTime';
 
 function SchedulesCalendar() {
   const param = useParams();
+  console.log(param);
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -100,7 +101,7 @@ function SchedulesCalendar() {
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
       </Calcontain>
-      <SchedulesTime />
+      <SchedulesTime param={param.userId} selectDay={date} />
     </>
   );
 }
