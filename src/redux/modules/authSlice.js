@@ -3,8 +3,8 @@ import { cookies } from "../../shared/cookies";
 
 const initialState = {
     token: null,
-    // isLogin: false,
-    isLogin: cookies.get("token") ? true : false,
+    isLogin: false,
+    // isLogin: cookies.get("token") ? true : false,
     isError: null
   };
   

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
-import { StBtnBox, StDropBox } from '../../pages/space/AdminSpace';
+import { StBtnBox } from '../../pages/space/AdminSpace';
+import { StDropBox } from './SpaceStyles';
 
 function BoxItem({
   box,
@@ -39,6 +40,7 @@ function BoxItem({
     dispatch(__editBox(payload));
     setBoxEdit(!boxEdit);
   };
+
   return (
     <>
       <StDropBox

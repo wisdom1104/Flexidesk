@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import api from '../../axios/api';
+import { StSmallFont } from '../Welcome/WelcomeStyled';
+import { StSmallButton } from './UserStyled';
 
 function Certification({email,onChange,admin,setAdmin}) {
-
 
   // form태그 핸들러
   // 로딩 띄우기 -> 로딩 이쁜걸로 ~~~
@@ -25,7 +26,12 @@ function Certification({email,onChange,admin,setAdmin}) {
 
   return (
     <div>
-      <p>회사 이메일</p>
+      <StSmallFont
+      width
+      align="start"
+      fontSize='0.875rem'
+      weight='700'
+      >회사 이메일</StSmallFont>
       <Input
         type="email"
         value={email}
@@ -34,9 +40,9 @@ function Certification({email,onChange,admin,setAdmin}) {
         placeholder="이메일을 입력하세요."
         required
       />
-      <button 
+      <StSmallButton 
       type='button'
-      onClick={submitBtnHandler}>클릭시 인증번호가 나올예정</button>
+      onClick={submitBtnHandler}>클릭</StSmallButton>
     </div>
   );
 }

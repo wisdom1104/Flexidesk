@@ -9,7 +9,7 @@ import {
 import { cookies } from '../../shared/cookies';
 import AllReservation from './AllReservation';
 
-function Reservation({ param, selectDay }) {
+function ReservationTime({ param, selectDay }) {
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
@@ -19,11 +19,28 @@ function Reservation({ param, selectDay }) {
   const [clickReservation, setClickReservation] = useState([]);
 
   const [count, setCount] = useState(1);
-  const reqData = { start: clickReservation[0], userList: [] };
+  // const reqData = { start: clickReservation[0], userList: [] };
+
+  //연속되는 시간 추가하기 위한 request정리
+  let reqData = [];
+
+  const dataList = () => {
+    clickReservation.map((_, index) => {
+      reqData.push({ start: clickReservation[index] });
+    });
+    return reqData;
+    // for (let i = 0; i < clickReservation.length; i++) {
+    //   reqData.push({ start: clickReservation[i] });
+    // }
+    // console.log('동작', reqData);
+    // return reqData;
+  };
+
+  const reqDatas = { startList: dataList(), useList: [] };
   const dispatch = useDispatch();
 
   const { reservation } = useSelector(state => state.reservation);
-  const { mrId, timeList } = reservation;
+  const { timeList } = reservation;
   const userId = cookies.get('userId');
   const navi = useNavigate();
 
@@ -61,7 +78,7 @@ function Reservation({ param, selectDay }) {
   }, [selectDay]);
 
   return (
-    <>
+    <div>
       <div>
         클릭한 회의실 이름
         <div>
@@ -87,7 +104,7 @@ function Reservation({ param, selectDay }) {
           <div>
             <button
               onClick={() => {
-                dispatch(__addReservation(reqData));
+                dispatch(__addReservation({ reqDatas, param, selectDay }));
                 navi(`/detail/${userId}`);
               }}
             >
@@ -96,11 +113,8 @@ function Reservation({ param, selectDay }) {
           </div>
         </div>
       </div>
-      <div>
-        <AllReservation />
-      </div>
-    </>
+    </div>
   );
 }
 
-export default Reservation;
+export default ReservationTime;

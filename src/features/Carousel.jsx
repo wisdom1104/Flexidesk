@@ -1,108 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import styled from 'styled-components';
+import { SliderContainer, StSlider, StSliderButton, StSliders } from "../pages/Welcome/WelcomeStyled";
 
-export const MAX_VISIBILITY = 3;
-
-export const Card = ({ title, content }) => {
+const Button = ({ children, dir, onClick }) => {
   return (
-    <div className='card'>
-      <h2>{title}</h2>
-      <p>{content}</p>
-    </div>
+    <StSliderButton dir={dir} onClick={onClick}>
+      {children}
+    </StSliderButton>
   );
 };
 
-export const Carousel = ({ children }) => {
-  const [current, setCurrent] = useState(0);
+const A = () => {
+  return <div>회의실 예약</div>;
+};
 
-  const handlePrev = () => {
-    setCurrent((current - 1 + children.length) % children.length);
+const B = () => {
+  return <div>스페이스</div>;
+};
+
+const C = () => {
+  return <div>스케줄 관리</div>;
+};
+
+const Carousel = () => {
+  
+   const [components] = useState([
+    { id: 1,Component: A},
+    {id: 2,Component: B},
+    {id: 3,Component: C},
+  ]);
+
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState({
+    on: false,
+    value: "310px"
+  });
+
+  const genImagesArray = (target) => {
+    return [target - 1, target, target + 1].map((el) => {
+      if (el === 3) {
+        console.log('1');
+        return components.at(0);
+      }
+      console.log('2');
+      return components.at(el);
+    });
   };
 
-  const handleNext = () => {
-    setCurrent((current + 1) % children.length);
+
+  const clickLeftHandler = () => {
+    setAnimate(() => ({ on: true, value: "310px" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, value: "310px" }));
+      setIndex((pre) => {
+        if (pre === -4) return (pre = 0);
+        else return pre - 1;
+      });
+    }, 350);
   };
 
-  const visibleCards = [];
-  const leftIndex = (current - Math.floor(MAX_VISIBILITY / 2) + children.length) % children.length;
-  for (let i = 0; i < MAX_VISIBILITY; i++) {
-    visibleCards.push(children[(leftIndex + i) % children.length]);
-  }
+  const clickRightHandler = () => {
+    setAnimate(() => ({ on: true, value: "-310px" }));
+    setTimeout(() => {
+      setAnimate(() => ({ on: false, value: "-310px" }));
+      setIndex((pre) => {
+        if (pre === 4) return (pre = 0);
+        else return pre + 1;
+      });
+    }, 400);
+  };
 
   return (
-    <StCarousel>
-      <StButton onClick={handlePrev}>
+      <SliderContainer>
+        <Button dir="left" onClick={clickLeftHandler}>
         <TiChevronLeftOutline />
-      </StButton>
-      <StCards>
-        <div>
-          {visibleCards.map((child, index) => {
-            return (
-              <div key={index} className='card-wrapper'>
-                {React.cloneElement(child, { key: index })}
-              </div>
-            );
-          })}
-        </div>
-        <StCard>
-          {children.slice(leftIndex - 1, leftIndex)}
-          {children.slice(leftIndex + MAX_VISIBILITY, leftIndex + MAX_VISIBILITY + 1)}
-        </StCard>
-      </StCards>
-      <StButton onClick={handleNext}>
+        </Button>
+        <Button dir="right" onClick={clickRightHandler}>
         <TiChevronRightOutline />
-      </StButton>
-    </StCarousel>
+        </Button>
+
+          <StSliders>
+          {genImagesArray(index).map(({ id, Component }) => (
+            <StSlider key={id} animate={animate}>
+              <Component />
+            </StSlider>
+          ))}
+        </StSliders>
+
+      </SliderContainer>
   );
 };
 
-const StCarousel = styled.div`
-    display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-`
-
-const StButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-`
-
-const StCards = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
-  border-radius: 1rem;
-  color: $color-gray;
-  text-align: justify;
-  transition: all 0.3s ease-out;
-`
-
-const StCard = styled.div`
-      /* position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center; */
-
-
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: 
-    rotateY(calc(var(--offset) * 50deg)) 
-    scaleY(calc(1 + var(--abs-offset) * -0.4))
-    translateZ(calc(var(--abs-offset) * -30rem))
-    translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 1rem));
-  transition: all 0.3s ease-out;
-`
+export default Carousel;

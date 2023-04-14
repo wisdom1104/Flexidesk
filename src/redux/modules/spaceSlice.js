@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpaces } from './spacesSlice';
+import { __getFloors } from './floorsSlice';
 
 const initialState = {
   space: [],
@@ -16,11 +17,15 @@ export const __getSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.get(`/${companyName}/space/${spaceId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await api.get(
+        `/spaces/${companyName}/${spaceId}
+      `,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -35,12 +40,13 @@ export const __deleteSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.delete(`/${companyName}/space/${spaceId}`, {
+      const response = await api.delete(`/spaces/${companyName}/${spaceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       thunk.dispatch(__getSpaces());
+      thunk.dispatch(__getFloors());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
@@ -48,7 +54,7 @@ export const __deleteSpace = createAsyncThunk(
   },
 );
 
-// space name 수정
+// space 수정
 export const __editSpace = createAsyncThunk(
   '__editSpace',
   async (payload, thunk) => {
@@ -57,7 +63,7 @@ export const __editSpace = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(
-        `/${companyName}/space/${payload.spaceId}`,
+        `/spaces/${companyName}/${payload.spaceId}`,
         {
           spaceName: payload.spaceName,
         },
@@ -68,6 +74,7 @@ export const __editSpace = createAsyncThunk(
         },
       );
       thunk.dispatch(__getSpaces());
+      thunk.dispatch(__getFloors());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;

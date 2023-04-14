@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
+import { __getFloors } from './floorsSlice';
 
 const initialState = {
   spaces: [],
@@ -15,7 +16,7 @@ export const __getSpaces = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.get(`/${companyName}/space`, {
+      const response = await api.get(`/spaces/${companyName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,16 +35,38 @@ export const __addSpace = createAsyncThunk(
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
+      const response = await api.post(`/spaces/${companyName}`, newSpace, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      thunk.dispatch(__getSpaces());
+      return thunk.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return error;
+    }
+  },
+);
+
+// floor 안에 space 추가
+export const __addInnerSpace = createAsyncThunk(
+  '__addInnerSpace',
+  async (payload, thunk) => {
+    try {
+      const token = cookies.get('token');
+      const companyName = cookies.get('companyName');
       const response = await api.post(
-        `/spaces/${companyName}/space`,
-        newSpace,
+        `/spaces/${companyName}/${payload.floorId}`,
+        {
+          spaceName: payload.spaceName,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         },
       );
-      thunk.dispatch(__getSpaces());
+      thunk.dispatch(__getFloors());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;

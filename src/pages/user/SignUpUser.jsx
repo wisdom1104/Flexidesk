@@ -3,17 +3,24 @@ import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
-import useTrueHook from '../../hooks/useTrueHook'
-import CertificationCkeck from '../user/CertificationCkeck'
-
-// 유효성검사 라이브러리
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import useTrueHook from '../../hooks/useTrueHook';
+import CertificationCkeck from '../user/CertificationCkeck';
+import {
+  StBackground,
+  StForm,
+  StFormBox,
+  StLoginForm,
+  StLongButton,
+  StOverall,
+  StTextInput,
+} from './UserStyled';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 
 function SignUpUser() {
-  // alert 에러메세지 띄어주기!!!
   // maxlength 설정
+
+  // 가드
+  useTrueHook();
 
   const [user, setUser] = useState({
     email: '',
@@ -22,8 +29,6 @@ function SignUpUser() {
     userName: '',
     certification: '',
   });
-
-  console.log('유저!!!!!!->', user);
 
   const onChangeHandler = e => {
     const { value, name } = e.target;
@@ -48,93 +53,115 @@ function SignUpUser() {
     }
   };
 
-  // 토큰값으로 페이지 위치조절 (가드)
-  useTrueHook();
-
-  // 정규식 유효성 검사를 수행
-  const schema = yup.object().shape({
-    userName: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup
-      .string()
-      .required()
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    passwordCheck: yup
-      .string()
-      .oneOf([yup.ref('password'), null])
-      .min(8)
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
-        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
-      ),
-    certification: yup.string().required(),
-  });
-
-  const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
-  });
-
   return (
-    <form onSubmit={submitBtnHandler}>
-      <h3>회원가입</h3>
+    <>
+      <StBackground>
+        <StOverall height="1000px">
+          <div
+            style={{
+              marginTop: '100px',
+            }}
+          >
+            <StLoginForm onSubmit={submitBtnHandler} height="750px">
+              <StForm height="750px">
+                <StFormBox>
+                  <StFont align="start" fontSize="28px">
+                    회원가입
+                  </StFont>
 
-      <p>회사 이메일</p>
-      <Input
-        type="email"
-        value={user.email|| ''}
-        onChange={onChangeHandler}
-        name="email"
-        placeholder="이메일을 입력하세요."
-        required
-      />
-      {errors.certification && <span>인증번호를 입력하세요.</span>}
+                  <StTextInput>
+                    <StSmallFont
+                      width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                    >
+                      이메일
+                    </StSmallFont>
+                    <Input
+                      type="email"
+                      value={user.email || ''}
+                      onChange={onChangeHandler}
+                      name="email"
+                      placeholder="이메일을 입력하세요."
+                      required
+                    />
+                  </StTextInput>
 
-      <p>비밀번호</p>
-      <Input
-        type="password"
-        value={user.password|| ''}
-        onChange={onChangeHandler}
-        name="password"
-        placeholder="비밀번호를 입력하세요."
-        required
-      />
-      {errors.password && <span>비밀번호 형식에 맞게 입력하세요.</span>}
+                  <StTextInput>
+                    <CertificationCkeck
+                      certification={user.certification}
+                      onChange={onChangeHandler}
+                      user={user}
+                      setUser={setUser}
+                    />
+                  </StTextInput>
 
-      <p>비밀번호 확인</p>
-      <Input
-        type="password"
-        value={user.passwordCheck|| ''}
-        onChange={onChangeHandler}
-        name="passwordCheck"
-        placeholder="비밀번호를 한번 더 입력해주세요."
-        required
-      />
-      {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
+                  <StTextInput>
+                    <StSmallFont
+                      width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                    >
+                      비밀번호
+                    </StSmallFont>
+                    <Input
+                      type="password"
+                      value={user.password || ''}
+                      onChange={onChangeHandler}
+                      name="password"
+                      placeholder="비밀번호를 입력하세요."
+                      required
+                    />
+                  </StTextInput>
 
-      <CertificationCkeck 
-      certification={user.certification} 
-      onChange={onChangeHandler}
-      user={user}
-      setUser={setUser}
-      />
+                  <StTextInput>
+                    <StSmallFont
+                      width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                    >
+                      비밀번호 확인
+                    </StSmallFont>
+                    <Input
+                      type="password"
+                      value={user.passwordCheck || ''}
+                      onChange={onChangeHandler}
+                      name="passwordCheck"
+                      placeholder="비밀번호를 한번 더 입력해주세요."
+                      required
+                    />
+                  </StTextInput>
 
-      <p>이름</p>
-      <Input
-        type="text"
-        value={user.userName|| ''}
-        onChange={onChangeHandler}
-        name="userName"
-        placeholder="사용하실 이름을 입력하세요."
-        required
-      />
-      {errors.userName && <span>사용하실 이름을 입력하세요.</span>}
+                  <StTextInput>
+                    <StSmallFont
+                      width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                    >
+                      이름
+                    </StSmallFont>
+                    <Input
+                      type="text"
+                      value={user.userName || ''}
+                      onChange={onChangeHandler}
+                      name="userName"
+                      placeholder="사용하실 이름을 입력하세요."
+                      required
+                    />
+                  </StTextInput>
 
-      <button>시작하기</button>
-    </form>
+                  <StLongButton type="submit">시작하기</StLongButton>
+                </StFormBox>
+              </StForm>
+            </StLoginForm>
+          </div>
+        </StOverall>
+      </StBackground>
+    </>
   );
 }
 

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
 import InnerSpaceList from './InnerSpaceList';
+import { EditInput, ListItem } from './SpaceStyles';
 
-function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
+function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
   // floor 삭제
   const onDeleteFloorHandler = async floorId => {
     dispatch(__deleteFloor(floorId));
@@ -21,18 +22,18 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
     dispatch(__editFloor(payload));
     setFloorEdit(!floorEdit);
   };
+  // console.log('floor', floor);
+  // console.log('spaceList', floor.spaceList);
+  const [isMd, setIsMd] = useState(false);
+
   return (
     <>
       <div>
         {!floorEdit ? (
           <Row>
-            <span
-              style={{ cursor: 'pointer' }}
-              key={floor.floorId}
-              onClick={() => onClickFloorListHandler(floor.floorId)}
-            >
+            <ListItem style={{ cursor: 'pointer' }} key={floor.floorId}>
               {floor.floorName}/{floor.floorId}-----
-            </span>
+            </ListItem>
             <div>
               <button
                 onClick={() => {
@@ -52,11 +53,18 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
               >
                 삭제
               </button>
+              <button
+                onClick={() => {
+                  setIsMd(!isMd);
+                }}
+              >
+                열기
+              </button>
             </div>
           </Row>
         ) : (
           <Row>
-            <input
+            <EditInput
               style={{ padding: '10px' }}
               type="text"
               value={editFloorName}
@@ -83,7 +91,12 @@ function FloorItem({ floor, onClickFloorListHandler, dispatch }) {
           </Row>
         )}
       </div>
-      <InnerSpaceList />
+      {isMd ? (
+        <InnerSpaceList
+          floor={floor}
+          onClickSpaceListHandler={onClickSpaceListHandler}
+        />
+      ) : null}
     </>
   );
 }

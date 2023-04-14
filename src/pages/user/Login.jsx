@@ -5,16 +5,31 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import useTrueHook from '../../hooks/useTrueHook'
+import useTrueHook from '../../hooks/useTrueHook';
+import {
+  StBackground,
+  StForm,
+  StFormBox,
+  StLoginForm,
+  StLongButton,
+  StOverall,
+} from './UserStyled';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
+import {
+  useValidEmail,
+  useValidPassword,
+  usePasswordCheck,
+  useSignUp,
+} from '../../hooks/useSignUpHook';
 
 function Login() {
+  const [user, setUser, onSubmitHandler] = useSignUp('');
 
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  });
+  const [emailMsg, validEmail] = useValidEmail();
+  const [passwordMsg, validPassword] = useValidPassword();
+  const [passwordCheckMsg, validPasswordCheck] = usePasswordCheck();
 
-  const loginChangeHandler = e => {
+  const onChangeHandler = e => {
     const { value, name } = e.target;
     setUser(old => {
       return { ...old, [name]: value };
@@ -31,13 +46,19 @@ function Login() {
       const newtoken = token.split(' ')[1];
       const payload = jwt_decode(newtoken);
 
-      cookies.set('token', newtoken, { path: '/' , maxAge:3540,});
-      cookies.set('userId', payload.id, { path: '/' , maxAge:3540,});
-      cookies.set('companyName', String(payload.companyName), { path: '/' , maxAge:3540, });
-      cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
-      
-      navi('/adminspace')
+      cookies.set('token', newtoken, { path: '/', maxAge: 3540 });
+      cookies.set('userId', payload.id, { path: '/', maxAge: 3540 });
+      cookies.set('companyName', String(payload.companyName), {
+        path: '/',
+        maxAge: 3540,
+      });
+      cookies.set('username', String(payload.username), {
+        path: '/',
+        maxAge: 3540,
+      });
+      cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
 
+      navi('/adminspace');
     } catch (e) {
       const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
@@ -45,30 +66,53 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={onsubmitHandler}>
-        <p>이메일</p>
-        <Input
-          type="email"
-          value={user.email|| ''}
-          onChange={loginChangeHandler}
-          name="email"
-          placeholder="이메일을 입력하세요."
-          required
-        />
+    <StBackground>
+      <StOverall>
 
-        <p>비밀번호</p>
-        <Input
-          type="password"
-          value={user.password|| ''}
-          onChange={loginChangeHandler}
-          name="password"
-          placeholder="비밀번호를 입력하세요."
-          required
-        />
-        <button> 확인 </button>
-      </form>
-    </div>
+        <div style={{
+        marginTop: '100px'
+      }}>
+        <StLoginForm onSubmit={onsubmitHandler}>
+
+            <StForm>
+              <StFormBox>
+            <StFont
+              align="start"
+              fontSize="28px"
+            >
+              로그인
+            </StFont>
+            <StSmallFont align="start" fontSize="1rem">
+              이메일 주소와 비밀번호를 입력해주세요.
+            </StSmallFont>
+            </StFormBox>
+            
+            <Input
+              type="email"
+              value={user.email || ''}
+              onChange={e => {
+                validEmail(e);
+                setUser({ ...user, email: e.target.value });
+              }}
+              name="email"
+              placeholder="이메일"
+              required
+            />
+
+            <Input
+              type="password"
+              value={user.password || ''}
+              onChange={onChangeHandler}
+              name="password"
+              placeholder="비밀번호"
+              required
+            />
+            <StLongButton> 로그인 </StLongButton>
+          </StForm>
+        </StLoginForm>      
+        </div>
+      </StOverall>
+    </StBackground>
   );
 }
 
