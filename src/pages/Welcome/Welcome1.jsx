@@ -9,7 +9,7 @@ function Welcome1() {
 
   return (
     <>
-      <StBackground>
+      <StBackground id='signup'>
     <StOverall>
       <StWrapDiv>
     <StSmallFont>

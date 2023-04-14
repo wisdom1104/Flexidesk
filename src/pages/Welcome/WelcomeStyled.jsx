@@ -15,6 +15,16 @@ export const StOverall = styled.div`
   justify-content: center;
   margin: 0 auto;
 `
+export const StWrapDiv = styled.div`
+  width: 50vw;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: 120px;
+`;
 
 // 폰트
 export const StFont = styled.p`
@@ -29,14 +39,16 @@ export const StFont = styled.p`
   color: ${props => props.color || '#07133b'};
 
   padding: ${props => props.padding || ''};
-  padding-top: ${props => props.paddingtop || ''};
+  padding-top: ${props => props.paddingTop || ''};
+
+  margin-bottom: ${props => props.marginBottom || ''};
 `;
 
 export const StSmallFont = styled.p`
   width: ${props => props.width || '38vw'};
   height: ${props => props.height || ''};
   left: ${props => props.left || '597px'};
-  margin-bottom: ${props => props.marginbottom || ''};
+  margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: ${props => props.weight || '500'};
   font-size: ${props => props.fontSize || '1.125rem'};
@@ -44,6 +56,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+
 `;
 
 // 버튼
@@ -80,17 +93,6 @@ export const StBlueButton = styled.button`
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 34px;
-`;
-
-export const StWrapDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  margin: 120px;
-
-  width: 1000px;
 `;
 
 // welcome 4
@@ -150,8 +152,6 @@ export const StSpacePhoto = styled.div`
 
 //캐러셀 슬라이드
 export const SliderContainer = styled.div`
-  /* width: 490px;
-  height: 300px; */
   width: 690px;
   height: 300px;
   display: flex;

@@ -21,7 +21,7 @@ function Welcome4() {
           >
         <StFont 
         color="#fff"
-        paddingtop='200px'
+        paddingTop='200px'
         >Why flexidesk?</StFont>
         </div>
 

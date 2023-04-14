@@ -12,6 +12,7 @@ function Welcome6() {
         <StWrapDiv>
           <StFont 
           color="#383838"
+          marginBottom='100px'
           >
           Flexidesk는 회사생활을 <br/> 어떻게 쉽게 만들어주나요?
           </StFont>

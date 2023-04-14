@@ -9,6 +9,7 @@ import useTrueHook from '../../hooks/useTrueHook';
 import {
   StBackground,
   StForm,
+  StFormBox,
   StLoginForm,
   StLongButton,
   StOverall,
@@ -66,26 +67,26 @@ function Login() {
 
   return (
     <StBackground>
+      <StOverall>
 
-      <StOverall>      
         <div style={{
         marginTop: '100px'
       }}>
         <StLoginForm onSubmit={onsubmitHandler}>
-          <StForm width="480px" height="10px" margintop="0" padding="20px">
+
+            <StForm>
+              <StFormBox>
             <StFont
-              width="450px"
               align="start"
               fontSize="28px"
-              paddingtop="20px"
             >
               로그인
             </StFont>
-            <StSmallFont width="450px" align="start" fontSize="1rem">
+            <StSmallFont align="start" fontSize="1rem">
               이메일 주소와 비밀번호를 입력해주세요.
             </StSmallFont>
-          </StForm>
-          <StForm>
+            </StFormBox>
+            
             <Input
               type="email"
               value={user.email || ''}
