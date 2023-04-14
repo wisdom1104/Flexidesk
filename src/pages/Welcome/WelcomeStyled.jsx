@@ -1,153 +1,223 @@
-import styled from 'styled-components';
+import styled, { css } from "styled-components";
 
+//배경
 export const StBackground = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  height: ${props=>props.height || '800px'};
-  margin: 0 auto;
-  left: 0px;
-  top: 0px;
+  background: ${props => props.background || '#d2ece9'};
+  height: ${props => props.height || ''};
+`
 
+// 전체 공통 스타일
+export const StOverall = styled.div`
+  max-width: 62vw;
+  min-width: 41vw;
+  height: 50vw;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+`
+export const StWrapDiv = styled.div`
+  width: 50vw;
 
-  background: ${props => props.background || '#d2ece9'};
-`;
-
-export const StColumnDiv = styled.div`
-  height: ${props=>props.height || '100vh'};
   display: flex;
-  flex-direction: ${props => props.direction || 'column'};
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  margin: 120px;
 `;
+
+// 폰트
+export const StFont = styled.p`
+  width: ${props => props.width || '48vw'};
+  /* height: ${props => props.height || '6vw'}; */
+
+  font-weight: 700;
+  font-size: ${props => props.fontSize || '3rem'};
+  line-height: 150%;
+  text-align: ${props => props.align || 'center'};
+
+  color: ${props => props.color || '#07133b'};
+
+  padding: ${props => props.padding || ''};
+  padding-top: ${props => props.paddingTop || ''};
+
+  margin-bottom: ${props => props.marginBottom || ''};
+`;
+
+export const StSmallFont = styled.p`
+  width: ${props => props.width || '38vw'};
+  height: ${props => props.height || ''};
+  left: ${props => props.left || '597px'};
+  margin-bottom: ${props => props.marginBottom || ''};
+
+  font-weight: ${props => props.weight || '500'};
+  font-size: ${props => props.fontSize || '1.125rem'};
+  line-height: 150%;
+  text-align: ${props => props.align || 'center'};
+
+  color: ${props => props.color || '#6A7B8F'};
+
+`;
+
 // 버튼
 export const StButtonGap = styled.div`
-  gap: 60px;
+  position: absolute;
+  width: 600px;
+  height: 110px;
+  margin-top: 250px;
+
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 60px;
 `;
 
 export const StBlueButton = styled.button`
+  width: 50vw;
+  height: 12vh;
+  left: 28.7vw;
+  top: 50vh;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 30px 60px;
 
-  width: 307px;
-  height: 94px;
-  left: 386px;
-  top: 450px;
-
   background: #07133b;
   border-radius: 50px;
 
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   line-height: 34px;
 `;
-// 폰트
-export const StFont = styled.p`
-  width: ${props => props.width || '750px'};
-  height: ${props => props.height || '144px'};
-  left: 459px;
 
-  font-weight: 700;
-  font-size: ${props => props.fontSize || '48px'};
-  line-height: 150%;
-  text-align: ${props => props.align || 'center'};
+// welcome 4
+export const StIntroArray = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 100px;
 
-  color: ${props => props.color || '#07133b'};
-
-  background: aquamarine;
-`;
-
-export const StSmallFont = styled.p`
-  width: ${props => props.width || '280px'};
-  height: ${props => props.height || ''};
-  max-width: 1200px;
-  min-width: 800px;
-  left: ${props => props.left || '597px'};
-  /* top: ${props => props.top || '1105px'}; */
-  /* padding: 50px; */
-
-  font-weight: ${props => props.weight || '500'};
-  font-size: ${props => props.fontSize || '18px'};
-  line-height: 150%;
-
-  text-align: ${props => props.align || 'center'};
-
-  color: ${props => props.color || '#6A7B8F'};
-
-  background: black;
-`;
+  border: 5px solid green;
+`
 
 export const StIntroDiv = styled.div`
-  width: 1280px;
-  height: 363px;
-  left: 80px;
-  top: 2593px;
-  margin-top: 300px;
+  width: 166vh;
+  height: 360px;
+  display:flex;
+  gap: 100px;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 두 개의 열로 구성 */
-  grid-gap: 10px; /* 아이템 사이의 간격 */
   align-items: center;
+
+  border: 2px solid yellow;
 `;
 
 export const StIntroPhoto = styled.div`
   width: 363px;
   height: 363px;
+  display: inline-block;
 
   background: #d9d9d9;
 `;
 
 export const StIntroWrite = styled.div`
-  /* width: 600px;
-  height: 363px; */
   width: 770px;
   height: 363px;
+  display: inline-block;
 
-  background: #d9d9d9;
+  background: #fdffdc;
 `;
 
+// welcome 5
+export const StSpaceDiv = styled.div`
+  margin-bottom: 100px;
+`
+
 export const StSpacePhoto = styled.div`
-  /* width: 1280px; */  
-  /* height: 720px; */
+  width: 168vh;
+  height: 37vw;
 
-  width: 1200px;
-  height: 720px;
-  left: 80px;
+  margin-top: 15px;
 
-  background: #d9d9d9;
+  background: #eeeded;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
 `;
 
-////////////////////캐러셀//////////////////////////
-export const StCard = styled.div`
-  border: 2px solid #995454;
-  width: 600px;
+//캐러셀 슬라이드
+export const SliderContainer = styled.div`
+  width: 690px;
   height: 300px;
-  background-color: #efadad;
-  font-size: 32px;
-  
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+`;
 
-export const StCard2 = styled.div`
-  border: 2px solid #1d5e25;
-  width: 600px;
-  height: 300px;
-  background-color: #adefb5;
-  font-size: 32px;
-`
+export const StSliders = styled.div`
+display: flex;
+gap: 10px;
 
-export const StCard3 = styled.div`
-  border: 2px solid #1d2d5e;
-  width: 600px;
+display : flex;
+justify-content : center;
+align-items : center;
+
+${( animate ) => {
+  if (animate.on) {
+    return css`
+      transform: translate(${({ animate }) => animate.value});
+      transition: transform 350ms ease-in-out;
+    `;
+  }
+}};
+`;
+
+export const StSlider = styled.div`
+  width: 400px;
   height: 300px;
-  background-color: #c7ccfe;
-  font-size: 32px;
-`
+  background: #fff;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+
+  text-align: center;
+  line-height : 200px;
+  `;
+
+export const StSliderButton = styled.button`
+width: 20px;
+height: 20px;
+position: absolute;
+z-index: 1;
+
+background-color: transparent;
+border: none;
+font-size: 2rem;
+color: #ccc;
+cursor: pointer;
+
+${({ dir }) => {
+  if (dir === "left") {
+    return css`
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    `;
+  }
+
+  if (dir === "right") {
+    return css`
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    `;
+  }
+}}
+`;
