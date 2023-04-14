@@ -10,6 +10,7 @@ import userSchedules from '../modules/userSchedules';
 import reservationList from '../modules/allReservationSlice';
 import floors from '../modules/floorsSlice';
 import floor from '../modules/floorSlice';
+import schedules from '../modules/schedules';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     mr,
     box,
     userSchedules,
+    schedules,
     floors,
     floor,
   },

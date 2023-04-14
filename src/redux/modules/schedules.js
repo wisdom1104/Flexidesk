@@ -3,39 +3,40 @@ import { cookies } from '../../shared/cookies'
 import api from '../../axios/api'
 
 const initialState = {
-  userchedules:[]
+  schedules:[]
   
 }
 
-export const __getUserSchedules = createAsyncThunk(
-  "getuserschedules",
+export const __getSchedules = createAsyncThunk(
+  "getschedules",
   async(payload,thunk) =>{
     console.log('페이로드',payload)
     try{
       const token = cookies.get('token')
-      const data = await api.get(`/schedules/${payload.param}`,{
+      const data = await api.get(`/schedules?selDate=${payload.selectDay}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }
       })
-      console.log(data);
-      return thunk.fulfillWithValue(data.data)
+      console.log(data.data.data.timeList);
+      return thunk.fulfillWithValue(data.data.data)
     }catch(error){
       return thunk.rejectWithValue(error)
     }
   }
 )
 
-export const userSchedulesSlice = createSlice({
-  name:'userSchedules',
+
+export const schedulesSlice = createSlice({
+  name:'schedules',
   initialState,
   reducers:{
   },
   extraReducers:{
-    [__getUserSchedules.fulfilled] : (state, action) =>{
-      state.userSchedules = action.payload.data
+    [__getSchedules.fulfilled] : (state, action) =>{
+      state.schedules = action.payload
     }
 
   }
 })
-export default userSchedulesSlice.reducer;
+export default schedulesSlice.reducer;
