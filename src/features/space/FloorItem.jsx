@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
 import InnerSpaceList from './InnerSpaceList';
+import { EditInput, ListItem } from './SpaceStyles';
 
-function FloorItem({
-  floor,
-  onClickFloorListHandler,
-  dispatch,
-  onClickSpaceListHandler,
-}) {
+function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
   // floor 삭제
   const onDeleteFloorHandler = async floorId => {
     dispatch(__deleteFloor(floorId));
@@ -35,13 +31,9 @@ function FloorItem({
       <div>
         {!floorEdit ? (
           <Row>
-            <span
-              style={{ cursor: 'pointer' }}
-              key={floor.floorId}
-              onClick={() => onClickFloorListHandler(floor.floorId)}
-            >
+            <ListItem style={{ cursor: 'pointer' }} key={floor.floorId}>
               {floor.floorName}/{floor.floorId}-----
-            </span>
+            </ListItem>
             <div>
               <button
                 onClick={() => {
@@ -72,7 +64,7 @@ function FloorItem({
           </Row>
         ) : (
           <Row>
-            <input
+            <EditInput
               style={{ padding: '10px' }}
               type="text"
               value={editFloorName}
@@ -99,7 +91,6 @@ function FloorItem({
           </Row>
         )}
       </div>
-
       {isMd ? (
         <InnerSpaceList
           floor={floor}

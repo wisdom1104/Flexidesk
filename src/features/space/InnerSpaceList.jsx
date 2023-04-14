@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { __addInnerSpace } from '../../redux/modules/spacesSlice';
 import InnerSpaceItem from './InnerSpaceItem';
+import { InnerList } from './SpaceStyles';
 
 function InnerSpaceList({ floor, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
@@ -34,10 +35,3 @@ function InnerSpaceList({ floor, onClickSpaceListHandler }) {
 }
 
 export default InnerSpaceList;
-
-const InnerList = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 15px;
-  gap: 20px;
-`;

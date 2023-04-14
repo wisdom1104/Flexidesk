@@ -95,10 +95,9 @@ export const __editBoxUser = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(
-        `/boxes/${companyName}/${payload.fromBoxId}/move/${payload.toBoxId}/user`,
+        `/boxes/${companyName}/${payload.toBoxId}/move`,
         {
           boxName: payload.boxName,
-          username: payload.username,
           x: payload.x,
           y: payload.y,
         },

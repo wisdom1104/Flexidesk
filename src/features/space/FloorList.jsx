@@ -4,11 +4,7 @@ import { __addFloor } from '../../redux/modules/floorsSlice';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import FloorItem from './FloorItem';
 
-function FloorList({
-  floors,
-  onClickFloorListHandler,
-  onClickSpaceListHandler,
-}) {
+function FloorList({ floors, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
 
   // floor 추가
@@ -30,7 +26,6 @@ function FloorList({
             <FloorItem
               key={floor.floorId}
               floor={floor}
-              onClickFloorListHandler={onClickFloorListHandler}
               onClickSpaceListHandler={onClickSpaceListHandler}
               dispatch={dispatch}
             />
