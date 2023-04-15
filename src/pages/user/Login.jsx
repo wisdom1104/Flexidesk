@@ -65,15 +65,22 @@ function Login() {
     }
   };
 
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    navi('/signup')
+  }
+
   return (
     <StBackground>
       <StOverall>
-
         <div style={{
-        marginTop: '100px'
+        marginTop: '80px'
       }}>
-        <StLoginForm onSubmit={onsubmitHandler}>
 
+        <StLoginForm 
+        onSubmit={onsubmitHandler}
+        width='420px'
+        >
             <StForm>
               <StFormBox>
             <StFont
@@ -82,7 +89,11 @@ function Login() {
             >
               로그인
             </StFont>
-            <StSmallFont align="start" fontSize="1rem">
+            <StSmallFont 
+            align="start" 
+            fontSize="1rem"
+            marginTop='10px'
+            >
               이메일 주소와 비밀번호를 입력해주세요.
             </StSmallFont>
             </StFormBox>
@@ -107,7 +118,10 @@ function Login() {
               placeholder="비밀번호"
               required
             />
-            <StLongButton> 로그인 </StLongButton>
+
+            <StLongButton> 로그인 </StLongButton>          
+            <StLongButton onClick={onClickHandler}> 회원가입 </StLongButton>
+
           </StForm>
         </StLoginForm>      
         </div>

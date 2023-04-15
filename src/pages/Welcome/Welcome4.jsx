@@ -12,7 +12,7 @@ import {
 function Welcome4() {
   return (
     <>
-        <StBackground background="#07133B" height='1987px'>
+        <StBackground background="#07133B" height='1600px'>
         <div
           style={{
             display: 'flex',
@@ -21,7 +21,7 @@ function Welcome4() {
           >
         <StFont 
         color="#fff"
-        paddingTop='200px'
+        paddingTop='100px'
         >Why flexidesk?</StFont>
         </div>
 

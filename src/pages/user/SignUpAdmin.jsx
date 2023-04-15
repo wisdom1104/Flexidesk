@@ -57,22 +57,24 @@ function SignUpAdmin() {
   return (
     <>
       <StBackground>
-        <StOverall height="1100px">
+        <StOverall height="1060px">
           <div
             style={{
-              marginTop: '100px',
+              marginTop: '80px',
             }}
           >
-            <StLoginForm onSubmit={submitBtnHandler} height="850px">
+            <StLoginForm onSubmit={submitBtnHandler} height="880px">
               <StForm
-              height='850px'
+              height='880px'
               >
                 <StFormBox>
                   <StFont align="start" fontSize="28px">
                     관리자 회원가입
                   </StFont>
 
-                  <StTextInput>
+                  <StTextInput
+                    height='118px'
+                  >
                     <Certification
                       email={admin.email}
                       onChange={onChangeHandler}
@@ -87,6 +89,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       인증번호
                     </StSmallFont>
@@ -99,12 +102,14 @@ function SignUpAdmin() {
                       required
                     />
                   </StTextInput>
+
                     <StTextInput>
                     <StSmallFont
                       width
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       비밀번호
                     </StSmallFont>
@@ -124,6 +129,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       비밀번호 확인
                     </StSmallFont>
@@ -143,6 +149,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       이름
                     </StSmallFont>
@@ -162,6 +169,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       회사
                     </StSmallFont>

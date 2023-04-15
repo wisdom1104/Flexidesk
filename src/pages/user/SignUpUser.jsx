@@ -56,14 +56,14 @@ function SignUpUser() {
   return (
     <>
       <StBackground>
-        <StOverall height="1000px">
+        <StOverall height="960px">
           <div
             style={{
-              marginTop: '100px',
+              marginTop: '80px',
             }}
           >
-            <StLoginForm onSubmit={submitBtnHandler} height="750px">
-              <StForm height="750px">
+            <StLoginForm onSubmit={submitBtnHandler} height="760px">
+              <StForm height="760px">
                 <StFormBox>
                   <StFont align="start" fontSize="28px">
                     회원가입
@@ -75,6 +75,7 @@ function SignUpUser() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       이메일
                     </StSmallFont>
@@ -86,9 +87,21 @@ function SignUpUser() {
                       placeholder="이메일을 입력하세요."
                       required
                     />
+
+                    {/* <StSmallFont
+                      width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                      marginTop='10px'
+                    >
+                      이메일 오류
+                    </StSmallFont> */}
                   </StTextInput>
 
-                  <StTextInput>
+                  <StTextInput
+                  height='118px'
+                  >
                     <CertificationCkeck
                       certification={user.certification}
                       onChange={onChangeHandler}
@@ -103,6 +116,7 @@ function SignUpUser() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       비밀번호
                     </StSmallFont>
@@ -122,6 +136,7 @@ function SignUpUser() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       비밀번호 확인
                     </StSmallFont>
@@ -141,6 +156,7 @@ function SignUpUser() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
+                      marginBottom='10px'
                     >
                       이름
                     </StSmallFont>

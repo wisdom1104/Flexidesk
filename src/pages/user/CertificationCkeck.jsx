@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import api from '../../axios/api';
-import { StSmallButton } from './UserStyled';
+import {  Container, InlinButton, InlineInput, StSmallButton } from './UserStyled';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 
 function CertificationCkeck({ certification, onChange, user, setUser }) {
@@ -22,11 +22,21 @@ function CertificationCkeck({ certification, onChange, user, setUser }) {
   };
 
   return (
-    <div>
-      <StSmallFont width align="start" fontSize="0.875rem" weight="700">
+    <>
+    <Container>
+      <StSmallFont
+      width 
+      align="start" 
+      fontSize="0.875rem" 
+      weight="700"
+      marginBottom='10px'
+      >
         인증번호
       </StSmallFont>
-      <Input
+      </Container>
+
+      <Container>
+      <InlineInput
         type="text"
         value={certification || ''}
         onChange={onChange}
@@ -34,10 +44,14 @@ function CertificationCkeck({ certification, onChange, user, setUser }) {
         placeholder="인증번호를 입력하세요."
         required
       />
-      <StSmallButton type="button" onClick={submitBtnHandler}>
-        인증번호 확인
-      </StSmallButton>
-    </div>
+
+      <InlinButton 
+      type="button" 
+      onClick={submitBtnHandler}
+      value="인증받기"
+      />
+    </Container>
+    </>
   );
 }
 
