@@ -24,6 +24,8 @@ function AdminSpaceBox({
   handleDragStart,
   isModal,
   setIsModal,
+  spaces,
+  id,
 }) {
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -31,7 +33,7 @@ function AdminSpaceBox({
   const { space } = useSelector(state => state.space);
   const { floor } = useSelector(state => state.floor);
 
-  console.log('space', space);
+  // console.log('space', space);
 
   const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
@@ -42,15 +44,26 @@ function AdminSpaceBox({
   const elRef = useRef([]);
   const boardEl = useRef(null);
 
-  //floor, space 조회
+  // floor, space 조회
   useEffect(() => {
-    dispatch(__getSpace(spaceId));
+    const foundSpace = spaces.find(space => space.spaceId === id);
+    console.log('foundSpace', foundSpace);
+    if (foundSpace) {
+      dispatch(__getSpace(id));
+      // console.log('1');
+    }
   }, [selectedSpace]);
 
-  const mrList = space?.map(item => item.mrlist);
-  const boxList = space?.map(item => item.boxlist);
-  // const mrList = 0;
-  // const boxList = 0;
+  // mrList와 boxList를 계산하는 useEffect
+  const [mrList, setMrList] = useState([]);
+  const [boxList, setBoxList] = useState([]);
+
+  useEffect(() => {
+    const newMrList = space?.map(item => item.mrlist) || [];
+    const newBoxList = space?.map(item => item.boxlist) || [];
+    setMrList(newMrList);
+    setBoxList(newBoxList);
+  }, [space]);
 
   // 모든 요소 드롭
   const HandleDrop = async e => {
@@ -182,11 +195,11 @@ function AdminSpaceBox({
       const boardRect = boardEl.current.getBoundingClientRect();
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
 
-      const limitedx = Math.max(
+      const limitedX = Math.max(
         boardRect.x - (boardRect.x + 10),
         Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))),
       );
-      const limitedy = Math.max(
+      const limitedY = Math.max(
         boardRect.y - (boardRect.y + 10),
         Math.min(
           newy,
@@ -198,8 +211,8 @@ function AdminSpaceBox({
         spaceId,
         mrId: currentMrBox.mrId,
         mrName: currentMrBox.mrName,
-        x: Number(limitedx),
-        y: Number(limitedy),
+        x: Number(limitedX),
+        y: Number(limitedY),
       };
       setNewMrBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
@@ -238,11 +251,11 @@ function AdminSpaceBox({
 
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
 
-      const limitedx = Math.max(
+      const limitedX = Math.max(
         boardRect.x - (boardRect.x + 10),
         Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))),
       );
-      const limitedy = Math.max(
+      const limitedY = Math.max(
         boardRect.y - (boardRect.y + 10),
         Math.min(
           newy,
@@ -254,8 +267,8 @@ function AdminSpaceBox({
         spaceId,
         boxId: currentBox.boxId,
         boxName: currentBox.boxName,
-        x: Number(limitedx),
-        y: Number(limitedy),
+        x: Number(limitedX),
+        y: Number(limitedY),
       };
       // setNewBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
@@ -318,18 +331,19 @@ function AdminSpaceBox({
           {space?.map(item => {
             if (item && item.floorId !== null)
               return (
-                <>
+                <Row key={item.spaceId}>
                   <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
                   <SubIcon>&gt;</SubIcon>
-                  <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
-                </>
+                  <SubTitle key={item.spaceId}>
+                    {item.spaceName}/{item.spaceId}
+                  </SubTitle>
+                </Row>
               );
             if (item && item.floorId === null)
               return (
                 <SubTitle key={item.spaceId}>
                   {/* if(item.floorId) */}
-                  {item.spaceName}
-                  {/* {item.spaceId} */}
+                  {item.spaceName}/{item.spaceId}
                 </SubTitle>
               );
           })}

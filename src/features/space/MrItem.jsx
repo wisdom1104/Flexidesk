@@ -43,6 +43,7 @@ function MrItem({
   return (
     <>
       <StDropMr
+        key={mr.mrId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
         ref={el => (elRef.current[mr.mrId] = el)}

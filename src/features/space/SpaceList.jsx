@@ -8,10 +8,12 @@ function SpaceList({ spaces, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
 
   // 그냥 space 추가
-  const onClickAddSpaceHandler = async () => {
+  const onClickAddSpaceHandler = async spaceId => {
     const newSpace = {
+      // spaceId,
       spaceName: 'New Space',
     };
+    console.log('newSpace', newSpace);
     dispatch(__addSpace(newSpace));
   };
 

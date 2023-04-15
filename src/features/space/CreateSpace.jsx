@@ -11,6 +11,7 @@ import {
 } from './SpaceStyles';
 import Test3 from '../../pages/space/Test3';
 import Test1 from '../../pages/space/Test1';
+import Test2 from '../../pages/space/Test2';
 
 function CreateSpace({
   isModal,
@@ -49,7 +50,8 @@ function CreateSpace({
                   onClickSpaceListHandler={onClickSpaceListHandler}
                 />
                 {/* <Test1 /> */}
-                {/* <Test3 /> */}
+                {/* <Test2 />
+                <Test3 /> */}
               </ModalList>
             </Modal>
           </ModalBackground>

@@ -7,7 +7,7 @@ function Test1() {
     {
       floorId: 1,
       floorName: '1번',
-      list: [
+      spaceList: [
         { floorId: 1, floorName: '1번', spaceId: 2, spaceName: 'space1-1' },
         { floorId: 1, floorName: '1번', spaceId: 3, spaceName: 'space1-2' },
       ],
@@ -15,58 +15,27 @@ function Test1() {
     {
       floorId: 2,
       floorName: '2번',
-      list: [
+      spaceList: [
         { floorId: 2, floorName: '2번', spaceId: 3, spaceName: 'space2-1' },
         { floorId: 2, floorName: '2번', spaceId: 4, spaceName: 'space2-2' },
       ],
     },
   ]);
 
-  const dragItem = useRef();
-  const dragOverItem = useRef();
-
-  const dragStart = (e, position) => {
-    dragItem.current = position;
-  };
-
-  const dragEnter = (e, position) => {
-    dragOverItem.current = position;
-  };
-
-  const drop = e => {
-    const copyListItems = [...floor];
-    const dragItemContent = copyListItems[dragItem.current];
-    copyListItems.splice(dragItem.current, 1);
-    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setFloor(copyListItems);
-  };
-
   return (
     <>
       <StList>
         {floor.map(space => (
-          <>
-            <StFloor>{space.floorName}</StFloor>
-
-            {space.list?.length > 0 ? (
-              space.list?.map(item => (
-                <StSpace
-                  key={item.spaceId}
-                  onDragStart={e => dragStart(e, item.spaceId)}
-                  onDragOver={e => e.preventDefault()}
-                  onDragEnter={e => dragEnter(e, item.spaceId)}
-                  onDragEnd={drop}
-                  draggable
-                >
-                  <div>{item.spaceName}</div>
-                </StSpace>
+          <div key={space.floorId}>
+            <StFloor key={space.floorId}>{space.floorName}</StFloor>
+            {space.spaceList?.length > 0 ? (
+              space.spaceList?.map((item, index) => (
+                <StSpace key={item.spaceId}>{item.spaceName}</StSpace>
               ))
             ) : (
               <div>null</div>
             )}
-          </>
+          </div>
         ))}
       </StList>
     </>
@@ -85,5 +54,6 @@ const StFloor = styled.div`
 `;
 const StSpace = styled.div`
   background-color: lightsteelblue;
+  margin: 5px 0px;
 `;
 // const StList = styled.div``;
