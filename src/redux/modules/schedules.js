@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { cookies } from '../../shared/cookies'
 import api from '../../axios/api'
+import { th } from 'date-fns/locale'
 
 const initialState = {
   schedules:[]
@@ -24,6 +25,24 @@ export const __getSchedules = createAsyncThunk(
       return thunk.rejectWithValue(error)
     }
   }
+)
+
+export const __addSchdule = createAsyncThunk(
+  "addschedule",
+  async(payload,thunk) =>{
+    try{
+      const token = cookies.get('token')
+      await api.post('/schedules',payload,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      await thunk.dispatch(__getSchedules(payload.startData.startList[0].start.split('T')[0]))
+      return thunk.fulfillWithValue(payload)
+    }catch(error)
+    {return thunk.rejectWithValue(error)}
+  }
+
 )
 
 

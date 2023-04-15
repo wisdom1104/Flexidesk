@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
+import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
           path="/schedulescalendar/:userId"
           element={<SchedulesCalendar />}
         />
+        <Route path="/scheduledetail/:userId" element={<SchedulesDetail/>} />
         <Route path="/detail/:userId" element={<ReservationDetail />} />
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />

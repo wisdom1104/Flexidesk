@@ -16,7 +16,7 @@ function Header() {
   const dispatch = useDispatch();
   const navi = useNavigate();
 
-  const userName = cookies.get('companyName');
+  const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
   const logout = () => {
@@ -34,8 +34,18 @@ function Header() {
             <StHeaderContentBox onClick={() => navi(`/space`)}>
               스페이스
             </StHeaderContentBox>
+            <StHeaderContentBox
+              onClick={() => navi(`/schedulescalendar/${userId}`)}
+            >
+              스케줄 등록
+            </StHeaderContentBox>
+            <StHeaderContentBox
+              onClick={() => navi(`/scheduledetail/${userId}`)}
+            >
+              스케줄 조회
+            </StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
-              스케줄
+              회의실 예약현황
             </StHeaderContentBox>
             <StHeaderContentBox>{`${userName}님 환영합니다`}</StHeaderContentBox>
             <StHeaderContentButtonBox>
