@@ -64,17 +64,13 @@ function SignUpAdmin() {
             }}
           >
             <StLoginForm onSubmit={submitBtnHandler} height="880px">
-              <StForm
-              height='880px'
-              >
+              <StForm height="880px">
                 <StFormBox>
                   <StFont align="start" fontSize="28px">
                     관리자 회원가입
                   </StFont>
 
-                  <StTextInput
-                    height='118px'
-                  >
+                  <StTextInput height="118px">
                     <Certification
                       email={admin.email}
                       onChange={onChangeHandler}
@@ -89,7 +85,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
-                      marginBottom='10px'
+                      marginBottom="10px"
                     >
                       인증번호
                     </StSmallFont>
@@ -103,13 +99,13 @@ function SignUpAdmin() {
                     />
                   </StTextInput>
 
-                    <StTextInput>
+                  <StTextInput>
                     <StSmallFont
                       width
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
-                      marginBottom='10px'
+                      marginBottom="10px"
                     >
                       비밀번호
                     </StSmallFont>
@@ -121,15 +117,15 @@ function SignUpAdmin() {
                       placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
                       required
                     />
-                    </StTextInput>
+                  </StTextInput>
 
-                    <StTextInput>
+                  <StTextInput>
                     <StSmallFont
                       width
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
-                      marginBottom='10px'
+                      marginBottom="10px"
                     >
                       비밀번호 확인
                     </StSmallFont>
@@ -149,7 +145,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
-                      marginBottom='10px'
+                      marginBottom="10px"
                     >
                       이름
                     </StSmallFont>
@@ -169,7 +165,7 @@ function SignUpAdmin() {
                       align="start"
                       fontSize="0.875rem"
                       weight="700"
-                      marginBottom='10px'
+                      marginBottom="10px"
                     >
                       회사
                     </StSmallFont>
@@ -184,7 +180,6 @@ function SignUpAdmin() {
                   </StTextInput>
 
                   <StLongButton type="submit">시작하기</StLongButton>
-                
                 </StFormBox>
               </StForm>
             </StLoginForm>

@@ -23,7 +23,7 @@ import {
 } from '../../hooks/useSignUpHook';
 
 function Login() {
-  const [user, setUser, onSubmitHandler] = useSignUp('');
+  const [user, setUser] = useSignUp('');
 
   const [emailMsg, validEmail] = useValidEmail();
   const [passwordMsg, validPassword] = useValidPassword();
