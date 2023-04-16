@@ -4,7 +4,8 @@ import api from '../../axios/api'
 import { th } from 'date-fns/locale'
 
 const initialState = {
-  schedules:[]
+  schedules:[],
+  userScehdules:[]
   
 }
 
@@ -45,6 +46,24 @@ export const __addSchdule = createAsyncThunk(
 
 )
 
+export const __getAllSchedules = createAsyncThunk(
+  "getschedules",
+  async(payload,thunk) =>{
+    try{
+      const token = cookies.get('token')
+      const data = await api.get(`/schedules/all`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      console.log(data.data.data.scList);
+      return thunk.fulfillWithValue(data.data.data.scList)
+    }catch(error){
+      return thunk.rejectWithValue(error)
+    }
+  }
+)
+
 
 export const schedulesSlice = createSlice({
   name:'schedules',
@@ -54,6 +73,9 @@ export const schedulesSlice = createSlice({
   extraReducers:{
     [__getSchedules.fulfilled] : (state, action) =>{
       state.schedules = action.payload
+    },
+    [__getAllSchedules.fulfilled]: (state,action) =>{
+      state.userScehdules = action.payload
     }
 
   }
