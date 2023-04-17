@@ -4,9 +4,13 @@ import api from '../../axios/api';
 import {  Container, InlinButton, InlineInput, StSmallButton } from './UserStyled';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 
-function CertificationCkeck({ certification, onChange, user, setUser }) {
+function CertificationCkeck({ certification, setCertification, user }) {
+
+  const certificationHandler = e => {
+    setCertification(e.target.value)
+  }
+
   // form태그 핸들러
-  // 로딩 띄우기 -> 로딩 이쁜걸로 ~~~
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
@@ -39,7 +43,7 @@ function CertificationCkeck({ certification, onChange, user, setUser }) {
       <InlineInput
         type="text"
         value={certification || ''}
-        onChange={onChange}
+        onChange={certificationHandler}
         name="certification"
         placeholder="인증번호를 입력하세요."
         required

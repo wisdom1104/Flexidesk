@@ -91,7 +91,7 @@ export const Container = styled.div`
 
 export const InlineInput = styled.input`
   width: 80%;
-  height: 45px;
+  height: 55px;
 
   border: 1px solid #a6aebb;
   border-radius: 8px;
@@ -111,7 +111,7 @@ export const InlineInput = styled.input`
 
 export const InlinButton = styled.input`
   width: 20%;
-  height: 45px;
+  height: 55px;
 
   outline: none;
   margin-left: 10px;

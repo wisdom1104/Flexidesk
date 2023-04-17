@@ -68,7 +68,6 @@ function Certification({ admin }) {
           required
         />
 
-
         <InlinButton
           type="button"
           onClick={submitBtnHandler}

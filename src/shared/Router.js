@@ -12,7 +12,6 @@ import Header from '../components/Header';
 import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
-import Login2 from '../pages/user/Login2';
 
 function Router() {
   return (
@@ -33,9 +32,6 @@ function Router() {
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />
         <Route path="/*" element={<NotFound />} />
-
-        <Route path="/login2" element={<Login2 />} />
-
       </Routes>
     </BrowserRouter>
   );
