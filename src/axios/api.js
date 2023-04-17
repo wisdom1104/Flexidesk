@@ -46,7 +46,7 @@ api.interceptors.response.use(
     const originalConfig = error.config;
     console.log(originalConfig);
 
-    if (error.response && error.response.status === 400) {
+    if (error.response && error.response.status === 401) {
       const refreshToken = originalConfig.headers['Refresh_Token'];
       try {
         const data = await axios({
@@ -56,10 +56,13 @@ api.interceptors.response.use(
             authorization: refreshToken,
           },
         });
+        console.log('data1',data);
+
         if (data) {
+          console.log('data2',data);
           localStorage.setItem(
             'token',
-            JSON.stringify(data.data, ['Access_Token', 'Refresh_Token']),
+            JSON.stringify(data.data, ['token', 'Refresh_Token']),
           );
           return await api.request(originalConfig);
         }
@@ -70,7 +73,7 @@ api.interceptors.response.use(
   },
 );
 
-// // 요청 인터셉터 설정
+// 요청 인터셉터 설정
 api.interceptors.request.use(config => {
     const token = cookies.get("token")
 
@@ -79,6 +82,5 @@ api.interceptors.request.use(config => {
     }
     return config;
   });
-  
 
 export default api;

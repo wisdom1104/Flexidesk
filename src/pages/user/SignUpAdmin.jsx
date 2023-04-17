@@ -13,6 +13,7 @@ import {
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
 import Certification from './Certification';
+import useTrueHook from '../../hooks/useTrueHook';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState('');
@@ -24,6 +25,9 @@ function SignUpAdmin() {
 
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
+
+    // 가드
+    // useTrueHook();
 
   const navi = useNavigate();
 

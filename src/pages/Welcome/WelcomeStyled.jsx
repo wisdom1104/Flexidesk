@@ -43,7 +43,7 @@ export const StFont = styled.p`
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
 
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 export const StSmallFont = styled.p`
@@ -59,8 +59,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
-  border: 1px solid red;
-
+  /* border: 1px solid red; */
 `;
 
 // 버튼
@@ -149,6 +148,11 @@ export const StSpacePhoto = styled.div`
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
 `;
+
+//welcome 7
+export const StfontA = styled.a`
+  text-decoration: none;
+`
 
 //캐러셀 슬라이드
 export const SliderContainer = styled.div`
