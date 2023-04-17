@@ -207,7 +207,7 @@ function SignUpAdmin() {
                     required
                   />
                 </StTextInput>
-                <StLongButton type="submit">Submit</StLongButton>
+                <StLongButton type="submit">확인</StLongButton>
               </StFormBox>
             </StForm>
           </StLoginForm>

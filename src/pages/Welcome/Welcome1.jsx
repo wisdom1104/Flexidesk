@@ -1,8 +1,6 @@
 import React from 'react'
 import { StBackground, StBlueButton, StButtonGap, StOverall, StSmallFont, StWrapDiv } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
-import { cookies } from '../../shared/cookies';
-import { StForm, StLoginForm } from '../user/UserStyled';
 
 function Welcome1() {
     const navi = useNavigate();
