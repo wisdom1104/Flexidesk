@@ -16,7 +16,7 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 
-function SignUpAdmin() {
+function SignUpAdmin2() {
   // 가드
   useTrueHook();
 
@@ -190,4 +190,4 @@ function SignUpAdmin() {
   );
 }
 
-export default SignUpAdmin;
+export default SignUpAdmin2;

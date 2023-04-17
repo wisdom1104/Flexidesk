@@ -41,13 +41,14 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
-      console.log(response);
+      console.log('response 로그인 값',response);
       const token = response.headers.authorization;
+      const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
 
 // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
-      cookies.set('refresh_token', response.headers.refresh_token.split(' ')[1], { path: '/', maxAge: 3540 });
+      cookies.set('refresh_token', refreshToken.split(' ')[1], { path: '/', maxAge: 3540 });
       cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',

@@ -13,6 +13,7 @@ import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
+import SignUpAdmin2 from '../pages/user/SignUpAdmin2';
 
 function Router() {
   return (
@@ -23,6 +24,8 @@ function Router() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
+        <Route path="/signup2" element={<SignUpAdmin2 />} />
+
         <Route path="/signupuser" element={<SignUpUser />} />
         <Route path="/calender/:id" element={<Calendar />} />
         <Route

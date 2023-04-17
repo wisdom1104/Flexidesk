@@ -4,11 +4,11 @@ import api from '../../axios/api';
 import {  Container, InlinButton, InlineInput, StSmallButton } from './UserStyled';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 
-function CertificationCkeck({ certification, setCertification, user }) {
+function CertificationCkeck({ certification, setCertification, user, onChange }) {
 
-  const certificationHandler = e => {
-    setCertification(e.target.value)
-  }
+  // const certificationHandler = e => {
+  //   setCertification(e.target.value)
+  // }
 
   // form태그 핸들러
   const submitBtnHandler = async e => {
@@ -43,7 +43,7 @@ function CertificationCkeck({ certification, setCertification, user }) {
       <InlineInput
         type="text"
         value={certification || ''}
-        onChange={certificationHandler}
+        onChange={onChange}
         name="certification"
         placeholder="인증번호를 입력하세요."
         required

@@ -16,12 +16,14 @@ import CertificationCkeck from './CertificationCkeck';
 import api from '../../axios/api';
 
 function SignUpUser() {
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setpasswordCheck] = useState('');
-  const [username, setUsername] = useState('');
-  const [certification, setCertification] = useState('');
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    passwordCheck: '',
+    username: '',
+    certification: '',
+  });
+  console.log(user);
 
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
@@ -36,7 +38,7 @@ function SignUpUser() {
 
   const handleEmailChange = event => {
     const value = event.target.value;
-    setEmail(value);
+    setUser(prevState => ({ ...prevState, email: value }));
 
     if (!emailRegex.test(value)) {
       setEmailError('올바른 이메일 형식이 아닙니다.');
@@ -47,31 +49,32 @@ function SignUpUser() {
 
   const handlePasswordChange = event => {
     const value = event.target.value;
-    setPassword(value);
+    setUser(prevState => ({ ...prevState, password: value }));
 
     if (value.length < 8) {
       setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
     } else {
       setPasswordError('');
     }
-  };
+};
 
-  const handlepasswordCheckChange = event => {
+const handlepasswordCheckChange = event => {
     const value = event.target.value;
-    setpasswordCheck(value);
+    setUser(prevState => ({ ...prevState, passwordCheck: value }));
 
-    if (value !== password) {
+    if (value !== user.password) {
       setPasswordCheckError('비밀번호와 일치하지 않습니다.');
     } else {
       setPasswordCheckError('');
     }
-  };
+};
 
   const submitBtnHandler = async e => {
     e.preventDefault();
-    try {
+    try {      
       const response = await api.post('/users/signup/user', user);
-      alert(`${user.userName}님 회원가입을 축하합니다.`);
+      console.log('response',user);
+      alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
     } catch (error) {
@@ -102,14 +105,15 @@ function SignUpUser() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
+                    marginTop='10px'
                     marginBottom="10px"
                   >
                     사용자 이름
                   </StSmallFont>
                   <Input
                     type="text"
-                    value={username}
-                    onChange={event => setUsername(event.target.value)}
+                    value={user.username}
+                    onChange={event => setUser({...user, username: event.target.value})}
                     placeholder="이름을 입력하세요."
                     required
                   />
@@ -127,13 +131,24 @@ function SignUpUser() {
 
                   <Input
                     type="email"
-                    value={email}
+                    value={user.email}
                     onChange={handleEmailChange}
                     name="email"
                     placeholder="이메일을 입력하세요."
                     required
                   />
                 </StTextInput>
+
+                <StTextInput
+                  height='118px'
+                  >
+                    <CertificationCkeck
+                      certification={user.certification}
+                      onChange={event => setUser({...user, certification: event.target.value})}
+                      user={user}
+                      setUser={setUser}
+                    />
+                  </StTextInput>
 
                 <StTextInput>
                   <StSmallFont
@@ -147,7 +162,7 @@ function SignUpUser() {
                   </StSmallFont>
                   <Input
                     type="password"
-                    value={password}
+                    value={user.password}
                     onChange={handlePasswordChange}
                     placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
                     required
@@ -179,7 +194,7 @@ function SignUpUser() {
                   </StSmallFont>
                   <Input
                     type="password"
-                    value={passwordCheck}
+                    value={user.passwordCheck}
                     onChange={handlepasswordCheckChange}
                     placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
                     required
@@ -199,25 +214,7 @@ function SignUpUser() {
                   </StSmallFont>
                 )}
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    marginBottom="10px"
-                  >
-                    인증번호
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    id="certification"
-                    value={certification}
-                    onChange={event => setCertification(event.target.value)}
-                    placeholder="인증번호를 입력하세요."
-                    required
-                  />
-                </StTextInput>
+
                 <StLongButton type="submit">확인</StLongButton>
               </StFormBox>
             </StForm>

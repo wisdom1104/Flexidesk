@@ -223,7 +223,7 @@ export const StSliderButton = styled.button`
   ${({ dir }) => {
     if (dir === 'left') {
       return css`
-        left: 20px;
+        left: 50px;
         top: 50%;
         transform: translateY(-50%);
       `;
@@ -231,7 +231,7 @@ export const StSliderButton = styled.button`
 
     if (dir === 'right') {
       return css`
-        right: 20px;
+        right: 50px;
         top: 50%;
         transform: translateY(-50%);
       `;

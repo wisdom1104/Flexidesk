@@ -9,9 +9,8 @@ import {
   StSmallButton,
 } from './UserStyled';
 
-function Certification({ admin }) {
+function Certification({email,admin,setAdmin}) {
 
-  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
 
@@ -19,7 +18,7 @@ function Certification({ admin }) {
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
-    setEmail(value);
+    setAdmin(prevState => ({ ...prevState, email: value }));
 
     if (!emailRegex.test(value)) {
       setEmailError("올바른 이메일 형식이 아닙니다.");
@@ -33,7 +32,8 @@ function Certification({ admin }) {
     e.preventDefault();
 
     try {
-      const response = await api.post('/users/signup/email', admin);
+      const response = await api.post('/users/signup/email', admin);      
+      console.log(response);
       const data = response.data;
       alert(`${data}`);
       return data;

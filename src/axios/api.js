@@ -45,6 +45,7 @@ api.interceptors.response.use(
   async error => {
     const originalConfig = error.config;
     console.log(originalConfig);
+    console.log(originalConfig.headers);
 
     if (error.response && error.response.status === 401) {
       const refreshToken = originalConfig.headers['Refresh_Token'];
@@ -75,7 +76,9 @@ api.interceptors.response.use(
 
 // 요청 인터셉터 설정
 api.interceptors.request.use(config => {
-    const token = cookies.get("token")
+    const token = cookies.get("token");
+
+    console.log('찍히나??',config.headers.Authorization);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
