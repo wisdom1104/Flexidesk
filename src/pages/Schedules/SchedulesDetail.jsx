@@ -4,20 +4,21 @@ import { __getAllSchedules } from '../../redux/modules/schedules';
 
 function SchedulesDetail() {
   const dispatch = useDispatch();
-  const { scList } = useSelector(state => state.userSchedules);
-  console.log(scList);
+  const { userSchedules } = useSelector(state => state.schedules);
+  console.log(userSchedules);
   useEffect(() => {
     dispatch(__getAllSchedules());
   }, []);
 
   return (
     <div>
-      {scList?.map(item => (
-        <div>
+      {userSchedules?.map(item => (
+        <div key={item.scId}>
           <div>제목 : {item.scTitle}</div>
           <div>내용 : {item.scComment}</div>
           <div>시작시간 : {item.scStart}</div>
           <div>종료시간 : {item.scEnd}</div>
+          -------------------------------
         </div>
       ))}
     </div>

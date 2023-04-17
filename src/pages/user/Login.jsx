@@ -15,10 +15,7 @@ import {
   StOverall,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import {
-  useValidEmail,
-  useSignUp,
-} from '../../hooks/useSignUpHook';
+import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
 
 function Login() {
   const [user, setUser] = useSignUp({
@@ -43,7 +40,6 @@ function Login() {
       const response = await api.post('/users/login', user);
       console.log(response);
       const token = response.headers.authorization;
-      // const token = response.headers.authorization;
       const payload = jwt_decode(token);
       console.log(payload);
 
@@ -59,14 +55,12 @@ function Login() {
         maxAge: 3540,
       });
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
-
       navi('/adminspace');
     } catch (e) {
       const errorMsg = e.response.data.message;
       alert(`${errorMsg}`);
     }
   };
-
 
   const onClickAdminHandler = (e) => {
     e.preventDefault();
@@ -81,14 +75,12 @@ function Login() {
   return (
     <StBackground>
       <StOverall>
-        <div style={{
-        marginTop: '80px'
-      }}>
-
-        <StLoginForm 
-        onSubmit={onsubmitHandler}
-        width='420px'
+        <div
+          style={{
+            marginTop: '80px',
+          }}
         >
+          <StLoginForm onSubmit={onsubmitHandler} width="420px">
             <StForm>
               <StFormBox>
             <StFont
