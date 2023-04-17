@@ -110,9 +110,10 @@ function SignUpAdmin() {
 
                 <StTextInput height="118px">
                   <Certification 
-                  email={admin.email}
                   admin={admin}
                   setAdmin={setAdmin}
+                  email={admin.email}
+                  onChange={event => setAdmin({...admin, email: event.target.value})}
                   />
                 </StTextInput>
 

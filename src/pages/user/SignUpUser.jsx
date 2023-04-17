@@ -143,10 +143,9 @@ const handlepasswordCheckChange = event => {
                   height='118px'
                   >
                     <CertificationCkeck
+                      user={user}
                       certification={user.certification}
                       onChange={event => setUser({...user, certification: event.target.value})}
-                      user={user}
-                      setUser={setUser}
                     />
                   </StTextInput>
 

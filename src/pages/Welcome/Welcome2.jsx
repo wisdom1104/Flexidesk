@@ -26,7 +26,7 @@ function Welcome2() {
           </div>
 
           <StSmallFont 
-          marginBottom='100px'
+          marginBottom='150px'
           >
               사장님이 어디갔는지 모르겠다면 내 선배가 어디갔는지 모르겠다면 내
               후배가 어디갔는지 모르겠다면 Flexidesk을 사용해보세요

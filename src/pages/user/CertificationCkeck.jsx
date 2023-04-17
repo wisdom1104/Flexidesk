@@ -4,17 +4,15 @@ import api from '../../axios/api';
 import {  Container, InlinButton, InlineInput, StSmallButton } from './UserStyled';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 
-function CertificationCkeck({ certification, setCertification, user, onChange }) {
+function CertificationCkeck({ user,certification, onChange }) {
 
-  // const certificationHandler = e => {
-  //   setCertification(e.target.value)
-  // }
 
   // form태그 핸들러
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/match', user);
+      console.log('data',user);
       const newResponse = response.data.message;
       alert(`${newResponse}`);
       return newResponse;

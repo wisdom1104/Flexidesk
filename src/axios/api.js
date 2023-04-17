@@ -61,10 +61,9 @@ api.interceptors.response.use(
 
         if (data) {
           console.log('data2',data);
-          localStorage.setItem(
-            'token',
-            JSON.stringify(data.data, ['token', 'Refresh_Token']),
-          );
+          console.log('data2',data.data);
+          cookies.set('token', data.data.token, {expires: 7});
+          cookies.set('refresh_token', data.data.refreshToken, { expires: 14 } )
           return await api.request(originalConfig);
         }
       } catch (e) {
