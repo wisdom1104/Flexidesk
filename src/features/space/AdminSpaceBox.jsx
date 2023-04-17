@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { __editSpace, __getSpace } from '../../redux/modules/spaceSlice';
+import { __getSpace } from '../../redux/modules/spaceSlice';
 import { __addMr, __editMr } from '../../redux/modules/spaceMrSlice';
 import { __addBox, __editBox } from '../../redux/modules/spaceBoxSlice';
 import MrItem from './MrItem';
 import BoxItem from './BoxItem';
 import { useNavigate } from 'react-router-dom';
 import { Row } from '../../components/Flex';
-import { __editFloor, __getFloor } from '../../redux/modules/floorSlice';
 import {
   StBoard,
   StBtn,
+  StDrag,
   StSubBtn,
+  StSubHeader,
   Stmainspace,
   SubIcon,
   SubTitle,
@@ -47,10 +47,8 @@ function AdminSpaceBox({
   // floor, space 조회
   useEffect(() => {
     const foundSpace = spaces.find(space => space.spaceId === id);
-    console.log('foundSpace', foundSpace);
     if (foundSpace) {
       dispatch(__getSpace(id));
-      // console.log('1');
     }
   }, [selectedSpace]);
 
@@ -270,7 +268,7 @@ function AdminSpaceBox({
         x: Number(limitedX),
         y: Number(limitedY),
       };
-      // setNewBoxes(prevBoxes => [...prevBoxes, payload]);
+      setNewBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
 
@@ -284,43 +282,6 @@ function AdminSpaceBox({
 
     document.addEventListener('mousemove', boxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
-  };
-
-  //---------------------------------------------------
-  //space name 수정
-  const [editSpaceName, setEditSpaceName] = useState('');
-  const [spaceEdit, setSpaceEdit] = useState(false);
-
-  useEffect(() => {
-    const spaceName = space?.[0]?.spaceName;
-    setEditSpaceName(spaceName || '');
-  }, [space]);
-  //space name 수정 핸들러
-  const onEditSpaceNameHandler = async spaceId => {
-    const payload = {
-      spaceId,
-      spaceName: editSpaceName,
-    };
-    dispatch(__editSpace(payload));
-    setSpaceEdit(!spaceEdit);
-  };
-
-  //floor name 수정
-  const [editFloorName, setEditFloorName] = useState('');
-  const [floorEdit, setFloorEdit] = useState(false);
-
-  useEffect(() => {
-    const floorName = floor?.[0]?.floorName;
-    setEditFloorName(floorName || '');
-  }, [floor]);
-  //floor name 수정 핸들러
-  const onEditFloorNameHandler = async floorId => {
-    const payload = {
-      floorId,
-      floorName: editFloorName,
-    };
-    dispatch(__editFloor(payload));
-    setFloorEdit(!floorEdit);
   };
 
   return (
@@ -354,7 +315,7 @@ function AdminSpaceBox({
               setIsModal(!isModal);
             }}
           >
-            수정하기
+            관리하기
           </StSubBtn>
           <StBtn onClick={() => navi('/space')}>완료</StBtn>
         </Row>
@@ -363,7 +324,7 @@ function AdminSpaceBox({
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
         {/* 가짜 회의실 */}
         {newMrBoxes.map((box, index) => (
-          <StDragMr
+          <StDrag
             onDrop={HandleDrop}
             onDragOver={handleDragOver}
             key={box.mrId}
@@ -371,21 +332,17 @@ function AdminSpaceBox({
             onMouseDown={e => mrBoxMouseDownHandler(e, index)}
             onDragStart={e => handleDragStart(e, box.mrId)}
             style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-          >
-            {/* <div>{box.mrName}</div> */}
-          </StDragMr>
+          ></StDrag>
         ))}
         {/* 가짜 박스 */}
         {newBoxes.map((box, index) => (
-          <StDragBox
+          <StDrag
             key={box.boxId}
             ref={el => (elRef.current[index] = el)}
             onMouseDown={e => boxMouseDownHandler(e, index)}
             onDragStart={e => handleDragStart(e, box.boxId)}
             style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-          >
-            <div>{box.boxName}</div>
-          </StDragBox>
+          ></StDrag>
         ))}
         {/* 회의실 드래그 앤 드롭 */}
         <div>
@@ -433,40 +390,3 @@ function AdminSpaceBox({
 }
 
 export default AdminSpaceBox;
-
-export const StSubHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 10px;
-`;
-
-export const StDragMr = styled.div`
-  background: #c478a4;
-  opacity: 0.2;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: grab;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-export const StDragBox = styled.div`
-  background: #c0a55c;
-  opacity: 0.2;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  cursor: grab;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;

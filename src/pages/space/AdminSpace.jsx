@@ -34,6 +34,7 @@ function AdminSpace() {
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
   const navi = useNavigate();
+  const [selectedSpace, setSelectedSpace] = useState(null);
 
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
@@ -44,7 +45,7 @@ function AdminSpace() {
   useEffect(() => {
     const token = cookies.get('token');
     const role = cookies.get('role');
-    setSelectedSpace(null);
+
     if (token === undefined) {
       navi('/');
     } else if (role === 'ADMIN') {
@@ -56,11 +57,11 @@ function AdminSpace() {
     // cleanup 함수
     return () => {
       setSelectedSpace(null);
+      // window.location.reload();
     };
   }, []);
-  console.log(spaces);
+  // console.log(spaces);
   // space 선택
-  const [selectedSpace, setSelectedSpace] = useState(null);
   useEffect(() => {
     // 초기 space 설정
     setSelectedSpace(spaces[0]);
@@ -70,9 +71,9 @@ function AdminSpace() {
     const space = spaces.find(space => space.spaceId === id);
     setSelectedSpace(space);
     setIsModal(!isModal);
-    console.log('space', space);
+    // console.log('space', space);
   };
-  console.log('selectedSpace', selectedSpace);
+  // console.log('selectedSpace', selectedSpace);
 
   const [isModal, setIsModal] = useState(false);
 
@@ -162,10 +163,3 @@ function AdminSpace() {
 }
 
 export default AdminSpace;
-
-export const StBtnBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  gap: 5px;
-`;

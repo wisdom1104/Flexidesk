@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SpaceList from './SpaceList';
 import FloorList from './FloorList';
 import {
@@ -12,6 +12,9 @@ import {
 import Test3 from '../../pages/space/Test3';
 import Test1 from '../../pages/space/Test1';
 import Test2 from '../../pages/space/Test2';
+import Test4 from '../../pages/space/Test4';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getSpace } from '../../redux/modules/spaceSlice';
 
 function CreateSpace({
   isModal,
@@ -20,6 +23,13 @@ function CreateSpace({
   floors,
   onClickSpaceListHandler,
 }) {
+  const dispatch = useDispatch();
+  // const { space } = useSelector(state => state.space);
+
+  // useEffect(() => {
+  //   dispatch(__getSpace());
+  // }, [dispatch]);
+
   return (
     <>
       {
@@ -32,7 +42,7 @@ function CreateSpace({
             <Modal onClick={e => e.stopPropagation()}>
               <ModalList>
                 <ModalHeader>
-                  <ModalTitle>수정하기</ModalTitle>
+                  <ModalTitle>관리하기</ModalTitle>
                   <Modalbtn
                     onClick={() => {
                       setIsModal(!isModal);
@@ -41,17 +51,18 @@ function CreateSpace({
                     <img src="img/modalBtnIcon.png" />
                   </Modalbtn>
                 </ModalHeader>
-                <FloorList
+                {/* <FloorList
                   floors={floors}
                   onClickSpaceListHandler={onClickSpaceListHandler}
                 />
                 <SpaceList
                   spaces={spaces}
                   onClickSpaceListHandler={onClickSpaceListHandler}
-                />
+                /> */}
                 {/* <Test1 /> */}
-                {/* <Test2 />
-                <Test3 /> */}
+                <Test4 floors={floors} spaces={spaces} />
+                {/* <Test2 /> */}
+                {/* <Test3 /> */}
               </ModalList>
             </Modal>
           </ModalBackground>

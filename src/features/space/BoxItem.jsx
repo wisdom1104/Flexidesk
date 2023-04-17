@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
-import { StBtnBox } from '../../pages/space/AdminSpace';
-import { StDropBox } from './SpaceStyles';
+import { BoxBtn, BoxSubBtn, StBtnBox, StDropBox } from './SpaceStyles';
 
 function BoxItem({
   box,
@@ -58,20 +57,20 @@ function BoxItem({
               {box.boxName}/{box.boxId}
             </div>
             <StBtnBox>
-              <button
+              <BoxBtn
                 onClick={() => {
                   setBoxEdit(!boxEdit);
                 }}
               >
                 수정
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   onClickDeleteBoxHandler(box.boxId);
                 }}
               >
                 삭제
-              </button>
+              </BoxSubBtn>
             </StBtnBox>
           </>
         ) : (
@@ -84,20 +83,20 @@ function BoxItem({
               }}
             />
             <StBtnBox>
-              <button
+              <BoxBtn
                 onClick={() => {
                   onEditBoxNameHandler();
                 }}
               >
                 완료
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   setBoxEdit(!boxEdit);
                 }}
               >
                 취소
-              </button>
+              </BoxSubBtn>
             </StBtnBox>
           </>
         )}
