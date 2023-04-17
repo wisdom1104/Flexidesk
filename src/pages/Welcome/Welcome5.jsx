@@ -4,7 +4,7 @@ import { StBackground, StFont, StOverall, StSmallFont, StSpaceDiv, StSpacePhoto 
 function Welcome5() {
   return (
     <>
-      <StBackground background="#fff" height='3100px'>
+      <StBackground background="#fff" height='3300px'>
         <div
           style={{
             display: 'flex',
@@ -13,7 +13,7 @@ function Welcome5() {
           >
         <StFont 
         color="#383838"
-        padding='200px'
+        padding='100px'
         >
         이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
         </StFont>
@@ -26,14 +26,14 @@ function Welcome5() {
               color="#ACDAD8"
               weight="700"
               align="start"
-              width="1200px"
+              width="100%"
             >
               스케줄
             </StSmallFont>
             <StFont align="start">내 스케줄 관리도 한번에</StFont>
             <StSmallFont 
             align="start"
-            width="1200px"
+            width="100%"
             >
               근무 일정과 연동되는 스케줄
             </StSmallFont>
@@ -45,17 +45,17 @@ function Welcome5() {
                 color="#ACDAD8"
                 weight="700"
                 align="end"
-                width="1200px"
+                width="100%"
               >
                 스케줄
               </StSmallFont>
               <StFont 
               align="end"
-              width="1200px"
+              width="100%"
               >내 스케줄 관리도 한번에</StFont>
               <StSmallFont 
               align="end"
-              width="1200px"
+              width="100%"
               >
                 근무 일정과 연동되는 스케줄
               </StSmallFont>
@@ -67,7 +67,7 @@ function Welcome5() {
               color="#ACDAD8"
               weight="700"
               align="start"
-              width="1200px"
+              width="100%"
             >
               스케줄
             </StSmallFont>
@@ -77,7 +77,7 @@ function Welcome5() {
             >내 스케줄 관리도 한번에</StFont>
             <StSmallFont 
             align="start"
-            width="1200px"
+            width="100%"
             >
               근무 일정과 연동되는 스케줄
             </StSmallFont>
