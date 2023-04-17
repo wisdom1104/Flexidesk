@@ -47,7 +47,7 @@ function Login() {
       const payload = jwt_decode(newtoken);
 
       cookies.set('token', newtoken, { path: '/', maxAge: 3540 });
-      cookies.set('userId', payload.id, { path: '/', maxAge: 3540 });
+      cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',
         maxAge: 3540,
@@ -68,48 +68,45 @@ function Login() {
   return (
     <StBackground>
       <StOverall>
-
-        <div style={{
-        marginTop: '100px'
-      }}>
-        <StLoginForm onSubmit={onsubmitHandler}>
-
+        <div
+          style={{
+            marginTop: '100px',
+          }}
+        >
+          <StLoginForm onSubmit={onsubmitHandler}>
             <StForm>
               <StFormBox>
-            <StFont
-              align="start"
-              fontSize="28px"
-            >
-              로그인
-            </StFont>
-            <StSmallFont align="start" fontSize="1rem">
-              이메일 주소와 비밀번호를 입력해주세요.
-            </StSmallFont>
-            </StFormBox>
-            
-            <Input
-              type="email"
-              value={user.email || ''}
-              onChange={e => {
-                validEmail(e);
-                setUser({ ...user, email: e.target.value });
-              }}
-              name="email"
-              placeholder="이메일"
-              required
-            />
+                <StFont align="start" fontSize="28px">
+                  로그인
+                </StFont>
+                <StSmallFont align="start" fontSize="1rem">
+                  이메일 주소와 비밀번호를 입력해주세요.
+                </StSmallFont>
+              </StFormBox>
 
-            <Input
-              type="password"
-              value={user.password || ''}
-              onChange={onChangeHandler}
-              name="password"
-              placeholder="비밀번호"
-              required
-            />
-            <StLongButton> 로그인 </StLongButton>
-          </StForm>
-        </StLoginForm>      
+              <Input
+                type="email"
+                value={user.email || ''}
+                onChange={e => {
+                  validEmail(e);
+                  setUser({ ...user, email: e.target.value });
+                }}
+                name="email"
+                placeholder="이메일"
+                required
+              />
+
+              <Input
+                type="password"
+                value={user.password || ''}
+                onChange={onChangeHandler}
+                name="password"
+                placeholder="비밀번호"
+                required
+              />
+              <StLongButton> 로그인 </StLongButton>
+            </StForm>
+          </StLoginForm>
         </div>
       </StOverall>
     </StBackground>

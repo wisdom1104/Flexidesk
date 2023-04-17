@@ -49,7 +49,6 @@ function SchedulesTime({ param, selectDay }) {
 
   const { schedules } = useSelector(state => state.schedules);
   console.log('스케줄', schedules);
-  const { timeList } = schedules;
 
   const onclickHandler = e => {
     if (clickSchedules.find(item => item === e.target.value)) {
@@ -81,7 +80,7 @@ function SchedulesTime({ param, selectDay }) {
     <>
       <div>스케줄 시간</div>
       <div>
-        {timeList?.map(item => (
+        {schedules?.map(item => (
           <button
             key={item.start}
             onClick={onclickHandler}
