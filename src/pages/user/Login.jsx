@@ -38,17 +38,13 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
-      console.log(response.headers);
-
+      console.log(response);
       const token = response.headers.authorization;
       const payload = jwt_decode(token);
       console.log(payload);
 
-      cookies.set('token', payload, { path: '/', maxAge: 3540 });
-      cookies.set('refresh_token', response.headers.refresh_token, {
-        path: '/',
-        maxAge: 3540,
-      });
+      cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
+      cookies.set('refresh_token', response.headers.refresh_token.split(' ')[1], { path: '/', maxAge: 3540 });
       cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',
@@ -59,9 +55,6 @@ function Login() {
         maxAge: 3540,
       });
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
-
-      /////////////////////////////////////////////////////////////////////////////////////
-
       navi('/adminspace');
     } catch (e) {
       const errorMsg = e.response.data.message;
@@ -69,10 +62,15 @@ function Login() {
     }
   };
 
-  const onClickHandler = e => {
+  const onClickAdminHandler = (e) => {
     e.preventDefault();
-    navi('/signup');
+    navi('/signup')
   };
+
+  const onClickUserHandler = (e) => {
+    e.preventDefault();
+    navi('/signupuser')
+  }
 
   return (
     <StBackground>
@@ -85,39 +83,48 @@ function Login() {
           <StLoginForm onSubmit={onsubmitHandler} width="420px">
             <StForm>
               <StFormBox>
-                <StFont align="start" fontSize="28px">
-                  로그인
-                </StFont>
-                <StSmallFont align="start" fontSize="1rem" marginTop="10px">
-                  이메일 주소와 비밀번호를 입력해주세요.
-                </StSmallFont>
-              </StFormBox>
+            <StFont
+              align="start"
+              fontSize="28px"
+            >
+              로그인
+            </StFont>
+            <StSmallFont 
+            align="start" 
+            fontSize="1rem"
+            marginTop='10px'
+            >
+              이메일 주소와 비밀번호를 입력해주세요.
+            </StSmallFont>
+            </StFormBox>
+            
+            <Input
+              type="email"
+              value={user.email || ''}
+              onChange={e => {
+                validEmail(e);
+                setUser({ ...user, email: e.target.value });
+              }}
+              name="email"
+              placeholder="이메일"
+              required
+            />
 
-              <Input
-                type="email"
-                value={user.email || ''}
-                onChange={e => {
-                  validEmail(e);
-                  setUser({ ...user, email: e.target.value });
-                }}
-                name="email"
-                placeholder="이메일"
-                required
-              />
+            <Input
+              type="password"
+              value={user.password || ''}
+              onChange={onChangeHandler}
+              name="password"
+              placeholder="비밀번호"
+              required
+            />
 
-              <Input
-                type="password"
-                value={user.password || ''}
-                onChange={onChangeHandler}
-                name="password"
-                placeholder="비밀번호"
-                required
-              />
+            <StLongButton> 로그인 </StLongButton>          
+            <StLongButton onClick={onClickAdminHandler}> 관리자 회원가입 </StLongButton>
+            <StLongButton onClick={onClickUserHandler}> 일반 회원가입 </StLongButton>
 
-              <StLongButton> 로그인 </StLongButton>
-              <StLongButton onClick={onClickHandler}> 회원가입 </StLongButton>
-            </StForm>
-          </StLoginForm>
+          </StForm>
+        </StLoginForm>      
         </div>
       </StOverall>
     </StBackground>
