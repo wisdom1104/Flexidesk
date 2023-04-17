@@ -5,7 +5,7 @@ import api from '../../axios/api'
 
 const initialState = {
   schedules:[],
-  userScehdules:[]
+  userSchedules:[]
   
 }
 
@@ -17,7 +17,7 @@ export const __getSchedules = createAsyncThunk(
       const token = cookies.get('token')
       const data = await api.get(`/schedules?selDate=${payload.selectDay}`,{
         headers:{
-          Authorization:`Bearer ${token}`
+          Authorization:`${token}`
         }
       })
       console.log(data.data.data.timeList);
@@ -35,7 +35,7 @@ export const __addSchdule = createAsyncThunk(
       const token = cookies.get('token')
       await api.post('/schedules',payload,{
         headers:{
-          Authorization:`Bearer ${token}`
+          Authorization:`${token}`
         }
       })
       await thunk.dispatch(__getSchedules(payload.startData.startList[0].start.split('T')[0]))
@@ -53,10 +53,10 @@ export const __getAllSchedules = createAsyncThunk(
       const token = cookies.get('token')
       const data = await api.get(`/schedules/all`,{
         headers:{
-          Authorization:`Bearer ${token}`
+          Authorization:`${token}`
         }
       })
-      console.log(data.data.data.scList);
+      console.log("여기",data.data.data.scList);
       return thunk.fulfillWithValue(data.data.data.scList)
     }catch(error){
       return thunk.rejectWithValue(error)
@@ -75,7 +75,7 @@ export const schedulesSlice = createSlice({
       state.schedules = action.payload
     },
     [__getAllSchedules.fulfilled]: (state,action) =>{
-      state.userScehdules = action.payload
+      state.userSchedules = action.payload
     }
 
   }

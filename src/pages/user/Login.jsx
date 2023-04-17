@@ -15,10 +15,7 @@ import {
   StOverall,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import {
-  useValidEmail,
-  useSignUp,
-} from '../../hooks/useSignUpHook';
+import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
 
 function Login() {
   const [user, setUser] = useSignUp({
@@ -44,11 +41,14 @@ function Login() {
       console.log(response.headers);
 
       const token = response.headers.authorization;
-      const payload = jwt_decode(token); 
+      const payload = jwt_decode(token);
       console.log(payload);
 
-      cookies.set('authorization', payload, { path: '/', maxAge: 3540 });
-      cookies.set('refresh_token', response.headers.refresh_token, { path: '/', maxAge: 3540 });
+      cookies.set('token', payload, { path: '/', maxAge: 3540 });
+      cookies.set('refresh_token', response.headers.refresh_token, {
+        path: '/',
+        maxAge: 3540,
+      });
       cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',
@@ -60,7 +60,6 @@ function Login() {
       });
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
 
-
       /////////////////////////////////////////////////////////////////////////////////////
 
       navi('/adminspace');
@@ -70,66 +69,55 @@ function Login() {
     }
   };
 
-
-  const onClickHandler = (e) => {
+  const onClickHandler = e => {
     e.preventDefault();
-    navi('/signup')
-  }
+    navi('/signup');
+  };
 
   return (
     <StBackground>
       <StOverall>
-        <div style={{
-        marginTop: '80px'
-      }}>
-
-        <StLoginForm 
-        onSubmit={onsubmitHandler}
-        width='420px'
+        <div
+          style={{
+            marginTop: '80px',
+          }}
         >
+          <StLoginForm onSubmit={onsubmitHandler} width="420px">
             <StForm>
               <StFormBox>
-            <StFont
-              align="start"
-              fontSize="28px"
-            >
-              로그인
-            </StFont>
-            <StSmallFont 
-            align="start" 
-            fontSize="1rem"
-            marginTop='10px'
-            >
-              이메일 주소와 비밀번호를 입력해주세요.
-            </StSmallFont>
-            </StFormBox>
-            
-            <Input
-              type="email"
-              value={user.email || ''}
-              onChange={e => {
-                validEmail(e);
-                setUser({ ...user, email: e.target.value });
-              }}
-              name="email"
-              placeholder="이메일"
-              required
-            />
+                <StFont align="start" fontSize="28px">
+                  로그인
+                </StFont>
+                <StSmallFont align="start" fontSize="1rem" marginTop="10px">
+                  이메일 주소와 비밀번호를 입력해주세요.
+                </StSmallFont>
+              </StFormBox>
 
-            <Input
-              type="password"
-              value={user.password || ''}
-              onChange={onChangeHandler}
-              name="password"
-              placeholder="비밀번호"
-              required
-            />
+              <Input
+                type="email"
+                value={user.email || ''}
+                onChange={e => {
+                  validEmail(e);
+                  setUser({ ...user, email: e.target.value });
+                }}
+                name="email"
+                placeholder="이메일"
+                required
+              />
 
-            <StLongButton> 로그인 </StLongButton>          
-            <StLongButton onClick={onClickHandler}> 회원가입 </StLongButton>
+              <Input
+                type="password"
+                value={user.password || ''}
+                onChange={onChangeHandler}
+                name="password"
+                placeholder="비밀번호"
+                required
+              />
 
-          </StForm>
-        </StLoginForm>      
+              <StLongButton> 로그인 </StLongButton>
+              <StLongButton onClick={onClickHandler}> 회원가입 </StLongButton>
+            </StForm>
+          </StLoginForm>
         </div>
       </StOverall>
     </StBackground>
