@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteMr, __editMr } from '../../redux/modules/spaceMrSlice';
-import { StBtnBox } from '../../pages/space/AdminSpace';
-import { StDropMr } from './SpaceStyles';
+import { BoxBtn, BoxSubBtn, StBtnBox, StDropMr } from './SpaceStyles';
 
 function MrItem({
   mr,
@@ -43,6 +42,7 @@ function MrItem({
   return (
     <>
       <StDropMr
+        key={mr.mrId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
         ref={el => (elRef.current[mr.mrId] = el)}
@@ -56,20 +56,20 @@ function MrItem({
               {mr.mrName}/{mr.mrId}
             </div>
             <StBtnBox>
-              <button
+              <BoxBtn
                 onClick={() => {
                   setMrEdit(!mrEdit);
                 }}
               >
                 수정
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   onClickDeleteMrHandler(mr.mrId);
                 }}
               >
                 삭제
-              </button>
+              </BoxSubBtn>
             </StBtnBox>
           </>
         ) : (
@@ -82,20 +82,20 @@ function MrItem({
               }}
             />
             <StBtnBox>
-              <button
+              <BoxBtn
                 onClick={() => {
                   onEditMrNameHandler();
                 }}
               >
                 완료
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   setMrEdit(!mrEdit);
                 }}
               >
                 취소
-              </button>
+              </BoxSubBtn>
             </StBtnBox>
           </>
         )}

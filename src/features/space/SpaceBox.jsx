@@ -5,6 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import { __editBox, __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 import {
+  MoveModal,
+  MoveModalBackground,
+  MoveModalErrorbtn,
+  MoveModalSubTitle,
+  MoveModalSubbtn,
+  MoveModalTitle,
+  MoveModalbtn,
   StBoard,
   StBox,
   StBtn,
@@ -33,19 +40,25 @@ function SpaceBox({ spaceId, selectedSpace }) {
   }, [selectedSpace]);
 
   //유저 이동 핸들러
-  const onClickMoveUserHandler = box => {
-    // alert(`${boxId}move`);
+  const [moveBox, setMoveBox] = useState(null);
 
-    console.log(box);
+  const onClickMoveUserHandler = box => {
+    setIsModal(!isModal);
+    setMoveBox(box);
+  };
+  const MoveUser = moveBox => {
     const payload = {
       spaceId,
-      toBoxId: box.boxId,
-      boxName: box.boxName,
-      x: box.x,
-      y: box.y,
+      toBoxId: moveBox.boxId,
+      boxName: moveBox.boxName,
+      x: moveBox.x,
+      y: moveBox.y,
     };
     dispatch(__editBoxUser(payload));
+    setIsModal(!isModal);
   };
+
+  const [isModal, setIsModal] = useState(false);
 
   return (
     <Stmainspace>
@@ -78,6 +91,54 @@ function SpaceBox({ spaceId, selectedSpace }) {
         </Row>
       </StSubHeader>
       <StBoard>
+        {moveBox !== null && !isModal ? (
+          <>
+            {moveBox.username === null ? (
+              <MoveModalBackground>
+                <MoveModal>
+                  <MoveModalSubTitle>자리선택</MoveModalSubTitle>
+                  <MoveModalTitle>
+                    {moveBox.boxName}
+                    <br />
+                    선택하시겠습니까?
+                  </MoveModalTitle>
+                  <MoveModalbtn
+                    onClick={() => {
+                      MoveUser(moveBox);
+                    }}
+                  >
+                    예
+                  </MoveModalbtn>
+                  <MoveModalSubbtn
+                    onClick={() => {
+                      setIsModal(!isModal);
+                    }}
+                  >
+                    아니요
+                  </MoveModalSubbtn>
+                </MoveModal>
+              </MoveModalBackground>
+            ) : (
+              <MoveModalBackground>
+                <MoveModal>
+                  <MoveModalSubTitle>자리선택</MoveModalSubTitle>
+                  <MoveModalTitle>
+                    {moveBox.boxName}
+                    <br />
+                    이미 <span style={{ color: '#FF5454' }}>사용중</span>입니다.
+                  </MoveModalTitle>
+                  <MoveModalErrorbtn
+                    onClick={() => {
+                      setIsModal(!isModal);
+                    }}
+                  >
+                    다른 자리 찾기
+                  </MoveModalErrorbtn>
+                </MoveModal>
+              </MoveModalBackground>
+            )}
+          </>
+        ) : null}
         {/* 박스 */}
         <div>
           {space?.map(item =>

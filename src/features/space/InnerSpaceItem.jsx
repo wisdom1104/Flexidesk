@@ -21,11 +21,11 @@ function InnerSpaceItem({ dispatch, space, onClickSpaceListHandler }) {
     dispatch(__editSpace(payload));
     setSpaceEdit(!spaceEdit);
   };
-
+  console.log('space', space);
   return (
     <>
       {!spaceEdit ? (
-        <Row>
+        <Row key={space.spaceId}>
           <ListItem onClick={() => onClickSpaceListHandler(space.spaceId)}>
             {space.spaceName}/{space.spaceId}---
           </ListItem>

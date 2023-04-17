@@ -30,7 +30,6 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
       <div>
         {!spaceEdit ? (
           <Row>
-            {' '}
             <ListItem
               key={space.spaceId}
               onClick={() => onClickSpaceListHandler(space.spaceId)}

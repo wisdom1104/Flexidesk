@@ -3,16 +3,22 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import { __getSchedules } from '../../redux/modules/schedules';
+import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
 
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
+  const dispatch = useDispatch();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickSchedules, setClickSchedules] = useState([]);
+
+  const [scheduleValue, setScheduleValue] = useState({
+    scTitle: '',
+    scComment: '',
+  });
 
   // const reqData = { start: clickReservation[0], userList: [] };
 
@@ -30,13 +36,19 @@ function SchedulesTime({ param, selectDay }) {
     // console.log('동작', reqData);
     // return reqData;
   };
+  const dataListResult = dataList();
 
-  const reqDatas = { startList: dataList(), useList: [] };
-  const dispatch = useDispatch();
+  const reqDatas = { startList: dataListResult, useList: [] };
+
+  //adddispatch로 보낼값
+  const startData = { startList: dataListResult };
+  const { scComment, scTitle } = scheduleValue;
+  const reqScheduleValue = { scComment, scTitle, startData };
+
+  console.log('스케줄내용', reqScheduleValue);
 
   const { schedules } = useSelector(state => state.schedules);
   console.log('스케줄', schedules);
-  const { timeList } = schedules;
 
   const onclickHandler = e => {
     if (clickSchedules.find(item => item === e.target.value)) {
@@ -68,7 +80,7 @@ function SchedulesTime({ param, selectDay }) {
     <>
       <div>스케줄 시간</div>
       <div>
-        {timeList?.map(item => (
+        {schedules?.map(item => (
           <button
             key={item.start}
             onClick={onclickHandler}
@@ -79,10 +91,38 @@ function SchedulesTime({ param, selectDay }) {
           </button>
         ))}
       </div>
-      <div>
-        제목 : <input />
-        내용 : <input />
-      </div>
+      <form
+        onSubmit={async e => {
+          e.preventDefault();
+          await dispatch(__addSchdule(reqScheduleValue));
+        }}
+      >
+        제목 :{' '}
+        <input
+          type="text"
+          value={scheduleValue.scTitle}
+          required
+          onChange={e =>
+            setScheduleValue({
+              ...scheduleValue,
+              scTitle: e.target.value,
+            })
+          }
+        />
+        내용 :{' '}
+        <input
+          type="text"
+          value={scheduleValue.scComment}
+          required
+          onChange={e =>
+            setScheduleValue({
+              ...scheduleValue,
+              scComment: e.target.value,
+            })
+          }
+        />
+        <button>등록하기</button>
+      </form>
     </>
   );
 }
