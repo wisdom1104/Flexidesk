@@ -51,16 +51,16 @@ function CreateSpace({
                     <img src="img/modalBtnIcon.png" />
                   </Modalbtn>
                 </ModalHeader>
-                {/* <FloorList
+                <FloorList
                   floors={floors}
                   onClickSpaceListHandler={onClickSpaceListHandler}
                 />
                 <SpaceList
                   spaces={spaces}
                   onClickSpaceListHandler={onClickSpaceListHandler}
-                /> */}
+                />
                 {/* <Test1 /> */}
-                <Test4 floors={floors} spaces={spaces} />
+                {/* <Test4 floors={floors} spaces={spaces} /> */}
                 {/* <Test2 /> */}
                 {/* <Test3 /> */}
               </ModalList>
