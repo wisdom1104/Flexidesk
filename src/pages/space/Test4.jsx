@@ -41,7 +41,7 @@ function Test4({ floors, spaces }) {
   return (
     <>
       <StList>
-        {floors?.map(floor => {
+        {/* {floors?.map(floor => {
           if (floor)
             return (
               <>
@@ -73,7 +73,7 @@ function Test4({ floors, spaces }) {
               </StSpace>
             );
           if (space && space.floorId !== null) return null;
-        })}
+        })} */}
       </StList>
     </>
   );
