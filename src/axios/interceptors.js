@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cookies } from "../shared/cookies";
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL
@@ -6,7 +7,7 @@ const api = axios.create({
 
 //요청시 AccessToken 계속 보내주기
 api.interceptors.request.use(function (config) {
-    const token = localStorage.getItem("token");
+    const token = cookies.get("token")
 
     if (!token) {
         config.headers["Access_Token"]= null;

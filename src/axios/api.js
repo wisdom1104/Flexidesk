@@ -2,14 +2,13 @@ import axios from 'axios';
 import { cookies } from '../shared/cookies';
 
 const api = axios.create({
-    // baseURL: 'http:/http://localhost:3000/users',
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    // headers:{
-    //   "Access-Control-Allow-Origin": "*",
-    // },
-    // timeout: 1,
-})
-
+  // baseURL: 'http:/http://localhost:3000/users',
+  baseURL: process.env.REACT_APP_SERVER_URL,
+  // headers:{
+  //   "Access-Control-Allow-Origin": "*",
+  // },
+  // timeout: 1,
+});
 
 // api.interceptors.request.use(
 //   // 요청을 보내기 전 수행되는 함수
@@ -38,36 +37,48 @@ const api = axios.create({
 //   }
 // )
 
-
+// 응답 인터셉터 설정
 api.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    async (error) => {
-      const originalRequest = error.config;
-  
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-  
-        const refreshToken = localStorage.getItem('refresh_token');
-        if (refreshToken) {
-          try {
-            const { data } = await axios.post(
-              'http://3.34.179.86/users/token',
-              { token: refreshToken }
-            );
-            cookies.set('access_token', data.access_token, { path: '/' });
-            originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`;
-            return api(originalRequest);
-          } catch (err) {
-            console.error(err);
-          }
-        }
-      }
-  
-      return Promise.reject(error);
-    }
-  );
+  response => {
+    return response;
+  },
+  async error => {
+    const originalConfig = error.config;
+    console.log(originalConfig);
 
+    if (error.response && error.response.status === 400) {
+      const refreshToken = originalConfig.headers['Refresh_Token'];
+      try {
+        const data = await axios({
+          url: '/users/refresh',
+          method: 'GET',
+          headers: {
+            authorization: refreshToken,
+          },
+        });
+        if (data) {
+          localStorage.setItem(
+            'token',
+            JSON.stringify(data.data, ['Access_Token', 'Refresh_Token']),
+          );
+          return await api.request(originalConfig);
+        }
+      } catch (e) {
+        console.log('토큰 갱신 에러');
+      }
+    }
+  },
+);
+
+// // 요청 인터셉터 설정
+api.interceptors.request.use(config => {
+    const token = cookies.get("token")
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+  
 
 export default api;

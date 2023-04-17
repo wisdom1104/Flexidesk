@@ -18,8 +18,8 @@ export const StOverall = styled.div`
 `;
 
 export const StLoginForm = styled.form`
-  width: ${props => props.width || '460px'};
-  height: ${props => props.height || '380px'};
+  width: 420px;
+  height: ${props => props.height || '450px'};
   background: #ffffff;
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
   border-radius: 8px;
