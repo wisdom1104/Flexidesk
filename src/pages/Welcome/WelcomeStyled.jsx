@@ -42,6 +42,8 @@ export const StFont = styled.p`
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
+
+  border: 1px solid red;
 `;
 
 export const StSmallFont = styled.p`
@@ -57,6 +59,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+  border: 1px solid red;
 
 `;
 
@@ -186,6 +189,7 @@ export const StSliderContain = styled.div`
 export const StSlider = styled.div`
   width: 1100px;
   height: 518px;
+  
   background: #d9d9d9;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
@@ -193,8 +197,11 @@ export const StSlider = styled.div`
   background-size: cover;
   border-radius: 10px;
 
-  text-align: center;
-  line-height: 200px;
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  align-items: center;
+
 `;
 
 export const StSliderButton = styled.button`

@@ -17,17 +17,16 @@ import {
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import {
   useValidEmail,
-  useValidPassword,
-  usePasswordCheck,
   useSignUp,
 } from '../../hooks/useSignUpHook';
 
 function Login() {
-  const [user, setUser] = useSignUp('');
+  const [user, setUser] = useSignUp({
+    email: '',
+    password: '',
+  });
 
   const [emailMsg, validEmail] = useValidEmail();
-  const [passwordMsg, validPassword] = useValidPassword();
-  const [passwordCheckMsg, validPasswordCheck] = usePasswordCheck();
 
   const onChangeHandler = e => {
     const { value, name } = e.target;
@@ -42,11 +41,20 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
+      console.log(response);
       const token = response.headers.authorization;
       const newtoken = token.split(' ')[1];
-      const payload = jwt_decode(newtoken);
+      const payload = jwt_decode(newtoken); 
+      
+      const refresh = api.post('/users/refresh', user);
+      const refreshToken = refresh.headers.refresh_token;
+      const refreshNewToken = refreshToken.split(' ')[1];
+      console.log('리프레쉬 토큰 -->',refreshNewToken);
 
       cookies.set('token', newtoken, { path: '/', maxAge: 3540 });
+
+      cookies.set('refresh_token', refreshNewToken, { path: '/', maxAge: 3540 });
+
       cookies.set('userId', payload.id, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',
@@ -57,6 +65,9 @@ function Login() {
         maxAge: 3540,
       });
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
+      cookies.set('Access', payload.Access, { path: '/', maxAge: 3540 });
+
+      /////////////////////////////////////////////////////////////////////////////////////
 
       navi('/adminspace');
     } catch (e) {
@@ -64,6 +75,7 @@ function Login() {
       alert(`${errorMsg}`);
     }
   };
+
 
   const onClickHandler = (e) => {
     e.preventDefault();

@@ -1,6 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StBackground, StForm, StFormBox, StLoginForm, StLongButton, StOverall, StTextInput } from './UserStyled';
+import {
+  StBackground,
+  StForm,
+  StFormBox,
+  StLoginForm,
+  StLongButton,
+  StOverall,
+  StTextInput,
+} from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
 import useTrueHook from '../../hooks/useTrueHook';
@@ -8,21 +16,35 @@ import CertificationCkeck from './CertificationCkeck';
 import api from '../../axios/api';
 
 function SignUpUser() {
-    const [user,setUser] = useState("");
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setpasswordCheck] = useState('');
   const [username, setUsername] = useState('');
   const [certification, setCertification] = useState('');
+  const [email, setEmail] = useState('');
 
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const navi = useNavigate();
 
-    // 가드
-    useTrueHook();
+  // 가드
+  useTrueHook();
 
-    
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleEmailChange = event => {
+    const value = event.target.value;
+    setEmail(value);
+
+    if (!emailRegex.test(value)) {
+      setEmailError('올바른 이메일 형식이 아닙니다.');
+    } else {
+      setEmailError('');
+    }
+  };
+
   const handlePasswordChange = event => {
     const value = event.target.value;
     setPassword(value);
@@ -34,7 +56,6 @@ function SignUpUser() {
     }
   };
 
-  
   const handlepasswordCheckChange = event => {
     const value = event.target.value;
     setpasswordCheck(value);
@@ -46,34 +67,33 @@ function SignUpUser() {
     }
   };
 
-    const submitBtnHandler = async e => {
-        e.preventDefault();
-        try {
-          const response = await api.post('/users/signup/user', user);
-          alert(`${user.userName}님 회원가입을 축하합니다.`);
-          navi('/login');
-          return response;
-        } catch (error) {
-          const errorMsg = error.response.data.message;
-          alert(`${errorMsg}`);
-          return error;
-        }
-      };
+  const submitBtnHandler = async e => {
+    e.preventDefault();
+    try {
+      const response = await api.post('/users/signup/user', user);
+      alert(`${user.userName}님 회원가입을 축하합니다.`);
+      navi('/login');
+      return response;
+    } catch (error) {
+      const errorMsg = error.response.data.message;
+      alert(`${errorMsg}`);
+      return error;
+    }
+  };
 
   return (
-    <StBackground height='900px'>
+    <StBackground height="900px">
       <StOverall>
         <div
           style={{
             marginTop: '80px',
           }}
         >
-          <StLoginForm onSubmit={submitBtnHandler}
-          height='695px'>
+          <StLoginForm onSubmit={submitBtnHandler} height="695px">
             <StForm>
               <StFormBox>
                 <StFont align="start" fontSize="28px">
-                   회원가입
+                  회원가입
                 </StFont>
 
                 <StTextInput>
@@ -94,16 +114,26 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
-
-                <StTextInput
-                  height='118px'
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
                   >
-                    <CertificationCkeck
-                    certification={certification}
-                    setCertification={setCertification}
-                    user={user}
-                    />
-                  </StTextInput>
+                    회사 이메일
+                  </StSmallFont>
+
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    name="email"
+                    placeholder="이메일을 입력하세요."
+                    required
+                  />
+                </StTextInput>
 
                 <StTextInput>
                   <StSmallFont
@@ -168,7 +198,7 @@ function SignUpUser() {
                     {passwordCheckError}
                   </StSmallFont>
                 )}
-                
+
                 <StTextInput>
                   <StSmallFont
                     width
@@ -188,14 +218,14 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
-                <StLongButton type="submit">Submit</StLongButton>
+                <StLongButton type="submit">확인</StLongButton>
               </StFormBox>
             </StForm>
           </StLoginForm>
         </div>
       </StOverall>
     </StBackground>
-  )
+  );
 }
 
-export default SignUpUser
+export default SignUpUser;

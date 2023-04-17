@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { SliderContainer, StSlider, StSliderButton, StSliders } from "../pages/Welcome/WelcomeStyled";
+import { SliderContainer, StFont, StSlider, StSliderButton, StSliders, StSmallFont } from "../pages/Welcome/WelcomeStyled";
 
 const Button = ({ children, dir, onClick }) => {
   return (
@@ -13,9 +13,9 @@ const Button = ({ children, dir, onClick }) => {
 const Carousel = () => {
   
    const [components, setComponents] = useState([
-    { id: 1, component: "회의실 예약" },
-    { id: 2, component: "스페이스" },
-    { id: 3, component: "스케줄 관리" },
+    { id: 1, title: "회의실 예약", component:"누구나 눈치 보지 않고 예약이 가능해요."},
+    { id: 2, title: "스페이스", component:"공간에 있다는 걸 모두가 알 수 있도록 설정이 가능해요." },
+    { id: 3, title: "스케줄 관리", component:"효율적인 스케줄 관리가 가능해요."},
   ]);  
 
 
@@ -24,27 +24,6 @@ const Carousel = () => {
     on: false,
     value: "310px"
   });
-
-  // const genSlidersArray = (item) => {
-  //   if (item === 2) {
-  //     return [1, item, 3].map((pre) =>
-  //       components[pre] ? components[pre] : { id: -1, component: "1" }
-  //     );
-  //   }
-  //   if (item === 3) {
-  //     return [3, item, 0].map((pre) =>
-  //       components[pre] ? components[pre] : { id: -1, component: "회의실 예약2" }
-  //     );
-  //   }
-  //   if (item === -3) {
-  //     return [0, item, -3].map((pre) =>
-  //       components[pre] ? components[pre] : { id: -1, component: "3" }
-  //     );
-  //   }
-  //   return [item - 1, item, item + 1].map((pre) =>
-  //     components[pre] ? components[pre] : { id: -1, component: "스페이스2" }
-  //   );
-  // };
 
   const genSlidersArray = (item) => {
     if (item === 3) {
@@ -99,7 +78,8 @@ const Carousel = () => {
           <StSliders animate={animate}>
           {genSlidersArray(index).map((item, index) => (
           <StSlider key={index}>
-            {item?.component}
+            <StFont marginBottom='50px'>{item?.title}</StFont>
+            <StSmallFont>{item?.component}</StSmallFont>
           </StSlider>
           ))}
         </StSliders>
