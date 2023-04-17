@@ -10,11 +10,12 @@ function InnerSpaceList({ floor, onClickSpaceListHandler }) {
 
   // 그냥 space 추가
   const onClickAddSpaceHandler = async () => {
-    const payload = {
+    const newSpace = {
       floorId: floor.floorId,
       spaceName: 'New Space',
     };
-    dispatch(__addInnerSpace(payload));
+    // console.log('newSpace', newSpace);
+    dispatch(__addInnerSpace(newSpace));
   };
 
   return (

@@ -18,33 +18,27 @@ export const StSpace = styled.div`
 
 // space 리스트
 export const StSpaceList = styled.div`
-  min-width: 150px;
-  height: 500px;
-  padding: 20px 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: flex-start;
+  padding: 0px 10px;
+  margin: 16px;
+  /* position: absolute; */
+  min-width: 213px;
+  /* height: 312px; */
+  height: 530px;
+
   overflow: scroll;
   overflow-x: hidden;
-  /* overflow: auto; */
-  border-radius: 10px;
-  background: #65bab6;
-  color: #ffffff;
-  /* ::-webkit-scrollbar 스크롤바 전체
-::-webkit-scrollbar-thumb : 스크롤 막대
-::-webkit-scrollbar-track : 스크롤 막대 외부 */
+  gap: 10px;
   /* 스크롤바 스타일 변경 */
   ::-webkit-scrollbar {
     width: 5px; /* 스크롤바 너비 */
-    background-color: gray;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
   }
 
   /* 스크롤바 썸네일 스타일 변경 */
   ::-webkit-scrollbar-thumb {
-    background-color: steelblue;
-    /* background-color: transparent; */
+    background-color: #b6dfdd;
     border-radius: 50px; /* 스크롤바 모양 */
   }
 `;
@@ -56,20 +50,36 @@ export const StListTitle = styled.div`
   font-size: 28px;
   line-height: 34px;
   letter-spacing: -0.03em;
-  /* color: #000000; */
-  color: #ffffff;
+  color: #000000;
+  margin: 16px;
+
+  /* color: #ffffff; */
 `;
 
 export const SpaceInnerList = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 15px;
-  gap: 20px;
+  gap: 10px;
   margin-top: 20px;
 `;
 
 export const ListItem = styled.div`
   cursor: pointer;
+  padding: 5px 10px;
+`;
+
+export const ListFloor = styled.div`
+  cursor: default;
+  padding: 5px 10px;
+`;
+
+export const ClisckedListItem = styled.div`
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #def1ef;
+  border: 1px solid #b6dfdd;
+  border-radius: 8px;
 `;
 
 export const EditInput = styled.input`
@@ -88,6 +98,7 @@ export const Stmainspace = styled.div`
   /* background: #f4fbf9; */
   background: steelblue;
   border-radius: 8px;
+  margin-top: 16px;
 `;
 
 // 서브 헤더 부분
@@ -231,12 +242,12 @@ export const StUseBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #ff5353;
+  color: #2ed775;
 
   //박스
   position: absolute;
-  background: #ffdddd;
-  border: 1px solid #ff5353;
+  background: #caf5dc;
+  border: 1px solid #2ed775;
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -250,6 +261,11 @@ export const StUseBox = styled.div`
   &:hover {
     background: #8b93a6;
     color: #f1f2f4;
+  }
+  &:focus {
+    background: #2ed775;
+    border: 1px solid #2ed775;
+    color: #ffffff;
   }
 `;
 
@@ -352,8 +368,8 @@ export const StDropMr = styled.div`
   color: #8b93a6;
   //박스
   position: absolute;
-  /* background: #f1f2f4; */
-  background: #fab8de;
+  background: #f1f2f4;
+  /* background: #fab8de; */
   border: 1px solid #8b93a6;
   border-radius: 4px;
   width: 90px;
@@ -383,8 +399,8 @@ export const StDropBox = styled.div`
   color: #8b93a6;
   //박스
   position: absolute;
-  /* background: #f1f2f4; */
-  background: #ead089;
+  background: #f1f2f4;
+  /* background: #ead089; */
   border: 1px solid #8b93a6;
   border-radius: 4px;
   width: 90px;
@@ -402,12 +418,88 @@ export const StDropBox = styled.div`
   }
 `;
 
-// admin space 모달창
+//버튼들
+export const StBtnBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 5px;
+`;
+//수정 & 완료 버튼
+export const BoxBtn = styled.button`
+  //버튼
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 7px;
+  height: 23px;
+  background: #5c6373;
+  border: 0.5px solid #5c6373;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #ffffff;
+  &:hover {
+    background: #ffffff;
+    color: #5c6373;
+    border: 0.5px solid #5c6373;
+  }
+`;
+//삭제 & 취소 버튼
+export const BoxSubBtn = styled.button`
+  //버튼
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 7px;
+  height: 23px;
+  background: #f1f2f4;
+  border: 0.5px solid #5c6373;
+  border-radius: 4px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #5c6373;
+  &:hover {
+    background: #5c6373;
+    color: #f1f2f4;
+    border: 0.5px solid #5c6373;
+  }
+`;
+
+//잔상
+export const StDrag = styled.div`
+  background: #8b93a6;
+  border-radius: 4px;
+  opacity: 0.2;
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+  cursor: grab;
+  position: absolute;
+  cursor: pointer;
+`;
+
+// admin space 모달창 ---------------
 export const ModalBackground = styled.div`
   position: fixed;
   display: flex;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   background: rgba(0, 0, 0, 0.7);
   width: 100vw;
   height: 100vh;
@@ -426,7 +518,8 @@ export const Modal = styled.div`
   border-radius: 8px;
   padding: 2px;
   width: 322px;
-  height: 445px;
+  /* height: 445px; */
+  height: 620px;
   margin: 20px;
 `;
 
@@ -440,6 +533,18 @@ export const ModalList = styled.div`
   gap: 20px;
   box-sizing: border-box;
   overflow: scroll;
+  overflow-x: hidden;
+
+  /* 스크롤바 스타일 변경 */
+  ::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+  }
+
+  /* 스크롤바 썸네일 스타일 변경 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #b6dfdd;
+    border-radius: 50px; /* 스크롤바 모양 */
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -463,6 +568,7 @@ export const Modalbtn = styled.button`
   height: 24px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
 
 export const InnerList = styled.div`
@@ -472,6 +578,149 @@ export const InnerList = styled.div`
   gap: 20px;
 `;
 
-// export const ModalHeader = styled.div`
+//유저 이동 모달 --------------------------------------------
+export const MoveModalBackground = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
+  /* opacity: 0.3; */
+  top: 0px;
+  z-index: 50;
+  box-sizing: border-box;
+  height: 593px;
+  min-width: 990px;
+  max-width: 990px;
 
-// `;
+  /* min-width: 989.93px; */
+  /* height: 30.8854vh; */
+  /* background: #fcfcfc; */
+  /* box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25); */
+  border-radius: 8px;
+  margin: auto;
+`;
+
+export const MoveModal = styled.div`
+  position: absolute;
+  /* top: 134px; */
+  /* left: 802px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #def1ef;
+  box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25);
+  border-radius: 8px;
+  padding: 2px;
+  width: 188px;
+  height: 174px;
+`;
+export const MoveModalSubTitle = styled.div`
+  position: absolute;
+  width: 52px;
+  height: 17px;
+  left: 16px;
+  top: 16px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8b93a6;
+`;
+
+export const MoveModalTitle = styled.div`
+  position: absolute;
+  width: 142px;
+  height: 54px;
+  left: 23px;
+  top: 41px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  color: #07133b;
+`;
+
+export const MoveModalbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 61px;
+  height: 41px;
+  left: 16px;
+  top: 117px;
+  background: #65bab6;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #ffffff;
+`;
+
+export const MoveModalSubbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 87px;
+  height: 41px;
+  left: 85px;
+  top: 117px;
+  background: #def1ef;
+  border: 1px solid #65bab6;
+  border-radius: 8px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #65bab6;
+`;
+
+export const MoveModalErrorbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 157px;
+  height: 41px;
+  left: 16px;
+  top: 117px;
+  background: #65bab6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #ffffff;
+`;

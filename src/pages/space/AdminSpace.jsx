@@ -34,43 +34,46 @@ function AdminSpace() {
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
   const navi = useNavigate();
+  const [selectedSpace, setSelectedSpace] = useState(null);
 
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
-  console.log('spaces', spaces);
+  // console.log('spaces', spaces);
 
+  //가드 &&로 합치기 tay catch
   // token 유무에 따른 가드
-  const token = cookies.get('token');
   useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getSpaces());
-  }, []);
+    const token = cookies.get('token');
+    const role = cookies.get('role');
 
-  // 관리자 가드
-  const role = cookies.get('role');
-
-  useEffect(() => {
-    if (role === 'ADMIN') {
+    if (token === undefined) {
+      navi('/');
+    } else if (role === 'ADMIN') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
     } else {
       navi('/space');
     }
-  }, [dispatch]);
-  // console.log(floors);
-
+    // cleanup 함수
+    return () => {
+      setSelectedSpace(null);
+      // window.location.reload();
+    };
+  }, []);
+  // console.log(spaces);
   // space 선택
-  const [selectedSpace, setSelectedSpace] = useState(null);
   useEffect(() => {
     // 초기 space 설정
     setSelectedSpace(spaces[0]);
   }, [spaces]);
   //space 선택 핸들러
-  const onClickSpaceListHandler = spaceId => {
-    const space = spaces.find(space => space.spaceId === spaceId);
+  const onClickSpaceListHandler = id => {
+    const space = spaces.find(space => space.spaceId === id);
     setSelectedSpace(space);
     setIsModal(!isModal);
-    console.log(selectedSpace);
+    // console.log('space', space);
   };
+  // console.log('selectedSpace', selectedSpace);
 
   const [isModal, setIsModal] = useState(false);
 
@@ -125,8 +128,10 @@ function AdminSpace() {
                 handleDragStart={handleDragStart}
                 isModal={isModal}
                 setIsModal={setIsModal}
-                floors={floors}
+                spaces={spaces}
+                id={selectedSpace.spaceId}
               />
+              // <div>1</div>
             )}
           </>
         ) : (
@@ -158,10 +163,3 @@ function AdminSpace() {
 }
 
 export default AdminSpace;
-
-export const StBtnBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  gap: 5px;
-`;
