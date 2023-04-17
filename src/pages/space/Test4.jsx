@@ -4,44 +4,10 @@ import styled from 'styled-components';
 import { __editSpace } from '../../redux/modules/spaceSlice';
 
 function Test4({ floors, spaces }) {
-  console.log('spaces', spaces);
-  const dispatch = useDispatch();
-
-  const dragItem = useRef(); // 드래그 시작위치
-  const dragOverItem = useRef(); //드래그 중인 요소가 들어가려는 위치
-
-  const dragStart = (e, position) => {
-    dragItem.current = position;
-    console.log(e.target.innerHTML);
-    console.log('dragItem.current', dragItem.current);
-    e.target.classList.add('grabbing');
-  };
-
-  const onAvailableItemDragEnter = (e, index) => {
-    dragOverItem.current = index;
-    const copyListItems = [...spaces];
-    const dragItemContent = copyListItems[dragItem.current];
-    dragItemContent.floorId = 1; // 변경할 floorId 값인 1로 설정
-    copyListItems.splice(dragItem.current, 1);
-    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-    dragItem.current = dragOverItem.current;
-    dragOverItem.current = null;
-    console.log('set', dragItemContent);
-    const payload = {};
-    // dispatch(__editSpace(copyListItems));
-  };
-
-  const onDragEnd = e => {
-    e.target.classList.remove('grabbing');
-  };
-  const onDragOver = e => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <StList>
-        {floors?.map(floor => {
+        {/* {floors?.map(floor => {
           if (floor)
             return (
               <>
@@ -57,8 +23,8 @@ function Test4({ floors, spaces }) {
                   : null}
               </>
             );
-        })}
-        {spaces?.map((space, index) => {
+        })} */}
+        {/* {spaces?.map((space, index) => {
           if (space && space.floorId === null)
             return (
               <StSpace
@@ -73,7 +39,8 @@ function Test4({ floors, spaces }) {
               </StSpace>
             );
           if (space && space.floorId !== null) return null;
-        })}
+        })} */}
+        <div>1</div>
       </StList>
     </>
   );
