@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 //요청시 AccessToken 계속 보내주기
-api.interceptors.request(function (config) {
+api.interceptors.request.use(function (config) {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -22,33 +22,32 @@ api.interceptors.request(function (config) {
 });
 
 // AccessToken이 만료되었을 때
-api.interceptors.response(
-    function (response) {
+api.interceptors.response.use(
+     (response) => {
         return response;
     },
-    async function (err) {
-        const originalConfig = err.config;
-
-        if(err.response && err.response.status === 401) {
+    async (error) => {
+        const originalConfig = error.config;
+  
+        if (error.response && error.response.status === 401) {
             const refreshToken = originalConfig.headers["Refresh_Token"];
             try {
-                const data = await axios ({
-                    url:'/users/refresh',
-                    method:'GET',
+                const data = await axios({
+                    url: '/users/refresh',
+                    method: 'POST',
                     headers: {
                         authorization: refreshToken
-                    },
-                    if(data) {
-                        localStorage.setItem("token",
-                        JSON.stringify(data.data, ["Access_Token","Refresh_Token"])
-                        )
-                        return await api.request(originalConfig)
                     }
-                } catch (e) {
-                    console.log("토큰 갱신 에러");
+                });
+                if (data) {
+                    localStorage.setItem("token",
+                        JSON.stringify(data.data, ["Access_Token", "Refresh_Token"])
+                    );
+                    return await api.request(originalConfig);
                 }
-                )
+            } catch (e) {
+                console.log("토큰 갱신 에러");
             }
         }
     }
-)
+  );

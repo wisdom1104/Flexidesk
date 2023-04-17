@@ -22,14 +22,11 @@ const Carousel = () => {
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState({
     on: false,
-    value: "310px"
+    value: "610px"
   });
 
   const genSlidersArray = (item) => {
-    if (item === 3) {
-      console.log('1');
-      return [1, item , 0].map(pre => components.at(pre));
-    }
+
     if (item === 4) {     
       console.log('2');
       return [2, item, 1].map(pre => components.at(pre));
