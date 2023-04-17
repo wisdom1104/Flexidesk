@@ -9,21 +9,37 @@ import {
   StSmallButton,
 } from './UserStyled';
 
-function Certification({ email, onChange, admin, setAdmin }) {
-  // form태그 핸들러
-  // 로딩 띄우기 -> 로딩 이쁜걸로 ~~~
+function Certification({ admin }) {
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+
+    if (!emailRegex.test(value)) {
+      setEmailError("올바른 이메일 형식이 아닙니다.");
+    } else {
+      setEmailError("");
+    }
+  }
+
+
   const submitBtnHandler = async e => {
     e.preventDefault();
+
     try {
       const response = await api.post('/users/signup/email', admin);
-      console.log('인증번호--->>>>>>', response.data.split(':')[1]);
       const data = response.data;
       alert(`${data}`);
       return data;
     } catch (error) {
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
-      setAdmin('');
       return error;
     }
   };
@@ -46,17 +62,25 @@ function Certification({ email, onChange, admin, setAdmin }) {
         <InlineInput
           type="email"
           value={email}
-          onChange={onChange}
+          onChange={handleEmailChange}
           name="email"
           placeholder="이메일을 입력하세요."
           required
         />
+
+
         <InlinButton
           type="button"
           onClick={submitBtnHandler}
           value="인증받기"
         />
-      </Container>
+      </Container>        
+      {emailError && <StSmallFont width
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="700"
+                      marginTop='10px'
+                     color='red'>{emailError}</StSmallFont>}
     </>
   );
 }

@@ -15,8 +15,6 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-
-  border: 1px solid red;
 `;
 
 export const StLoginForm = styled.form`
@@ -80,7 +78,7 @@ export const StTextInput = styled.div`
   width: 27.5vw;
   height: ${props => props.height || '108px'};
 
-  margin-top: 10px;
+
 `;
 
 /////////////////////////////
@@ -89,7 +87,6 @@ export const Container = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
-  border: 2px solid red;
 `;
 
 export const InlineInput = styled.input`

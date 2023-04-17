@@ -1,117 +1,219 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import api from '../../axios/api';
+import { useNavigate } from 'react-router-dom';
+import {
+  StBackground,
+  StForm,
+  StFormBox,
+  StLoginForm,
+  StLongButton,
+  StOverall,
+  StTextInput,
+} from './UserStyled';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
+import { Input } from '../../components/Input';
+import Certification from './Certification';
 
 function Login2() {
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setpasswordCheck] = useState("");
-  const [username, setUsername] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [certification, setCertification] = useState("");
+  const [admin, setAdmin] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setpasswordCheck] = useState('');
+  const [username, setUsername] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [certification, setCertification] = useState('');
 
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordCheckError, setPasswordCheckError] = useState("");
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordCheckError, setPasswordCheckError] = useState('');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const navi = useNavigate();
 
-  function handleEmailChange(event) {
-    const value = event.target.value;
-    setEmail(value);
-
-    if (!emailRegex.test(value)) {
-      setEmailError("올바른 이메일 형식이 아닙니다.");
-    } else {
-      setEmailError("");
-    }
-  }
-
-  function handlePasswordChange(event) {
+  const handlePasswordChange = event => {
     const value = event.target.value;
     setPassword(value);
 
     if (value.length < 8) {
-      setPasswordError("비밀번호는 최소 8자 이상이어야 합니다.");
+      setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
     } else {
-      setPasswordError("");
+      setPasswordError('');
     }
-  }
+  };
 
-  function handlepasswordCheckChange(event) {
+  const handlepasswordCheckChange = event => {
     const value = event.target.value;
     setpasswordCheck(value);
 
     if (value !== password) {
-      setPasswordCheckError("비밀번호와 일치하지 않습니다.");
+      setPasswordCheckError('비밀번호와 일치하지 않습니다.');
     } else {
-      setPasswordCheckError("");
+      setPasswordCheckError('');
     }
-  }
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    if (!emailRegex.test(email)) {
-      setEmailError("올바른 이메일 형식이 아닙니다.");
-      return;
+    try {
+      const response = await api.post('/users/signup/admin', admin);
+      alert(`${admin.userName}님 회원가입을 축하합니다.`);
+      navi('/login');
+      return response;
+    } catch (error) {
+      console.log(error);
+      const errorMsg = error.response.data.message;
+      alert(`${errorMsg}`);
+      return error;
     }
-
-    if (password.length < 8) {
-      setPasswordError("비밀번호는 최소 8자 이상이어야 합니다.");
-      return;
-    }
-
-    if (passwordCheck !== password) {
-      setPasswordCheckError("비밀번호와 일치하지 않습니다.");
-      return;
-    }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">이름</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        {emailError && <div style={{ color: "red" }}>{emailError}</div>}
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        {passwordError && <div style={{ color: "red" }}>{passwordError}</div>}
-      </div>
-      <div>
-        <label htmlFor="passwordCheck">Confirm Password:</label>
-        <input
-          type="password"
-          id="passwordCheck"
-          value={passwordCheck}
-          onChange={handlepasswordCheckChange}
-        />
-        {passwordCheckError && (
-          <div style={{ color: "red" }}>{passwordCheckError}</div>
-        )}
-      </div>
-      <button type="submit">Submit</button>
-      </form>
+    <StBackground height='1000px'>
+      <StOverall>
+        <div
+          style={{
+            marginTop: '80px',
+          }}
+        >
+          <StLoginForm onSubmit={handleSubmit}
+          height='815px'>
+            <StForm>
+              <StFormBox>
+                <StFont align="start" fontSize="28px">
+                  관리자 회원가입
+                </StFont>
+
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
+                  >
+                    사용자 이름
+                  </StSmallFont>
+                  <Input
+                    type="text"
+                    value={username}
+                    onChange={event => setUsername(event.target.value)}
+                    placeholder="이름을 입력하세요."
+                    required
+                  />
+                </StTextInput>
+
+                <StTextInput height="118px">
+                  <Certification admin={admin} />
+                </StTextInput>
+
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
+                  >
+                    비밀번호
+                  </StSmallFont>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                    required
+                    minlength="8"
+                    maxlength="16"
+                  />
+                </StTextInput>
+                {passwordError && (
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    color="red"
+                  >
+                    {passwordError}
+                  </StSmallFont>
+                )}
+
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
+                  >
+                    비밀번호 확인
+                  </StSmallFont>
+                  <Input
+                    type="password"
+                    value={passwordCheck}
+                    onChange={handlepasswordCheckChange}
+                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                    required
+                    minlength="8"
+                    maxlength="16"
+                  />
+                </StTextInput>
+                {passwordCheckError && (
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    color="red"
+                  >
+                    {passwordCheckError}
+                  </StSmallFont>
+                )}
+
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
+                  >
+                    회사
+                  </StSmallFont>
+                  <Input
+                    type="text"
+                    id="companyName"
+                    value={companyName}
+                    onChange={event => setCompanyName(event.target.value)}
+                    placeholder="회사를 입력하세요."
+                    required
+                  />
+                </StTextInput>
+
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                    marginBottom="10px"
+                  >
+                    인증번호
+                  </StSmallFont>
+                  <Input
+                    type="text"
+                    id="certification"
+                    value={certification}
+                    onChange={event => setCertification(event.target.value)}
+                    placeholder="인증번호를 입력하세요."
+                    required
+                  />
+                </StTextInput>
+                <StLongButton type="submit">Submit</StLongButton>
+              </StFormBox>
+            </StForm>
+          </StLoginForm>
+        </div>
+      </StOverall>
+    </StBackground>
   );
 }
 export default Login2;

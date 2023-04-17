@@ -57,6 +57,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+
 `;
 
 // 버튼
