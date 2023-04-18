@@ -11,7 +11,6 @@ export const StOverall = styled.div`
   max-width: 1440px;
   min-width: 410px;
   min-height: 680px;
-  /* height: ${props => props.height || '40vw'}; */
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -89,16 +88,13 @@ export const StLoginIconDiv = styled.div`
   display:flex;
   align-items:center;
   padding-right:10px;
+
 `
-
 export const StLoginIcon = styled.img`
-  position: absolute;
+  width: 20px;
   display: inline-block;
-  width:20px;
-  /* left: 37%; */
-  left: 40vw;
+  margin-left: 20px;
   z-index: 1;
-
 `
 
 // signup
@@ -154,4 +150,7 @@ export const InlinButton = styled.input`
   font-size: 12px;
   line-height: 15px;
   color: #a6aebb;
+
+    border: 1px solid red;
+
 `;

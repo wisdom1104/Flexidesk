@@ -25,11 +25,16 @@ function Header() {
     navi('/login');
   };
 
+  const onClcikHandelr = () => {
+    navi('/')
+  };
+
+
   return (
     <StHeader>
       {cookies.get('token') ? (
         <HeaderContain>
-          <StHeaderContentBox>로고다</StHeaderContentBox>
+          <StHeaderContentBox onClick={onClcikHandelr}>로고다</StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
               스페이스
@@ -57,7 +62,7 @@ function Header() {
         </HeaderContain>
       ) : (
         <HeaderContain>
-          <StHeaderContentBox>로고여</StHeaderContentBox>
+          <StHeaderContentBox onClick={onClcikHandelr}>로고여</StHeaderContentBox>
           <StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/`)}>
               서비스 소개
