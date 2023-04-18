@@ -27,6 +27,8 @@ const Carousel = () => {
 
   const genSlidersArray = (item) => {
 
+    const idx = (item + components.length) % components.length;
+
     if (item === 4) {     
       console.log('2');
       return [2, item, 1].map(pre => components.at(pre));
@@ -36,7 +38,11 @@ const Carousel = () => {
       return [-1, item, -2].map(pre => components.at(pre));
     }
     console.log('4');
-    return [ item -1, item, item +1 ].map(pre => components.at(pre))
+    return [
+    components[(idx - 1 + components.length) % components.length],
+    components[idx],
+    components[(idx + 1) % components.length]
+  ];
   };
 
 
@@ -45,7 +51,7 @@ const Carousel = () => {
     setTimeout(() => {
       setAnimate(() => ({ on: false, value: "610px" }));
       setIndex((pre) => {
-        if (pre === -3) return (pre = 0);
+        if (pre === -2) return (pre = 0);
         else return pre - 1;
       });
     }, 400);
@@ -56,7 +62,7 @@ const Carousel = () => {
     setTimeout(() => {
       setAnimate(() => ({ on: false, value: "-610px" }));
       setIndex((pre) => {
-        if (pre === 3) return (pre = 0);
+        if (pre === 2) return (pre = 0);
         else return pre + 1;
       });
     }, 400);

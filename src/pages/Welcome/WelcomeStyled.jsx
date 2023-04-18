@@ -30,20 +30,20 @@ export const StWrapDiv = styled.div`
 // 폰트
 export const StFont = styled.p`
   width: ${props => props.width || '48vw'};
-  /* height: ${props => props.height || '6vw'}; */
   margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: 700;
   font-size: ${props => props.fontSize || '3rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
+  text-shadow: 0px 2px 4px #40404032 ;
 
   color: ${props => props.color || '#07133b'};
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
+  
 
-  border: 1px solid red;
 `;
 
 export const StSmallFont = styled.p`
@@ -59,8 +59,6 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
-  border: 1px solid red;
-
 `;
 
 // 버튼
@@ -150,6 +148,11 @@ export const StSpacePhoto = styled.div`
   border-radius: 8px;
 `;
 
+//welcome 7
+export const StfontA = styled.a`
+  text-decoration: none;
+`
+
 //캐러셀 슬라이드
 export const SliderContainer = styled.div`
   width: 100%;
@@ -219,7 +222,7 @@ export const StSliderButton = styled.button`
   ${({ dir }) => {
     if (dir === 'left') {
       return css`
-        left: 20px;
+        left: 50px;
         top: 50%;
         transform: translateY(-50%);
       `;
@@ -227,7 +230,7 @@ export const StSliderButton = styled.button`
 
     if (dir === 'right') {
       return css`
-        right: 20px;
+        right: 50px;
         top: 50%;
         transform: translateY(-50%);
       `;

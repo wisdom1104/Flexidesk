@@ -3,23 +3,15 @@ import { Input } from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import api from '../../axios/api';
-import useTrueHook from '../../hooks/useTrueHook';
+import useTrueHook from '../../hooks/useTrueHook'
+
+// 유효성검사 라이브러리
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import Certification from './Certification';
-import {
-  StBackground,
-  StForm,
-  StFormBox,
-  StLoginForm,
-  StLongButton,
-  StOverall,
-  StTextInput,
-} from './UserStyled';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 
 function SignUpAdmin() {
-  // 가드
-  useTrueHook();
-
   const [admin, setAdmin] = useState({
     email: '',
     password: '',
@@ -49,143 +41,111 @@ function SignUpAdmin() {
     } catch (error) {
       console.log(error);
       const errorMsg = error.response.data.message;
+      console.log(errorMsg);
       alert(`${errorMsg}`);
+      setAdmin('');
       return error;
     }
   };
 
+  // 토큰값으로 페이지 위치조절 (가드)
+  useTrueHook();
+
+  // 정규식 유효성 검사를 수행
+  const schema = yup.object().shape({
+    userName: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup
+      .string()
+      .required()
+      .min(8)
+      .matches(
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
+      ),
+    passwordCheck: yup
+      .string()
+      .oneOf([yup.ref('password'), null])
+      .min(8)
+      .matches(
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+        '비밀번호는 숫자, 영문자, 특수문자를 모두 포함해야 합니다.',
+      ),
+    certification: yup.string().required(),
+  });
+
+  const { register, handleSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+  
   return (
     <>
-      <StBackground>
-        <StOverall height="1060px">
-          <div
-            style={{
-              marginTop: '80px',
-            }}
-          >
-            <StLoginForm onSubmit={submitBtnHandler} height="880px">
-              <StForm height="880px">
-                <StFormBox>
-                  <StFont align="start" fontSize="28px">
-                    관리자 회원가입
-                  </StFont>
+      <form onSubmit={submitBtnHandler}>
+        <h3>관리자 회원가입</h3>
+       
+        <Certification 
+        email={admin.email}
+        onChange={onChangeHandler}
+        admin={admin}
+        setAdmin={setAdmin}
+        />
 
-                  <StTextInput height="118px">
-                    <Certification
-                      email={admin.email}
-                      onChange={onChangeHandler}
-                      admin={admin}
-                      setAdmin={setAdmin}
-                    />
-                  </StTextInput>
+        <p>인증번호</p>
+        <Input
+          type="text"
+          value={admin.certification|| ''}
+          onChange={onChangeHandler}
+          name="certification"
+          placeholder="인증번호를 입력하세요."
+          required
+        />
 
-                  <StTextInput>
-                    <StSmallFont
-                      width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginBottom="10px"
-                    >
-                      인증번호
-                    </StSmallFont>
-                    <Input
-                      type="text"
-                      value={admin.certification || ''}
-                      onChange={onChangeHandler}
-                      name="certification"
-                      placeholder="인증번호를 입력하세요."
-                      required
-                    />
-                  </StTextInput>
+        <p>비밀번호</p>
+        <Input
+          type="password"
+          value={admin.password|| ''}
+          onChange={onChangeHandler}
+          name="password"
+          placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+          required
+        />
+        {errors.password && <span>비밀번호 형식에 맞게 입력하세요.</span>}
+    
+        <p>비밀번호 확인</p>
+        <Input
+          type="password"
+          value={admin.passwordCheck|| ''}
+          onChange={onChangeHandler}
+          name="passwordCheck"
+          placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+          required
+        />
+        {errors.passwordCheck && <span>비밀번호가 맞는지 확인해주세요.</span>}
 
-                  <StTextInput>
-                    <StSmallFont
-                      width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginBottom="10px"
-                    >
-                      비밀번호
-                    </StSmallFont>
-                    <Input
-                      type="password"
-                      value={admin.password || ''}
-                      onChange={onChangeHandler}
-                      name="password"
-                      placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                      required
-                    />
-                  </StTextInput>
+        <p>이름</p>
+        <Input
+          type="text"
+          value={admin.userName|| ''}
+          onChange={onChangeHandler}
+          name="userName"
+          placeholder="사용하실 이름을 입력하세요."
+          required
+        />
+        {errors.userName && <span>사용하실 이름을 입력하세요.</span>}
 
-                  <StTextInput>
-                    <StSmallFont
-                      width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginBottom="10px"
-                    >
-                      비밀번호 확인
-                    </StSmallFont>
-                    <Input
-                      type="password"
-                      value={admin.passwordCheck || ''}
-                      onChange={onChangeHandler}
-                      name="passwordCheck"
-                      placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                      required
-                    />
-                  </StTextInput>
+        <p>회사</p>
+        <Input
+          type="text"
+          value={admin.companyName|| ''}
+          onChange={onChangeHandler}
+          name="companyName"
+          placeholder="회사를 입력하세요."
+          required
+        />
+        {errors.companyName && <span>회사를 입력하세요.</span>}
 
-                  <StTextInput>
-                    <StSmallFont
-                      width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginBottom="10px"
-                    >
-                      이름
-                    </StSmallFont>
-                    <Input
-                      type="text"
-                      value={admin.userName || ''}
-                      onChange={onChangeHandler}
-                      name="userName"
-                      placeholder="사용하실 이름을 입력하세요."
-                      required
-                    />
-                  </StTextInput>
-
-                  <StTextInput>
-                    <StSmallFont
-                      width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginBottom="10px"
-                    >
-                      회사
-                    </StSmallFont>
-                    <Input
-                      type="text"
-                      value={admin.companyName || ''}
-                      onChange={onChangeHandler}
-                      name="companyName"
-                      placeholder="회사를 입력하세요."
-                      required
-                    />
-                  </StTextInput>
-
-                  <StLongButton type="submit">시작하기</StLongButton>
-                </StFormBox>
-              </StForm>
-            </StLoginForm>
-          </div>
-        </StOverall>
-      </StBackground>
+        <button type="submit">시작하기</button>
+      </form>
     </>
   );
 }

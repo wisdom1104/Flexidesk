@@ -10,7 +10,10 @@ import {
   StBackground,
   StForm,
   StFormBox,
+  StLoginContain,
   StLoginForm,
+  StLoginIcon,
+  StLoginIconDiv,
   StLongButton,
   StOverall,
 } from './UserStyled';
@@ -38,13 +41,13 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
-      console.log(response);
       const token = response.headers.authorization;
+      const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
-      console.log(payload);
 
+// cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
-      cookies.set('refresh_token', response.headers.refresh_token.split(' ')[1], { path: '/', maxAge: 3540 });
+      cookies.set('refresh_token', refreshToken.split(' ')[1], { path: '/', maxAge: 3540 });
       cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {
         path: '/',
@@ -55,6 +58,7 @@ function Login() {
         maxAge: 3540,
       });
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
+// cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
     } catch (e) {
       const errorMsg = e.response.data.message;
@@ -97,7 +101,15 @@ function Login() {
               이메일 주소와 비밀번호를 입력해주세요.
             </StSmallFont>
             </StFormBox>
-            
+
+            <StLoginContain>
+              <StLoginIconDiv>
+              <StLoginIcon
+              src="img/loginIcon3.png"
+              alt="img/loginIcon3"
+            />
+            </StLoginIconDiv>
+
             <Input
               type="email"
               value={user.email || ''}
@@ -108,16 +120,28 @@ function Login() {
               name="email"
               placeholder="이메일"
               required
+              border='none'
             />
+          </StLoginContain>
 
-            <Input
-              type="password"
-              value={user.password || ''}
-              onChange={onChangeHandler}
-              name="password"
-              placeholder="비밀번호"
-              required
+            <StLoginContain>
+              <StLoginIconDiv>
+            <StLoginIcon
+              src="img/loginIcon4.png"
+              alt="img/loginIcon4"
             />
+            </StLoginIconDiv>
+            <Input
+            type="password"
+            value={user.password || ''}
+            onChange={onChangeHandler}
+            name="password"
+            placeholder="비밀번호"
+            required
+            border='none'
+          />
+            
+            </StLoginContain>
 
             <StLongButton> 로그인 </StLongButton>          
             <StLongButton onClick={onClickAdminHandler}> 관리자 회원가입 </StLongButton>

@@ -45,22 +45,24 @@ api.interceptors.response.use(
   async error => {
     const originalConfig = error.config;
     console.log(originalConfig);
+    console.log(originalConfig.headers);
 
-    if (error.response && error.response.status === 400) {
+    if (error.response && error.response.status === 401) {
       const refreshToken = originalConfig.headers['Refresh_Token'];
       try {
-        const data = await axios({
-          url: '/users/refresh',
-          method: 'GET',
+        const data = await api.get('/users/refresh',{
           headers: {
-            authorization: refreshToken,
+            Authorization: refreshToken,
           },
         });
+        console.log('data1',data);
+
         if (data) {
-          localStorage.setItem(
-            'token',
-            JSON.stringify(data.data, ['Access_Token', 'Refresh_Token']),
-          );
+          console.log('data2',data);
+          console.log('data2',data.data);
+          
+          cookies.set('token', data.data.token);
+          cookies.set('refresh_token', data.data.refreshToken, { expires: 14 } )
           return await api.request(originalConfig);
         }
       } catch (e) {
@@ -70,15 +72,16 @@ api.interceptors.response.use(
   },
 );
 
-// // 요청 인터셉터 설정
+// 요청 인터셉터 설정
 api.interceptors.request.use(config => {
-    const token = cookies.get("token")
+    const token = cookies.get("token");
+
+    // console.log('찍히나??',config.headers.Authorization);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   });
-  
 
 export default api;

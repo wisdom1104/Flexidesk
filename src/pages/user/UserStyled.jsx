@@ -72,13 +72,39 @@ export const StSmallButton = styled.button`
 
   border-radius: 4px;
 `;
+//login
+export const StLoginContain = styled.div`
+  width: 400px;
+  height: 60px;
+  border: 2px solid #A6AEBB;
+  border-radius: 8px;
+  
+  align-items: center;
+  display: flex;
+`
+
+export const StLoginIconDiv = styled.div`
+  width:15%;
+  height: 50px;
+  display:flex;
+  align-items:center;
+  padding-right:10px;
+`
+
+export const StLoginIcon = styled.img`
+  position: absolute;
+  display: inline-block;
+  width:20px;
+  /* left: 37%; */
+  left: 40vw;
+  z-index: 1;
+
+`
 
 // signup
 export const StTextInput = styled.div`
   width: 27.5vw;
   height: ${props => props.height || '108px'};
-
-
 `;
 
 /////////////////////////////
