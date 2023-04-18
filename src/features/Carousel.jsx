@@ -30,14 +30,11 @@ const Carousel = () => {
     const idx = (item + components.length) % components.length;
 
     if (item === 4) {     
-      console.log('2');
       return [2, item, 1].map(pre => components.at(pre));
     }
     if (item === -4) {
-      console.log('3');
       return [-1, item, -2].map(pre => components.at(pre));
     }
-    console.log('4');
     return [
     components[(idx - 1 + components.length) % components.length],
     components[idx],

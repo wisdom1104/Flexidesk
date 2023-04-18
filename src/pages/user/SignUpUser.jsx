@@ -32,7 +32,7 @@ function SignUpUser() {
   const navi = useNavigate();
 
   // 가드
-  useTrueHook();
+  // useTrueHook();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
