@@ -11,7 +11,6 @@ import {
 
 function Certification({ admin, setAdmin, email  }) {
 
-
   const [emailError, setEmailError] = useState("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,9 +32,6 @@ function Certification({ admin, setAdmin, email  }) {
 
     try {
       const response = await api.post('/users/signup/email', admin);
-      console.log(admin);
-      console.log('payload admin ->>>>>>>>>>',response);
-
       const data = response.data;
       alert(`${data}`);
       return data;
