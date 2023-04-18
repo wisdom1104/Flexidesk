@@ -50,11 +50,9 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       const refreshToken = originalConfig.headers['Refresh_Token'];
       try {
-        const data = await axios({
-          url: '/users/refresh',
-          method: 'GET',
+        const data = await api.get('/users/refresh',{
           headers: {
-            authorization: refreshToken,
+            Authorization: refreshToken,
           },
         });
         console.log('data1',data);
@@ -62,7 +60,8 @@ api.interceptors.response.use(
         if (data) {
           console.log('data2',data);
           console.log('data2',data.data);
-          cookies.set('token', data.data.token, {expires: 7});
+          
+          cookies.set('token', data.data.token);
           cookies.set('refresh_token', data.data.refreshToken, { expires: 14 } )
           return await api.request(originalConfig);
         }
@@ -77,7 +76,7 @@ api.interceptors.response.use(
 api.interceptors.request.use(config => {
     const token = cookies.get("token");
 
-    console.log('찍히나??',config.headers.Authorization);
+    // console.log('찍히나??',config.headers.Authorization);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

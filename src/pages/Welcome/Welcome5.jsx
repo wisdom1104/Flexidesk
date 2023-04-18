@@ -4,7 +4,7 @@ import { StBackground, StFont, StOverall, StSmallFont, StSpaceDiv, StSpacePhoto 
 function Welcome5() {
   return (
     <>
-      <StBackground background="#fff" height='3300px'>
+      <StBackground background="#fff" height='3030px'>
         <div
           style={{
             display: 'flex',

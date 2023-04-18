@@ -30,20 +30,20 @@ export const StWrapDiv = styled.div`
 // 폰트
 export const StFont = styled.p`
   width: ${props => props.width || '48vw'};
-  /* height: ${props => props.height || '6vw'}; */
   margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: 700;
   font-size: ${props => props.fontSize || '3rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
+  text-shadow: 0px 2px 4px #40404032 ;
 
   color: ${props => props.color || '#07133b'};
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
+  
 
-  /* border: 1px solid red; */
 `;
 
 export const StSmallFont = styled.p`
@@ -59,7 +59,6 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
-  /* border: 1px solid red; */
 `;
 
 // 버튼

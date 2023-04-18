@@ -41,7 +41,6 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
-      console.log('response 로그인 값',response);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -133,14 +132,15 @@ function Login() {
             />
             </StLoginIconDiv>
             <Input
-              type="password"
-              value={user.password || ''}
-              onChange={onChangeHandler}
-              name="password"
-              placeholder="비밀번호"
-              required
-              border='none'
-            />
+            type="password"
+            value={user.password || ''}
+            onChange={onChangeHandler}
+            name="password"
+            placeholder="비밀번호"
+            required
+            border='none'
+          />
+            
             </StLoginContain>
 
             <StLongButton> 로그인 </StLongButton>          

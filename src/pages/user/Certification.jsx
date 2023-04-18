@@ -9,12 +9,8 @@ import {
   StSmallButton,
 } from './UserStyled';
 
-function Certification() {
+function Certification({ admin, setAdmin, email  }) {
 
-  const [number, setNumber] = useState({
-    email: '',
-  });
-  
 
   const [emailError, setEmailError] = useState("");
 
@@ -22,22 +18,22 @@ function Certification() {
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
-    setNumber(prevState => ({ ...prevState, email: value }));
+    setAdmin(prevState => ({ ...prevState, email: value }));
 
     if (!emailRegex.test(value)) {
       setEmailError("올바른 이메일 형식이 아닙니다.");
     } else {
-      setEmailError("");
+      setEmailError("")
     }
   }
-
+  
 
   const submitBtnHandler = async e => {
     e.preventDefault();
 
     try {
-      const response = await api.post('/users/signup/email', number);
-      console.log(number);
+      const response = await api.post('/users/signup/email', admin);
+      console.log(admin);
       console.log('payload admin ->>>>>>>>>>',response);
 
       const data = response.data;
@@ -67,7 +63,7 @@ function Certification() {
       <Container>
         <InlineInput
           type="email"
-          value={number.email}
+          value={email}
           onChange={handleEmailChange}
           name="email"
           placeholder="이메일을 입력하세요."

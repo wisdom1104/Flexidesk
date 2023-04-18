@@ -8,7 +8,7 @@ function Welcome1() {
   return (
     <>
       <StBackground id='signup'>
-    <StOverall>
+    <StOverall height='44vw'>
       <StWrapDiv>
     <StSmallFont>
             취업을 넘어, 10년 뒤에도 살아남는 개발자로 턱걸이로 취업하는 것은
