@@ -73,7 +73,7 @@ function AdminSpaceBox({
     if (Number(id) === 1) {
       const newBox = {
         spaceId,
-        mrName: 'new mr',
+        mrName: 'New 회의실',
         x: e.clientX - targetRect.x - 50,
         y: e.clientY - targetRect.y - 50,
       };
@@ -122,7 +122,7 @@ function AdminSpaceBox({
     if (Number(id) === 2) {
       const newBox = {
         spaceId,
-        boxName: 'new box',
+        boxName: 'New 자리',
         x: e.clientX - targetRect.x - 50,
         y: e.clientY - targetRect.y - 50,
       };

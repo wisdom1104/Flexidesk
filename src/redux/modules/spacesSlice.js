@@ -15,6 +15,7 @@ export const __getSpaces = createAsyncThunk(
   async (payload, thunk) => {
     try {
       const token = cookies.get('token');
+      // const token = cookies.get('refresh_token');
       const companyName = cookies.get('companyName');
       const response = await api.get(`/spaces/${companyName}`, {
         headers: {

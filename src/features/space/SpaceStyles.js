@@ -82,10 +82,6 @@ export const ClisckedListItem = styled.div`
   border-radius: 8px;
 `;
 
-export const EditInput = styled.input`
-  padding: 5px 10px;
-`;
-
 // space 서브헤더+보더
 export const Stmainspace = styled.div`
   position: relative;
@@ -233,6 +229,35 @@ export const StBox = styled.div`
   }
 `;
 
+export const Box = styled.div`
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #8b93a6;
+  //박스
+  position: absolute;
+  background: #07133b;
+  border: 1px solid #8b93a6;
+  border-radius: 4px;
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  &:hover {
+    background: #8b93a6;
+    color: #f1f2f4;
+  }
+`;
+
 // 유저 있는 박스
 export const StUseBox = styled.div`
   //글자
@@ -242,12 +267,12 @@ export const StUseBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #2ed775;
+  color: #65bab6;
 
   //박스
   position: absolute;
-  background: #caf5dc;
-  border: 1px solid #2ed775;
+  background: #def1ef;
+  border: 1px solid #65bab6;
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -413,8 +438,8 @@ export const StDropBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
+    background: #ffffff;
+    font-weight: 800;
   }
 `;
 
@@ -434,7 +459,7 @@ export const BoxBtn = styled.button`
   align-items: center;
   padding: 2px 7px;
   height: 23px;
-  background: #5c6373;
+  background: #65bab6;
   border: 0.5px solid #5c6373;
   border-radius: 4px;
   border: none;
@@ -448,9 +473,10 @@ export const BoxBtn = styled.button`
   text-align: right;
   color: #ffffff;
   &:hover {
-    background: #ffffff;
-    color: #5c6373;
-    border: 0.5px solid #5c6373;
+    /* background: #ffffff; */
+    /* color: #5c6373; */
+    /* border: 0.5px solid #5c6373; */
+    font-weight: 800;
   }
 `;
 //삭제 & 취소 버튼
@@ -462,8 +488,8 @@ export const BoxSubBtn = styled.button`
   align-items: center;
   padding: 2px 7px;
   height: 23px;
-  background: #f1f2f4;
-  border: 0.5px solid #5c6373;
+  background: #ffffff;
+  border: 0.5px solid #65bab6;
   border-radius: 4px;
   cursor: pointer;
   //글자
@@ -473,11 +499,12 @@ export const BoxSubBtn = styled.button`
   font-size: 14px;
   line-height: 17px;
   text-align: right;
-  color: #5c6373;
+  color: #65bab6;
   &:hover {
-    background: #5c6373;
-    color: #f1f2f4;
-    border: 0.5px solid #5c6373;
+    /* background: #5c6373; */
+    /* color: #f1f2f4; */
+    border: 0.5px solid #343434;
+    font-weight: 800;
   }
 `;
 
@@ -492,6 +519,18 @@ export const StDrag = styled.div`
   cursor: grab;
   position: absolute;
   cursor: pointer;
+`;
+
+export const BoxInput = styled.input`
+  width: 80px;
+  background: #ffffff;
+  border: 1px solid #8b93a6;
+  box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25);
+  border-radius: 2px;
+  &:focus {
+    outline: none;
+    /* border: 2px solid #8b93a6; */
+  }
 `;
 
 // admin space 모달창 ---------------
@@ -723,4 +762,155 @@ export const MoveModalErrorbtn = styled.button`
   line-height: 17px;
   text-align: right;
   color: #ffffff;
+`;
+
+// 리스트 모달-------------------------
+
+// 추가 버튼들
+export const StAddBtnBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+//추가 버튼
+export const StAddBtn = styled.button`
+  width: 131px;
+  height: 43px;
+  background: #65bab6;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #ffffff;
+`;
+
+//각 리스트의 버튼들
+export const StListBtnBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0px 10px;
+`;
+
+//각 리스트
+export const StList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid #c9cdd6;
+  border-radius: 8px;
+  width: 290px;
+  height: 45px;
+  padding: 10px;
+  cursor: pointer;
+`;
+
+//각 리스트 이름
+export const StListItem = styled.div`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  margin: 0px 10px;
+`;
+
+//열기 아이콘 버튼
+export const StOpenBtn = styled.button`
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+//각 리스트 오픈 시
+export const StOpenList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #c9cdd6;
+  border-radius: 8px 8px 0px 0px;
+  width: 290px;
+  height: 45px;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+`;
+
+//각 내부 리스트 모달
+export const StInnerList = styled.div`
+  box-sizing: border-box;
+  width: 290px;
+  /* height: 217px; */
+  background: #f1f2f4;
+  border: 1px solid #f1f2f4;
+  border-radius: 0px 0px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 10px;
+`;
+
+//inner space 추가 버튼
+export const StAddInnerBtn = styled.button`
+  width: 274px;
+  height: 35px;
+  box-sizing: border-box;
+  background: #def1ef;
+  border: 1px solid #65bab6;
+  border-radius: 8px;
+  margin: 11px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #65bab6;
+`;
+
+//inner space 요소
+export const StInner = styled.div`
+  border-top: 1px solid #e0e5e8;
+  height: 47px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 274px;
+  cursor: pointer;
+`;
+
+//inner space 글자
+export const StInnerItem = styled.div`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin-left: 34px;
+`;
+
+export const EditInput = styled.input`
+  width: 120px;
+  padding: 5px;
+  margin-left: 34px;
 `;

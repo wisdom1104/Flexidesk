@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
-import { BoxBtn, BoxSubBtn, StBtnBox, StDropBox } from './SpaceStyles';
+import {
+  BoxBtn,
+  BoxInput,
+  BoxSubBtn,
+  StBtnBox,
+  StDropBox,
+} from './SpaceStyles';
 
 function BoxItem({
   box,
@@ -75,7 +81,7 @@ function BoxItem({
           </>
         ) : (
           <>
-            <input
+            <BoxInput
               type="text"
               value={editBoxName}
               onChange={e => {
