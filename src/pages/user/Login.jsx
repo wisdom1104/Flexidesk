@@ -112,7 +112,7 @@ function Login() {
 
             <Input
               type="email"
-              value={user.email || ''}
+              value={user.email}
               onChange={e => {
                 validEmail(e);
                 setUser({ ...user, email: e.target.value });
@@ -133,7 +133,7 @@ function Login() {
             </StLoginIconDiv>
             <Input
             type="password"
-            value={user.password || ''}
+            value={user.password}
             onChange={onChangeHandler}
             name="password"
             placeholder="비밀번호"

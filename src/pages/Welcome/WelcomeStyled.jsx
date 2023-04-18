@@ -36,14 +36,12 @@ export const StFont = styled.p`
   font-size: ${props => props.fontSize || '3rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
-  text-shadow: 0px 2px 4px #40404032 ;
 
   color: ${props => props.color || '#07133b'};
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
   
-
 `;
 
 export const StSmallFont = styled.p`
