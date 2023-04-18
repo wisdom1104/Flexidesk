@@ -66,6 +66,7 @@ export const __editSpace = createAsyncThunk(
         `/spaces/${companyName}/${payload.spaceId}`,
         {
           spaceName: payload.spaceName,
+          floorId: payload.floorId,
         },
         {
           headers: {

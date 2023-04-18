@@ -8,13 +8,14 @@ import {
   ModalList,
   ModalTitle,
   Modalbtn,
+  StAddBtn,
+  StAddBtnBox,
 } from './SpaceStyles';
-import Test3 from '../../pages/space/Test3';
-import Test1 from '../../pages/space/Test1';
 import Test2 from '../../pages/space/Test2';
 import Test4 from '../../pages/space/Test4';
-import { useDispatch, useSelector } from 'react-redux';
-import { __getSpace } from '../../redux/modules/spaceSlice';
+import { useDispatch } from 'react-redux';
+import { __addFloor } from '../../redux/modules/floorsSlice';
+import { __addSpace } from '../../redux/modules/spacesSlice';
 
 function CreateSpace({
   isModal,
@@ -24,11 +25,23 @@ function CreateSpace({
   onClickSpaceListHandler,
 }) {
   const dispatch = useDispatch();
-  // const { space } = useSelector(state => state.space);
 
-  // useEffect(() => {
-  //   dispatch(__getSpace());
-  // }, [dispatch]);
+  // floor 추가
+  const onClickAddFloorHandler = async () => {
+    const newFloor = {
+      floorName: 'New 층',
+    };
+    dispatch(__addFloor(newFloor));
+  };
+
+  // 그냥 space 추가
+  const onClickAddSpaceHandler = async () => {
+    const newSpace = {
+      spaceName: 'New 스페이스',
+    };
+    console.log('newSpace', newSpace);
+    dispatch(__addSpace(newSpace));
+  };
 
   return (
     <>
@@ -51,18 +64,25 @@ function CreateSpace({
                     <img src="img/modalBtnIcon.png" />
                   </Modalbtn>
                 </ModalHeader>
+                <StAddBtnBox>
+                  <StAddBtn onClick={onClickAddFloorHandler}>층 추가</StAddBtn>
+                  <StAddBtn onClick={onClickAddSpaceHandler}>
+                    스페이스 추가
+                  </StAddBtn>
+                </StAddBtnBox>
+
                 <FloorList
                   floors={floors}
+                  dispatch={dispatch}
                   onClickSpaceListHandler={onClickSpaceListHandler}
                 />
                 <SpaceList
                   spaces={spaces}
+                  dispatch={dispatch}
                   onClickSpaceListHandler={onClickSpaceListHandler}
                 />
-                {/* <Test1 /> */}
-                {/* <Test4 floors={floors} spaces={spaces} /> */}
+                <Test4 floors={floors} spaces={spaces} />
                 {/* <Test2 /> */}
-                {/* <Test3 /> */}
               </ModalList>
             </Modal>
           </ModalBackground>

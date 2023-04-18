@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
 import InnerSpaceList from './InnerSpaceList';
-import { EditInput, ListItem } from './SpaceStyles';
+import {
+  BoxBtn,
+  BoxSubBtn,
+  EditInput,
+  ListItem,
+  StList,
+  StListBtnBox,
+  StListItem,
+  StOpenBtn,
+  StOpenList,
+} from './SpaceStyles';
 
 function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
   // floor 삭제
@@ -30,42 +40,84 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
     <>
       <div>
         {!floorEdit ? (
-          <Row>
-            <ListItem style={{ cursor: 'pointer' }} key={floor.floorId}>
-              {floor.floorName}/{floor.floorId}-----
-            </ListItem>
-            <div>
-              <button
-                onClick={() => {
-                  setFloorEdit(!floorEdit);
-                }}
-              >
-                수정
-              </button>
-              <button
-                onClick={() => {
-                  const confirmDelete =
-                    window.confirm('정말 삭제하시겠습니까?');
-                  if (confirmDelete) {
-                    onDeleteFloorHandler(floor.floorId);
-                  }
-                }}
-              >
-                삭제
-              </button>
-              <button
-                onClick={() => {
-                  setIsMd(!isMd);
-                }}
-              >
-                열기
-              </button>
-            </div>
-          </Row>
+          <>
+            {!isMd ? (
+              <StList>
+                <Row>
+                  <StListItem key={floor.floorId}>{floor.floorName}</StListItem>
+                  <StOpenBtn
+                    onClick={() => {
+                      setIsMd(!isMd);
+                    }}
+                  >
+                    <img src="img/listOpenIcon.png" />
+                  </StOpenBtn>
+                </Row>
+                <StListBtnBox>
+                  <BoxBtn
+                    onClick={() => {
+                      setFloorEdit(!floorEdit);
+                    }}
+                  >
+                    수정
+                  </BoxBtn>
+                  <BoxSubBtn
+                    onClick={() => {
+                      const confirmDelete =
+                        window.confirm('정말 삭제하시겠습니까?');
+                      if (confirmDelete) {
+                        onDeleteFloorHandler(floor.floorId);
+                      }
+                    }}
+                  >
+                    삭제
+                  </BoxSubBtn>
+                </StListBtnBox>
+              </StList>
+            ) : (
+              <StOpenList>
+                <Row>
+                  <StListItem key={floor.floorId}>{floor.floorName}</StListItem>
+                  <StOpenBtn
+                    onClick={() => {
+                      setIsMd(!isMd);
+                    }}
+                  >
+                    <img src="img/listCloseIcon.png" />
+                  </StOpenBtn>
+                </Row>
+                <StListBtnBox>
+                  <BoxBtn
+                    onClick={() => {
+                      setFloorEdit(!floorEdit);
+                    }}
+                  >
+                    수정
+                  </BoxBtn>
+                  <BoxSubBtn
+                    onClick={() => {
+                      const confirmDelete =
+                        window.confirm('정말 삭제하시겠습니까?');
+                      if (confirmDelete) {
+                        onDeleteFloorHandler(floor.floorId);
+                      }
+                    }}
+                  >
+                    삭제
+                  </BoxSubBtn>
+                </StListBtnBox>
+              </StOpenList>
+            )}
+            {isMd ? (
+              <InnerSpaceList
+                floor={floor}
+                onClickSpaceListHandler={onClickSpaceListHandler}
+              />
+            ) : null}
+          </>
         ) : (
           <Row>
             <EditInput
-              style={{ padding: '10px' }}
               type="text"
               value={editFloorName}
               onChange={e => {
@@ -73,30 +125,24 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
               }}
             />
             <div>
-              <button
+              <BoxBtn
                 onClick={() => {
                   onEditFloorNameHandler(floor.floorId);
                 }}
               >
                 완료
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   setFloorEdit(!floorEdit);
                 }}
               >
                 취소
-              </button>
+              </BoxSubBtn>
             </div>
           </Row>
         )}
       </div>
-      {isMd ? (
-        <InnerSpaceList
-          floor={floor}
-          onClickSpaceListHandler={onClickSpaceListHandler}
-        />
-      ) : null}
     </>
   );
 }

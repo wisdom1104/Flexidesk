@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { __addInnerSpace } from '../../redux/modules/spacesSlice';
 import InnerSpaceItem from './InnerSpaceItem';
-import { InnerList } from './SpaceStyles';
+import { InnerList, StAddInnerBtn, StInnerList } from './SpaceStyles';
 
 function InnerSpaceList({ floor, onClickSpaceListHandler }) {
   const dispatch = useDispatch();
@@ -19,8 +19,10 @@ function InnerSpaceList({ floor, onClickSpaceListHandler }) {
   };
 
   return (
-    <InnerList>
-      <button onClick={onClickAddSpaceHandler}>Space 추가</button>
+    <StInnerList>
+      <StAddInnerBtn onClick={onClickAddSpaceHandler}>
+        스페이스 추가
+      </StAddInnerBtn>
       {floor.spaceList?.length > 0
         ? floor.spaceList.map(space => (
             <InnerSpaceItem
@@ -31,7 +33,7 @@ function InnerSpaceList({ floor, onClickSpaceListHandler }) {
             />
           ))
         : null}
-    </InnerList>
+    </StInnerList>
   );
 }
 

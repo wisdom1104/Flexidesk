@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { __deleteSpace, __editSpace } from '../../redux/modules/spaceSlice';
 import { Row } from '../../components/Flex';
-import { EditInput, ListItem } from './SpaceStyles';
+import {
+  BoxBtn,
+  BoxSubBtn,
+  EditInput,
+  ListItem,
+  StList,
+  StListBtnBox,
+  StListItem,
+} from './SpaceStyles';
 
 function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
   // space 삭제
@@ -27,24 +35,24 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
 
   return (
     <>
-      <div>
+      <>
         {!spaceEdit ? (
-          <Row>
-            <ListItem
+          <StList>
+            <StListItem
               key={space.spaceId}
               onClick={() => onClickSpaceListHandler(space.spaceId)}
             >
-              {space.spaceName}/{space.spaceId}-----
-            </ListItem>
-            <div>
-              <button
+              {space.spaceName}
+            </StListItem>
+            <StListBtnBox>
+              <BoxBtn
                 onClick={() => {
                   setSpaceEdit(!spaceEdit);
                 }}
               >
                 수정
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   const confirmDelete =
                     window.confirm('정말 삭제하시겠습니까?');
@@ -54,12 +62,11 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
                 }}
               >
                 삭제
-              </button>
-            </div>
-          </Row>
+              </BoxSubBtn>
+            </StListBtnBox>
+          </StList>
         ) : (
           <Row>
-            {' '}
             <EditInput
               type="text"
               value={editSpaceName}
@@ -85,7 +92,7 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
             </div>
           </Row>
         )}
-      </div>
+      </>
     </>
   );
 }

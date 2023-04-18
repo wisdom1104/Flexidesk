@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteMr, __editMr } from '../../redux/modules/spaceMrSlice';
-import { BoxBtn, BoxSubBtn, StBtnBox, StDropMr } from './SpaceStyles';
+import { BoxBtn, BoxInput, BoxSubBtn, StBtnBox, StDropMr } from './SpaceStyles';
 
 function MrItem({
   mr,
@@ -52,9 +52,7 @@ function MrItem({
       >
         {!mrEdit ? (
           <>
-            <div>
-              {mr.mrName}/{mr.mrId}
-            </div>
+            <div>{mr.mrName}</div>
             <StBtnBox>
               <BoxBtn
                 onClick={() => {
@@ -74,7 +72,7 @@ function MrItem({
           </>
         ) : (
           <>
-            <input
+            <BoxInput
               type="text"
               value={editMrName}
               onChange={e => {
