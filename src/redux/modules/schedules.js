@@ -17,7 +17,7 @@ export const __getSchedules = createAsyncThunk(
       const token = cookies.get('token')
       const data = await api.get(`/schedules?selDate=${payload.selectDay}`,{
         headers:{
-          Authorization:`${token}`
+          Authorization:`Bearer ${token}`
         }
       })
       console.log(data.data.data.timeList);
@@ -31,14 +31,15 @@ export const __getSchedules = createAsyncThunk(
 export const __addSchdule = createAsyncThunk(
   "addschedule",
   async(payload,thunk) =>{
+    const selectdate = {selectDay : payload.startList[0].start.split('T')[0]}
     try{
       const token = cookies.get('token')
       await api.post('/schedules',payload,{
         headers:{
-          Authorization:`${token}`
+          Authorization:`Bearer ${token}`
         }
       })
-      await thunk.dispatch(__getSchedules(payload.startData.startList[0].start.split('T')[0]))
+      await thunk.dispatch(__getSchedules(selectdate))
       return thunk.fulfillWithValue(payload)
     }catch(error)
     {return thunk.rejectWithValue(error)}
@@ -53,11 +54,29 @@ export const __getAllSchedules = createAsyncThunk(
       const token = cookies.get('token')
       const data = await api.get(`/schedules/all`,{
         headers:{
-          Authorization:`${token}`
+          Authorization:`Bearer ${token}`
         }
       })
       console.log("여기",data.data.data.scList);
       return thunk.fulfillWithValue(data.data.data.scList)
+    }catch(error){
+      return thunk.rejectWithValue(error)
+    }
+  }
+)
+
+export const __deleteSchedule = createAsyncThunk(
+  "deletschedule",
+  async (payload,thunk) =>{
+    try{
+      const token = cookies.get('token')
+      await api.delete(`/scheules/${payload}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      await thunk.dispatch(__getAllSchedules())
+      return thunk.fulfillWithValue(payload)
     }catch(error){
       return thunk.rejectWithValue(error)
     }

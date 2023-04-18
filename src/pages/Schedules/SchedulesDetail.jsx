@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { __getAllSchedules } from '../../redux/modules/schedules';
+import { useParams } from 'react-router-dom';
+import {
+  __deleteSchedule,
+  __getAllSchedules,
+} from '../../redux/modules/schedules';
 
 function SchedulesDetail() {
+  const param = useParams();
   const dispatch = useDispatch();
   const { userSchedules } = useSelector(state => state.schedules);
   console.log(userSchedules);
+
   useEffect(() => {
     dispatch(__getAllSchedules());
   }, []);
@@ -18,7 +24,14 @@ function SchedulesDetail() {
           <div>내용 : {item.scComment}</div>
           <div>시작시간 : {item.scStart}</div>
           <div>종료시간 : {item.scEnd}</div>
-          -------------------------------
+          <button
+            onClick={() => {
+              dispatch(__deleteSchedule(item.scId));
+            }}
+          >
+            삭제
+          </button>
+          <div>-------------------------------</div>
         </div>
       ))}
     </div>

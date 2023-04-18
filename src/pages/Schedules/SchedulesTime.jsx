@@ -8,6 +8,7 @@ import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
   const dispatch = useDispatch();
+  const navi = useNavigate();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
@@ -43,7 +44,7 @@ function SchedulesTime({ param, selectDay }) {
   //adddispatch로 보낼값
   const startData = { startList: dataListResult };
   const { scComment, scTitle } = scheduleValue;
-  const reqScheduleValue = { scComment, scTitle, startData };
+  const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
 
   console.log('스케줄내용', reqScheduleValue);
 
@@ -95,6 +96,7 @@ function SchedulesTime({ param, selectDay }) {
         onSubmit={async e => {
           e.preventDefault();
           await dispatch(__addSchdule(reqScheduleValue));
+          navi(`/scheduledetail/${param}`);
         }}
       >
         제목 :{' '}
