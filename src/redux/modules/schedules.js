@@ -70,7 +70,7 @@ export const __deleteSchedule = createAsyncThunk(
   async (payload,thunk) =>{
     try{
       const token = cookies.get('token')
-      await api.delete(`/scheules/${payload}`,{
+      await api.delete(`/schedules/${payload}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }
