@@ -52,7 +52,6 @@ function ReservationDetail() {
         <p>전체 조회</p>
         <AllReservation />
       </div>
-      <SchedulesDetail />
     </>
   );
 }

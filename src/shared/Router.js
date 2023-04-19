@@ -12,23 +12,17 @@ import React, { useState } from 'react';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
-import { cookies } from './cookies';
 
 function Router() {
 
-  const cooki = cookies.get('token');
-
   return (
     <BrowserRouter>
-      {cooki ? <Header/> : null}
+      <Header/>
       <Routes>
         <Route path="/" element={ <Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
-        
-        {cooki ? (
-        <>
         <Route path="/calender/:id" element={<Calendar />} />
         <Route
           path="/schedulescalendar/:userId"
@@ -38,9 +32,6 @@ function Router() {
         <Route path="/detail/:userId" element={<ReservationDetail />} />
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />
-        </>
-        ) :null}
-
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

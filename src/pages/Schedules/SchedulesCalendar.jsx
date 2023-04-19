@@ -2,6 +2,16 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import SchedulesTime from './SchedulesTime';
+import {
+  StDate,
+  DayContain,
+  Header,
+  SchContain,
+  Day,
+  StCalenHeader,
+  FontSt,
+  DateFont,
+} from '../Reservation/CalendarStyled';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -54,7 +64,7 @@ function SchedulesCalendar() {
       if (week[day] === stDay) {
         for (let i = 0; i < dateTotalCount; i++) {
           dayArr.push(
-            <Day
+            <StDate
               key={i}
               onClick={dayClickHandler}
               value={`${selectYear}-${selectMonth
@@ -62,11 +72,11 @@ function SchedulesCalendar() {
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
             >
               {i + 1}
-            </Day>,
+            </StDate>,
           );
         }
       } else {
-        dayArr.push(<Day> </Day>);
+        dayArr.push(<StDate> </StDate>);
       }
     }
     return dayArr;
@@ -75,52 +85,37 @@ function SchedulesCalendar() {
 
   return (
     <>
-      <Calcontain>
-        <Header>
-          <button
-            onClick={() => {
-              preMonth();
-            }}
-          >
-            이전달
-          </button>
-          <div>{selectYear}</div>
-          <div>-{selectMonth}</div>
-          <button
-            onClick={() => {
-              nextMonth();
-            }}
-          >
-            다음달
-          </button>
-        </Header>
+      <SchContain>
+        <StCalenHeader>
+          <FontSt>스케줄 날짜</FontSt>
+          <Header>
+            <button
+              onClick={() => {
+                preMonth();
+              }}
+            >
+              이전달
+            </button>
+            <DateFont>{selectYear}년</DateFont>
+            <DateFont>{selectMonth}월</DateFont>
+            <button
+              onClick={() => {
+                nextMonth();
+              }}
+            >
+              다음달
+            </button>
+          </Header>
+        </StCalenHeader>
         <DayContain>
           {week?.map(item => {
             return <Day key={item}>{item}</Day>;
           })}
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
-      </Calcontain>
+      </SchContain>
       <SchedulesTime param={param.userId} selectDay={date} />
     </>
   );
 }
 export default SchedulesCalendar;
-
-const Calcontain = styled.div`
-  width: 500px;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const DayContain = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Day = styled.button`
-  min-width: calc(100% / 7);
-`;

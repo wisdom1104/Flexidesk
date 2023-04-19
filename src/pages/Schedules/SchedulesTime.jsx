@@ -4,6 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
 import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
+import {
+  ScheduleInput,
+  StReserTimeBox,
+  StReserTimeButton,
+  FontSt,
+  FinButton,
+} from '../Reservation/CalendarStyled';
 
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
@@ -79,19 +86,19 @@ function SchedulesTime({ param, selectDay }) {
 
   return (
     <>
-      <div>스케줄 시간</div>
-      <div>
+      <FontSt>스케줄 시간</FontSt>
+      <StReserTimeBox>
         {schedules?.map(item => (
-          <button
+          <StReserTimeButton
             key={item.start}
             onClick={onclickHandler}
             disabled={item.isCheckOut === true}
             value={`${selectDay}T${item.start}`}
           >
             {item.start}~{item.end}
-          </button>
+          </StReserTimeButton>
         ))}
-      </div>
+      </StReserTimeBox>
       <form
         onSubmit={async e => {
           e.preventDefault();
@@ -99,7 +106,8 @@ function SchedulesTime({ param, selectDay }) {
           navi(`/scheduledetail/${param}`);
         }}
       >
-        <input
+        <FontSt>스케줄 제목</FontSt>
+        <ScheduleInput
           type="text"
           value={scheduleValue.scTitle}
           required
@@ -110,8 +118,8 @@ function SchedulesTime({ param, selectDay }) {
             })
           }
         />
-
-        <input
+        <FontSt>스케줄 내용</FontSt>
+        <ScheduleInput
           type="text"
           value={scheduleValue.scComment}
           required
@@ -122,7 +130,7 @@ function SchedulesTime({ param, selectDay }) {
             })
           }
         />
-        <button>등록하기</button>
+        <FinButton>등록하기</FinButton>
       </form>
     </>
   );
