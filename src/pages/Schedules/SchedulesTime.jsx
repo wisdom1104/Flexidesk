@@ -99,7 +99,6 @@ function SchedulesTime({ param, selectDay }) {
           navi(`/scheduledetail/${param}`);
         }}
       >
-        제목 :{' '}
         <input
           type="text"
           value={scheduleValue.scTitle}
@@ -111,7 +110,7 @@ function SchedulesTime({ param, selectDay }) {
             })
           }
         />
-        내용 :{' '}
+
         <input
           type="text"
           value={scheduleValue.scComment}
