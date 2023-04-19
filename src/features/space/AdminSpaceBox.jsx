@@ -315,7 +315,7 @@ function AdminSpaceBox({
               setIsModal(!isModal);
             }}
           >
-            관리하기
+            스페이스 관리하기
           </StSubBtn>
           <StBtn onClick={() => navi('/space')}>완료</StBtn>
         </Row>

@@ -14,6 +14,7 @@ import {
   StBoard,
   StBtn,
   StListTitle,
+  StListbox,
   StSpace,
   StSpaceList,
   StSubHeader,
@@ -63,64 +64,66 @@ function Space() {
       <Column>
         <StListTitle>스페이스</StListTitle>
         {/* <div>11</div> */}
-        <StSpaceList>
-          {floors?.map(floor => {
-            if (floor && floor.spaceList?.length > 0)
-              return (
-                <div key={floor.floorId}>
-                  <ListFloor>{floor.floorName}</ListFloor>
-                  <SpaceInnerList>
-                    {floor.spaceList.map(space => {
-                      const isClicked = space.spaceId === clickedSpaceId;
-                      return (
-                        <React.Fragment key={space.spaceId}>
-                          {isClicked ? (
-                            <ClisckedListItem
-                              onClick={() =>
-                                onClickSpaceListHandler(space.spaceId)
-                              }
-                            >
-                              {space.spaceName}
-                            </ClisckedListItem>
-                          ) : (
-                            <ListItem
-                              onClick={() =>
-                                onClickSpaceListHandler(space.spaceId)
-                              }
-                            >
-                              {space.spaceName}
-                            </ListItem>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
-                  </SpaceInnerList>
-                </div>
-              );
-          })}
-          {spaces?.map(space => {
-            const isClicked = space.spaceId === clickedSpaceId;
-            if (space && space.floorId === null)
-              return (
-                <React.Fragment key={space.spaceId}>
-                  {isClicked ? (
-                    <ClisckedListItem
-                      onClick={() => onClickSpaceListHandler(space.spaceId)}
-                    >
-                      {space.spaceName}/{space.spaceId}
-                    </ClisckedListItem>
-                  ) : (
-                    <ListItem
-                      onClick={() => onClickSpaceListHandler(space.spaceId)}
-                    >
-                      {space.spaceName}
-                    </ListItem>
-                  )}
-                </React.Fragment>
-              );
-            // if (space && space.floorId !== null) return null;
-          })}
-        </StSpaceList>
+        <StListbox>
+          <StSpaceList>
+            {floors?.map(floor => {
+              if (floor && floor.spaceList?.length > 0)
+                return (
+                  <div key={floor.floorId}>
+                    <ListFloor>{floor.floorName}</ListFloor>
+                    <SpaceInnerList>
+                      {floor.spaceList.map(space => {
+                        const isClicked = space.spaceId === clickedSpaceId;
+                        return (
+                          <React.Fragment key={space.spaceId}>
+                            {isClicked ? (
+                              <ClisckedListItem
+                                onClick={() =>
+                                  onClickSpaceListHandler(space.spaceId)
+                                }
+                              >
+                                {space.spaceName}
+                              </ClisckedListItem>
+                            ) : (
+                              <ListItem
+                                onClick={() =>
+                                  onClickSpaceListHandler(space.spaceId)
+                                }
+                              >
+                                {space.spaceName}
+                              </ListItem>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </SpaceInnerList>
+                  </div>
+                );
+            })}
+            {spaces?.map(space => {
+              const isClicked = space.spaceId === clickedSpaceId;
+              if (space && space.floorId === null)
+                return (
+                  <React.Fragment key={space.spaceId}>
+                    {isClicked ? (
+                      <ClisckedListItem
+                        onClick={() => onClickSpaceListHandler(space.spaceId)}
+                      >
+                        {space.spaceName}/{space.spaceId}
+                      </ClisckedListItem>
+                    ) : (
+                      <ListItem
+                        onClick={() => onClickSpaceListHandler(space.spaceId)}
+                      >
+                        {space.spaceName}
+                      </ListItem>
+                    )}
+                  </React.Fragment>
+                );
+              // if (space && space.floorId !== null) return null;
+            })}
+          </StSpaceList>
+        </StListbox>
       </Column>
       {/* 보더 영역 */}
       {spaces.length > 0 ? (

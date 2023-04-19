@@ -5,7 +5,14 @@ import { __addInnerSpace } from '../../redux/modules/spacesSlice';
 import InnerSpaceItem from './InnerSpaceItem';
 import { InnerList, StAddInnerBtn, StInnerList } from './SpaceStyles';
 
-function InnerSpaceList({ floor, onClickSpaceListHandler }) {
+function InnerSpaceList({
+  floor,
+  onClickSpaceListHandler,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   const dispatch = useDispatch();
 
   // 그냥 space 추가
@@ -30,6 +37,10 @@ function InnerSpaceList({ floor, onClickSpaceListHandler }) {
               dispatch={dispatch}
               space={space}
               onClickSpaceListHandler={onClickSpaceListHandler}
+              dragStart={dragStart}
+              onAvailableItemDragEnter={onAvailableItemDragEnter}
+              onDragOver={onDragOver}
+              onDragEnd={onDragEnd}
             />
           ))
         : null}

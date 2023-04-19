@@ -14,9 +14,18 @@ import {
   StOpenList,
 } from './SpaceStyles';
 
-function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
+function FloorItem({
+  floor,
+  dispatch,
+  onClickSpaceListHandler,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   // floor 삭제
   const onDeleteFloorHandler = async floorId => {
+    console.log(floorId);
     dispatch(__deleteFloor(floorId));
   };
   //floor name 수정
@@ -42,19 +51,36 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
         {!floorEdit ? (
           <>
             {!isMd ? (
-              <StList>
-                <Row>
-                  <StListItem key={floor.floorId}>{floor.floorName}</StListItem>
+              <StList
+                key={floor.floorId}
+                data-floor-id={floor.floorId}
+                draggable
+                // data-space-id={floor.spaceId}
+                // data-space-name={floor.spaceName}
+                // onDragStart={e => dragStart(e, floor)}
+                onDragEnter={e => onAvailableItemDragEnter(e, floor)}
+                onDragOver={onDragOver}
+                onDragEnd={e => onDragEnd(e, floor)}
+              >
+                <Row data-floor-id={floor.floorId}>
+                  <StListItem data-floor-id={floor.floorId} key={floor.floorId}>
+                    {floor.floorName}
+                  </StListItem>
                   <StOpenBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       setIsMd(!isMd);
                     }}
                   >
-                    <img src="img/listOpenIcon.png" />
+                    <img
+                      data-floor-id={floor.floorId}
+                      src="img/listOpenIcon.png"
+                    />
                   </StOpenBtn>
                 </Row>
-                <StListBtnBox>
+                <StListBtnBox data-floor-id={floor.floorId}>
                   <BoxBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       setFloorEdit(!floorEdit);
                     }}
@@ -62,6 +88,7 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
                     수정
                   </BoxBtn>
                   <BoxSubBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       const confirmDelete =
                         window.confirm('정말 삭제하시겠습니까?');
@@ -75,19 +102,26 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
                 </StListBtnBox>
               </StList>
             ) : (
-              <StOpenList>
-                <Row>
-                  <StListItem key={floor.floorId}>{floor.floorName}</StListItem>
+              <StOpenList data-floor-id={floor.floorId}>
+                <Row data-floor-id={floor.floorId}>
+                  <StListItem data-floor-id={floor.floorId} key={floor.floorId}>
+                    {floor.floorName}
+                  </StListItem>
                   <StOpenBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       setIsMd(!isMd);
                     }}
                   >
-                    <img src="img/listCloseIcon.png" />
+                    <img
+                      data-floor-id={floor.floorId}
+                      src="img/listCloseIcon.png"
+                    />
                   </StOpenBtn>
                 </Row>
-                <StListBtnBox>
+                <StListBtnBox data-floor-id={floor.floorId}>
                   <BoxBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       setFloorEdit(!floorEdit);
                     }}
@@ -95,6 +129,7 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
                     수정
                   </BoxBtn>
                   <BoxSubBtn
+                    data-floor-id={floor.floorId}
                     onClick={() => {
                       const confirmDelete =
                         window.confirm('정말 삭제하시겠습니까?');
@@ -112,20 +147,26 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
               <InnerSpaceList
                 floor={floor}
                 onClickSpaceListHandler={onClickSpaceListHandler}
+                dragStart={dragStart}
+                onAvailableItemDragEnter={onAvailableItemDragEnter}
+                onDragOver={onDragOver}
+                onDragEnd={onDragEnd}
               />
             ) : null}
           </>
         ) : (
-          <Row>
+          <StList data-floor-id={floor.floorId}>
             <EditInput
+              data-floor-id={floor.floorId}
               type="text"
               value={editFloorName}
               onChange={e => {
                 setEditFloorName(e.target.value);
               }}
             />
-            <div>
+            <StListBtnBox>
               <BoxBtn
+                data-floor-id={floor.floorId}
                 onClick={() => {
                   onEditFloorNameHandler(floor.floorId);
                 }}
@@ -133,14 +174,15 @@ function FloorItem({ floor, dispatch, onClickSpaceListHandler }) {
                 완료
               </BoxBtn>
               <BoxSubBtn
+                data-floor-id={floor.floorId}
                 onClick={() => {
                   setFloorEdit(!floorEdit);
                 }}
               >
                 취소
               </BoxSubBtn>
-            </div>
-          </Row>
+            </StListBtnBox>
+          </StList>
         )}
       </div>
     </>
