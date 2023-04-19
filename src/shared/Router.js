@@ -15,31 +15,30 @@ import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
 import { cookies } from './cookies';
 
 function Router() {
-
-  const cooki = cookies.get('token');
+  // const cooki = cookies.get('token');
 
   return (
     <BrowserRouter>
-      {cooki ? <Header/> : null}
+      {/* {cooki ? <Header/> : null} */}
       <Routes>
-        <Route path="/" element={ <Welcome />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
-        
-        {cooki ? (
+
+        {/* {cooki ? ( */}
         <>
-        <Route path="/calender/:id" element={<Calendar />} />
-        <Route
-          path="/schedulescalendar/:userId"
-          element={<SchedulesCalendar />}
-        />
-        <Route path="/scheduledetail/:userId" element={<SchedulesDetail/>} />
-        <Route path="/detail/:userId" element={<ReservationDetail />} />
-        <Route path="/adminspace" element={<AdminSpace />} />
-        <Route path="/space" element={<Space />} />
+          <Route path="/calender/:id" element={<Calendar />} />
+          <Route
+            path="/schedulescalendar/:userId"
+            element={<SchedulesCalendar />}
+          />
+          <Route path="/scheduledetail/:userId" element={<SchedulesDetail />} />
+          <Route path="/detail/:userId" element={<ReservationDetail />} />
+          <Route path="/adminspace" element={<AdminSpace />} />
+          <Route path="/space" element={<Space />} />
         </>
-        ) :null}
+        {/* ) :null} */}
 
         <Route path="/*" element={<NotFound />} />
       </Routes>

@@ -47,7 +47,8 @@ function AdminSpace() {
     const role = cookies.get('role');
 
     if (token === undefined) {
-      navi('/');
+      // navi('/');
+      navi('/login');
     } else if (role === 'ADMIN') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
@@ -147,7 +148,7 @@ function AdminSpace() {
                       setIsModal(!isModal);
                     }}
                   >
-                    수정하기
+                    스페이스 관리하기
                   </StSubBtn>
                   <StBtn onClick={() => navi('/space')}>완료</StBtn>
                 </Row>

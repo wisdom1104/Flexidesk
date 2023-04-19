@@ -101,7 +101,7 @@ function CreateSpace({
   return (
     <>
       {
-        isModal == false ? (
+        isModal ? (
           <ModalBackground
             onClick={() => {
               setIsModal(!isModal);

@@ -35,8 +35,8 @@ function AdminSpaceBox({
 
   // console.log('space', space);
 
-  const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
+  const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '박스' }]);
 
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
@@ -295,16 +295,14 @@ function AdminSpaceBox({
                 <Row key={item.spaceId}>
                   <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
                   <SubIcon>&gt;</SubIcon>
-                  <SubTitle key={item.spaceId}>
-                    {item.spaceName}/{item.spaceId}
-                  </SubTitle>
+                  <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
                 </Row>
               );
             if (item && item.floorId === null)
               return (
                 <SubTitle key={item.spaceId}>
                   {/* if(item.floorId) */}
-                  {item.spaceName}/{item.spaceId}
+                  {item.spaceName}
                 </SubTitle>
               );
           })}

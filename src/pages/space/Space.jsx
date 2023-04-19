@@ -34,14 +34,19 @@ function Space() {
   const token = cookies.get('token');
   // 관리자 가드
   const role = cookies.get('role');
+
   useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getFloors());
-  }, []);
-  useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getSpaces());
+    if (token === undefined) {
+      // navi('/');
+      navi('/login');
+    } else {
+      dispatch(__getFloors());
+      dispatch(__getSpaces());
+    }
   }, []);
 
   const [selectedSpace, setSelectedSpace] = useState(null);
+  // console.log('token', token);
 
   useEffect(() => {
     setSelectedSpace(spaces[0]);
@@ -109,7 +114,7 @@ function Space() {
                       <ClisckedListItem
                         onClick={() => onClickSpaceListHandler(space.spaceId)}
                       >
-                        {space.spaceName}/{space.spaceId}
+                        {space.spaceName}
                       </ClisckedListItem>
                     ) : (
                       <ListItem

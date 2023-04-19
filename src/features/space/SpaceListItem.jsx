@@ -11,7 +11,7 @@ import {
   StListItem,
 } from './SpaceStyles';
 
-function SpaceItem({
+function SpaceListItem({
   space,
   onClickSpaceListHandler,
   dispatch,
@@ -55,11 +55,9 @@ function SpaceItem({
             onDragEnter={e => onAvailableItemDragEnter(e, space)}
             onDragOver={onDragOver}
             onDragEnd={e => onDragEnd(e, space)}
+            onClick={() => onClickSpaceListHandler(space.spaceId)}
           >
-            <StListItem
-              data-floor-id={space.floorId}
-              onClick={() => onClickSpaceListHandler(space.spaceId)}
-            >
+            <StListItem data-floor-id={space.floorId}>
               {space.spaceName}
             </StListItem>
             <StListBtnBox>
@@ -115,4 +113,4 @@ function SpaceItem({
   );
 }
 
-export default SpaceItem;
+export default SpaceListItem;

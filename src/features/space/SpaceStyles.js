@@ -551,8 +551,8 @@ export const BoxInput = styled.input`
 export const ModalBackground = styled.div`
   position: fixed;
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.7);
   width: 100vw;
   height: 100vh;
