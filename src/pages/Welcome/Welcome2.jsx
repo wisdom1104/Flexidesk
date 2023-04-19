@@ -10,7 +10,6 @@ import {
 function Welcome2() {
   return (
     <>
-      <StBackground background="#fff">
         <StOverall>
           <StWrapDiv>
           <div 
@@ -33,7 +32,6 @@ function Welcome2() {
           </StSmallFont>
           </StWrapDiv>
         </StOverall>
-      </StBackground>
     </>
   );
 }

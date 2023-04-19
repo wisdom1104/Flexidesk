@@ -6,6 +6,12 @@ export const StBackground = styled.div`
   height: ${props => props.height || ''};
 `;
 
+//그라데이션 배경
+export const StGradationBackground = styled.div`
+background: linear-gradient(180deg, #FFFFFF 0%, #DEF1EF 100%);
+height: 1569px;
+`
+
 // 전체 공통 스타일
 export const StOverall = styled.div`
   max-width: 1440px;

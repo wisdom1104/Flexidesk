@@ -1,13 +1,14 @@
 import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StOverall, StSmallFont, StWrapDiv } from './WelcomeStyled';
+import { StBackground, StBlueButton, StButtonGap, StGradationBackground, StOverall, StSmallFont, StWrapDiv } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
+import Welcome2 from './Welcome2';
 
 function Welcome1() {
     const navi = useNavigate();
 
   return (
     <>
-      <StBackground id='signup'>
+      <StGradationBackground id='signup'>
     <StOverall height='44vw'>
       <StWrapDiv>
     <StSmallFont>
@@ -35,7 +36,8 @@ function Welcome1() {
           </StButtonGap>
           </StWrapDiv>
     </StOverall>
-    </StBackground>
+    <Welcome2 />
+    </StGradationBackground>
 
     </>
   )

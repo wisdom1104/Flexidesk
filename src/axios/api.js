@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { cookies, getCookie, removeCookie } from '../shared/cookies';
+import { cookies } from '../shared/cookies';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL,
+  // baseURL: process.env.REACT_APP_SERVER_URL,
+  baseURL: '54.180.152.100:8080',
 });
 
 api.interceptors.response.use(
@@ -12,33 +13,35 @@ api.interceptors.response.use(
 
   async function (error) {
   const originalConfig = error.config;
-  try {
-    const refreshToken = getCookie("refreshToken");
-    const expire = getCookie("expire");
-    console.log('refreshToken->>>>>>>>>>',refreshToken);
-    console.log('expire->>>>>>>>>>',expire);
 
+  if(error.response.data.statusCode === 401 && ! originalConfig._retry) {
+    originalConfig._retry = true;
+
+    try {
+    const refreshToken = cookies.get('refresh_token');
+    console.log('refreshToken---->',refreshToken);
 
     const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/refresh`, {
       headers: {
-        "Refresh-Token": refreshToken,
-        "Access-Token-Expire": expire,
+        "refresh_token": `Bearer ${refreshToken}`,
       },
     });
-    console.log('data->>>>>>>>>>',data);
+    console.log('data------>',data);
 
-    const newInfo = data.headers["authorization"];
-    const newToken = newInfo.split(" ")[1];
-    cookies.remove("token",{path: "/"});
-    cookies.set("token", newToken, {path: "/"} )
-
+    const newToken = data.headers["authorization"].split(" ")[1];
+    console.log('newToken',newToken);
+    
+    // cookies.remove("token",{path: "/"});
+    cookies.set("token", newToken, {path: "/"} );
+    
+    
     return await api.request(originalConfig);
-
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log('error->>>>>>>>>>',error);
+  }
+  return Promise.reject(error); 
   }
   }
 )
-
 
 export default api;
