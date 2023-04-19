@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 
 //배경
 export const StBackground = styled.div`
-  background: ${props => props.background || '#d2ece9'};
+  background: ${props => props.background || '#DEF1EF'};
   height: ${props => props.height || ''};
 `;
 
 //그라데이션 배경
 export const StGradationBackground = styled.div`
 background: linear-gradient(180deg, #FFFFFF 0%, #DEF1EF 100%);
-height: 1569px;
+height: 1500px;
 `
 
 // 전체 공통 스타일
@@ -20,6 +20,7 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
+
 `;
 
 export const StWrapDiv = styled.div`
@@ -32,6 +33,7 @@ export const StWrapDiv = styled.div`
 
   margin: 120px;
 `;
+
 
 // 폰트
 export const StFont = styled.p`
@@ -48,22 +50,42 @@ export const StFont = styled.p`
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
   
-`;
+  /* border: 1px solid red; */
 
+`;
+//작은 폰트
 export const StSmallFont = styled.p`
-  width: ${props => props.width || '38vw'};
+  width: ${props => props.width || '48vw'};
   height: ${props => props.height || ''};
-  left: ${props => props.left || '597px'};
+  /* left: ${props => props.left || '597px'}; */
   margin-bottom: ${props => props.marginBottom || ''};
   margin-top: ${props => props.marginTop || ''};
 
   font-weight: ${props => props.weight || '500'};
   font-size: ${props => props.fontSize || '1.125rem'};
-  line-height: 150%;
+  line-height: 200%;
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
 `;
+
+//그라데이션 폰트
+export const StGradationFont = styled.p`
+  width: ${props => props.width || '48vw'};
+  padding: 100px;
+
+  font-weight: 700;
+  font-size: ${props => props.fontSize || '3rem'};
+  line-height: 150%;
+  text-align: ${props => props.align || 'center'};
+
+
+  background: linear-gradient(180deg, #07133B 15.36%, #ACDAD8 119.53%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+`
 
 // 버튼
 export const StButtonGap = styled.div`
@@ -81,10 +103,11 @@ export const StButtonGap = styled.div`
 `;
 
 export const StBlueButton = styled.button`
-  width: 50vw;
-  height: 12vh;
-  left: 28.7vw;
-  top: 50vh;
+
+  width: 312px;
+  height: 80px;
+  left: 392px;
+  top: 632px;
 
   display: flex;
   flex-direction: row;
@@ -96,10 +119,12 @@ export const StBlueButton = styled.button`
   border-radius: 50px;
 
   color: #fff;
-  font-size: 1.125rem;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 34px;
+  line-height: 24px;
 `;
+
+
 
 // welcome 4
 export const StIntroArray = styled.div`
@@ -138,19 +163,28 @@ export const StIntroWrite = styled.div`
 
 // welcome 5
 export const StSpaceDiv = styled.div`
+  width: ${props => props.width || ''};
   margin-bottom: 100px;
 `;
 
-export const StSpacePhoto = styled.div`
-  width: 168vh;
-  height: 37vw;
 
-  margin-top: 15px;
+export const StSpacePagePhoto = styled.img`
+  max-width: 100%;
+  height: auto;
+  width: 1200px;
+  object-fit: contain;
 
-  background: #eeeded;
-  box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: url(image.png);
+  filter: drop-shadow(0px 8px 40px rgba(140, 159, 157, 0.25));  
   border-radius: 8px;
 `;
+
 
 //welcome 7
 export const StfontA = styled.a`
@@ -197,12 +231,12 @@ export const StSlider = styled.div`
   width: 1100px;
   height: 518px;
   
-  background: #d9d9d9;
+  background: #fff;
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
   background-position: center center;
   background-size: cover;
-  border-radius: 10px;
+  border-radius: 8px;
 
   display: flex;
   flex-direction: column;  

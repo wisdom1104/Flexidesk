@@ -42,7 +42,7 @@ function Welcome7() {
 
       {/* 방법2 */}
       <StBackground background="#fff">
-        <StOverall>
+        <StOverall height='40vw'>
           <StWrapDiv>
             <StfontA href="#signup">
               <StFont>

@@ -23,7 +23,6 @@ const GlobalStyles = createGlobalStyle`
 		--point : #ffcccc;
 		--notice : #ff7776; */
   };
-
 `
 
 export default GlobalStyles;

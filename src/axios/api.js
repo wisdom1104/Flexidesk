@@ -3,7 +3,7 @@ import { cookies } from '../shared/cookies';
 
 const api = axios.create({
   // baseURL: process.env.REACT_APP_SERVER_URL,
-  baseURL: '54.180.152.100:8080',
+  baseURL: 'http://54.180.152.100',
 });
 
 api.interceptors.response.use(
@@ -21,7 +21,7 @@ api.interceptors.response.use(
     const refreshToken = cookies.get('refresh_token');
     console.log('refreshToken---->',refreshToken);
 
-    const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/refresh`, {
+    const data = await axios.get('http://54.180.152.100/users/refresh', {
       headers: {
         "refresh_token": `Bearer ${refreshToken}`,
       },
@@ -33,7 +33,6 @@ api.interceptors.response.use(
     
     // cookies.remove("token",{path: "/"});
     cookies.set("token", newToken, {path: "/"} );
-    
     
     return await api.request(originalConfig);
   } catch (error) {
