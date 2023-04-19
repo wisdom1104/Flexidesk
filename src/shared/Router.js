@@ -8,7 +8,7 @@ import Space from '../pages/space/Space';
 import ReservationDetail from '../pages/Reservation/ReservationDetail';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
-import React, { useState } from 'react';
+import React from 'react';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/Schedules/SchedulesDetail';

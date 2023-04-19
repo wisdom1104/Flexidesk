@@ -10,6 +10,7 @@ export const HeaderContain = styled.div`
   background-color: white;
 `;
 
+
 export const StHeaderButtonBox = styled.div`
   display: flex;
   gap: 35px;
@@ -21,6 +22,19 @@ export const StHeaderContentBox = styled.div`
   align-items: center;
   margin: 5px;
 `;
+
+export const StHaderFont = styled.p`
+  height: 19px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #15161A;
+
+`
 
 export const StHeaderContentButtonBox = styled.div`
   display: flex;
@@ -42,3 +56,7 @@ export const StHeaderButton = styled.button`
   border: 1px solid transparent;
   font-family: inherit;
 `;
+
+export const StHeaderLogo = styled.img`
+  width: 150px;
+`

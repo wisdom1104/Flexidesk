@@ -90,12 +90,15 @@ function SignUpUser() {
         <div
           style={{
             marginTop: '80px',
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="570px">
             <StForm>
               <StFormBox>
-                <StFont align="start" fontSize="28px">
+                <StFont width='100%' align="start" fontSize="28px">
                   회원가입
                 </StFont>
 
@@ -106,7 +109,6 @@ function SignUpUser() {
                     fontSize="0.875rem"
                     weight="700"
                     marginTop="10px"
-                    marginBottom="10px"
                   >
                     사용자 이름
                   </StSmallFont>
@@ -126,7 +128,6 @@ function SignUpUser() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     회사 이메일
                   </StSmallFont>
@@ -157,7 +158,6 @@ function SignUpUser() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     비밀번호
                   </StSmallFont>

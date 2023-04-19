@@ -41,7 +41,6 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
-      console.log('로그인 헤더---->>',response.headers);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -83,18 +82,23 @@ function Login() {
         <div
           style={{
             marginTop: '150px',
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
           }}
         >
           <StLoginForm onSubmit={onsubmitHandler} width="420px">
             <StForm>
               <StFormBox>
             <StFont
+            width='100%'
               align="start"
               fontSize="28px"
             >
               로그인
             </StFont>
             <StSmallFont 
+            width='100%'
             align="start" 
             fontSize="1rem"
             marginTop='10px'

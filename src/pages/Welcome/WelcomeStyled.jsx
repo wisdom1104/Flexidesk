@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+
 //배경
 export const StBackground = styled.div`
   background: ${props => props.background || '#DEF1EF'};
@@ -45,12 +46,10 @@ export const StFont = styled.p`
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
 
-  color: ${props => props.color || '#07133b'};
+  color: ${props => props.color || 'var(--blue)'};
 
   padding: ${props => props.padding || ''};
   padding-top: ${props => props.paddingTop || ''};
-  
-  /* border: 1px solid red; */
 
 `;
 //작은 폰트
@@ -67,6 +66,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+
 `;
 
 //그라데이션 폰트
@@ -80,7 +80,7 @@ export const StGradationFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
 
-  background: linear-gradient(180deg, #07133B 15.36%, #ACDAD8 119.53%);
+  background: linear-gradient(180deg, var(--blue) 15.36%, #ACDAD8 119.53%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,7 +103,6 @@ export const StButtonGap = styled.div`
 `;
 
 export const StBlueButton = styled.button`
-
   width: 312px;
   height: 80px;
   left: 392px;
@@ -115,16 +114,20 @@ export const StBlueButton = styled.button`
   justify-content: center;
   padding: 30px 60px;
 
-  background: #07133b;
-  border-radius: 50px;
-
-  color: #fff;
+  color: var(--white);
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
+
+  background: linear-gradient(276.35deg, var(--blue) 10.61%, var(--lightblue)85.36%);
+  border-radius: 64px;
+  &:hover {
+    background: var(--lightblue);
+  }
+  &:focus {
+    background: var(--blue);
+  }
 `;
-
-
 
 // welcome 4
 export const StIntroArray = styled.div`
@@ -231,7 +234,7 @@ export const StSlider = styled.div`
   width: 1100px;
   height: 518px;
   
-  background: #fff;
+  background: var(--white);
   box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
   border-radius: 8px;
   background-position: center center;

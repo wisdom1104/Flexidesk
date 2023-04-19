@@ -31,7 +31,8 @@ function CertificationCkeck({ user,certification, onChange }) {
       align="start" 
       fontSize="0.875rem" 
       weight="700"
-      marginBottom='10px'
+      marginBottom="10px"
+
       >
         인증번호
       </StSmallFont>

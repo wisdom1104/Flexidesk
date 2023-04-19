@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { isLoginActions } from '../redux/modules/loginSlice';
@@ -10,6 +10,8 @@ import {
   StHeaderContentBox,
   StHeaderContentButtonBox,
   StHeaderButton,
+  StHeaderLogo,
+  StHaderFont,
 } from './HeaderStyled';
 
 function Header() {
@@ -34,38 +36,44 @@ function Header() {
     <StHeader>
       {cookies.get('token') ? (
         <HeaderContain>
-          <StHeaderContentBox onClick={onClcikHandelr}>로고다</StHeaderContentBox>
+          <StHeaderContentBox>
+            <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+          </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
-              스페이스
+              <StHaderFont>스페이스</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox
               onClick={() => navi(`/schedulescalendar/${userId}`)}
             >
-              스케줄 등록
+              <StHaderFont>스케줄 등록</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox
               onClick={() => navi(`/scheduledetail/${userId}`)}
             >
-              스케줄 조회
+              <StHaderFont>스케줄 조회</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
-              회의실 예약현황
+            <StHaderFont>회의실 예약현황</StHaderFont>
             </StHeaderContentBox>
-            <StHeaderContentBox>{`${userName}님 환영합니다`}</StHeaderContentBox>
+            <StHeaderContentBox>
+            <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
+            </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-                Logout
+              Logout
               </StHeaderButton>
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
         </HeaderContain>
       ) : (
         <HeaderContain>
-          <StHeaderContentBox onClick={onClcikHandelr}>로고여</StHeaderContentBox>
+          <StHeaderContentBox>
+          <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+          </StHeaderContentBox>
           <StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/`)}>
-              서비스 소개
+            <StHaderFont>서비스 소개</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={() => navi('/login')}>

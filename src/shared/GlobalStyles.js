@@ -1,6 +1,14 @@
 import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
+
+${reset}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+  }
 
 :root {
 			/* color */
@@ -17,6 +25,8 @@ const GlobalStyles = createGlobalStyle`
     --darkgrey: #8B93A6;
     --grey: #C9CDD6;
     --lightgrey: #F1F2F4;
+
+    --white : #ffffff;
 
     /* --line: #eaeaea;
 		--white : #ffffff;

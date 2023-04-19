@@ -9,7 +9,6 @@ import {
   StOverall,
   StSmallFont,
   StWrapDiv,
-  Stquadrilateral,
 } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
 import Welcome2 from './Welcome2';

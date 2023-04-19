@@ -9,6 +9,7 @@ import {
   StLongButton,
   StOverall,
   StTextInput,
+  SterrorFont,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
@@ -29,7 +30,7 @@ function SignUpAdmin() {
   const [passwordCheckError, setPasswordCheckError] = useState('');
 
     // 가드
-    // useTrueHook();
+    useTrueHook();
 
   const navi = useNavigate();
 
@@ -79,13 +80,16 @@ function SignUpAdmin() {
         <div
           style={{
             marginTop: '80px',
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
           }}
         >
           <StLoginForm onSubmit={handleSubmit}
           height='650px'>
             <StForm>
               <StFormBox>
-                <StFont align="start" fontSize="28px">
+                <StFont width='100%' align="start" fontSize="28px">
                   관리자 회원가입
                 </StFont>
 
@@ -95,7 +99,6 @@ function SignUpAdmin() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     사용자 이름
                   </StSmallFont>
@@ -107,8 +110,7 @@ function SignUpAdmin() {
                     required
                   />
                 </StTextInput>
-
-                <StTextInput height='80px'>
+                <StTextInput height='100%'>
                   <Certification 
                   admin={admin}
                   setAdmin={setAdmin}
@@ -117,13 +119,12 @@ function SignUpAdmin() {
                   />
                 </StTextInput>
 
-                <StTextInput>
+                <StTextInput  height='65px'>
                   <StSmallFont
                     width
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     비밀번호
                   </StSmallFont>
@@ -137,19 +138,21 @@ function SignUpAdmin() {
                     maxlength="16"
                   />
                 </StTextInput>
-                {passwordError && (
+                <SterrorFont>
+                  {passwordError && (
                   <StSmallFont
-                    width
+                    width='420px'
                     align="start"
                     fontSize="0.875rem"
-                    weight="700"
+                    weight="400"
                     color="red"
                   >
                     {passwordError}
                   </StSmallFont>
                 )}
+                </SterrorFont>
 
-                <StTextInput height='45px'>
+                <StTextInput height='35px' >
                   <Input
                     type="password"
                     value={admin.passwordCheck}
@@ -160,17 +163,19 @@ function SignUpAdmin() {
                     maxlength="16"
                   />
                 </StTextInput>
+                <SterrorFont>
                 {passwordCheckError && (
                   <StSmallFont
-                    width
-                    align="start"
+                  width='420px'
+                  align="start"
                     fontSize="0.875rem"
-                    weight="700"
+                    weight="400"
                     color="red"
                   >
                     {passwordCheckError}
                   </StSmallFont>
                 )}
+                </SterrorFont>
 
                 <StTextInput>
                   <StSmallFont
@@ -178,7 +183,6 @@ function SignUpAdmin() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     회사
                   </StSmallFont>
@@ -198,7 +202,6 @@ function SignUpAdmin() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     인증번호
                   </StSmallFont>

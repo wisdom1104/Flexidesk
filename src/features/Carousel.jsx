@@ -78,8 +78,8 @@ const Carousel = () => {
           <StSliders animate={animate}>
           {genSlidersArray(index).map((item, index) => (
           <StSlider key={index}>
-            <StSmallFont height='50%' fontSize='1.6rem' align='start' weight='700'> "{item?.component}" </StSmallFont>
-            <StFont fontSize='20px' align='end' paddingTop='150px'>{item?.name}</StFont>
+            <StSmallFont height='50%' fontSize='1.5rem' align='start' weight='700'> "{item?.component}" </StSmallFont>
+            <StFont fontSize='20px' align='end' paddingTop='100px'>{item?.name}</StFont>
           </StSlider>
           ))}
         </StSliders>
