@@ -41,6 +41,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
+      console.log('로그인 헤더---->>',response.headers);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -77,11 +78,11 @@ function Login() {
   }
 
   return (
-    <StBackground>
+    <StBackground height='843px'>
       <StOverall>
         <div
           style={{
-            marginTop: '80px',
+            marginTop: '150px',
           }}
         >
           <StLoginForm onSubmit={onsubmitHandler} width="420px">
@@ -112,7 +113,7 @@ function Login() {
 
             <Input
               type="email"
-              value={user.email || ''}
+              value={user.email}
               onChange={e => {
                 validEmail(e);
                 setUser({ ...user, email: e.target.value });
@@ -133,7 +134,7 @@ function Login() {
             </StLoginIconDiv>
             <Input
             type="password"
-            value={user.password || ''}
+            value={user.password}
             onChange={onChangeHandler}
             name="password"
             placeholder="비밀번호"

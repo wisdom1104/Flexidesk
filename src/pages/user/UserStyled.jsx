@@ -11,7 +11,6 @@ export const StOverall = styled.div`
   max-width: 1440px;
   min-width: 410px;
   min-height: 680px;
-  /* height: ${props => props.height || '40vw'}; */
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -23,7 +22,7 @@ export const StLoginForm = styled.form`
   background: #ffffff;
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
   border-radius: 8px;
-  padding: 20px;
+  padding: 40px;
 `;
 
 // 폼 전체 감싸는 div
@@ -35,11 +34,12 @@ export const StForm = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+
 `;
 
 export const StFormBox = styled.div`
   width: 420px;
-  height: 78px;
+  height: 84px;
 `;
 
 // 버튼
@@ -81,6 +81,7 @@ export const StLoginContain = styled.div`
   
   align-items: center;
   display: flex;
+
 `
 
 export const StLoginIconDiv = styled.div`
@@ -89,22 +90,20 @@ export const StLoginIconDiv = styled.div`
   display:flex;
   align-items:center;
   padding-right:10px;
+
 `
-
 export const StLoginIcon = styled.img`
-  position: absolute;
+  width: 20px;
   display: inline-block;
-  width:20px;
-  /* left: 37%; */
-  left: 40vw;
+  margin-left: 20px;
   z-index: 1;
-
 `
 
 // signup
 export const StTextInput = styled.div`
-  width: 27.5vw;
-  height: ${props => props.height || '108px'};
+  width: 24vw;
+  height: ${props => props.height || '75px'};
+  margin-top: 16px;
 `;
 
 /////////////////////////////
@@ -117,7 +116,7 @@ export const Container = styled.div`
 
 export const InlineInput = styled.input`
   width: 80%;
-  height: 55px;
+  height: 50px;
 
   border: 1px solid #a6aebb;
   border-radius: 8px;
@@ -137,7 +136,7 @@ export const InlineInput = styled.input`
 
 export const InlinButton = styled.input`
   width: 20%;
-  height: 55px;
+  height: 48px;
 
   outline: none;
   margin-left: 10px;

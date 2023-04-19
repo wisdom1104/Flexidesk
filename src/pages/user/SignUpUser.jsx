@@ -32,7 +32,7 @@ function SignUpUser() {
   const navi = useNavigate();
 
   // 가드
-  // useTrueHook();
+  useTrueHook();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -56,9 +56,9 @@ function SignUpUser() {
     } else {
       setPasswordError('');
     }
-};
+  };
 
-const handlepasswordCheckChange = event => {
+  const handlepasswordCheckChange = event => {
     const value = event.target.value;
     setUser(prevState => ({ ...prevState, passwordCheck: value }));
 
@@ -67,13 +67,13 @@ const handlepasswordCheckChange = event => {
     } else {
       setPasswordCheckError('');
     }
-};
+  };
 
   const submitBtnHandler = async e => {
     e.preventDefault();
-    try {      
+    try {
       const response = await api.post('/users/signup/user', user);
-      console.log('response',user);
+      console.log('response', user);
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -85,14 +85,14 @@ const handlepasswordCheckChange = event => {
   };
 
   return (
-    <StBackground height="900px">
+    <StBackground height="844px">
       <StOverall>
         <div
           style={{
             marginTop: '80px',
           }}
         >
-          <StLoginForm onSubmit={submitBtnHandler} height="695px">
+          <StLoginForm onSubmit={submitBtnHandler} height="570px">
             <StForm>
               <StFormBox>
                 <StFont align="start" fontSize="28px">
@@ -105,7 +105,7 @@ const handlepasswordCheckChange = event => {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginTop='10px'
+                    marginTop="10px"
                     marginBottom="10px"
                   >
                     사용자 이름
@@ -113,7 +113,9 @@ const handlepasswordCheckChange = event => {
                   <Input
                     type="text"
                     value={user.username}
-                    onChange={event => setUser({...user, username: event.target.value})}
+                    onChange={event =>
+                      setUser({ ...user, username: event.target.value })
+                    }
                     placeholder="이름을 입력하세요."
                     required
                   />
@@ -139,15 +141,15 @@ const handlepasswordCheckChange = event => {
                   />
                 </StTextInput>
 
-                <StTextInput
-                  height='118px'
-                  >
-                    <CertificationCkeck
-                      user={user}
-                      certification={user.certification}
-                      onChange={event => setUser({...user, certification: event.target.value})}
-                    />
-                  </StTextInput>
+                <StTextInput height="80px">
+                  <CertificationCkeck
+                    user={user}
+                    certification={user.certification}
+                    onChange={event =>
+                      setUser({ ...user, certification: event.target.value })
+                    }
+                  />
+                </StTextInput>
 
                 <StTextInput>
                   <StSmallFont
@@ -181,21 +183,12 @@ const handlepasswordCheckChange = event => {
                   </StSmallFont>
                 )}
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    marginBottom="10px"
-                  >
-                    비밀번호 확인
-                  </StSmallFont>
+                <StTextInput height="45px">
                   <Input
                     type="password"
                     value={user.passwordCheck}
                     onChange={handlepasswordCheckChange}
-                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                    placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
                     required
                     minlength="8"
                     maxlength="16"
@@ -213,8 +206,13 @@ const handlepasswordCheckChange = event => {
                   </StSmallFont>
                 )}
 
-
-                <StLongButton type="submit">확인</StLongButton>
+                <div
+                  style={{
+                    marginTop: '20px',
+                  }}
+                >
+                  <StLongButton type="submit">확인</StLongButton>
+                </div>
               </StFormBox>
             </StForm>
           </StLoginForm>

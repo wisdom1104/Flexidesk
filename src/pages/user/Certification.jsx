@@ -62,7 +62,7 @@ function Certification({ admin, setAdmin, email  }) {
           value={email}
           onChange={handleEmailChange}
           name="email"
-          placeholder="이메일을 입력하세요."
+          placeholder=" 이메일을 입력하세요."
           required
         />
 

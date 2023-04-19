@@ -74,7 +74,7 @@ function SignUpAdmin() {
   };
 
   return (
-    <StBackground height='1000px'>
+    <StBackground height='910px'>
       <StOverall>
         <div
           style={{
@@ -82,7 +82,7 @@ function SignUpAdmin() {
           }}
         >
           <StLoginForm onSubmit={handleSubmit}
-          height='815px'>
+          height='650px'>
             <StForm>
               <StFormBox>
                 <StFont align="start" fontSize="28px">
@@ -95,7 +95,6 @@ function SignUpAdmin() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginTop='10px'
                     marginBottom="10px"
                   >
                     사용자 이름
@@ -109,7 +108,7 @@ function SignUpAdmin() {
                   />
                 </StTextInput>
 
-                <StTextInput height="118px">
+                <StTextInput height='80px'>
                   <Certification 
                   admin={admin}
                   setAdmin={setAdmin}
@@ -150,21 +149,12 @@ function SignUpAdmin() {
                   </StSmallFont>
                 )}
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    marginBottom="10px"
-                  >
-                    비밀번호 확인
-                  </StSmallFont>
+                <StTextInput height='45px'>
                   <Input
                     type="password"
                     value={admin.passwordCheck}
                     onChange={handlepasswordCheckChange}
-                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                    placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
                     required
                     minlength="8"
                     maxlength="16"
@@ -221,7 +211,11 @@ function SignUpAdmin() {
                     required
                   />
                 </StTextInput>
+                <div style={{
+                  marginTop:'20px'
+                }}>
                 <StLongButton type="submit">확인</StLongButton>
+                </div>
               </StFormBox>
             </StForm>
           </StLoginForm>
