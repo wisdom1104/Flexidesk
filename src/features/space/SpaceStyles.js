@@ -17,16 +17,28 @@ export const StSpace = styled.div`
 `;
 
 // space 리스트
+export const StListbox = styled.div`
+  border-top: 1px solid #8b93a6;
+  border-bottom: 1px solid #8b93a6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 0px 19px; */
+  width: 180px;
+  margin: 0px 23px;
+`;
+
 export const StSpaceList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 10px;
-  margin: 16px;
+  /* padding: 10px; */
+  /* margin: 20px; */
   /* position: absolute; */
-  min-width: 213px;
+  min-width: 180px;
   /* height: 312px; */
-  height: 530px;
+  height: 500px;
 
   overflow: scroll;
   overflow-x: hidden;
@@ -38,7 +50,7 @@ export const StSpaceList = styled.div`
 
   /* 스크롤바 썸네일 스타일 변경 */
   ::-webkit-scrollbar-thumb {
-    background-color: #b6dfdd;
+    background: #8b93a6;
     border-radius: 50px; /* 스크롤바 모양 */
   }
 `;
@@ -61,7 +73,7 @@ export const SpaceInnerList = styled.div`
   flex-direction: column;
   padding-left: 15px;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 export const ListItem = styled.div`
@@ -70,6 +82,7 @@ export const ListItem = styled.div`
 `;
 
 export const ListFloor = styled.div`
+  margin-top: 15px;
   cursor: default;
   padding: 5px 10px;
 `;
@@ -93,6 +106,7 @@ export const Stmainspace = styled.div`
   /* height: 35.7292vh; */
   /* background: #f4fbf9; */
   background: steelblue;
+  background: linear-gradient(291.78deg, #a2cecf 0%, #b6dfdd 100%);
   border-radius: 8px;
   margin-top: 16px;
 `;
@@ -136,9 +150,9 @@ export const StBtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 24px;
+  padding: 8px 16px;
   gap: 5px;
-  width: 107px;
+  width: auto;
   height: 43px;
   background: #65bab6;
   border-radius: 8px;
@@ -364,9 +378,9 @@ export const StSubBtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 24px;
+  padding: 8px 16px;
   gap: 5px;
-  width: 107px;
+  width: auto;
   height: 43px;
   background: #def1ef;
   border: 1px solid #65bab6;
@@ -906,11 +920,14 @@ export const StInnerItem = styled.div`
   font-size: 16px;
   line-height: 19px;
   color: #000000;
-  margin-left: 34px;
+  margin-left: 30px;
 `;
 
 export const EditInput = styled.input`
   width: 120px;
   padding: 5px;
-  margin-left: 34px;
+  /* margin-left: 29px; */
+  outline: none;
+  border: 1px solid #8b93a6;
+  border-radius: 2px;
 `;

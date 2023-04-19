@@ -48,7 +48,7 @@ function BoxItem({
 
   return (
     <>
-      <StDropBox
+      <div
         key={box.boxId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -58,10 +58,8 @@ function BoxItem({
         style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
       >
         {!boxEdit ? (
-          <>
-            <div>
-              {box.boxName}/{box.boxId}
-            </div>
+          <StDropBox>
+            <div>{box.boxName}</div>
             <StBtnBox>
               <BoxBtn
                 onClick={() => {
@@ -78,9 +76,9 @@ function BoxItem({
                 삭제
               </BoxSubBtn>
             </StBtnBox>
-          </>
+          </StDropBox>
         ) : (
-          <>
+          <StDropBox>
             <BoxInput
               type="text"
               value={editBoxName}
@@ -104,9 +102,9 @@ function BoxItem({
                 취소
               </BoxSubBtn>
             </StBtnBox>
-          </>
+          </StDropBox>
         )}
-      </StDropBox>
+      </div>
     </>
   );
 }

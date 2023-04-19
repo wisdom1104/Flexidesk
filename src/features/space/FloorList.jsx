@@ -1,7 +1,15 @@
 import React from 'react';
 import FloorItem from './FloorItem';
 
-function FloorList({ floors, onClickSpaceListHandler, dispatch }) {
+function FloorList({
+  floors,
+  onClickSpaceListHandler,
+  dispatch,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   return (
     <>
       {floors?.map(floor => {
@@ -12,6 +20,10 @@ function FloorList({ floors, onClickSpaceListHandler, dispatch }) {
               floor={floor}
               onClickSpaceListHandler={onClickSpaceListHandler}
               dispatch={dispatch}
+              dragStart={dragStart}
+              onAvailableItemDragEnter={onAvailableItemDragEnter}
+              onDragOver={onDragOver}
+              onDragEnd={onDragEnd}
             />
           );
       })}

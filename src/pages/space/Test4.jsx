@@ -4,36 +4,53 @@ import styled from 'styled-components';
 import { __editSpace } from '../../redux/modules/spaceSlice';
 
 function Test4({ floors, spaces }) {
-  console.log('spaces', spaces);
+  // console.log('spaces', spaces);
   const dispatch = useDispatch();
 
   const dragSpace = useRef(); // 드래그 시작위치
+  const dragName = useRef(); // 드래그 시작위치
   const dragFloor = useRef(); // 드래그 시작위치
   const dragOverSpace = useRef(); //드래그 중인 요소가 들어가려는 위치
   const dragOverFloor = useRef(); //드래그 중인 요소가 들어가려는 위치
 
+  const [moveSpace, setMoveSpace] = useState({
+    spaceId: null,
+    spaceName: '',
+    floorId: null,
+  });
+
   const dragStart = (e, space) => {
     dragSpace.current = space.spaceId;
+    dragName.current = space.spaceName;
     dragFloor.current = space.floorId;
-    console.log('space', space);
-    // console.log(e.target.innerHTML);
-    // console.log('dragItem.current', dragItem.current);
+    // console.log('space', space);
     e.target.classList.add('grabbing');
   };
 
-  const onAvailableItemDragEnter = (e, index) => {
+  const onAvailableItemDragEnter = (e, space) => {
+    console.log('space', space);
     const draggedOverSpace = e.target;
+    // console.log('taget', draggedOverSpace);
     dragOverSpace.current = draggedOverSpace.dataset.spaceId;
     dragOverFloor.current = draggedOverSpace.dataset.floorId;
     if (dragOverFloor.current === undefined) {
       dragOverFloor.current = null;
     }
-    console.log('dragOverSpace.current', dragOverSpace.current);
-    console.log('dragOverFloor.current', dragOverFloor.current);
+    const payload = {
+      spaceId: dragSpace.current,
+      spaceName: dragName.current,
+      floorId: dragOverFloor.current,
+    };
+    console.log('name', payload.spaceName);
+    console.log('id', payload.spaceId);
+    console.log('Floor', payload.floorId);
+    setMoveSpace(payload);
   };
 
-  const onDragEnd = e => {
+  const onDragEnd = (e, space) => {
     e.target.classList.remove('grabbing');
+    console.log('moveSpace', moveSpace);
+    dispatch(__editSpace(moveSpace));
   };
 
   const onDragOver = e => {
@@ -56,11 +73,12 @@ function Test4({ floors, spaces }) {
                         key={space.spaceId}
                         draggable
                         data-space-id={space.spaceId}
+                        data-space-name={space.spaceName}
                         data-floor-id={space.floorId}
                         onDragStart={e => dragStart(e, space)}
-                        onDragEnter={e => onAvailableItemDragEnter(e, index)}
+                        onDragEnter={e => onAvailableItemDragEnter(e, space)}
                         onDragOver={onDragOver}
-                        onDragEnd={onDragEnd}
+                        onDragEnd={e => onDragEnd(e, space)}
                       >
                         {space.spaceName}/{space.spaceId}
                       </StSpace>
@@ -78,9 +96,9 @@ function Test4({ floors, spaces }) {
                 data-space-id={space.spaceId}
                 data-floor-id={space.floorId}
                 onDragStart={e => dragStart(e, space)}
-                onDragEnter={e => onAvailableItemDragEnter(e, index)}
+                onDragEnter={e => onAvailableItemDragEnter(e, space)}
                 onDragOver={onDragOver}
-                onDragEnd={onDragEnd}
+                onDragEnd={e => onDragEnd(e, space)}
               >
                 {space.spaceName}/{space.spaceId}
               </StSpace>

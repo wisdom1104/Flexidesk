@@ -11,7 +11,15 @@ import {
   StListItem,
 } from './SpaceStyles';
 
-function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
+function SpaceItem({
+  space,
+  onClickSpaceListHandler,
+  dispatch,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   // space 삭제
   const onDeleteSpaceHandler = async spaceId => {
     dispatch(__deleteSpace(spaceId));
@@ -37,9 +45,19 @@ function SpaceItem({ space, onClickSpaceListHandler, dispatch }) {
     <>
       <>
         {!spaceEdit ? (
-          <StList>
+          <StList
+            key={space.spaceId}
+            draggable
+            data-space-id={space.spaceId}
+            data-space-name={space.spaceName}
+            data-floor-id={space.floorId}
+            onDragStart={e => dragStart(e, space)}
+            onDragEnter={e => onAvailableItemDragEnter(e, space)}
+            onDragOver={onDragOver}
+            onDragEnd={e => onDragEnd(e, space)}
+          >
             <StListItem
-              key={space.spaceId}
+              data-floor-id={space.floorId}
               onClick={() => onClickSpaceListHandler(space.spaceId)}
             >
               {space.spaceName}

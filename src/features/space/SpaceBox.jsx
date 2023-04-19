@@ -155,9 +155,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
                           onClickMoveUserHandler(box);
                         }}
                       >
-                        <div>
-                          {box.boxName}/{box.boxId}
-                        </div>
+                        <div>{box.boxName}</div>
                         {box.username !== null ? (
                           <StUser>{box.username}</StUser>
                         ) : null}
@@ -175,9 +173,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
                           onClickMoveUserHandler(box);
                         }}
                       >
-                        <div>
-                          {box.boxName}/{box.boxId}
-                        </div>
+                        <div>{box.boxName}</div>
                         {box.username !== null ? (
                           <StUser>{box.username}</StUser>
                         ) : null}
