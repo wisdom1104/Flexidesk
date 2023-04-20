@@ -4,7 +4,6 @@ import { cookies } from "../../shared/cookies";
 const initialState = {
     users: [],
     isLogin: false,
-    // isLogin: cookies.get("token") ? true : false,
     isLoading: false,
     isError: null,
 };

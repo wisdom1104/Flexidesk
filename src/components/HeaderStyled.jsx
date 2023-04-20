@@ -34,6 +34,7 @@ export const StHaderFont = styled.p`
 
   color: #15161A;
 
+  cursor:default
 `
 
 export const StHeaderContentButtonBox = styled.div`

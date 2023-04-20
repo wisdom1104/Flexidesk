@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StBackground,
   StBlueButton,
   StButtonGap,
   StFont,
@@ -38,7 +37,8 @@ function Welcome1() {
                   marginBottom="-185px"
                   marginTop="65px"
                 >
-                  Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및 <br /> 
+                  Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및{' '}
+                  <br />
                   회의실 예약 시스템을 제공합니다
                 </StSmallFont>{' '}
                 <br />

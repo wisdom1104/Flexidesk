@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { css , keyframes } from 'styled-components';
+
 
 
 //배경
@@ -277,4 +278,24 @@ export const StSliderButton = styled.button`
       `;
     }
   }}
+`;
+
+//애니메이션
+const animation = keyframes`
+  0% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateZ(-1100px);
+    opacity: 0;
+  }
+`;
+
+export const StAnimationBox = styled.div`
+  height: 200px;
+  width: 200px;
+  /* background-color: tomato; */
+  animation: ${animation} .5s cubic-bezier(.55,.085,.68,.53) both;  
+  /* animation:${animation} 5s linear infinite; //1초동안 선형 무한 속성값주기 */
 `;

@@ -10,6 +10,10 @@ body {
     font-style: normal;
   }
 
+  button {
+    cursor:pointer
+  }
+
 :root {
 			/* color */
     --blue: #07133B;
