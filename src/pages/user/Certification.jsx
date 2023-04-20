@@ -31,7 +31,7 @@ function Certification({ admin, setAdmin, email }) {
     try {
       const response = await api.post('/users/signup/email', admin);
       const data = response.data;
-      alert(`${data}`);
+      // alert(`${data}`);
       return data;
     } catch (error) {
       const errorMsg = error.response.data.message;
