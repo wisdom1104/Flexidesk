@@ -89,7 +89,7 @@ function Header() {
 
 const StHeader = styled.div`
   height: 6vh;
-  width: 100%;
+  width: 99%;
   display: flex;
   justify-content: center;
   align-items: center;

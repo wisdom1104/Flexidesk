@@ -39,7 +39,6 @@ export const StForm = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-
 `;
 
 export const StFormBox = styled.div`
@@ -56,7 +55,7 @@ export const StLongButton = styled.button`
   width: 420px;
   height: 60px;
   margin-top: 5px;
-  
+
   align-items: center;
   border-radius: 8px;
 
@@ -94,43 +93,39 @@ export const StSmallButton = styled.button`
 export const StLoginContain = styled.div`
   width: 400px;
   height: 60px;
-  border: 2px solid #A6AEBB;
+  border: 2px solid #a6aebb;
   border-radius: 8px;
-  
+
   align-items: center;
   display: flex;
-
-`
+`;
 
 export const StLoginIconDiv = styled.div`
-  width:15%;
+  width: 15%;
   height: 50px;
-  display:flex;
-  align-items:center;
-  padding-right:10px;
-
-`
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+`;
 export const StLoginIcon = styled.img`
   width: 20px;
   display: inline-block;
   margin-left: 20px;
   z-index: 1;
-`
+`;
 
 // signup
 export const StTextInput = styled.div`
   /* width: ${props => props.width || '24vw'}; */
   height: ${props => props.height || '75px'};
-  margin-top: ${ props => props.marginTop || '16px'};
-  
+  margin-top: ${props => props.marginTop || '16px'};
 `;
 
 //오류메시지
 export const SterrorFont = styled.p`
   text-align: start;
   margin-top: 15px;
-
-`
+`;
 
 //////////////////////////////////////////////////////////
 export const Container = styled.div`
@@ -143,9 +138,9 @@ export const Container = styled.div`
 export const InlineInput = styled.input`
   width: 80%;
   height: 50px;
-  display: block;  
+  display: block;
 
-  border: 1px solid #A6AEBB;
+  border: 1px solid #a6aebb;
   border-radius: 8px;
 
   font-size: 1em;
@@ -158,12 +153,12 @@ export const InlineInput = styled.input`
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
-  color: #A6AEBB;
+  color: #a6aebb;
   &:focus {
-    border: 1px solid #65BAB6;
+    border: 1px solid #65bab6;
   }
   &:active {
-    border: 1px solid #07133B;
+    border: 1px solid #07133b;
   }
 `;
 
@@ -188,9 +183,9 @@ export const InlinButton = styled.input`
   color: #a6aebb;
 
   &:focus {
-    border: 1px solid #65BAB6;
+    border: 1px solid #65bab6;
   }
   &:active {
-    border: 1px solid #07133B;
+    border: 1px solid #07133b;
   }
 `;

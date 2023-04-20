@@ -6,7 +6,6 @@ import {
   Container,
   InlinButton,
   InlineInput,
-  StSmallButton,
   SterrorFont,
 } from './UserStyled';
 
@@ -78,7 +77,6 @@ function Certification({ admin, setAdmin, email }) {
             align="start"
             fontSize="0.875rem"
             weight="400"
-            // marginTop="10px"
             color="red"
           >
             {emailError}

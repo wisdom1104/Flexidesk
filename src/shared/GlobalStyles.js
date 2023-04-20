@@ -17,8 +17,8 @@ body {
     --darkblue: #314563;
 
     --mint1: #151515;
-    --mint2: #B6DFDD;;
-    --mint3: #DEF1EF;;
+    --mint2: #B6DFDD;
+    --mint3: #DEF1EF;
     --mint4: #F4FBF9;
 
     --black: #15161A;
