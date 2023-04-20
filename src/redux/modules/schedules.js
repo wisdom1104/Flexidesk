@@ -12,7 +12,6 @@ const initialState = {
 export const __getSchedules = createAsyncThunk(
   "getschedules",
   async(payload,thunk) =>{
-    console.log('페이로드',payload)
     try{
       const token = cookies.get('token')
       const data = await api.get(`/schedules?selDate=${payload.selectDay}`,{
@@ -20,7 +19,6 @@ export const __getSchedules = createAsyncThunk(
           Authorization:`Bearer ${token}`
         }
       })
-      console.log(data.data.data.timeList);
       return thunk.fulfillWithValue(data.data.data.timeList)
     }catch(error){
       return thunk.rejectWithValue(error)
@@ -57,7 +55,6 @@ export const __getAllSchedules = createAsyncThunk(
           Authorization:`Bearer ${token}`
         }
       })
-      console.log("여기",data.data.data.scList);
       return thunk.fulfillWithValue(data.data.data.scList)
     }catch(error){
       return thunk.rejectWithValue(error)

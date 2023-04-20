@@ -22,8 +22,9 @@ function SchedulesDetail() {
         <div key={item.scId}>
           <div>제목 : {item.scTitle}</div>
           <div>내용 : {item.scComment}</div>
-          <div>시작시간 : {item.scStart}</div>
-          <div>종료시간 : {item.scEnd}</div>
+          <div>날짜 : {item.scStart.split('T')[0]}</div>
+          <div>시작시간 : {item.scStart.split('T')[1]}</div>
+          <div>종료시간 : {item.scEnd.split('T')[1]}</div>
           <button
             onClick={() => {
               dispatch(__deleteSchedule(item.scId));
