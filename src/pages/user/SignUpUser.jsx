@@ -23,7 +23,6 @@ function SignUpUser() {
     username: '',
     certification: '',
   });
-  console.log(user);
 
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
@@ -73,7 +72,6 @@ function SignUpUser() {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
-      console.log('response', user);
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;

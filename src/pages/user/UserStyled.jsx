@@ -18,7 +18,6 @@ export const StOverall = styled.div`
 
 export const StLoginForm = styled.form`
   width: 420px;
-  /* height: ${props => props.height || '450px'}; */
   background: var(--white);
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
   border-radius: 8px;
@@ -44,7 +43,7 @@ export const StForm = styled.div`
 export const StFormBox = styled.div`
   /* width: 420px;
   height: 84px; */
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;

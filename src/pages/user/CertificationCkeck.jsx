@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Input } from '../../components/Input';
+import React from 'react';
 import api from '../../axios/api';
-import {  Container, InlinButton, InlineInput, StSmallButton } from './UserStyled';
+import {  Container, InlinButton, InlineInput } from './UserStyled';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 
 function CertificationCkeck({ user,certification, onChange }) {
@@ -12,7 +11,6 @@ function CertificationCkeck({ user,certification, onChange }) {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/match', user);
-      console.log('data',user);
       const newResponse = response.data.message;
       alert(`${newResponse}`);
       return newResponse;
