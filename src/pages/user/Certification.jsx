@@ -6,26 +6,24 @@ import {
   Container,
   InlinButton,
   InlineInput,
-  StSmallButton,
+  SterrorFont,
 } from './UserStyled';
 
-function Certification({ admin, setAdmin, email  }) {
-
-  const [emailError, setEmailError] = useState("");
+function Certification({ admin, setAdmin, email }) {
+  const [emailError, setEmailError] = useState('');
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = event => {
     const value = event.target.value;
     setAdmin(prevState => ({ ...prevState, email: value }));
 
     if (!emailRegex.test(value)) {
-      setEmailError("올바른 이메일 형식이 아닙니다.");
+      setEmailError('올바른 이메일 형식이 아닙니다.');
     } else {
-      setEmailError("")
+      setEmailError('');
     }
-  }
-  
+  };
 
   const submitBtnHandler = async e => {
     e.preventDefault();
@@ -51,7 +49,7 @@ function Certification({ admin, setAdmin, email  }) {
           fontSize="0.875rem"
           weight="700"
           marginBottom="10px"
-        >
+          >
           회사 이메일
         </StSmallFont>
       </Container>
@@ -71,13 +69,20 @@ function Certification({ admin, setAdmin, email  }) {
           onClick={submitBtnHandler}
           value="인증받기"
         />
-      </Container>        
-      {emailError && <StSmallFont width
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="700"
-                      marginTop='10px'
-                     color='red'>{emailError}</StSmallFont>}
+      </Container>
+      <SterrorFont>
+        {emailError && (
+          <StSmallFont
+            width
+            align="start"
+            fontSize="0.875rem"
+            weight="400"
+            color="red"
+          >
+            {emailError}
+          </StSmallFont>
+        )}
+      </SterrorFont>
     </>
   );
 }

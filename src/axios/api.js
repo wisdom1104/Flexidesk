@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { cookies, getCookie, removeCookie } from '../shared/cookies';
+import { cookies } from '../shared/cookies';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
@@ -11,34 +11,31 @@ api.interceptors.response.use(
   },
 
   async function (error) {
-  const originalConfig = error.config;
-  try {
-    const refreshToken = getCookie("refreshToken");
-    const expire = getCookie("expire");
-    console.log('refreshToken->>>>>>>>>>',refreshToken);
-    console.log('expire->>>>>>>>>>',expire);
+    const originalConfig = error.config;
 
+    if (error.response.data.statusCode === 401 && !originalConfig._retry) {
+      originalConfig._retry = true;
 
-    const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/refresh`, {
-      headers: {
-        "Refresh-Token": refreshToken,
-        "Access-Token-Expire": expire,
-      },
-    });
-    console.log('data->>>>>>>>>>',data);
+      try {
+        const refreshToken = cookies.get('refresh_token');
 
-    const newInfo = data.headers["authorization"];
-    const newToken = newInfo.split(" ")[1];
-    cookies.remove("token",{path: "/"});
-    cookies.set("token", newToken, {path: "/"} )
+        const data = await api.get('users/refresh', {
 
-    return await api.request(originalConfig);
+          headers: {
+            refresh_token: `Bearer ${refreshToken}`,
+          },
+        });
+        const newToken = data.headers['authorization'].split(' ')[1];
 
-  } catch (e) {
-    console.log(e);
-  }
-  }
-)
+        cookies.set('token', newToken, { path: '/' });
 
+        return await api.request(originalConfig);
+      } catch (error) {
+        console.log(error);
+      }
+      return Promise.reject(error);
+    }
+  },
+);
 
 export default api;

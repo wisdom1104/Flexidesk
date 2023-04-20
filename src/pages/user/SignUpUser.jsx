@@ -23,7 +23,6 @@ function SignUpUser() {
     username: '',
     certification: '',
   });
-  console.log(user);
 
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
@@ -73,7 +72,6 @@ function SignUpUser() {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
-      console.log('response', user);
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -90,12 +88,15 @@ function SignUpUser() {
         <div
           style={{
             marginTop: '80px',
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="570px">
             <StForm>
               <StFormBox>
-                <StFont align="start" fontSize="28px">
+                <StFont width='100%' align="start" fontSize="28px">
                   회원가입
                 </StFont>
 
@@ -106,7 +107,6 @@ function SignUpUser() {
                     fontSize="0.875rem"
                     weight="700"
                     marginTop="10px"
-                    marginBottom="10px"
                   >
                     사용자 이름
                   </StSmallFont>
@@ -126,7 +126,6 @@ function SignUpUser() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     회사 이메일
                   </StSmallFont>
@@ -157,7 +156,6 @@ function SignUpUser() {
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
-                    marginBottom="10px"
                   >
                     비밀번호
                   </StSmallFont>

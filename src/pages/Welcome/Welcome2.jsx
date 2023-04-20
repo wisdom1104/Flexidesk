@@ -1,39 +1,36 @@
 import React from 'react';
-import {
-  StBackground,
-  StFont,
-  StSmallFont,
-  StOverall,
-  StWrapDiv,
-} from './WelcomeStyled';
+import { StFont, StSmallFont, StOverall, StWrapDiv } from './WelcomeStyled';
 
 function Welcome2() {
   return (
     <>
-      <StBackground background="#fff">
-        <StOverall>
-          <StWrapDiv>
-          <div 
-          style={{
-            marginTop:'100px',
-          }}
-          >
+      <StOverall>
+        <StWrapDiv>
+          <div>
             <StFont>🤔</StFont> <br />
-
-          <StFont>
-            이런 고민을 하고 있다면, <br/> Flexidesk를 시작하세요!
-          </StFont>
+            <StFont>
+              이런 고민을 하고 있다면, <br /> Flexidesk를 시작하세요!
+            </StFont>
+            <StSmallFont marginTop="15px" color="--darkblue" weight="700">
+              내가 일할 자리 내가 자유롭게 정하고 싶다.
+            </StSmallFont>
+            <StSmallFont
+              marginTop="15px"
+              color="rgba(49, 69, 99, 0.8)"
+              weight="700"
+            >
+              회의실 사용 겹치지 않도록 미리 예약하고 싶다.
+            </StSmallFont>
+            <StSmallFont
+              marginTop="15px"
+              color="rgba(49, 69, 99, 0.6);"
+              weight="700"
+            >
+              내 스케줄을 다른 사람들과 쉽게 공유하고 싶다.
+            </StSmallFont>
           </div>
-
-          <StSmallFont 
-          marginBottom='150px'
-          >
-              사장님이 어디갔는지 모르겠다면 <br/> 내 선배가 어디갔는지 모르겠다면 <br/> 내
-              후배가 어디갔는지 모르겠다면 <br/> Flexidesk을 사용해보세요
-          </StSmallFont>
-          </StWrapDiv>
-        </StOverall>
-      </StBackground>
+        </StWrapDiv>
+      </StOverall>
     </>
   );
 }

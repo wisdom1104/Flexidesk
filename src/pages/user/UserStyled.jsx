@@ -18,11 +18,15 @@ export const StOverall = styled.div`
 
 export const StLoginForm = styled.form`
   width: 420px;
-  height: ${props => props.height || '450px'};
-  background: #ffffff;
+  background: var(--white);
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
   border-radius: 8px;
   padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
 `;
 
 // 폼 전체 감싸는 div
@@ -34,29 +38,40 @@ export const StForm = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-
 `;
 
 export const StFormBox = styled.div`
-  width: 420px;
-  height: 84px;
+  /* width: 420px;
+  height: 84px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 // 버튼
 export const StLongButton = styled.button`
   width: 420px;
   height: 60px;
+  margin-top: 5px;
 
   align-items: center;
-  color: #fff;
-  background: #07133b;
   border-radius: 8px;
 
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 22px;
 
-  margin-top: 5px;
+  color: var(--white);
+  background: var(--blue);
+  &:hover {
+    background: var(--lightblue);
+  }
+  &:focus {
+    color: var(--blue);
+    background: var(--white);
+    border: 1px solid var(--blue);
+  }
 `;
 
 export const StSmallButton = styled.button`
@@ -72,44 +87,49 @@ export const StSmallButton = styled.button`
 
   border-radius: 4px;
 `;
+
 //login
 export const StLoginContain = styled.div`
   width: 400px;
   height: 60px;
-  border: 2px solid #A6AEBB;
+  border: 2px solid #a6aebb;
   border-radius: 8px;
-  
+
   align-items: center;
   display: flex;
-
-`
+`;
 
 export const StLoginIconDiv = styled.div`
-  width:15%;
+  width: 15%;
   height: 50px;
-  display:flex;
-  align-items:center;
-  padding-right:10px;
-
-`
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+`;
 export const StLoginIcon = styled.img`
   width: 20px;
   display: inline-block;
   margin-left: 20px;
   z-index: 1;
-`
+`;
 
 // signup
 export const StTextInput = styled.div`
-  width: 24vw;
+  /* width: ${props => props.width || '24vw'}; */
   height: ${props => props.height || '75px'};
-  margin-top: 16px;
+  margin-top: ${props => props.marginTop || '16px'};
 `;
 
-/////////////////////////////
+//오류메시지
+export const SterrorFont = styled.p`
+  text-align: start;
+  margin-top: 15px;
+`;
+
+//////////////////////////////////////////////////////////
 export const Container = styled.div`
   width: 420px;
-  height: 40px;
+  height: 35px;
   display: flex;
   align-items: center;
 `;
@@ -117,6 +137,7 @@ export const Container = styled.div`
 export const InlineInput = styled.input`
   width: 80%;
   height: 50px;
+  display: block;
 
   border: 1px solid #a6aebb;
   border-radius: 8px;
@@ -132,6 +153,12 @@ export const InlineInput = styled.input`
   font-size: 14px;
   line-height: 17px;
   color: #a6aebb;
+  &:focus {
+    border: 1px solid #65bab6;
+  }
+  &:active {
+    border: 1px solid #07133b;
+  }
 `;
 
 export const InlinButton = styled.input`
@@ -153,4 +180,11 @@ export const InlinButton = styled.input`
   font-size: 12px;
   line-height: 15px;
   color: #a6aebb;
+
+  &:focus {
+    border: 1px solid #65bab6;
+  }
+  &:active {
+    border: 1px solid #07133b;
+  }
 `;
