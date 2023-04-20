@@ -74,7 +74,6 @@ function Welcome1() {
             </StIntroDiv>
           </StWrapDiv>
         </StOverall>
-
         <div
           style={{
             marginTop: '-250px',

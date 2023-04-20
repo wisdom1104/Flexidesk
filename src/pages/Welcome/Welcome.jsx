@@ -4,7 +4,6 @@ import Welcome3 from './Welcome3';
 import Welcome5 from './Welcome5';
 import Welcome6 from './Welcome6';
 import Welcome7 from './Welcome7';
-import { StAnimationBox } from './WelcomeStyled';
 
 
 function Welcome() {

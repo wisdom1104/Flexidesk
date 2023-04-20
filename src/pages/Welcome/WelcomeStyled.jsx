@@ -1,7 +1,6 @@
 import styled, { css , keyframes } from 'styled-components';
 
 
-
 //배경
 export const StBackground = styled.div`
   background: ${props => props.background || '#DEF1EF'};
@@ -22,7 +21,6 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-
 `;
 
 export const StWrapDiv = styled.div`
