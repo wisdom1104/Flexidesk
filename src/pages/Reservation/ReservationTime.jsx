@@ -13,6 +13,7 @@ import {
   StReserCountBox,
   StReserCountButton,
   ReservationCheckContain,
+  FinButton,
 } from './CalendarStyled';
 import ReservationCheck from './ReservationCheck';
 
@@ -75,12 +76,10 @@ function ReservationTime({ param, selectDay }) {
     setIsCheckOut(!isCheckOut);
     // setChoseReservationTime(!choseReservationTime);
   };
-  console.log('클릭', clickReservation);
 
   useEffect(() => {
     if (selectDay) {
       dispatch(__getReservation({ param, selectDay }));
-      console.log(date);
     } else {
       dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
     }
@@ -118,24 +117,22 @@ function ReservationTime({ param, selectDay }) {
               <StReserCountButton onClick={addCount}>+</StReserCountButton>
             </StReserCountBox>
           </StReserTimeBox>
-          <div>
-            <ReservationCheckContain>
-              <ReservationCheck
-                param={param}
-                selectDay={selectDay}
-                clickReservation={clickReservation}
-                count={count}
-              />
-              <button
-                onClick={() => {
-                  dispatch(__addReservation({ reqDatas, param, selectDay }));
-                  navi(`/detail/${userId}`);
-                }}
-              >
-                예약 완료
-              </button>
-            </ReservationCheckContain>
-          </div>
+          <ReservationCheckContain>
+            <ReservationCheck
+              param={param}
+              selectDay={selectDay}
+              clickReservation={clickReservation}
+              count={count}
+            />
+            <FinButton
+              onClick={() => {
+                dispatch(__addReservation({ reqDatas, param, selectDay }));
+                navi(`/detail/${userId}`);
+              }}
+            >
+              예약 완료
+            </FinButton>
+          </ReservationCheckContain>
         </div>
       </div>
     </>

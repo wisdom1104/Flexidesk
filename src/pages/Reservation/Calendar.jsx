@@ -11,6 +11,13 @@ import {
   StMrName,
   StCalenHeader,
   BackCusor,
+  Calcontain,
+  Header,
+  DayContain,
+  Day,
+  StDate,
+  FontSt,
+  DateFont,
 } from './CalendarStyled';
 const Calendar = () => {
   // useFalseHook();
@@ -54,7 +61,6 @@ const Calendar = () => {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log('날짜선택', e.target.value);
     setDate(e.target.value);
   };
 
@@ -101,12 +107,12 @@ const Calendar = () => {
 
         <MainContain>
           <StMrNameBox>
-            <div>회의실 이름</div>
+            <FontSt>회의실 이름</FontSt>
             <StMrName>회의실 {mrId}</StMrName>
           </StMrNameBox>
 
           <StCalenHeader>
-            <div>예약 날짜</div>
+            <FontSt>예약 날짜</FontSt>
             <Header>
               <button
                 onClick={() => {
@@ -115,8 +121,8 @@ const Calendar = () => {
               >
                 이전달
               </button>
-              <div>{selectYear}</div>
-              <div>-{selectMonth}</div>
+              <DateFont>{selectYear}년</DateFont>
+              <DateFont>{selectMonth}월</DateFont>
               <button
                 onClick={() => {
                   nextMonth();
@@ -140,41 +146,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-const Calcontain = styled.div`
-  width: 75vw;
-  height: 63vh;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const DayContain = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-`;
-
-const Day = styled.button`
-  min-width: calc(100% / 7);
-  background-color: white;
-  border: 1px solid transparent;
-  color: navy;
-  font-family: inherit;
-  height: 3vh;
-  align-items: flex-end;
-  display: flex;
-  justify-content: center;
-`;
-
-const StDate = styled.button`
-  min-width: calc(100% / 7);
-  background-color: white;
-  border: 1px solid lightgray;
-  height: 6vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-`;

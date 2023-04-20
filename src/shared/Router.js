@@ -15,7 +15,7 @@ import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
 function Router() {
   return (
     <BrowserRouter>
-      <Header />
+      <Header/>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />

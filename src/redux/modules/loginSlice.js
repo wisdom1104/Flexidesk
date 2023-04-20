@@ -4,7 +4,6 @@ import { cookies } from "../../shared/cookies";
 const initialState = {
     users: [],
     isLogin: false,
-    // isLogin: cookies.get("token") ? true : false,
     isLoading: false,
     isError: null,
 };
@@ -25,7 +24,6 @@ const loginSlice  = createSlice({
         logout(state){
             state.isLogin = false;
             cookies.remove("token");
-            cookies.remove("refresh_token");
             cookies.remove("userId");
             cookies.remove("companyName");
             cookies.remove("username");
