@@ -170,3 +170,16 @@ export const FontSt = styled.div`
 export const DateFont = styled.div`
   color: #59aba7;
 `;
+
+export const InfoBox = styled.div`
+  border: 1px solid;
+  width: 30vw;
+  height: 30vw;
+  display: flex;
+  flex-direction: column;
+`;
+export const InfoContain = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+`;

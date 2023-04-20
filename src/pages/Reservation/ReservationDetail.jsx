@@ -9,9 +9,12 @@ import SchedulesDetail from '../Schedules/SchedulesDetail';
 import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
 import AllReservation from './AllReservation';
+import { BackCusor, ReservationTitle } from './CalendarStyled';
+import { useNavigate } from 'react-router-dom';
 
 function ReservationDetail() {
   // useFalseHook();
+  const navi = useNavigate();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
 
@@ -28,7 +31,16 @@ function ReservationDetail() {
 
   return (
     <>
-      <div>내가 예약한 회의실</div>
+      <ReservationTitle>
+        <BackCusor
+          onClick={() => {
+            navi('/space');
+          }}
+        >
+          ←
+        </BackCusor>
+        <h2>내가 예약한 회의실</h2>
+      </ReservationTitle>
       <div>
         {reservationDetail?.map(item => (
           <div key={item.reservationId}>
@@ -47,10 +59,10 @@ function ReservationDetail() {
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         <p>전체 조회</p>
         <AllReservation />
-      </div>
+      </div> */}
     </>
   );
 }
