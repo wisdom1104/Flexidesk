@@ -89,7 +89,6 @@ const Calendar = () => {
     }
     return dayArr;
   };
-  console.log(returnDay());
 
   return (
     <>

@@ -7,7 +7,6 @@ function AllReservation() {
   const { reservationList, isLoading, isError } = useSelector(
     state => state.reservationList,
   );
-  // console.log(reservationList.data.reservationList);
 
   const dispatch = useDispatch();
 
