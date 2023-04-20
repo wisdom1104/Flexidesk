@@ -17,7 +17,6 @@ function ReservationDetail() {
 
   const deleteHandler = id => {
     dispatch(__deleteRervation(id));
-    console.log('패치보내기전', id);
   };
 
   const token = getCookie('userId');

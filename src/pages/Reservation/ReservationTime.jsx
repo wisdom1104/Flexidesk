@@ -76,12 +76,10 @@ function ReservationTime({ param, selectDay }) {
     setIsCheckOut(!isCheckOut);
     // setChoseReservationTime(!choseReservationTime);
   };
-  console.log('클릭', clickReservation);
 
   useEffect(() => {
     if (selectDay) {
       dispatch(__getReservation({ param, selectDay }));
-      console.log(date);
     } else {
       dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
     }

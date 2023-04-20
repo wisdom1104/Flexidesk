@@ -61,7 +61,6 @@ const Calendar = () => {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log('날짜선택', e.target.value);
     setDate(e.target.value);
   };
 

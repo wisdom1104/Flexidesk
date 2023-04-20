@@ -53,10 +53,7 @@ function SchedulesTime({ param, selectDay }) {
   const { scComment, scTitle } = scheduleValue;
   const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
 
-  console.log('스케줄내용', reqScheduleValue);
-
   const { schedules } = useSelector(state => state.schedules);
-  console.log('스케줄', schedules);
 
   const onclickHandler = e => {
     if (clickSchedules.find(item => item === e.target.value)) {
@@ -68,12 +65,10 @@ function SchedulesTime({ param, selectDay }) {
     }
     setIsCheckOut(!isCheckOut);
   };
-  console.log('클릭', clickSchedules);
 
   useEffect(() => {
     if (selectDay !== undefined) {
       dispatch(__getSchedules({ param, selectDay }));
-      console.log('데이터:', date);
     } else {
       dispatch(
         __getSchedules({

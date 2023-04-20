@@ -52,7 +52,6 @@ function SchedulesCalendar() {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log('날짜선택', e.target.value);
     setDate(e.target.value);
   };
 
@@ -81,7 +80,6 @@ function SchedulesCalendar() {
     }
     return dayArr;
   };
-  console.log(returnDay());
 
   return (
     <>

@@ -11,7 +11,6 @@ const initialState = {
 export const __getReservation = createAsyncThunk(
   "getreservation",
   async(payload,thunk) =>{
-    console.log('페이로드',payload)
     try{
       const token = cookies.get('token')
       const data = await api.get(`/reservations/${payload.param}?selDate=${payload.selectDay}`,{
@@ -19,7 +18,6 @@ export const __getReservation = createAsyncThunk(
           Authorization:`Bearer ${token}`
         }
       })
-      console.log(data);
       return thunk.fulfillWithValue(data.data)
     }catch(error){
       return thunk.rejectWithValue(error)
@@ -30,7 +28,6 @@ export const __getReservation = createAsyncThunk(
 export const __addReservation=createAsyncThunk(
   "addreservation",
   async (payload, thunk) =>{
-    console.log('예약:',payload)
     try{
       const token = cookies.get('token')
       await api.post(`/reservations/${payload.param} `, payload.reqDatas,
