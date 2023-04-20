@@ -31,12 +31,9 @@ function AdminSpaceBox({
   const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
-  const { floor } = useSelector(state => state.floor);
 
-  // console.log('space', space);
-
-  const [mrBoxes] = useState([{ mrId: 1, x: 0, y: 0, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, x: 0, y: 0, inner: '박스' }]);
+  const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '박스' }]);
 
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
@@ -74,20 +71,20 @@ function AdminSpaceBox({
       const newBox = {
         spaceId,
         mrName: 'New 회의실',
-        x: e.clientX - targetRect.x - 50,
-        y: e.clientY - targetRect.y - 50,
+        x: e.clientX - targetRect.x - 45,
+        y: e.clientY - targetRect.y - 45,
       };
       if (Number(mrList.length) !== 0 || Number(boxList.length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
-          const draggedRight = draggedBox.x + 80;
+          const draggedRight = draggedBox.x + 70;
           const draggedy = draggedBox.y;
-          const draggedBottom = draggedBox.y + 80;
+          const draggedBottom = draggedBox.y + 70;
 
           const existingx = existingBox.x;
-          const existingRight = existingBox.x + 80;
+          const existingRight = existingBox.x + 70;
           const existingy = existingBox.y;
-          const existingBottom = existingBox.y + 80;
+          const existingBottom = existingBox.y + 70;
 
           if (
             draggedx < existingRight &&
@@ -105,13 +102,8 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        // console.log(isOverlapping);
-        // console.log(isMrListOverlapping);
-        // console.log(isBoxListOverlapping);
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addMr(newBox));
-        } else {
-          console.log('겹쳐져');
         }
       } else {
         dispatch(__addMr(newBox));
@@ -123,20 +115,20 @@ function AdminSpaceBox({
       const newBox = {
         spaceId,
         boxName: 'New 자리',
-        x: e.clientX - targetRect.x - 50,
-        y: e.clientY - targetRect.y - 50,
+        x: e.clientX - targetRect.x - 45,
+        y: e.clientY - targetRect.y - 45,
       };
       if (Number(mrList[0].length) !== 0 || Number(boxList[0].length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
-          const draggedRight = draggedBox.x + 80;
+          const draggedRight = draggedBox.x + 70;
           const draggedy = draggedBox.y;
-          const draggedBottom = draggedBox.y + 80;
+          const draggedBottom = draggedBox.y + 70;
 
           const existingx = existingBox.x;
-          const existingRight = existingBox.x + 80;
+          const existingRight = existingBox.x + 70;
           const existingy = existingBox.y;
-          const existingBottom = existingBox.y + 80;
+          const existingBottom = existingBox.y + 70;
 
           if (
             draggedx < existingRight &&
@@ -153,15 +145,8 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        // console.log('mrList[0]', mrList[0]);
-        // console.log('isOverlapping', isOverlapping);
-        // console.log('isMrListOverlapping', isMrListOverlapping);
-        // console.log('isBoxListOverlapping', isBoxListOverlapping);
-
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addBox(newBox));
-        } else {
-          console.log('겹쳐져');
         }
       } else {
         dispatch(__addBox(newBox));
@@ -204,7 +189,6 @@ function AdminSpaceBox({
           boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
         ),
       );
-
       const payload = {
         spaceId,
         mrId: currentMrBox.mrId,
@@ -226,7 +210,6 @@ function AdminSpaceBox({
     document.addEventListener('mousemove', mrBoxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
-  // console.log(newMrBoxes);
 
   //--------------------------박스 드래그 앤 드롭--------------------------------
   const boxMouseDownHandler = (e, boxIndex) => {
@@ -295,16 +278,14 @@ function AdminSpaceBox({
                 <Row key={item.spaceId}>
                   <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
                   <SubIcon>&gt;</SubIcon>
-                  <SubTitle key={item.spaceId}>
-                    {item.spaceName}/{item.spaceId}
-                  </SubTitle>
+                  <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
                 </Row>
               );
             if (item && item.floorId === null)
               return (
                 <SubTitle key={item.spaceId}>
                   {/* if(item.floorId) */}
-                  {item.spaceName}/{item.spaceId}
+                  {item.spaceName}
                 </SubTitle>
               );
           })}

@@ -1,6 +1,6 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { isLoginActions } from '../redux/modules/loginSlice';
 import { cookies } from '../shared/cookies';
@@ -24,13 +24,22 @@ function Header() {
   const logout = () => {
     dispatch(isLoginActions.logout());
     alert('로그아웃 되었습니다.');
-    navi('/login');
+    navi('/');
   };
 
   const onClcikHandelr = () => {
-    navi('/')
+    navi('/');
   };
 
+  const location = useLocation();
+
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/signupuser'
+  ) {
+    return null;
+  }
 
   return (
     <StHeader>

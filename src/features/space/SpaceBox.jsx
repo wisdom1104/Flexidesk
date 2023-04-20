@@ -24,6 +24,8 @@ import {
   SubTitle,
 } from './SpaceStyles';
 import { Row } from '../../components/Flex';
+import SpaceBoxItem from './SpaceBoxItem';
+import SpaceUesrItem from './SpaceUesrItem';
 
 function SpaceBox({ spaceId, selectedSpace }) {
   const dispatch = useDispatch();
@@ -36,15 +38,17 @@ function SpaceBox({ spaceId, selectedSpace }) {
 
   useEffect(() => {
     dispatch(__getSpace(spaceId));
-    // console.log(space);
   }, [selectedSpace]);
 
   //유저 이동 핸들러
   const [moveBox, setMoveBox] = useState(null);
+  const [isModal, setIsModal] = useState(false);
+  const [isClicked, setClicked] = useState(null);
 
   const onClickMoveUserHandler = box => {
     setIsModal(!isModal);
     setMoveBox(box);
+    setClicked(box.boxId);
   };
   const MoveUser = moveBox => {
     const payload = {
@@ -56,10 +60,8 @@ function SpaceBox({ spaceId, selectedSpace }) {
     };
     dispatch(__editBoxUser(payload));
     setIsModal(!isModal);
+    setClicked(null);
   };
-
-  const [isModal, setIsModal] = useState(false);
-
   return (
     <Stmainspace>
       <StSubHeader>
@@ -91,7 +93,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
         </Row>
       </StSubHeader>
       <StBoard>
-        {moveBox !== null && !isModal ? (
+        {moveBox !== null && isModal ? (
           <>
             {moveBox.username === null ? (
               <MoveModalBackground>
@@ -112,6 +114,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
                   <MoveModalSubbtn
                     onClick={() => {
                       setIsModal(!isModal);
+                      setClicked(null);
                     }}
                   >
                     아니요
@@ -130,6 +133,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
                   <MoveModalErrorbtn
                     onClick={() => {
                       setIsModal(!isModal);
+                      setClicked(null);
                     }}
                   >
                     다른 자리 찾기
@@ -146,39 +150,19 @@ function SpaceBox({ spaceId, selectedSpace }) {
               ? item.boxlist.map(box => {
                   if (box.username !== null)
                     return (
-                      <StUseBox
-                        key={box.boxId}
-                        style={{
-                          transform: `translate(${box.x}px, ${box.y}px)`,
-                        }}
-                        onClick={() => {
-                          onClickMoveUserHandler(box);
-                        }}
-                      >
-                        <div>{box.boxName}</div>
-                        {box.username !== null ? (
-                          <StUser>{box.username}</StUser>
-                        ) : null}
-                        {/* <StUser>{user}</StUser> */}
-                      </StUseBox>
+                      <SpaceUesrItem
+                        box={box}
+                        onClickMoveUserHandler={onClickMoveUserHandler}
+                        isClicked={isClicked}
+                      />
                     );
                   if (box.username === null)
                     return (
-                      <StBox
-                        key={box.boxId}
-                        style={{
-                          transform: `translate(${box.x}px, ${box.y}px)`,
-                        }}
-                        onClick={() => {
-                          onClickMoveUserHandler(box);
-                        }}
-                      >
-                        <div>{box.boxName}</div>
-                        {box.username !== null ? (
-                          <StUser>{box.username}</StUser>
-                        ) : null}
-                        {/* <StUser>{user}</StUser> */}
-                      </StBox>
+                      <SpaceBoxItem
+                        box={box}
+                        onClickMoveUserHandler={onClickMoveUserHandler}
+                        isClicked={isClicked}
+                      />
                     );
                 })
               : null,

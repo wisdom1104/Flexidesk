@@ -21,7 +21,6 @@ function InnerSpaceList({
       floorId: floor.floorId,
       spaceName: 'New Space',
     };
-    // console.log('newSpace', newSpace);
     dispatch(__addInnerSpace(newSpace));
   };
 

@@ -60,7 +60,6 @@ export const __deleteBox = createAsyncThunk(
 // box 수정
 export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
   try {
-    console.log('payload', payload);
     const token = cookies.get('token');
     const companyName = cookies.get('companyName');
     const response = await api.patch(
@@ -91,7 +90,6 @@ export const __editBoxUser = createAsyncThunk(
   'editBoxUser',
   async (payload, thunk) => {
     try {
-      console.log('payload', payload);
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(

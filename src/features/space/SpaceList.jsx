@@ -1,5 +1,5 @@
 import React from 'react';
-import SpaceItem from './SpaceItem';
+import SpaceListItem from './SpaceListItem';
 
 function SpaceList({
   spaces,
@@ -15,7 +15,7 @@ function SpaceList({
       {spaces?.map(space => {
         if (space && space.floorId === null)
           return (
-            <SpaceItem
+            <SpaceListItem
               key={space.spaceId}
               space={space}
               onClickSpaceListHandler={onClickSpaceListHandler}

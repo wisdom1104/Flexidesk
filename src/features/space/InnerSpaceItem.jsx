@@ -38,7 +38,7 @@ function InnerSpaceItem({
     dispatch(__editSpace(payload));
     setSpaceEdit(!spaceEdit);
   };
-  // console.log('space', space);
+
   return (
     <>
       {!spaceEdit ? (

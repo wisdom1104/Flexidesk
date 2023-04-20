@@ -11,7 +11,7 @@ import {
   StListItem,
 } from './SpaceStyles';
 
-function SpaceItem({
+function SpaceListItem({
   space,
   onClickSpaceListHandler,
   dispatch,
@@ -38,8 +38,6 @@ function SpaceItem({
     dispatch(__editSpace(payload));
     setSpaceEdit(!spaceEdit);
   };
-  // console.log('space', space);
-  // console.log('spaceList', space.spaceList);
 
   return (
     <>
@@ -84,7 +82,7 @@ function SpaceItem({
             </StListBtnBox>
           </StList>
         ) : (
-          <Row>
+          <StList>
             <EditInput
               type="text"
               value={editSpaceName}
@@ -92,27 +90,27 @@ function SpaceItem({
                 setEditSpaceName(e.target.value);
               }}
             />
-            <div>
-              <button
+            <StListBtnBox>
+              <BoxBtn
                 onClick={() => {
                   onEditSpaceNameHandler(space.spaceId);
                 }}
               >
                 완료
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   setSpaceEdit(!spaceEdit);
                 }}
               >
                 취소
-              </button>
-            </div>
-          </Row>
+              </BoxSubBtn>
+            </StListBtnBox>
+          </StList>
         )}
       </>
     </>
   );
 }
 
-export default SpaceItem;
+export default SpaceListItem;
