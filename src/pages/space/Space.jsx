@@ -46,7 +46,6 @@ function Space() {
   }, []);
 
   const [selectedSpace, setSelectedSpace] = useState(null);
-  // console.log('token', token);
 
   useEffect(() => {
     setSelectedSpace(spaces[0]);

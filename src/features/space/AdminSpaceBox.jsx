@@ -32,8 +32,6 @@ function AdminSpaceBox({
 
   const { space } = useSelector(state => state.space);
 
-  // console.log('space', space);
-
   const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '박스' }]);
 
@@ -104,13 +102,8 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        // console.log(isOverlapping);
-        // console.log(isMrListOverlapping);
-        // console.log(isBoxListOverlapping);
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addMr(newBox));
-        } else {
-          console.log('겹쳐져');
         }
       } else {
         dispatch(__addMr(newBox));
@@ -152,15 +145,8 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        // console.log('mrList[0]', mrList[0]);
-        // console.log('isOverlapping', isOverlapping);
-        // console.log('isMrListOverlapping', isMrListOverlapping);
-        // console.log('isBoxListOverlapping', isBoxListOverlapping);
-
         if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
           dispatch(__addBox(newBox));
-        } else {
-          console.log('겹쳐져');
         }
       } else {
         dispatch(__addBox(newBox));
@@ -191,7 +177,6 @@ function AdminSpaceBox({
 
       const boardRect = boardEl.current.getBoundingClientRect();
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
-      console.log('boardRect', boardRect);
 
       const limitedX = Math.max(
         boardRect.x - (boardRect.x + 10),
@@ -204,8 +189,6 @@ function AdminSpaceBox({
           boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
         ),
       );
-      // console.log('limitedX', boardRect.right);
-      // console.log('limitedY', limitedY);
       const payload = {
         spaceId,
         mrId: currentMrBox.mrId,
@@ -227,7 +210,6 @@ function AdminSpaceBox({
     document.addEventListener('mousemove', mrBoxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
-  // console.log(newMrBoxes);
 
   //--------------------------박스 드래그 앤 드롭--------------------------------
   const boxMouseDownHandler = (e, boxIndex) => {

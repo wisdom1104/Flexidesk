@@ -38,8 +38,6 @@ function SpaceListItem({
     dispatch(__editSpace(payload));
     setSpaceEdit(!spaceEdit);
   };
-  // console.log('space', space);
-  // console.log('spaceList', space.spaceList);
 
   return (
     <>

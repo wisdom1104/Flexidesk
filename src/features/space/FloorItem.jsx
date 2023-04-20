@@ -25,7 +25,6 @@ function FloorItem({
 }) {
   // floor 삭제
   const onDeleteFloorHandler = async floorId => {
-    console.log(floorId);
     dispatch(__deleteFloor(floorId));
   };
   //floor name 수정
@@ -41,8 +40,6 @@ function FloorItem({
     dispatch(__editFloor(payload));
     setFloorEdit(!floorEdit);
   };
-  // console.log('floor', floor);
-  // console.log('spaceList', floor.spaceList);
   const [isMd, setIsMd] = useState(false);
 
   return (

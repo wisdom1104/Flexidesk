@@ -38,7 +38,6 @@ function SpaceBox({ spaceId, selectedSpace }) {
 
   useEffect(() => {
     dispatch(__getSpace(spaceId));
-    // console.log(space);
   }, [selectedSpace]);
 
   //유저 이동 핸들러
@@ -47,13 +46,10 @@ function SpaceBox({ spaceId, selectedSpace }) {
   const [isClicked, setClicked] = useState(null);
 
   const onClickMoveUserHandler = box => {
-    console.log('box', box.boxId);
     setIsModal(!isModal);
     setMoveBox(box);
     setClicked(box.boxId);
   };
-  // console.log('isModal', isModal);
-  console.log('isClicked', isClicked);
   const MoveUser = moveBox => {
     const payload = {
       spaceId,

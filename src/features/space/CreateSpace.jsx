@@ -11,7 +11,6 @@ import {
   StAddBtn,
   StAddBtnBox,
 } from './SpaceStyles';
-import Test4 from '../../pages/space/Test4';
 import { useDispatch } from 'react-redux';
 import { __addFloor } from '../../redux/modules/floorsSlice';
 import { __addSpace } from '../../redux/modules/spacesSlice';
@@ -39,7 +38,6 @@ function CreateSpace({
     const newSpace = {
       spaceName: 'New 스페이스',
     };
-    console.log('newSpace', newSpace);
     dispatch(__addSpace(newSpace));
   };
 
@@ -57,7 +55,6 @@ function CreateSpace({
   });
 
   const dragStart = (e, space) => {
-    // console.log('1');
     dragSpace.current = space.spaceId;
     dragName.current = space.spaceName;
     dragFloor.current = space.floorId;
@@ -65,11 +62,7 @@ function CreateSpace({
   };
 
   const onAvailableItemDragEnter = (e, space) => {
-    // console.log('2');
-
-    // console.log('space', space);
     const draggedOverSpace = e.target;
-    console.log('taget', draggedOverSpace);
     dragOverSpace.current = draggedOverSpace.dataset.spaceId;
     dragOverFloor.current = draggedOverSpace.dataset.floorId;
     if (dragOverFloor.current === undefined) {
@@ -80,17 +73,11 @@ function CreateSpace({
       spaceName: dragName.current,
       floorId: dragOverFloor.current,
     };
-    // console.log('name', payload.spaceName);
-    // console.log('id', payload.spaceId);
-    console.log('Floor', payload.floorId);
     setMoveSpace(payload);
   };
 
   const onDragEnd = e => {
-    // console.log('3');
-
     e.target.classList.remove('grabbing');
-    console.log('moveSpace', moveSpace);
     dispatch(__editSpace(moveSpace));
   };
 
@@ -143,8 +130,6 @@ function CreateSpace({
                   onDragOver={onDragOver}
                   onDragEnd={onDragEnd}
                 />
-                {/* <Test4 floors={floors} spaces={spaces} /> */}
-                {/* <Test2 /> */}
               </ModalList>
             </Modal>
           </ModalBackground>
