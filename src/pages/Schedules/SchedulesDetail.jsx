@@ -10,7 +10,6 @@ function SchedulesDetail() {
   const param = useParams();
   const dispatch = useDispatch();
   const { userSchedules } = useSelector(state => state.schedules);
-  console.log(userSchedules);
 
   useEffect(() => {
     dispatch(__getAllSchedules());

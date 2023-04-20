@@ -41,7 +41,6 @@ function ReservationTime({ param, selectDay }) {
     // for (let i = 0; i < clickReservation.length; i++) {
     //   reqData.push({ start: clickReservation[i] });
     // }
-    // console.log('동작', reqData);
     // return reqData;
   };
 

@@ -29,15 +29,14 @@ function SignUpAdmin() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
 
-    // 가드
-    useTrueHook();
+  // 가드
+  useTrueHook();
 
   const navi = useNavigate();
 
   const handlePasswordChange = event => {
     const value = event.target.value;
     setAdmin(prevState => ({ ...prevState, password: value }));
-
 
     if (value.length < 8) {
       setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
@@ -63,11 +62,9 @@ function SignUpAdmin() {
     try {
       const response = await api.post('/users/signup/admin', admin);
       alert(`${admin.username}님 회원가입을 축하합니다.`);
-      console.log(`${admin.username}`);
       navi('/login');
       return response;
     } catch (error) {
-      console.log(error);
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
       return error;
@@ -75,21 +72,20 @@ function SignUpAdmin() {
   };
 
   return (
-    <StBackground height='910px'>
+    <StBackground height="910px">
       <StOverall>
         <div
           style={{
             marginTop: '80px',
             display: 'flex',
             alignItems: 'center',
-            height: '100%'
+            height: '100%',
           }}
         >
-          <StLoginForm onSubmit={handleSubmit}
-          height='650px'>
+          <StLoginForm onSubmit={handleSubmit} height="650px">
             <StForm>
               <StFormBox>
-                <StFont width='100%' align="start" fontSize="28px">
+                <StFont width="100%" align="start" fontSize="28px">
                   관리자 회원가입
                 </StFont>
 
@@ -105,21 +101,25 @@ function SignUpAdmin() {
                   <Input
                     type="text"
                     value={admin.username}
-                    onChange={event => setAdmin({...admin, username: event.target.value})}
+                    onChange={event =>
+                      setAdmin({ ...admin, username: event.target.value })
+                    }
                     placeholder="이름을 입력하세요."
                     required
                   />
                 </StTextInput>
-                <StTextInput height='100%'>
-                  <Certification 
-                  admin={admin}
-                  setAdmin={setAdmin}
-                  email={admin.email}
-                  onChange={event => setAdmin({...admin, email: event.target.value})}
+                <StTextInput height="100%">
+                  <Certification
+                    admin={admin}
+                    setAdmin={setAdmin}
+                    email={admin.email}
+                    onChange={event =>
+                      setAdmin({ ...admin, email: event.target.value })
+                    }
                   />
                 </StTextInput>
 
-                <StTextInput  height='65px'>
+                <StTextInput height="65px">
                   <StSmallFont
                     width
                     align="start"
@@ -140,19 +140,19 @@ function SignUpAdmin() {
                 </StTextInput>
                 <SterrorFont>
                   {passwordError && (
-                  <StSmallFont
-                    width='420px'
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="400"
-                    color="red"
-                  >
-                    {passwordError}
-                  </StSmallFont>
-                )}
+                    <StSmallFont
+                      width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
+                    >
+                      {passwordError}
+                    </StSmallFont>
+                  )}
                 </SterrorFont>
 
-                <StTextInput height='35px' >
+                <StTextInput height="35px">
                   <Input
                     type="password"
                     value={admin.passwordCheck}
@@ -164,17 +164,17 @@ function SignUpAdmin() {
                   />
                 </StTextInput>
                 <SterrorFont>
-                {passwordCheckError && (
-                  <StSmallFont
-                  width='420px'
-                  align="start"
-                    fontSize="0.875rem"
-                    weight="400"
-                    color="red"
-                  >
-                    {passwordCheckError}
-                  </StSmallFont>
-                )}
+                  {passwordCheckError && (
+                    <StSmallFont
+                      width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
+                    >
+                      {passwordCheckError}
+                    </StSmallFont>
+                  )}
                 </SterrorFont>
 
                 <StTextInput>
@@ -190,7 +190,9 @@ function SignUpAdmin() {
                     type="text"
                     id="companyName"
                     value={admin.companyName}
-                    onChange={event => setAdmin({...admin, companyName: event.target.value})}
+                    onChange={event =>
+                      setAdmin({ ...admin, companyName: event.target.value })
+                    }
                     placeholder="회사를 입력하세요."
                     required
                   />
@@ -209,15 +211,19 @@ function SignUpAdmin() {
                     type="text"
                     id="certification"
                     value={admin.certification}
-                    onChange={event => setAdmin({...admin, certification: event.target.value})}
+                    onChange={event =>
+                      setAdmin({ ...admin, certification: event.target.value })
+                    }
                     placeholder="인증번호를 입력하세요."
                     required
                   />
                 </StTextInput>
-                <div style={{
-                  marginTop:'20px'
-                }}>
-                <StLongButton type="submit">확인</StLongButton>
+                <div
+                  style={{
+                    marginTop: '20px',
+                  }}
+                >
+                  <StLongButton type="submit">확인</StLongButton>
                 </div>
               </StFormBox>
             </StForm>

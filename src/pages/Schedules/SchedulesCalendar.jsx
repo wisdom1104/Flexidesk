@@ -15,7 +15,6 @@ import {
 
 function SchedulesCalendar() {
   const param = useParams();
-  console.log(param);
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
