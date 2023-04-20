@@ -22,7 +22,6 @@ const store = configureStore({
     reservationList,
     mr,
     box,
-    userSchedules,
     schedules,
     floors,
     floor,

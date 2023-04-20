@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { __addFloor } from '../../redux/modules/floorsSlice';
-import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
+import React from 'react';
 import FloorItem from './FloorItem';
 
-function FloorList({ floors, onClickSpaceListHandler }) {
-  const dispatch = useDispatch();
-
-  // floor 추가
-  const onClickAddFloorHandler = async () => {
-    const newFloor = {
-      floorName: 'New Floor',
-    };
-    dispatch(__addFloor(newFloor));
-  };
-
+function FloorList({
+  floors,
+  onClickSpaceListHandler,
+  dispatch,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   return (
     <>
-      Floor List
-      <br />
-      <button onClick={onClickAddFloorHandler}>floor 추가</button>
       {floors?.map(floor => {
         if (floor)
           return (
@@ -28,6 +20,10 @@ function FloorList({ floors, onClickSpaceListHandler }) {
               floor={floor}
               onClickSpaceListHandler={onClickSpaceListHandler}
               dispatch={dispatch}
+              dragStart={dragStart}
+              onAvailableItemDragEnter={onAvailableItemDragEnter}
+              onDragOver={onDragOver}
+              onDragEnd={onDragEnd}
             />
           );
       })}

@@ -30,7 +30,6 @@ export const __getReservationDetail = createAsyncThunk(
 export const __deleteRervation = createAsyncThunk(
   "deletereservation",
   async (payload, thunk) =>{
-    console.log('보낸후',payload)
     try{
       const token = cookies.get('token')
       await api.delete(`reservations/${payload}`,{

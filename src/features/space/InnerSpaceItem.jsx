@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import { Row } from '../../components/Flex';
 import { __deleteSpace, __editSpace } from '../../redux/modules/spaceSlice';
-import { EditInput, ListItem } from './SpaceStyles';
+import {
+  BoxBtn,
+  BoxSubBtn,
+  EditInput,
+  ListItem,
+  StInner,
+  StInnerItem,
+  StListBtnBox,
+} from './SpaceStyles';
 
-function InnerSpaceItem({ dispatch, space, onClickSpaceListHandler }) {
+function InnerSpaceItem({
+  dispatch,
+  space,
+  onClickSpaceListHandler,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   // space 삭제
   const onDeleteSpaceHandler = async spaceId => {
     dispatch(__deleteSpace(spaceId));
@@ -13,10 +29,11 @@ function InnerSpaceItem({ dispatch, space, onClickSpaceListHandler }) {
   const [spaceEdit, setSpaceEdit] = useState(false);
 
   //space name 수정 핸들러
-  const onEditSpaceNameHandler = async spaceId => {
+  const onEditSpaceNameHandler = async space => {
     const payload = {
-      spaceId,
+      spaceId: space.spaceId,
       spaceName: editSpaceName,
+      floorId: space.floorId,
     };
     dispatch(__editSpace(payload));
     setSpaceEdit(!spaceEdit);
@@ -25,19 +42,33 @@ function InnerSpaceItem({ dispatch, space, onClickSpaceListHandler }) {
   return (
     <>
       {!spaceEdit ? (
-        <Row>
-          <ListItem onClick={() => onClickSpaceListHandler(space.spaceId)}>
-            {space.spaceName}/{space.spaceId}---
-          </ListItem>
-          <div>
-            <button
+        <StInner
+          key={space.spaceId}
+          draggable
+          data-space-id={space.spaceId}
+          data-floor-id={space.floorId}
+          onDragStart={e => dragStart(e, space)}
+          onDragEnter={e => onAvailableItemDragEnter(e, space)}
+          onDragOver={onDragOver}
+          onDragEnd={e => onDragEnd(e, space)}
+        >
+          <StInnerItem
+            data-floor-id={space.floorId}
+            onClick={() => onClickSpaceListHandler(space.spaceId)}
+          >
+            {space.spaceName}
+          </StInnerItem>
+          <StListBtnBox data-floor-id={space.floorId}>
+            <BoxBtn
+              data-floor-id={space.floorId}
               onClick={() => {
                 setSpaceEdit(!spaceEdit);
               }}
             >
               수정
-            </button>
-            <button
+            </BoxBtn>
+            <BoxSubBtn
+              data-floor-id={space.floorId}
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
@@ -46,35 +77,39 @@ function InnerSpaceItem({ dispatch, space, onClickSpaceListHandler }) {
               }}
             >
               삭제
-            </button>
-          </div>
-        </Row>
+            </BoxSubBtn>
+          </StListBtnBox>
+        </StInner>
       ) : (
-        <Row>
+        <StInner data-floor-id={space.floorId}>
           <EditInput
+            data-floor-id={space.floorId}
+            style={{ marginLeft: '25px' }}
             type="text"
             value={editSpaceName}
             onChange={e => {
               setEditSpaceName(e.target.value);
             }}
           />
-          <div>
-            <button
+          <StListBtnBox data-floor-id={space.floorId}>
+            <BoxBtn
+              data-floor-id={space.floorId}
               onClick={() => {
-                onEditSpaceNameHandler(space.spaceId);
+                onEditSpaceNameHandler(space);
               }}
             >
               완료
-            </button>
-            <button
+            </BoxBtn>
+            <BoxSubBtn
+              data-floor-id={space.floorId}
               onClick={() => {
                 setSpaceEdit(!spaceEdit);
               }}
             >
               취소
-            </button>
-          </div>
-        </Row>
+            </BoxSubBtn>
+          </StListBtnBox>
+        </StInner>
       )}
     </>
   );

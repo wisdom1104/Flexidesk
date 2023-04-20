@@ -52,7 +52,6 @@ export const __deleteFloor = createAsyncThunk(
 export const __editFloor = createAsyncThunk(
   '__editFloor',
   async (payload, thunk) => {
-    console.log(payload);
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');

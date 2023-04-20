@@ -1,13 +1,21 @@
 import { addMonths, subMonths } from 'date-fns';
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   __addReservation,
   __getReservation,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
-import AllReservation from './AllReservation';
+import {
+  StReserTimeButton,
+  StReserTimeBox,
+  StReserCountBox,
+  StReserCountButton,
+  ReservationCheckContain,
+  FinButton,
+} from './CalendarStyled';
+import ReservationCheck from './ReservationCheck';
 
 function ReservationTime({ param, selectDay }) {
   const now = new Date();
@@ -17,6 +25,7 @@ function ReservationTime({ param, selectDay }) {
 
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
+  // const [choseReservationTime, setChoseReservationTime] = useState('false');
 
   const [count, setCount] = useState(1);
   // const reqData = { start: clickReservation[0], userList: [] };
@@ -32,7 +41,6 @@ function ReservationTime({ param, selectDay }) {
     // for (let i = 0; i < clickReservation.length; i++) {
     //   reqData.push({ start: clickReservation[i] });
     // }
-    // console.log('동작', reqData);
     // return reqData;
   };
 
@@ -65,55 +73,68 @@ function ReservationTime({ param, selectDay }) {
       setClickReservation([...clickReservation, e.target.value]);
     }
     setIsCheckOut(!isCheckOut);
+    // setChoseReservationTime(!choseReservationTime);
   };
-  console.log('클릭', clickReservation);
 
   useEffect(() => {
     if (selectDay) {
       dispatch(__getReservation({ param, selectDay }));
-      console.log(date);
     } else {
       dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
     }
   }, [selectDay]);
 
   return (
-    <div>
+    <>
       <div>
-        클릭한 회의실 이름
         <div>
           예약시간
-          <div>
+          <StReserTimeBox>
             {timeList?.map(item => (
-              <button
+              <StReserTimeButton
+                // style={{
+                //   backgroundColor: choseReservationTime ? '#07133b' : 'white',
+                // }}
                 key={item.start}
                 onClick={onclickHandler}
                 disabled={item.isCheckOut === true}
-                value={`${selectDay}T${item.start}`}
+                value={
+                  selectDay
+                    ? `${selectDay}T${item.start}`
+                    : `${date}${item.start}`
+                }
               >
                 {item.start} ~ {item.end}
-              </button>
+              </StReserTimeButton>
             ))}
-          </div>
+          </StReserTimeBox>
           예약 인원
-          <div>
-            <button onClick={delCount}>-</button>
-            <span>{count}</span>
-            <button onClick={addCount}>+</button>
-          </div>
-          <div>
-            <button
+          <StReserTimeBox>
+            <StReserCountBox>
+              <StReserCountButton onClick={delCount}>-</StReserCountButton>
+              <div>{count}</div>
+              <StReserCountButton onClick={addCount}>+</StReserCountButton>
+            </StReserCountBox>
+          </StReserTimeBox>
+          <ReservationCheckContain>
+            <ReservationCheck
+              param={param}
+              selectDay={selectDay}
+              clickReservation={clickReservation}
+              count={count}
+            />
+            <FinButton
               onClick={() => {
                 dispatch(__addReservation({ reqDatas, param, selectDay }));
                 navi(`/detail/${userId}`);
               }}
             >
               예약 완료
-            </button>
-          </div>
+            </FinButton>
+          </ReservationCheckContain>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

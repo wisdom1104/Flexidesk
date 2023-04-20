@@ -1,47 +1,89 @@
-import React from 'react'
-import { StBackground, StBlueButton, StButtonGap, StOverall, StSmallFont, StWrapDiv } from './WelcomeStyled';
+import React from 'react';
+import {
+  StBlueButton,
+  StButtonGap,
+  StFont,
+  StGradationBackground,
+  StIntroDiv,
+  StOverall,
+  StSmallFont,
+  StWrapDiv,
+} from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
-import { cookies } from '../../shared/cookies';
-import { StForm, StLoginForm } from '../user/UserStyled';
+import Welcome2 from './Welcome2';
 
 function Welcome1() {
-    const navi = useNavigate();
+  const navi = useNavigate();
 
   return (
     <>
-      <StBackground id='signup'>
-    <StOverall>
-      <StWrapDiv>
-    <StSmallFont>
-            취업을 넘어, 10년 뒤에도 살아남는 개발자로 턱걸이로 취업하는 것은
-            우리의 목표가 아닙니다. 자유롭게 커리어를 이어나갈 수 있도록 최고의
-            교육을 제공합니다. 항해99는 다릅니다.
-          </StSmallFont> <br/>
+      <StGradationBackground id="signup">
+        <StOverall>
+          <StWrapDiv>
+            <StIntroDiv>
+              <div
+                style={{
+                  width: '820px',
+                  height: '720px',
+                  display: 'inline-block',
+                }}
+              >
+                <StFont align="start">
+                  스마트해진 업무공간,
+                  <br /> 보다 생산적인 업무시간
+                </StFont>
+                <StSmallFont
+                  align="start"
+                  marginBottom="-185px"
+                  marginTop="65px"
+                >
+                  Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및{' '}
+                  <br />
+                  회의실 예약 시스템을 제공합니다
+                </StSmallFont>{' '}
+                <br />
+                <StButtonGap>
+                  <StBlueButton
+                    onClick={() => {
+                      navi('/signupuser');
+                    }}
+                  >
+                    일반 회원가입
+                  </StBlueButton>
 
-          <StButtonGap>
-            <StBlueButton
-              onClick={() => {
-                navi('/signupuser');
-              }}
-            >
-              일반 회원가입
-            </StBlueButton>
+                  <StBlueButton
+                    onClick={() => {
+                      navi('/signup');
+                    }}
+                  >
+                    관리자 회원가입
+                  </StBlueButton>
+                </StButtonGap>
+              </div>
 
-            <StBlueButton
-              onClick={() => {
-                navi('/signup');
-              }}
-            >
-              관리자 회원가입
-            </StBlueButton>
-          </StButtonGap>
+              {/* 도형 자리 */}
+              <div
+                style={{
+                  width: '577px',
+                  height: '700px',
+                  display: 'inline-block',
+                }}
+              >
+                <img src="img/GroupIcon1.png" alt="GroupIcon1" />
+              </div>
+            </StIntroDiv>
           </StWrapDiv>
-    </StOverall>
-    </StBackground>
-
+        </StOverall>
+        <div
+          style={{
+            marginTop: '-250px',
+          }}
+        >
+          <Welcome2 />
+        </div>
+      </StGradationBackground>
     </>
-  )
+  );
 }
 
-export default Welcome1
-
+export default Welcome1;

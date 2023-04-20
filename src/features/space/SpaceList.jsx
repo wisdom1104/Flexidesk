@@ -1,33 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { __addSpace } from '../../redux/modules/spacesSlice';
-import { __deleteSpace } from '../../redux/modules/spaceSlice';
-import SpaceItem from './SpaceItem';
+import SpaceListItem from './SpaceListItem';
 
-function SpaceList({ spaces, onClickSpaceListHandler }) {
-  const dispatch = useDispatch();
-
-  // 그냥 space 추가
-  const onClickAddSpaceHandler = async () => {
-    const newSpace = {
-      spaceName: 'New Space',
-    };
-    dispatch(__addSpace(newSpace));
-  };
-
+function SpaceList({
+  spaces,
+  onClickSpaceListHandler,
+  dispatch,
+  dragStart,
+  onAvailableItemDragEnter,
+  onDragOver,
+  onDragEnd,
+}) {
   return (
     <>
-      Space List
-      <br />
-      <button onClick={onClickAddSpaceHandler}>Space 추가</button>
       {spaces?.map(space => {
         if (space && space.floorId === null)
           return (
-            <SpaceItem
+            <SpaceListItem
               key={space.spaceId}
               space={space}
               onClickSpaceListHandler={onClickSpaceListHandler}
               dispatch={dispatch}
+              dragStart={dragStart}
+              onAvailableItemDragEnter={onAvailableItemDragEnter}
+              onDragOver={onDragOver}
+              onDragEnd={onDragEnd}
             />
           );
         if (space && space.floorId !== null) return null;

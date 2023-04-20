@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
 import useFalseHook from '../../hooks/useFalseHook';
-import { Row } from '../../components/Flex';
+import { Column, Row } from '../../components/Flex';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import {
+  ClisckedListItem,
+  ListFloor,
   ListItem,
   SpaceInnerList,
   StBoard,
   StBtn,
   StListTitle,
+  StListbox,
   StSpace,
   StSpaceList,
   StSubHeader,
@@ -31,11 +34,15 @@ function Space() {
   const token = cookies.get('token');
   // 관리자 가드
   const role = cookies.get('role');
+
   useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getFloors());
-  }, []);
-  useEffect(() => {
-    token === undefined ? navi('/') : dispatch(__getSpaces());
+    if (token === undefined) {
+      navi('/');
+      // navi('/login');
+    } else {
+      dispatch(__getFloors());
+      dispatch(__getSpaces());
+    }
   }, []);
 
   const [selectedSpace, setSelectedSpace] = useState(null);
@@ -44,50 +51,82 @@ function Space() {
     setSelectedSpace(spaces[0]);
   }, [spaces]);
 
+  const [clickedSpaceId, setClickedSpaceId] = useState(null);
+
   const onClickSpaceListHandler = spaceId => {
     const space = spaces.find(space => space.spaceId === spaceId);
     setSelectedSpace(space);
-    // dispatch(__getSpace(spaceId));
+    setClickedSpaceId(spaceId);
   };
 
   return (
     <StSpace>
       {/* <Row> */}
       {/* ------------------------리스트 영역--------------------------------- */}
-      <StSpaceList>
+      <Column>
         <StListTitle>스페이스</StListTitle>
-        {floors?.map(floor => {
-          if (floor && floor.spaceList?.length > 0)
-            return (
-              <ListItem key={floor.floorId}>
-                {floor.floorName}/{floor.floorId}
-                <SpaceInnerList>
-                  {floor.spaceList.map(space => (
-                    <ListItem
-                      key={space.spaceId}
-                      onClick={() => onClickSpaceListHandler(space.spaceId)}
-                    >
-                      {space.spaceName}/{space.spaceId}
-                    </ListItem>
-                  ))}
-                </SpaceInnerList>
-              </ListItem>
-            );
-        })}
-        {spaces?.map(space => {
-          if (space && space.floorId === null)
-            return (
-              <ListItem
-                key={space.spaceId}
-                onClick={() => onClickSpaceListHandler(space.spaceId)}
-              >
-                {space.spaceName}/{space.spaceId}
-              </ListItem>
-            );
-          if (space && space.floorId !== null) return null;
-        })}
-      </StSpaceList>
-
+        {/* <div>11</div> */}
+        <StListbox>
+          <StSpaceList>
+            {floors?.map(floor => {
+              if (floor && floor.spaceList?.length > 0)
+                return (
+                  <div key={floor.floorId}>
+                    <ListFloor>{floor.floorName}</ListFloor>
+                    <SpaceInnerList>
+                      {floor.spaceList.map(space => {
+                        const isClicked = space.spaceId === clickedSpaceId;
+                        return (
+                          <React.Fragment key={space.spaceId}>
+                            {isClicked ? (
+                              <ClisckedListItem
+                                onClick={() =>
+                                  onClickSpaceListHandler(space.spaceId)
+                                }
+                              >
+                                {space.spaceName}
+                              </ClisckedListItem>
+                            ) : (
+                              <ListItem
+                                onClick={() =>
+                                  onClickSpaceListHandler(space.spaceId)
+                                }
+                              >
+                                {space.spaceName}
+                              </ListItem>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </SpaceInnerList>
+                  </div>
+                );
+            })}
+            {spaces?.map(space => {
+              const isClicked = space.spaceId === clickedSpaceId;
+              if (space && space.floorId === null)
+                return (
+                  <React.Fragment key={space.spaceId}>
+                    {isClicked ? (
+                      <ClisckedListItem
+                        onClick={() => onClickSpaceListHandler(space.spaceId)}
+                      >
+                        {space.spaceName}
+                      </ClisckedListItem>
+                    ) : (
+                      <ListItem
+                        onClick={() => onClickSpaceListHandler(space.spaceId)}
+                      >
+                        {space.spaceName}
+                      </ListItem>
+                    )}
+                  </React.Fragment>
+                );
+              // if (space && space.floorId !== null) return null;
+            })}
+          </StSpaceList>
+        </StListbox>
+      </Column>
       {/* 보더 영역 */}
       {spaces.length > 0 ? (
         <>

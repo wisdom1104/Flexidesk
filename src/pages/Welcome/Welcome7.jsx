@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  StBackground,
-  StBlueButton,
-  StButtonGap,
-  StColumnDiv,
-  StFont,
-  StGrid,
-  StOverall,
-  StWrapDiv,
-} from './WelcomeStyled';
-import { Link, Route, useNavigate } from 'react-router-dom';
+import { StBackground, StFont, StOverall, StfontA } from './WelcomeStyled';
+import { useNavigate } from 'react-router-dom';
+import { StWrapDiv } from './WelcomeStyled';
 
 function Welcome7() {
   const navi = useNavigate();
@@ -51,13 +43,13 @@ function Welcome7() {
       {/* 방법2 */}
       <StBackground background="#fff">
         <StOverall>
-
-          <a href="#signup">
-            <StFont>
-              간단한 회원가입으로 Flexidesk의 솔루션 만나보세요.
-            </StFont>
-          </a>
-          
+          <StWrapDiv>
+            <StfontA href="#signup">
+              <StFont>
+                간단한 회원가입으로 <br /> Flexidesk의 솔루션 만나보세요.
+              </StFont>
+            </StfontA>
+          </StWrapDiv>
         </StOverall>
       </StBackground>
     </>

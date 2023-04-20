@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { isLoginActions } from '../redux/modules/loginSlice';
 import { cookies } from '../shared/cookies';
@@ -10,47 +10,79 @@ import {
   StHeaderContentBox,
   StHeaderContentButtonBox,
   StHeaderButton,
+  StHeaderLogo,
+  StHaderFont,
 } from './HeaderStyled';
 
 function Header() {
   const dispatch = useDispatch();
   const navi = useNavigate();
 
-  const userName = cookies.get('companyName');
+  const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
   const logout = () => {
     dispatch(isLoginActions.logout());
     alert('로그아웃 되었습니다.');
-    navi('/login');
+    navi('/');
   };
+
+  const onClcikHandelr = () => {
+    navi('/');
+  };
+
+  const location = useLocation();
+
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/signupuser'
+  ) {
+    return null;
+  }
 
   return (
     <StHeader>
       {cookies.get('token') ? (
         <HeaderContain>
-          <StHeaderContentBox>로고다</StHeaderContentBox>
+          <StHeaderContentBox>
+            <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+          </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
-              스페이스
+              <StHaderFont>스페이스</StHaderFont>
+            </StHeaderContentBox>
+            <StHeaderContentBox
+              onClick={() => navi(`/schedulescalendar/${userId}`)}
+            >
+              <StHaderFont>스케줄 등록</StHaderFont>
+            </StHeaderContentBox>
+            <StHeaderContentBox
+              onClick={() => navi(`/scheduledetail/${userId}`)}
+            >
+              <StHaderFont>스케줄 조회</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
-              스케줄
+            <StHaderFont>회의실 예약현황</StHaderFont>
             </StHeaderContentBox>
-            <StHeaderContentBox>{`${userName}님 환영합니다`}</StHeaderContentBox>
+            <StHeaderContentBox>
+            <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
+            </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-                Logout
+              Logout
               </StHeaderButton>
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
         </HeaderContain>
       ) : (
         <HeaderContain>
-          <StHeaderContentBox>로고여</StHeaderContentBox>
+          <StHeaderContentBox>
+          <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+          </StHeaderContentBox>
           <StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/`)}>
-              서비스 소개
+            <StHaderFont>서비스 소개</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={() => navi('/login')}>
@@ -66,7 +98,7 @@ function Header() {
 
 const StHeader = styled.div`
   height: 6vh;
-  width: 100%;
+  width: 99%;
   display: flex;
   justify-content: center;
   align-items: center;

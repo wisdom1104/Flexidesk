@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import styled from 'styled-components'
 
-export const Input = ({type, value, onChange, name, placeholder}) => {
+export const Input = ({type, value, onChange, name, placeholder, ...restProps}) => {
   
     return (
       <>
@@ -12,54 +12,36 @@ export const Input = ({type, value, onChange, name, placeholder}) => {
           onChange={onChange}
           name={name}
           placeholder={placeholder}
+          {...restProps}
           />
       </>
     )
-  }
-
-  // export const PostsButtons = ({text, onClick}) => {
-  //   return (
-  //   <StyledButton onClick={onClick}>{text}</StyledButton>
-  //   )
-  // }
+  };
 
   const StInput = styled.input`
-  width: 26vw;
-  height: 45px;
+  width: 400px;
+  height: 50px;
 
-  display: block;
+  display: block;  
   height: ${props => props.heigth};
   padding: 0 10px;
-  background: #fff;
+  background: var(--white);
 
-  border: 1px solid #A6AEBB;;
-  border-radius: 8px;
+  outline: none;
+
+  border: ${props => props.border || "1px solid #A6AEBB"};
+  border-radius: ${props => props.borderRadius || '8px'};
   
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
   color: #A6AEBB;
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  &:focus {
+    border: 1px solid #65BAB6;
+  }
+  &:active {
+    border: 1px solid #07133B;
+  }
+
 `
-
-// const StyledButton = styled.button`
-//   border: none;
-//   cursor: pointer;
-
-//   border-radius: 8px;
-//   background-color: #fab1a0;
-//   &:hover {
-//     background-color:#FDE8E3;
-//   }
-//   &:active {
-//     background-color:#e6a293;
-//   }
-//   color: #d63031;
-//   font-weight: 400px;
-
-//   height: 40px;
-//   width: 100px;
-// `;

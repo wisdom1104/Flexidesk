@@ -3,16 +3,30 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import { __getSchedules } from '../../redux/modules/schedules';
+import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
+import {
+  ScheduleInput,
+  StReserTimeBox,
+  StReserTimeButton,
+  FontSt,
+  FinButton,
+} from '../Reservation/CalendarStyled';
 
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
+  const dispatch = useDispatch();
+  const navi = useNavigate();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickSchedules, setClickSchedules] = useState([]);
+
+  const [scheduleValue, setScheduleValue] = useState({
+    scTitle: '',
+    scComment: '',
+  });
 
   // const reqData = { start: clickReservation[0], userList: [] };
 
@@ -27,16 +41,18 @@ function SchedulesTime({ param, selectDay }) {
     // for (let i = 0; i < clickReservation.length; i++) {
     //   reqData.push({ start: clickReservation[i] });
     // }
-    // console.log('동작', reqData);
     // return reqData;
   };
+  const dataListResult = dataList();
 
-  const reqDatas = { startList: dataList(), useList: [] };
-  const dispatch = useDispatch();
+  const reqDatas = { startList: dataListResult, useList: [] };
+
+  //adddispatch로 보낼값
+  const startData = { startList: dataListResult };
+  const { scComment, scTitle } = scheduleValue;
+  const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
 
   const { schedules } = useSelector(state => state.schedules);
-  console.log('스케줄', schedules);
-  const { timeList } = schedules;
 
   const onclickHandler = e => {
     if (clickSchedules.find(item => item === e.target.value)) {
@@ -48,12 +64,10 @@ function SchedulesTime({ param, selectDay }) {
     }
     setIsCheckOut(!isCheckOut);
   };
-  console.log('클릭', clickSchedules);
 
   useEffect(() => {
     if (selectDay !== undefined) {
       dispatch(__getSchedules({ param, selectDay }));
-      console.log('데이터:', date);
     } else {
       dispatch(
         __getSchedules({
@@ -66,23 +80,52 @@ function SchedulesTime({ param, selectDay }) {
 
   return (
     <>
-      <div>스케줄 시간</div>
-      <div>
-        {timeList?.map(item => (
-          <button
+      <FontSt>스케줄 시간</FontSt>
+      <StReserTimeBox>
+        {schedules?.map(item => (
+          <StReserTimeButton
             key={item.start}
             onClick={onclickHandler}
             disabled={item.isCheckOut === true}
             value={`${selectDay}T${item.start}`}
           >
             {item.start}~{item.end}
-          </button>
+          </StReserTimeButton>
         ))}
-      </div>
-      <div>
-        제목 : <input />
-        내용 : <input />
-      </div>
+      </StReserTimeBox>
+      <form
+        onSubmit={async e => {
+          e.preventDefault();
+          await dispatch(__addSchdule(reqScheduleValue));
+          navi(`/scheduledetail/${param}`);
+        }}
+      >
+        <FontSt>스케줄 제목</FontSt>
+        <ScheduleInput
+          type="text"
+          value={scheduleValue.scTitle}
+          required
+          onChange={e =>
+            setScheduleValue({
+              ...scheduleValue,
+              scTitle: e.target.value,
+            })
+          }
+        />
+        <FontSt>스케줄 내용</FontSt>
+        <ScheduleInput
+          type="text"
+          value={scheduleValue.scComment}
+          required
+          onChange={e =>
+            setScheduleValue({
+              ...scheduleValue,
+              scComment: e.target.value,
+            })
+          }
+        />
+        <FinButton>등록하기</FinButton>
+      </form>
     </>
   );
 }

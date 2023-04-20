@@ -9,6 +9,15 @@ import {
   ReservationTitle,
   StMrNameBox,
   StMrName,
+  StCalenHeader,
+  BackCusor,
+  Calcontain,
+  Header,
+  DayContain,
+  Day,
+  StDate,
+  FontSt,
+  DateFont,
 } from './CalendarStyled';
 const Calendar = () => {
   // useFalseHook();
@@ -52,7 +61,6 @@ const Calendar = () => {
   }, [selectMonth]);
 
   const dayClickHandler = e => {
-    console.log('날짜선택', e.target.value);
     setDate(e.target.value);
   };
 
@@ -64,7 +72,7 @@ const Calendar = () => {
       if (week[day] === stDay) {
         for (let i = 0; i < dateTotalCount; i++) {
           dayArr.push(
-            <Day
+            <StDate
               key={i}
               onClick={dayClickHandler}
               value={`${selectYear}-${selectMonth
@@ -72,55 +80,57 @@ const Calendar = () => {
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
             >
               {i + 1}
-            </Day>,
+            </StDate>,
           );
         }
       } else {
-        dayArr.push(<Day> </Day>);
+        dayArr.push(<StDate> </StDate>);
       }
     }
     return dayArr;
   };
-  console.log(returnDay());
 
   return (
     <>
       <Calcontain>
         <ReservationTitle>
-          <div
+          <BackCusor
             onClick={() => {
               navi('/space');
             }}
           >
             ←
-          </div>
+          </BackCusor>
           <h2>회의실 예약하기</h2>
         </ReservationTitle>
 
         <MainContain>
           <StMrNameBox>
-            <div>회의실 이름</div>
+            <FontSt>회의실 이름</FontSt>
             <StMrName>회의실 {mrId}</StMrName>
           </StMrNameBox>
 
-          <Header>
-            <button
-              onClick={() => {
-                preMonth();
-              }}
-            >
-              이전달
-            </button>
-            <div>{selectYear}</div>
-            <div>-{selectMonth}</div>
-            <button
-              onClick={() => {
-                nextMonth();
-              }}
-            >
-              다음달
-            </button>
-          </Header>
+          <StCalenHeader>
+            <FontSt>예약 날짜</FontSt>
+            <Header>
+              <button
+                onClick={() => {
+                  preMonth();
+                }}
+              >
+                이전달
+              </button>
+              <DateFont>{selectYear}년</DateFont>
+              <DateFont>{selectMonth}월</DateFont>
+              <button
+                onClick={() => {
+                  nextMonth();
+                }}
+              >
+                다음달
+              </button>
+            </Header>
+          </StCalenHeader>
           <DayContain>
             {week?.map(item => {
               return <Day key={item}>{item}</Day>;
@@ -135,22 +145,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-const Calcontain = styled.div`
-  width: 75vw;
-  height: 63vh;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const DayContain = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Day = styled.button`
-  min-width: calc(100% / 7);
-`;

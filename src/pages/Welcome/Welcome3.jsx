@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StBackground,
   StFont,
+  StIntroDiv,
   StOverall,
   StSmallFont,
   StWrapDiv,
@@ -11,21 +12,46 @@ function Welcome3() {
   return (
     <>
       <StBackground>
-        <StOverall>
+        <StOverall height="1000px">
           <StWrapDiv>
-            <StFont fontSize="2rem">업무 트렌드</StFont>
-            <StFont>👨‍💻</StFont> <br /> 
-            <StFont>
-              좌율 좌석제 
-            </StFont>
+            <StIntroDiv>
+              <div
+                style={{
+                  width: '720px',
+                  display: 'inline-block',
+                }}
+              >
+                <StSmallFont
+                  fontSize="2rem"
+                  color="#ACDAD8"
+                  weight="700"
+                  align="start"
+                  width="100%"
+                >
+                  업무 트렌드
+                </StSmallFont>
+                <StFont align="start" marginBottom="150px">
+                  좌율 좌석제{' '}
+                </StFont>
 
-            <StSmallFont>
-              자율좌석제는 기본적으로 퇴근 시 자신이 사용한 자리를
-              ‘클린데스크’로 유지해야 하기 때문에 업무상 보안 문제까지 자연스레
-              해결 과거 팀이나 직급에 따라 자리를 배치해 독자적이고 수직적이었던
-              사무실 분위기가 자율좌석제 도입으로 상호보완적이고, 수평적인
-              분위기로 변화
-            </StSmallFont>
+                <StSmallFont marginBottom="100px" weight="600" align="start">
+                  팀이나 직급에 따라 자리를 배치해 독자적이고 수직적이었던{' '}
+                  <br />
+                  사무실 분위기가 자율좌석제 도입으로 <br />
+                  상호보완적이고, 수평적인 분위기로 변화합니다.
+                </StSmallFont>
+              </div>
+              {/* 도형 자리 */}
+              <div
+                style={{
+                  width: '577px',
+                  height: '700px',
+                  display: 'inline-block',
+                }}
+              >
+                <img src="img/GroupIcon2.png" alt="GroupIcon2" />
+              </div>
+            </StIntroDiv>
           </StWrapDiv>
         </StOverall>
       </StBackground>

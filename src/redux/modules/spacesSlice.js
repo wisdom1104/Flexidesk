@@ -15,6 +15,7 @@ export const __getSpaces = createAsyncThunk(
   async (payload, thunk) => {
     try {
       const token = cookies.get('token');
+      // const token = cookies.get('refresh_token');
       const companyName = cookies.get('companyName');
       const response = await api.get(`/spaces/${companyName}`, {
         headers: {
@@ -31,15 +32,21 @@ export const __getSpaces = createAsyncThunk(
 // space 추가
 export const __addSpace = createAsyncThunk(
   '__addSpace',
-  async (newSpace, thunk) => {
+  async (payload, thunk) => {
     try {
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
-      const response = await api.post(`/spaces/${companyName}`, newSpace, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await api.post(
+        `/spaces/${companyName}`,
+        {
+          spaceName: payload.spaceName,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
@@ -67,6 +74,7 @@ export const __addInnerSpace = createAsyncThunk(
         },
       );
       thunk.dispatch(__getFloors());
+      thunk.dispatch(__getSpaces());
       return thunk.fulfillWithValue(response.data.data);
     } catch (error) {
       return error;
