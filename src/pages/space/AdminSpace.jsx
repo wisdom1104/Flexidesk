@@ -24,7 +24,7 @@ import { Row } from '../../components/Flex';
 function AdminSpace() {
   // useFalseHook();
   const [mrBoxes] = useState([{ mrId: 1, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, inner: '박스' }]);
+  const [boxes] = useState([{ boxId: 2, inner: '자리' }]);
 
   const elRef = useRef([]);
 
@@ -47,8 +47,8 @@ function AdminSpace() {
     const role = cookies.get('role');
 
     if (token === undefined) {
-      // navi('/');
-      navi('/login');
+      navi('/');
+      // navi('/login');
     } else if (role === 'ADMIN') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
@@ -79,87 +79,84 @@ function AdminSpace() {
   const [isModal, setIsModal] = useState(false);
 
   return (
-    <>
-      <StSpace>
-        {/* 리스트 영역 */}
-        <CreateSpace
-          isModal={isModal}
-          setIsModal={setIsModal}
-          spaces={spaces}
-          floors={floors}
-          onClickSpaceListHandler={onClickSpaceListHandler}
-        />
-        {/* 셀렉터 영역 */}
-        <StSelect>
-          <StSelectTitle>AdminSpace</StSelectTitle>
-          <div>
-            {/* 회의실 셀렉터 */}
-            {mrBoxes.map((box, i) => (
-              <StSelectBox
-                key={box.mrId}
-                ref={el => (elRef.current[i] = el)}
-                draggable={true}
-                onDragStart={e => handleDragStart(e, box.mrId)}
-              >
-                {box.inner} {box.mrId}
-              </StSelectBox>
-            ))}
-          </div>
-          <div>
-            {/* 박스 셀렉터 */}
-            {boxes.map((box, i) => (
-              <StSelectBox
-                key={box.boxId}
-                ref={el => (elRef.current[i] = el)}
-                draggable={true}
-                onDragStart={e => handleDragStart(e, box.boxId)}
-              >
-                {box.inner} {box.boxId}
-              </StSelectBox>
-            ))}
-          </div>
-        </StSelect>
-        {/* 보더 영역 */}
-        {spaces.length > 0 ? (
-          <>
-            {selectedSpace && (
-              <AdminSpaceBox
-                spaceId={selectedSpace.spaceId}
-                selectedSpace={selectedSpace}
-                handleDragStart={handleDragStart}
-                isModal={isModal}
-                setIsModal={setIsModal}
-                spaces={spaces}
-                id={selectedSpace.spaceId}
-              />
-              // <div>1</div>
-            )}
-          </>
-        ) : (
-          <>
-            {/* 초기 화면 */}
-            <Stmainspace>
-              <StSubHeader>
-                {/* space name 부분 */}
-                <Row></Row>
-                <Row>
-                  <StSubBtn
-                    onClick={() => {
-                      setIsModal(!isModal);
-                    }}
-                  >
-                    스페이스 관리하기
-                  </StSubBtn>
-                  <StBtn onClick={() => navi('/space')}>완료</StBtn>
-                </Row>
-              </StSubHeader>
-              {/* board 부분 */}
-              <StBoard></StBoard>
-            </Stmainspace>
-          </>
-        )}
-      </StSpace>
-    </>
+    <StSpace>
+      {/* 리스트 영역 */}
+      <CreateSpace
+        isModal={isModal}
+        setIsModal={setIsModal}
+        spaces={spaces}
+        floors={floors}
+        onClickSpaceListHandler={onClickSpaceListHandler}
+      />
+      {/* 셀렉터 영역 */}
+      <StSelect>
+        <StSelectTitle>AdminSpace</StSelectTitle>
+        <div>
+          {mrBoxes.map((box, i) => (
+            <StSelectBox
+              key={box.mrId}
+              ref={el => (elRef.current[i] = el)}
+              draggable={true}
+              onDragStart={e => handleDragStart(e, box.mrId)}
+            >
+              {box.inner}
+            </StSelectBox>
+          ))}
+        </div>
+        <div>
+          {/* 박스 셀렉터 */}
+          {boxes.map((box, i) => (
+            <StSelectBox
+              key={box.boxId}
+              ref={el => (elRef.current[i] = el)}
+              draggable={true}
+              onDragStart={e => handleDragStart(e, box.boxId)}
+            >
+              {box.inner}
+            </StSelectBox>
+          ))}
+        </div>
+      </StSelect>
+      {/* 보더 영역 */}
+      {spaces.length > 0 ? (
+        <>
+          {selectedSpace && (
+            <AdminSpaceBox
+              spaceId={selectedSpace.spaceId}
+              selectedSpace={selectedSpace}
+              handleDragStart={handleDragStart}
+              isModal={isModal}
+              setIsModal={setIsModal}
+              spaces={spaces}
+              id={selectedSpace.spaceId}
+            />
+            // <div>1</div>
+          )}
+        </>
+      ) : (
+        <>
+          {/* 초기 화면 */}
+          <Stmainspace>
+            <StSubHeader>
+              {/* space name 부분 */}
+              <Row></Row>
+              <Row>
+                <StSubBtn
+                  onClick={() => {
+                    setIsModal(!isModal);
+                  }}
+                >
+                  스페이스 관리하기
+                </StSubBtn>
+                <StBtn onClick={() => navi('/space')}>완료</StBtn>
+              </Row>
+            </StSubHeader>
+            {/* board 부분 */}
+            <StBoard></StBoard>
+          </Stmainspace>
+        </>
+      )}
+    </StSpace>
   );
 }
 

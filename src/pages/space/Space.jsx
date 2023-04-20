@@ -37,8 +37,8 @@ function Space() {
 
   useEffect(() => {
     if (token === undefined) {
-      // navi('/');
-      navi('/login');
+      navi('/');
+      // navi('/login');
     } else {
       dispatch(__getFloors());
       dispatch(__getSpaces());
@@ -51,8 +51,6 @@ function Space() {
   useEffect(() => {
     setSelectedSpace(spaces[0]);
   }, [spaces]);
-
-  const [isClicked, setIsClicked] = useState(false);
 
   const [clickedSpaceId, setClickedSpaceId] = useState(null);
 

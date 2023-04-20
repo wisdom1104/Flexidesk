@@ -16,7 +16,7 @@ export const StSpace = styled.div`
   gap: 10px;
 `;
 
-// space 리스트
+// space 리스트------------------------------------------------------
 export const StListbox = styled.div`
   border-top: 1px solid #8b93a6;
   border-bottom: 1px solid #8b93a6;
@@ -95,7 +95,7 @@ export const ClisckedListItem = styled.div`
   border-radius: 8px;
 `;
 
-// space 서브헤더+보더
+// space 서브헤더+보더 ------------------------------------------------------
 export const Stmainspace = styled.div`
   position: relative;
   /* width: 1162px; */
@@ -109,9 +109,10 @@ export const Stmainspace = styled.div`
   background: linear-gradient(291.78deg, #a2cecf 0%, #b6dfdd 100%);
   border-radius: 8px;
   margin-top: 16px;
+  margin-right: 0;
 `;
 
-// 서브 헤더 부분
+// 서브 헤더 부분 ------------------------------------------------------
 export const StSubHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -166,9 +167,17 @@ export const StBtn = styled.button`
   line-height: 19px;
   text-align: right;
   color: #ffffff;
+  &:hover {
+    background: #65bab6;
+    color: #def1ef;
+  }
+  &:active {
+    background: #4a8e8b;
+    color: #def1ef;
+  }
 `;
 
-//보더 부분
+//보더 부분 ------------------------------------------------------
 export const StBoard = styled.div`
   position: relative;
   /* width: 1130px; */
@@ -208,8 +217,9 @@ export const StMr = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
+    background: #ffffff;
+    border: 1px solid #8b93a6;
+    font-weight: 700;
   }
 `;
 
@@ -238,8 +248,9 @@ export const StBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
+    background: #ffffff;
+    border: 1px solid #8b93a6;
+    font-weight: 700;
   }
 `;
 
@@ -266,10 +277,6 @@ export const Box = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
-  }
 `;
 
 // 유저 있는 박스
@@ -298,13 +305,8 @@ export const StUseBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
-  }
-  &:focus {
-    background: #2ed775;
-    border: 1px solid #2ed775;
-    color: #ffffff;
+    background: #ffffff;
+    font-weight: 700;
   }
 `;
 
@@ -319,7 +321,7 @@ export const StUser = styled.div`
   color: #5c6373;
 `;
 
-// Admin space 페이지 ------------------------------------------
+// Admin space 페이지 -----------------------------------------------------
 // select 박스
 export const StSelect = styled.div`
   width: 130px;
@@ -367,11 +369,12 @@ export const StSelectBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
+    background: #ffffff;
+    border: 1px solid #8b93a6;
+    font-weight: 700;
   }
 `;
-// 서브 헤더
+// 서브 헤더 ------------------------------------------------------
 export const StSubBtn = styled.button`
   //버튼
   display: flex;
@@ -393,6 +396,16 @@ export const StSubBtn = styled.button`
   line-height: 19px;
   text-align: right;
   color: #65bab6;
+  &:hover {
+    border: 1px solid #65bab6;
+    background: #ffffff;
+    color: #65bab6;
+  }
+  &:active {
+    border: 1px solid #4a8e8b;
+    background: #ffffff;
+    color: #4a8e8b;
+  }
 `;
 
 // 회의실
@@ -421,8 +434,9 @@ export const StDropMr = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #8b93a6;
-    color: #f1f2f4;
+    background: #ffffff;
+    border: 1px solid #8b93a6;
+    font-weight: 700;
   }
 `;
 
@@ -453,7 +467,8 @@ export const StDropBox = styled.div`
   gap: 20px;
   &:hover {
     background: #ffffff;
-    font-weight: 800;
+    border: 1px solid #8b93a6;
+    font-weight: 700;
   }
 `;
 
@@ -487,10 +502,13 @@ export const BoxBtn = styled.button`
   text-align: right;
   color: #ffffff;
   &:hover {
-    /* background: #ffffff; */
-    /* color: #5c6373; */
-    /* border: 0.5px solid #5c6373; */
-    font-weight: 800;
+    color: #def1ef;
+    font-weight: 700;
+  }
+  &:active {
+    background: #4a8e8b;
+    color: #def1ef;
+    font-weight: 700;
   }
 `;
 //삭제 & 취소 버튼
@@ -515,10 +533,15 @@ export const BoxSubBtn = styled.button`
   text-align: right;
   color: #65bab6;
   &:hover {
-    /* background: #5c6373; */
-    /* color: #f1f2f4; */
-    border: 0.5px solid #343434;
-    font-weight: 800;
+    background: #def1ef;
+    color: #65bab6;
+    font-weight: 700;
+  }
+  &:active {
+    border: 0.5px solid #4a8e8b;
+    background: #def1ef;
+    color: #4a8e8b;
+    font-weight: 700;
   }
 `;
 
@@ -547,7 +570,7 @@ export const BoxInput = styled.input`
   }
 `;
 
-// admin space 모달창 ---------------
+// admin space 모달창 ------------------------------------------------------------
 export const ModalBackground = styled.div`
   position: fixed;
   display: flex;
@@ -570,9 +593,8 @@ export const Modal = styled.div`
   background: #ffffff;
   border-radius: 8px;
   padding: 2px;
-  width: 322px;
-  /* height: 445px; */
-  height: 620px;
+  width: 326px;
+  height: 489px;
   margin: 20px;
 `;
 
@@ -631,155 +653,6 @@ export const InnerList = styled.div`
   gap: 20px;
 `;
 
-//유저 이동 모달 --------------------------------------------
-export const MoveModalBackground = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  background: rgba(0, 0, 0, 0.2);
-  /* opacity: 0.3; */
-  top: 0px;
-  z-index: 50;
-  box-sizing: border-box;
-  height: 593px;
-  min-width: 990px;
-  max-width: 990px;
-
-  /* min-width: 989.93px; */
-  /* height: 30.8854vh; */
-  /* background: #fcfcfc; */
-  /* box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25); */
-  border-radius: 8px;
-  margin: auto;
-`;
-
-export const MoveModal = styled.div`
-  position: absolute;
-  /* top: 134px; */
-  /* left: 802px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: #ffffff;
-  border: 1px solid #def1ef;
-  box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25);
-  border-radius: 8px;
-  padding: 2px;
-  width: 188px;
-  height: 174px;
-`;
-export const MoveModalSubTitle = styled.div`
-  position: absolute;
-  width: 52px;
-  height: 17px;
-  left: 16px;
-  top: 16px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  color: #8b93a6;
-`;
-
-export const MoveModalTitle = styled.div`
-  position: absolute;
-  width: 142px;
-  height: 54px;
-  left: 23px;
-  top: 41px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 150%;
-  text-align: center;
-  color: #07133b;
-`;
-
-export const MoveModalbtn = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 24px;
-  gap: 5px;
-  position: absolute;
-  width: 61px;
-  height: 41px;
-  left: 16px;
-  top: 117px;
-  background: #65bab6;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: right;
-  color: #ffffff;
-`;
-
-export const MoveModalSubbtn = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 24px;
-  gap: 5px;
-  position: absolute;
-  width: 87px;
-  height: 41px;
-  left: 85px;
-  top: 117px;
-  background: #def1ef;
-  border: 1px solid #65bab6;
-  border-radius: 8px;
-  cursor: pointer;
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: right;
-  color: #65bab6;
-`;
-
-export const MoveModalErrorbtn = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 24px;
-  gap: 5px;
-  position: absolute;
-  width: 157px;
-  height: 41px;
-  left: 16px;
-  top: 117px;
-  background: #65bab6;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: right;
-  color: #ffffff;
-`;
-
-// 리스트 모달-------------------------
-
 // 추가 버튼들
 export const StAddBtnBox = styled.div`
   display: flex;
@@ -803,6 +676,14 @@ export const StAddBtn = styled.button`
   line-height: 19px;
   text-align: center;
   color: #ffffff;
+  &:hover {
+    background: #65bab6;
+    color: #def1ef;
+  }
+  &:active {
+    background: #4a8e8b;
+    color: #def1ef;
+  }
 `;
 
 //각 리스트의 버튼들
@@ -899,6 +780,16 @@ export const StAddInnerBtn = styled.button`
   line-height: 19px;
   text-align: center;
   color: #65bab6;
+  &:hover {
+    border: 1px solid #65bab6;
+    background: #ffffff;
+    color: #65bab6;
+  }
+  &:active {
+    border: 1px solid #4a8e8b;
+    background: #ffffff;
+    color: #4a8e8b;
+  }
 `;
 
 //inner space 요소
@@ -930,4 +821,177 @@ export const EditInput = styled.input`
   outline: none;
   border: 1px solid #8b93a6;
   border-radius: 2px;
+`;
+
+//유저 이동 모달 -----------------------------------------------------------
+export const MoveModalBackground = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
+  /* opacity: 0.3; */
+  top: 0px;
+  z-index: 50;
+  box-sizing: border-box;
+  height: 593px;
+  min-width: 990px;
+  max-width: 990px;
+
+  /* min-width: 989.93px; */
+  /* height: 30.8854vh; */
+  /* background: #fcfcfc; */
+  /* box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25); */
+  border-radius: 8px;
+  margin: auto;
+`;
+
+export const MoveModal = styled.div`
+  position: absolute;
+  /* top: 134px; */
+  /* left: 802px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #def1ef;
+  box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25);
+  border-radius: 8px;
+  padding: 2px;
+  width: 188px;
+  height: 174px;
+`;
+export const MoveModalSubTitle = styled.div`
+  position: absolute;
+  width: 52px;
+  height: 17px;
+  left: 16px;
+  top: 16px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8b93a6;
+`;
+
+export const MoveModalTitle = styled.div`
+  position: absolute;
+  width: 142px;
+  height: 54px;
+  left: 23px;
+  top: 41px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  color: #07133b;
+`;
+
+export const MoveModalbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 61px;
+  height: 41px;
+  left: 16px;
+  top: 117px;
+  background: #65bab6;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #ffffff;
+  &:hover {
+    background: #65bab6;
+    color: #def1ef;
+  }
+  &:active {
+    background: #4a8e8b;
+    color: #def1ef;
+  }
+`;
+
+export const MoveModalSubbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 87px;
+  height: 41px;
+  left: 85px;
+  top: 117px;
+  background: #def1ef;
+  border: 1px solid #65bab6;
+  border-radius: 8px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #65bab6;
+  &:hover {
+    border: 1px solid #65bab6;
+    background: #ffffff;
+    color: #65bab6;
+  }
+  &:active {
+    border: 1px solid #4a8e8b;
+    background: #ffffff;
+    color: #4a8e8b;
+  }
+`;
+
+export const MoveModalErrorbtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 5px;
+  position: absolute;
+  width: 157px;
+  height: 41px;
+  left: 16px;
+  top: 117px;
+  background: #65bab6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #ffffff;
+  &:hover {
+    background: #65bab6;
+    color: #def1ef;
+  }
+  &:active {
+    background: #4a8e8b;
+    color: #def1ef;
+  }
 `;

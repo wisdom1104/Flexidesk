@@ -55,9 +55,11 @@ function SpaceListItem({
             onDragEnter={e => onAvailableItemDragEnter(e, space)}
             onDragOver={onDragOver}
             onDragEnd={e => onDragEnd(e, space)}
-            onClick={() => onClickSpaceListHandler(space.spaceId)}
           >
-            <StListItem data-floor-id={space.floorId}>
+            <StListItem
+              data-floor-id={space.floorId}
+              onClick={() => onClickSpaceListHandler(space.spaceId)}
+            >
               {space.spaceName}
             </StListItem>
             <StListBtnBox>
@@ -82,7 +84,7 @@ function SpaceListItem({
             </StListBtnBox>
           </StList>
         ) : (
-          <Row>
+          <StList>
             <EditInput
               type="text"
               value={editSpaceName}
@@ -90,23 +92,23 @@ function SpaceListItem({
                 setEditSpaceName(e.target.value);
               }}
             />
-            <div>
-              <button
+            <StListBtnBox>
+              <BoxBtn
                 onClick={() => {
                   onEditSpaceNameHandler(space.spaceId);
                 }}
               >
                 완료
-              </button>
-              <button
+              </BoxBtn>
+              <BoxSubBtn
                 onClick={() => {
                   setSpaceEdit(!spaceEdit);
                 }}
               >
                 취소
-              </button>
-            </div>
-          </Row>
+              </BoxSubBtn>
+            </StListBtnBox>
+          </StList>
         )}
       </>
     </>

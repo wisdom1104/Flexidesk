@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { isLoginActions } from '../redux/modules/loginSlice';
 import { cookies } from '../shared/cookies';
@@ -22,19 +22,30 @@ function Header() {
   const logout = () => {
     dispatch(isLoginActions.logout());
     alert('로그아웃 되었습니다.');
-    navi('/login');
+    navi('/');
   };
 
   const onClcikHandelr = () => {
-    navi('/')
+    navi('/');
   };
 
+  const location = useLocation();
+
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/signupuser'
+  ) {
+    return null;
+  }
 
   return (
     <StHeader>
       {cookies.get('token') ? (
         <HeaderContain>
-          <StHeaderContentBox onClick={onClcikHandelr}>로고다</StHeaderContentBox>
+          <StHeaderContentBox onClick={onClcikHandelr}>
+            로고다
+          </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
               스페이스
@@ -62,7 +73,9 @@ function Header() {
         </HeaderContain>
       ) : (
         <HeaderContain>
-          <StHeaderContentBox onClick={onClcikHandelr}>로고여</StHeaderContentBox>
+          <StHeaderContentBox onClick={onClcikHandelr}>
+            로고여
+          </StHeaderContentBox>
           <StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/`)}>
               서비스 소개

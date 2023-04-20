@@ -54,12 +54,7 @@ function FloorItem({
               <StList
                 key={floor.floorId}
                 data-floor-id={floor.floorId}
-                draggable
-                // data-space-id={floor.spaceId}
-                // data-space-name={floor.spaceName}
-                // onDragStart={e => dragStart(e, floor)}
                 onDragEnter={e => onAvailableItemDragEnter(e, floor)}
-                onDragOver={onDragOver}
                 onDragEnd={e => onDragEnd(e, floor)}
               >
                 <Row data-floor-id={floor.floorId}>
@@ -102,7 +97,12 @@ function FloorItem({
                 </StListBtnBox>
               </StList>
             ) : (
-              <StOpenList data-floor-id={floor.floorId}>
+              <StOpenList
+                key={floor.floorId}
+                data-floor-id={floor.floorId}
+                onDragEnter={e => onAvailableItemDragEnter(e, floor)}
+                onDragEnd={e => onDragEnd(e, floor)}
+              >
                 <Row data-floor-id={floor.floorId}>
                   <StListItem data-floor-id={floor.floorId} key={floor.floorId}>
                     {floor.floorName}

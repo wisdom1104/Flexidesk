@@ -31,7 +31,6 @@ function AdminSpaceBox({
   const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
-  const { floor } = useSelector(state => state.floor);
 
   // console.log('space', space);
 
@@ -74,20 +73,20 @@ function AdminSpaceBox({
       const newBox = {
         spaceId,
         mrName: 'New 회의실',
-        x: e.clientX - targetRect.x - 50,
-        y: e.clientY - targetRect.y - 50,
+        x: e.clientX - targetRect.x - 45,
+        y: e.clientY - targetRect.y - 45,
       };
       if (Number(mrList.length) !== 0 || Number(boxList.length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
-          const draggedRight = draggedBox.x + 80;
+          const draggedRight = draggedBox.x + 70;
           const draggedy = draggedBox.y;
-          const draggedBottom = draggedBox.y + 80;
+          const draggedBottom = draggedBox.y + 70;
 
           const existingx = existingBox.x;
-          const existingRight = existingBox.x + 80;
+          const existingRight = existingBox.x + 70;
           const existingy = existingBox.y;
-          const existingBottom = existingBox.y + 80;
+          const existingBottom = existingBox.y + 70;
 
           if (
             draggedx < existingRight &&
@@ -123,20 +122,20 @@ function AdminSpaceBox({
       const newBox = {
         spaceId,
         boxName: 'New 자리',
-        x: e.clientX - targetRect.x - 50,
-        y: e.clientY - targetRect.y - 50,
+        x: e.clientX - targetRect.x - 45,
+        y: e.clientY - targetRect.y - 45,
       };
       if (Number(mrList[0].length) !== 0 || Number(boxList[0].length) !== 0) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
-          const draggedRight = draggedBox.x + 80;
+          const draggedRight = draggedBox.x + 70;
           const draggedy = draggedBox.y;
-          const draggedBottom = draggedBox.y + 80;
+          const draggedBottom = draggedBox.y + 70;
 
           const existingx = existingBox.x;
-          const existingRight = existingBox.x + 80;
+          const existingRight = existingBox.x + 70;
           const existingy = existingBox.y;
-          const existingBottom = existingBox.y + 80;
+          const existingBottom = existingBox.y + 70;
 
           if (
             draggedx < existingRight &&
@@ -192,6 +191,7 @@ function AdminSpaceBox({
 
       const boardRect = boardEl.current.getBoundingClientRect();
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
+      console.log('boardRect', boardRect);
 
       const limitedX = Math.max(
         boardRect.x - (boardRect.x + 10),
@@ -204,7 +204,8 @@ function AdminSpaceBox({
           boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
         ),
       );
-
+      // console.log('limitedX', boardRect.right);
+      // console.log('limitedY', limitedY);
       const payload = {
         spaceId,
         mrId: currentMrBox.mrId,
