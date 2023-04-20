@@ -18,15 +18,14 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = cookies.get('refresh_token');
-        console.log('refreshToken---->', refreshToken);
 
-        const data = await axios.get('http://54.180.152.100/users/refresh', {
+        const data = await api.get('users/refresh', {
+
           headers: {
             refresh_token: `Bearer ${refreshToken}`,
           },
         });
         const newToken = data.headers['authorization'].split(' ')[1];
-
 
         cookies.set('token', newToken, { path: '/' });
 
