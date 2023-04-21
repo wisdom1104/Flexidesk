@@ -3,51 +3,51 @@ import { cookies } from "../../shared/cookies";
 import api from "../../axios/api";
 
 const initialState = {
-    reservationList:[],
+    userList:[],
     isLoading: false,
     isError: false,
     isSuccess: false,
 };
 
-  export const __getAllReservation = createAsyncThunk(
+export const __getAllManagement = createAsyncThunk(
     "getAllReservation",
     async(payload,thunk) =>{
       try{
         const token = cookies.get('token')
-        const companyName = cookies.get('companyName');
-        const data = await api.get(`/reservations/${companyName}/all`
+        const data = await api.get(`/admin/users`
         ,{
           headers:{
             Authorization:`Bearer ${token}`
           }
         })
-        return thunk.fulfillWithValue(data.data.data.reservationList)
+        console.log(data.data.data.userList);
+        return thunk.fulfillWithValue(data.data.data.userList)
       }catch(error){
         return thunk.rejectWithValue(error)
       }
     }
   )
 
-  export const allReservationSlice = createSlice({
-    name:'reservation',
+  export const allManagementSlice = createSlice({
+    name:'allManagement',
     initialState,
     reducers:{
     },
     extraReducers:{
-        [__getAllReservation.pending] : (state, action) => {
+        [__getAllManagement.pending] : (state, action) => {
             state.isLoading = false;
             state.isError = false;        
         },
-      [__getAllReservation.fulfilled] : (state, action) =>{
+      [__getAllManagement.fulfilled] : (state, action) =>{
         state.isLoading = true;
         state.isError = false;        
-        state.reservationList = action.payload;
+        state.userList = action.payload;
       },
-      [__getAllReservation.rejected] : (state, action) => {
+      [__getAllManagement.rejected] : (state, action) => {
         state.isLoading = true;
         state.isError = true;
       }
     }
   })
 
-export default allReservationSlice.reducer;
+export default allManagementSlice.reducer;

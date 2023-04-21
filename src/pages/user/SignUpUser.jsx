@@ -83,11 +83,11 @@ function SignUpUser() {
   };
 
   return (
-    <StBackground height="844px">
+    <StBackground height='100vh'>
       <StOverall>
         <div
           style={{
-            marginTop: '80px',
+            marginTop: '200px',
             display: 'flex',
             alignItems: 'center',
             height: '100%'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -14,7 +14,13 @@ import {
   StHaderFont,
 } from './HeaderStyled';
 
+
 function Header() {
+// test /////////////////////////////////////////////////////////////////
+  const [loginTime, setLoginTime] = useState(Date.now());
+  const [expirationTime, setExpirationTime] = useState(loginTime + 3600000); // 토큰 만료 시간은 로그인 시간으로부터 1시간 후로 설정
+  //////////////////////////////////////////////////////////////////////////
+
   const dispatch = useDispatch();
   const navi = useNavigate();
 
@@ -23,13 +29,30 @@ function Header() {
 
   const logout = () => {
     dispatch(isLoginActions.logout());
-    alert('로그아웃 되었습니다.');
+    setLoginTime(null);
+    setExpirationTime(null);
     navi('/');
   };
 
   const onClcikHandelr = () => {
     navi('/');
   };
+// test /////////////////////////////////////////////////////////////////
+  useEffect(
+    () => {
+      const timerId = setInterval(() => {
+        if (expirationTime && Date.now() > expirationTime) {
+          logout();
+        }
+      }, 1000);
+
+      return () => clearInterval(timerId);
+    },
+    [expirationTime,logout]
+  );
+
+
+  //////////////////////////////////////////////////////////////////////////
 
   const location = useLocation();
 
@@ -46,7 +69,11 @@ function Header() {
       {cookies.get('token') ? (
         <HeaderContain>
           <StHeaderContentBox>
-            <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+            <StHeaderLogo
+              src="img/Logo.png"
+              alt="logo"
+              onClick={onClcikHandelr}
+            />
           </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
@@ -63,26 +90,31 @@ function Header() {
               <StHaderFont>스케줄 조회</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
-            <StHaderFont>회의실 예약현황</StHaderFont>
+              <StHaderFont>회의실 예약현황</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentBox>
-            <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
+              <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-              Logout
+                Logout
               </StHeaderButton>
+
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
         </HeaderContain>
       ) : (
         <HeaderContain>
           <StHeaderContentBox>
-          <StHeaderLogo src="img/Logo.png" alt="logo" onClick={onClcikHandelr} />
+            <StHeaderLogo
+              src="img/Logo.png"
+              alt="logo"
+              onClick={onClcikHandelr}
+            />
           </StHeaderContentBox>
           <StHeaderContentBox>
             <StHeaderContentBox onClick={() => navi(`/`)}>
-            <StHaderFont>서비스 소개</StHaderFont>
+              <StHaderFont>서비스 소개</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={() => navi('/login')}>

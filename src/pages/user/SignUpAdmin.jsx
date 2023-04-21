@@ -75,11 +75,11 @@ function SignUpAdmin() {
   };
 
   return (
-    <StBackground height='910px'>
+    <StBackground height='100vh'>
       <StOverall>
         <div
           style={{
-            marginTop: '80px',
+            marginTop: '130px',
             display: 'flex',
             alignItems: 'center',
             height: '100%'

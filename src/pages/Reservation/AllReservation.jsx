@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllReservation } from '../../redux/modules/allReservationSlice';
-import { cookies } from '../../shared/cookies';
 
 function AllReservation() {
   const { reservationList, isLoading, isError } = useSelector(
     state => state.reservationList,
   );
-  // console.log(reservationList.data.reservationList);
 
   const dispatch = useDispatch();
 
