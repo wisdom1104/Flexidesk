@@ -4,6 +4,7 @@ import ReservationTime from './ReservationTime';
 import { useNavigate, useParams } from 'react-router-dom';
 import useFalseHook from '../../hooks/useFalseHook';
 import { useSelector } from 'react-redux';
+import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 import {
   MainContain,
   ReservationTitle,
@@ -114,22 +115,18 @@ const Calendar = () => {
           <StCalenHeader>
             <FontSt>예약 날짜</FontSt>
             <Header>
-              <button
+              <VscArrowCircleLeft
                 onClick={() => {
                   preMonth();
                 }}
-              >
-                이전달
-              </button>
+              />
               <DateFont>{selectYear}년</DateFont>
               <DateFont>{selectMonth}월</DateFont>
-              <button
+              <VscArrowCircleRight
                 onClick={() => {
                   nextMonth();
                 }}
-              >
-                다음달
-              </button>
+              />
             </Header>
           </StCalenHeader>
           <DayContain>

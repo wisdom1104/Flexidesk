@@ -12,6 +12,7 @@ import {
   FontSt,
   DateFont,
 } from '../Reservation/CalendarStyled';
+import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -87,22 +88,18 @@ function SchedulesCalendar() {
         <StCalenHeader>
           <FontSt>스케줄 날짜</FontSt>
           <Header>
-            <button
+            <scArrowCircleLeft
               onClick={() => {
                 preMonth();
               }}
-            >
-              이전달
-            </button>
+            />
             <DateFont>{selectYear}년</DateFont>
             <DateFont>{selectMonth}월</DateFont>
-            <button
+            <VscArrowCircleRight
               onClick={() => {
                 nextMonth();
               }}
-            >
-              다음달
-            </button>
+            />
           </Header>
         </StCalenHeader>
         <DayContain>
