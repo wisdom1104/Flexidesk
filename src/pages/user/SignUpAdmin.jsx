@@ -72,11 +72,13 @@ function SignUpAdmin() {
   };
 
   return (
-    <StBackground height="910px">
+
+    <StBackground height="100vh">
+
       <StOverall>
         <div
           style={{
-            marginTop: '80px',
+            marginTop: '130px',
             display: 'flex',
             alignItems: 'center',
             height: '100%',
@@ -108,6 +110,27 @@ function SignUpAdmin() {
                     required
                   />
                 </StTextInput>
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                  >
+                    회사
+                  </StSmallFont>
+                  <Input
+                    type="text"
+                    id="companyName"
+                    value={admin.companyName}
+                    onChange={event =>
+                      setAdmin({ ...admin, companyName: event.target.value })
+                    }
+                    placeholder="회사를 입력하세요."
+                    required
+                  />
+                </StTextInput>
+
                 <StTextInput height="100%">
                   <Certification
                     admin={admin}
@@ -119,6 +142,28 @@ function SignUpAdmin() {
                   />
                 </StTextInput>
 
+                <StTextInput>
+                  <StSmallFont
+                    width
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="700"
+                  >
+                    인증번호
+                  </StSmallFont>
+                  <Input
+                    type="text"
+
+                    id="certification"
+                    value={admin.certification}
+                    onChange={event =>
+                      setAdmin({ ...admin, certification: event.target.value })
+                    }
+                    placeholder="인증번호를 입력하세요."
+
+                    required
+                  />
+                </StTextInput>
                 <StTextInput height="65px">
                   <StSmallFont
                     width
@@ -129,6 +174,7 @@ function SignUpAdmin() {
                     비밀번호
                   </StSmallFont>
                   <Input
+
                     type="password"
                     value={admin.password}
                     onChange={handlePasswordChange}
@@ -158,11 +204,13 @@ function SignUpAdmin() {
                     value={admin.passwordCheck}
                     onChange={handlepasswordCheckChange}
                     placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
+
                     required
                     minlength="8"
                     maxlength="16"
                   />
                 </StTextInput>
+
                 <SterrorFont>
                   {passwordCheckError && (
                     <StSmallFont
@@ -177,47 +225,6 @@ function SignUpAdmin() {
                   )}
                 </SterrorFont>
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    회사
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    id="companyName"
-                    value={admin.companyName}
-                    onChange={event =>
-                      setAdmin({ ...admin, companyName: event.target.value })
-                    }
-                    placeholder="회사를 입력하세요."
-                    required
-                  />
-                </StTextInput>
-
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    인증번호
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    id="certification"
-                    value={admin.certification}
-                    onChange={event =>
-                      setAdmin({ ...admin, certification: event.target.value })
-                    }
-                    placeholder="인증번호를 입력하세요."
-                    required
-                  />
-                </StTextInput>
                 <div
                   style={{
                     marginTop: '20px',

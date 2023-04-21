@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Input } from '../../components/Input';
 import api from '../../axios/api';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 import {
@@ -30,9 +29,8 @@ function Certification({ admin, setAdmin, email }) {
 
     try {
       const response = await api.post('/users/signup/email', admin);
-      const data = response.data;
-      // alert(`${data}`);
-      return data;
+      alert('이메일로 인증번호를 보냈습니다.');
+      return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);

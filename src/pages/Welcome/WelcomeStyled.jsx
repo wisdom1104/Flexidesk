@@ -10,7 +10,7 @@ export const StBackground = styled.div`
 //그라데이션 배경
 export const StGradationBackground = styled.div`
 background: linear-gradient(180deg, #FFFFFF 0%, #DEF1EF 100%);
-height: 1500px;
+height: 155vh;
 `
 
 // 전체 공통 스타일

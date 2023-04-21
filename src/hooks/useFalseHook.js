@@ -9,20 +9,21 @@ function useFalseHook(url) {
     const token = cookies.get('token');
     const role = cookies.get('role');
 
-    //navi 보내버리는 함수 , '갈수있다'라는 의미는 사용x
-    //조건이 성립할 때 .. 여기서 조정x 컴포넌트에서 조정해주기
-    if (token && role === 'USER') {
-      //일반 사용자만 접근가능
-      if (navi('/adminspace')) {
-        navi('/space');
-      }
-    } else if (token && role === 'ADMIN') {
-      //사업자만 접근가능
-      // navi(url)
-      redirect(url);
-    }
-  }, [url]);
-  return null;
+
+//navi 보내버리는 함수 , '갈수있다'라는 의미는 사용x
+//조건이 성립할 때 .. 여기서 조정x 컴포넌트에서 조정해주기
+        if(token && role==='USER') {
+            //일반 사용자만 접근가능
+            if(navi("/adminspace"))
+            {navi("/space")}
+        } else if(token && role==='ADMIN') {
+            //사업자만 접근가능
+            // navi(url)
+            redirect(url)
+        }
+    },[url])
+    return null;
+
 }
 
 export default useFalseHook;

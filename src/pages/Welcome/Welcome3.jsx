@@ -17,7 +17,7 @@ function Welcome3() {
             <StIntroDiv>
               <div
                 style={{
-                  width: '720px',
+                  width: '35vw',
                   display: 'inline-block',
                 }}
               >

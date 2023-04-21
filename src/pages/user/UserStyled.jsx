@@ -8,9 +8,9 @@ export const StBackground = styled.div`
 
 // 전체 공통 스타일 (min은 px)
 export const StOverall = styled.div`
-  max-width: 1440px;
-  min-width: 410px;
-  min-height: 680px;
+  max-width: 75vw;
+  min-width: 21vw;
+  min-height: 35vh;
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -115,7 +115,6 @@ export const StLoginIcon = styled.img`
 
 // signup
 export const StTextInput = styled.div`
-  /* width: ${props => props.width || '24vw'}; */
   height: ${props => props.height || '75px'};
   margin-top: ${props => props.marginTop || '16px'};
 `;
