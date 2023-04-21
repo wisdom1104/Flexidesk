@@ -87,7 +87,7 @@ function SchedulesCalendar() {
         <StCalenHeader>
           <FontSt>스케줄 날짜</FontSt>
           <Header>
-            <scArrowCircleLeft
+            <VscArrowCircleLeft
               onClick={() => {
                 preMonth();
               }}
