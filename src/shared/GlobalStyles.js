@@ -8,6 +8,7 @@ ${reset}
 body {
     font-family: 'Inter', sans-serif;
     font-style: normal;
+    scroll-behavior: smooth;
   }
 
   button {

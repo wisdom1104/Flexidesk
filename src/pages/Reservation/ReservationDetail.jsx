@@ -9,9 +9,21 @@ import SchedulesDetail from '../Schedules/SchedulesDetail';
 import UserSchedules from '../Schedules/UserSchedules';
 import useFalseHook from '../../hooks/useFalseHook';
 import AllReservation from './AllReservation';
+import {
+  BackCusor,
+  InfoContain,
+  ReservationTitle,
+  InfoBox,
+  Info,
+  CommentBox,
+  DelBtn,
+  ComFont,
+} from './CalendarStyled';
+import { useNavigate } from 'react-router-dom';
 
 function ReservationDetail() {
   // useFalseHook();
+  const navi = useNavigate();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
 
@@ -28,29 +40,45 @@ function ReservationDetail() {
 
   return (
     <>
-      <div>내가 예약한 회의실</div>
-      <div>
+      <ReservationTitle>
+        <BackCusor
+          onClick={() => {
+            navi('/space');
+          }}
+        >
+          ←
+        </BackCusor>
+        <h2>내가 예약한 회의실</h2>
+      </ReservationTitle>
+      <InfoContain>
         {reservationDetail?.map(item => (
-          <div key={item.reservationId}>
-            <div>{item.username}</div>
-            <div>회의실 번호 : {item.mrId}</div>
-            <div>
-              예약시간 : {item.start}~{item.end}
-            </div>
-            <div>
-              <button>수정</button>
-              <button onClick={() => deleteHandler(item.reservationId)}>
+          <InfoBox key={item.reservationId}>
+            <h2>{item.username}</h2>
+            <Info>
+              <CommentBox>
+                <ComFont>회의실 번호</ComFont>
+                <div>{item.mrId}</div>
+              </CommentBox>
+
+              <CommentBox>
+                <ComFont>시작시간</ComFont>
+                <div>{item.start.split('T')[1]}</div>
+              </CommentBox>
+              <CommentBox>
+                <ComFont>종료시간</ComFont>
+                <div>{item.end.split('T')[1]}</div>
+              </CommentBox>
+              <DelBtn onClick={() => deleteHandler(item.reservationId)}>
                 삭제
-              </button>
-            </div>
-            --------------------------------
-          </div>
+              </DelBtn>
+            </Info>
+          </InfoBox>
         ))}
-      </div>
-      <div>
+      </InfoContain>
+      {/* <div>
         <p>전체 조회</p>
         <AllReservation />
-      </div>
+      </div> */}
     </>
   );
 }

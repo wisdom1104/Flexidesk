@@ -61,8 +61,7 @@ function Login() {
 // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
     } catch (e) {
-      const errorMsg = e.response.data.message;
-      alert(`${errorMsg}`);
+      alert('다시 로그인 해주세요.');
     }
   };
 
@@ -74,14 +73,14 @@ function Login() {
   const onClickUserHandler = (e) => {
     e.preventDefault();
     navi('/signupuser')
-  }
+  };
 
   return (
-    <StBackground height='843px'>
+    <StBackground height='100vh'>
       <StOverall>
         <div
           style={{
-            marginTop: '150px',
+            marginTop: '200px',
             display: 'flex',
             alignItems: 'center',
             height: '100%'

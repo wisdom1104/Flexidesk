@@ -9,6 +9,7 @@ const initialState = {
   isSuccess: false,
 };
 
+
 export const __getAllReservation = createAsyncThunk(
   'getAllReservation',
   async (payload, thunk) => {
@@ -23,6 +24,7 @@ export const __getAllReservation = createAsyncThunk(
       return thunk.fulfillWithValue(data.data.data.reservationList);
     } catch (error) {
       return thunk.rejectWithValue(error);
+
     }
   },
 );

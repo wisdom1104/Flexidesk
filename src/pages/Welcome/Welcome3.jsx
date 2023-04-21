@@ -17,7 +17,7 @@ function Welcome3() {
             <StIntroDiv>
               <div
                 style={{
-                  width: '720px',
+                  width: '35vw',
                   display: 'inline-block',
                 }}
               >
@@ -31,7 +31,7 @@ function Welcome3() {
                   업무 트렌드
                 </StSmallFont>
                 <StFont align="start" marginBottom="150px">
-                  좌율 좌석제{' '}
+                  자율 좌석제
                 </StFont>
 
                 <StSmallFont marginBottom="100px" weight="600" align="start">

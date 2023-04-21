@@ -23,8 +23,8 @@ function Welcome1() {
             <StIntroDiv>
               <div
                 style={{
-                  width: '820px',
-                  height: '720px',
+                  width: '35vw',
+                  height: '50vh',
                   display: 'inline-block',
                 }}
               >
@@ -64,8 +64,8 @@ function Welcome1() {
               {/* 도형 자리 */}
               <div
                 style={{
-                  width: '577px',
-                  height: '700px',
+                  width: '40vw',
+                  height: '55vh',
                   display: 'inline-block',
                 }}
               >
@@ -76,7 +76,7 @@ function Welcome1() {
         </StOverall>
         <div
           style={{
-            marginTop: '-250px',
+            marginTop: '-450px',
           }}
         >
           <Welcome2 />
