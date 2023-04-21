@@ -120,14 +120,14 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
-                <StTextInput>
+                <StTextInput marginTop='20px'>
                   <StSmallFont
                     width
                     align="start"
                     fontSize="0.875rem"
                     weight="700"
                   >
-                    회사 이메일
+                    사용자 이메일
                   </StSmallFont>
 
                   <Input

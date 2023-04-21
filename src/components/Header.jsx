@@ -31,6 +31,7 @@ function Header() {
     dispatch(isLoginActions.logout());
     setLoginTime(null);
     setExpirationTime(null);
+    alert('로그아웃 되었습니다.')
     navi('/');
   };
 

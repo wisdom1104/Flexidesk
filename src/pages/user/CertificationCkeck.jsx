@@ -32,7 +32,7 @@ function CertificationCkeck({ user,certification, onChange }) {
       marginBottom="10px"
 
       >
-        인증번호
+        회사 인증번호
       </StSmallFont>
       </Container>
 
@@ -42,14 +42,14 @@ function CertificationCkeck({ user,certification, onChange }) {
         value={certification || ''}
         onChange={onChange}
         name="certification"
-        placeholder="인증번호를 입력하세요."
+        placeholder=" 인증번호는 관리자에게 문의하세요."
         required
       />
 
       <InlinButton 
       type="button" 
       onClick={submitBtnHandler}
-      value="인증받기"
+      value="인증확인"
       />
     </Container>
     </>

@@ -22,7 +22,6 @@ export const useSignUp = (payload) => {
       cookies.set('role', payload.role, { path: '/' , maxAge:3540,});
       
       navi('/adminspace');
-      console.log('payload',payload);
       return payload;
 
     } catch (e) {

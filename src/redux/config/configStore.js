@@ -11,7 +11,6 @@ import reservationList from '../modules/allReservationSlice';
 import floors from '../modules/floorsSlice';
 import floor from '../modules/floorSlice';
 import schedules from '../modules/schedules';
-import userList from '../modules/allManagementSlice';
 
 const store = configureStore({
   reducer: {
@@ -26,7 +25,6 @@ const store = configureStore({
     schedules,
     floors,
     floor,
-    userList,
   },
 });
 
