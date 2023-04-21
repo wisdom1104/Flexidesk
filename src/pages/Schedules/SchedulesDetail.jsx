@@ -10,6 +10,10 @@ import {
   BackCusor,
   InfoBox,
   InfoContain,
+  Info,
+  CommentBox,
+  ComFont,
+  DelBtn,
 } from '../Reservation/CalendarStyled';
 
 function SchedulesDetail() {
@@ -37,20 +41,32 @@ function SchedulesDetail() {
       <InfoContain>
         {userSchedules?.map(item => (
           <InfoBox key={item.scId}>
-            <div>{item.scTitle}</div>
-            <div>
-              <div>내용 : {item.scComment}</div>
-              <div>날짜 : {item.scStart.split('T')[0]}</div>
-              <div>시작시간 : {item.scStart.split('T')[1]}</div>
-              <div>종료시간 : {item.scEnd.split('T')[1]}</div>
-              <button
+            <h2>{item.scTitle}</h2>
+            <Info>
+              <CommentBox>
+                <ComFont>내용</ComFont>
+                <div>{item.scComment}</div>
+              </CommentBox>
+              <CommentBox>
+                <ComFont>날짜</ComFont>
+                <div>{item.scStart.split('T')[0]}</div>
+              </CommentBox>
+              <CommentBox>
+                <ComFont>시작시간</ComFont>
+                <div>{item.scStart.split('T')[1]}</div>
+              </CommentBox>
+              <CommentBox>
+                <ComFont>종료시간</ComFont>
+                <div>{item.scEnd.split('T')[1]}</div>
+              </CommentBox>
+              <DelBtn
                 onClick={() => {
                   dispatch(__deleteSchedule(item.scId));
                 }}
               >
                 삭제
-              </button>
-            </div>
+              </DelBtn>
+            </Info>
           </InfoBox>
         ))}
       </InfoContain>

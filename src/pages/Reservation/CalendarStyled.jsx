@@ -177,9 +177,49 @@ export const InfoBox = styled.div`
   height: 30vw;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4fbf9;
+  border: none;
+  border-radius: 5px;
 `;
 export const InfoContain = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
+  margin: 10px;
+`;
+export const Info = styled.div`
+  display: flex;
+  border-radius: 5px;
+  width: 28vw;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+`;
+export const CommentBox = styled.div`
+  display: flex;
+  width: 28vw;
+  justify-content: space-between;
+  margin: 20px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+`;
+
+export const ComFont = styled.div`
+  color: #5c6373;
+`;
+
+export const DelBtn = styled.button`
+  background-color: white;
+  color: #65bab6;
+  width: 50px;
+  padding: 7px;
+  border: 1px solid #65bab6;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  &:hover {
+    background-color: #def1ef;
+    color: #65bab6;
+  }
 `;
