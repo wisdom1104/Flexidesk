@@ -38,7 +38,6 @@ function AdminSpace() {
 
   const { spaces } = useSelector(state => state.spaces);
   const { floors } = useSelector(state => state.floors);
-  // console.log('spaces', spaces);
 
   //가드 &&로 합치기 tay catch
   // token 유무에 따른 가드
@@ -58,10 +57,10 @@ function AdminSpace() {
     // cleanup 함수
     return () => {
       setSelectedSpace(null);
-      // window.location.reload();
+      window.location.reload();
     };
   }, []);
-  // console.log(spaces);
+
   // space 선택
   useEffect(() => {
     // 초기 space 설정
@@ -72,9 +71,8 @@ function AdminSpace() {
     const space = spaces.find(space => space.spaceId === id);
     setSelectedSpace(space);
     setIsModal(!isModal);
-    // console.log('space', space);
   };
-  // console.log('selectedSpace', selectedSpace);
+
 
   const [isModal, setIsModal] = useState(false);
 
