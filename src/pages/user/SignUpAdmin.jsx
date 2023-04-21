@@ -62,11 +62,9 @@ function SignUpAdmin() {
     try {
       const response = await api.post('/users/signup/admin', admin);
       alert(`${admin.username}님 회원가입을 축하합니다.`);
-      console.log(`${admin.username}`);
       navi('/login');
       return response;
     } catch (error) {
-      console.log(error);
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
       return error;
@@ -74,7 +72,9 @@ function SignUpAdmin() {
   };
 
   return (
+
     <StBackground height="100vh">
+
       <StOverall>
         <div
           style={{
@@ -130,6 +130,7 @@ function SignUpAdmin() {
                     required
                   />
                 </StTextInput>
+
                 <StTextInput height="100%">
                   <Certification
                     admin={admin}
@@ -140,6 +141,7 @@ function SignUpAdmin() {
                     }
                   />
                 </StTextInput>
+
                 <StTextInput>
                   <StSmallFont
                     width
@@ -151,12 +153,14 @@ function SignUpAdmin() {
                   </StSmallFont>
                   <Input
                     type="text"
+
                     id="certification"
                     value={admin.certification}
                     onChange={event =>
                       setAdmin({ ...admin, certification: event.target.value })
                     }
                     placeholder="인증번호를 입력하세요."
+
                     required
                   />
                 </StTextInput>
@@ -170,6 +174,7 @@ function SignUpAdmin() {
                     비밀번호
                   </StSmallFont>
                   <Input
+
                     type="password"
                     value={admin.password}
                     onChange={handlePasswordChange}
@@ -199,11 +204,13 @@ function SignUpAdmin() {
                     value={admin.passwordCheck}
                     onChange={handlepasswordCheckChange}
                     placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
+
                     required
                     minlength="8"
                     maxlength="16"
                   />
                 </StTextInput>
+
                 <SterrorFont>
                   {passwordCheckError && (
                     <StSmallFont
