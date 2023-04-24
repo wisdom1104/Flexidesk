@@ -59,6 +59,13 @@ function SchedulesDetail() {
                 <ComFont>종료시간</ComFont>
                 <div>{item.scEnd.split('T')[1]}</div>
               </CommentBox>
+              <button
+                onClick={() => {
+                  navi(`/pathschedules/${item.scId}`);
+                }}
+              >
+                수정
+              </button>
               <DelBtn
                 onClick={() => {
                   dispatch(__deleteSchedule(item.scId));

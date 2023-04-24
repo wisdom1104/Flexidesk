@@ -35,6 +35,7 @@ const Calendar = () => {
   const [selectYear, setSelectYear] = useState(today.year);
   const [selectMonth, setSelectMonth] = useState(today.month + 1);
   const [date, setDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
@@ -63,6 +64,7 @@ const Calendar = () => {
 
   const dayClickHandler = e => {
     setDate(e.target.value);
+    setSelectedDate(e.target.value);
   };
 
   //달의 날짜 반환 함수
@@ -72,6 +74,10 @@ const Calendar = () => {
       const day = new Date(selectYear, selectMonth - 1, 1).getDay();
       if (week[day] === stDay) {
         for (let i = 0; i < dateTotalCount; i++) {
+          const dateStr = `${selectYear}-${selectMonth
+            .toString()
+            .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`;
+          const isSelected = selectedDate === dateStr;
           dayArr.push(
             <StDate
               key={i}
@@ -79,13 +85,14 @@ const Calendar = () => {
               value={`${selectYear}-${selectMonth
                 .toString()
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
+              style={{ backgroundColor: isSelected ? 'yellow' : 'white' }}
             >
               {i + 1}
             </StDate>,
           );
         }
       } else {
-        dayArr.push(<StDate> </StDate>);
+        dayArr.push(<StDate key={stDay}> </StDate>);
       }
     }
     return dayArr;
