@@ -61,7 +61,7 @@ function SchedulesDetail() {
               </CommentBox>
               <button
                 onClick={() => {
-                  navi(`/pathschedules/${item.scId}`);
+                  navi(`/pathschedules/${item.scId}`, { state: { ...item } });
                 }}
               >
                 수정
