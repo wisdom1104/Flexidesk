@@ -847,6 +847,25 @@ export const MoveModalBackground = styled.div`
   margin: auto;
 `;
 
+//전체 백그라운드 모달
+export const ModalFullBackground = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0px;
+  z-index: 50;
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 100%;
+  max-width: 990px;
+
+  border-radius: 8px;
+  margin: auto;
+`
+
 export const MoveModal = styled.div`
   position: absolute;
   /* top: 134px; */

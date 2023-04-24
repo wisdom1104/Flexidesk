@@ -2,17 +2,35 @@ import React, {useEffect} from 'react';
 import { StSmallFont } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
+import { cookies } from '../../shared/cookies';
+import { useNavigate } from 'react-router-dom';
 
 function Management() {
 
     const { userList, isLoading, isError } = useSelector(state => state.userList);
-    console.log(userList);
 
     const dispatch = useDispatch();
+    const navi = useNavigate();
 
-    useEffect(()=> {
-        dispatch(__getAllManagement())
-    },[])
+
+    // useEffect(()=> {
+    //     dispatch(__getAllManagement())
+    // },[]);
+
+      // token 유무에 따른 가드
+  const token = cookies.get('token');
+  // 관리자 가드
+  const role = cookies.get('role');
+
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else if (role !== 'ADMIN') {
+      navi('/');
+    } else {
+      dispatch(__getAllManagement());
+    }
+  }, []);
 
   return (
     <>

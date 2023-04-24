@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 //배경
@@ -36,13 +37,12 @@ export const StForm = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
   gap: 16px;
+
 `;
 
 export const StFormBox = styled.div`
-  /* width: 420px;
-  height: 84px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,13 +90,14 @@ export const StSmallButton = styled.button`
 
 //login
 export const StLoginContain = styled.div`
-  width: 400px;
+  width: 100%;
   height: 60px;
   border: 2px solid #a6aebb;
   border-radius: 8px;
 
   align-items: center;
   display: flex;
+  
 `;
 
 export const StLoginIconDiv = styled.div`
@@ -112,6 +113,19 @@ export const StLoginIcon = styled.img`
   margin-left: 20px;
   z-index: 1;
 `;
+
+export const StLink = styled(Link)`
+width: 90px;
+height: 15px;
+
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+text-align: end;
+
+color: #8B93A6;
+
+`
 
 // signup
 export const StTextInput = styled.div`

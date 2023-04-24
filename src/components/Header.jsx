@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { isLoginActions } from '../redux/modules/loginSlice';
 import { cookies } from '../shared/cookies';
 import {
   HeaderContain,
@@ -14,6 +12,8 @@ import {
   StHaderFont,
 } from './HeaderStyled';
 import Modal from '../features/Modal';
+import { useDispatch } from 'react-redux';
+import { isLoginActions } from '../redux/modules/loginSlice';
 
 
 function Header() {
@@ -24,15 +24,22 @@ function Header() {
   const [expirationTime, setExpirationTime] = useState(loginTime + 3600000); // 토큰 만료 시간은 로그인 시간으로부터 1시간 후로 설정
 
   const navi = useNavigate();
+  const dispatch = useDispatch();
 
   const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
   const logout = () => {
-    // dispatch(isLoginActions.logout());
     setLoginTime(null);
     setExpirationTime(null);
     setIsModal(true);
+  };
+
+  const tokenLogout = () => {
+    dispatch(isLoginActions.logout());
+    setLoginTime(null);
+    setExpirationTime(null);
+    navi('/');
   };
 
   const onClcikHandelr = () => {
@@ -43,7 +50,7 @@ function Header() {
     () => {
       const timerId = setInterval(() => {
         if (expirationTime && Date.now() > expirationTime) {
-          logout();
+          tokenLogout();
         }
       }, 1000);
       return () => clearInterval(timerId);

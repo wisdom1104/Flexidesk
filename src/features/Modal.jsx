@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import {
+  ModalFullBackground,
   MoveModal,
-  MoveModalBackground,
   MoveModalSubbtn,
   MoveModalTitle,
   MoveModalbtn,
@@ -25,7 +24,7 @@ function Modal({ setIsModal }) {
       };
 
   return (
-    <MoveModalBackground>
+    <ModalFullBackground>
       <MoveModal>
         <MoveModalTitle>로그아웃 하시겠습니까?</MoveModalTitle>
         <MoveModalbtn
@@ -43,7 +42,7 @@ function Modal({ setIsModal }) {
           아니요
         </MoveModalSubbtn>
       </MoveModal>
-    </MoveModalBackground>
+    </ModalFullBackground>
   );
 }
 

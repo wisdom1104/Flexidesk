@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import {
+  ModalFullBackground,
   MoveModal,
-  MoveModalBackground,
   MoveModalSubbtn,
   MoveModalTitle,
-  MoveModalbtn,
 } from '../features/space/SpaceStyles';
-import { useDispatch } from 'react-redux';
-import { isLoginActions } from '../redux/modules/loginSlice';
-import { useNavigate } from 'react-router-dom';
 
 function LoginModal({ setIsModal }) {
 
-    const dispatch = useDispatch();
-    const navi = useNavigate();
 
     const closeModal = () => {
         setIsModal(false);
@@ -25,7 +18,7 @@ function LoginModal({ setIsModal }) {
       };
 
   return (
-    <MoveModalBackground>
+    <ModalFullBackground>
       <MoveModal>
 
         <MoveModalTitle>다시 입력해주세요.</MoveModalTitle>
@@ -33,10 +26,10 @@ function LoginModal({ setIsModal }) {
         <MoveModalSubbtn
           onClick={closeModal}
         >
-          예
+        확인
         </MoveModalSubbtn>
       </MoveModal>
-    </MoveModalBackground>
+    </ModalFullBackground>
   );
 }
 
