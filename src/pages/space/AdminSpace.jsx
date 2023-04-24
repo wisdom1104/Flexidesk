@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import AdminSpaceBox from '../../features/space/AdminSpaceBox';
-import useFalseHook from '../../hooks/useFalseHook';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import CreateSpace from '../../features/space/CreateSpace';
@@ -18,13 +17,14 @@ import {
   StSubHeader,
   Stmainspace,
 } from '../../features/space/SpaceStyles';
-import styled from 'styled-components';
 import { Row } from '../../components/Flex';
 
 function AdminSpace() {
-  // useFalseHook();
-  const [mrBoxes] = useState([{ mrId: 1, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, inner: '자리' }]);
+  const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
+  const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '자리' }]);
+  const [multiBoxes] = useState([
+    { multiBoxId: 3, x: 1000, y: 1000, inner: '공용공간' },
+  ]);
 
   const elRef = useRef([]);
 
@@ -73,7 +73,6 @@ function AdminSpace() {
     setIsModal(!isModal);
   };
 
-
   const [isModal, setIsModal] = useState(false);
 
   return (
@@ -89,6 +88,7 @@ function AdminSpace() {
       {/* 셀렉터 영역 */}
       <StSelect>
         <StSelectTitle>AdminSpace</StSelectTitle>
+        {/* 회의실 셀렉터 */}
         <div>
           {mrBoxes.map((box, i) => (
             <StSelectBox
@@ -101,14 +101,27 @@ function AdminSpace() {
             </StSelectBox>
           ))}
         </div>
+        {/* 박스 셀렉터 */}
         <div>
-          {/* 박스 셀렉터 */}
           {boxes.map((box, i) => (
             <StSelectBox
               key={box.boxId}
               ref={el => (elRef.current[i] = el)}
               draggable={true}
               onDragStart={e => handleDragStart(e, box.boxId)}
+            >
+              {box.inner}
+            </StSelectBox>
+          ))}
+        </div>
+        {/* 공용공간 셀렉터 */}
+        <div>
+          {multiBoxes.map((box, i) => (
+            <StSelectBox
+              key={box.multiBoxId}
+              ref={el => (elRef.current[i] = el)}
+              draggable={true}
+              onDragStart={e => handleDragStart(e, box.multiBoxId)}
             >
               {box.inner}
             </StSelectBox>
@@ -127,6 +140,9 @@ function AdminSpace() {
               setIsModal={setIsModal}
               spaces={spaces}
               id={selectedSpace.spaceId}
+              mrBoxes={mrBoxes}
+              boxes={boxes}
+              multiBoxes={multiBoxes}
             />
             // <div>1</div>
           )}

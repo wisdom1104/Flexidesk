@@ -325,7 +325,7 @@ export const StUser = styled.div`
 // select 박스
 export const StSelect = styled.div`
   width: 130px;
-  height: 346px;
+  height: 400px;
   background: #07133b;
   border-radius: 8px;
   display: flex;
@@ -333,6 +333,7 @@ export const StSelect = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 50px 29px;
+  padding: 10px;
 `;
 
 export const StSelectTitle = styled.div`
