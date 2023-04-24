@@ -13,32 +13,32 @@ import {
   StHeaderLogo,
   StHaderFont,
 } from './HeaderStyled';
+import Modal from '../features/Modal';
 
 
 function Header() {
-// test /////////////////////////////////////////////////////////////////
+
+  const [isModal, setIsModal] = useState(false);
+
   const [loginTime, setLoginTime] = useState(Date.now());
   const [expirationTime, setExpirationTime] = useState(loginTime + 3600000); // 토큰 만료 시간은 로그인 시간으로부터 1시간 후로 설정
-  //////////////////////////////////////////////////////////////////////////
 
-  const dispatch = useDispatch();
   const navi = useNavigate();
 
   const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
   const logout = () => {
-    dispatch(isLoginActions.logout());
+    // dispatch(isLoginActions.logout());
     setLoginTime(null);
     setExpirationTime(null);
-    alert('로그아웃 되었습니다.')
-    navi('/');
+    setIsModal(true);
   };
 
   const onClcikHandelr = () => {
     navi('/');
   };
-// test /////////////////////////////////////////////////////////////////
+
   useEffect(
     () => {
       const timerId = setInterval(() => {
@@ -46,14 +46,10 @@ function Header() {
           logout();
         }
       }, 1000);
-
       return () => clearInterval(timerId);
     },
-    [expirationTime,logout]
+    [expirationTime]
   );
-
-
-  //////////////////////////////////////////////////////////////////////////
 
   const location = useLocation();
 
@@ -98,9 +94,8 @@ function Header() {
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-                Logout
+                Logout 
               </StHeaderButton>
-
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
         </HeaderContain>
@@ -125,9 +120,15 @@ function Header() {
           </StHeaderContentBox>
         </HeaderContain>
       )}
+      {isModal && (
+        <Modal
+          setIsModal={setIsModal}
+        ></Modal>
+      )}
     </StHeader>
   );
 }
+
 
 const StHeader = styled.div`
   height: 6vh;

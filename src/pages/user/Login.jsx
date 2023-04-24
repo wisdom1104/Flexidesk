@@ -19,6 +19,7 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
+import LoginModal from '../../features/LoginModal';
 
 function Login() {
   const [user, setUser] = useSignUp({
@@ -36,6 +37,7 @@ function Login() {
   };
 
   const navi = useNavigate();
+  const [isModal, setIsModal] = useState(false);
 
   const onsubmitHandler = async e => {
     e.preventDefault();
@@ -61,7 +63,7 @@ function Login() {
 // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
     } catch (e) {
-      alert('다시 로그인 해주세요.');
+      setIsModal(true);
     }
   };
 
@@ -96,6 +98,11 @@ function Login() {
             >
               로그인
             </StFont>
+            {isModal && (
+        <LoginModal
+          setIsModal={setIsModal}
+        ></LoginModal>
+      )}
             <StSmallFont 
             width='100%'
             align="start" 
