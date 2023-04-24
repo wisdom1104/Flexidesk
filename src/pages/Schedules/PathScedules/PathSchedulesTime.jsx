@@ -2,7 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { __addSchdule, __getSchedules } from '../../../redux/modules/schedules';
+import {
+  __pathScehdule,
+  __getSchedules,
+} from '../../../redux/modules/schedules';
 import {
   ScheduleInput,
   StReserTimeBox,
@@ -11,7 +14,7 @@ import {
   FinButton,
 } from '../../Reservation/CalendarStyled';
 
-function PathSchedulesTime({ param, selectDay, title, comment }) {
+function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
   const now = new Date();
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -49,7 +52,11 @@ function PathSchedulesTime({ param, selectDay, title, comment }) {
   //adddispatch로 보낼값
   const startData = { startList: dataListResult };
   const { scComment, scTitle } = scheduleValue;
-  const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
+  const reqScheduleValue = {
+    scComment,
+    scTitle,
+    startList: dataListResult,
+  };
 
   const { schedules } = useSelector(state => state.schedules);
 
@@ -96,7 +103,7 @@ function PathSchedulesTime({ param, selectDay, title, comment }) {
       <form
         onSubmit={async e => {
           e.preventDefault();
-          await dispatch(__addSchdule(reqScheduleValue));
+          await dispatch(__pathScehdule({ reqScheduleValue, scId }));
           navi(`/scheduledetail/${param}`);
         }}
       >
@@ -124,7 +131,7 @@ function PathSchedulesTime({ param, selectDay, title, comment }) {
             })
           }
         />
-        <FinButton>등록하기</FinButton>
+        <FinButton>수정하기</FinButton>
       </form>
     </>
   );

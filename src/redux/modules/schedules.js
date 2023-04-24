@@ -80,6 +80,24 @@ export const __deleteSchedule = createAsyncThunk(
   }
 )
 
+export const __pathScehdule = createAsyncThunk(
+  "pathschedule",
+  async (payload,thunk)=>{
+    console.log(payload)
+    try{
+      const token = cookies.get('token')
+      await api.patch(`/schedules/${payload.scId}`,payload.reqScheduleValue,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      await thunk.dispatch(__getAllSchedules())
+    }catch(error){
+      return thunk.rejectWithValue(error)
+    }
+  }
+)
+
 
 export const schedulesSlice = createSlice({
   name:'schedules',

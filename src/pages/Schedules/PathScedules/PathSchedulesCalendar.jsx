@@ -123,6 +123,7 @@ function PathScedules() {
         selectDay={date}
         title={location.state.scTitle}
         comment={location.state.scComment}
+        scId={location.state.scId}
       />
     </>
   );
