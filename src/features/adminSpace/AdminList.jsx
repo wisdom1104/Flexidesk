@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-import SpaceList from './SpaceList';
-import FloorList from './FloorList';
 import {
   Modal,
   ModalBackground,
@@ -10,13 +8,15 @@ import {
   Modalbtn,
   StAddBtn,
   StAddBtnBox,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
 import { __addFloor } from '../../redux/modules/floorsSlice';
 import { __addSpace } from '../../redux/modules/spacesSlice';
 import { __editSpace } from '../../redux/modules/spaceSlice';
+import AdminFloorList from './AdminFloorList';
+import AdminSpaceList from './AdminSpaceList';
 
-function CreateSpace({
+function AdminList({
   isModal,
   setIsModal,
   spaces,
@@ -112,7 +112,7 @@ function CreateSpace({
                     스페이스 추가
                   </StAddBtn>
                 </StAddBtnBox>
-                <FloorList
+                <AdminFloorList
                   floors={floors}
                   dispatch={dispatch}
                   onClickSpaceListHandler={onClickSpaceListHandler}
@@ -121,7 +121,7 @@ function CreateSpace({
                   onDragOver={onDragOver}
                   onDragEnd={onDragEnd}
                 />
-                <SpaceList
+                <AdminSpaceList
                   spaces={spaces}
                   dispatch={dispatch}
                   onClickSpaceListHandler={onClickSpaceListHandler}
@@ -139,4 +139,4 @@ function CreateSpace({
   );
 }
 
-export default CreateSpace;
+export default AdminList;

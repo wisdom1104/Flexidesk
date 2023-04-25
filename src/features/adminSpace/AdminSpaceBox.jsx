@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getSpace } from '../../redux/modules/spaceSlice';
 import { __addMr, __editMr } from '../../redux/modules/spaceMrSlice';
 import { __addBox, __editBox } from '../../redux/modules/spaceBoxSlice';
-import MrItem from './MrItem';
-import BoxItem from './BoxItem';
 import { useNavigate } from 'react-router-dom';
 import { Row } from '../../components/Flex';
 import {
@@ -16,7 +14,17 @@ import {
   Stmainspace,
   SubIcon,
   SubTitle,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
+import {
+  __addMultiBox,
+  __editMultiBox,
+} from '../../redux/modules/MultiBoxSlice';
+import AdminMrItem from './AdminMrItem';
+import AdminBoxItem from './AdminBoxItem';
+import AdminMultiBoxItem from './AdminMultiBoxItem';
+import AdminSubHeader from './AdminSubHeader';
+import AdminShadowItem from './AdminShadowItem';
+import AdminDropItem from './AdminDropItem';
 
 function AdminSpaceBox({
   spaceId,
@@ -26,17 +34,17 @@ function AdminSpaceBox({
   setIsModal,
   spaces,
   id,
+  mrBoxes,
+  boxes,
+  multiBoxes,
 }) {
   const dispatch = useDispatch();
-  const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
 
-  const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
-  const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '박스' }]);
-
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
+  const [newMultiBoxes, setNewMultiBoxes] = useState([]);
 
   const elRef = useRef([]);
   const boardEl = useRef(null);
@@ -52,12 +60,15 @@ function AdminSpaceBox({
   // mrList와 boxList를 계산하는 useEffect
   const [mrList, setMrList] = useState([]);
   const [boxList, setBoxList] = useState([]);
+  const [multiBoxList, setMultiBoxList] = useState([]);
 
   useEffect(() => {
-    const newMrList = space?.map(item => item.mrlist) || [];
-    const newBoxList = space?.map(item => item.boxlist) || [];
+    const newMrList = space?.map(item => item.mrList) || [];
+    const newBoxList = space?.map(item => item.boxList) || [];
+    const newMultiBoxList = space?.map(item => item.multiBoxList) || [];
     setMrList(newMrList);
     setBoxList(newBoxList);
+    setMultiBoxList(newMultiBoxList);
   }, [space]);
 
   // 모든 요소 드롭
@@ -74,7 +85,11 @@ function AdminSpaceBox({
         x: e.clientX - targetRect.x - 45,
         y: e.clientY - targetRect.y - 45,
       };
-      if (Number(mrList.length) !== 0 || Number(boxList.length) !== 0) {
+      if (
+        Number(mrList[0].length) !== 0 ||
+        Number(boxList[0].length) !== 0 ||
+        Number(multiBoxList[0].length) !== 0
+      ) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
           const draggedRight = draggedBox.x + 70;
@@ -102,7 +117,15 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
+        // const isMultiBoxListOverlapping = multiBoxList.some(box =>
+        //   isOverlap(newBox, box),
+        // );
+        if (
+          !isOverlapping &&
+          !isMrListOverlapping &&
+          !isBoxListOverlapping
+          // && !isMultiBoxListOverlapping
+        ) {
           dispatch(__addMr(newBox));
         }
       } else {
@@ -118,7 +141,11 @@ function AdminSpaceBox({
         x: e.clientX - targetRect.x - 45,
         y: e.clientY - targetRect.y - 45,
       };
-      if (Number(mrList[0].length) !== 0 || Number(boxList[0].length) !== 0) {
+      if (
+        Number(mrList[0].length) !== 0 ||
+        Number(boxList[0].length) !== 0 ||
+        Number(multiBoxList[0].length) !== 0
+      ) {
         const isOverlap = (draggedBox, existingBox) => {
           const draggedx = draggedBox.x;
           const draggedRight = draggedBox.x + 70;
@@ -145,11 +172,74 @@ function AdminSpaceBox({
         const isBoxListOverlapping = boxList.some(box =>
           isOverlap(newBox, box),
         );
-        if (!isOverlapping && !isMrListOverlapping && !isBoxListOverlapping) {
+        const isMultiBoxListOverlapping = multiBoxList.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (
+          !isOverlapping &&
+          !isMrListOverlapping &&
+          !isBoxListOverlapping &&
+          !isMultiBoxListOverlapping
+        ) {
           dispatch(__addBox(newBox));
         }
       } else {
         dispatch(__addBox(newBox));
+      }
+    }
+
+    //------------------------공용공간 드롭----------------------------------
+    if (Number(id) === 3) {
+      const newBox = {
+        spaceId,
+        multiBoxName: 'New 공용공간',
+        x: e.clientX - targetRect.x - 45,
+        y: e.clientY - targetRect.y - 45,
+      };
+      if (
+        Number(mrList[0].length) !== 0 ||
+        Number(boxList[0].length) !== 0 ||
+        Number(multiBoxList[0].length) !== 0
+      ) {
+        const isOverlap = (draggedBox, existingBox) => {
+          const draggedx = draggedBox.x;
+          const draggedRight = draggedBox.x + 70;
+          const draggedy = draggedBox.y;
+          const draggedBottom = draggedBox.y + 70;
+
+          const existingx = existingBox.x;
+          const existingRight = existingBox.x + 70;
+          const existingy = existingBox.y;
+          const existingBottom = existingBox.y + 70;
+
+          if (
+            draggedx < existingRight &&
+            draggedRight > existingx &&
+            draggedy < existingBottom &&
+            draggedBottom > existingy
+          ) {
+            return true;
+          }
+          return false;
+        };
+        const isOverlapping = boxes.some(box => isOverlap(newBox, box));
+        const isMrListOverlapping = mrList.some(box => isOverlap(newBox, box));
+        const isBoxListOverlapping = boxList.some(box =>
+          isOverlap(newBox, box),
+        );
+        const isMultiBoxListOverlapping = multiBoxList.some(box =>
+          isOverlap(newBox, box),
+        );
+        if (
+          !isOverlapping &&
+          !isMrListOverlapping &&
+          !isBoxListOverlapping &&
+          !isMultiBoxListOverlapping
+        ) {
+          dispatch(__addMultiBox(newBox));
+        }
+      } else {
+        dispatch(__addMultiBox(newBox));
       }
     }
   };
@@ -267,104 +357,82 @@ function AdminSpaceBox({
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
 
+  //--------------------------공용공간 드래그 앤 드롭--------------------------------
+  const multiBoxMouseDownHandler = (e, boxIndex) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const multiBoxMoveHandler = e => {
+      const currentMultiBox = multiBoxList[0].find(
+        multiBox => multiBox.multiBoxId === boxIndex,
+      );
+
+      const newMouseX = e.clientX;
+      const newMouseY = e.clientY;
+
+      const mrDiffX = mouseX - currentMultiBox.x;
+      const mrDiffY = mouseY - currentMultiBox.y;
+
+      const newx = newMouseX - mrDiffX;
+      const newy = newMouseY - mrDiffY;
+
+      const boardRect = boardEl.current.getBoundingClientRect();
+      const boxRect = elRef.current[boxIndex].getBoundingClientRect();
+
+      const limitedX = Math.max(
+        boardRect.x - (boardRect.x + 10),
+        Math.min(newx, boardRect.right - (boxRect.width + (boardRect.x + 10))),
+      );
+      const limitedY = Math.max(
+        boardRect.y - (boardRect.y + 10),
+        Math.min(
+          newy,
+          boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
+        ),
+      );
+      const payload = {
+        spaceId,
+        multiBoxId: currentMultiBox.multiBoxId,
+        multiBoxName: currentMultiBox.multiBoxName,
+        x: Number(limitedX),
+        y: Number(limitedY),
+      };
+      setNewMultiBoxes(prevBoxes => [...prevBoxes, payload]);
+      return payload;
+    };
+    const spaceMouseUpHandler = (e, boxIndex) => {
+      document.removeEventListener('mousemove', multiBoxMoveHandler);
+      document.removeEventListener('mouseup', spaceMouseUpHandler);
+      const result = multiBoxMoveHandler(e, boxIndex);
+      dispatch(__editMultiBox(result));
+      setNewMultiBoxes([]);
+    };
+
+    document.addEventListener('mousemove', multiBoxMoveHandler);
+    document.addEventListener('mouseup', spaceMouseUpHandler);
+  };
+
   return (
     <Stmainspace>
-      <StSubHeader>
-        {/* space name 부분 */}
-        <Row>
-          {space?.map(item => {
-            if (item && item.floorId !== null)
-              return (
-                <Row key={item.spaceId}>
-                  <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
-                  <SubIcon>&gt;</SubIcon>
-                  <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
-                </Row>
-              );
-            if (item && item.floorId === null)
-              return (
-                <SubTitle key={item.spaceId}>
-                  {/* if(item.floorId) */}
-                  {item.spaceName}
-                </SubTitle>
-              );
-          })}
-        </Row>
-        <Row>
-          <StSubBtn
-            onClick={() => {
-              setIsModal(!isModal);
-            }}
-          >
-            스페이스 관리하기
-          </StSubBtn>
-          <StBtn onClick={() => navi('/space')}>완료</StBtn>
-        </Row>
-      </StSubHeader>
-      {/* board 부분 */}
+      <AdminSubHeader space={space} isModal={isModal} setIsModal={setIsModal} />
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
-        {/* 가짜 회의실 */}
-        {newMrBoxes.map((box, index) => (
-          <StDrag
-            onDrop={HandleDrop}
-            onDragOver={handleDragOver}
-            key={box.mrId}
-            ref={el => (elRef.current[index] = el)}
-            onMouseDown={e => mrBoxMouseDownHandler(e, index)}
-            onDragStart={e => handleDragStart(e, box.mrId)}
-            style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-          ></StDrag>
-        ))}
-        {/* 가짜 박스 */}
-        {newBoxes.map((box, index) => (
-          <StDrag
-            key={box.boxId}
-            ref={el => (elRef.current[index] = el)}
-            onMouseDown={e => boxMouseDownHandler(e, index)}
-            onDragStart={e => handleDragStart(e, box.boxId)}
-            style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
-          ></StDrag>
-        ))}
-        {/* 회의실 드래그 앤 드롭 */}
-        <div>
-          {space?.map(item =>
-            item.mrlist?.length > 0
-              ? item.mrlist?.map(mr => (
-                  <MrItem
-                    key={mr.mrId}
-                    mr={mr}
-                    mrList={mrList}
-                    HandleDrop={HandleDrop}
-                    handleDragOver={handleDragOver}
-                    elRef={elRef}
-                    mrBoxMouseDownHandler={mrBoxMouseDownHandler}
-                    handleDragStart={handleDragStart}
-                    spaceId={spaceId}
-                  />
-                ))
-              : null,
-          )}
-        </div>
-        {/* 박스 드래그 앤 드롭 */}
-        <div>
-          {space?.map(item =>
-            item.boxlist?.length > 0
-              ? item.boxlist?.map(box => (
-                  <BoxItem
-                    key={box.boxId}
-                    box={box}
-                    boxList={boxList}
-                    HandleDrop={HandleDrop}
-                    handleDragOver={handleDragOver}
-                    elRef={elRef}
-                    boxMouseDownHandler={boxMouseDownHandler}
-                    handleDragStart={handleDragStart}
-                    spaceId={spaceId}
-                  />
-                ))
-              : null,
-          )}
-        </div>
+        <AdminShadowItem
+          newMrBoxes={newMrBoxes}
+          newBoxes={newBoxes}
+          newMultiBoxes={newMultiBoxes}
+          elRef={elRef}
+        />
+        <AdminDropItem
+          space={space}
+          HandleDrop={HandleDrop}
+          handleDragOver={handleDragOver}
+          elRef={elRef}
+          handleDragStart={handleDragStart}
+          spaceId={spaceId}
+          mrBoxMouseDownHandler={mrBoxMouseDownHandler}
+          boxMouseDownHandler={boxMouseDownHandler}
+          multiBoxMouseDownHandler={multiBoxMouseDownHandler}
+        />
       </StBoard>
     </Stmainspace>
   );

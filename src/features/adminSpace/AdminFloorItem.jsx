@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
 import { Row } from '../../components/Flex';
-import InnerSpaceList from './InnerSpaceList';
 import {
   BoxBtn,
   BoxSubBtn,
   EditInput,
-  ListItem,
   StList,
   StListBtnBox,
   StListItem,
   StOpenBtn,
   StOpenList,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
+import AdminInnerList from './AdminInnerList';
 
-function FloorItem({
+function AdminFloorItem({
   floor,
   dispatch,
   onClickSpaceListHandler,
@@ -141,7 +140,7 @@ function FloorItem({
               </StOpenList>
             )}
             {isMd ? (
-              <InnerSpaceList
+              <AdminInnerList
                 floor={floor}
                 onClickSpaceListHandler={onClickSpaceListHandler}
                 dragStart={dragStart}
@@ -186,4 +185,4 @@ function FloorItem({
   );
 }
 
-export default FloorItem;
+export default AdminFloorItem;

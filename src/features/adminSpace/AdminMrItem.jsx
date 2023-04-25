@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deleteMr, __editMr } from '../../redux/modules/spaceMrSlice';
-import { BoxBtn, BoxInput, BoxSubBtn, StBtnBox, StDropMr } from './SpaceStyles';
+import {
+  BoxBtn,
+  BoxInput,
+  BoxSubBtn,
+  StBtnBox,
+  StDropMr,
+} from '../../shared/SpaceStyles';
 
-function MrItem({
+function AdminMrItem({
   mr,
-  mrList,
   HandleDrop,
   handleDragOver,
   elRef,
@@ -102,4 +107,4 @@ function MrItem({
   );
 }
 
-export default MrItem;
+export default AdminMrItem;

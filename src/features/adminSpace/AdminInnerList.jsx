@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import { __addInnerSpace } from '../../redux/modules/spacesSlice';
-import InnerSpaceItem from './InnerSpaceItem';
-import { InnerList, StAddInnerBtn, StInnerList } from './SpaceStyles';
+import { StAddInnerBtn, StInnerList } from '../../shared/SpaceStyles';
+import AdminInnerItem from './AdminInnerItem';
 
-function InnerSpaceList({
+function AdminInnerList({
   floor,
   onClickSpaceListHandler,
   dragStart,
@@ -19,7 +18,7 @@ function InnerSpaceList({
   const onClickAddSpaceHandler = async () => {
     const newSpace = {
       floorId: floor.floorId,
-      spaceName: 'New Space',
+      spaceName: 'New 스페이스',
     };
     dispatch(__addInnerSpace(newSpace));
   };
@@ -31,7 +30,7 @@ function InnerSpaceList({
       </StAddInnerBtn>
       {floor.spaceList?.length > 0
         ? floor.spaceList.map(space => (
-            <InnerSpaceItem
+            <AdminInnerItem
               key={space.spaceId}
               dispatch={dispatch}
               space={space}
@@ -47,4 +46,4 @@ function InnerSpaceList({
   );
 }
 
-export default InnerSpaceList;
+export default AdminInnerList;
