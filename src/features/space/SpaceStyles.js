@@ -853,7 +853,6 @@ export const ModalFullBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
   background: rgba(0, 0, 0, 0.2);
   top: 0px;
   z-index: 50;
@@ -864,6 +863,8 @@ export const ModalFullBackground = styled.div`
 
   border-radius: 8px;
   margin: auto;
+
+  border: 1px solid red;
 `
 
 export const MoveModal = styled.div`
@@ -883,7 +884,7 @@ export const MoveModal = styled.div`
 `;
 export const MoveModalSubTitle = styled.div`
   position: absolute;
-  width: 52px;
+  width: ${props => props.width || '52px'};
   height: 17px;
   left: 16px;
   top: 16px;

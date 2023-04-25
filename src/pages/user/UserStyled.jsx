@@ -202,3 +202,60 @@ export const InlinButton = styled.input`
     border: 1px solid #07133b;
   }
 `;
+
+//managmentPage
+export const DropdownMenu = styled.div`
+  display: inline-block;
+  margin-left: 15px;
+`;
+
+export const DropdownButton = styled.button`
+  width: 160px;
+  height: 40px;
+  color: #15161A;
+  padding: 12px;
+  margin-bottom: 25px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  border: 1px solid #65BAB6;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+`;
+
+export const DropdownContent = styled.div`
+  width: 160px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  border: 1px solid #65BAB6;
+  border-radius: 8px;
+`;
+
+export const DropdownItem = styled.button`
+  color: black;
+  width: 160px;
+  padding: 12px 16px;
+  text-decoration: none;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  display: block;
+  background-color: #fff;
+  border: 1px transparent;
+  border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
+
+  &:hover {
+    background-color: #E9F6F4;
+    color: #65BAB6;
+  }
+`;

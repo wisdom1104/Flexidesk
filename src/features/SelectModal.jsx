@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { HiChevronDown } from "react-icons/hi2";
 import {
   ModalFullBackground,
   MoveModal,
   MoveModalErrorbtn,
+  MoveModalSubTitle,
   MoveModalSubbtn,
   MoveModalTitle,
   MoveModalbtn,
 } from '../features/space/SpaceStyles';
+import { DropdownButton, DropdownContent, DropdownItem, DropdownMenu } from "../pages/user/UserStyled";
 
 
 const SelectModal = ({ setIsModal, role }) => {
@@ -18,7 +21,6 @@ const SelectModal = ({ setIsModal, role }) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
-  console.log('fav',fav);
 
     const closeModal = () => {
     setIsModal(false);
@@ -28,16 +30,14 @@ const SelectModal = ({ setIsModal, role }) => {
     setIsModal(true);
   };
 
-
-
   return (
     <ModalFullBackground>
       <MoveModal>
-        <MoveModalTitle>권한수정</MoveModalTitle> <br />
+        <MoveModalSubTitle width='65px'>권한수정</MoveModalSubTitle> <br />
     <DropdownMenu>
       <DropdownButton onClick={(e) => setList((pre) => !pre)}>
         <div>{fav}</div>
-        {/* <div>▼</div> */}
+        <HiChevronDown/>
       </DropdownButton>
       {list ? (
         <DropdownContent>
@@ -76,56 +76,3 @@ const SelectModal = ({ setIsModal, role }) => {
 };
 
 export default SelectModal;
-
-const DropdownMenu = styled.div`
-  display: inline-block;
-  margin-left: 15px;
-`;
-
-const DropdownButton = styled.button`
-  width: 160px;
-  height: 40px;
-  background-color: white;
-  color: black;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #65BAB6;
-  border-radius: 8px;
-  /* display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr; */
-`;
-
-const DropdownContent = styled.div`
-  width: 160px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-
-  border: 1px solid #65BAB6;
-  border-radius: 8px;
-`;
-
-const DropdownItem = styled.button`
-  color: black;
-  width: 160px;
-  padding: 12px 16px;
-  text-decoration: none;
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-
-  display: block;
-  background-color: #fff;
-  border: 1px transparent;
-  border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
-
-  &:hover {
-    background-color: #E9F6F4;
-    color: #65BAB6;
-  }
-`;
-

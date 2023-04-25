@@ -16,14 +16,15 @@ import ManagementChange from './ManagementChange';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-  // const userId = userList[0].userId
-  // console.log(userId);
+  
 
   /////////////////////test/////////////////////////////////////
+  //현재 선택된 사용자의 ID를 저장
   const [selectedUserId, setSelectedUserId] = useState(null);
-  console.log('userId->>>>>>>>>>', selectedUserId);
+  console.log('selectedUserId',selectedUserId);
 
   const { userId } = useParams();
+  console.log('userId', userId);
 
   useEffect(() => {
     if (userId) {
@@ -41,8 +42,8 @@ function Management() {
 
   const [isModal, setIsModal] = useState(false);
 
-  const openModal = userId => {
-    setSelectedUserId(userId);
+  const openModal = () => {
+    setSelectedUserId();
     setIsModal(true);
   };
 
@@ -75,6 +76,7 @@ function Management() {
               {userList.map(item => (
                 <InfoBox key={item.allManagementId}>
                   {item.userId}
+                  <p>{item.username}</p>
                   <Info>
                     <CommentBox>
                       <span>이메일</span> <br />
@@ -82,32 +84,21 @@ function Management() {
                     </CommentBox>
 
                     <CommentBox>
-                      <span>이름</span> <br />
-                      <p>{item.username}</p>
-                    </CommentBox>
-
-                    <CommentBox>
                       <span>권한</span> <br />
                       <p>{item.role}</p>
                     </CommentBox>
-                  </Info>
+                  
                   <ManagementChange 
                   item={item}
                   openModal={openModal}
                   isModal={isModal}
                   setIsModal={setIsModal}
                   selectedUserId={selectedUserId}
+                  allManagementId={item.allManagementId}
+                  userId={userId}
                   />
-                  {/* <button onClick={() => openModal(item.allManagementId)}>
-                    권한 수정
-                  </button>
-                  {isModal && selectedUserId === item.allManagementId && (
-                    <SelectModal
-                      setIsModal={setIsModal}
-                      role={item.role}
-                    ></SelectModal>
-                  )}
-                  <button>인원 삭제</button> */}
+
+                  </Info>
                 </InfoBox>
               ))}
             </InfoContain>

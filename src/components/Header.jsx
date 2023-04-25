@@ -96,7 +96,7 @@ function Header() {
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
               <StHaderFont>회의실 예약현황</StHaderFont>
             </StHeaderContentBox>
-            <StHeaderContentBox>
+            <StHeaderContentBox onClick={() => navi('/management')}>
               <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
