@@ -211,15 +211,30 @@ export const ComFont = styled.div`
 `;
 
 export const DelBtn = styled.button`
-  background-color: white;
-  color: #65bab6;
+  background-color: #65bab6;
+  color: white;
   width: 50px;
   padding: 7px;
   border: 1px solid #65bab6;
   margin-bottom: 10px;
   border-radius: 3px;
+  margin-left: 10px;
   &:hover {
     background-color: #def1ef;
-    color: #65bab6;
+    color: #4a8e8b;
+  }
+`;
+
+export const PathBtn = styled.button`
+  background-color: #def1ef;
+  color: #65bab6;
+  width: 50px;
+  padding: 7px;
+  border: 1px solid #def1ef;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  &:hover {
+    background-color: #65bab6;
+    color: #def1ef;
   }
 `;

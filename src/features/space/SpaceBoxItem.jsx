@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, StBox, StUseBox, StUser } from './SpaceStyles';
+import { ClickedBox, StBox } from '../../shared/SpaceStyles';
 
 function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
   return (
     <>
       {isClicked === box.boxId ? (
-        <Box
+        <ClickedBox
           key={box.boxId}
           id={box.boxId}
           style={{
@@ -16,7 +16,7 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
           }}
         >
           <div>{box.boxName}</div>
-        </Box>
+        </ClickedBox>
       ) : (
         <StBox
           key={box.boxId}

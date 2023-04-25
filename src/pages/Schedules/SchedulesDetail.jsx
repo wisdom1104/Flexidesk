@@ -14,6 +14,7 @@ import {
   CommentBox,
   ComFont,
   DelBtn,
+  PathBtn,
 } from '../Reservation/CalendarStyled';
 
 function SchedulesDetail() {
@@ -59,13 +60,22 @@ function SchedulesDetail() {
                 <ComFont>종료시간</ComFont>
                 <div>{item.scEnd.split('T')[1]}</div>
               </CommentBox>
-              <DelBtn
-                onClick={() => {
-                  dispatch(__deleteSchedule(item.scId));
-                }}
-              >
-                삭제
-              </DelBtn>
+              <div>
+                <PathBtn
+                  onClick={() => {
+                    navi(`/pathschedules/${item.scId}`, { state: { ...item } });
+                  }}
+                >
+                  수정
+                </PathBtn>
+                <DelBtn
+                  onClick={() => {
+                    dispatch(__deleteSchedule(item.scId));
+                  }}
+                >
+                  삭제
+                </DelBtn>
+              </div>
             </Info>
           </InfoBox>
         ))}

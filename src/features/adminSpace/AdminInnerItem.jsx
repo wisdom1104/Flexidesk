@@ -9,9 +9,9 @@ import {
   StInner,
   StInnerItem,
   StListBtnBox,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 
-function InnerSpaceItem({
+function AdminInnerItem({
   dispatch,
   space,
   onClickSpaceListHandler,
@@ -115,4 +115,4 @@ function InnerSpaceItem({
   );
 }
 
-export default InnerSpaceItem;
+export default AdminInnerItem;

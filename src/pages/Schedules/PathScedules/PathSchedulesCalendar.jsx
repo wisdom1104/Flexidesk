@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import SchedulesTime from './SchedulesTime';
+import { useLocation, useParams } from 'react-router-dom';
+import PathSchedulesTime from './PathSchedulesTime';
 import {
   StDate,
   DayContain,
@@ -11,11 +10,14 @@ import {
   StCalenHeader,
   FontSt,
   DateFont,
-} from '../Reservation/CalendarStyled';
+} from '../../Reservation/CalendarStyled';
 import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 
-function SchedulesCalendar() {
+function PathScedules() {
   const param = useParams();
+  const location = useLocation();
+  const dataDay = location.state.scStart.split('T')[0];
+  console.log(location.state);
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -27,7 +29,7 @@ function SchedulesCalendar() {
   const [selectYear, setSelectYear] = useState(today.year);
   const [selectMonth, setSelectMonth] = useState(today.month + 1);
   const [date, setDate] = useState();
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dataDay);
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
@@ -115,8 +117,14 @@ function SchedulesCalendar() {
         </DayContain>
         <DayContain>{returnDay()}</DayContain>
       </SchContain>
-      <SchedulesTime param={param.userId} selectDay={date} />
+      <PathSchedulesTime
+        param={param.userId}
+        selectDay={date}
+        title={location.state.scTitle}
+        comment={location.state.scComment}
+        scId={location.state.scId}
+      />
     </>
   );
 }
-export default SchedulesCalendar;
+export default PathScedules;

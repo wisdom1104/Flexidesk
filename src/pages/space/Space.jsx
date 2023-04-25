@@ -19,7 +19,7 @@ import {
   StSpaceList,
   StSubHeader,
   Stmainspace,
-} from '../../features/space/SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 
 function Space() {
@@ -130,7 +130,6 @@ function Space() {
       {/* 보더 영역 */}
       {spaces.length > 0 ? (
         <>
-          {' '}
           {selectedSpace && (
             <SpaceBox
               spaceId={selectedSpace.spaceId}
