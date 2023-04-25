@@ -818,6 +818,26 @@ export const MoveModalBackground = styled.div`
   margin: auto;
 `;
 
+//전체 백그라운드 모달
+export const ModalFullBackground = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0px;
+  z-index: 50;
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 100%;
+  max-width: 990px;
+
+  border-radius: 8px;
+  margin: auto;
+
+  border: 1px solid red;
+`
+
 export const MoveModal = styled.div`
   position: absolute;
   /* top: 134px; */
@@ -835,7 +855,7 @@ export const MoveModal = styled.div`
 `;
 export const MoveModalSubTitle = styled.div`
   position: absolute;
-  width: 52px;
+  width: ${props => props.width || '52px'};
   height: 17px;
   left: 16px;
   top: 16px;
@@ -868,13 +888,13 @@ export const MoveModalbtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 24px;
+  padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
   position: absolute;
-  width: 61px;
-  height: 41px;
-  left: 16px;
-  top: 117px;
+  width: ${props => props.width || '61px'};
+  height: ${props => props.height || '41px'};
+  left: ${props => props.left || '16px'};
+  top: ${props => props.top || '117px'};
   background: #65bab6;
   border-radius: 8px;
   border: none;
@@ -902,13 +922,13 @@ export const MoveModalSubbtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 24px;
+  padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
   position: absolute;
-  width: 87px;
-  height: 41px;
-  left: 85px;
-  top: 117px;
+  width: ${props => props.width || '87px'};
+  height: ${props => props.height || '41px'};
+  left: ${props => props.left || '85px'};
+  top: ${props => props.top || '117px'};
   background: #def1ef;
   border: 1px solid #65bab6;
   border-radius: 8px;

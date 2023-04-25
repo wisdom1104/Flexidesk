@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { isLoginActions } from '../redux/modules/loginSlice';
 import { cookies } from '../shared/cookies';
 import {
   HeaderContain,
@@ -13,47 +11,52 @@ import {
   StHeaderLogo,
   StHaderFont,
 } from './HeaderStyled';
+import Modal from '../features/Modal';
+import { useDispatch } from 'react-redux';
+import { isLoginActions } from '../redux/modules/loginSlice';
 
 
 function Header() {
-// test /////////////////////////////////////////////////////////////////
+
+  const [isModal, setIsModal] = useState(false);
+
   const [loginTime, setLoginTime] = useState(Date.now());
   const [expirationTime, setExpirationTime] = useState(loginTime + 3600000); // 토큰 만료 시간은 로그인 시간으로부터 1시간 후로 설정
-  //////////////////////////////////////////////////////////////////////////
 
-  const dispatch = useDispatch();
   const navi = useNavigate();
+  const dispatch = useDispatch();
 
   const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
   const logout = () => {
+    setLoginTime(null);
+    setExpirationTime(null);
+    setIsModal(true);
+  };
+
+  const tokenLogout = () => {
     dispatch(isLoginActions.logout());
     setLoginTime(null);
     setExpirationTime(null);
-    alert('로그아웃 되었습니다.')
     navi('/');
   };
 
   const onClcikHandelr = () => {
     navi('/');
   };
-// test /////////////////////////////////////////////////////////////////
+
   useEffect(
     () => {
       const timerId = setInterval(() => {
         if (expirationTime && Date.now() > expirationTime) {
-          logout();
+          tokenLogout();
         }
       }, 1000);
-
       return () => clearInterval(timerId);
     },
-    [expirationTime,logout]
+    [expirationTime]
   );
-
-
-  //////////////////////////////////////////////////////////////////////////
 
   const location = useLocation();
 
@@ -93,14 +96,13 @@ function Header() {
             <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
               <StHaderFont>회의실 예약현황</StHaderFont>
             </StHeaderContentBox>
-            <StHeaderContentBox>
+            <StHeaderContentBox onClick={() => navi('/management')}>
               <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-                Logout
+                Logout 
               </StHeaderButton>
-
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
         </HeaderContain>
@@ -125,9 +127,15 @@ function Header() {
           </StHeaderContentBox>
         </HeaderContain>
       )}
+      {isModal && (
+        <Modal
+          setIsModal={setIsModal}
+        ></Modal>
+      )}
     </StHeader>
   );
 }
+
 
 const StHeader = styled.div`
   height: 6vh;

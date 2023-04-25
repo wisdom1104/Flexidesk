@@ -17,7 +17,7 @@ height: 155vh;
 export const StOverall = styled.div`
   max-width: 1440px;
   min-width: 410px;
-  height: ${props => props.height || '50vw'};
+  height: ${props => props.height || '785px'};
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -141,10 +141,12 @@ export const StIntroArray = styled.div`
 export const StIntroDiv = styled.div`
   width: 1280px;
   height: 360px;
+  margin-top: ${props => props.marginTop || ''};
   display: flex;
   gap: 30px;
 
   align-items: center;
+
 `;
 
 export const StIntroPhoto = styled.div`

@@ -11,6 +11,7 @@ import reservationList from '../modules/allReservationSlice';
 import floors from '../modules/floorsSlice';
 import floor from '../modules/floorSlice';
 import schedules from '../modules/schedules';
+import userList from '../modules/allManagementSlice';
 import multiBox from '../modules/MultiBoxSlice';
 
 const store = configureStore({
@@ -26,6 +27,7 @@ const store = configureStore({
     schedules,
     floors,
     floor,
+    userList,
     multiBox,
   },
 });

@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
+import Management from '../pages/user/Management';
 import PathSchedulesCalendar from '../pages/Schedules/PathScedules/PathSchedulesCalendar'
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
+        <Route path="/management" element={<Management />} />
         <Route path="/calender/:id" element={<Calendar />} />
         <Route
           path="/schedulescalendar/:userId"

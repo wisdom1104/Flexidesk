@@ -24,23 +24,22 @@ function Welcome1() {
               <div
                 style={{
                   width: '35vw',
-                  height: '50vh',
+                  height: '35vh',
                   display: 'inline-block',
                 }}
               >
                 <StFont align="start">
-                  스마트해진 업무공간,
-                  <br /> 보다 생산적인 업무시간
+                  스마트해진 업무공간, <br /> 
+                  보다 생산적인 업무시간
                 </StFont>
                 <StSmallFont
                   align="start"
                   marginBottom="-185px"
                   marginTop="65px"
                 >
-                  Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및{' '}
-                  <br />
+                  Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및 <br />
                   회의실 예약 시스템을 제공합니다
-                </StSmallFont>{' '}
+                </StSmallFont>
                 <br />
                 <StButtonGap>
                   <StBlueButton
@@ -64,8 +63,8 @@ function Welcome1() {
               {/* 도형 자리 */}
               <div
                 style={{
-                  width: '40vw',
-                  height: '55vh',
+                  width: '30vw',
+                  height: '40vh',
                   display: 'inline-block',
                 }}
               >
@@ -74,14 +73,9 @@ function Welcome1() {
             </StIntroDiv>
           </StWrapDiv>
         </StOverall>
-        <div
-          style={{
-            marginTop: '-450px',
-          }}
-        >
-          <Welcome2 />
-        </div>
-      </StGradationBackground>
+      <Welcome2 />
+      </StGradationBackground>          
+
     </>
   );
 }

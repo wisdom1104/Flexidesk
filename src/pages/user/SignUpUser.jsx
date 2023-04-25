@@ -171,11 +171,11 @@ function SignUpUser() {
                 </StTextInput>
                 {passwordError && (
                   <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    color="red"
+                    width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
                   >
                     {passwordError}
                   </StSmallFont>
@@ -194,11 +194,11 @@ function SignUpUser() {
                 </StTextInput>
                 {passwordCheckError && (
                   <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    color="red"
+                     width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
                   >
                     {passwordCheckError}
                   </StSmallFont>
