@@ -825,17 +825,18 @@ export const ModalFullBackground = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  top: 0px;
-  z-index: 50;
-  box-sizing: border-box;
-  height: 100%;
-  min-width: 100%;
-  max-width: 990px;
 
-  border-radius: 8px;
+  width: 100%;  
+  height: 99%;
+  left: 1px;
+  top: 78px;
+
+  max-width: 99vw;
+  min-width: 21vw;
+
   margin: auto;
 
-  border: 1px solid red;
+  z-index: 50;
 `
 
 export const MoveModal = styled.div`
@@ -890,7 +891,7 @@ export const MoveModalbtn = styled.button`
   align-items: center;
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
-  position: absolute;
+  position: ${props => props.position || 'absolute'};
   width: ${props => props.width || '61px'};
   height: ${props => props.height || '41px'};
   left: ${props => props.left || '16px'};
@@ -900,8 +901,6 @@ export const MoveModalbtn = styled.button`
   border: none;
   cursor: pointer;
   //글자
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
@@ -924,7 +923,7 @@ export const MoveModalSubbtn = styled.button`
   align-items: center;
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
-  position: absolute;
+  position: ${props => props.position || 'absolute'};
   width: ${props => props.width || '87px'};
   height: ${props => props.height || '41px'};
   left: ${props => props.left || '85px'};
@@ -934,8 +933,6 @@ export const MoveModalSubbtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
   //글자
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;

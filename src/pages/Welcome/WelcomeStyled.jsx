@@ -32,8 +32,6 @@ export const StWrapDiv = styled.div`
   align-items: center;
 
   margin: 120px;
-
-  border: 1px solid red;
 `;
 
 
@@ -67,9 +65,6 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
-
-  border: 1px solid red;
-
 `;
 
 //그라데이션 폰트

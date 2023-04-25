@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const ReservationTitle = styled.div`
   display: flex;
-  gap: 5px;
-  font-size: large;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 20px;
 `;
 
@@ -172,34 +172,49 @@ export const DateFont = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  border: 1px solid;
-  width: 30vw;
-  height: 30vw;
+  width: ${props => props.width || '25vw'};
+  height: ${props => props.height || '20vw'};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
-  background-color: #f4fbf9;
+  padding-bottom: 20px;
+  background-color: #DEF1EF;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+
 `;
 export const InfoContain = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
+  gap: 40px;
   margin: 10px;
+  
 `;
 export const Info = styled.div`
   display: flex;
-  border-radius: 5px;
-  width: 28vw;
+  width: 22vw;
+
+  left: 2.01%;
+  right: 2.01%;
+  top: 2.62%;
+  bottom: 3.62%;
+
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: var(--white);
+
+  box-shadow: 0px 5.02286px 37.6714px rgba(140, 159, 157, 0.25);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+
+  min-height: 10vw;
+
 `;
 export const CommentBox = styled.div`
   display: flex;
-  width: 28vw;
+  width: 18vw;
   justify-content: space-between;
   margin: 20px;
   border-bottom: 1px solid lightgray;

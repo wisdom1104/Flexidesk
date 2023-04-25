@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StBackground, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import { StBackground, StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
@@ -11,6 +11,7 @@ import {
   Info,
   InfoBox,
   InfoContain,
+  ReservationTitle,
 } from '../Reservation/CalendarStyled';
 import ManagementChange from './ManagementChange';
 
@@ -25,7 +26,6 @@ function Management() {
   //   setUserList(updatedUserList);
   // };
   /////////////////////test/////////////////////////////////////
-
 
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -49,12 +49,16 @@ function Management() {
     <>
         <StOverall>
           <StWrapDiv>
-                <StSmallFont align='start'>사용자 관리</StSmallFont>
+          <ReservationTitle>
+            <StFont width="76vw" fontSize="2rem" align="start">
+            사용자 관리
+            </StFont>
+          </ReservationTitle>
+          
             <InfoContain>
               {userList.map(item => (
-                <InfoBox key={item.allManagementId}>
-                  {item.userId}
-                  <p>{item.username}</p>
+                <InfoBox key={item.allManagementId} height='16vw' >
+                  <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
                   <Info>
                     <CommentBox>
                       <span>이메일</span> <br />

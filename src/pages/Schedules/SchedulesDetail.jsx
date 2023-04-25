@@ -16,6 +16,8 @@ import {
   DelBtn,
   PathBtn,
 } from '../Reservation/CalendarStyled';
+import { StFont, StOverall } from '../Welcome/WelcomeStyled';
+import { StWrapDiv } from '../Welcome/WelcomeStyled';
 
 function SchedulesDetail() {
   const param = useParams();
@@ -28,59 +30,66 @@ function SchedulesDetail() {
   }, []);
 
   return (
-    <div>
-      <ReservationTitle>
-        <BackCusor
-          onClick={() => {
-            navi('/space');
-          }}
-        >
-          ←
-        </BackCusor>
-        <h2>내가 등록한 스케줄</h2>
-      </ReservationTitle>
-      <InfoContain>
-        {userSchedules?.map(item => (
-          <InfoBox key={item.scId}>
-            <h2>{item.scTitle}</h2>
-            <Info>
-              <CommentBox>
-                <ComFont>내용</ComFont>
-                <div>{item.scComment}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>날짜</ComFont>
-                <div>{item.scStart.split('T')[0]}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>시작시간</ComFont>
-                <div>{item.scStart.split('T')[1]}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>종료시간</ComFont>
-                <div>{item.scEnd.split('T')[1]}</div>
-              </CommentBox>
-              <div>
-                <PathBtn
-                  onClick={() => {
-                    navi(`/pathschedules/${item.scId}`, { state: { ...item } });
-                  }}
-                >
-                  수정
-                </PathBtn>
-                <DelBtn
-                  onClick={() => {
-                    dispatch(__deleteSchedule(item.scId));
-                  }}
-                >
-                  삭제
-                </DelBtn>
-              </div>
-            </Info>
-          </InfoBox>
-        ))}
-      </InfoContain>
-    </div>
+    <StOverall>
+      <StWrapDiv>
+        <ReservationTitle>
+          <BackCusor
+            onClick={() => {
+              navi('/space');
+            }}
+          >
+            ←
+          </BackCusor>
+
+          <StFont width='76vw' fontSize="2rem" align='start' >내가 등록한 스케줄</StFont>
+        </ReservationTitle>
+        <InfoContain>
+          {userSchedules?.map(item => (
+            <InfoBox key={item.scId}>
+              <StFont width="18vw" fontSize="1.5rem" align="start">
+                {item.scTitle}
+              </StFont>
+              <Info>
+                <CommentBox>
+                  <ComFont>내용</ComFont>
+                  <div>{item.scComment}</div>
+                </CommentBox>
+                <CommentBox>
+                  <ComFont>날짜</ComFont>
+                  <div>{item.scStart.split('T')[0]}</div>
+                </CommentBox>
+                <CommentBox>
+                  <ComFont>시작시간</ComFont>
+                  <div>{item.scStart.split('T')[1]}</div>
+                </CommentBox>
+                <CommentBox>
+                  <ComFont>종료시간</ComFont>
+                  <div>{item.scEnd.split('T')[1]}</div>
+                </CommentBox>
+                <div>
+                  <PathBtn
+                    onClick={() => {
+                      navi(`/pathschedules/${item.scId}`, {
+                        state: { ...item },
+                      });
+                    }}
+                  >
+                    수정
+                  </PathBtn>
+                  <DelBtn
+                    onClick={() => {
+                      dispatch(__deleteSchedule(item.scId));
+                    }}
+                  >
+                    삭제
+                  </DelBtn>
+                </div>
+              </Info>
+            </InfoBox>
+          ))}
+        </InfoContain>
+      </StWrapDiv>
+    </StOverall>
   );
 }
 
