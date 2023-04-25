@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
 import {
   BoxBtn,
   BoxInput,
@@ -8,68 +7,74 @@ import {
   StBtnBox,
   StDropBox,
 } from './SpaceStyles';
+import {
+  __deleteMultiBox,
+  __editMultiBox,
+} from '../../redux/modules/MultiBoxSlice';
 
-function BoxItem({
-  box,
+function MultiBoxItem({
+  multiBox,
   HandleDrop,
   handleDragOver,
   elRef,
-  boxMouseDownHandler,
+  multiBoxMouseDownHandler,
   handleDragStart,
   spaceId,
 }) {
   const dispatch = useDispatch();
 
-  //box 삭제
-  const onClickDeleteBoxHandler = async boxId => {
+  //multiBox 삭제
+  const onClickDeleteBoxHandler = async multiBoxId => {
     const payload = {
-      boxId,
+      multiBoxId,
       spaceId,
     };
-    dispatch(__deleteBox(payload));
+    dispatch(__deleteMultiBox(payload));
   };
 
-  //box name 수정
-  const [boxEdit, setBoxEdit] = useState(false);
-  const [editBoxName, setEditBoxName] = useState(box.boxName);
+  //multiBox name 수정
+  const [multiBoxEdit, setMultiBoxEdit] = useState(false);
+  const [editMultiBoxName, setEditMultiBoxName] = useState(
+    multiBox.multiBoxName,
+  );
 
   const onEditBoxNameHandler = async () => {
     const payload = {
       spaceId,
-      boxId: box.boxId,
-      boxName: editBoxName,
-      x: box.x,
-      y: box.y,
+      multiBoxId: multiBox.multiBoxId,
+      multiBoxName: editMultiBoxName,
+      x: multiBox.x,
+      y: multiBox.y,
     };
-    dispatch(__editBox(payload));
-    setBoxEdit(!boxEdit);
+    dispatch(__editMultiBox(payload));
+    setMultiBoxEdit(!multiBoxEdit);
   };
 
   return (
     <>
       <StDropBox
-        key={box.boxId}
+        key={multiBox.multiBoxId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
-        ref={el => (elRef.current[box.boxId] = el)}
-        onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
-        onDragStart={e => handleDragStart(e, box.boxId)}
-        style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+        ref={el => (elRef.current[multiBox.multiBoxId] = el)}
+        onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
+        onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
+        style={{ transform: `translate(${multiBox.x}px, ${multiBox.y}px)` }}
       >
-        {!boxEdit ? (
+        {!multiBoxEdit ? (
           <>
-            <div>{box.boxName}</div>
+            <div>{multiBox.multiBoxName}</div>
             <StBtnBox>
               <BoxBtn
                 onClick={() => {
-                  setBoxEdit(!boxEdit);
+                  setMultiBoxEdit(!multiBoxEdit);
                 }}
               >
                 수정
               </BoxBtn>
               <BoxSubBtn
                 onClick={() => {
-                  onClickDeleteBoxHandler(box.boxId);
+                  onClickDeleteBoxHandler(multiBox.multiBoxId);
                 }}
               >
                 삭제
@@ -80,9 +85,9 @@ function BoxItem({
           <>
             <BoxInput
               type="text"
-              value={editBoxName}
+              value={editMultiBoxName}
               onChange={e => {
-                setEditBoxName(e.target.value);
+                setEditMultiBoxName(e.target.value);
               }}
             />
             <StBtnBox>
@@ -95,7 +100,7 @@ function BoxItem({
               </BoxBtn>
               <BoxSubBtn
                 onClick={() => {
-                  setBoxEdit(!boxEdit);
+                  setMultiBoxEdit(!multiBoxEdit);
                 }}
               >
                 취소
@@ -108,4 +113,4 @@ function BoxItem({
   );
 }
 
-export default BoxItem;
+export default MultiBoxItem;

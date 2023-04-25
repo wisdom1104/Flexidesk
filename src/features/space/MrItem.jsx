@@ -5,7 +5,6 @@ import { BoxBtn, BoxInput, BoxSubBtn, StBtnBox, StDropMr } from './SpaceStyles';
 
 function MrItem({
   mr,
-  mrList,
   HandleDrop,
   handleDragOver,
   elRef,

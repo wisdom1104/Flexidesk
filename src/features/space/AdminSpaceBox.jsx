@@ -17,7 +17,11 @@ import {
   SubIcon,
   SubTitle,
 } from './SpaceStyles';
-import { __addMultiBox } from '../../redux/modules/MultiBoxSlice';
+import {
+  __addMultiBox,
+  __editMultiBox,
+} from '../../redux/modules/MultiBoxSlice';
+import MultiBoxItem from './MultiBoxItem';
 
 function AdminSpaceBox({
   spaceId,
@@ -35,7 +39,6 @@ function AdminSpaceBox({
   const navi = useNavigate();
 
   const { space } = useSelector(state => state.space);
-  console.log('space', space);
 
   const [newMrBoxes, setNewMrBoxes] = useState([]);
   const [newBoxes, setNewBoxes] = useState([]);
@@ -65,10 +68,6 @@ function AdminSpaceBox({
     setBoxList(newBoxList);
     setMultiBoxList(newMultiBoxList);
   }, [space]);
-
-  console.log('mrList', mrList[0]);
-  console.log('boxList', boxList[0]);
-  console.log('multiBoxList', multiBoxList[0]);
 
   // 모든 요소 드롭
   const HandleDrop = async e => {
@@ -361,22 +360,21 @@ function AdminSpaceBox({
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    const boxMoveHandler = e => {
-      const currentBox = multiBoxList[0].find(
-        box => box.multiBoxId === boxIndex,
+    const multiBoxMoveHandler = e => {
+      const currentMultiBox = multiBoxList[0].find(
+        multiBox => multiBox.multiBoxId === boxIndex,
       );
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
-      const boxDiffY = mouseY - currentBox.y;
-      const boxDiffX = mouseX - currentBox.x;
+      const mrDiffX = mouseX - currentMultiBox.x;
+      const mrDiffY = mouseY - currentMultiBox.y;
 
-      const newx = newMouseX - boxDiffX;
-      const newy = newMouseY - boxDiffY;
+      const newx = newMouseX - mrDiffX;
+      const newy = newMouseY - mrDiffY;
 
       const boardRect = boardEl.current.getBoundingClientRect();
-
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
 
       const limitedX = Math.max(
@@ -390,27 +388,25 @@ function AdminSpaceBox({
           boardRect.bottom - (boxRect.height + (boardRect.y + 10)),
         ),
       );
-
       const payload = {
         spaceId,
-        boxId: currentBox.boxId,
-        boxName: currentBox.boxName,
+        multiBoxId: currentMultiBox.multiBoxId,
+        multiBoxName: currentMultiBox.multiBoxName,
         x: Number(limitedX),
         y: Number(limitedY),
       };
-      setNewBoxes(prevBoxes => [...prevBoxes, payload]);
+      setNewMultiBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
-
-    const spaceMouseUpHandler = e => {
-      document.removeEventListener('mousemove', boxMoveHandler);
+    const spaceMouseUpHandler = (e, boxIndex) => {
+      document.removeEventListener('mousemove', multiBoxMoveHandler);
       document.removeEventListener('mouseup', spaceMouseUpHandler);
-      const result = boxMoveHandler(e, boxIndex);
-      dispatch(__editBox(result));
-      setNewBoxes([]);
+      const result = multiBoxMoveHandler(e, boxIndex);
+      dispatch(__editMultiBox(result));
+      setNewMultiBoxes([]);
     };
 
-    document.addEventListener('mousemove', boxMoveHandler);
+    document.addEventListener('mousemove', multiBoxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
 
@@ -488,7 +484,6 @@ function AdminSpaceBox({
                   <MrItem
                     key={mr.mrId}
                     mr={mr}
-                    mrList={mrList}
                     HandleDrop={HandleDrop}
                     handleDragOver={handleDragOver}
                     elRef={elRef}
@@ -508,7 +503,6 @@ function AdminSpaceBox({
                   <BoxItem
                     key={box.boxId}
                     box={box}
-                    boxList={boxList}
                     HandleDrop={HandleDrop}
                     handleDragOver={handleDragOver}
                     elRef={elRef}
@@ -525,18 +519,17 @@ function AdminSpaceBox({
           {space?.map(item =>
             item.multiBoxList?.length > 0
               ? item.multiBoxList?.map(multiBox => (
-                  <div>{multiBox.multiBoxName}</div>
-                  // <BoxItem
-                  //   key={box.boxId}
-                  //   box={box}
-                  //   boxList={boxList}
-                  //   HandleDrop={HandleDrop}
-                  //   handleDragOver={handleDragOver}
-                  //   elRef={elRef}
-                  //   boxMouseDownHandler={boxMouseDownHandler}
-                  //   handleDragStart={handleDragStart}
-                  //   spaceId={spaceId}
-                  // />
+                  // <div>{multiBox.multiBoxName}</div>
+                  <MultiBoxItem
+                    key={multiBox.multiBoxId}
+                    multiBox={multiBox}
+                    HandleDrop={HandleDrop}
+                    handleDragOver={handleDragOver}
+                    elRef={elRef}
+                    multiBoxMouseDownHandler={multiBoxMouseDownHandler}
+                    handleDragStart={handleDragStart}
+                    spaceId={spaceId}
+                  />
                 ))
               : null,
           )}
