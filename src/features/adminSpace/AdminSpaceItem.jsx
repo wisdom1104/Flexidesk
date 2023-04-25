@@ -9,9 +9,9 @@ import {
   StList,
   StListBtnBox,
   StListItem,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 
-function SpaceListItem({
+function AdminSpaceItem({
   space,
   onClickSpaceListHandler,
   dispatch,
@@ -113,4 +113,4 @@ function SpaceListItem({
   );
 }
 
-export default SpaceListItem;
+export default AdminSpaceItem;

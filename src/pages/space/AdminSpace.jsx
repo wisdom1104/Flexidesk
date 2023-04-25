@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
-import AdminSpaceBox from '../../features/space/AdminSpaceBox';
+import AdminSpaceBox from '../../features/adminSpace/AdminSpaceBox';
+
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
-import CreateSpace from '../../features/space/CreateSpace';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 import {
   StBoard,
@@ -16,8 +16,9 @@ import {
   StSubBtn,
   StSubHeader,
   Stmainspace,
-} from '../../features/space/SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
+import AdminList from '../../features/adminSpace/AdminList';
 
 function AdminSpace() {
   const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
@@ -78,7 +79,7 @@ function AdminSpace() {
   return (
     <StSpace>
       {/* 리스트 영역 */}
-      <CreateSpace
+      <AdminList
         isModal={isModal}
         setIsModal={setIsModal}
         spaces={spaces}

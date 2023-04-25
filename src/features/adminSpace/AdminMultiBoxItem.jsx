@@ -6,13 +6,13 @@ import {
   BoxSubBtn,
   StBtnBox,
   StDropBox,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 import {
   __deleteMultiBox,
   __editMultiBox,
 } from '../../redux/modules/MultiBoxSlice';
 
-function MultiBoxItem({
+function AdminMultiBoxItem({
   multiBox,
   HandleDrop,
   handleDragOver,
@@ -113,4 +113,4 @@ function MultiBoxItem({
   );
 }
 
-export default MultiBoxItem;
+export default AdminMultiBoxItem;

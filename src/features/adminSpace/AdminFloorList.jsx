@@ -1,7 +1,7 @@
 import React from 'react';
-import FloorItem from './FloorItem';
+import AdminFloorItem from './AdminFloorItem';
 
-function FloorList({
+function AdminFloorList({
   floors,
   onClickSpaceListHandler,
   dispatch,
@@ -15,7 +15,7 @@ function FloorList({
       {floors?.map(floor => {
         if (floor)
           return (
-            <FloorItem
+            <AdminFloorItem
               key={floor.floorId}
               floor={floor}
               onClickSpaceListHandler={onClickSpaceListHandler}
@@ -31,4 +31,4 @@ function FloorList({
   );
 }
 
-export default FloorList;
+export default AdminFloorList;

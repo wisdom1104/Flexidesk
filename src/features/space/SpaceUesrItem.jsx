@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, StUseBox, StUser } from './SpaceStyles';
+import { Box, StUseBox, StUser } from '../../shared/SpaceStyles';
 
 function SpaceUesrItem({ box, onClickMoveUserHandler, isClicked }) {
   return (

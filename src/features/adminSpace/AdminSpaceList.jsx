@@ -1,7 +1,7 @@
 import React from 'react';
-import SpaceListItem from './SpaceListItem';
+import AdminSpaceItem from './AdminSpaceItem';
 
-function SpaceList({
+function AdminSpaceList({
   spaces,
   onClickSpaceListHandler,
   dispatch,
@@ -15,7 +15,7 @@ function SpaceList({
       {spaces?.map(space => {
         if (space && space.floorId === null)
           return (
-            <SpaceListItem
+            <AdminSpaceItem
               key={space.spaceId}
               space={space}
               onClickSpaceListHandler={onClickSpaceListHandler}
@@ -32,4 +32,4 @@ function SpaceList({
   );
 }
 
-export default SpaceList;
+export default AdminSpaceList;

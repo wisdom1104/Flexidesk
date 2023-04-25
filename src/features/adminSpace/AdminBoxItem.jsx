@@ -7,9 +7,9 @@ import {
   BoxSubBtn,
   StBtnBox,
   StDropBox,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 
-function BoxItem({
+function AdminBoxItem({
   box,
   HandleDrop,
   handleDragOver,
@@ -108,4 +108,4 @@ function BoxItem({
   );
 }
 
-export default BoxItem;
+export default AdminBoxItem;

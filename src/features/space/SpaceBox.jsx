@@ -22,7 +22,7 @@ import {
   Stmainspace,
   SubIcon,
   SubTitle,
-} from './SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
 import SpaceBoxItem from './SpaceBoxItem';
 import SpaceUesrItem from './SpaceUesrItem';
@@ -92,6 +92,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
           ) : null}
         </Row>
       </StSubHeader>
+      {/* space board 부분 */}
       <StBoard>
         {moveBox !== null && isModal ? (
           <>
@@ -146,8 +147,8 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 박스 */}
         <div>
           {space?.map(item =>
-            item.boxlist?.length > 0
-              ? item.boxlist.map(box => {
+            item.boxList?.length > 0
+              ? item.boxList.map(box => {
                   if (box.username !== null)
                     return (
                       <SpaceUesrItem
@@ -171,8 +172,8 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 회의실 */}
         <div>
           {space?.map(item =>
-            item.mrlist?.length > 0
-              ? item.mrlist.map(mr => (
+            item.mrList?.length > 0
+              ? item.mrList.map(mr => (
                   <StMr
                     key={mr.mrId}
                     style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}

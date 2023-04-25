@@ -19,7 +19,7 @@ import {
   StSpaceList,
   StSubHeader,
   Stmainspace,
-} from '../../features/space/SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 
 function Space() {
