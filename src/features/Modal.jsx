@@ -5,7 +5,7 @@ import {
   MoveModalSubbtn,
   MoveModalTitle,
   MoveModalbtn,
-} from '../features/space/SpaceStyles';
+} from '../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
 import { isLoginActions } from '../redux/modules/loginSlice';
 import { useNavigate } from 'react-router-dom';

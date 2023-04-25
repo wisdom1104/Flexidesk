@@ -9,9 +9,8 @@ import {
   MoveModalSubbtn,
   MoveModalTitle,
   MoveModalbtn,
-} from '../features/space/SpaceStyles';
+} from '../shared/SpaceStyles';
 import { DropdownButton, DropdownContent, DropdownItem, DropdownMenu } from "../pages/user/UserStyled";
-
 
 const SelectModal = ({ setIsModal, role }) => {
   const choose = (e) => {
@@ -26,9 +25,6 @@ const SelectModal = ({ setIsModal, role }) => {
     setIsModal(false);
   };
 
-  const openModal = () => {
-    setIsModal(true);
-  };
 
   return (
     <ModalFullBackground>

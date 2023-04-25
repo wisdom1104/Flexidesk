@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SelectModal from '../../features/SelectModal';
 import { CommentBox } from '../Reservation/CalendarStyled';
 
 function ManagementChange({
   item,
-  openModal,
-  isModal,
-  setIsModal,
-  selectedUserId,
   allManagementId,
-  userId
 })
 
 {
+  //모달이 컴포넌트 안에 있어야 될듯
+  const [isModal, setIsModal] = useState(false);
+
+  const openModal = () => {
+    setIsModal(true);
+  };
 
   return (
     <>
@@ -21,9 +22,10 @@ function ManagementChange({
 
       <button onClick={() => openModal(allManagementId)}>직급 수정</button>
 {/* 모달이 열릴때의 조건 = userId가 allManagementId 랑 같을때 */}
-      {isModal && userId === allManagementId && (
-        <SelectModal setIsModal={setIsModal} role={item.role}></SelectModal>
-      )}
+      {isModal ? (
+        <SelectModal setIsModal={setIsModal} role={item.role}></SelectModal> 
+      ): null
+    }
 
       <button>인원 삭제</button>
       </CommentBox>

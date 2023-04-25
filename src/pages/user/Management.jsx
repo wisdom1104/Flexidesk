@@ -16,22 +16,8 @@ import ManagementChange from './ManagementChange';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-  
 
   /////////////////////test/////////////////////////////////////
-  //현재 선택된 사용자의 ID를 저장
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  console.log('selectedUserId',selectedUserId);
-
-  const { userId } = useParams();
-  console.log('userId', userId);
-
-  useEffect(() => {
-    if (userId) {
-      openModal(userId);
-    }
-  }, [userId]);
-
   // const handleRoleUpdate = (userId) => {
   //   const updatedUserList = [...userList];
   //   const updatedUser = updatedUserList.find((user) => user.allManagementId === userId);
@@ -40,12 +26,6 @@ function Management() {
   // };
   /////////////////////test/////////////////////////////////////
 
-  const [isModal, setIsModal] = useState(false);
-
-  const openModal = () => {
-    setSelectedUserId();
-    setIsModal(true);
-  };
 
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -67,11 +47,9 @@ function Management() {
 
   return (
     <>
-      <StBackground>
         <StOverall>
           <StWrapDiv>
-            <StSmallFont>사용자 관리</StSmallFont>
-
+                <StSmallFont align='start'>사용자 관리</StSmallFont>
             <InfoContain>
               {userList.map(item => (
                 <InfoBox key={item.allManagementId}>
@@ -90,12 +68,7 @@ function Management() {
                   
                   <ManagementChange 
                   item={item}
-                  openModal={openModal}
-                  isModal={isModal}
-                  setIsModal={setIsModal}
-                  selectedUserId={selectedUserId}
                   allManagementId={item.allManagementId}
-                  userId={userId}
                   />
 
                   </Info>
@@ -104,7 +77,6 @@ function Management() {
             </InfoContain>
           </StWrapDiv>
         </StOverall>
-      </StBackground>
     </>
   );
 }
