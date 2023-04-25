@@ -21,7 +21,6 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
-import LoginModal from '../../features/LoginModal';
 
 function Login() {
   const [user, setUser] = useSignUp({
@@ -142,7 +141,7 @@ function Login() {
                 <StSmallFont
                   width="420px"
                   align="start"
-                  fontSize="0.875rem"
+                  fontSize="0.87rem"
                   weight="400"
                   color="red"
                 >

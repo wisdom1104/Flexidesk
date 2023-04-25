@@ -15,6 +15,7 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
+
 `;
 
 export const StLoginForm = styled.form`
@@ -116,10 +117,10 @@ export const StLoginIcon = styled.img`
 
 export const StLink = styled(Link)`
 width: 90px;
-height: 15px;
+margin-top: 10px;
 
 font-weight: 400;
-font-size: 12px;
+font-size: 14px;
 line-height: 14px;
 text-align: end;
 

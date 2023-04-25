@@ -21,7 +21,6 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  /* border: 1px solid red; */
 `;
 
 export const StWrapDiv = styled.div`

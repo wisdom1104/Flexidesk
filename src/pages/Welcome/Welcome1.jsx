@@ -20,9 +20,7 @@ function Welcome1() {
       <StGradationBackground id="signup">
         <StOverall>
           <StWrapDiv>
-            <StIntroDiv 
-            // marginTop='100px'
-            >
+            <StIntroDiv>
               <div
                 style={{
                   width: '35vw',
@@ -65,7 +63,7 @@ function Welcome1() {
               {/* 도형 자리 */}
               <div
                 style={{
-                  width: '40vw',
+                  width: '30vw',
                   height: '40vh',
                   display: 'inline-block',
                 }}
@@ -75,14 +73,9 @@ function Welcome1() {
             </StIntroDiv>
           </StWrapDiv>
         </StOverall>
-        <div
-          style={{
-            marginTop: '-450px',
-          }}
-        >
-          <Welcome2 />
-        </div>
-      </StGradationBackground>
+      <Welcome2 />
+      </StGradationBackground>          
+
     </>
   );
 }
