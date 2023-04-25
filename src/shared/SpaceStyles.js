@@ -192,37 +192,6 @@ export const StBoard = styled.div`
   margin: auto;
 `;
 
-// 회의실
-export const StMr = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  position: absolute;
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
-
 // 박스
 export const StBox = styled.div`
   //글자
@@ -254,7 +223,8 @@ export const StBox = styled.div`
   }
 `;
 
-export const Box = styled.div`
+//선택된 박스
+export const ClickedBox = styled.div`
   //글자
   font-family: 'Inter';
   font-style: normal;

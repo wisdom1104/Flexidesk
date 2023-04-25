@@ -35,6 +35,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
   const role = cookies.get('role');
 
   const { space } = useSelector(state => state.space);
+  console.log('space', space);
 
   useEffect(() => {
     dispatch(__getSpace(spaceId));
@@ -51,9 +52,10 @@ function SpaceBox({ spaceId, selectedSpace }) {
     setClicked(box.boxId);
   };
   const MoveUser = moveBox => {
+    // console.log('moveBox', moveBox);
     const payload = {
       spaceId,
-      toBoxId: moveBox.boxId,
+      locationId: moveBox.boxId,
       boxName: moveBox.boxName,
       x: moveBox.x,
       y: moveBox.y,
@@ -145,46 +147,59 @@ function SpaceBox({ spaceId, selectedSpace }) {
           </>
         ) : null}
         {/* 박스 */}
-        <div>
-          {space?.map(item =>
-            item.boxList?.length > 0
-              ? item.boxList.map(box => {
-                  if (box.username !== null)
-                    return (
-                      <SpaceUesrItem
-                        box={box}
-                        onClickMoveUserHandler={onClickMoveUserHandler}
-                        isClicked={isClicked}
-                      />
-                    );
-                  if (box.username === null)
-                    return (
-                      <SpaceBoxItem
-                        box={box}
-                        onClickMoveUserHandler={onClickMoveUserHandler}
-                        isClicked={isClicked}
-                      />
-                    );
-                })
-              : null,
-          )}
-        </div>
+        {space?.map(item =>
+          item.boxList?.length > 0
+            ? item.boxList.map(box => {
+                if (box.username !== null)
+                  return (
+                    <SpaceUesrItem
+                      key={box.boxId}
+                      box={box}
+                      onClickMoveUserHandler={onClickMoveUserHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+                if (box.username === null)
+                  return (
+                    <SpaceBoxItem
+                      key={box.boxId}
+                      box={box}
+                      onClickMoveUserHandler={onClickMoveUserHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+              })
+            : null,
+        )}
         {/* 회의실 */}
-        <div>
-          {space?.map(item =>
-            item.mrList?.length > 0
-              ? item.mrList.map(mr => (
-                  <StMr
-                    key={mr.mrId}
-                    style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
-                    onClick={() => navi(`/calender/${mr.mrId}`)}
-                  >
-                    <div>{mr.mrName}</div>
-                  </StMr>
-                ))
-              : null,
-          )}
-        </div>
+        {space?.map(item =>
+          item.mrList?.length > 0
+            ? item.mrList.map(mr => (
+                <StBox
+                  key={mr.mrId}
+                  style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
+                  onClick={() => navi(`/calender/${mr.mrId}`)}
+                >
+                  <div>{mr.mrName}</div>
+                </StBox>
+              ))
+            : null,
+        )}
+        {/* 공용공간 */}
+        {space?.map(item =>
+          item.multiBoxList?.length > 0
+            ? item.multiBoxList.map(multiBox => (
+                <StBox
+                  key={multiBox.multiBoxId}
+                  style={{
+                    transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
+                  }}
+                >
+                  <div>{multiBox.multiBoxName}</div>
+                </StBox>
+              ))
+            : null,
+        )}
       </StBoard>
     </Stmainspace>
   );

@@ -130,7 +130,6 @@ function Space() {
       {/* 보더 영역 */}
       {spaces.length > 0 ? (
         <>
-          {' '}
           {selectedSpace && (
             <SpaceBox
               spaceId={selectedSpace.spaceId}
