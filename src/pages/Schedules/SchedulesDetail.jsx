@@ -58,7 +58,7 @@ function SchedulesDetail() {
               </CommentBox>
               <CommentBox>
                 <ComFont>종료시간</ComFont>
-                <div>{item.scEnd.split('T')[1]}</div>,
+                <div>{item.scEnd.split('T')[1]}</div>
               </CommentBox>
               <div>
                 <PathBtn

@@ -1,4 +1,3 @@
-import { addMonths, subMonths } from 'date-fns';
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -82,6 +81,7 @@ function ReservationTime({ param, selectDay }) {
     } else {
       dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
     }
+    setClickReservation([]);
   }, [selectDay]);
 
   return (

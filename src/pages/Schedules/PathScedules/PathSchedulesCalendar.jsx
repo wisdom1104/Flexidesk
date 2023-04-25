@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
 import { useLocation, useParams } from 'react-router-dom';
 import PathSchedulesTime from './PathSchedulesTime';
 import {

@@ -85,7 +85,7 @@ const Calendar = () => {
               value={`${selectYear}-${selectMonth
                 .toString()
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
-              style={{ backgroundColor: isSelected ? 'yellow' : 'white' }}
+              style={{ backgroundColor: isSelected ? 'Pink' : 'white' }}
             >
               {i + 1}
             </StDate>,
