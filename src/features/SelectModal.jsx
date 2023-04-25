@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { HiChevronDown } from "react-icons/hi2";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
   MoveModal,
@@ -9,12 +9,16 @@ import {
   MoveModalSubbtn,
   MoveModalTitle,
   MoveModalbtn,
-} from '../features/space/SpaceStyles';
-import { DropdownButton, DropdownContent, DropdownItem, DropdownMenu } from "../pages/user/UserStyled";
-
+} from '../shared/SpaceStyles';
+import {
+  DropdownButton,
+  DropdownContent,
+  DropdownItem,
+  DropdownMenu,
+} from '../pages/user/UserStyled';
 
 const SelectModal = ({ setIsModal, role }) => {
-  const choose = (e) => {
+  const choose = e => {
     setFav(e.target.value);
     setList(false);
   };
@@ -22,7 +26,7 @@ const SelectModal = ({ setIsModal, role }) => {
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
 
-    const closeModal = () => {
+  const closeModal = () => {
     setIsModal(false);
   };
 
@@ -33,44 +37,49 @@ const SelectModal = ({ setIsModal, role }) => {
   return (
     <ModalFullBackground>
       <MoveModal>
-        <MoveModalSubTitle width='65px'>권한수정</MoveModalSubTitle> <br />
-    <DropdownMenu>
-      <DropdownButton onClick={(e) => setList((pre) => !pre)}>
-        <div>{fav}</div>
-        <HiChevronDown/>
-      </DropdownButton>
-      {list ? (
-        <DropdownContent>
-          <DropdownItem onClick={choose} value="ADMIN">
-          ADMIN
-          </DropdownItem>
-          <DropdownItem onClick={choose} value="MANAGER"
-          borderRadius='0'
-          >
-          MANAGER
-          </DropdownItem>
-          <DropdownItem onClick={choose} value="USER"
-          borderRadius='0 0 8px 8px'
-          >
-          USER
-          </DropdownItem>
-        </DropdownContent>
-      ) : null}
-    </DropdownMenu>
-    <MoveModalSubbtn onClick={closeModal}
-    width='80px'
-    height='33px'
-    left= '18px'
-    top= '130px'
-    >수정하기</MoveModalSubbtn>
-
-    <MoveModalbtn onClick={closeModal}
-    width='80px'
-    height='33px'
-    left= '100px'
-    top= '130px'>닫기</MoveModalbtn>
-
-    </MoveModal>
+        <MoveModalSubTitle width="65px">권한수정</MoveModalSubTitle> <br />
+        <DropdownMenu>
+          <DropdownButton onClick={e => setList(pre => !pre)}>
+            <div>{fav}</div>
+            <HiChevronDown />
+          </DropdownButton>
+          {list ? (
+            <DropdownContent>
+              <DropdownItem onClick={choose} value="ADMIN">
+                ADMIN
+              </DropdownItem>
+              <DropdownItem onClick={choose} value="MANAGER" borderRadius="0">
+                MANAGER
+              </DropdownItem>
+              <DropdownItem
+                onClick={choose}
+                value="USER"
+                borderRadius="0 0 8px 8px"
+              >
+                USER
+              </DropdownItem>
+            </DropdownContent>
+          ) : null}
+        </DropdownMenu>
+        <MoveModalSubbtn
+          onClick={closeModal}
+          width="80px"
+          height="33px"
+          left="18px"
+          top="130px"
+        >
+          수정하기
+        </MoveModalSubbtn>
+        <MoveModalbtn
+          onClick={closeModal}
+          width="80px"
+          height="33px"
+          left="100px"
+          top="130px"
+        >
+          닫기
+        </MoveModalbtn>
+      </MoveModal>
     </ModalFullBackground>
   );
 };

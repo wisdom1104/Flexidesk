@@ -250,7 +250,7 @@ export const ClickedBox = styled.div`
 `;
 
 // 유저 있는 박스
-export const StUseBox = styled.div`
+export const StUserBox = styled.div`
   //글자
   font-family: 'Inter';
   font-style: normal;
@@ -379,38 +379,6 @@ export const StSubBtn = styled.button`
   }
 `;
 
-// 회의실
-export const StDropMr = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  position: absolute;
-  background: #f1f2f4;
-  /* background: #fab8de; */
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
-
 // 박스
 export const StDropBox = styled.div`
   //글자
@@ -436,6 +404,7 @@ export const StDropBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  transform: ${props => props.transformValue};
   &:hover {
     background: #ffffff;
     border: 1px solid #8b93a6;
@@ -527,6 +496,7 @@ export const StDrag = styled.div`
   cursor: grab;
   position: absolute;
   cursor: pointer;
+  transform: ${props => props.transformValue};
 `;
 
 export const BoxInput = styled.input`
@@ -836,7 +806,7 @@ export const ModalFullBackground = styled.div`
   margin: auto;
 
   border: 1px solid red;
-`
+`;
 
 export const MoveModal = styled.div`
   position: absolute;

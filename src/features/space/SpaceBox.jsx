@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getSpace } from '../../redux/modules/spaceSlice';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import { __editBox, __editBoxUser } from '../../redux/modules/spaceBoxSlice';
+import { __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 import {
   MoveModal,
   MoveModalBackground,
@@ -15,10 +15,7 @@ import {
   StBoard,
   StBox,
   StBtn,
-  StMr,
   StSubHeader,
-  StUseBox,
-  StUser,
   Stmainspace,
   SubIcon,
   SubTitle,
@@ -26,6 +23,9 @@ import {
 import { Row } from '../../components/Flex';
 import SpaceBoxItem from './SpaceBoxItem';
 import SpaceUesrItem from './SpaceUesrItem';
+import SpaceMultiUesrItem from './SpaceMultiUesrItem';
+import SpaceMultiBoxItem from './SpaceMultiBoxItem';
+import SpaceMrItem from './SpaceMrItem';
 
 function SpaceBox({ spaceId, selectedSpace }) {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
   const role = cookies.get('role');
 
   const { space } = useSelector(state => state.space);
-  console.log('space', space);
+  // console.log('space', space);
 
   useEffect(() => {
     dispatch(__getSpace(spaceId));
@@ -174,30 +174,32 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 회의실 */}
         {space?.map(item =>
           item.mrList?.length > 0
-            ? item.mrList.map(mr => (
-                <StBox
-                  key={mr.mrId}
-                  style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
-                  onClick={() => navi(`/calender/${mr.mrId}`)}
-                >
-                  <div>{mr.mrName}</div>
-                </StBox>
-              ))
+            ? item.mrList.map(mr => <SpaceMrItem mr={mr} navi={navi} />)
             : null,
         )}
         {/* 공용공간 */}
         {space?.map(item =>
           item.multiBoxList?.length > 0
-            ? item.multiBoxList.map(multiBox => (
-                <StBox
-                  key={multiBox.multiBoxId}
-                  style={{
-                    transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-                  }}
-                >
-                  <div>{multiBox.multiBoxName}</div>
-                </StBox>
-              ))
+            ? item.multiBoxList.map(multiBox => {
+                if (multiBox.username !== null)
+                  return (
+                    <SpaceMultiUesrItem
+                      key={multiBox.multiBoxId}
+                      multiBox={multiBox}
+                      onClickMoveUserHandler={onClickMoveUserHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+                if (multiBox.username === null)
+                  return (
+                    <SpaceMultiBoxItem
+                      key={multiBox.multiBoxId}
+                      multiBox={multiBox}
+                      onClickMoveUserHandler={onClickMoveUserHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+              })
             : null,
         )}
       </StBoard>
