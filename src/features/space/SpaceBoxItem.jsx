@@ -29,7 +29,7 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
           }}
         >
           <div>{box.boxName}</div>
-          <div>{box.boxId}</div>
+          {/* <div>{box.boxId}</div> */}
         </StBox>
       )}
     </>

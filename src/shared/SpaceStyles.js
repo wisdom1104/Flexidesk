@@ -801,17 +801,13 @@ export const ModalFullBackground = styled.div`
   height: 100%;
   min-width: 100%;
   max-width: 990px;
-
   border-radius: 8px;
   margin: auto;
-
   border: 1px solid red;
 `;
 
 export const MoveModal = styled.div`
   position: absolute;
-  /* top: 134px; */
-  /* left: 802px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -820,8 +816,8 @@ export const MoveModal = styled.div`
   box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25);
   border-radius: 8px;
   padding: 2px;
-  width: 188px;
-  height: 174px;
+  width: ${props => props.width || '188px'};
+  height: ${props => props.height || '174px'};
 `;
 export const MoveModalSubTitle = styled.div`
   position: absolute;
@@ -955,4 +951,54 @@ export const MoveModalErrorbtn = styled.button`
     background: #4a8e8b;
     color: #def1ef;
   }
+`;
+
+export const MoveModalList = styled.div`
+  /* background-color: steelblue; */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 16px;
+  top: 108px;
+  margin-left: 10px;
+  padding: 10px 0px;
+  width: 140px;
+  height: 80px;
+  gap: 5px;
+  overflow: scroll;
+  overflow-x: hidden;
+  border-top: 1px solid #f1f2f4;
+  border-bottom: 1px solid #f1f2f4;
+  /* 스크롤바 스타일 변경 */
+  ::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+  }
+
+  /* 스크롤바 썸네일 스타일 변경 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #b6dfdd;
+    border-radius: 50px; /* 스크롤바 모양 */
+  }
+`;
+
+export const MoveModalItem = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #5c6373;
+`;
+
+export const ListDot = styled.div`
+  width: 4px;
+  height: 4px;
+  margin: 0px 10px;
+  margin-left: 20px;
+  background: #5c6373;
 `;

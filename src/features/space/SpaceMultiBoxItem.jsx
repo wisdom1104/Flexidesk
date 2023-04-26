@@ -29,6 +29,7 @@ function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
           }}
         >
           <div>{multiBox.multiBoxName}</div>
+          {/* <div>{multiBox.multiBoxId}</div> */}
         </StBox>
       )}
     </>

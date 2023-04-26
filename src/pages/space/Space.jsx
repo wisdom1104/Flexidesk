@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
-import useFalseHook from '../../hooks/useFalseHook';
 import { Column, Row } from '../../components/Flex';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +37,6 @@ function Space() {
   useEffect(() => {
     if (token === undefined) {
       navi('/');
-      // navi('/login');
     } else {
       dispatch(__getFloors());
       dispatch(__getSpaces());
@@ -59,32 +57,11 @@ function Space() {
     setClickedSpaceId(spaceId);
   };
 
-  const [days, setDays] = useState('');
-  const [time, setTime] = useState('');
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     const date = new Date();
-  //     const year = String(date.getFullYear()).padStart(2, '0');
-  //     const month = String(date.getMonth()).padStart(2, '0');
-  //     const day = String(date.getDate()).padStart(2, '0');
-  //     const hours = String(date.getHours()).padStart(2, '0');
-  //     const minutes = String(date.getMinutes()).padStart(2, '0');
-  //     const seconds = String(date.getSeconds()).padStart(2, '0');
-  //     setTime(`${hours}:${minutes}:${seconds}`);
-  //     setDays(`${year}년${month}월${day}일`);
-  //   }, 1000);
-  //   // 컴포넌트 언마운트 시 interval clear
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
   return (
     <StSpace>
       {/* <Row> */}
       {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
-        <div style={{ margin: '0px 20px' }}>{days}</div>
-        <div style={{ margin: '0px 20px' }}>{time}</div>
         <StListTitle>스페이스</StListTitle>
         <StListbox>
           <StSpaceList>

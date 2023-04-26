@@ -30,6 +30,7 @@ function SpaceUesrItem({ box, onClickMoveUserHandler, isClicked }) {
           }}
         >
           <div>{box.boxName}</div>
+          {/* <div>{box.boxId}</div> */}
           <StUser>{box.username}</StUser>
         </StUserBox>
       )}

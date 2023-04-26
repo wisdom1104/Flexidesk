@@ -30,7 +30,10 @@ function SpaceMultiUesrItem({ multiBox, onClickMoveUserHandler, isClicked }) {
           }}
         >
           <div>{multiBox.multiBoxName}</div>
-          <StUser>{multiBox.username}</StUser>
+          {/* <div>{multiBox.multiBoxId}</div> */}
+          <div>
+            {multiBox.userlist[0].username}외 {multiBox.userlist.length - 1}명
+          </div>
         </StUserBox>
       )}
     </>

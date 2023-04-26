@@ -3,58 +3,48 @@ import { StBox } from '../../shared/SpaceStyles';
 
 function SpaceMrItem({ mr, navi }) {
   const start = mr.reservationList?.map(reservation => reservation.start);
-  const end = mr.reservationList?.map(reservation => reservation.end);
-  const tagetTime = '13';
-  const tagetDays = '2023-04-25';
 
   let startTime = '';
   if (start.length > 0) {
     const startTimes = start.map(time => time.split('T')[1]);
     startTime = startTimes.map(time => time.split(':')[0]);
-    // console.log(`시작시간 ${startTime}`);
   }
-  // console.log('startTime', startTime);
 
   let startDays = '';
   if (start.length > 0) {
     startDays = start.map(time => time.split('T')[0]);
-    // console.log(`시작일 ${startDays}`);
   }
-  // console.log('startDays', startDays);
-
-  if (startDays === tagetDays) {
-    console.log('11');
-  } else {
-    console.log('22');
-    console.log('3', tagetDays, startDays);
-    // console.log('tagetDays', tagetDays);
-  }
-  // console.log('startDays', startDays);
 
   const [days, setDays] = useState('');
   const [time, setTime] = useState('');
-
+  const tagetTime = time.split(':')[0];
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      const date = new Date();
-      const year = String(date.getFullYear()).padStart(2, '0');
-      const month = String(date.getMonth()).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hours = String(date.getHours()).padStart(2, '0');
-      setTime(`${hours}`);
-      setDays(`${year}-${month}-${day}`);
-    }, 60000);
+    const intervalId = setInterval(
+      () => {
+        const date = new Date();
+        const year = String(date.getFullYear());
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        setTime(`${hours}:${minutes}:${seconds}`);
+        setDays(`${year}-${month}-${day}`);
+      },
+      time === '' && days === '' ? 1 : 60000,
+    );
     // 컴포넌트 언마운트 시 interval clear
     return () => clearInterval(intervalId);
-  }, []);
+  }, [days, time]);
   console.log('days', days);
-  console.log('time', time);
+  console.log('tagetTime', tagetTime);
+
   return (
     <>
       {startTime.length > 0 ? (
         <>
           {startDays.map(item =>
-            item === tagetDays ? (
+            item === days ? (
               <>
                 {startTime.map(timeItem => (
                   <>
@@ -79,7 +69,7 @@ function SpaceMrItem({ mr, navi }) {
                         style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                         onClick={() => navi(`/calender/${mr.mrId}`)}
                       >
-                        <div>1{mr.mrName}</div>
+                        <div>{mr.mrName}</div>
                       </StBox>
                     )}
                   </>
@@ -91,7 +81,7 @@ function SpaceMrItem({ mr, navi }) {
                 style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                 onClick={() => navi(`/calender/${mr.mrId}`)}
               >
-                <div>2{mr.mrName}</div>
+                <div>{mr.mrName}</div>
               </StBox>
             ),
           )}
@@ -102,7 +92,7 @@ function SpaceMrItem({ mr, navi }) {
           style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
           onClick={() => navi(`/calender/${mr.mrId}`)}
         >
-          <div>3{mr.mrName}</div>
+          <div>{mr.mrName}</div>
         </StBox>
       )}
     </>
