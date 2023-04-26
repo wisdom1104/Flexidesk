@@ -67,7 +67,7 @@ export const __getUserData=createAsyncThunk(
       }
     })
     console.log(userData.data.data)
-    return thunk.fulfillWithValue(userData.data.data[0].username)
+    return thunk.fulfillWithValue(userData.data.data)
     }catch(error){
       return thunk.rejectWithValue(error)
     }
