@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import SelectModal from '../../features/SelectModal';
-import { CommentBox, DelBtn, PathBtn } from '../Reservation/CalendarStyled';
+import { CommentBox } from '../Reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
+import { useDispatch } from 'react-redux';
+import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
+import { cookies } from '../../shared/cookies';
 
-function ManagementChange({ item, allManagementId }) {
+function ManagementChange({ item }) {
   //모달이 컴포넌트 안에 있어야 함
   const [isModal, setIsModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setIsModal(true);
   };
+
+    //삭제
+    // const onClickDeleteHandler = async userId => {
+    //   dispatch(__deleteAllManagement(userId));
+    // };
 
   return (
     <>
@@ -23,7 +33,7 @@ function ManagementChange({ item, allManagementId }) {
           gap: '10px'
         }}>
           <MoveModalSubbtn
-            onClick={() => openModal(allManagementId)}
+            onClick={openModal}
             width="84px"
             height="35px"
             left="18px"
@@ -35,10 +45,13 @@ function ManagementChange({ item, allManagementId }) {
           </MoveModalSubbtn>
 
           {isModal ? (
-            <SelectModal setIsModal={setIsModal} role={item.role}></SelectModal>
+            <SelectModal setIsModal={setIsModal} role={item.role} userId={item.userId} ></SelectModal>
           ) : null}
 
           <MoveModalbtn
+            onClick={()=>{
+              dispatch(__deleteAllManagement(item.userId))
+            }}
             width="84px"
             height="35px"
             left="100px"

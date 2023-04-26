@@ -57,7 +57,7 @@ function Management() {
           
             <InfoContain>
               {userList.map(item => (
-                <InfoBox key={item.allManagementId} height='16vw' >
+                <InfoBox key={item.userId} height='16vw' >
                   <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
                   <Info>
                     <CommentBox>
@@ -72,7 +72,7 @@ function Management() {
                   
                   <ManagementChange 
                   item={item}
-                  allManagementId={item.allManagementId}
+                  // allManagementId={item.allManagementId}
                   />
 
                   </Info>

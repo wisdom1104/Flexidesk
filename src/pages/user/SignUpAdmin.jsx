@@ -61,7 +61,7 @@ function SignUpAdmin() {
 
     try {
       const response = await api.post('/users/signup/admin', admin);
-      console.log('response',response)
+      console.log('Admin response',response)
       alert(`${admin.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;

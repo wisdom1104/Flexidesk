@@ -14,8 +14,10 @@ import {
   DropdownItem,
   DropdownMenu,
 } from '../pages/user/UserStyled';
+import { useDispatch } from 'react-redux';
+import { __patchAllManagement } from '../redux/modules/allManagementSlice';
 
-const SelectModal = ({ setIsModal, role }) => {
+const SelectModal = ({ setIsModal, role ,userId}) => {
   const choose = e => {
     setFav(e.target.value);
     setList(false);
@@ -23,6 +25,14 @@ const SelectModal = ({ setIsModal, role }) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
+  console.log('role',fav);
+  const dispatch = useDispatch();
+
+  // const fetchButtonHandelr = (userId) =>{
+  //   setIsModal(false);
+
+  //     dispatch(__patchAllManagement(userId));
+  //   };
 
   const closeModal = () => {
     setIsModal(false);
@@ -42,9 +52,7 @@ const SelectModal = ({ setIsModal, role }) => {
               <DropdownItem onClick={choose} value="ADMIN">
                 ADMIN
               </DropdownItem>
-              {/* <DropdownItem onClick={choose} value="MANAGER" borderRadius="0">
-                MANAGER
-              </DropdownItem> */}
+              
               <DropdownItem
                 onClick={choose}
                 value="USER"
@@ -56,7 +64,9 @@ const SelectModal = ({ setIsModal, role }) => {
           ) : null}
         </DropdownMenu>
         <MoveModalSubbtn
-          onClick={closeModal}
+          onClick={()=>{
+            dispatch(__patchAllManagement(userId))
+          }}
           width="80px"
           height="35px"
           left="18px"
