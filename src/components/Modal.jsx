@@ -6,36 +6,32 @@ import {
   MoveModalTitle,
   MoveModalbtn,
 } from '../shared/SpaceStyles';
-import { useDispatch } from 'react-redux';
-import { isLoginActions } from '../redux/modules/loginSlice';
+
 import { useNavigate } from 'react-router-dom';
 
 
-function Modal({ setIsModal }) {
+function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
 
-    const dispatch = useDispatch();
     const navi = useNavigate();
 
     const closeModal = () => {
         setIsModal(false);
       };
 
-    const openModal = () => {
-        setIsModal(true);
-      };
+      const handleButtonClick  = () => {
+        onButtonClick();
+        navi(redirectPath);
+        closeModal();
+    };
 
   return (
     <ModalFullBackground>
       <MoveModal>
-        <MoveModalTitle>로그아웃 <br/> 하시겠습니까?</MoveModalTitle>
+        <MoveModalTitle>{modalTitle}</MoveModalTitle>
         
         <MoveModalbtn
-          onClick={() => {
-            dispatch(isLoginActions.logout());
-            navi('/')
-            closeModal();
-          }}
-
+          onClick={handleButtonClick}
+          
           width='75px'
           height= '33px'
           left='16px'

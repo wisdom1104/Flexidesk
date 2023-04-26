@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import SelectModal from '../../features/SelectModal';
 import { CommentBox } from '../Reservation/CalendarStyled';
-import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
+import {  MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
-import { cookies } from '../../shared/cookies';
+import Modal from '../../components/Modal';
 
 function ManagementChange({ item }) {
   //모달이 컴포넌트 안에 있어야 함
@@ -16,10 +16,9 @@ function ManagementChange({ item }) {
     setIsModal(true);
   };
 
-    //삭제
-    // const onClickDeleteHandler = async userId => {
-    //   dispatch(__deleteAllManagement(userId));
-    // };
+  const handleLogout = () => {
+    dispatch(__deleteAllManagement(item.userId));
+  };
 
   return (
     <>
@@ -49,9 +48,8 @@ function ManagementChange({ item }) {
           ) : null}
 
           <MoveModalbtn
-            onClick={()=>{
-              dispatch(__deleteAllManagement(item.userId))
-            }}
+            onClick={openModal}
+
             width="84px"
             height="35px"
             left="100px"
@@ -61,6 +59,13 @@ function ManagementChange({ item }) {
           >
             인원 삭제
           </MoveModalbtn>
+
+        {isModal && (
+        <Modal
+          setIsModal={setIsModal} modalTitle="삭제 하시겠습니까?" onButtonClick={handleLogout}
+        ></Modal>
+      )}
+
         </div>
       </CommentBox>
     </>

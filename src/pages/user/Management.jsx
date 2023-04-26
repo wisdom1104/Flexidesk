@@ -72,7 +72,6 @@ function Management() {
                   
                   <ManagementChange 
                   item={item}
-                  // allManagementId={item.allManagementId}
                   />
 
                   </Info>

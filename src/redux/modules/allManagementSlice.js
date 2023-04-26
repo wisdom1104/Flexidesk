@@ -32,16 +32,14 @@ export const __getAllManagement = createAsyncThunk(
 export const __deleteAllManagement = createAsyncThunk(
   'deleteAllManagement',
   async (payload, thunk) => {
-    console.log('delete payload:',payload)
 
     try {
       const token = cookies.get('token');
-      const data = await api.delete(`/admin/users/${payload}`, {
+      await api.delete(`/admin/users/${payload}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('삭제 data:',data);
       await thunk.dispatch(__getAllManagement());
       return thunk.fulfillWithValue(payload);
     } catch (error) {
