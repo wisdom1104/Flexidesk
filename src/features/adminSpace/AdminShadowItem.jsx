@@ -9,7 +9,7 @@ function AdminShadowItem({ newMrBoxes, newBoxes, newMultiBoxes, elRef }) {
         <StDrag
           key={box.mrId}
           ref={el => (elRef.current[index] = el)}
-          style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         ></StDrag>
       ))}
       {/* 박스 잔상 */}
@@ -17,7 +17,7 @@ function AdminShadowItem({ newMrBoxes, newBoxes, newMultiBoxes, elRef }) {
         <StDrag
           key={box.boxId}
           ref={el => (elRef.current[index] = el)}
-          style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         ></StDrag>
       ))}
       {/* 공용공간 잔상 */}
@@ -25,7 +25,7 @@ function AdminShadowItem({ newMrBoxes, newBoxes, newMultiBoxes, elRef }) {
         <StDrag
           key={box.multiBoxId}
           ref={el => (elRef.current[index] = el)}
-          style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         ></StDrag>
       ))}
     </>

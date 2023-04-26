@@ -6,7 +6,7 @@ import {
   BoxInput,
   BoxSubBtn,
   StBtnBox,
-  StDropMr,
+  StDropBox,
 } from '../../shared/SpaceStyles';
 
 function AdminMrItem({
@@ -46,14 +46,14 @@ function AdminMrItem({
 
   return (
     <>
-      <StDropMr
+      <StDropBox
         key={mr.mrId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
         ref={el => (elRef.current[mr.mrId] = el)}
         onMouseDown={e => mrBoxMouseDownHandler(e, mr.mrId)}
         onDragStart={e => handleDragStart(e, mr.mrId)}
-        style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
+        transformValue={`translate(${mr.x}px, ${mr.y}px)`}
       >
         {!mrEdit ? (
           <>
@@ -102,7 +102,7 @@ function AdminMrItem({
             </StBtnBox>
           </>
         )}
-      </StDropMr>
+      </StDropBox>
     </>
   );
 }

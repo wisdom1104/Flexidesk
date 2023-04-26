@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { HiChevronDown } from 'react-icons/hi2';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
   MoveModal,
@@ -28,6 +31,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
   console.log('role',fav);
   const dispatch = useDispatch();
 
+  const closeModal = () => {
   const closeModal = () => {
     setIsModal(false);
   };

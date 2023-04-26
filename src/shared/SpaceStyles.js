@@ -250,7 +250,7 @@ export const ClickedBox = styled.div`
 `;
 
 // 유저 있는 박스
-export const StUseBox = styled.div`
+export const StUserBox = styled.div`
   //글자
   font-family: 'Inter';
   font-style: normal;
@@ -379,38 +379,6 @@ export const StSubBtn = styled.button`
   }
 `;
 
-// 회의실
-export const StDropMr = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  position: absolute;
-  background: #f1f2f4;
-  /* background: #fab8de; */
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
-
 // 박스
 export const StDropBox = styled.div`
   //글자
@@ -436,6 +404,7 @@ export const StDropBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  transform: ${props => props.transformValue};
   &:hover {
     background: #ffffff;
     border: 1px solid #8b93a6;
@@ -527,6 +496,7 @@ export const StDrag = styled.div`
   cursor: grab;
   position: absolute;
   cursor: pointer;
+  transform: ${props => props.transformValue};
 `;
 
 export const BoxInput = styled.input`
@@ -825,24 +795,19 @@ export const ModalFullBackground = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-
-  width: 100%;  
-  height: 99%;
-  left: 1px;
-  top: 78px;
-
-  max-width: 99vw;
-  min-width: 21vw;
-
-  margin: auto;
-
+  top: 0px;
   z-index: 50;
-`
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 100%;
+  max-width: 990px;
+  border-radius: 8px;
+  margin: auto;
+  border: 1px solid red;
+`;
 
 export const MoveModal = styled.div`
   position: absolute;
-  /* top: 134px; */
-  /* left: 802px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -851,8 +816,8 @@ export const MoveModal = styled.div`
   box-shadow: 0px 5px 40px rgba(140, 159, 157, 0.25);
   border-radius: 8px;
   padding: 2px;
-  width: 188px;
-  height: 174px;
+  width: ${props => props.width || '188px'};
+  height: ${props => props.height || '174px'};
 `;
 export const MoveModalSubTitle = styled.div`
   position: absolute;
@@ -982,4 +947,54 @@ export const MoveModalErrorbtn = styled.button`
     background: #4a8e8b;
     color: #def1ef;
   }
+`;
+
+export const MoveModalList = styled.div`
+  /* background-color: steelblue; */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 16px;
+  top: 108px;
+  margin-left: 10px;
+  padding: 10px 0px;
+  width: 140px;
+  height: 80px;
+  gap: 5px;
+  overflow: scroll;
+  overflow-x: hidden;
+  border-top: 1px solid #f1f2f4;
+  border-bottom: 1px solid #f1f2f4;
+  /* 스크롤바 스타일 변경 */
+  ::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+  }
+
+  /* 스크롤바 썸네일 스타일 변경 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #b6dfdd;
+    border-radius: 50px; /* 스크롤바 모양 */
+  }
+`;
+
+export const MoveModalItem = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  //글자
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  color: #5c6373;
+`;
+
+export const ListDot = styled.div`
+  width: 4px;
+  height: 4px;
+  margin: 0px 10px;
+  margin-left: 20px;
+  background: #5c6373;
 `;

@@ -54,7 +54,7 @@ function AdminBoxItem({
         ref={el => (elRef.current[box.boxId] = el)}
         onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
         onDragStart={e => handleDragStart(e, box.boxId)}
-        style={{ transform: `translate(${box.x}px, ${box.y}px)` }}
+        transformValue={`translate(${box.x}px, ${box.y}px)`}
       >
         {!boxEdit ? (
           <>
