@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   __addReservation,
   __getReservation,
+  __getUserData,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
 import {
@@ -24,6 +25,13 @@ function ReservationTime({ param, selectDay }) {
 
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
+  const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
+  const [userIdInfo, setUserIdInfo] = useState([]);
+  const { userData } = useSelector(state => state.reservation);
+  console.log(userData);
+  console.log(userInfo);
+  console.log('유저아이디', userIdInfo);
+
   // const [choseReservationTime, setChoseReservationTime] = useState('false');
 
   const [count, setCount] = useState(1);
@@ -43,7 +51,7 @@ function ReservationTime({ param, selectDay }) {
     // return reqData;
   };
 
-  const reqDatas = { startList: dataList(), useList: [] };
+  const reqDatas = { startList: dataList(), useList: userIdInfo };
   const dispatch = useDispatch();
 
   const { reservation } = useSelector(state => state.reservation);
@@ -109,6 +117,23 @@ function ReservationTime({ param, selectDay }) {
             ))}
           </StReserTimeBox>
           예약 인원
+          <input
+            type="text"
+            onChange={e => {
+              dispatch(__getUserData(e.target.value));
+            }}
+          />
+          {userData?.map(item => (
+            <div
+              onClick={e => {
+                setUserInfo([...userInfo, { username: item.username }]);
+                setUserIdInfo([...userIdInfo, { userId: item.userId }]);
+              }}
+              key={item.userId}
+            >
+              {item.username}
+            </div>
+          ))}
           <StReserTimeBox>
             <StReserCountBox>
               <StReserCountButton onClick={delCount}>-</StReserCountButton>
@@ -121,7 +146,7 @@ function ReservationTime({ param, selectDay }) {
               param={param}
               selectDay={selectDay}
               clickReservation={clickReservation}
-              count={count}
+              userName={userInfo}
             />
             <FinButton
               onClick={() => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckContain, CheckTitle } from './CalendarStyled';
 
-function ReservationCheck({ param, selectDay, clickReservation, count }) {
+function ReservationCheck({ param, selectDay, clickReservation, userName }) {
   //예약시간 보여주기
   const timeArray = clickReservation.map(item => {
     const selectTime = item.split('T');
@@ -42,7 +42,9 @@ function ReservationCheck({ param, selectDay, clickReservation, count }) {
       </CheckContain>
       <CheckContain>
         <div>예약 인원</div>
-        <div>{count}</div>
+        {userName?.map(item => (
+          <div>{item.username}</div>
+        ))}
       </CheckContain>
     </>
   );
