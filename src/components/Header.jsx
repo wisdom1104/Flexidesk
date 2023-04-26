@@ -15,9 +15,7 @@ import Modal from '../features/Modal';
 import { useDispatch } from 'react-redux';
 import { isLoginActions } from '../redux/modules/loginSlice';
 
-
 function Header() {
-
   const [isModal, setIsModal] = useState(false);
 
   const [loginTime, setLoginTime] = useState(Date.now());
@@ -46,17 +44,14 @@ function Header() {
     navi('/');
   };
 
-  useEffect(
-    () => {
-      const timerId = setInterval(() => {
-        if (expirationTime && Date.now() > expirationTime) {
-          tokenLogout();
-        }
-      }, 1000);
-      return () => clearInterval(timerId);
-    },
-    [expirationTime]
-  );
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      if (expirationTime && Date.now() > expirationTime) {
+        tokenLogout();
+      }
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, [expirationTime]);
 
   const location = useLocation();
 
@@ -101,7 +96,7 @@ function Header() {
             </StHeaderContentBox>
             <StHeaderContentButtonBox>
               <StHeaderButton type="button" onClick={logout}>
-                Logout 
+                Logout
               </StHeaderButton>
             </StHeaderContentButtonBox>
           </StHeaderButtonBox>
@@ -127,15 +122,10 @@ function Header() {
           </StHeaderContentBox>
         </HeaderContain>
       )}
-      {isModal && (
-        <Modal
-          setIsModal={setIsModal}
-        ></Modal>
-      )}
+      {isModal && <Modal setIsModal={setIsModal}></Modal>}
     </StHeader>
   );
 }
-
 
 const StHeader = styled.div`
   height: 6vh;

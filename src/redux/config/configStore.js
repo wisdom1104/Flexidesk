@@ -13,6 +13,7 @@ import floor from '../modules/floorSlice';
 import schedules from '../modules/schedules';
 import userList from '../modules/allManagementSlice';
 import multiBox from '../modules/MultiBoxSlice';
+import userData from'../modules/reservation'
 
 const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ const store = configureStore({
     floor,
     userList,
     multiBox,
+    userData,
   },
 });
 

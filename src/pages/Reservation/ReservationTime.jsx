@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   __addReservation,
   __getReservation,
+  __getUserData,
 } from '../../redux/modules/reservation';
 import { cookies } from '../../shared/cookies';
 import {
@@ -24,6 +25,16 @@ function ReservationTime({ param, selectDay }) {
 
   const [isCheckOut, setIsCheckOut] = useState('false');
   const [clickReservation, setClickReservation] = useState([]);
+  const user = useSelector(state => state.reservation);
+  console.log(user);
+
+  const [userData, setUserData] = useState('');
+  const hadleInputChange = e => {
+    const value = e.target.value;
+    setUserData(value);
+    console.log(userData);
+    dispatch(__getUserData(value));
+  };
   // const [choseReservationTime, setChoseReservationTime] = useState('false');
 
   const [count, setCount] = useState(1);
@@ -109,6 +120,7 @@ function ReservationTime({ param, selectDay }) {
             ))}
           </StReserTimeBox>
           예약 인원
+          <input type="text" value={userData} onChange={hadleInputChange} />
           <StReserTimeBox>
             <StReserCountBox>
               <StReserCountButton onClick={delCount}>-</StReserCountButton>
