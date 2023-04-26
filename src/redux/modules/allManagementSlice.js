@@ -32,17 +32,17 @@ export const __getAllManagement = createAsyncThunk(
 export const __deleteAllManagement = createAsyncThunk(
   'deleteAllManagement',
   async (payload, thunk) => {
-    console.log('delete payload',payload)
+    console.log('delete payload:',payload)
 
     try {
       const token = cookies.get('token');
-      
-      await api.delete(`/users/${payload}`, {
+      const data = await api.delete(`/admin/users/${payload}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      thunk.dispatch(__getAllManagement());
+      console.log('삭제 data:',data);
+      await thunk.dispatch(__getAllManagement());
       return thunk.fulfillWithValue(payload);
     } catch (error) {
       return thunk.rejectWithValue(error)
@@ -54,10 +54,10 @@ export const __deleteAllManagement = createAsyncThunk(
   export const __patchAllManagement = createAsyncThunk(
     "patchAllManagement",
     async (payload, thunk)=>{
-      console.log('patch payload',payload)
+      console.log('patch payload:',payload)
       try{
         const token = cookies.get('token')
-        await api.patch(`/admin/users/${payload.userId}`,payload,{
+        await api.patch(`/admin/users/${payload}`,payload,{
           headers:{
             Authorization:`Bearer ${token}`
           }

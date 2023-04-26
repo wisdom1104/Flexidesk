@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { StBackground, StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import React, { useEffect} from 'react';
+import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SelectModal from '../../features/SelectModal';
 import { StOverall } from './UserStyled';
 import {

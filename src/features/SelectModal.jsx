@@ -28,12 +28,6 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
   console.log('role',fav);
   const dispatch = useDispatch();
 
-  // const fetchButtonHandelr = (userId) =>{
-  //   setIsModal(false);
-
-  //     dispatch(__patchAllManagement(userId));
-  //   };
-
   const closeModal = () => {
     setIsModal(false);
   };
@@ -65,6 +59,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
         </DropdownMenu>
         <MoveModalSubbtn
           onClick={()=>{
+            setIsModal(false);
             dispatch(__patchAllManagement(userId))
           }}
           width="80px"
