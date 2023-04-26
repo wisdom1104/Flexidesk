@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { HiChevronDown } from 'react-icons/hi2';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
   MoveModal,
@@ -31,7 +28,6 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
   console.log('role',fav);
   const dispatch = useDispatch();
 
-  const closeModal = () => {
   const closeModal = () => {
     setIsModal(false);
   };
@@ -70,7 +66,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           height="35px"
           left="18px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding='8px 16px 8px 16px'
         >
           수정하기
         </MoveModalSubbtn>
@@ -80,13 +76,14 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           height="35px"
           left="100px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding='8px 16px 8px 16px'
         >
           닫기
         </MoveModalbtn>
       </MoveModal>
     </ModalFullBackground>
   );
+  
 };
 
 export default SelectModal;
