@@ -59,7 +59,7 @@ function AdminMultiBoxItem({
         ref={el => (elRef.current[multiBox.multiBoxId] = el)}
         onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
         onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
-        style={{ transform: `translate(${multiBox.x}px, ${multiBox.y}px)` }}
+        transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
       >
         {!multiBoxEdit ? (
           <>

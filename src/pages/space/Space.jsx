@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
-import useFalseHook from '../../hooks/useFalseHook';
 import { Column, Row } from '../../components/Flex';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +37,6 @@ function Space() {
   useEffect(() => {
     if (token === undefined) {
       navi('/');
-      // navi('/login');
     } else {
       dispatch(__getFloors());
       dispatch(__getSpaces());
@@ -65,7 +63,6 @@ function Space() {
       {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
         <StListTitle>스페이스</StListTitle>
-        {/* <div>11</div> */}
         <StListbox>
           <StSpaceList>
             {floors?.map(floor => {

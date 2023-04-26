@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getSpace } from '../../redux/modules/spaceSlice';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../shared/cookies';
-import { __editBox, __editBoxUser } from '../../redux/modules/spaceBoxSlice';
+import { __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 import {
+  ListDot,
   MoveModal,
   MoveModalBackground,
   MoveModalErrorbtn,
+  MoveModalItem,
+  MoveModalList,
   MoveModalSubTitle,
   MoveModalSubbtn,
   MoveModalTitle,
@@ -15,10 +18,7 @@ import {
   StBoard,
   StBox,
   StBtn,
-  StMr,
   StSubHeader,
-  StUseBox,
-  StUser,
   Stmainspace,
   SubIcon,
   SubTitle,
@@ -26,6 +26,9 @@ import {
 import { Row } from '../../components/Flex';
 import SpaceBoxItem from './SpaceBoxItem';
 import SpaceUesrItem from './SpaceUesrItem';
+import SpaceMultiUesrItem from './SpaceMultiUesrItem';
+import SpaceMultiBoxItem from './SpaceMultiBoxItem';
+import SpaceMrItem from './SpaceMrItem';
 
 function SpaceBox({ spaceId, selectedSpace }) {
   const dispatch = useDispatch();
@@ -44,6 +47,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
   //유저 이동 핸들러
   const [moveBox, setMoveBox] = useState(null);
   const [isModal, setIsModal] = useState(false);
+  const [isMultiModal, setIsMultiModal] = useState(false);
   const [isClicked, setClicked] = useState(null);
 
   const onClickMoveUserHandler = box => {
@@ -51,8 +55,12 @@ function SpaceBox({ spaceId, selectedSpace }) {
     setMoveBox(box);
     setClicked(box.boxId);
   };
+  const onClickMoveMultiHandler = multiBox => {
+    setIsMultiModal(!isMultiModal);
+    setMoveBox(multiBox);
+    setClicked(multiBox.multiBoxId);
+  };
   const MoveUser = moveBox => {
-    // console.log('moveBox', moveBox);
     const payload = {
       spaceId,
       locationId: moveBox.boxId,
@@ -62,6 +70,18 @@ function SpaceBox({ spaceId, selectedSpace }) {
     };
     dispatch(__editBoxUser(payload));
     setIsModal(!isModal);
+    setClicked(null);
+  };
+  const MoveMultiUser = moveBox => {
+    const payload = {
+      spaceId,
+      locationId: moveBox.multiBoxId,
+      boxName: moveBox.boxName,
+      x: moveBox.x,
+      y: moveBox.y,
+    };
+    dispatch(__editBoxUser(payload));
+    setIsMultiModal(!isMultiModal);
     setClicked(null);
   };
   return (
@@ -146,6 +166,46 @@ function SpaceBox({ spaceId, selectedSpace }) {
             )}
           </>
         ) : null}
+        {moveBox !== null && isMultiModal ? (
+          <>
+            <MoveModalBackground>
+              <MoveModal height="280px">
+                <MoveModalSubTitle>자리선택</MoveModalSubTitle>
+                <MoveModalTitle>
+                  {moveBox.multiBoxName}
+                  <br />
+                  선택하시겠습니까?
+                </MoveModalTitle>
+                <MoveModalList>
+                  <MoveModalItem>현재 인원</MoveModalItem>
+                  {moveBox.userlist.map(user => (
+                    <MoveModalItem>
+                      <ListDot />
+                      <div>{user.username}</div>
+                    </MoveModalItem>
+                  ))}
+                </MoveModalList>
+                <MoveModalbtn
+                  onClick={() => {
+                    MoveMultiUser(moveBox);
+                  }}
+                  top="227px"
+                >
+                  예
+                </MoveModalbtn>
+                <MoveModalSubbtn
+                  onClick={() => {
+                    setIsMultiModal(!isMultiModal);
+                    setClicked(null);
+                  }}
+                  top="227px"
+                >
+                  아니요
+                </MoveModalSubbtn>
+              </MoveModal>
+            </MoveModalBackground>
+          </>
+        ) : null}
         {/* 박스 */}
         {space?.map(item =>
           item.boxList?.length > 0
@@ -174,30 +234,32 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 회의실 */}
         {space?.map(item =>
           item.mrList?.length > 0
-            ? item.mrList.map(mr => (
-                <StBox
-                  key={mr.mrId}
-                  style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
-                  onClick={() => navi(`/calender/${mr.mrId}`)}
-                >
-                  <div>{mr.mrName}</div>
-                </StBox>
-              ))
+            ? item.mrList.map(mr => <SpaceMrItem mr={mr} navi={navi} />)
             : null,
         )}
         {/* 공용공간 */}
         {space?.map(item =>
           item.multiBoxList?.length > 0
-            ? item.multiBoxList.map(multiBox => (
-                <StBox
-                  key={multiBox.multiBoxId}
-                  style={{
-                    transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-                  }}
-                >
-                  <div>{multiBox.multiBoxName}</div>
-                </StBox>
-              ))
+            ? item.multiBoxList.map(multiBox => {
+                if (multiBox.userlist.length > 0)
+                  return (
+                    <SpaceMultiUesrItem
+                      key={multiBox.multiBoxId}
+                      multiBox={multiBox}
+                      onClickMoveUserHandler={onClickMoveMultiHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+                if (multiBox.userlist.length === 0)
+                  return (
+                    <SpaceMultiBoxItem
+                      key={multiBox.multiBoxId}
+                      multiBox={multiBox}
+                      onClickMoveUserHandler={onClickMoveMultiHandler}
+                      isClicked={isClicked}
+                    />
+                  );
+              })
             : null,
         )}
       </StBoard>
