@@ -93,22 +93,6 @@ export const useValidEmail = () => {
   return [emailMsg, validEmail];
 };
 
-// 닉네임 유효성 검사
-export const useValidNick = () => {
-  const [nickMsg, setNickMsg] = useState('');
-  const validNick = e => {
-    const nick = e.target.value;
-    const isValidNick = /^[가-힣a-zA-Z0-9]{2,15}$/.test(nick);
-    if (isValidNick) {
-      setNickMsg(null);
-      return;
-    } else {
-      setNickMsg('닉네임은 2~15글자, 한글, 알파벳, 숫자만 입력 가능합니다');
-      return;
-    }
-  };
-  return [nickMsg, validNick];
-};
 
 //비밀번호 유효성 검사
 export const useValidPassword = () => {

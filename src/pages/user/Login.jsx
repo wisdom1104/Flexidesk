@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -17,7 +17,6 @@ import {
   StLoginIconDiv,
   StLongButton,
   StOverall,
-  SterrorFont,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
@@ -36,7 +35,6 @@ function Login() {
   };
 
   const navi = useNavigate();
-  const [isModal, setIsModal] = useState(false);
   const [emailMsg, validEmail] = useValidEmail();
   const [isError, setIsError] = useState(false);
 
@@ -44,6 +42,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', user);
+      console.log('login',response);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -67,13 +66,23 @@ function Login() {
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
     } catch (e) {
+      console.log('error',e);
       setIsError(true);
+      // const status = e.response.status;
+      // let errorMsg = '';
+    //   switch (status) {
+    //     case 400:
+    //       errorMsg = '인증 정보가 올바르지 않습니다.';
+    //       break;
+    //     case 404:
+    //       errorMsg = '등록된 사용자가 없습니다.';
+    //       break;
+    //     default:
+    //       errorMsg = '알 수 없는 오류가 발생했습니다.';
+    //       break;
+    // }
+      return Promise.reject(e);
     }
-  };
-
-  const onClickUserHandler = e => {
-    e.preventDefault();
-    navi('/signupuser');
   };
 
   return (

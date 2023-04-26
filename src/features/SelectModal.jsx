@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { HiChevronDown } from 'react-icons/hi2';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
   MoveModal,
-  MoveModalErrorbtn,
   MoveModalSubTitle,
   MoveModalSubbtn,
-  MoveModalTitle,
   MoveModalbtn,
 } from '../shared/SpaceStyles';
 import {
@@ -16,8 +17,10 @@ import {
   DropdownItem,
   DropdownMenu,
 } from '../pages/user/UserStyled';
+import { useDispatch } from 'react-redux';
+import { __patchAllManagement } from '../redux/modules/allManagementSlice';
 
-const SelectModal = ({ setIsModal, role }) => {
+const SelectModal = ({ setIsModal, role ,userId}) => {
   const choose = e => {
     setFav(e.target.value);
     setList(false);
@@ -25,13 +28,12 @@ const SelectModal = ({ setIsModal, role }) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
+  console.log('role',fav);
+  const dispatch = useDispatch();
 
   const closeModal = () => {
+  const closeModal = () => {
     setIsModal(false);
-  };
-
-  const openModal = () => {
-    setIsModal(true);
   };
 
   return (
@@ -48,9 +50,7 @@ const SelectModal = ({ setIsModal, role }) => {
               <DropdownItem onClick={choose} value="ADMIN">
                 ADMIN
               </DropdownItem>
-              <DropdownItem onClick={choose} value="MANAGER" borderRadius="0">
-                MANAGER
-              </DropdownItem>
+              
               <DropdownItem
                 onClick={choose}
                 value="USER"
@@ -62,20 +62,25 @@ const SelectModal = ({ setIsModal, role }) => {
           ) : null}
         </DropdownMenu>
         <MoveModalSubbtn
-          onClick={closeModal}
+          onClick={()=>{
+            setIsModal(false);
+            dispatch(__patchAllManagement(userId))
+          }}
           width="80px"
-          height="33px"
+          height="35px"
           left="18px"
           top="130px"
+          padding='8px, 16px, 8px, 16px'
         >
           수정하기
         </MoveModalSubbtn>
         <MoveModalbtn
           onClick={closeModal}
-          width="80px"
-          height="33px"
+          width="79px"
+          height="35px"
           left="100px"
           top="130px"
+          padding='8px, 16px, 8px, 16px'
         >
           닫기
         </MoveModalbtn>

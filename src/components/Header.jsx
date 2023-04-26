@@ -11,7 +11,7 @@ import {
   StHeaderLogo,
   StHaderFont,
 } from './HeaderStyled';
-import Modal from '../features/Modal';
+import Modal from '../components/Modal';
 import { useDispatch } from 'react-redux';
 import { isLoginActions } from '../redux/modules/loginSlice';
 
@@ -24,6 +24,7 @@ function Header() {
   const navi = useNavigate();
   const dispatch = useDispatch();
 
+  const token = cookies.get('token');
   const userName = cookies.get('username');
   const userId = cookies.get('userId');
 
@@ -38,6 +39,10 @@ function Header() {
     setLoginTime(null);
     setExpirationTime(null);
     navi('/');
+  };
+
+  const handleLogout = () => {
+    dispatch(isLoginActions.logout());
   };
 
   const onClcikHandelr = () => {
@@ -65,7 +70,7 @@ function Header() {
 
   return (
     <StHeader>
-      {cookies.get('token') ? (
+      {token ? (
         <HeaderContain>
           <StHeaderContentBox>
             <StHeaderLogo
@@ -122,7 +127,11 @@ function Header() {
           </StHeaderContentBox>
         </HeaderContain>
       )}
-      {isModal && <Modal setIsModal={setIsModal}></Modal>}
+      {isModal && (
+        <Modal
+          setIsModal={setIsModal} modalTitle="로그아웃 하시겠습니까?" onButtonClick={handleLogout} redirectPath="/"
+        ></Modal>
+      )}
     </StHeader>
   );
 }

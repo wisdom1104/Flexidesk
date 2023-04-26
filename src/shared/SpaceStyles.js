@@ -856,7 +856,7 @@ export const MoveModalbtn = styled.button`
   align-items: center;
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
-  position: absolute;
+  position: ${props => props.position || 'absolute'};
   width: ${props => props.width || '61px'};
   height: ${props => props.height || '41px'};
   left: ${props => props.left || '16px'};
@@ -866,8 +866,6 @@ export const MoveModalbtn = styled.button`
   border: none;
   cursor: pointer;
   //글자
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
@@ -890,7 +888,7 @@ export const MoveModalSubbtn = styled.button`
   align-items: center;
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
-  position: absolute;
+  position: ${props => props.position || 'absolute'};
   width: ${props => props.width || '87px'};
   height: ${props => props.height || '41px'};
   left: ${props => props.left || '85px'};
@@ -900,8 +898,6 @@ export const MoveModalSubbtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
   //글자
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;

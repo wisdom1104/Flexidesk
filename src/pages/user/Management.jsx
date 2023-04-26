@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { StBackground, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import React, { useEffect} from 'react';
+import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SelectModal from '../../features/SelectModal';
 import { StOverall } from './UserStyled';
 import {
@@ -11,27 +11,14 @@ import {
   Info,
   InfoBox,
   InfoContain,
+  ReservationTitle,
 } from '../Reservation/CalendarStyled';
 import ManagementChange from './ManagementChange';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-  
 
   /////////////////////test/////////////////////////////////////
-  //현재 선택된 사용자의 ID를 저장
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  console.log('selectedUserId',selectedUserId);
-
-  const { userId } = useParams();
-  console.log('userId', userId);
-
-  useEffect(() => {
-    if (userId) {
-      openModal(userId);
-    }
-  }, [userId]);
-
   // const handleRoleUpdate = (userId) => {
   //   const updatedUserList = [...userList];
   //   const updatedUser = updatedUserList.find((user) => user.allManagementId === userId);
@@ -39,13 +26,6 @@ function Management() {
   //   setUserList(updatedUserList);
   // };
   /////////////////////test/////////////////////////////////////
-
-  const [isModal, setIsModal] = useState(false);
-
-  const openModal = () => {
-    setSelectedUserId();
-    setIsModal(true);
-  };
 
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -67,16 +47,18 @@ function Management() {
 
   return (
     <>
-      <StBackground>
         <StOverall>
           <StWrapDiv>
-            <StSmallFont>사용자 관리</StSmallFont>
-
+          <ReservationTitle>
+            <StFont width="76vw" fontSize="2rem" align="start">
+            사용자 관리
+            </StFont>
+          </ReservationTitle>
+          
             <InfoContain>
               {userList.map(item => (
-                <InfoBox key={item.allManagementId}>
-                  {item.userId}
-                  <p>{item.username}</p>
+                <InfoBox key={item.userId} height='16vw' >
+                  <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
                   <Info>
                     <CommentBox>
                       <span>이메일</span> <br />
@@ -90,12 +72,6 @@ function Management() {
                   
                   <ManagementChange 
                   item={item}
-                  openModal={openModal}
-                  isModal={isModal}
-                  setIsModal={setIsModal}
-                  selectedUserId={selectedUserId}
-                  allManagementId={item.allManagementId}
-                  userId={userId}
                   />
 
                   </Info>
@@ -104,7 +80,6 @@ function Management() {
             </InfoContain>
           </StWrapDiv>
         </StOverall>
-      </StBackground>
     </>
   );
 }

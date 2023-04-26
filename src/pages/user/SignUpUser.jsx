@@ -72,6 +72,8 @@ function SignUpUser() {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
+      console.log('response',response)
+
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;

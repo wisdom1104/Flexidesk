@@ -11,9 +11,12 @@ import {
 } from './WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
 import Welcome2 from './Welcome2';
+import { cookies } from '../../shared/cookies';
 
 function Welcome1() {
   const navi = useNavigate();
+
+  const token = cookies.get('token');
 
   return (
     <>
@@ -21,7 +24,45 @@ function Welcome1() {
         <StOverall>
           <StWrapDiv>
             <StIntroDiv>
-              <div
+              {token ? (
+                <>
+             <div
+             style={{
+               width: '35vw',
+               height: '25vh',
+               display: 'inline-block',
+             }}
+           >
+             <StFont align="start">
+               스마트해진 업무공간, <br /> 
+               보다 생산적인 업무시간
+             </StFont>
+             <StSmallFont
+               align="start"
+               marginBottom="-185px"
+               marginTop="65px"
+             >
+               Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및 <br />
+               회의실 예약 시스템을 제공합니다
+             </StSmallFont>
+           </div>
+
+           {/* 도형 자리 */}
+           <div
+             style={{
+               width: '30vw',
+               height: '40vh',
+               display: 'inline-block',
+             }}
+           >
+             <img src="img/GroupIcon1.png" alt="GroupIcon1" />
+           </div>
+           </>
+
+              ):(
+                
+                <>
+                <div
                 style={{
                   width: '35vw',
                   height: '35vh',
@@ -60,7 +101,6 @@ function Welcome1() {
                 </StButtonGap>
               </div>
 
-              {/* 도형 자리 */}
               <div
                 style={{
                   width: '30vw',
@@ -70,6 +110,8 @@ function Welcome1() {
               >
                 <img src="img/GroupIcon1.png" alt="GroupIcon1" />
               </div>
+              </>
+              )}
             </StIntroDiv>
           </StWrapDiv>
         </StOverall>

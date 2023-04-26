@@ -9,6 +9,7 @@ const initialState = {
     isSuccess: false,
 };
 
+  //조회
 export const __getAllManagement = createAsyncThunk(
     "getAllReservation",
     async(payload,thunk) =>{
@@ -20,13 +21,52 @@ export const __getAllManagement = createAsyncThunk(
             Authorization:`Bearer ${token}`
           }
         })
-        console.log(data.data.data.userList);
         return thunk.fulfillWithValue(data.data.data.userList)
       }catch(error){
         return thunk.rejectWithValue(error)
       }
     }
+  );
+
+  //삭제
+export const __deleteAllManagement = createAsyncThunk(
+  'deleteAllManagement',
+  async (payload, thunk) => {
+
+    try {
+      const token = cookies.get('token');
+      await api.delete(`/admin/users/${payload}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      await thunk.dispatch(__getAllManagement());
+      return thunk.fulfillWithValue(payload);
+    } catch (error) {
+      return thunk.rejectWithValue(error)
+    }
+  },
+);
+
+  //수정
+  export const __patchAllManagement = createAsyncThunk(
+    "patchAllManagement",
+    async (payload, thunk)=>{
+      console.log('patch payload:',payload)
+      try{
+        const token = cookies.get('token')
+        await api.patch(`/admin/users/${payload}`,payload,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
+        await thunk.dispatch(__getAllManagement())
+      }catch(error){
+        return thunk.rejectWithValue(error)
+      }
+    }
   )
+
 
   export const allManagementSlice = createSlice({
     name:'allManagement',
