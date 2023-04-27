@@ -1,23 +1,37 @@
 import React, { useState } from 'react';
 import SelectModal from '../../features/SelectModal';
-import { CommentBox } from '../Reservation/CalendarStyled';
+import { CommentBox } from '../../pages/Reservation/CalendarStyled';
 import {  MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import Modal from '../../components/Modal';
 
 function ManagementChange({ item }) {
-  //모달이 컴포넌트 안에 있어야 함
-  const [isModal, setIsModal] = useState(false);
+
+  const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const openModal = () => {
-    setIsModal(true);
+  const openSelectModal = () => {
+    setIsSelectModalOpen(true);
+  };
+
+  const closeSelectModal = () => {
+    setIsSelectModalOpen(false);
+  };
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
   };
 
   const handleLogout = () => {
     dispatch(__deleteAllManagement(item.userId));
+    closeDeleteModal();
   };
 
   return (
@@ -32,7 +46,7 @@ function ManagementChange({ item }) {
           gap: '10px'
         }}>
           <MoveModalSubbtn
-            onClick={openModal}
+            onClick={openSelectModal}
             width="84px"
             height="35px"
             left="18px"
@@ -43,12 +57,12 @@ function ManagementChange({ item }) {
             직급 수정
           </MoveModalSubbtn>
 
-          {isModal ? (
-            <SelectModal setIsModal={setIsModal} role={item.role} userId={item.userId} ></SelectModal>
-          ) : null}
+          {isSelectModalOpen && (
+            <SelectModal setIsModal={closeSelectModal} role={item.role} userId={item.userId} ></SelectModal>
+          )}
 
           <MoveModalbtn
-            onClick={openModal}
+            onClick={openDeleteModal}
 
             width="84px"
             height="35px"
@@ -60,9 +74,9 @@ function ManagementChange({ item }) {
             인원 삭제
           </MoveModalbtn>
 
-        {isModal && (
+        {isDeleteModalOpen && (
         <Modal
-          setIsModal={setIsModal} modalTitle="삭제 하시겠습니까?" onButtonClick={handleLogout}
+          setIsModal={closeDeleteModal} modalTitle="삭제 하시겠습니까?" onButtonClick={handleLogout}
         ></Modal>
       )}
 

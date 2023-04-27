@@ -795,15 +795,17 @@ export const ModalFullBackground = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  top: 0px;
   z-index: 50;
-  box-sizing: border-box;
-  height: 100%;
-  min-width: 100%;
+
+  width: 100%;  
+  height: 99%;
+  left: 1px;
+  top: 78px;
+
+  min-width: 2114px;
   max-width: 990px;
   border-radius: 8px;
   margin: auto;
-  border: 1px solid red;
 `;
 
 export const MoveModal = styled.div`

@@ -182,7 +182,6 @@ export const InfoBox = styled.div`
   background-color: #DEF1EF;
   border: none;
   border-radius: 8px;
-
 `;
 export const InfoContain = styled.div`
   display: grid;
@@ -210,7 +209,6 @@ export const Info = styled.div`
   margin-top: 20px;
 
   min-height: 10vw;
-
 `;
 export const CommentBox = styled.div`
   display: flex;
