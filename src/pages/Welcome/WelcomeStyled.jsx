@@ -24,7 +24,7 @@ export const StOverall = styled.div`
 `;
 
 export const StWrapDiv = styled.div`
-  width: 50vw;
+  width: ${props => props.width || '50vw'};
 
   display: flex;
   flex-wrap: wrap;
@@ -64,6 +64,7 @@ export const StSmallFont = styled.p`
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+
 `;
 
 //그라데이션 폰트

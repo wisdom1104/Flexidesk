@@ -11,6 +11,10 @@ import {
   FontSt,
   FinButton,
 } from '../Reservation/CalendarStyled';
+import { StBackground, StFont, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import { Input } from '../../components/Input';
+import { StBlueButton } from '../Welcome/WelcomeStyled';
+import { StLongButton } from '../user/UserStyled';
 
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
@@ -82,7 +86,8 @@ function SchedulesTime({ param, selectDay }) {
 
   return (
     <>
-      <FontSt>스케줄 시간</FontSt>
+      <StWrapDiv margin width='30vw'>
+      <StSmallFont width='30vw' align='start'>스케줄 시간</StSmallFont>
       <StReserTimeBox>
         {schedules?.map(item => (
           <StReserTimeButton
@@ -91,10 +96,11 @@ function SchedulesTime({ param, selectDay }) {
             disabled={item.isCheckOut === true}
             value={`${selectDay}T${item.start}`}
           >
-            {item.start}~{item.end}
+            {item.start}
           </StReserTimeButton>
         ))}
       </StReserTimeBox>
+      </StWrapDiv>
       <form
         onSubmit={async e => {
           e.preventDefault();
@@ -102,8 +108,9 @@ function SchedulesTime({ param, selectDay }) {
           navi(`/scheduledetail/${param}`);
         }}
       >
-        <FontSt>스케줄 제목</FontSt>
-        <ScheduleInput
+        <br/>
+        <StSmallFont width='30vw' align='start'>스케줄 제목</StSmallFont>
+        <Input
           type="text"
           value={scheduleValue.scTitle}
           required
@@ -113,9 +120,12 @@ function SchedulesTime({ param, selectDay }) {
               scTitle: e.target.value,
             })
           }
+          placeholder="제목을 입력하세요."
+
         />
-        <FontSt>스케줄 내용</FontSt>
-        <ScheduleInput
+        <br/>
+        <StSmallFont width='30vw' align='start'>스케줄 내용</StSmallFont>
+        <Input
           type="text"
           value={scheduleValue.scComment}
           required
@@ -125,10 +135,12 @@ function SchedulesTime({ param, selectDay }) {
               scComment: e.target.value,
             })
           }
+          placeholder="내용을 입력하세요."
         />
-        <FinButton>등록하기</FinButton>
+        <br/>
+        <StLongButton>등록하기</StLongButton>
       </form>
-    </>
+      </>
   );
 }
 

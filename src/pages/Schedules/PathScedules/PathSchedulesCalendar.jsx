@@ -12,6 +12,8 @@ import {
   DateFont,
 } from '../../Reservation/CalendarStyled';
 import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
+import styled from 'styled-components';
+import { StBackground } from '../../Welcome/WelcomeStyled';
 
 function PathScedules() {
   const param = useParams();
@@ -110,6 +112,7 @@ function PathScedules() {
             />
           </Header>
         </StCalenHeader>
+
         <DayContain>
           {week?.map(item => {
             return <Day key={item}>{item}</Day>;
