@@ -24,24 +24,6 @@ function Skeleton() {
 
 export default Skeleton;
 
-export const Shimmer = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: #e0e0e0;
-  box-shadow: 0 0 30px 30px #e0e0e0;
-  animation: loading 2s infinite;
-  @keyframes loading {
-    0% {
-      transform: translateX(-50%);
-    }
-    50% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translate(200%);
-    }
-  }
-`;
 
 export const Div = styled.div`
   display: flex;
@@ -75,10 +57,30 @@ export const Wrap = styled.div`
 `;
 
 export const Text = styled.div`
-  width: 200px;
-  height: 10px;
+  width: 20vw;
+  height: 5px;
+  margin: 10px;
   margin-bottom: 5px;
-  padding: 10px;
+  padding: 5px;
   overflow: hidden;
   background-color: #eeeeee;
+`;
+
+export const Shimmer = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: #e0e0e0;
+  box-shadow: 0 0 30px 30px #e0e0e0;
+  animation: loading 2s infinite;
+  @keyframes loading {
+    0% {
+      transform: translateX(-50%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translate(200%);
+    }
+  }
 `;

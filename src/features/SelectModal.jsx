@@ -17,7 +17,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { __patchAllManagement } from '../redux/modules/allManagementSlice';
 
-const SelectModal = ({ setIsModal, role, userId }) => {
+const SelectModal = ({ setIsModal, role ,userId}) => {
   const choose = e => {
     setFav(e.target.value);
     setList(false);
@@ -25,7 +25,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
-  console.log('role', fav);
+  console.log('role',fav);
   const dispatch = useDispatch();
 
   const closeModal = () => {
@@ -85,42 +85,5 @@ const SelectModal = ({ setIsModal, role, userId }) => {
   );
   
 };
-                <DropdownItem
-                  onClick={choose}
-                  value="USER"
-                  borderRadius="0 0 8px 8px"
-                >
-                  USER
-                </DropdownItem>
-              </DropdownContent>
-            ) : null}
-          </DropdownMenu>
-          <MoveModalSubbtn
-            onClick={() => {
-              setIsModal(false);
-              dispatch(__patchAllManagement(userId));
-            }}
-            width="80px"
-            height="35px"
-            left="18px"
-            top="130px"
-            padding="8px, 16px, 8px, 16px"
-          >
-            수정하기
-          </MoveModalSubbtn>
-          <MoveModalbtn
-            onClick={closeModal}
-            width="79px"
-            height="35px"
-            left="100px"
-            top="130px"
-            padding="8px, 16px, 8px, 16px"
-          >
-            닫기
-          </MoveModalbtn>
-        </MoveModal>
-      </ModalFullBackground>
-    );
-  };
-};
+
 export default SelectModal;

@@ -1,5 +1,5 @@
-import React, { useEffect} from 'react';
-import {  StFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import React, { useEffect, useState} from 'react';
+import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
@@ -17,7 +17,7 @@ import Skeleton from '../../components/Skeleton';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
   const navi = useNavigate();
 
@@ -32,8 +32,12 @@ function Management() {
     } else if (role !== 'ADMIN') {
       navi('/');
     } else {
-      dispatch(__getAllManagement());
+      setTimeout(() => {
+        dispatch(__getAllManagement());
+        setShowSkeleton(false);
+      }, 2000);
     }
+    return () => clearTimeout();
   }, []);
 
   return (
@@ -45,8 +49,15 @@ function Management() {
             사용자 관리
             </StFont>
           </ReservationTitle>
-          
-            <InfoContain>
+
+          {showSkeleton ? (
+             [...Array(userList?.length || 3)].map((_, index) => (
+              <InfoContain>
+              <Skeleton key={index} />
+              </InfoContain>
+            ))
+          ) : (
+              <InfoContain>
               {userList?
               userList.map(item => (
 
@@ -55,7 +66,7 @@ function Management() {
                   
                   <Info>
                     <CommentBox>
-                      <spen>이메일</spen> <br />
+                      <span>이메일</span> <br />
                       <p>{item.email}</p>
                     </CommentBox>
 
@@ -73,8 +84,8 @@ function Management() {
               ))
               :
               <Skeleton/>}
-              <Skeleton/>
             </InfoContain>
+            )}
           </StWrapDiv>
         </StOverall>
     </>

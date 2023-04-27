@@ -797,13 +797,13 @@ export const ModalFullBackground = styled.div`
   background: rgba(0, 0, 0, 0.2);
   z-index: 50;
 
-  width: 100%;  
-  height: 99%;
+  width: 99vw;  
+  height: 100vh;
   left: 1px;
   top: 78px;
 
-  min-width: 2114px;
-  max-width: 990px;
+  /* min-width: 2114px;
+  max-width: 990px; */
   border-radius: 8px;
   margin: auto;
 `;

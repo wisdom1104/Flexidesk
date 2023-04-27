@@ -41,8 +41,8 @@ function Login() {
   const onsubmitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/login', user);
-      console.log('login',response);
+      const response = await api.post('/users/login', user );
+      console.log(' try문 login response:',response);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -66,7 +66,9 @@ function Login() {
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
     } catch (e) {
-      console.log('error',e);
+      
+      console.log('error response :',e.response);
+      console.log('error request :',e.request);
       setIsError(true);
     //   const status = e.response.status;
     //   console.log('status상태값:',status);
