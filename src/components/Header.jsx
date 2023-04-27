@@ -129,7 +129,10 @@ function Header() {
       )}
       {isModal && (
         <Modal
-          setIsModal={setIsModal} modalTitle="로그아웃 하시겠습니까?" onButtonClick={handleLogout} redirectPath="/"
+          setIsModal={setIsModal}
+          modalTitle="로그아웃 하시겠습니까?"
+          onButtonClick={handleLogout}
+          redirectPath="/"
         ></Modal>
       )}
     </StHeader>
@@ -138,11 +141,13 @@ function Header() {
 
 const StHeader = styled.div`
   height: 6vh;
-  width: 99%;
+  /* width: 99%; */
+  max-width: 1200px;
+  min-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 10px auto;
 `;
 
 export default Header;

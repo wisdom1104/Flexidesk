@@ -8,12 +8,10 @@ function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
         <ClickedBox
           key={multiBox.multiBoxId}
           id={multiBox.multiBoxId}
-          style={{
-            transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(multiBox);
           }}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
           <div>{multiBox.multiBoxName}</div>
         </ClickedBox>
@@ -21,12 +19,10 @@ function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
         <StBox
           key={multiBox.multiBoxId}
           id={multiBox.multiBoxId}
-          style={{
-            transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(multiBox);
           }}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
           <div>{multiBox.multiBoxName}</div>
           {/* <div>{multiBox.multiBoxId}</div> */}

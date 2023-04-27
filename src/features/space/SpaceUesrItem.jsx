@@ -8,12 +8,10 @@ function SpaceUesrItem({ box, onClickMoveUserHandler, isClicked }) {
         <ClickedBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
           <div>{box.boxName}</div>
           <StUser>{box.username}</StUser>
@@ -22,12 +20,10 @@ function SpaceUesrItem({ box, onClickMoveUserHandler, isClicked }) {
         <StUserBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
           <div>{box.boxName}</div>
           {/* <div>{box.boxId}</div> */}

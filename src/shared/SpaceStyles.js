@@ -216,6 +216,7 @@ export const StBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  transform: ${props => props.transformValue};
   &:hover {
     background: #ffffff;
     border: 1px solid #8b93a6;
@@ -392,7 +393,6 @@ export const StDropBox = styled.div`
   //박스
   position: absolute;
   background: #f1f2f4;
-  /* background: #ead089; */
   border: 1px solid #8b93a6;
   border-radius: 4px;
   width: 90px;
