@@ -57,9 +57,9 @@ export const StSmallFont = styled.p`
   height: ${props => props.height || ''};
   margin-bottom: ${props => props.marginBottom || ''};
   margin-top: ${props => props.marginTop || ''};
-
+  
   font-weight: ${props => props.weight || '500'};
-  font-size: ${props => props.fontSize || '1.125rem'};
+  font-size: ${props => props.fontSize || '1.25rem'};
   line-height: 200%;
   text-align: ${props => props.align || 'center'};
 
@@ -67,16 +67,16 @@ export const StSmallFont = styled.p`
 
 `;
 
+
 //그라데이션 폰트
 export const StGradationFont = styled.p`
   width: ${props => props.width || '48vw'};
-  padding: 100px;
+  padding: 150px;
 
-  font-weight: 700;
-  font-size: ${props => props.fontSize || '3rem'};
+  font-weight: 800;
+  font-size: ${props => props.fontSize || '4rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
-
 
   background: linear-gradient(180deg, var(--blue) 15.36%, #ACDAD8 119.53%);
   -webkit-background-clip: text;
@@ -174,11 +174,12 @@ export const StSpaceDiv = styled.div`
 
 export const StSpacePagePhoto = styled.img`
   max-width: 100%;
-  height: auto;
-  width: 1200px;
+  height: ${props=> props.height || 'auto'};
+  width: ${props=> props.width || '1200px'};
+
   object-fit: contain;
 
-  margin-top: 40px;
+  margin-top: ${props=> props.marginTop || '40px'};
 
   display: flex;
   justify-content: center;

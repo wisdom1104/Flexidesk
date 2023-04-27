@@ -29,6 +29,10 @@ function SignUpUser() {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
+      if (!response) {
+        alert('다시 회원가입해주세요😓');
+        return;
+      }
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -44,10 +48,10 @@ function SignUpUser() {
       <StOverall>
         <div
           style={{
-            marginTop: '200px',
             display: 'flex',
             alignItems: 'center',
-            height: '100%'
+            height: '100%',
+            padding:'height="100%"'
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="570px">

@@ -17,7 +17,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { __patchAllManagement } from '../redux/modules/allManagementSlice';
 
-const SelectModal = ({ setIsModal, role ,userId}) => {
+const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
     setFav(e.target.value);
     setList(false);
@@ -25,11 +25,16 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
-  console.log('role',fav);
+
   const dispatch = useDispatch();
 
   const closeModal = () => {
     setIsModal(false);
+  };
+
+  const onPatchButtonHandler = () => {
+    setIsModal(false);
+    dispatch(__patchAllManagement({ userId, role: fav , updateRole:true}));
   };
 
   return (
@@ -38,7 +43,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
         <MoveModalSubTitle width="65px">권한수정</MoveModalSubTitle> <br />
         <DropdownMenu>
           <DropdownButton onClick={e => setList(pre => !pre)}>
-            <div>{fav}</div>
+            {fav}
             <HiChevronDown />
           </DropdownButton>
           {list ? (
@@ -46,7 +51,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
               <DropdownItem onClick={choose} value="ADMIN">
                 ADMIN
               </DropdownItem>
-              
+
               <DropdownItem
                 onClick={choose}
                 value="USER"
@@ -58,15 +63,12 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           ) : null}
         </DropdownMenu>
         <MoveModalSubbtn
-          onClick={()=>{
-            setIsModal(false);
-            dispatch(__patchAllManagement({userId, role:fav}))
-          }}
+          onClick={onPatchButtonHandler}
           width="80px"
           height="35px"
           left="18px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding="8px, 16px, 8px, 16px"
         >
           수정하기
         </MoveModalSubbtn>
@@ -76,14 +78,13 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           height="35px"
           left="100px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding="8px, 16px, 8px, 16px"
         >
           닫기
         </MoveModalbtn>
       </MoveModal>
     </ModalFullBackground>
   );
-  
 };
 
 export default SelectModal;

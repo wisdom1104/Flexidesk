@@ -23,7 +23,7 @@ function ManagementChange({ item }) {
   return (
     <>
       <CommentBox>
-        <StSmallFont>권한 변경</StSmallFont>
+        <StSmallFont width>권한 변경</StSmallFont>
 
         <div 
         style={{

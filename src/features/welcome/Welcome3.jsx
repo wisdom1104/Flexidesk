@@ -27,14 +27,15 @@ function Welcome3() {
                   weight="700"
                   align="start"
                   width="100%"
+                  marginBottom='5vw'
                 >
                   업무 트렌드
                 </StSmallFont>
-                <StFont align="start" marginBottom="250px">
+                <StFont align="start" marginBottom='2vw' >
                   자율 좌석제
                 </StFont>
 
-                <StSmallFont marginBottom="120px" weight="600" align="start">
+                <StSmallFont weight="600" align="start">
                   팀이나 직급에 따라 자리를 배치해 독자적이고 수직적이었던{' '}
                   <br />
                   사무실 분위기가 자율좌석제 도입으로 <br />

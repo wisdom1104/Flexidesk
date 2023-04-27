@@ -7,32 +7,32 @@ export const useFormValidation = () => {
   const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
 
   const handleEmailChange = useCallback(({ target: { value } }) => {
-    setUser(prevState => ({ ...prevState, email: value }));
+    setUser(pre => ({ ...pre, email: value }));
   
     if (!emailRegex.test(value)) {
-      setErrors(prevState => ({ ...prevState, email: '올바른 이메일 형식이 아닙니다.' }));
+      setErrors(pre => ({ ...pre, email: '올바른 이메일 형식이 아닙니다.' }));
     } else {
-      setErrors(prevState => ({ ...prevState, email: '' }));
+      setErrors(pre => ({ ...pre, email: '' }));
     }
   }, [emailRegex]);
 
   const handlePasswordChange = useCallback(({ target: { value } }) => {
-    setUser(prevState => ({ ...prevState, password: value }));
+    setUser(pre => ({ ...pre, password: value }));
 
     if (value.length < 8) {
-      setErrors(prevState => ({ ...prevState, password: '비밀번호는 최소 8자 이상이어야 합니다.' }));
+      setErrors(pre => ({ ...pre, password: '비밀번호는 최소 8자 이상이어야 합니다.' }));
     } else {
-      setErrors(prevState => ({ ...prevState, password: '' }));
+      setErrors(pre => ({ ...pre, password: '' }));
     }
   }, []);
 
   const handlepasswordCheckChange = useCallback(({ target: { value } }) => {
-    setUser(prevState => ({ ...prevState, passwordCheck: value }));
+    setUser(pre => ({ ...pre, passwordCheck: value }));
 
     if (value !== user.password) {
-      setErrors(prevState => ({ ...prevState, passwordCheck: '비밀번호와 일치하지 않습니다.' }));
+      setErrors(pre => ({ ...pre, passwordCheck: '비밀번호와 일치하지 않습니다.' }));
     } else {
-      setErrors(prevState => ({ ...prevState, passwordCheck: '' }));
+      setErrors(pre => ({ ...pre, passwordCheck: '' }));
     }
   }, [user.password]);
 

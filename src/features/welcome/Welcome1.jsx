@@ -7,6 +7,7 @@ import {
   StIntroDiv,
   StOverall,
   StSmallFont,
+  StSpacePagePhoto,
   StWrapDiv,
 } from '../../pages/Welcome/WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
@@ -76,7 +77,7 @@ function Welcome1() {
                 <StSmallFont
                   align="start"
                   marginBottom="-185px"
-                  marginTop="65px"
+                  marginTop="85px"
                 >
                   Flexidesk는 효율적인 자율 좌석제 운영을 위한 업무 위치 선택 및 <br />
                   회의실 예약 시스템을 제공합니다
@@ -104,7 +105,7 @@ function Welcome1() {
               <div
                 style={{
                   width: '30vw',
-                  height: '30vh',
+                  height: '10vh',
                   display: 'inline-block',
                 }}
               >

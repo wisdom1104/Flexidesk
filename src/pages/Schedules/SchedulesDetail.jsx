@@ -16,7 +16,7 @@ import {
   DelBtn,
   PathBtn,
 } from '../Reservation/CalendarStyled';
-import { StFont, StOverall } from '../Welcome/WelcomeStyled';
+import { StFont, StOverall, StSmallFont } from '../Welcome/WelcomeStyled';
 import { StWrapDiv } from '../Welcome/WelcomeStyled';
 
 function SchedulesDetail() {
@@ -51,20 +51,20 @@ function SchedulesDetail() {
               </StFont>
               <Info>
                 <CommentBox>
-                  <ComFont>내용</ComFont>
-                  <div>{item.scComment}</div>
+                  <StSmallFont width>내용</StSmallFont>
+                  <StSmallFont width>{item.scComment}</StSmallFont>
                 </CommentBox>
                 <CommentBox>
-                  <ComFont>날짜</ComFont>
-                  <div>{item.scStart.split('T')[0]}</div>
+                  <StSmallFont width>날짜</StSmallFont>
+                  <StSmallFont width>{item.scStart.split('T')[0]}</StSmallFont>
                 </CommentBox>
                 <CommentBox>
-                  <ComFont>시작시간</ComFont>
-                  <div>{item.scStart.split('T')[1]}</div>
+                  <StSmallFont width>시작시간</StSmallFont>
+                  <StSmallFont width>{item.scStart.split('T')[1]}</StSmallFont>
                 </CommentBox>
                 <CommentBox>
-                  <ComFont>종료시간</ComFont>
-                  <div>{item.scEnd.split('T')[1]}</div>
+                  <StSmallFont width>종료시간</StSmallFont>
+                  <StSmallFont width>{item.scEnd.split('T')[1]}</StSmallFont>
                 </CommentBox>
                 <div>
                   <PathBtn

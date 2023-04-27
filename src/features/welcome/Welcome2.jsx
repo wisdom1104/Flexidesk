@@ -4,13 +4,13 @@ import { StFont, StSmallFont, StOverall, StWrapDiv } from '../../pages/Welcome/W
 function Welcome2() {
   return (
     <>
-      <StOverall height='40vw'>
+      <StOverall height='55vw'>
         <StWrapDiv>
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '40px',
+              gap: '55px',
             }}
           >
             <StFont>

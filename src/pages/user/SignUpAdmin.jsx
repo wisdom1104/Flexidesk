@@ -37,6 +37,10 @@ function SignUpAdmin() {
     try {
       const response = await api.post('/users/signup/admin', admin);
       console.log('Admin response', response);
+      if (!response) {
+        alert('다시 회원가입해주세요😓');
+        return;
+      }
       alert(`${admin.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -52,10 +56,10 @@ function SignUpAdmin() {
       <StOverall>
         <div
           style={{
-            marginTop: '130px',
             display: 'flex',
             alignItems: 'center',
             height: '100%',
+            padding:'26px'
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="650px">

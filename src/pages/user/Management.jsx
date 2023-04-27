@@ -76,13 +76,13 @@ function Management() {
 
                     <Info>
                       <CommentBox>
-                        <StSmallFont>이메일</StSmallFont> <br />
-                        <StSmallFont>{item.email}</StSmallFont>
+                        <StSmallFont width>이메일</StSmallFont> <br />
+                        <StSmallFont width>{item.email}</StSmallFont>
                       </CommentBox>
 
                       <CommentBox>
-                        <StSmallFont>권한</StSmallFont> <br />
-                        <StSmallFont>{item.role}</StSmallFont>
+                        <StSmallFont width>권한</StSmallFont> <br />
+                        <StSmallFont width>{item.role}</StSmallFont>
                       </CommentBox>
 
                       <ManagementChange item={item} />
