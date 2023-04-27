@@ -12,7 +12,7 @@ import {
 function Welcome5() {
   return (
     <>
-      <StBackground background="#fff" height="3030px">
+      <StBackground background="#fff" height="3300px">
         <div
           style={{
             display: 'flex',
@@ -35,7 +35,7 @@ function Welcome5() {
               >
                 스페이스
               </StSmallFont>
-              <StFont align="start">업무 공간 이동</StFont>
+              <StFont fontSize='3rem' align="start">업무 공간 이동</StFont>
               <StSmallFont align="start" width="100%">
                 회사내에서도 나에게 맞는 공간을 찾아봐요
               </StSmallFont>
@@ -52,7 +52,7 @@ function Welcome5() {
               >
                 회의실 예약
               </StSmallFont>
-              <StFont align="start" width="100%">
+              <StFont fontSize='3rem' align="start" width="100%">
                 간편해진 회의실 예약
               </StFont>
               <StSmallFont align="start" width="100%">
@@ -70,7 +70,7 @@ function Welcome5() {
               >
                 스케줄
               </StSmallFont>
-              <StFont align="start">내 스케줄 관리도 한번에</StFont>
+              <StFont fontSize='3rem' align="start">내 스케줄 관리도 한번에</StFont>
               <StSmallFont align="start" width="100%">
                 근무 일정과 연동되는 스케줄
               </StSmallFont>

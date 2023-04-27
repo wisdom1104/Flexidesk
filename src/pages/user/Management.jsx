@@ -1,5 +1,5 @@
-import React, { useEffect} from 'react';
-import {  StFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import React, { useEffect, useState } from 'react';
+import { StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
@@ -17,7 +17,7 @@ import Skeleton from '../../components/Skeleton';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
   const navi = useNavigate();
 
@@ -32,51 +32,68 @@ function Management() {
     } else if (role !== 'ADMIN') {
       navi('/');
     } else {
-      dispatch(__getAllManagement());
+      const loadData = async () => {
+        try {
+          dispatch(__getAllManagement());
+          setShowSkeleton(false);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const timer = setTimeout(() => {
+        loadData();
+      }, 4000);
+
+      return () => clearTimeout(timer);
     }
   }, []);
 
   return (
     <>
-        <StOverall>
-          <StWrapDiv>
+      <StOverall>
+        <StWrapDiv margin>
           <ReservationTitle>
             <StFont width="80vw" fontSize="2rem" align="start">
-            사용자 관리
+              사용자 관리
             </StFont>
           </ReservationTitle>
-          
-            <InfoContain>
-              {userList?
-              userList.map(item => (
 
-                <InfoBox key={item.userId} height='16vw' >
-                  <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
-                  
-                  <Info>
-                    <CommentBox>
-                      <spen>이메일</spen> <br />
-                      <p>{item.email}</p>
-                    </CommentBox>
+          <>
+            {!isLoading ? (
+              <InfoContain>
+                <Skeleton />
+              </InfoContain>
+            ) : isError ? (
+              <div>에러가 발생했습니다...</div>
+            ) : (
+              <InfoContain>
+                {userList.map(item => (
+                  <InfoBox key={item.userId} height="16vw">
+                    <StFont width="18vw" fontSize="1.5rem" align="start">
+                      {item.username}
+                    </StFont>
 
-                    <CommentBox>
-                      <span>권한</span> <br />
-                      <p>{item.role}</p>
-                    </CommentBox>
-                  
-                  <ManagementChange 
-                  item={item}
-                  />
+                    <Info>
+                      <CommentBox>
+                        <StSmallFont width>이메일</StSmallFont> <br />
+                        <StSmallFont width>{item.email}</StSmallFont>
+                      </CommentBox>
 
-                  </Info>
-                </InfoBox>
-              ))
-              :
-              <Skeleton/>}
-              <Skeleton/>
-            </InfoContain>
-          </StWrapDiv>
-        </StOverall>
+                      <CommentBox>
+                        <StSmallFont width>권한</StSmallFont> <br />
+                        <StSmallFont width>{item.role}</StSmallFont>
+                      </CommentBox>
+
+                      <ManagementChange item={item} />
+                    </Info>
+                  </InfoBox>
+                ))}
+              </InfoContain>
+            )}
+          </>
+        </StWrapDiv>
+      </StOverall>
     </>
   );
 }

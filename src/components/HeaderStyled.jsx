@@ -34,7 +34,7 @@ export const StHaderFont = styled.p`
   line-height: 19px;
   text-align: center;
 
-  color: #15161a;
+  color: var(--black);
 
   cursor: default;
 `;

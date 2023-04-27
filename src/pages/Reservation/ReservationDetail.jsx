@@ -20,7 +20,7 @@ import {
   ComFont,
 } from './CalendarStyled';
 import { useNavigate } from 'react-router-dom';
-import { StFont, StOverall, StWrapDiv } from '../Welcome/WelcomeStyled';
+import { StFont, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 
 function ReservationDetail() {
   // useFalseHook();
@@ -42,7 +42,7 @@ function ReservationDetail() {
   return (
     <>
       <StOverall>
-        <StWrapDiv>
+        <StWrapDiv margin>
           <ReservationTitle>
             <BackCusor
               onClick={() => {
@@ -57,23 +57,23 @@ function ReservationDetail() {
           </ReservationTitle>
           <InfoContain>
             {reservationDetail?.map(item => (
-              <InfoBox key={item.reservationId} height='16vw' >
+              <InfoBox key={item.reservationId} >
                 <StFont width='18vw' fontSize="1.5rem" align="start">
                   {item.username}
                 </StFont>
                 <Info>
                   <CommentBox>
-                    <ComFont>회의실 번호</ComFont>
-                    <div>{item.mrId}</div>
+                    <StSmallFont width>회의실 번호</StSmallFont>
+                    <StSmallFont width>{item.mrId}</StSmallFont>
                   </CommentBox>
 
                   <CommentBox>
-                    <ComFont>시작시간</ComFont>
-                    <div>{item.start.split('T')[1]}</div>
+                    <StSmallFont width>시작시간</StSmallFont>
+                    <StSmallFont width>{item.start.split('T')[1]}</StSmallFont>
                   </CommentBox>
                   <CommentBox>
-                    <ComFont>종료시간</ComFont>
-                    <div>{item.end.split('T')[1]}</div>
+                    <StSmallFont width>종료시간</StSmallFont>
+                    <StSmallFont width>{item.end.split('T')[1]}</StSmallFont>
                   </CommentBox>
                   <DelBtn onClick={() => deleteHandler(item.reservationId)}>
                     삭제

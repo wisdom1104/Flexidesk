@@ -13,6 +13,7 @@ import {
   DateFont,
 } from '../Reservation/CalendarStyled';
 import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
+import { StIntroDiv, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -90,32 +91,56 @@ function SchedulesCalendar() {
 
   return (
     <>
-      <SchContain>
-        <StCalenHeader>
-          <FontSt>스케줄 날짜</FontSt>
-          <Header>
-            <VscArrowCircleLeft
-              onClick={() => {
-                preMonth();
+      <StOverall>
+        <StWrapDiv margin>
+          <StIntroDiv>
+            <div
+              style={{
+                width: '32vw',
+                height:'20vw',
+                display: 'inline-block',
               }}
-            />
-            <DateFont>{selectYear}년</DateFont>
-            <DateFont>{selectMonth}월</DateFont>
-            <VscArrowCircleRight
-              onClick={() => {
-                nextMonth();
+            >
+              <SchContain>
+                <StCalenHeader>
+                  <StSmallFont width='15vw' align='start'>스케줄 날짜</StSmallFont>
+                  <br />
+                  <Header>
+                    <VscArrowCircleLeft
+                      onClick={() => {
+                        preMonth();
+                      }}
+                    />
+                    <DateFont>{selectYear}년</DateFont>
+                    <DateFont>{selectMonth}월</DateFont>
+                    <VscArrowCircleRight
+                      onClick={() => {
+                        nextMonth();
+                      }}
+                    />
+                  </Header>
+                </StCalenHeader>
+                <DayContain>
+                  {week?.map(item => {
+                    return <Day key={item}>{item}</Day>;
+                  })}
+                </DayContain>
+                <DayContain>{returnDay()}</DayContain>
+              </SchContain>
+            </div>
+
+            <div
+              style={{
+                width: '30vw',
+                height:'20vw',
+                display: 'inline-block',
               }}
-            />
-          </Header>
-        </StCalenHeader>
-        <DayContain>
-          {week?.map(item => {
-            return <Day key={item}>{item}</Day>;
-          })}
-        </DayContain>
-        <DayContain>{returnDay()}</DayContain>
-      </SchContain>
-      <SchedulesTime param={param.userId} selectDay={date} />
+            >
+              <SchedulesTime param={param.userId} selectDay={date} />
+            </div>
+          </StIntroDiv>
+        </StWrapDiv>
+      </StOverall>
     </>
   );
 }

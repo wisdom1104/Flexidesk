@@ -24,11 +24,16 @@ const SelectModal = ({ setIsModal, role, userId }) => {
 
   const [list, setList] = useState(false);
   const [fav, setFav] = useState(role);
-  console.log('role', fav);
+
   const dispatch = useDispatch();
 
   const closeModal = () => {
     setIsModal(false);
+  };
+
+  const onPatchButtonHandler = () => {
+    setIsModal(false);
+    dispatch(__patchAllManagement({ userId, role: fav , updateRole:true}));
   };
 
   return (
@@ -37,7 +42,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
         <MoveModalSubTitle width="65px">권한수정</MoveModalSubTitle> <br />
         <DropdownMenu>
           <DropdownButton onClick={e => setList(pre => !pre)}>
-            <div>{fav}</div>
+            {fav}
             <HiChevronDown />
           </DropdownButton>
           {list ? (
@@ -57,10 +62,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
           ) : null}
         </DropdownMenu>
         <MoveModalSubbtn
-          onClick={() => {
-            setIsModal(false);
-            dispatch(__patchAllManagement(userId));
-          }}
+          onClick={onPatchButtonHandler}
           width="80px"
           height="35px"
           left="18px"

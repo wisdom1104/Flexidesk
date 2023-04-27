@@ -24,14 +24,14 @@ export const StOverall = styled.div`
 `;
 
 export const StWrapDiv = styled.div`
-  width: 50vw;
+  width: ${props => props.width || '50vw'};
 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
-  margin: 120px;
+  margin: ${props => props.margin || '120px'};
 `;
 
 
@@ -41,7 +41,7 @@ export const StFont = styled.p`
   margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: 700;
-  font-size: ${props => props.fontSize || '3rem'};
+  font-size: ${props => props.fontSize || '4rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
 
@@ -57,25 +57,26 @@ export const StSmallFont = styled.p`
   height: ${props => props.height || ''};
   margin-bottom: ${props => props.marginBottom || ''};
   margin-top: ${props => props.marginTop || ''};
-
+  
   font-weight: ${props => props.weight || '500'};
-  font-size: ${props => props.fontSize || '1.125rem'};
+  font-size: ${props => props.fontSize || '1.25rem'};
   line-height: 200%;
   text-align: ${props => props.align || 'center'};
 
   color: ${props => props.color || '#6A7B8F'};
+
 `;
+
 
 //그라데이션 폰트
 export const StGradationFont = styled.p`
   width: ${props => props.width || '48vw'};
-  padding: 100px;
+  padding: 150px;
 
-  font-weight: 700;
-  font-size: ${props => props.fontSize || '3rem'};
+  font-weight: 800;
+  font-size: ${props => props.fontSize || '4rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
-
 
   background: linear-gradient(180deg, var(--blue) 15.36%, #ACDAD8 119.53%);
   -webkit-background-clip: text;
@@ -87,7 +88,7 @@ export const StGradationFont = styled.p`
 // 버튼
 export const StButtonGap = styled.div`
   position: absolute;
-  width: 600px;
+  width: 660px;
   height: 110px;
   margin-top: 250px;
 
@@ -100,7 +101,7 @@ export const StButtonGap = styled.div`
 `;
 
 export const StBlueButton = styled.button`
-  width: 312px;
+  width: 512px;
   height: 80px;
   left: 392px;
   top: 632px;
@@ -125,6 +126,7 @@ export const StBlueButton = styled.button`
     background: var(--blue);
   }
 `;
+///////////////////////////위에까진 스타일 나눠놓았음///////////
 
 // welcome 4
 export const StIntroArray = styled.div`
@@ -172,11 +174,12 @@ export const StSpaceDiv = styled.div`
 
 export const StSpacePagePhoto = styled.img`
   max-width: 100%;
-  height: auto;
-  width: 1200px;
+  height: ${props=> props.height || 'auto'};
+  width: ${props=> props.width || '1200px'};
+
   object-fit: contain;
 
-  margin-top: 40px;
+  margin-top: ${props=> props.marginTop || '40px'};
 
   display: flex;
   justify-content: center;

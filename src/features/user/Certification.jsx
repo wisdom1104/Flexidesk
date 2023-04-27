@@ -8,21 +8,8 @@ import {
   SterrorFont,
 } from '../../pages/user/UserStyled';
 
-function Certification({ admin, setAdmin, email }) {
-  const [emailError, setEmailError] = useState('');
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const handleEmailChange = event => {
-    const value = event.target.value;
-    setAdmin(prevState => ({ ...prevState, email: value }));
-
-    if (!emailRegex.test(value)) {
-      setEmailError('올바른 이메일 형식이 아닙니다.');
-    } else {
-      setEmailError('');
-    }
-  };
+function Certification({ admin, email ,onChange, errors}) {
+  
 
   const submitBtnHandler = async e => {
     e.preventDefault();
@@ -56,7 +43,7 @@ function Certification({ admin, setAdmin, email }) {
         <InlineInput
           type="email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={onChange}
           name="email"
           placeholder=" 이메일을 입력하세요."
           required
@@ -68,8 +55,9 @@ function Certification({ admin, setAdmin, email }) {
           value="인증받기"
         />
       </Container>
+
       <SterrorFont>
-        {emailError && (
+        {errors.email && (
           <StSmallFont
             width
             align="start"
@@ -77,7 +65,7 @@ function Certification({ admin, setAdmin, email }) {
             weight="400"
             color="red"
           >
-            {emailError}
+            {errors.email}
           </StSmallFont>
         )}
       </SterrorFont>

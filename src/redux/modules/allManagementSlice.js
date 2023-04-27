@@ -55,7 +55,8 @@ export const __deleteAllManagement = createAsyncThunk(
       console.log('patch payload:',payload)
       try{
         const token = cookies.get('token')
-        await api.patch(`/admin/users/${payload}`,payload,{
+        const userId = cookies.get('userId')
+        await api.patch(`/admin/users/${userId}`,payload,{
           headers:{
             Authorization:`Bearer ${token}`
           }

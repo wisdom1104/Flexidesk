@@ -27,29 +27,30 @@ function Welcome3() {
                   weight="700"
                   align="start"
                   width="100%"
+                  marginBottom='5vw'
                 >
                   업무 트렌드
                 </StSmallFont>
-                <StFont align="start" marginBottom="250px">
+                <StFont align="start" marginBottom='2vw' >
                   자율 좌석제
                 </StFont>
 
-                <StSmallFont marginBottom="120px" weight="600" align="start">
+                <StSmallFont weight="600" align="start">
                   팀이나 직급에 따라 자리를 배치해 독자적이고 수직적이었던{' '}
                   <br />
                   사무실 분위기가 자율좌석제 도입으로 <br />
                   상호보완적이고, 수평적인 분위기로 변화합니다.
                 </StSmallFont>
               </div>
-              {/* 도형 자리 */}
+              {/* 이미지 자리 */}
               <div
                 style={{
                   width: '577px',
-                  height: '700px',
+                  height: '260px',
                   display: 'inline-block',
                 }}
               >
-                <img src="img/GroupIcon2.png" alt="GroupIcon2" />
+                <img src="img/welcome2.png" alt="welcome2" />
               </div>
             </StIntroDiv>
           </StWrapDiv>

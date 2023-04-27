@@ -5,29 +5,15 @@ import {  MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import Modal from '../../components/Modal';
+import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { useModal } from '../../hooks/useModalHook';
 
 function ManagementChange({ item }) {
 
-  const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
+  const [isSelectModalOpen, openSelectModal, closeSelectModal] = useModal();
+  const [isDeleteModalOpen, openDeleteModal, closeDeleteModal] = useModal();
+  
   const dispatch = useDispatch();
-
-  const openSelectModal = () => {
-    setIsSelectModalOpen(true);
-  };
-
-  const closeSelectModal = () => {
-    setIsSelectModalOpen(false);
-  };
-
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
 
   const handleLogout = () => {
     dispatch(__deleteAllManagement(item.userId));
@@ -37,7 +23,7 @@ function ManagementChange({ item }) {
   return (
     <>
       <CommentBox>
-        <p>권한 변경</p>
+        <StSmallFont width>권한 변경</StSmallFont>
 
         <div 
         style={{

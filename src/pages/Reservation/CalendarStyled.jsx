@@ -5,6 +5,7 @@ export const ReservationTitle = styled.div`
   align-items: center;
   gap: 15px;
   margin-bottom: 20px;
+
 `;
 
 export const MainContain = styled.div`
@@ -34,23 +35,26 @@ export const StMrName = styled.div`
 export const StCalenHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 28vw;
 `;
 
 export const StReserTimeButton = styled.button`
   background-color: white;
   border-radius: 5px;
-  border: 1px solid #07133b;
-  margin: 2px;
-  padding: 5px;
+  border: 1px solid var(--blue);
+  margin: 5px;
+  padding: 8px;
   font-family: inherit;
   color: #07133b;
+  width: 5vw;
+
   &:hover {
     color: white;
-    background-color: #07133b;
+    background-color: var(--blue);
   }
   &:focus {
     color: white;
-    background-color: #07133b;
+    background-color: var(--blue);
   }
   &:disabled {
     color: lightgray;
@@ -62,13 +66,15 @@ export const StReserTimeButton = styled.button`
 export const StReserTimeBox = styled.div`
   background-color: white;
   padding: 10px;
+  /* width: 25vw; */
 `;
 
 export const StReserCountBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 50px;  
+
 `;
 
 export const StReserCountButton = styled.button`
@@ -132,6 +138,8 @@ export const DayContain = styled.div`
   display: flex;
   flex-wrap: wrap;
   background-color: white;
+
+  width: 35%;
 `;
 
 export const Day = styled.button`
@@ -140,7 +148,7 @@ export const Day = styled.button`
   border: 1px solid transparent;
   color: navy;
   font-family: inherit;
-  height: 3vh;
+  width: 3vw;
   align-items: flex-end;
   display: flex;
   justify-content: center;
@@ -156,7 +164,7 @@ export const StDate = styled.button`
   align-items: flex-start;
 `;
 export const SchContain = styled.div`
-  width: 100vw;
+  width: 80vw;
   height: 50vh;
 `;
 
@@ -214,7 +222,7 @@ export const CommentBox = styled.div`
   display: flex;
   width: 18vw;
   justify-content: space-between;
-  margin: 20px;
+  margin: 10px;
   border-bottom: 1px solid lightgray;
   padding-bottom: 10px;
 `;

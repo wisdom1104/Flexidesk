@@ -19,30 +19,25 @@ import {
   StOverall,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
+import { LoginFormValidation } from '../../hooks/useLoginHook';
 
 function Login() {
-  const [user, setUser] = useSignUp({
-    email: '',
-    password: '',
-  });
 
-  const onChangeHandler = e => {
-    const { value, name } = e.target;
-    setUser(old => {
-      return { ...old, [name]: value };
-    });
-  };
+  const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
+
+  const [isError, setIsError] = useState(false);
 
   const navi = useNavigate();
-  const [emailMsg, validEmail] = useValidEmail();
-  const [isError, setIsError] = useState(false);
 
   const onsubmitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/login', user);
-      console.log('login',response);
+      const response = await api.post('/users/login', login );
+      console.log(' try문 login response:',response);
+      if (!response) {
+        alert('다시 입력해주세요😓');
+        return;
+      }
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -65,23 +60,10 @@ function Login() {
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
+
     } catch (e) {
-      console.log('error',e);
       setIsError(true);
-    //   const status = e.response.status;
-    //   console.log('status상태값:',status);
-    //   let errorMsg = '';
-    //   switch (status) {
-    //     case 400:
-    //       errorMsg = '인증 정보가 올바르지 않습니다.';
-    //       break;
-    //     case 404:
-    //       errorMsg = '등록된 사용자가 없습니다.';
-    //       break;
-    //     default:
-    //       errorMsg = '알 수 없는 오류가 발생했습니다.';
-    //       break;
-    // }
+
       return Promise.reject(e);
     }
   };
@@ -121,11 +103,8 @@ function Login() {
 
                 <Input
                   type="email"
-                  value={user.email}
-                  onChange={e => {
-                    validEmail(e);
-                    setUser({ ...user, email: e.target.value });
-                  }}
+                  value={login.email}
+                  onChange={handleEmailChange}
                   name="email"
                   placeholder="이메일"
                   required
@@ -139,8 +118,8 @@ function Login() {
                 </StLoginIconDiv>
                 <Input
                   type="password"
-                  value={user.password}
-                  onChange={onChangeHandler}
+                  value={login.password}
+                  onChange={handlePasswordChange}
                   name="password"
                   placeholder="비밀번호"
                   required
