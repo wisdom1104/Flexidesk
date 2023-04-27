@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   StBoard,
   StBtn,
-  StSpace,
   StSubBtn,
   StSubHeader,
   Stmainspace,
@@ -17,6 +16,7 @@ import {
   useSpaceSelection,
 } from '../../hooks/useAdminSpaceHook';
 import AdminSelector from '../../features/adminSpace/AdminSelector';
+import Page from '../../components/Page';
 
 function AdminSpace() {
   const navi = useNavigate();
@@ -28,7 +28,7 @@ function AdminSpace() {
     useSpaceSelection(spaces);
 
   return (
-    <StSpace>
+    <Page>
       {/* 리스트 영역 */}
       <AdminList
         isModal={isModal}
@@ -84,7 +84,7 @@ function AdminSpace() {
           </Stmainspace>
         </>
       )}
-    </StSpace>
+    </Page>
   );
 }
 

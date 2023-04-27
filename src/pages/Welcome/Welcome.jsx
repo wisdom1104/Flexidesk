@@ -5,9 +5,7 @@ import Welcome5 from '../../features/welcome/Welcome5';
 import Welcome6 from '../../features/welcome/Welcome6';
 import Welcome7 from '../../features/welcome/Welcome7';
 
-
 function Welcome() {
-
   return (
     <>
       <Welcome1 />
@@ -19,7 +17,7 @@ function Welcome() {
       <Welcome6 />
       {/* ////////////////////////////////////////////////////////////////////////////////////// */}
       <Welcome7 />
-    </> 
+    </>
   );
 }
 

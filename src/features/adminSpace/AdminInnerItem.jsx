@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { Row } from '../../components/Flex';
-import { __deleteSpace, __editSpace } from '../../redux/modules/spaceSlice';
+import React from 'react';
 import {
   BoxBtn,
   BoxSubBtn,
   EditInput,
-  ListItem,
   StInner,
   StInnerItem,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
+import { useSpaceDeleteAndEdit } from '../../hooks/adminSpace/useAdminListHook';
 
 function AdminInnerItem({
   dispatch,
@@ -20,24 +18,14 @@ function AdminInnerItem({
   onDragOver,
   onDragEnd,
 }) {
-  // space 삭제
-  const onDeleteSpaceHandler = async spaceId => {
-    dispatch(__deleteSpace(spaceId));
-  };
-  //space name 수정
-  const [editSpaceName, setEditSpaceName] = useState(space.spaceName);
-  const [spaceEdit, setSpaceEdit] = useState(false);
-
-  //space name 수정 핸들러
-  const onEditSpaceNameHandler = async space => {
-    const payload = {
-      spaceId: space.spaceId,
-      spaceName: editSpaceName,
-      floorId: space.floorId,
-    };
-    dispatch(__editSpace(payload));
-    setSpaceEdit(!spaceEdit);
-  };
+  const {
+    onDeleteSpaceHandler,
+    onEditSpaceNameHandler,
+    spaceEdit,
+    setSpaceEdit,
+    editSpaceName,
+    setEditSpaceName,
+  } = useSpaceDeleteAndEdit(dispatch, space);
 
   return (
     <>

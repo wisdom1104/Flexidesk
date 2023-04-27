@@ -7,7 +7,7 @@ export const HeaderContain = styled.div`
   height: 6vh;
   /* min-width: 1200px; */
   /* max-width: 1200px; */
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
 `;

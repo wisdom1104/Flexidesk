@@ -14,12 +14,12 @@ import {
   StBtn,
   StListTitle,
   StListbox,
-  StSpace,
   StSpaceList,
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
 import { __getFloors } from '../../redux/modules/floorsSlice';
+import Page from '../../components/Page';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -58,7 +58,7 @@ function Space() {
   };
 
   return (
-    <StSpace>
+    <Page>
       {/* <Row> */}
       {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
@@ -153,7 +153,7 @@ function Space() {
           </Stmainspace>
         </>
       )}
-    </StSpace>
+    </Page>
   );
 }
 

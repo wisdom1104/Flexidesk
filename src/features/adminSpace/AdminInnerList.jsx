@@ -14,7 +14,7 @@ function AdminInnerList({
 }) {
   const dispatch = useDispatch();
 
-  // 그냥 space 추가
+  // inner space 추가
   const onClickAddSpaceHandler = async () => {
     const newSpace = {
       floorId: floor.floorId,

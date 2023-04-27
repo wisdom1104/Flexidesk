@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
