@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { __deleteBox, __editBox } from '../../redux/modules/spaceBoxSlice';
 import {
   BoxBtn,
   BoxInput,
   BoxSubBtn,
+  StBox,
   StBtnBox,
-  StDropBox,
 } from '../../shared/SpaceStyles';
+import { useBoxDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
 
 function AdminBoxItem({
   box,
@@ -20,34 +20,18 @@ function AdminBoxItem({
 }) {
   const dispatch = useDispatch();
 
-  //box 삭제
-  const onClickDeleteBoxHandler = async boxId => {
-    const payload = {
-      boxId,
-      spaceId,
-    };
-    dispatch(__deleteBox(payload));
-  };
-
-  //box name 수정
-  const [boxEdit, setBoxEdit] = useState(false);
-  const [editBoxName, setEditBoxName] = useState(box.boxName);
-
-  const onEditBoxNameHandler = async () => {
-    const payload = {
-      spaceId,
-      boxId: box.boxId,
-      boxName: editBoxName,
-      x: box.x,
-      y: box.y,
-    };
-    dispatch(__editBox(payload));
-    setBoxEdit(!boxEdit);
-  };
+  const {
+    onClickDeleteBoxHandler,
+    onEditBoxNameHandler,
+    boxEdit,
+    setBoxEdit,
+    editBoxName,
+    setEditBoxName,
+  } = useBoxDeleteAndEdit(dispatch, box, spaceId);
 
   return (
     <>
-      <StDropBox
+      <StBox
         key={box.boxId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -103,7 +87,7 @@ function AdminBoxItem({
             </StBtnBox>
           </>
         )}
-      </StDropBox>
+      </StBox>
     </>
   );
 }

@@ -25,8 +25,6 @@ import {
 } from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
 import SpaceBoxItem from './SpaceBoxItem';
-import SpaceUesrItem from './SpaceUesrItem';
-import SpaceMultiUesrItem from './SpaceMultiUesrItem';
 import SpaceMultiBoxItem from './SpaceMultiBoxItem';
 import SpaceMrItem from './SpaceMrItem';
 
@@ -177,7 +175,12 @@ function SpaceBox({ spaceId, selectedSpace }) {
                   선택하시겠습니까?
                 </MoveModalTitle>
                 <MoveModalList>
-                  <MoveModalItem>현재 인원</MoveModalItem>
+                  <MoveModalItem>
+                    현재 인원
+                    <div style={{ color: '#65bab6' }}>
+                      &nbsp;{moveBox.userlist.length}명
+                    </div>
+                  </MoveModalItem>
                   {moveBox.userlist.map(user => (
                     <MoveModalItem>
                       <ListDot />
@@ -209,26 +212,14 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 박스 */}
         {space?.map(item =>
           item.boxList?.length > 0
-            ? item.boxList.map(box => {
-                if (box.username !== null)
-                  return (
-                    <SpaceUesrItem
-                      key={box.boxId}
-                      box={box}
-                      onClickMoveUserHandler={onClickMoveUserHandler}
-                      isClicked={isClicked}
-                    />
-                  );
-                if (box.username === null)
-                  return (
-                    <SpaceBoxItem
-                      key={box.boxId}
-                      box={box}
-                      onClickMoveUserHandler={onClickMoveUserHandler}
-                      isClicked={isClicked}
-                    />
-                  );
-              })
+            ? item.boxList.map(box => (
+                <SpaceBoxItem
+                  key={box.boxId}
+                  box={box}
+                  onClickMoveUserHandler={onClickMoveUserHandler}
+                  isClicked={isClicked}
+                />
+              ))
             : null,
         )}
         {/* 회의실 */}
@@ -240,26 +231,14 @@ function SpaceBox({ spaceId, selectedSpace }) {
         {/* 공용공간 */}
         {space?.map(item =>
           item.multiBoxList?.length > 0
-            ? item.multiBoxList.map(multiBox => {
-                if (multiBox.userlist.length > 0)
-                  return (
-                    <SpaceMultiUesrItem
-                      key={multiBox.multiBoxId}
-                      multiBox={multiBox}
-                      onClickMoveUserHandler={onClickMoveMultiHandler}
-                      isClicked={isClicked}
-                    />
-                  );
-                if (multiBox.userlist.length === 0)
-                  return (
-                    <SpaceMultiBoxItem
-                      key={multiBox.multiBoxId}
-                      multiBox={multiBox}
-                      onClickMoveUserHandler={onClickMoveMultiHandler}
-                      isClicked={isClicked}
-                    />
-                  );
-              })
+            ? item.multiBoxList.map(multiBox => (
+                <SpaceMultiBoxItem
+                  key={multiBox.multiBoxId}
+                  multiBox={multiBox}
+                  onClickMoveUserHandler={onClickMoveMultiHandler}
+                  isClicked={isClicked}
+                />
+              ))
             : null,
         )}
       </StBoard>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { __deleteMr, __editMr } from '../../redux/modules/spaceMrSlice';
 import {
   BoxBtn,
   BoxInput,
   BoxSubBtn,
+  StBox,
   StBtnBox,
-  StDropBox,
 } from '../../shared/SpaceStyles';
+import { useMrDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
 
 function AdminMrItem({
   mr,
@@ -20,33 +20,18 @@ function AdminMrItem({
 }) {
   const dispatch = useDispatch();
 
-  // mr 삭제
-  const onClickDeleteMrHandler = async mrId => {
-    const payload = {
-      mrId,
-      spaceId,
-    };
-    dispatch(__deleteMr(payload));
-  };
-  //mr name 수정
-  const [mrEdit, setMrEdit] = useState(false);
-  const [editMrName, setEditMrName] = useState(mr.mrName);
-
-  const onEditMrNameHandler = async () => {
-    const payload = {
-      spaceId,
-      mrId: mr.mrId,
-      mrName: editMrName,
-      x: mr.x,
-      y: mr.y,
-    };
-    dispatch(__editMr(payload));
-    setMrEdit(!mrEdit);
-  };
+  const {
+    onClickDeleteMrHandler,
+    onEditMrNameHandler,
+    mrEdit,
+    setMrEdit,
+    editMrName,
+    setEditMrName,
+  } = useMrDeleteAndEdit(dispatch, mr, spaceId);
 
   return (
     <>
-      <StDropBox
+      <StBox
         key={mr.mrId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -102,7 +87,7 @@ function AdminMrItem({
             </StBtnBox>
           </>
         )}
-      </StDropBox>
+      </StBox>
     </>
   );
 }

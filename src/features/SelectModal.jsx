@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { HiChevronDown } from 'react-icons/hi2';
 import {
   ModalFullBackground,
@@ -46,7 +45,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
               <DropdownItem onClick={choose} value="ADMIN">
                 ADMIN
               </DropdownItem>
-              
+
               <DropdownItem
                 onClick={choose}
                 value="USER"
@@ -58,15 +57,15 @@ const SelectModal = ({ setIsModal, role, userId }) => {
           ) : null}
         </DropdownMenu>
         <MoveModalSubbtn
-          onClick={()=>{
+          onClick={() => {
             setIsModal(false);
-            dispatch(__patchAllManagement(userId))
+            dispatch(__patchAllManagement(userId));
           }}
           width="80px"
           height="35px"
           left="18px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding="8px, 16px, 8px, 16px"
         >
           수정하기
         </MoveModalSubbtn>
@@ -76,51 +75,13 @@ const SelectModal = ({ setIsModal, role, userId }) => {
           height="35px"
           left="100px"
           top="130px"
-          padding='8px, 16px, 8px, 16px'
+          padding="8px, 16px, 8px, 16px"
         >
           닫기
         </MoveModalbtn>
       </MoveModal>
     </ModalFullBackground>
   );
-  
 };
-                <DropdownItem
-                  onClick={choose}
-                  value="USER"
-                  borderRadius="0 0 8px 8px"
-                >
-                  USER
-                </DropdownItem>
-              </DropdownContent>
-            ) : null}
-          </DropdownMenu>
-          <MoveModalSubbtn
-            onClick={() => {
-              setIsModal(false);
-              dispatch(__patchAllManagement(userId));
-            }}
-            width="80px"
-            height="35px"
-            left="18px"
-            top="130px"
-            padding="8px, 16px, 8px, 16px"
-          >
-            수정하기
-          </MoveModalSubbtn>
-          <MoveModalbtn
-            onClick={closeModal}
-            width="79px"
-            height="35px"
-            left="100px"
-            top="130px"
-            padding="8px, 16px, 8px, 16px"
-          >
-            닫기
-          </MoveModalbtn>
-        </MoveModal>
-      </ModalFullBackground>
-    );
-  };
-};
+
 export default SelectModal;

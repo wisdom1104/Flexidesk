@@ -1,21 +1,5 @@
 import styled from 'styled-components';
 
-//space 페이지-----------------------------------------------------------
-export const StSpace = styled.div`
-  position: relative;
-  /* width: 1440px;
-  height: 810px; */
-  /* width: 100vw; */
-  height: 100vh;
-  max-width: 1200px;
-  min-width: 800px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  gap: 10px;
-`;
-
 // space 리스트------------------------------------------------------
 export const StListbox = styled.div`
   border-top: 1px solid #8b93a6;
@@ -201,11 +185,11 @@ export const StBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #8b93a6;
+  color: ${props => props.color || '#8b93a6'};
   //박스
-  position: absolute;
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
+  position: ${props => props.position || 'absolute'};
+  background: ${props => props.background || '#f1f2f4'};
+  border: 1px solid ${props => props.color || '#8b93a6'};
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -218,65 +202,8 @@ export const StBox = styled.div`
   gap: 20px;
   transform: ${props => props.transformValue};
   &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
-
-//선택된 박스
-export const ClickedBox = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  position: absolute;
-  background: #07133b;
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-// 유저 있는 박스
-export const StUserBox = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #65bab6;
-
-  //박스
-  position: absolute;
-  background: #def1ef;
-  border: 1px solid #65bab6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #ffffff;
+    background: ${props => props.hoverBackground || '#ffffff'};
+    border: 1px solid ${props => props.hoverColor || '#8b93a6'};
     font-weight: 700;
   }
 `;
@@ -318,34 +245,6 @@ export const StSelectTitle = styled.div`
   margin: 16px 13px;
 `;
 
-export const StSelectBox = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
 // 서브 헤더 ------------------------------------------------------
 export const StSubBtn = styled.button`
   //버튼
@@ -380,38 +279,6 @@ export const StSubBtn = styled.button`
   }
 `;
 
-// 박스
-export const StDropBox = styled.div`
-  //글자
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #8b93a6;
-  //박스
-  position: absolute;
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
-  border-radius: 4px;
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  cursor: grab;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  transform: ${props => props.transformValue};
-  &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
-    font-weight: 700;
-  }
-`;
-
 //버튼들
 export const StBtnBox = styled.div`
   display: flex;
@@ -426,7 +293,7 @@ export const BoxBtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 2px 7px;
+  padding: 2px 5px;
   height: 23px;
   background: #65bab6;
   border: 0.5px solid #5c6373;
@@ -458,7 +325,7 @@ export const BoxSubBtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 2px 7px;
+  padding: 2px 5px;
   height: 23px;
   background: #ffffff;
   border: 0.5px solid #65bab6;
@@ -797,7 +664,7 @@ export const ModalFullBackground = styled.div`
   background: rgba(0, 0, 0, 0.2);
   z-index: 50;
 
-  width: 100%;  
+  width: 100%;
   height: 99%;
   left: 1px;
   top: 78px;

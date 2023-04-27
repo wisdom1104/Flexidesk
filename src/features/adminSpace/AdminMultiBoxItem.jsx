@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
   BoxBtn,
   BoxInput,
   BoxSubBtn,
+  StBox,
   StBtnBox,
-  StDropBox,
 } from '../../shared/SpaceStyles';
-import {
-  __deleteMultiBox,
-  __editMultiBox,
-} from '../../redux/modules/MultiBoxSlice';
+import { useMultiBoxDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
 
 function AdminMultiBoxItem({
   multiBox,
@@ -23,36 +20,18 @@ function AdminMultiBoxItem({
 }) {
   const dispatch = useDispatch();
 
-  //multiBox 삭제
-  const onClickDeleteBoxHandler = async multiBoxId => {
-    const payload = {
-      multiBoxId,
-      spaceId,
-    };
-    dispatch(__deleteMultiBox(payload));
-  };
-
-  //multiBox name 수정
-  const [multiBoxEdit, setMultiBoxEdit] = useState(false);
-  const [editMultiBoxName, setEditMultiBoxName] = useState(
-    multiBox.multiBoxName,
-  );
-
-  const onEditBoxNameHandler = async () => {
-    const payload = {
-      spaceId,
-      multiBoxId: multiBox.multiBoxId,
-      multiBoxName: editMultiBoxName,
-      x: multiBox.x,
-      y: multiBox.y,
-    };
-    dispatch(__editMultiBox(payload));
-    setMultiBoxEdit(!multiBoxEdit);
-  };
+  const {
+    onClickDeleteBoxHandler,
+    onEditBoxNameHandler,
+    multiBoxEdit,
+    setMultiBoxEdit,
+    editMultiBoxName,
+    setEditMultiBoxName,
+  } = useMultiBoxDeleteAndEdit(dispatch, multiBox, spaceId);
 
   return (
     <>
-      <StDropBox
+      <StBox
         key={multiBox.multiBoxId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -108,7 +87,7 @@ function AdminMultiBoxItem({
             </StBtnBox>
           </>
         )}
-      </StDropBox>
+      </StBox>
     </>
   );
 }
