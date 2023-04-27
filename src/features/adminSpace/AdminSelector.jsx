@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StBox,
-  StSelect,
-  StSelectBox,
-  StSelectTitle,
-} from '../../shared/SpaceStyles';
+import { StBox, StSelect, StSelectTitle } from '../../shared/SpaceStyles';
 
 function AdminSelector({ mrBoxes, boxes, multiBoxes, elRef, handleDragStart }) {
   return (
