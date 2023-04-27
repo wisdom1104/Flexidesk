@@ -83,6 +83,18 @@ function ReservationTime({ param, selectDay }) {
     // setChoseReservationTime(!choseReservationTime);
   };
 
+  const userClickHandler = e => {
+    if (userInfo.find(item => item === e.target.value)) {
+      return (
+        setUserInfo(userInfo.filter(item => item !== e.value.tartget)),
+        setUserIdInfo(userIdInfo.filter(item => item !== e.target.value))
+      );
+    } else {
+      setUserInfo([...userInfo, e.target.value]);
+      setUserIdInfo([...userIdInfo, e.value.target]);
+    }
+  };
+
   useEffect(() => {
     if (selectDay) {
       dispatch(__getReservation({ param, selectDay }));
@@ -126,8 +138,21 @@ function ReservationTime({ param, selectDay }) {
           {userData?.map(item => (
             <div
               onClick={e => {
-                setUserInfo([...userInfo, { username: item.username }]);
-                setUserIdInfo([...userIdInfo, { userId: item.userId }]);
+                const clickUserId = item.userId;
+                if (userIdInfo.find(item => item.userId === clickUserId)) {
+                  return (
+                    setUserInfo(
+                      userInfo.filter(user => user.username !== item.username),
+                    ),
+                    setUserIdInfo(
+                      userIdInfo.filter(user => user.userId !== item.userId),
+                    )
+                  );
+                } else {
+                  console.log(userId);
+                  setUserInfo([...userInfo, { username: item.username }]);
+                  setUserIdInfo([...userIdInfo, { userId: item.userId }]);
+                }
               }}
               key={item.userId}
             >
