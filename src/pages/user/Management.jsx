@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import React, { useEffect, useState } from 'react';
+import { StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
@@ -32,62 +32,68 @@ function Management() {
     } else if (role !== 'ADMIN') {
       navi('/');
     } else {
-      setTimeout(() => {
-        dispatch(__getAllManagement());
-        setShowSkeleton(false);
-      }, 2000);
+      const loadData = async () => {
+        try {
+          dispatch(__getAllManagement());
+          setShowSkeleton(false);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const timer = setTimeout(() => {
+        loadData();
+      }, 4000);
+
+      return () => clearTimeout(timer);
     }
-    return () => clearTimeout();
   }, []);
 
   return (
     <>
-        <StOverall>
-          <StWrapDiv>
+      <StOverall>
+        <StWrapDiv margin>
           <ReservationTitle>
             <StFont width="80vw" fontSize="2rem" align="start">
-            사용자 관리
+              사용자 관리
             </StFont>
           </ReservationTitle>
 
-          {showSkeleton ? (
-             [...Array(userList?.length || 3)].map((_, index) => (
+          <>
+            {!isLoading ? (
               <InfoContain>
-              <Skeleton key={index} />
+                <Skeleton />
               </InfoContain>
-            ))
-          ) : (
+            ) : isError ? (
+              <div>에러가 발생했습니다...</div>
+            ) : (
               <InfoContain>
-              {userList?
-              userList.map(item => (
+                {userList.map(item => (
+                  <InfoBox key={item.userId} height="16vw">
+                    <StFont width="18vw" fontSize="1.5rem" align="start">
+                      {item.username}
+                    </StFont>
 
-                <InfoBox key={item.userId} height='16vw' >
-                  <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
-                  
-                  <Info>
-                    <CommentBox>
-                      <span>이메일</span> <br />
-                      <p>{item.email}</p>
-                    </CommentBox>
+                    <Info>
+                      <CommentBox>
+                        <StSmallFont>이메일</StSmallFont> <br />
+                        <StSmallFont>{item.email}</StSmallFont>
+                      </CommentBox>
 
-                    <CommentBox>
-                      <span>권한</span> <br />
-                      <p>{item.role}</p>
-                    </CommentBox>
-                  
-                  <ManagementChange 
-                  item={item}
-                  />
+                      <CommentBox>
+                        <StSmallFont>권한</StSmallFont> <br />
+                        <StSmallFont>{item.role}</StSmallFont>
+                      </CommentBox>
 
-                  </Info>
-                </InfoBox>
-              ))
-              :
-              <Skeleton/>}
-            </InfoContain>
+                      <ManagementChange item={item} />
+                    </Info>
+                  </InfoBox>
+                ))}
+              </InfoContain>
             )}
-          </StWrapDiv>
-        </StOverall>
+          </>
+        </StWrapDiv>
+      </StOverall>
     </>
   );
 }

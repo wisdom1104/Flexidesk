@@ -4,7 +4,7 @@ import { StFont, StSmallFont, StOverall, StWrapDiv } from '../../pages/Welcome/W
 function Welcome2() {
   return (
     <>
-      <StOverall>
+      <StOverall height='20vw'>
         <StWrapDiv>
           <div
             style={{

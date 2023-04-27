@@ -31,7 +31,7 @@ function SchedulesDetail() {
 
   return (
     <StOverall>
-      <StWrapDiv>
+      <StWrapDiv margin>
         <ReservationTitle>
           <BackCusor
             onClick={() => {

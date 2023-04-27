@@ -42,7 +42,7 @@ function ReservationDetail() {
   return (
     <>
       <StOverall>
-        <StWrapDiv>
+        <StWrapDiv margin>
           <ReservationTitle>
             <BackCusor
               onClick={() => {

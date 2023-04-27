@@ -5,6 +5,7 @@ export const ReservationTitle = styled.div`
   align-items: center;
   gap: 15px;
   margin-bottom: 20px;
+
 `;
 
 export const MainContain = styled.div`
@@ -39,18 +40,18 @@ export const StCalenHeader = styled.div`
 export const StReserTimeButton = styled.button`
   background-color: white;
   border-radius: 5px;
-  border: 1px solid #07133b;
+  border: 1px solid var(--blue);
   margin: 2px;
   padding: 5px;
   font-family: inherit;
   color: #07133b;
   &:hover {
     color: white;
-    background-color: #07133b;
+    background-color: var(--blue);
   }
   &:focus {
     color: white;
-    background-color: #07133b;
+    background-color: var(--blue);
   }
   &:disabled {
     color: lightgray;
@@ -214,7 +215,7 @@ export const CommentBox = styled.div`
   display: flex;
   width: 18vw;
   justify-content: space-between;
-  margin: 20px;
+  margin: 10px;
   border-bottom: 1px solid lightgray;
   padding-bottom: 10px;
 `;

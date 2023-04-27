@@ -41,7 +41,7 @@ export const Input = ({type, value, onChange, name, placeholder, ...restProps}) 
     border: 1px solid #65BAB6;
   }
   &:active {
-    border: 1px solid #07133B;
+    border: 1px solid var(--blue);
   }
 
 `

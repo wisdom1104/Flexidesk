@@ -31,7 +31,7 @@ export const StWrapDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin: 120px;
+  margin: ${props => props.margin || '120px'};
 `;
 
 
@@ -125,6 +125,7 @@ export const StBlueButton = styled.button`
     background: var(--blue);
   }
 `;
+///////////////////////////위에까진 스타일 나눠놓았음///////////
 
 // welcome 4
 export const StIntroArray = styled.div`

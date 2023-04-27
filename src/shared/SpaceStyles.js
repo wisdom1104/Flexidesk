@@ -9,7 +9,7 @@ export const StSpace = styled.div`
   height: 100vh;
   max-width: 1200px;
   min-width: 800px;
-  background-color: #ffffff;
+  background-color: var(--white);
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -18,8 +18,8 @@ export const StSpace = styled.div`
 
 // space 리스트------------------------------------------------------
 export const StListbox = styled.div`
-  border-top: 1px solid #8b93a6;
-  border-bottom: 1px solid #8b93a6;
+  border-top: 1px solid var(--darkgrey);
+  border-bottom: 1px solid var(--darkgrey);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +50,7 @@ export const StSpaceList = styled.div`
 
   /* 스크롤바 썸네일 스타일 변경 */
   ::-webkit-scrollbar-thumb {
-    background: #8b93a6;
+    background: var(--darkgrey);
     border-radius: 50px; /* 스크롤바 모양 */
   }
 `;
@@ -65,7 +65,7 @@ export const StListTitle = styled.div`
   color: #000000;
   margin: 16px;
 
-  /* color: #ffffff; */
+  /* color: var(--white); */
 `;
 
 export const SpaceInnerList = styled.div`
@@ -127,7 +127,7 @@ export const SubTitle = styled.div`
   gap: 67px;
   margin: 16px;
   margin-right: 0px;
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid #b4bac6;
   border-radius: 8px;
   align-items: center;
@@ -166,7 +166,7 @@ export const StBtn = styled.button`
   font-size: 16px;
   line-height: 19px;
   text-align: right;
-  color: #ffffff;
+  color: var(--white);
   &:hover {
     background: #65bab6;
     color: #def1ef;
@@ -201,11 +201,11 @@ export const StBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #8b93a6;
+  color: var(--darkgrey);
   //박스
   position: absolute;
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
+  background: var(--lightgrey);
+  border: 1px solid var(--darkgrey);
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -218,8 +218,8 @@ export const StBox = styled.div`
   gap: 20px;
   transform: ${props => props.transformValue};
   &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
+    background: var(--white);
+    border: 1px solid var(--darkgrey);
     font-weight: 700;
   }
 `;
@@ -233,11 +233,11 @@ export const ClickedBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #8b93a6;
+  color: var(--darkgrey);
   //박스
   position: absolute;
-  background: #07133b;
-  border: 1px solid #8b93a6;
+  background: var(--blue);
+  border: 1px solid var(--darkgrey);
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -276,7 +276,7 @@ export const StUserBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #ffffff;
+    background: var(--white);
     font-weight: 700;
   }
 `;
@@ -314,7 +314,7 @@ export const StSelectTitle = styled.div`
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #ffffff;
+  color: var(--white);
   margin: 16px 13px;
 `;
 
@@ -326,10 +326,10 @@ export const StSelectBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #8b93a6;
+  color: var(--darkgrey);
   //박스
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
+  background: var(--lightgrey);
+  border: 1px solid var(--darkgrey);
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -341,8 +341,8 @@ export const StSelectBox = styled.div`
   align-items: center;
   gap: 20px;
   &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
+    background: var(--white);
+    border: 1px solid var(--darkgrey);
     font-weight: 700;
   }
 `;
@@ -370,12 +370,12 @@ export const StSubBtn = styled.button`
   color: #65bab6;
   &:hover {
     border: 1px solid #65bab6;
-    background: #ffffff;
+    background: var(--white);
     color: #65bab6;
   }
   &:active {
     border: 1px solid #4a8e8b;
-    background: #ffffff;
+    background: var(--white);
     color: #4a8e8b;
   }
 `;
@@ -389,11 +389,11 @@ export const StDropBox = styled.div`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #8b93a6;
+  color: var(--darkgrey);
   //박스
   position: absolute;
-  background: #f1f2f4;
-  border: 1px solid #8b93a6;
+  background: var(--lightgrey);
+  border: 1px solid var(--darkgrey);
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -406,8 +406,8 @@ export const StDropBox = styled.div`
   gap: 20px;
   transform: ${props => props.transformValue};
   &:hover {
-    background: #ffffff;
-    border: 1px solid #8b93a6;
+    background: var(--white);
+    border: 1px solid var(--darkgrey);
     font-weight: 700;
   }
 `;
@@ -440,7 +440,7 @@ export const BoxBtn = styled.button`
   font-size: 14px;
   line-height: 17px;
   text-align: right;
-  color: #ffffff;
+  color: var(--white);
   &:hover {
     color: #def1ef;
     font-weight: 700;
@@ -460,7 +460,7 @@ export const BoxSubBtn = styled.button`
   align-items: center;
   padding: 2px 7px;
   height: 23px;
-  background: #ffffff;
+  background: var(--white);
   border: 0.5px solid #65bab6;
   border-radius: 4px;
   cursor: pointer;
@@ -487,7 +487,7 @@ export const BoxSubBtn = styled.button`
 
 //잔상
 export const StDrag = styled.div`
-  background: #8b93a6;
+  background: var(--darkgrey);
   border-radius: 4px;
   opacity: 0.2;
   width: 90px;
@@ -501,13 +501,13 @@ export const StDrag = styled.div`
 
 export const BoxInput = styled.input`
   width: 80px;
-  background: #ffffff;
-  border: 1px solid #8b93a6;
+  background: var(--white);
+  border: 1px solid var(--darkgrey);
   box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25);
   border-radius: 2px;
   &:focus {
     outline: none;
-    /* border: 2px solid #8b93a6; */
+    /* border: 2px solid var(--darkgrey); */
   }
 `;
 
@@ -531,7 +531,7 @@ export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #ffffff;
+  background: var(--white);
   border-radius: 8px;
   padding: 2px;
   width: 326px;
@@ -576,7 +576,7 @@ export const ModalTitle = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
-  color: #314563;
+  color: var(--darkblue);
 `;
 
 export const Modalbtn = styled.button`
@@ -616,7 +616,7 @@ export const StAddBtn = styled.button`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #ffffff;
+  color: var(--white);
   &:hover {
     background: #65bab6;
     color: #def1ef;
@@ -641,7 +641,7 @@ export const StList = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border: 1px solid #c9cdd6;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   width: 290px;
   height: 45px;
@@ -678,7 +678,7 @@ export const StOpenList = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid #c9cdd6;
   border-radius: 8px 8px 0px 0px;
   width: 290px;
@@ -693,8 +693,8 @@ export const StInnerList = styled.div`
   box-sizing: border-box;
   width: 290px;
   /* height: 217px; */
-  background: #f1f2f4;
-  border: 1px solid #f1f2f4;
+  background: var(--lightgrey);
+  border: 1px solid var(--lightgrey);
   border-radius: 0px 0px 8px 8px;
   display: flex;
   flex-direction: column;
@@ -723,12 +723,12 @@ export const StAddInnerBtn = styled.button`
   color: #65bab6;
   &:hover {
     border: 1px solid #65bab6;
-    background: #ffffff;
+    background: var(--white);
     color: #65bab6;
   }
   &:active {
     border: 1px solid #4a8e8b;
-    background: #ffffff;
+    background: var(--white);
     color: #4a8e8b;
   }
 `;
@@ -760,7 +760,7 @@ export const EditInput = styled.input`
   padding: 5px;
   /* margin-left: 29px; */
   outline: none;
-  border: 1px solid #8b93a6;
+  border: 1px solid var(--darkgrey);
   border-radius: 2px;
 `;
 
@@ -833,7 +833,7 @@ export const MoveModalSubTitle = styled.div`
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #8b93a6;
+  color: var(--darkgrey);
 `;
 
 export const MoveModalTitle = styled.div`
@@ -848,7 +848,7 @@ export const MoveModalTitle = styled.div`
   font-size: 18px;
   line-height: 150%;
   text-align: center;
-  color: #07133b;
+  color: var(--blue);
 `;
 
 export const MoveModalbtn = styled.button`
@@ -872,7 +872,7 @@ export const MoveModalbtn = styled.button`
   font-size: 14px;
   line-height: 17px;
   text-align: right;
-  color: #ffffff;
+  color: var(--white);
   &:hover {
     background: #65bab6;
     color: #def1ef;
@@ -907,12 +907,12 @@ export const MoveModalSubbtn = styled.button`
   color: #65bab6;
   &:hover {
     border: 1px solid #65bab6;
-    background: #ffffff;
+    background: var(--white);
     color: #65bab6;
   }
   &:active {
     border: 1px solid #4a8e8b;
-    background: #ffffff;
+    background: var(--white);
     color: #4a8e8b;
   }
 `;
@@ -940,7 +940,7 @@ export const MoveModalErrorbtn = styled.button`
   font-size: 14px;
   line-height: 17px;
   text-align: right;
-  color: #ffffff;
+  color: var(--white);
   &:hover {
     background: #65bab6;
     color: #def1ef;
@@ -965,8 +965,8 @@ export const MoveModalList = styled.div`
   gap: 5px;
   overflow: scroll;
   overflow-x: hidden;
-  border-top: 1px solid #f1f2f4;
-  border-bottom: 1px solid #f1f2f4;
+  border-top: 1px solid var(--lightgrey);
+  border-bottom: 1px solid var(--lightgrey);
   /* 스크롤바 스타일 변경 */
   ::-webkit-scrollbar {
     width: 5px; /* 스크롤바 너비 */

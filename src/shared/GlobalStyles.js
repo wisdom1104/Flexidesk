@@ -40,10 +40,6 @@ body {
 
     --white : #ffffff;
 
-    /* --line: #eaeaea;
-		--white : #ffffff;
-		--point : #ffcccc;
-		--notice : #ff7776; */
   };
 `
 

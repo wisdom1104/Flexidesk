@@ -83,7 +83,7 @@ export const StSmallButton = styled.button`
   gap: 10px;
   margin-top: 10px;
 
-  background: #f1f2f4;
+  background: var(--lightgrey);
   border: 1px solid #a6aebb;
 
   border-radius: 4px;
@@ -124,7 +124,7 @@ font-size: 14px;
 line-height: 14px;
 text-align: end;
 
-color: #8B93A6;
+color: var(--darkgrey);
 
 `
 
@@ -171,7 +171,7 @@ export const InlineInput = styled.input`
     border: 1px solid #65bab6;
   }
   &:active {
-    border: 1px solid #07133b;
+    border: 1px solid var(--blue);
   }
 `;
 
