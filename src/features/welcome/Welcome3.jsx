@@ -41,15 +41,15 @@ function Welcome3() {
                   상호보완적이고, 수평적인 분위기로 변화합니다.
                 </StSmallFont>
               </div>
-              {/* 도형 자리 */}
+              {/* 이미지 자리 */}
               <div
                 style={{
                   width: '577px',
-                  height: '700px',
+                  height: '260px',
                   display: 'inline-block',
                 }}
               >
-                <img src="img/GroupIcon2.png" alt="GroupIcon2" />
+                <img src="img/welcome2.png" alt="welcome2" />
               </div>
             </StIntroDiv>
           </StWrapDiv>

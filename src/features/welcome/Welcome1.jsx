@@ -47,7 +47,7 @@ function Welcome1() {
              </StSmallFont>
            </div>
 
-           {/* 도형 자리 */}
+           {/* 이미지 자리 */}
            <div
              style={{
                width: '30vw',
@@ -55,7 +55,7 @@ function Welcome1() {
                display: 'inline-block',
              }}
            >
-             <img src="img/GroupIcon1.png" alt="GroupIcon1" />
+             <img src="img/welcome1.png" alt="welcome1" />
            </div>
            </>
 
@@ -104,11 +104,11 @@ function Welcome1() {
               <div
                 style={{
                   width: '30vw',
-                  height: '40vh',
+                  height: '30vh',
                   display: 'inline-block',
                 }}
               >
-                <img src="img/GroupIcon1.png" alt="GroupIcon1" />
+             <img src="img/welcome1.png" alt="welcome1" />
               </div>
               </>
               )}

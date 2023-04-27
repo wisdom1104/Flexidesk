@@ -60,7 +60,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
         <MoveModalSubbtn
           onClick={()=>{
             setIsModal(false);
-            dispatch(__patchAllManagement(userId))
+            dispatch(__patchAllManagement({userId, role:fav}))
           }}
           width="80px"
           height="35px"

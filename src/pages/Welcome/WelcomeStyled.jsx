@@ -41,7 +41,7 @@ export const StFont = styled.p`
   margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: 700;
-  font-size: ${props => props.fontSize || '3rem'};
+  font-size: ${props => props.fontSize || '4rem'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
 
@@ -88,7 +88,7 @@ export const StGradationFont = styled.p`
 // 버튼
 export const StButtonGap = styled.div`
   position: absolute;
-  width: 600px;
+  width: 660px;
   height: 110px;
   margin-top: 250px;
 
@@ -101,7 +101,7 @@ export const StButtonGap = styled.div`
 `;
 
 export const StBlueButton = styled.button`
-  width: 312px;
+  width: 512px;
   height: 80px;
   left: 392px;
   top: 632px;

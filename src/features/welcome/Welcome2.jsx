@@ -4,7 +4,7 @@ import { StFont, StSmallFont, StOverall, StWrapDiv } from '../../pages/Welcome/W
 function Welcome2() {
   return (
     <>
-      <StOverall height='20vw'>
+      <StOverall height='40vw'>
         <StWrapDiv>
           <div
             style={{
@@ -13,7 +13,6 @@ function Welcome2() {
               gap: '40px',
             }}
           >
-            <StFont>🤔</StFont>
             <StFont>
               이런 고민을 하고 있다면, <br /> Flexidesk를 시작하세요!
             </StFont>

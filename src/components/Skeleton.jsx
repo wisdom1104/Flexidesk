@@ -28,8 +28,8 @@ export default Skeleton;
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.width || '25vw'};
-  height: ${props => props.height || '17vw'};
+  width: ${props => props.width || '50vw'};
+  height: ${props => props.height || '30vw'};
   margin: 1em;
   border: 1px solid #e8e7e6;
   border-radius: 0.5em;

@@ -12,6 +12,7 @@ function Welcome7() {
               <StFont>
                 간단한 회원가입으로 <br /> Flexidesk의 솔루션 만나보세요.
               </StFont>
+              <img src="img/welcome3.png" alt="welcome3" />
             </StfontA>
           </StWrapDiv>
         </StOverall>
