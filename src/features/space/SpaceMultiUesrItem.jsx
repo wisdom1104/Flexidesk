@@ -8,12 +8,10 @@ function SpaceMultiUesrItem({ multiBox, onClickMoveUserHandler, isClicked }) {
         <ClickedBox
           key={multiBox.multiBoxId}
           id={multiBox.multiBoxId}
-          style={{
-            transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(multiBox);
           }}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
           <div>{multiBox.multiBoxName}</div>
           <StUser>{multiBox.username}</StUser>
@@ -22,18 +20,20 @@ function SpaceMultiUesrItem({ multiBox, onClickMoveUserHandler, isClicked }) {
         <StUserBox
           key={multiBox.multiBoxId}
           id={multiBox.multiBoxId}
-          style={{
-            transform: `translate(${multiBox.x}px, ${multiBox.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(multiBox);
           }}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
           <div>{multiBox.multiBoxName}</div>
-          {/* <div>{multiBox.multiBoxId}</div> */}
-          <div>
-            {multiBox.userlist[0].username}외 {multiBox.userlist.length - 1}명
-          </div>
+          {multiBox.userlist.length > 1 ? (
+            <StUser>
+              {multiBox.userlist[0].username}외 {multiBox.userlist.length - 1}명
+            </StUser>
+          ) : (
+            <StUser>{multiBox.userlist[0].username}</StUser>
+          )}
+          {/* <StUser>{multiBox.userlist.length}명</StUser> */}
         </StUserBox>
       )}
     </>

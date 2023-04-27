@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StBox } from '../../shared/SpaceStyles';
+import { StBox, StUser } from '../../shared/SpaceStyles';
 
 function SpaceMrItem({ mr, navi }) {
   const start = mr.reservationList?.map(reservation => reservation.start);
@@ -53,21 +53,24 @@ function SpaceMrItem({ mr, navi }) {
                         key={mr.mrId}
                         style={{
                           backgroundColor: '#ffc8c8',
-                          transform: `translate(${mr.x}px, ${mr.y}px)`,
+                          color: '#FF5454',
                         }}
                         onClick={() => navi(`/calender/${mr.mrId}`)}
+                        transformValue={`translate(${mr.x}px, ${mr.y}px)`}
                       >
-                        <div>
+                        {/* <div>
                           현재시각 <br />
                           예약있는 <br />
                           회의실
-                        </div>
+                        </div> */}
+                        <div>{mr.mrName}</div>
+                        <StUser>사용중</StUser>
                       </StBox>
                     ) : (
                       <StBox
                         key={mr.mrId}
-                        style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                         onClick={() => navi(`/calender/${mr.mrId}`)}
+                        transformValue={`translate(${mr.x}px, ${mr.y}px)`}
                       >
                         <div>{mr.mrName}</div>
                       </StBox>
@@ -78,8 +81,8 @@ function SpaceMrItem({ mr, navi }) {
             ) : (
               <StBox
                 key={mr.mrId}
-                style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
                 onClick={() => navi(`/calender/${mr.mrId}`)}
+                transformValue={`translate(${mr.x}px, ${mr.y}px)`}
               >
                 <div>{mr.mrName}</div>
               </StBox>
@@ -89,8 +92,8 @@ function SpaceMrItem({ mr, navi }) {
       ) : (
         <StBox
           key={mr.mrId}
-          style={{ transform: `translate(${mr.x}px, ${mr.y}px)` }}
           onClick={() => navi(`/calender/${mr.mrId}`)}
+          transformValue={`translate(${mr.x}px, ${mr.y}px)`}
         >
           <div>{mr.mrName}</div>
         </StBox>

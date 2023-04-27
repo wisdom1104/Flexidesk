@@ -8,12 +8,10 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
         <ClickedBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
           <div>{box.boxName}</div>
         </ClickedBox>
@@ -21,12 +19,10 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
         <StBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
           <div>{box.boxName}</div>
           {/* <div>{box.boxId}</div> */}
