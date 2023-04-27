@@ -68,8 +68,9 @@ function Login() {
     } catch (e) {
       console.log('error',e);
       setIsError(true);
-      // const status = e.response.status;
-      // let errorMsg = '';
+    //   const status = e.response.status;
+    //   console.log('status상태값:',status);
+    //   let errorMsg = '';
     //   switch (status) {
     //     case 400:
     //       errorMsg = '인증 정보가 올바르지 않습니다.';

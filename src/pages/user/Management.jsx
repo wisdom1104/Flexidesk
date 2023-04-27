@@ -1,10 +1,9 @@
 import React, { useEffect} from 'react';
-import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import {  StFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
-import SelectModal from '../../features/SelectModal';
 import { StOverall } from './UserStyled';
 import {
   CommentBox,
@@ -13,19 +12,10 @@ import {
   InfoContain,
   ReservationTitle,
 } from '../Reservation/CalendarStyled';
-import ManagementChange from './ManagementChange';
+import ManagementChange from '../../features/user/ManagementChange';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-
-  /////////////////////test/////////////////////////////////////
-  // const handleRoleUpdate = (userId) => {
-  //   const updatedUserList = [...userList];
-  //   const updatedUser = updatedUserList.find((user) => user.allManagementId === userId);
-  //   TODO: 서버에 업데이트 요청 보내는 로직 추가
-  //   setUserList(updatedUserList);
-  // };
-  /////////////////////test/////////////////////////////////////
 
   const dispatch = useDispatch();
   const navi = useNavigate();

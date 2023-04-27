@@ -7,7 +7,7 @@ import {
   StSmallFont,
   StSpaceDiv,
   StSpacePagePhoto,
-} from './WelcomeStyled';
+} from '../../pages/Welcome/WelcomeStyled';
 
 function Welcome5() {
   return (

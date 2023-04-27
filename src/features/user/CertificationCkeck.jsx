@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../axios/api';
-import {  Container, InlinButton, InlineInput } from './UserStyled';
-import { StSmallFont } from '../Welcome/WelcomeStyled';
+import {  Container, InlinButton, InlineInput } from '../../pages/user/UserStyled';
+import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
 
 function CertificationCkeck({ user,certification, onChange }) {
 

@@ -66,7 +66,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           height="35px"
           left="18px"
           top="130px"
-          padding='8px 16px 8px 16px'
+          padding='8px, 16px, 8px, 16px'
         >
           수정하기
         </MoveModalSubbtn>
@@ -76,7 +76,7 @@ const SelectModal = ({ setIsModal, role ,userId}) => {
           height="35px"
           left="100px"
           top="130px"
-          padding='8px 16px 8px 16px'
+          padding='8px, 16px, 8px, 16px'
         >
           닫기
         </MoveModalbtn>
