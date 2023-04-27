@@ -19,29 +19,20 @@ import {
   StOverall,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { useValidEmail, useSignUp } from '../../hooks/useSignUpHook';
+import { LoginFormValidation } from '../../hooks/useLoginHook';
 
 function Login() {
-  const [user, setUser] = useSignUp({
-    email: '',
-    password: '',
-  });
 
-  const onChangeHandler = e => {
-    const { value, name } = e.target;
-    setUser(old => {
-      return { ...old, [name]: value };
-    });
-  };
+  const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
+
+  const [isError, setIsError] = useState(false);
 
   const navi = useNavigate();
-  const [emailMsg, validEmail] = useValidEmail();
-  const [isError, setIsError] = useState(false);
 
   const onsubmitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/login', user );
+      const response = await api.post('/users/login', login );
       console.log(' try문 login response:',response);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
@@ -123,11 +114,8 @@ function Login() {
 
                 <Input
                   type="email"
-                  value={user.email}
-                  onChange={e => {
-                    validEmail(e);
-                    setUser({ ...user, email: e.target.value });
-                  }}
+                  value={login.email}
+                  onChange={handleEmailChange}
                   name="email"
                   placeholder="이메일"
                   required
@@ -141,8 +129,8 @@ function Login() {
                 </StLoginIconDiv>
                 <Input
                   type="password"
-                  value={user.password}
-                  onChange={onChangeHandler}
+                  value={login.password}
+                  onChange={handlePasswordChange}
                   name="password"
                   placeholder="비밀번호"
                   required

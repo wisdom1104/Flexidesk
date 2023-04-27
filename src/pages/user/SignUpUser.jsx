@@ -14,7 +14,7 @@ import { Input } from '../../components/Input';
 import useTrueHook from '../../hooks/useTrueHook';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
-import { useFormValidation } from './useSignUpUserHook';
+import { useFormValidation } from '../../hooks/useSignUpUserHook';
 
 function SignUpUser() {
 
