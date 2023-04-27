@@ -5,6 +5,7 @@ import {
   BoxBtn,
   BoxInput,
   BoxSubBtn,
+  StBox,
   StBtnBox,
   StDropBox,
 } from '../../shared/SpaceStyles';
@@ -46,7 +47,7 @@ function AdminMrItem({
 
   return (
     <>
-      <StDropBox
+      <StBox
         key={mr.mrId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -102,7 +103,7 @@ function AdminMrItem({
             </StBtnBox>
           </>
         )}
-      </StDropBox>
+      </StBox>
     </>
   );
 }

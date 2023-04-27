@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import {
   Modal,
   ModalBackground,
@@ -10,11 +10,10 @@ import {
   StAddBtnBox,
 } from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
-import { __addFloor } from '../../redux/modules/floorsSlice';
-import { __addSpace } from '../../redux/modules/spacesSlice';
-import { __editSpace } from '../../redux/modules/spaceSlice';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
+import { useListDragAndDrop } from '../../hooks/adminSpace/useListDragAndDropHook';
+import { useFloorAndSpaceAdd } from '../../hooks/adminSpace/useAdminListHook';
 
 function AdminList({
   isModal,
@@ -25,116 +24,74 @@ function AdminList({
 }) {
   const dispatch = useDispatch();
 
-  // floor 추가
-  const onClickAddFloorHandler = async () => {
-    const newFloor = {
-      floorName: 'New 층',
-    };
-    dispatch(__addFloor(newFloor));
-  };
-
-  // 그냥 space 추가
-  const onClickAddSpaceHandler = async () => {
-    const newSpace = {
-      spaceName: 'New 스페이스',
-    };
-    dispatch(__addSpace(newSpace));
-  };
+  const { onClickAddFloorHandler, onClickAddSpaceHandler } =
+    useFloorAndSpaceAdd(dispatch);
 
   //리스트 드래그 앤 드롭
-  const dragSpace = useRef(); // 드래그 시작위치
-  const dragName = useRef(); // 드래그 시작위치
-  const dragFloor = useRef(); // 드래그 시작위치
-  const dragOverSpace = useRef(); //드래그 중인 요소가 들어가려는 위치
-  const dragOverFloor = useRef(); //드래그 중인 요소가 들어가려는 위치
-
-  const [moveSpace, setMoveSpace] = useState({
-    spaceId: null,
-    spaceName: '',
-    floorId: 0,
-  });
-
-  const dragStart = (e, space) => {
-    dragSpace.current = space.spaceId;
-    dragName.current = space.spaceName;
-    dragFloor.current = space.floorId;
-    e.target.classList.add('grabbing');
-  };
-
-  const onAvailableItemDragEnter = (e, space) => {
-    const draggedOverSpace = e.target;
-    dragOverSpace.current = draggedOverSpace.dataset.spaceId;
-    dragOverFloor.current = draggedOverSpace.dataset.floorId;
-    if (dragOverFloor.current === undefined) {
-      dragOverFloor.current = null;
-    }
-    const payload = {
-      spaceId: dragSpace.current,
-      spaceName: dragName.current,
-      floorId: dragOverFloor.current,
-    };
-    setMoveSpace(payload);
-  };
-
-  const onDragEnd = e => {
-    e.target.classList.remove('grabbing');
-    dispatch(__editSpace(moveSpace));
-  };
-
-  const onDragOver = e => {
-    e.preventDefault();
-  };
+  const { dragStart, onAvailableItemDragEnter, onDragEnd, onDragOver } =
+    useListDragAndDrop(dispatch);
 
   return (
     <>
-      {
-        isModal ? (
-          <ModalBackground
-            onClick={() => {
-              setIsModal(!isModal);
-            }}
-          >
-            <Modal onClick={e => e.stopPropagation()}>
-              <ModalList>
-                <ModalHeader>
-                  <ModalTitle>관리하기</ModalTitle>
-                  <Modalbtn
-                    onClick={() => {
-                      setIsModal(!isModal);
-                    }}
-                  >
-                    <img src="img/modalBtnIcon.png" />
-                  </Modalbtn>
-                </ModalHeader>
-                <StAddBtnBox>
-                  <StAddBtn onClick={onClickAddFloorHandler}>층 추가</StAddBtn>
-                  <StAddBtn onClick={onClickAddSpaceHandler}>
-                    스페이스 추가
-                  </StAddBtn>
-                </StAddBtnBox>
-                <AdminFloorList
-                  floors={floors}
-                  dispatch={dispatch}
-                  onClickSpaceListHandler={onClickSpaceListHandler}
-                  dragStart={dragStart}
-                  onAvailableItemDragEnter={onAvailableItemDragEnter}
-                  onDragOver={onDragOver}
-                  onDragEnd={onDragEnd}
-                />
-                <AdminSpaceList
-                  spaces={spaces}
-                  dispatch={dispatch}
-                  onClickSpaceListHandler={onClickSpaceListHandler}
-                  dragStart={dragStart}
-                  onAvailableItemDragEnter={onAvailableItemDragEnter}
-                  onDragOver={onDragOver}
-                  onDragEnd={onDragEnd}
-                />
-              </ModalList>
-            </Modal>
-          </ModalBackground>
-        ) : null //기계역할
-      }
+      {isModal ? (
+        <ModalBackground
+          onClick={() => {
+            setIsModal(!isModal);
+          }}
+        >
+          <Modal onClick={e => e.stopPropagation()}>
+            <ModalList>
+              <ModalHeader>
+                <ModalTitle>관리하기</ModalTitle>
+                <Modalbtn
+                  onClick={() => {
+                    setIsModal(!isModal);
+                  }}
+                >
+                  <img alt="모달 닫기 버튼" src="img/modalBtnIcon.png" />
+                </Modalbtn>
+              </ModalHeader>
+              <StAddBtnBox>
+                <StAddBtn onClick={onClickAddFloorHandler}>층 추가</StAddBtn>
+                <StAddBtn onClick={onClickAddSpaceHandler}>
+                  스페이스 추가
+                </StAddBtn>
+              </StAddBtnBox>
+              {floors?.map(floor => {
+                if (floor)
+                  return (
+                    <AdminFloorList
+                      key={floor.floorId}
+                      floor={floor}
+                      onClickSpaceListHandler={onClickSpaceListHandler}
+                      dispatch={dispatch}
+                      dragStart={dragStart}
+                      onAvailableItemDragEnter={onAvailableItemDragEnter}
+                      onDragOver={onDragOver}
+                      onDragEnd={onDragEnd}
+                    />
+                  );
+              })}
+              {spaces?.map(space => {
+                if (space && space.floorId === null)
+                  return (
+                    <AdminSpaceList
+                      key={space.spaceId}
+                      space={space}
+                      onClickSpaceListHandler={onClickSpaceListHandler}
+                      dispatch={dispatch}
+                      dragStart={dragStart}
+                      onAvailableItemDragEnter={onAvailableItemDragEnter}
+                      onDragOver={onDragOver}
+                      onDragEnd={onDragEnd}
+                    />
+                  );
+                if (space && space.floorId !== null) return null;
+              })}
+            </ModalList>
+          </Modal>
+        </ModalBackground>
+      ) : null}
     </>
   );
 }

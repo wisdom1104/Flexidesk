@@ -51,12 +51,10 @@ function SpaceMrItem({ mr, navi }) {
                     {timeItem === tagetTime ? (
                       <StBox
                         key={mr.mrId}
-                        style={{
-                          backgroundColor: '#ffc8c8',
-                          color: '#FF5454',
-                        }}
                         onClick={() => navi(`/calender/${mr.mrId}`)}
                         transformValue={`translate(${mr.x}px, ${mr.y}px)`}
+                        background="#def1ef"
+                        color="#65bab6"
                       >
                         {/* <div>
                           현재시각 <br />
@@ -64,7 +62,7 @@ function SpaceMrItem({ mr, navi }) {
                           회의실
                         </div> */}
                         <div>{mr.mrName}</div>
-                        <StUser>사용중</StUser>
+                        <StUser>- 사용중 -</StUser>
                       </StBox>
                     ) : (
                       <StBox

@@ -4,6 +4,7 @@ import {
   BoxBtn,
   BoxInput,
   BoxSubBtn,
+  StBox,
   StBtnBox,
   StDropBox,
 } from '../../shared/SpaceStyles';
@@ -52,7 +53,7 @@ function AdminMultiBoxItem({
 
   return (
     <>
-      <StDropBox
+      <StBox
         key={multiBox.multiBoxId}
         onDrop={HandleDrop}
         onDragOver={handleDragOver}
@@ -108,7 +109,7 @@ function AdminMultiBoxItem({
             </StBtnBox>
           </>
         )}
-      </StDropBox>
+      </StBox>
     </>
   );
 }
