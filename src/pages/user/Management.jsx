@@ -13,6 +13,7 @@ import {
   ReservationTitle,
 } from '../Reservation/CalendarStyled';
 import ManagementChange from '../../features/user/ManagementChange';
+import Skeleton from '../../components/Skeleton';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
@@ -40,18 +41,21 @@ function Management() {
         <StOverall>
           <StWrapDiv>
           <ReservationTitle>
-            <StFont width="76vw" fontSize="2rem" align="start">
+            <StFont width="80vw" fontSize="2rem" align="start">
             사용자 관리
             </StFont>
           </ReservationTitle>
           
             <InfoContain>
-              {userList.map(item => (
+              {userList?
+              userList.map(item => (
+
                 <InfoBox key={item.userId} height='16vw' >
                   <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
+                  
                   <Info>
                     <CommentBox>
-                      <span>이메일</span> <br />
+                      <spen>이메일</spen> <br />
                       <p>{item.email}</p>
                     </CommentBox>
 
@@ -66,7 +70,10 @@ function Management() {
 
                   </Info>
                 </InfoBox>
-              ))}
+              ))
+              :
+              <Skeleton/>}
+              <Skeleton/>
             </InfoContain>
           </StWrapDiv>
         </StOverall>

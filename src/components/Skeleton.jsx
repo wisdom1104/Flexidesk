@@ -46,8 +46,8 @@ export const Shimmer = styled.div`
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  width: 150px;
-  height: 200px;
+  width: ${props => props.width || '25vw'};
+  height: ${props => props.height || '17vw'};
   margin: 1em;
   border: 1px solid #e8e7e6;
   border-radius: 0.5em;
@@ -75,9 +75,10 @@ export const Wrap = styled.div`
 `;
 
 export const Text = styled.div`
-  width: 100px;
+  width: 200px;
   height: 10px;
   margin-bottom: 5px;
+  padding: 10px;
   overflow: hidden;
   background-color: #eeeeee;
 `;

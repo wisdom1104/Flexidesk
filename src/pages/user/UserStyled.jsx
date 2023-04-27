@@ -255,7 +255,6 @@ export const DropdownItem = styled.button`
   border: 1px transparent;
   border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
   
-
   &:hover {
     background-color: #E9F6F4;
     color: #65BAB6;
