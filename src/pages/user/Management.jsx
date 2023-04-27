@@ -1,10 +1,9 @@
 import React, { useEffect} from 'react';
-import {  StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import {  StFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
-import SelectModal from '../../features/SelectModal';
 import { StOverall } from './UserStyled';
 import {
   CommentBox,
@@ -13,19 +12,11 @@ import {
   InfoContain,
   ReservationTitle,
 } from '../Reservation/CalendarStyled';
-import ManagementChange from './ManagementChange';
+import ManagementChange from '../../features/user/ManagementChange';
+import Skeleton from '../../components/Skeleton';
 
 function Management() {
   const { userList, isLoading, isError } = useSelector(state => state.userList);
-
-  /////////////////////test/////////////////////////////////////
-  // const handleRoleUpdate = (userId) => {
-  //   const updatedUserList = [...userList];
-  //   const updatedUser = updatedUserList.find((user) => user.allManagementId === userId);
-  //   TODO: 서버에 업데이트 요청 보내는 로직 추가
-  //   setUserList(updatedUserList);
-  // };
-  /////////////////////test/////////////////////////////////////
 
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -50,18 +41,21 @@ function Management() {
         <StOverall>
           <StWrapDiv>
           <ReservationTitle>
-            <StFont width="76vw" fontSize="2rem" align="start">
+            <StFont width="80vw" fontSize="2rem" align="start">
             사용자 관리
             </StFont>
           </ReservationTitle>
           
             <InfoContain>
-              {userList.map(item => (
+              {userList?
+              userList.map(item => (
+
                 <InfoBox key={item.userId} height='16vw' >
                   <StFont width='18vw' fontSize='1.5rem' align='start' >{item.username}</StFont>
+                  
                   <Info>
                     <CommentBox>
-                      <span>이메일</span> <br />
+                      <spen>이메일</spen> <br />
                       <p>{item.email}</p>
                     </CommentBox>
 
@@ -76,7 +70,10 @@ function Management() {
 
                   </Info>
                 </InfoBox>
-              ))}
+              ))
+              :
+              <Skeleton/>}
+              <Skeleton/>
             </InfoContain>
           </StWrapDiv>
         </StOverall>

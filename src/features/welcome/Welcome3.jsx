@@ -6,7 +6,7 @@ import {
   StOverall,
   StSmallFont,
   StWrapDiv,
-} from './WelcomeStyled';
+} from '../../pages/Welcome/WelcomeStyled';
 
 function Welcome3() {
   return (

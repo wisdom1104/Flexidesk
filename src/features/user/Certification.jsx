@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import api from '../../axios/api';
-import { StSmallFont } from '../Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
 import {
   Container,
   InlinButton,
   InlineInput,
   SterrorFont,
-} from './UserStyled';
+} from '../../pages/user/UserStyled';
 
 function Certification({ admin, setAdmin, email }) {
   const [emailError, setEmailError] = useState('');

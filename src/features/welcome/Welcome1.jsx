@@ -8,7 +8,7 @@ import {
   StOverall,
   StSmallFont,
   StWrapDiv,
-} from './WelcomeStyled';
+} from '../../pages/Welcome/WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
 import Welcome2 from './Welcome2';
 import { cookies } from '../../shared/cookies';

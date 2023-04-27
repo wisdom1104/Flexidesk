@@ -13,7 +13,7 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
-import Certification from './Certification';
+import Certification from '../../features/user/Certification';
 import useTrueHook from '../../hooks/useTrueHook';
 
 function SignUpAdmin() {
@@ -34,30 +34,18 @@ function SignUpAdmin() {
 
   const navi = useNavigate();
 
-  const handlePasswordChange = event => {
-    const value = event.target.value;
-    setAdmin(prevState => ({ ...prevState, password: value }));
-
-    if (value.length < 8) {
-      setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
-    } else {
-      setPasswordError('');
-    }
-  };
-
-  const handlepasswordCheckChange = event => {
-    const value = event.target.value;
-    setAdmin(prevState => ({ ...prevState, passwordCheck: value }));
-
-    if (value !== admin.password) {
-      setPasswordCheckError('비밀번호와 일치하지 않습니다.');
-    } else {
-      setPasswordCheckError('');
-    }
-  };
-
   const handleSubmit = async event => {
     event.preventDefault();
+
+    const { password, passwordCheck } = admin;
+    if (password.length < 8) {
+      setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
+      return;
+    }
+    if (password !== passwordCheck) {
+      setPasswordCheckError('비밀번호와 일치하지 않습니다.');
+      return;
+    }
 
     try {
       const response = await api.post('/users/signup/admin', admin);
@@ -70,6 +58,11 @@ function SignUpAdmin() {
       alert(`${errorMsg}`);
       return error;
     }
+  };
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setAdmin(prevState => ({ ...prevState, [name]: value }));
   };
 
   return (
@@ -103,10 +96,9 @@ function SignUpAdmin() {
                   </StSmallFont>
                   <Input
                     type="text"
+                    name="username"
                     value={admin.username}
-                    onChange={event =>
-                      setAdmin({ ...admin, username: event.target.value })
-                    }
+                    onChange={handleInputChange}
                     placeholder="이름을 입력하세요."
                     required
                   />
@@ -123,10 +115,9 @@ function SignUpAdmin() {
                   <Input
                     type="text"
                     id="companyName"
+                    name="companyName"
                     value={admin.companyName}
-                    onChange={event =>
-                      setAdmin({ ...admin, companyName: event.target.value })
-                    }
+                    onChange={handleInputChange}
                     placeholder="회사를 입력하세요."
                     required
                   />
@@ -137,9 +128,7 @@ function SignUpAdmin() {
                     admin={admin}
                     setAdmin={setAdmin}
                     email={admin.email}
-                    onChange={event =>
-                      setAdmin({ ...admin, email: event.target.value })
-                    }
+                    onChange={handleInputChange}
                   />
                 </StTextInput>
 
@@ -154,12 +143,10 @@ function SignUpAdmin() {
                   </StSmallFont>
                   <Input
                     type="text"
-
+                    name="certification"
                     id="certification"
                     value={admin.certification}
-                    onChange={event =>
-                      setAdmin({ ...admin, certification: event.target.value })
-                    }
+                    onChange={handleInputChange}
                     placeholder="인증번호를 입력하세요."
 
                     required
@@ -178,7 +165,8 @@ function SignUpAdmin() {
 
                     type="password"
                     value={admin.password}
-                    onChange={handlePasswordChange}
+                    name="password"
+                    onChange={handleInputChange}
                     placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
                     required
                     minlength="8"
@@ -202,8 +190,9 @@ function SignUpAdmin() {
                 <StTextInput height="35px">
                   <Input
                     type="password"
+                    name="passwordCheck"
                     value={admin.passwordCheck}
-                    onChange={handlepasswordCheckChange}
+                    onChange={handleInputChange}
                     placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
 
                     required

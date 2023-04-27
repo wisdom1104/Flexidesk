@@ -214,7 +214,7 @@ export const DropdownButton = styled.button`
   height: 40px;
   color: #15161A;
   padding: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
 
   font-weight: 700;
   font-size: 16px;
@@ -234,6 +234,7 @@ export const DropdownContent = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1;
+  margin-top: -45px;
 
   border: 1px solid #65BAB6;
   border-radius: 8px;
@@ -253,7 +254,7 @@ export const DropdownItem = styled.button`
   background-color: #fff;
   border: 1px transparent;
   border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
-
+  
   &:hover {
     background-color: #E9F6F4;
     color: #65BAB6;

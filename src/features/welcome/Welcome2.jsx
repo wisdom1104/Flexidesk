@@ -1,5 +1,5 @@
 import React from 'react';
-import { StFont, StSmallFont, StOverall, StWrapDiv } from './WelcomeStyled';
+import { StFont, StSmallFont, StOverall, StWrapDiv } from '../../pages/Welcome/WelcomeStyled';
 
 function Welcome2() {
   return (

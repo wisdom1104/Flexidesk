@@ -55,7 +55,6 @@ export const StFont = styled.p`
 export const StSmallFont = styled.p`
   width: ${props => props.width || '48vw'};
   height: ${props => props.height || ''};
-  /* left: ${props => props.left || '597px'}; */
   margin-bottom: ${props => props.marginBottom || ''};
   margin-top: ${props => props.marginTop || ''};
 

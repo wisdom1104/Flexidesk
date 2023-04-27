@@ -1,0 +1,238 @@
+[33mcommit e12ed5dd120ae158442e112ba844ee8b94f0ae60[m[33m ([m[1;36mHEAD -> [m[1;32meunseon[m[33m, [m[1;31morigin/dev[m[33m)[m
+Merge: 753e7ca 284d4d2
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Thu Apr 27 01:04:00 2023 +0900
+
+    Merge pull request #76 from Teamthirteenseven/eunseon
+    
+    Eunseon
+
+[33mcommit 284d4d2eb31044bbf07df09da347f189eeb9f786[m[33m ([m[1;31morigin/eunseon[m[33m)[m
+Merge: 074ebc1 753e7ca
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Thu Apr 27 01:03:37 2023 +0900
+
+    병합완료
+
+[33mcommit 753e7ca45f7a96fb479ba62a3e7932024f04123b[m[33m ([m[1;32mdev[m[33m)[m
+Merge: 0a9f21d 5135c22
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Thu Apr 27 00:55:05 2023 +0900
+
+    Merge pull request #77 from Teamthirteenseven/jiho
+    
+    Jiho
+
+[33mcommit 0a9f21d10fb9d29c44a0267a51b2fd0bddf98f13[m
+Merge: 6ac1fb1 5e8794e
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Thu Apr 27 00:54:38 2023 +0900
+
+    Merge pull request #75 from Teamthirteenseven/jihye
+    
+    Jihye
+
+[33mcommit 074ebc1966e245e87c6ea4703e3e2acafc6efaae[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Thu Apr 27 00:51:54 2023 +0900
+
+    merge: 4/26 merge
+
+[33mcommit 5e8794eb588e7b7600411f0396f1cd6555f12019[m[33m ([m[1;31morigin/jihye[m[33m)[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Thu Apr 27 00:42:54 2023 +0900
+
+    feat: 회의실 예약 유무 구현, 멀티박스 유저 이동 및 조회 구현
+
+[33mcommit 5135c22dd5ca08a666492ea211a53cdba131efe8[m[33m ([m[1;31morigin/jiho[m[33m)[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Thu Apr 27 00:08:14 2023 +0900
+
+    예약인원추가및 등록완료
+
+[33mcommit 42f900b8a5aa6f548bb30be3ba5af05ad5533cb6[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Thu Apr 27 00:06:16 2023 +0900
+
+    feat: 관리자페이지 -회원삭제기능 완료
+
+[33mcommit ecb2599cb88ac72851e7cc374b902cb404c74e86[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Wed Apr 26 23:17:15 2023 +0900
+
+    fix: message - 예상치 못한 에러, 버그 수정
+
+[33mcommit 6a2e8008397caf3504b3105fb93851916084aa33[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Wed Apr 26 21:09:19 2023 +0900
+
+    feat:검색창추가
+
+[33mcommit 1af5c4892a588ede63400aeb9f6f0e4237ea2a8c[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Wed Apr 26 02:15:57 2023 +0900
+
+    style: welcomePage 로그인 후 회원가입 버튼 x
+
+[33mcommit ea37892276ce8fbe7d23e0d5dc1621fb07a49649[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Wed Apr 26 01:56:53 2023 +0900
+
+    feat:스페이스 페이지-회의실 날짜,시간별 예약 유무 확인구현
+
+[33mcommit 4b6049c5a2c60522431565cd9cd3d8aac429519d[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Tue Apr 25 23:32:36 2023 +0900
+
+    fix: 모달띄우기
+
+[33mcommit 6ac1fb1381b1f9d6c43a50dda0db1d98a063ebd5[m
+Merge: 5d4841e 0ffc64d
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Tue Apr 25 19:23:21 2023 +0900
+
+    Merge pull request #74 from Teamthirteenseven/eunseon
+    
+    Eunseon
+
+[33mcommit 0ffc64d03fbd5446acfc6997c70bf69eb0137115[m
+Merge: fef8df3 5d4841e
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Tue Apr 25 19:22:48 2023 +0900
+
+    병합완료
+
+[33mcommit 5d4841ee90be448327ad5b614efbfab5263abac1[m
+Merge: ab07c6d e50bba8
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Tue Apr 25 19:07:57 2023 +0900
+
+    Merge pull request #73 from Teamthirteenseven/jihye
+    
+    멀티박스 구현 중
+
+[33mcommit ab07c6d060476bb89e80150e56b4e4751f7f1bb7[m
+Merge: 3b11708 249536f
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Tue Apr 25 19:07:47 2023 +0900
+
+    Merge pull request #72 from Teamthirteenseven/jiho
+    
+    Jiho
+
+[33mcommit fef8df34b127d94dfb10e7d35743d11088ac84e6[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Tue Apr 25 19:05:52 2023 +0900
+
+    merge: 4/25merge
+
+[33mcommit e50bba8f5fdf5da2fc7928a2d69f271f49c0b695[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Tue Apr 25 19:05:39 2023 +0900
+
+    feat: space 페이지 멀티박스 조회 구현
+
+[33mcommit 249536fca9b273c5f2aea3e3f770d6c2739cf77d[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Tue Apr 25 19:05:30 2023 +0900
+
+    fix:스케줄 조회,달력 수정
+
+[33mcommit 25439f06b910bc5a3393fa83a184b36ca07ca156[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Tue Apr 25 16:43:23 2023 +0900
+
+    refactor: admin 컴포넌트 분리
+
+[33mcommit 9b388c0a5c13aace6fdbc9eb4d406e6715fa8122[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Tue Apr 25 15:06:18 2023 +0900
+
+    style: font변경
+
+[33mcommit b3c0ded9b3eeb6a03e19f19d33bf279081fa13aa[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Tue Apr 25 13:41:45 2023 +0900
+
+    feat: 멀티박스 CRUD 및 드래그 앤 드롭 구현
+
+[33mcommit 227b526df71b5066286e35cc589bf1fcad3fba41[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Tue Apr 25 03:09:59 2023 +0900
+
+    feat: 멀티박스 추가 구현
+
+[33mcommit e0d4a5efa7d92e4da9d3c77238a9391dcbda674f[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Tue Apr 25 01:11:25 2023 +0900
+
+    수정 thunk 추가,버튼 Css수정
+
+[33mcommit 387b694997664d724eb77f50ab60fc154ee35864[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Mon Apr 24 23:29:42 2023 +0900
+
+    스케줄 수정부분 추가
+
+[33mcommit 7ed9e4c57b09d8c0ee0a14f1e0a69ed5ae45558f[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Mon Apr 24 21:11:28 2023 +0900
+
+    feat: login 오류메세지 출력
+
+[33mcommit 8f569a3c1913f91d83bcbcb1373eb1935f12ebc0[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Mon Apr 24 20:05:19 2023 +0900
+
+    Feat: 달력 선택시 색상 변경
+
+[33mcommit f65665f04418ba4988ed1dc00b7881c2e4ebf555[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Mon Apr 24 13:39:18 2023 +0900
+
+    feat: alert창 대신 modal띄우기
+
+[33mcommit 13f4519a581406887381032926df2d050a0323aa[m
+Author: eunseonJeong <suni980215@gmail.com>
+Date:   Mon Apr 24 10:23:19 2023 +0900
+
+    feat: managementPage 전체조회 추가
+
+[33mcommit 3b1170832b35dd8de345706c6a50f862a4858d47[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: b7e1dd2 23fd5f0
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Fri Apr 21 23:34:19 2023 +0900
+
+    Merge pull request #71 from Teamthirteenseven/dev
+    
+    1차 배포 전 찐막 머지
+
+[33mcommit 23fd5f0b15bdd8c72522a76224bf7b7d3ca1031c[m
+Merge: bd5b509 2883f54
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Fri Apr 21 23:33:41 2023 +0900
+
+    Merge pull request #70 from Teamthirteenseven/jihye
+    
+    fix: 오타수정
+
+[33mcommit 2883f54b7d60f4f9d23939a691ccfab66cda02a4[m
+Author: 박지혜 <jihye@bagjihyeui-MacBookAir.local>
+Date:   Fri Apr 21 23:33:08 2023 +0900
+
+    fix: 오타수정
+
+[33mcommit bd5b509af2e20582fc4d94edd072a3636a6ca60f[m
+Merge: b3ea96b b2ea79d
+Author: Jjye_2lrwi <98861355+wisdom1104@users.noreply.github.com>
+Date:   Fri Apr 21 22:53:58 2023 +0900
+
+    Merge pull request #69 from Teamthirteenseven/jiho
+    
+    fix: 오타수정
+
+[33mcommit b2ea79de5687f1b46ae609bdd2239e7154d3f476[m
+Author: hojiii <shimn3060@naver.com>
+Date:   Fri Apr 21 22:52:33 2023 +0900
+
+    fix: 오타수정

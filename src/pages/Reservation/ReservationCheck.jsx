@@ -43,7 +43,7 @@ function ReservationCheck({ param, selectDay, clickReservation, userName }) {
       <CheckContain>
         <div>예약 인원</div>
         {userName?.map(item => (
-          <div>{item.username}</div>
+          <div key={item.username}>{item.username}</div>
         ))}
       </CheckContain>
     </>

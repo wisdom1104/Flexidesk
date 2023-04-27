@@ -5,8 +5,8 @@ import {
   StOverall,
   StSliderContain,
   StWrapDiv,
-} from './WelcomeStyled';
-import Carousel from '../../features/Carousel';
+} from '../../pages/Welcome/WelcomeStyled';
+import Carousel from '../Carousel';
 
 function Welcome6() {
   return (
