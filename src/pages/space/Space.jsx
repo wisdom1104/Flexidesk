@@ -21,6 +21,8 @@ import {
 import { __getFloors } from '../../redux/modules/floorsSlice';
 import Page from '../../components/Page';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { InfoContain } from '../Reservation/CalendarStyled';
+import Skeleton from '../../components/Skeleton';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -35,12 +37,35 @@ function Space() {
   // 관리자 가드
   const role = cookies.get('role');
 
+  // useEffect(() => {
+  //   if (token === undefined) {
+  //     navi('/');
+  //   } else {
+  //     dispatch(__getFloors());
+  //     dispatch(__getSpaces());
+  //   }
+  // }, []);
+
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
   useEffect(() => {
-    if (token === undefined) {
+    if (!token) {
       navi('/');
     } else {
-      dispatch(__getFloors());
-      dispatch(__getSpaces());
+      const loadData = async () => {
+        try {
+          dispatch(__getFloors());
+          dispatch(__getSpaces());
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      const timer = setTimeout(() => {
+        loadData();
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -135,32 +160,40 @@ function Space() {
         </StListbox>
       </Column>
       {/* 보더 영역 */}
-      {spaces.length > 0 ? (
-        <>
-          {selectedSpace && (
-            <SpaceBox
-              spaceId={selectedSpace.spaceId}
-              selectedSpace={selectedSpace}
-            />
-          )}
-        </>
+      {showSkeleton ? (
+        <InfoContain>
+        <Skeleton />
+      </InfoContain>
       ) : (
         <>
-          {/* 초기 화면 */}
-          <Stmainspace>
-            <StSubHeader>
-              {/* space name 부분 */}
-              <Row></Row>
-              <Row>
-                {role === 'ADMIN' ? (
-                  <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
-                ) : (
-                  <div>1</div>
-                )}
-              </Row>
-            </StSubHeader>
-            <StBoard></StBoard>
-          </Stmainspace>
+        {spaces.length > 0 ? (
+          <>
+            {selectedSpace && (
+              <SpaceBox
+                spaceId={selectedSpace.spaceId}
+                selectedSpace={selectedSpace}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {/* 초기 화면 */}
+            <Stmainspace>
+              <StSubHeader>
+                {/* space name 부분 */}
+                <Row></Row>
+                <Row>
+                  {role === 'ADMIN' ? (
+                    <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
+                  ) : (
+                    <div>1</div>
+                  )}
+                </Row>
+              </StSubHeader>
+              <StBoard></StBoard>
+            </Stmainspace>
+          </>
+        )}
         </>
       )}
     </Page>

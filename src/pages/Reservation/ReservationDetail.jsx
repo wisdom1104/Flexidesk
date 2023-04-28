@@ -43,17 +43,25 @@ function ReservationDetail() {
   //   }
   // }, []);
 
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const loadData = async () => {
-        try {
-          dispatch(__getReservationDetail());
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    useEffect(() => {
+      if (!token) {
+        navi('/');
+      } else {
+        const loadData = async () => {
+          try {
+            dispatch(__getReservationDetail());
+          } catch (error) {
+            console.log(error);
+          }
+        };
+
+        const timer = setTimeout(() => {
+          loadData();
+          setShowSkeleton(false);
+        }, 300);
+        return () => clearTimeout(timer);
+      }
+    }, []);
 
       const timer = setTimeout(() => {
         loadData();

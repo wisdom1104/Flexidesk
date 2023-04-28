@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import SchedulesTime from './SchedulesTime';
 import {
   StDate,
@@ -10,12 +10,15 @@ import {
   StSubHeader,
   StSelectDay,
   StIcon,
+  InfoContain,
 } from '../Reservation/CalendarStyled';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
+import { getCookie } from '../../shared/cookies';
+import Skeleton from '../../components/Skeleton';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -60,6 +63,21 @@ function SchedulesCalendar() {
     setSelectedDate(e.target.value);
   };
 
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const token = getCookie('token');
+  const navi = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   //달의 날짜 반환 함수
   const returnDay = () => {
     let dayArr = [];
@@ -103,43 +121,49 @@ function SchedulesCalendar() {
           />
           <div>스케줄 등록하기</div>
         </StListTitle>
-        <Row>
-          <SchContain>
-            <StSubHeader>
-              <StSubTitle>
-                <StIcon
-                  src={`${process.env.PUBLIC_URL}/img/day.png`}
-                  alt="icon"
-                />
-                스케줄 날짜
-              </StSubTitle>
-              <StSelectDay>
-                <IoIosArrowDropleft
-                  onClick={() => {
-                    preMonth();
-                  }}
-                />
-                <div>{selectYear}년</div>
-                <div>{selectMonth}월</div>
-                <IoIosArrowDropright
-                  onClick={() => {
-                    nextMonth();
-                  }}
-                />
-              </StSelectDay>
-            </StSubHeader>
+        {showSkeleton ? (
+          <InfoContain>
+            <Skeleton />
+          </InfoContain>
+        ) : (
+          <Row>
+            <SchContain>
+              <StSubHeader>
+                <StSubTitle>
+                  <StIcon
+                    src={`${process.env.PUBLIC_URL}/img/day.png`}
+                    alt="icon"
+                  />
+                  스케줄 날짜
+                </StSubTitle>
+                <StSelectDay>
+                  <IoIosArrowDropleft
+                    onClick={() => {
+                      preMonth();
+                    }}
+                  />
+                  <div>{selectYear}년</div>
+                  <div>{selectMonth}월</div>
+                  <IoIosArrowDropright
+                    onClick={() => {
+                      nextMonth();
+                    }}
+                  />
+                </StSelectDay>
+              </StSubHeader>
 
-            {/* ----- */}
-            <DayContain>
-              {week?.map(item => {
-                return <Day key={item}>{item}</Day>;
-              })}
-              {returnDay()}
-            </DayContain>
-            {/* <DayContain>{returnDay()}</DayContain> */}
-          </SchContain>
-          <SchedulesTime param={param.userId} selectDay={date} />
-        </Row>
+              {/* ----- */}
+              <DayContain>
+                {week?.map(item => {
+                  return <Day key={item}>{item}</Day>;
+                })}
+                {returnDay()}
+              </DayContain>
+              {/* <DayContain>{returnDay()}</DayContain> */}
+            </SchContain>
+            <SchedulesTime param={param.userId} selectDay={date} />
+          </Row>
+        )}
       </div>
     </Page>
   );
