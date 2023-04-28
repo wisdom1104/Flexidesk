@@ -6,7 +6,7 @@ import { __getFloors } from './floorsSlice';
 const initialState = {
   spaces: [],
   isLoading: false,
-  error: null,
+  isError: null,
 };
 
 //space 전체 조회
