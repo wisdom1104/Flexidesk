@@ -41,11 +41,11 @@ function SchedulesDetail() {
             ←
           </BackCusor>
 
-          <StFont width='76vw' fontSize="2rem" align='start' >내가 등록한 스케줄</StFont>
+          <StFont width='60vw' fontSize="2rem" align='start' >내가 등록한 스케줄</StFont>
         </ReservationTitle>
         <InfoContain>
           {userSchedules?.map(item => (
-            <InfoBox key={item.scId}>
+            <InfoBox key={item.scId} height='350px'>
               <StFont width="18vw" fontSize="1.5rem" align="start">
                 {item.scTitle}
               </StFont>

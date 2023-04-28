@@ -50,7 +50,8 @@ function Welcome3() {
                   display: 'inline-block',
                 }}
               >
-                <img src="img/welcome2.png" alt="welcome2" />
+                <img src={`${process.env.PUBLIC_URL}/img/welcome2.png`} alt="welcome2" />
+
               </div>
             </StIntroDiv>
           </StWrapDiv>

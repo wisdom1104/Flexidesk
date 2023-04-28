@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StFont, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import { StFont, StSmallFont, StSpacePagePhoto, StWrapDiv } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { cookies } from '../../shared/cookies';
@@ -14,8 +14,11 @@ import {
 } from '../Reservation/CalendarStyled';
 import ManagementChange from '../../features/user/ManagementChange';
 import Skeleton from '../../components/Skeleton';
+import { HiOutlineMail } from "react-icons/hi";
+import { BsPerson } from "react-icons/bs";
 
 function Management() {
+
   const { userList, isLoading, isError } = useSelector(state => state.userList);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
@@ -44,7 +47,6 @@ function Management() {
       const timer = setTimeout(() => {
         loadData();
       }, 4000);
-
       return () => clearTimeout(timer);
     }
   }, []);
@@ -54,7 +56,12 @@ function Management() {
       <StOverall>
         <StWrapDiv margin>
           <ReservationTitle>
-            <StFont width="80vw" fontSize="2rem" align="start">
+            <StSpacePagePhoto 
+            width='80px'
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/managementIcon.png`} alt="managementIcon" />
+
+            <StFont width="60vw" fontSize="2rem" align="start">
               사용자 관리
             </StFont>
           </ReservationTitle>
@@ -69,19 +76,19 @@ function Management() {
             ) : (
               <InfoContain>
                 {userList.map(item => (
-                  <InfoBox key={item.userId} height="16vw">
+                  <InfoBox key={item.userId}>
                     <StFont width="18vw" fontSize="1.5rem" align="start">
                       {item.username}
                     </StFont>
 
                     <Info>
                       <CommentBox>
-                        <StSmallFont width>이메일</StSmallFont> <br />
+                        <StSmallFont width> <HiOutlineMail/>  이메일</StSmallFont> <br />
                         <StSmallFont width>{item.email}</StSmallFont>
                       </CommentBox>
 
                       <CommentBox>
-                        <StSmallFont width>권한</StSmallFont> <br />
+                        <StSmallFont width><BsPerson/> 권한</StSmallFont> <br />
                         <StSmallFont width>{item.role}</StSmallFont>
                       </CommentBox>
 

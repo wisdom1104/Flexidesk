@@ -14,8 +14,8 @@ import {
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
 import Certification from '../../features/user/Certification';
-import useTrueHook from '../../hooks/useTrueHook';
-import { AdminFormValidation } from '../../hooks/useSignUpAdminHook';
+import useTrueHook from '../../hooks/user/useTrueHook';
+import { AdminFormValidation } from '../../hooks/user/useSignUpAdminHook';
 
 function SignUpAdmin() {
   const {

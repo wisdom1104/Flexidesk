@@ -7,7 +7,6 @@ import {
 import { getCookie } from '../../shared/cookies';
 import SchedulesDetail from '../Schedules/SchedulesDetail';
 import UserSchedules from '../Schedules/UserSchedules';
-import useFalseHook from '../../hooks/useFalseHook';
 import AllReservation from './AllReservation';
 import {
   BackCusor,
@@ -23,7 +22,6 @@ import { useNavigate } from 'react-router-dom';
 import { StFont, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
 
 function ReservationDetail() {
-  // useFalseHook();
   const navi = useNavigate();
   const dispatch = useDispatch();
   const { reservationDetail } = useSelector(state => state.detail);
@@ -51,7 +49,7 @@ function ReservationDetail() {
             >
               ←
             </BackCusor>
-            <StFont width="76vw" fontSize="2rem" align="start">
+            <StFont width='60vw' fontSize="2rem" align="start">
               내가 예약한 회의실
             </StFont>
           </ReservationTitle>

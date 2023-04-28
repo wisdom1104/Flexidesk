@@ -7,6 +7,7 @@ import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import Modal from '../../components/Modal';
 import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
 import { useModal } from '../../hooks/useModalHook';
+import { BsPersonGear } from "react-icons/bs";
 
 function ManagementChange({ item }) {
 
@@ -23,7 +24,7 @@ function ManagementChange({ item }) {
   return (
     <>
       <CommentBox>
-        <StSmallFont width>권한 변경</StSmallFont>
+        <StSmallFont width> <BsPersonGear/> 권한 변경</StSmallFont>
 
         <div 
         style={{

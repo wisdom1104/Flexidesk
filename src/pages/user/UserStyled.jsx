@@ -18,6 +18,14 @@ export const StOverall = styled.div`
 
 `;
 
+export const StLoginContain = styled.div`
+  margin-top: 200px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+`
+
+
 export const StLoginForm = styled.form`
   width: 420px;
   background: var(--white);
@@ -90,7 +98,7 @@ export const StSmallButton = styled.button`
 `;
 
 //login
-export const StLoginContain = styled.div`
+export const StLoginInputIconBox = styled.div`
   width: 100%;
   height: 60px;
   border: 2px solid #a6aebb;

@@ -180,8 +180,9 @@ export const DateFont = styled.div`
 `;
 
 export const InfoBox = styled.div`
-  width: ${props => props.width || '25vw'};
-  height: ${props => props.height || '20vw'};
+  width: ${props => props.width || '400px'};
+  height: ${props => props.height || '300px'};
+
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -200,12 +201,7 @@ export const InfoContain = styled.div`
 `;
 export const Info = styled.div`
   display: flex;
-  width: 22vw;
-
-  left: 2.01%;
-  right: 2.01%;
-  top: 2.62%;
-  bottom: 3.62%;
+  width: 90%;
 
   flex-direction: column;
   align-items: center;
@@ -213,18 +209,18 @@ export const Info = styled.div`
 
   box-shadow: 0px 5.02286px 37.6714px rgba(140, 159, 157, 0.25);
   border-radius: 8px;
-  padding: 10px;
+  padding: 0px;
   margin-top: 20px;
 
   min-height: 10vw;
 `;
 export const CommentBox = styled.div`
   display: flex;
-  width: 18vw;
+  width: 90%;
   justify-content: space-between;
-  margin: 10px;
+  margin: 5px;
   border-bottom: 1px solid lightgray;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 `;
 
 export const ComFont = styled.div`

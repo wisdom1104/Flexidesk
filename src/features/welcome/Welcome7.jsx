@@ -16,7 +16,7 @@ function Welcome7() {
               height='30vh'
               width='1000px'
               
-              src="img/welcome3.png" alt="welcome3" />
+              src={`${process.env.PUBLIC_URL}/img/welcome3.png`} alt="welcome3" />
             </StfontA>
           </StWrapDiv>
         </StOverall>
