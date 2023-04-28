@@ -51,7 +51,9 @@ const Calendar = () => {
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
-  const { reservation, isLoading, isError } = useSelector(state => state.reservation);
+  const { reservation, isLoading, isError } = useSelector(
+    state => state.reservation,
+  );
   const { mrName } = reservation;
 
   //이전달

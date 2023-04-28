@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  __deleteRervation,
-  __getReservationDetail,
-} from '../../redux/modules/detail';
+import { __getReservationDetail } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
-import SchedulesDetail from '../Schedules/SchedulesDetail';
-import UserSchedules from '../Schedules/UserSchedules';
-import AllReservation from './AllReservation';
 import {
   InfoContain,
   InfoBox,
   Info,
   CommentBox,
-  DelBtn,
   StSubTitle,
   UserList,
   StSmall,
 } from './CalendarStyled';
+
 import { useNavigate } from 'react-router-dom';
 import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
+
+import ReservationDelete from './ReservationDelete';
 
 function ReservationDetail() {
   const navi = useNavigate();
@@ -31,10 +27,6 @@ function ReservationDetail() {
     state => state.detail,
   );
   const [showSkeleton, setShowSkeleton] = useState(true);
-
-  const deleteHandler = id => {
-    dispatch(__deleteRervation(id));
-  };
 
   const token = getCookie('userId');
   // useEffect(() => {
@@ -122,9 +114,10 @@ function ReservationDetail() {
                         ))}
                       </UserList>
                     </CommentBox>
-                    <DelBtn onClick={() => deleteHandler(item.reservationId)}>
+                    <ReservationDelete reservationId={item.reservationId} />
+                    {/* <DelBtn onClick={() => deleteHandler(item.reservationId)}>
                       삭제
-                    </DelBtn>
+                    </DelBtn> */}
                   </Info>
                 </InfoBox>
               ))}

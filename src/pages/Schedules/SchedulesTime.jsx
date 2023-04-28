@@ -79,7 +79,6 @@ function SchedulesTime({ param, selectDay }) {
     }
     setClickSchedules([]);
   }, [selectDay]);
-  console.log('선택날짜', clickSchedules, reqScheduleValue);
 
   return (
     <SchContain width="383px">
