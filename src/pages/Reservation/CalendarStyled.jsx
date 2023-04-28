@@ -42,10 +42,10 @@ export const StReserTimeButton = styled.button`
   border-radius: 5px;
   border: 1px solid var(--blue);
   margin: 5px;
-  padding: 5px 0px;
+  padding: ${props => props.padding || '5px 0px'};
   font-family: inherit;
   color: #07133b;
-  width: 70px;
+  width: ${props => props.width || '70px'};
 
   &:hover {
     color: white;
@@ -67,9 +67,9 @@ export const StReserTimeBox = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${props => props.background || 'white'};
   padding: 10px 0px;
-  width: 90%;
+  width: ${props => props.width || '90%'};
   margin: auto;
   border-radius: 8px;
 `;
@@ -78,8 +78,8 @@ export const StReserTimeBox = styled.div`
 export const StSubmitButton = styled.button`
   width: 348px;
   height: 60px;
-  margin-left: 18px;
-  margin-top: 23px;
+  margin-left: ${props => props.marginLeft || '18px'};
+  margin-top: ${props => props.marginTop || '23px'};
 
   align-items: center;
   border-radius: 8px;
@@ -128,7 +128,7 @@ export const ReservationCheckContain = styled.div`
 `;
 export const CheckContain = styled.div`
   border: 1px solid;
-  width: 15vw;
+  width: 280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -139,6 +139,19 @@ export const CheckContain = styled.div`
   background-color: white;
 `;
 
+export const CheckContainBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: transparent; */
+  /* background-color: steelblue;s */
+  padding: 10px 0px;
+  width: ${props => props.width || '95%'};
+  margin: auto;
+  border-radius: 8px;
+`;
+
 export const CheckTitle = styled.div`
   font-family: inherit;
   font-weight: 700;
@@ -146,9 +159,9 @@ export const CheckTitle = styled.div`
 `;
 export const FinButton = styled.button`
   border: none;
-  width: 17vw;
-  padding: 10px;
-  margin: 3px;
+  width: 400px;
+  padding: 20px;
+  margin: auto;
   background-color: #07133b;
   color: white;
   border-radius: 8px;
@@ -170,8 +183,8 @@ export const DayContain = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  width: 92%;
-  height: 450px;
+  width: ${props => props.width || '92%'};
+  height: ${props => props.height || '450px'};
   background: #ffffff;
   box-shadow: 0px 5.02286px 37.6714px rgba(140, 159, 157, 0.25);
   border-radius: 8px;
@@ -179,7 +192,7 @@ export const DayContain = styled.div`
 `;
 
 export const Day = styled.button`
-  min-width: calc(100% / 7.5);
+  min-width: ${props => props.width || 'calc(100% / 7.5)'};
   background-color: transparent;
   border: 1px solid transparent;
   width: 3vw;
@@ -199,7 +212,7 @@ export const Day = styled.button`
 `;
 
 export const StDate = styled.button`
-  min-width: calc(100% / 7.5);
+  min-width: ${props => props.width || 'calc(100% / 7.5)'};
   background-color: ${props => props.background || '#ffffff'};
   /* background-color: lightblue; */
   border: none;
@@ -263,14 +276,55 @@ export const ScheduleInput = styled.input`
   margin: ${props => props.margin};
 `;
 
+export const ScheduleUsers = styled.div`
+  width: 95%;
+  height: 100px;
+  /* background-color: steelblue; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  /* margin-top: 15px; */
+  padding: 15px 0px;
+`;
+
 export const ScheduleUser = styled.div`
   display: flex;
-  /* justify-content: space-around; */
-  align-items: center;
-  margin-top: 15px;
+  margin-left: 20px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  color: #07133b;
+`;
+
+export const UserList = styled.div`
+  /* background-color: steelblue; */
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px 0px;
+  width: 300px;
+  height: 80px;
+  gap: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  border-top: 1px solid var(--lightgrey);
+  border-bottom: 1px solid var(--lightgrey);
+  /* 스크롤바 스타일 변경 */
+  ::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+  }
+
+  /* 스크롤바 썸네일 스타일 변경 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #b6dfdd;
+    border-radius: 50px; /* 스크롤바 모양 */
+  }
 `;
 
 export const FontSt = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
   color: #07133b;
 `;
 

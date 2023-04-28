@@ -19,10 +19,17 @@ import {
   StIcon,
   ScheduleInput,
   ScheduleUser,
+  FontSt,
+  ScheduleUsers,
+  UserList,
+  CheckContainBox,
+  StSubmitButton,
 } from './CalendarStyled';
 import ReservationCheck from './ReservationCheck';
+import { Input } from '../../components/Input';
+import { Column, Row } from '../../components/Flex';
 
-function ReservationTime({ param, selectDay }) {
+function ReservationTime({ param, selectDay, mrName }) {
   const now = new Date();
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
@@ -56,7 +63,7 @@ function ReservationTime({ param, selectDay }) {
     // return reqData;
   };
 
-  const reqDatas = { startList: dataList(), useList: userIdInfo };
+  const reqDatas = { startList: dataList(), userList: userIdInfo };
   const dispatch = useDispatch();
 
   const { reservation } = useSelector(state => state.reservation);
@@ -110,14 +117,14 @@ function ReservationTime({ param, selectDay }) {
   }, [selectDay]);
 
   return (
-    <SchContain width="383px">
+    <SchContain width="683px">
       <>
         <div>
           <StSubTitle margin="20px 0px 10px 24px">
             <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
             예약 시간
           </StSubTitle>
-          <StReserTimeBox>
+          <StReserTimeBox width="95%">
             {timeList?.map(item => (
               <StReserTimeButton
                 key={item.start}
@@ -134,70 +141,83 @@ function ReservationTime({ param, selectDay }) {
             ))}
           </StReserTimeBox>
         </div>
-
-        <ScheduleUser>
-          <StSubTitle margin="0px 10px 0px 24px">
-            <StIcon src={`${process.env.PUBLIC_URL}/img/user.png`} alt="icon" />
-            예약 인원
-          </StSubTitle>
-          <ScheduleInput
-            type="text"
-            width="100px"
-            height="20px"
-            margin="0px 5px"
-            onChange={e => {
-              dispatch(__getUserData(e.target.value));
-            }}
-          />
-          {userData?.map(item => (
-            <div
-              onClick={e => {
-                const clickUserId = item.userId;
-                if (userIdInfo.find(item => item.userId === clickUserId)) {
-                  return (
-                    setUserInfo(
-                      userInfo.filter(user => user.username !== item.username),
-                    ),
-                    setUserIdInfo(
-                      userIdInfo.filter(user => user.userId !== item.userId),
-                    )
-                  );
-                } else {
-                  console.log(userId);
-                  setUserInfo([...userInfo, { username: item.username }]);
-                  setUserIdInfo([...userIdInfo, { userId: item.userId }]);
-                }
+        <ScheduleUsers>
+          <Column>
+            <StSubTitle margin="0px 0px 20px 5px">
+              <StIcon
+                src={`${process.env.PUBLIC_URL}/img/user.png`}
+                alt="icon"
+              />
+              예약 인원
+            </StSubTitle>
+            {/* <ScheduleUsers> */}
+            {/* <Column> */}
+            <Input
+              width="280px"
+              height="40px"
+              margin="0px 10px"
+              onChange={e => {
+                dispatch(__getUserData(e.target.value));
               }}
-              key={item.userId}
-            >
-              {item.username}
-            </div>
-          ))}
-          <StReserCountBox>
+            />
+
+            {/* <StReserCountBox>
             <StReserCountButton onClick={delCount}>-</StReserCountButton>
             <div>{count}</div>
             <StReserCountButton onClick={addCount}>+</StReserCountButton>
-          </StReserCountBox>
-        </ScheduleUser>
+          </StReserCountBox> */}
+            {/* </Column> */}
+            {/* </ScheduleUsers> */}
+          </Column>
+          <UserList>
+            {userData?.map(item => (
+              <ScheduleUser
+                onClick={e => {
+                  const clickUserId = item.userId;
+                  if (userIdInfo.find(item => item.userId === clickUserId)) {
+                    return (
+                      setUserInfo(
+                        userInfo.filter(
+                          user => user.username !== item.username,
+                        ),
+                      ),
+                      setUserIdInfo(
+                        userIdInfo.filter(user => user.userId !== item.userId),
+                      )
+                    );
+                  } else {
+                    console.log(userId);
+                    setUserInfo([...userInfo, { username: item.username }]);
+                    setUserIdInfo([...userIdInfo, { userId: item.userId }]);
+                  }
+                }}
+                key={item.userId}
+              >
+                {item.username}
+              </ScheduleUser>
+            ))}
+          </UserList>
+        </ScheduleUsers>
       </>
       <ReservationCheck
         param={param}
         selectDay={selectDay}
         clickReservation={clickReservation}
         userName={userInfo}
-        dispatch={dispatch}
-        navi={navi}
-        userId={userId}
-        reqDatas={reqDatas}
+        mrName={mrName}
       />
-      {/* <FinButton
-        onClick={() => {
-          dispatch(__addReservation({ reqDatas, param, selectDay }));
-          navi(`/detail/${userId}`);
-        }}
-      >
-        예약 완료
-      </FinButton> */}
+      <CheckContainBox>
+        <StSubmitButton
+          marginTop="0px"
+          marginLeft="0px"
+          onClick={() => {
+            dispatch(__addReservation({ reqDatas, param, selectDay }));
+            navi(`/detail/${userId}`);
+          }}
+        >
+          예약 완료
+        </StSubmitButton>
+      </CheckContainBox>
     </SchContain>
   );
 }

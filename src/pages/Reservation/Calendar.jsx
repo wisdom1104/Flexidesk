@@ -22,6 +22,7 @@ import {
   StSubHeader,
   StSubTitle,
   StSelectDay,
+  StIcon,
 } from './CalendarStyled';
 import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
@@ -48,7 +49,7 @@ const Calendar = () => {
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
   const { reservation } = useSelector(state => state.reservation);
-  const { mrId } = reservation;
+  const { mrName } = reservation;
 
   //이전달
   const preMonth = useCallback(() => {
@@ -93,14 +94,15 @@ const Calendar = () => {
               value={`${selectYear}-${selectMonth
                 .toString()
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
-              style={{ backgroundColor: isSelected ? 'Pink' : 'white' }}
+              background={isSelected ? 'pink' : 'white'}
+              width="calc(100% / 7.8)"
             >
               {i + 1}
             </StDate>,
           );
         }
       } else {
-        dayArr.push(<StDate key={stDay}> </StDate>);
+        dayArr.push(<StDate width="calc(100% / 7.8)" key={stDay}></StDate>);
       }
     }
     return dayArr;
@@ -127,14 +129,20 @@ const Calendar = () => {
         </StListTitle>
 
         <Row>
-          <SchContain>
+          <SchContain width="500px" height="">
             {/* <StMrNameBox>
               <FontSt>회의실 이름</FontSt>
               <StMrName>회의실 {mrId}</StMrName>
             </StMrNameBox> */}
 
             <StSubHeader>
-              <StSubTitle>{mrId} 예약 날짜</StSubTitle>
+              <StSubTitle>
+                <StIcon
+                  src={`${process.env.PUBLIC_URL}/img/day.png`}
+                  alt="icon"
+                />{' '}
+                {mrName} 예약 날짜
+              </StSubTitle>
               <StSelectDay>
                 <IoIosArrowDropleft
                   onClick={() => {
@@ -150,14 +158,18 @@ const Calendar = () => {
                 />
               </StSelectDay>
             </StSubHeader>
-            <DayContain>
+            <DayContain width="88%" height="">
               {week?.map(item => {
-                return <Day key={item}>{item}</Day>;
+                return (
+                  <Day width="calc(100% / 7.8)" key={item}>
+                    {item}
+                  </Day>
+                );
               })}
               {returnDay()}
             </DayContain>
           </SchContain>
-          <ReservationTime param={param.id} selectDay={date} />
+          <ReservationTime param={param.id} selectDay={date} mrName={mrName} />
         </Row>
       </div>
     </Page>

@@ -19,7 +19,12 @@ import {
   ComFont,
 } from './CalendarStyled';
 import { useNavigate } from 'react-router-dom';
-import { StFont, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import {
+  StFont,
+  StOverall,
+  StSmallFont,
+  StWrapDiv,
+} from '../Welcome/WelcomeStyled';
 
 function ReservationDetail() {
   const navi = useNavigate();
@@ -49,20 +54,20 @@ function ReservationDetail() {
             >
               ←
             </BackCusor>
-            <StFont width='60vw' fontSize="2rem" align="start">
+            <StFont width="60vw" fontSize="2rem" align="start">
               내가 예약한 회의실
             </StFont>
           </ReservationTitle>
           <InfoContain>
             {reservationDetail?.map(item => (
-              <InfoBox key={item.reservationId} >
-                <StFont width='18vw' fontSize="1.5rem" align="start">
+              <InfoBox key={item.reservationId}>
+                <StFont width="18vw" fontSize="1.5rem" align="start">
                   {item.username}
                 </StFont>
                 <Info>
                   <CommentBox>
-                    <StSmallFont width>회의실 번호</StSmallFont>
-                    <StSmallFont width>{item.mrId}</StSmallFont>
+                    <StSmallFont width>회의실 이름</StSmallFont>
+                    <StSmallFont width>{item.mrName}</StSmallFont>
                   </CommentBox>
 
                   <CommentBox>

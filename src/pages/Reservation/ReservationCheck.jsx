@@ -1,23 +1,24 @@
 import React from 'react';
 import {
   CheckContain,
+  CheckContainBox,
   CheckTitle,
   FinButton,
+  FontSt,
   SchContain,
   StIcon,
   StSubTitle,
+  StSubmitButton,
 } from './CalendarStyled';
 import { __addReservation } from '../../redux/modules/reservation';
+import { Column, Row } from '../../components/Flex';
 
 function ReservationCheck({
   param,
   selectDay,
   clickReservation,
   userName,
-  dispatch,
-  navi,
-  userId,
-  reqDatas,
+  mrName,
 }) {
   //예약시간 보여주기
   const timeArray = clickReservation.map(item => {
@@ -40,40 +41,38 @@ function ReservationCheck({
 
   return (
     <>
-      <StSubTitle margin="20px 0px 10px 24px">
-        <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
+      <StSubTitle margin="0px 0px 10px 24px">
+        <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
         예약 확인하기
       </StSubTitle>
-      <CheckContain>
-        <CheckTitle>회의실 이름</CheckTitle>
-        <div>회의실 {param}</div>
-      </CheckContain>
-      <CheckContain>
-        <div>예약 날짜</div>
-        <div>{selectDay}</div>
-      </CheckContain>
-      <CheckContain>
-        <div>예약 시간</div>
-        <div>
-          {timeArray.map(time => (
-            <div key={time}>{time}</div>
-          ))}
-        </div>
-      </CheckContain>
-      <CheckContain>
-        <div>예약 인원</div>
-        {userName?.map(item => (
-          <div key={item.username}>{item.username}</div>
-        ))}
-      </CheckContain>
-      <FinButton
-        onClick={() => {
-          dispatch(__addReservation({ reqDatas, param, selectDay }));
-          navi(`/detail/${userId}`);
-        }}
-      >
-        예약 완료
-      </FinButton>
+      <CheckContainBox>
+        <Column>
+          <CheckContain>
+            <CheckTitle>회의실 이름</CheckTitle>
+            <FontSt>{mrName}</FontSt>
+          </CheckContain>
+          <CheckContain>
+            <CheckTitle>예약 날짜</CheckTitle>
+            <FontSt>{selectDay}</FontSt>
+          </CheckContain>
+        </Column>
+        <Column>
+          <CheckContain>
+            <CheckTitle>예약 시간</CheckTitle>
+            <FontSt>
+              {timeArray.map(time => (
+                <div key={time}>{time}</div>
+              ))}
+            </FontSt>
+          </CheckContain>
+          <CheckContain>
+            <CheckTitle>예약 인원</CheckTitle>
+            {userName?.map(item => (
+              <FontSt key={item.username}>{item.username}</FontSt>
+            ))}
+          </CheckContain>
+        </Column>
+      </CheckContainBox>
     </>
   );
 }

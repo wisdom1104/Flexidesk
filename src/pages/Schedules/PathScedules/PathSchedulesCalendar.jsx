@@ -10,10 +10,18 @@ import {
   StCalenHeader,
   FontSt,
   DateFont,
+  StSubHeader,
+  StSubTitle,
+  StIcon,
+  StSelectDay,
 } from '../../Reservation/CalendarStyled';
 import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 import styled from 'styled-components';
-import { StBackground } from '../../Welcome/WelcomeStyled';
+import { StBackground, StSpacePagePhoto } from '../../Welcome/WelcomeStyled';
+import Page from '../../../components/Page';
+import { StListTitle } from '../../../shared/SpaceStyles';
+import { Row } from '../../../components/Flex';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 
 function PathScedules() {
   const param = useParams();
@@ -93,41 +101,60 @@ function PathScedules() {
   };
 
   return (
-    <>
-      <SchContain>
-        <StCalenHeader>
-          <FontSt>스케줄 날짜</FontSt>
-          <Header>
-            <VscArrowCircleLeft
-              onClick={() => {
-                preMonth();
-              }}
-            />
-            <DateFont>{selectYear}년</DateFont>
-            <DateFont>{selectMonth}월</DateFont>
-            <VscArrowCircleRight
-              onClick={() => {
-                nextMonth();
-              }}
-            />
-          </Header>
-        </StCalenHeader>
+    <Page>
+      <div>
+        <StListTitle margin="30px 0px 0px 16px">
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
+            alt="managementIcon"
+          />
+          <div>스케줄 수정하기</div>
+        </StListTitle>
+        <Row>
+          <SchContain>
+            <StSubHeader>
+              <StSubTitle>
+                <StIcon
+                  src={`${process.env.PUBLIC_URL}/img/day.png`}
+                  alt="icon"
+                />
+                스케줄 날짜
+              </StSubTitle>
+              <StSelectDay>
+                <IoIosArrowDropleft
+                  onClick={() => {
+                    preMonth();
+                  }}
+                />
+                <div>{selectYear}년</div>
+                <div>{selectMonth}월</div>
+                <IoIosArrowDropright
+                  onClick={() => {
+                    nextMonth();
+                  }}
+                />
+              </StSelectDay>
+            </StSubHeader>
 
-        <DayContain>
-          {week?.map(item => {
-            return <Day key={item}>{item}</Day>;
-          })}
-        </DayContain>
-        <DayContain>{returnDay()}</DayContain>
-      </SchContain>
-      <PathSchedulesTime
-        param={param.userId}
-        selectDay={date}
-        title={location.state.scTitle}
-        comment={location.state.scComment}
-        scId={location.state.scId}
-      />
-    </>
+            <DayContain>
+              {week?.map(item => {
+                return <Day key={item}>{item}</Day>;
+              })}
+              {returnDay()}
+            </DayContain>
+          </SchContain>
+          <PathSchedulesTime
+            param={param.userId}
+            selectDay={date}
+            title={location.state.scTitle}
+            comment={location.state.scComment}
+            scId={location.state.scId}
+          />
+        </Row>
+      </div>
+    </Page>
   );
 }
 export default PathScedules;
