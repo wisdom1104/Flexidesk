@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 //배경
@@ -15,6 +16,14 @@ export const StOverall = styled.div`
   justify-content: center;
   margin: 0 auto;
 `;
+
+export const StLoginContain = styled.div`
+  margin-top: 200px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+`
+
 
 export const StLoginForm = styled.form`
   width: 420px;
@@ -36,13 +45,11 @@ export const StForm = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
   gap: 16px;
 `;
 
 export const StFormBox = styled.div`
-  /* width: 420px;
-  height: 84px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +64,7 @@ export const StLongButton = styled.button`
 
   align-items: center;
   border-radius: 8px;
-
+  border: none;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 22px;
@@ -82,15 +89,15 @@ export const StSmallButton = styled.button`
   gap: 10px;
   margin-top: 10px;
 
-  background: #f1f2f4;
+  background: var(--lightgrey);
   border: 1px solid #a6aebb;
 
   border-radius: 4px;
 `;
 
 //login
-export const StLoginContain = styled.div`
-  width: 400px;
+export const StLoginInputIconBox = styled.div`
+  width: 100%;
   height: 60px;
   border: 2px solid #a6aebb;
   border-radius: 8px;
@@ -111,6 +118,18 @@ export const StLoginIcon = styled.img`
   display: inline-block;
   margin-left: 20px;
   z-index: 1;
+`;
+
+export const StLink = styled(Link)`
+  width: 90px;
+  margin-top: 10px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: end;
+
+  color: var(--darkgrey);
 `;
 
 // signup
@@ -156,7 +175,7 @@ export const InlineInput = styled.input`
     border: 1px solid #65bab6;
   }
   &:active {
-    border: 1px solid #07133b;
+    border: 1px solid var(--blue);
   }
 `;
 
@@ -185,5 +204,63 @@ export const InlinButton = styled.input`
   }
   &:active {
     border: 1px solid #07133b;
+  }
+`;
+
+//managmentPage
+export const DropdownMenu = styled.div`
+  display: inline-block;
+  margin-left: 15px;
+`;
+
+export const DropdownButton = styled.button`
+  width: 160px;
+  height: 40px;
+  color: #15161a;
+  padding: 12px;
+  margin-bottom: 45px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  border: 1px solid #65bab6;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+`;
+
+export const DropdownContent = styled.div`
+  width: 160px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin-top: -45px;
+
+  border: 1px solid #65bab6;
+  border-radius: 8px;
+`;
+
+export const DropdownItem = styled.button`
+  color: black;
+  width: 160px;
+  padding: 12px 16px;
+  text-decoration: none;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  display: block;
+  background-color: #fff;
+  border: 1px transparent;
+  border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
+
+  &:hover {
+    background-color: #e9f6f4;
+    color: #65bab6;
   }
 `;

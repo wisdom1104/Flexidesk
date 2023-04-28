@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 export const HeaderContain = styled.div`
   display: flex;
-  position: absolute;
-  width: 75vw;
+  /* position: absolute; */
+  width: 100%;
   height: 6vh;
+  /* min-width: 1200px; */
+  /* max-width: 1200px; */
   justify-content: space-between;
   align-items: center;
   background-color: white;
 `;
-
 
 export const StHeaderButtonBox = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ export const StHeaderContentBox = styled.div`
   justify-content: center;
   align-items: center;
   margin: 5px;
+  /* min-width: 150px; */
 `;
 
 export const StHaderFont = styled.p`
@@ -32,10 +34,10 @@ export const StHaderFont = styled.p`
   line-height: 19px;
   text-align: center;
 
-  color: #15161A;
+  color: var(--black);
 
-  cursor:default
-`
+  cursor: default;
+`;
 
 export const StHeaderContentButtonBox = styled.div`
   display: flex;
@@ -60,4 +62,5 @@ export const StHeaderButton = styled.button`
 
 export const StHeaderLogo = styled.img`
   width: 150px;
-`
+  margin-right: 50px;
+`;

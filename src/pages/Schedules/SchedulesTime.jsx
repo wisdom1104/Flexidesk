@@ -2,15 +2,16 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { cookies } from '../../shared/cookies';
 import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
 import {
-  ScheduleInput,
   StReserTimeBox,
   StReserTimeButton,
-  FontSt,
-  FinButton,
+  SchContain,
+  StSubTitle,
+  StSubmitButton,
+  StIcon,
 } from '../Reservation/CalendarStyled';
+import { Input } from '../../components/Input';
 
 function SchedulesTime({ param, selectDay }) {
   const now = new Date();
@@ -76,23 +77,29 @@ function SchedulesTime({ param, selectDay }) {
         }),
       );
     }
+    setClickSchedules([]);
   }, [selectDay]);
 
   return (
-    <>
-      <FontSt>스케줄 시간</FontSt>
-      <StReserTimeBox>
-        {schedules?.map(item => (
-          <StReserTimeButton
-            key={item.start}
-            onClick={onclickHandler}
-            disabled={item.isCheckOut === true}
-            value={`${selectDay}T${item.start}`}
-          >
-            {item.start}~{item.end}
-          </StReserTimeButton>
-        ))}
-      </StReserTimeBox>
+    <SchContain width="383px">
+      <div>
+        <StSubTitle margin="20px 0px 10px 24px">
+          <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
+          스케줄 시간
+        </StSubTitle>
+        <StReserTimeBox>
+          {schedules?.map(item => (
+            <StReserTimeButton
+              key={item.start}
+              onClick={onclickHandler}
+              disabled={item.isCheckOut === true}
+              value={`${selectDay}T${item.start}`}
+            >
+              {item.start}
+            </StReserTimeButton>
+          ))}
+        </StReserTimeBox>
+      </div>
       <form
         onSubmit={async e => {
           e.preventDefault();
@@ -100,8 +107,14 @@ function SchedulesTime({ param, selectDay }) {
           navi(`/scheduledetail/${param}`);
         }}
       >
-        <FontSt>스케줄 제목</FontSt>
-        <ScheduleInput
+        <StSubTitle margin="15px 0px 10px 24px">
+          <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
+          스케줄 제목
+        </StSubTitle>
+        <Input
+          width="85%"
+          height="50px"
+          margin="auto"
           type="text"
           value={scheduleValue.scTitle}
           required
@@ -111,9 +124,16 @@ function SchedulesTime({ param, selectDay }) {
               scTitle: e.target.value,
             })
           }
+          placeholder="제목을 입력하세요."
         />
-        <FontSt>스케줄 내용</FontSt>
-        <ScheduleInput
+        <StSubTitle margin="15px 0px 10px 24px">
+          <StIcon src={`${process.env.PUBLIC_URL}/img/text.png`} alt="icon" />
+          스케줄 내용
+        </StSubTitle>
+        <Input
+          width="85%"
+          height="50px"
+          margin="auto"
           type="text"
           value={scheduleValue.scComment}
           required
@@ -123,10 +143,11 @@ function SchedulesTime({ param, selectDay }) {
               scComment: e.target.value,
             })
           }
+          placeholder="내용을 입력하세요."
         />
-        <FinButton>등록하기</FinButton>
+        <StSubmitButton>등록하기</StSubmitButton>
       </form>
-    </>
+    </SchContain>
   );
 }
 

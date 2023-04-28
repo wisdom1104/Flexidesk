@@ -1,13 +1,11 @@
 import React from 'react';
-import Welcome1 from './Welcome1';
-import Welcome3 from './Welcome3';
-import Welcome5 from './Welcome5';
-import Welcome6 from './Welcome6';
-import Welcome7 from './Welcome7';
-
+import Welcome1 from '../../features/welcome/Welcome1';
+import Welcome3 from '../../features/welcome/Welcome3';
+import Welcome5 from '../../features/welcome/Welcome5';
+import Welcome6 from '../../features/welcome/Welcome6';
+import Welcome7 from '../../features/welcome/Welcome7';
 
 function Welcome() {
-
   return (
     <>
       <Welcome1 />
@@ -19,7 +17,7 @@ function Welcome() {
       <Welcome6 />
       {/* ////////////////////////////////////////////////////////////////////////////////////// */}
       <Welcome7 />
-    </> 
+    </>
   );
 }
 

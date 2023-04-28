@@ -5,7 +5,7 @@ import api from '../../axios/api';
 const initialState = {
   floors: [],
   isLoading: false,
-  error: null,
+  isError: null,
 };
 
 // floor 전체 조회

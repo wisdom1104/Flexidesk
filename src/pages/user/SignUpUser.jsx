@@ -11,67 +11,28 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
-import useTrueHook from '../../hooks/useTrueHook';
-import CertificationCkeck from './CertificationCkeck';
+import useTrueHook from '../../hooks/user/useTrueHook';
+import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
+import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
 
 function SignUpUser() {
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    username: '',
-    certification: '',
-  });
-
-  const [passwordError, setPasswordError] = useState('');
-  const [passwordCheckError, setPasswordCheckError] = useState('');
-  const [emailError, setEmailError] = useState('');
 
   const navi = useNavigate();
 
   // 가드
   useTrueHook();
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const handleEmailChange = event => {
-    const value = event.target.value;
-    setUser(prevState => ({ ...prevState, email: value }));
-
-    if (!emailRegex.test(value)) {
-      setEmailError('올바른 이메일 형식이 아닙니다.');
-    } else {
-      setEmailError('');
-    }
-  };
-
-  const handlePasswordChange = event => {
-    const value = event.target.value;
-    setUser(prevState => ({ ...prevState, password: value }));
-
-    if (value.length < 8) {
-      setPasswordError('비밀번호는 최소 8자 이상이어야 합니다.');
-    } else {
-      setPasswordError('');
-    }
-  };
-
-  const handlepasswordCheckChange = event => {
-    const value = event.target.value;
-    setUser(prevState => ({ ...prevState, passwordCheck: value }));
-
-    if (value !== user.password) {
-      setPasswordCheckError('비밀번호와 일치하지 않습니다.');
-    } else {
-      setPasswordCheckError('');
-    }
-  };
+  const { user, setUser, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange } = useFormValidation();
 
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
+      if (!response) {
+        alert('다시 회원가입해주세요😓');
+        return;
+      }
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -87,10 +48,10 @@ function SignUpUser() {
       <StOverall>
         <div
           style={{
-            marginTop: '200px',
             display: 'flex',
             alignItems: 'center',
-            height: '100%'
+            height: '100%',
+            padding:'height="100%"'
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="570px">
@@ -139,6 +100,13 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
+                {errors.email && 
+                <StSmallFont 
+                      width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red">{errors.email}</StSmallFont>}
 
                 <StTextInput height="80px">
                   <CertificationCkeck
@@ -169,15 +137,15 @@ function SignUpUser() {
                     maxlength="16"
                   />
                 </StTextInput>
-                {passwordError && (
+                {errors.password && (
                   <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    color="red"
+                    width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
                   >
-                    {passwordError}
+                    {errors.password}
                   </StSmallFont>
                 )}
 
@@ -192,15 +160,15 @@ function SignUpUser() {
                     maxlength="16"
                   />
                 </StTextInput>
-                {passwordCheckError && (
+                {errors.passwordCheck && (
                   <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    color="red"
+                     width="420px"
+                      align="start"
+                      fontSize="0.875rem"
+                      weight="400"
+                      color="red"
                   >
-                    {passwordCheckError}
+                    {errors.passwordCheck}
                   </StSmallFont>
                 )}
 

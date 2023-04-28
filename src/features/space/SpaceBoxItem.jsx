@@ -1,32 +1,33 @@
 import React from 'react';
-import { Box, StBox, StUseBox, StUser } from './SpaceStyles';
+import { StBox, StUser } from '../../shared/SpaceStyles';
 
 function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
   return (
     <>
-      {isClicked === box.boxId ? (
-        <Box
+      {box.username !== null ? (
+        <StBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
+          background={isClicked === box.boxId ? '#07133b' : '#def1ef'}
+          color={isClicked === box.boxId ? '#8b93a6' : '#65bab6'}
         >
           <div>{box.boxName}</div>
-        </Box>
+          <StUser>{box.username}</StUser>
+        </StBox>
       ) : (
         <StBox
           key={box.boxId}
           id={box.boxId}
-          style={{
-            transform: `translate(${box.x}px, ${box.y}px)`,
-          }}
           onClick={() => {
             onClickMoveUserHandler(box);
           }}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
+          background={isClicked === box.boxId ? '#07133b' : undefined}
+          color={isClicked === box.boxId ? '#8b93a6' : undefined}
         >
           <div>{box.boxName}</div>
         </StBox>

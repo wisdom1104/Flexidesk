@@ -83,9 +83,8 @@ export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
   }
 });
 
-// /boxes/{companyName}/{fromBoxId}/move/{toBoxId}/user
-
 // box user 수정
+//  /locations/{companyName}/{locationId}
 export const __editBoxUser = createAsyncThunk(
   'editBoxUser',
   async (payload, thunk) => {
@@ -93,7 +92,7 @@ export const __editBoxUser = createAsyncThunk(
       const token = cookies.get('token');
       const companyName = cookies.get('companyName');
       const response = await api.patch(
-        `/boxes/${companyName}/${payload.toBoxId}/move`,
+        `/locations/${companyName}/${payload.locationId}`,
         {
           boxName: payload.boxName,
           x: payload.x,

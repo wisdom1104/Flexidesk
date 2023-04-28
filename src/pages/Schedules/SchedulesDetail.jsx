@@ -1,76 +1,127 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { __getAllSchedules } from '../../redux/modules/schedules';
 import {
-  __deleteSchedule,
-  __getAllSchedules,
-} from '../../redux/modules/schedules';
-import {
-  ReservationTitle,
-  BackCusor,
   InfoBox,
   InfoContain,
   Info,
   CommentBox,
-  ComFont,
-  DelBtn,
+  PathBtn,
+  StSubTitle,
+  ButtonContain,
 } from '../Reservation/CalendarStyled';
+import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import Page from '../../components/Page';
+import { StListTitle } from '../../shared/SpaceStyles';
+import { getCookie } from '../../shared/cookies';
+import Skeleton from '../../components/Skeleton';
+import SchedulesDelete from './SchedulesDelete';
 
 function SchedulesDetail() {
-  const param = useParams();
   const dispatch = useDispatch();
   const navi = useNavigate();
-  const { userSchedules } = useSelector(state => state.schedules);
+  const { userSchedules, isLoading, isError } = useSelector(
+    state => state.schedules,
+  );
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const token = getCookie('userId');
+
+  // useEffect(() => {
+  //   dispatch(__getAllSchedules());
+  // }, []);
 
   useEffect(() => {
-    dispatch(__getAllSchedules());
+    if (!token) {
+      navi('/');
+    } else {
+      const loadData = async () => {
+        try {
+          dispatch(__getAllSchedules());
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      const timer = setTimeout(() => {
+        loadData();
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
-    <div>
-      <ReservationTitle>
-        <BackCusor
-          onClick={() => {
-            navi('/space');
-          }}
-        >
-          ←
-        </BackCusor>
-        <h2>내가 등록한 스케줄</h2>
-      </ReservationTitle>
-      <InfoContain>
-        {userSchedules?.map(item => (
-          <InfoBox key={item.scId}>
-            <h2>{item.scTitle}</h2>
-            <Info>
-              <CommentBox>
-                <ComFont>내용</ComFont>
-                <div>{item.scComment}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>날짜</ComFont>
-                <div>{item.scStart.split('T')[0]}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>시작시간</ComFont>
-                <div>{item.scStart.split('T')[1]}</div>
-              </CommentBox>
-              <CommentBox>
-                <ComFont>종료시간</ComFont>
-                <div>{item.scEnd.split('T')[1]}</div>
-              </CommentBox>
-              <DelBtn
-                onClick={() => {
-                  dispatch(__deleteSchedule(item.scId));
-                }}
-              >
-                삭제
-              </DelBtn>
-            </Info>
-          </InfoBox>
-        ))}
-      </InfoContain>
-    </div>
+    <Page>
+      <div>
+        <StListTitle margin="30px 0px 0px 16px">
+          {/* <BackCusor
+              onClick={() => {
+                navi('/space');
+              }}
+            >
+              ←
+            </BackCusor> */}
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
+            alt="managementIcon"
+          />
+          <div>내가 등록한 스케줄</div>
+        </StListTitle>
+
+        {showSkeleton ? (
+          <InfoContain>
+            <Skeleton />
+          </InfoContain>
+        ) : isError ? (
+          <div>에러발생 ..⚙️</div>
+        ) : (
+          <InfoContain>
+            {userSchedules?.map(item => (
+              <InfoBox key={item.scId} height="350px">
+                <StSubTitle>{item.scTitle}</StSubTitle>
+                <Info>
+                  <CommentBox>
+                    <StSmallFont width>내용</StSmallFont>
+                    <StSmallFont width>{item.scComment}</StSmallFont>
+                  </CommentBox>
+                  <CommentBox>
+                    <StSmallFont width>날짜</StSmallFont>
+                    <StSmallFont width>
+                      {item.scStart.split('T')[0]}
+                    </StSmallFont>
+                  </CommentBox>
+                  <CommentBox>
+                    <StSmallFont width>시작시간</StSmallFont>
+                    <StSmallFont width>
+                      {item.scStart.split('T')[1]}
+                    </StSmallFont>
+                  </CommentBox>
+                  <CommentBox>
+                    <StSmallFont width>종료시간</StSmallFont>
+                    <StSmallFont width>{item.scEnd.split('T')[1]}</StSmallFont>
+                  </CommentBox>
+                  <ButtonContain>
+                    <PathBtn
+                      onClick={() => {
+                        navi(`/pathschedules/${item.scId}`, {
+                          state: { ...item },
+                        });
+                      }}
+                    >
+                      수정
+                    </PathBtn>
+                    <SchedulesDelete scId={item.scId} />
+                  </ButtonContain>
+                </Info>
+              </InfoBox>
+            ))}
+          </InfoContain>
+        )}
+      </div>
+    </Page>
   );
 }
 

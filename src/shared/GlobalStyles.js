@@ -5,10 +5,17 @@ const GlobalStyles = createGlobalStyle`
 
 ${reset}
 
-body {
-    font-family: 'Inter', sans-serif;
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
+}
+
+body {
+    font-family: 'Pretendard-Regular', sans-serif;
     scroll-behavior: smooth;
+    box-sizing: border-box;
   }
 
   button {
@@ -33,10 +40,6 @@ body {
 
     --white : #ffffff;
 
-    /* --line: #eaeaea;
-		--white : #ffffff;
-		--point : #ffcccc;
-		--notice : #ff7776; */
   };
 `
 

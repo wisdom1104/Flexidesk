@@ -11,6 +11,8 @@ import Header from '../components/Header';
 import Calendar from '../pages/Reservation/Calendar';
 import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
+import Management from '../pages/user/Management';
+import PathSchedulesCalendar from '../pages/Schedules/PathScedules/PathSchedulesCalendar'
 
 function Router() {
   return (
@@ -21,12 +23,14 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpAdmin />} />
         <Route path="/signupuser" element={<SignUpUser />} />
+        <Route path="/management" element={<Management />} />
         <Route path="/calender/:id" element={<Calendar />} />
         <Route
           path="/schedulescalendar/:userId"
           element={<SchedulesCalendar />}
         />
         <Route path="/scheduledetail/:userId" element={<SchedulesDetail />} />
+        <Route path="/pathschedules/:scId" element={<PathSchedulesCalendar/>} />
         <Route path="/detail/:userId" element={<ReservationDetail />} />
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />

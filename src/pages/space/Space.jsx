@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
-import useFalseHook from '../../hooks/useFalseHook';
 import { Column, Row } from '../../components/Flex';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
@@ -15,12 +14,15 @@ import {
   StBtn,
   StListTitle,
   StListbox,
-  StSpace,
   StSpaceList,
   StSubHeader,
   Stmainspace,
-} from '../../features/space/SpaceStyles';
+} from '../../shared/SpaceStyles';
 import { __getFloors } from '../../redux/modules/floorsSlice';
+import Page from '../../components/Page';
+import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { InfoContain } from '../Reservation/CalendarStyled';
+import Skeleton from '../../components/Skeleton';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -35,13 +37,35 @@ function Space() {
   // 관리자 가드
   const role = cookies.get('role');
 
+  // useEffect(() => {
+  //   if (token === undefined) {
+  //     navi('/');
+  //   } else {
+  //     dispatch(__getFloors());
+  //     dispatch(__getSpaces());
+  //   }
+  // }, []);
+
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
   useEffect(() => {
-    if (token === undefined) {
+    if (!token) {
       navi('/');
-      // navi('/login');
     } else {
-      dispatch(__getFloors());
-      dispatch(__getSpaces());
+      const loadData = async () => {
+        try {
+          dispatch(__getFloors());
+          dispatch(__getSpaces());
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      const timer = setTimeout(() => {
+        loadData();
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -60,12 +84,20 @@ function Space() {
   };
 
   return (
-    <StSpace>
+    <Page>
       {/* <Row> */}
       {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
-        <StListTitle>스페이스</StListTitle>
-        {/* <div>11</div> */}
+        <StListTitle>
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/space.png`}
+            alt="managementIcon"
+          />
+          <div>스페이스</div>
+        </StListTitle>
+
         <StListbox>
           <StSpaceList>
             {floors?.map(floor => {
@@ -128,36 +160,43 @@ function Space() {
         </StListbox>
       </Column>
       {/* 보더 영역 */}
-      {spaces.length > 0 ? (
-        <>
-          {' '}
-          {selectedSpace && (
-            <SpaceBox
-              spaceId={selectedSpace.spaceId}
-              selectedSpace={selectedSpace}
-            />
-          )}
-        </>
+      {showSkeleton ? (
+        <InfoContain>
+        <Skeleton />
+      </InfoContain>
       ) : (
         <>
-          {/* 초기 화면 */}
-          <Stmainspace>
-            <StSubHeader>
-              {/* space name 부분 */}
-              <Row></Row>
-              <Row>
-                {role === 'ADMIN' ? (
-                  <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
-                ) : (
-                  <div>1</div>
-                )}
-              </Row>
-            </StSubHeader>
-            <StBoard></StBoard>
-          </Stmainspace>
+        {spaces.length > 0 ? (
+          <>
+            {selectedSpace && (
+              <SpaceBox
+                spaceId={selectedSpace.spaceId}
+                selectedSpace={selectedSpace}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {/* 초기 화면 */}
+            <Stmainspace>
+              <StSubHeader>
+                {/* space name 부분 */}
+                <Row></Row>
+                <Row>
+                  {role === 'ADMIN' ? (
+                    <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
+                  ) : (
+                    <div>1</div>
+                  )}
+                </Row>
+              </StSubHeader>
+              <StBoard></StBoard>
+            </Stmainspace>
+          </>
+        )}
         </>
       )}
-    </StSpace>
+    </Page>
   );
 }
 
