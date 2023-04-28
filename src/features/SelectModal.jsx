@@ -14,7 +14,7 @@ import {
   DropdownMenu,
 } from '../pages/user/UserStyled';
 import { useDispatch } from 'react-redux';
-import { __patchAllManagement } from '../redux/modules/allManagementSlice';
+import {  __patchAllManagement } from '../redux/modules/allManagementSlice';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
@@ -33,7 +33,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
 
   const onPatchButtonHandler = () => {
     setIsModal(false);
-    dispatch(__patchAllManagement({ userId, role: fav , updateRole:true}));
+    dispatch(__patchAllManagement({ userId ,role: fav , updateRole:true}));
   };
 
   return (
@@ -47,8 +47,8 @@ const SelectModal = ({ setIsModal, role, userId }) => {
           </DropdownButton>
           {list ? (
             <DropdownContent>
-              <DropdownItem onClick={choose} value="ADMIN">
-                ADMIN
+              <DropdownItem onClick={choose} value="MANAGER">
+                MANAGER
               </DropdownItem>
 
               <DropdownItem

@@ -43,15 +43,7 @@ function ManagementChange({ item }) {
           >
             직급 수정
           </MoveModalSubbtn>
-
-          {isSelectModalOpen && (
-            <SelectModal
-              setIsModal={closeSelectModal}
-              role={item.role}
-              userId={item.userId}
-            ></SelectModal>
-          )}
-
+ 
           <MoveModalbtn
             onClick={openDeleteModal}
             width="84px"
@@ -63,6 +55,14 @@ function ManagementChange({ item }) {
           >
             인원 삭제
           </MoveModalbtn>
+          
+         {isSelectModalOpen && (
+            <SelectModal
+              setIsModal={closeSelectModal}
+              role={item.role}
+              userId={item.userId}
+            ></SelectModal>
+          )}
 
           {isDeleteModalOpen && (
             <Modal

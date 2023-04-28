@@ -47,7 +47,6 @@ function ReservationDetail() {
           console.log(error);
         }
       };
-
       const timer = setTimeout(() => {
         loadData();
         setShowSkeleton(false);

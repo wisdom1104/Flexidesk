@@ -52,11 +52,10 @@ export const __deleteAllManagement = createAsyncThunk(
   export const __patchAllManagement = createAsyncThunk(
     "patchAllManagement",
     async (payload, thunk)=>{
-      console.log('patch payload:',payload)
       try{
         const token = cookies.get('token')
         const userId = cookies.get('userId')
-        await api.patch(`/admin/users/${userId}`,payload,{
+        await api.patch(`/admin/users/${payload.userId}`,payload,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -66,7 +65,7 @@ export const __deleteAllManagement = createAsyncThunk(
         return thunk.rejectWithValue(error)
       }
     }
-  )
+  );
 
 
   export const allManagementSlice = createSlice({
