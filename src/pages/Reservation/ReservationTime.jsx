@@ -14,6 +14,11 @@ import {
   StReserCountButton,
   ReservationCheckContain,
   FinButton,
+  SchContain,
+  StSubTitle,
+  StIcon,
+  ScheduleInput,
+  ScheduleUser,
 } from './CalendarStyled';
 import ReservationCheck from './ReservationCheck';
 
@@ -105,16 +110,16 @@ function ReservationTime({ param, selectDay }) {
   }, [selectDay]);
 
   return (
-    <>
-      <div>
+    <SchContain width="383px">
+      <>
         <div>
-          예약시간
+          <StSubTitle margin="20px 0px 10px 24px">
+            <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
+            예약 시간
+          </StSubTitle>
           <StReserTimeBox>
             {timeList?.map(item => (
               <StReserTimeButton
-                // style={{
-                //   backgroundColor: choseReservationTime ? '#07133b' : 'white',
-                // }}
                 key={item.start}
                 onClick={onclickHandler}
                 disabled={item.isCheckOut === true}
@@ -124,13 +129,22 @@ function ReservationTime({ param, selectDay }) {
                     : `${date}${item.start}`
                 }
               >
-                {item.start} ~ {item.end}
+                {item.start}
               </StReserTimeButton>
             ))}
           </StReserTimeBox>
-          예약 인원
-          <input
+        </div>
+
+        <ScheduleUser>
+          <StSubTitle margin="0px 10px 0px 24px">
+            <StIcon src={`${process.env.PUBLIC_URL}/img/user.png`} alt="icon" />
+            예약 인원
+          </StSubTitle>
+          <ScheduleInput
             type="text"
+            width="100px"
+            height="20px"
+            margin="0px 5px"
             onChange={e => {
               dispatch(__getUserData(e.target.value));
             }}
@@ -159,32 +173,32 @@ function ReservationTime({ param, selectDay }) {
               {item.username}
             </div>
           ))}
-          <StReserTimeBox>
-            <StReserCountBox>
-              <StReserCountButton onClick={delCount}>-</StReserCountButton>
-              <div>{count}</div>
-              <StReserCountButton onClick={addCount}>+</StReserCountButton>
-            </StReserCountBox>
-          </StReserTimeBox>
-          <ReservationCheckContain>
-            <ReservationCheck
-              param={param}
-              selectDay={selectDay}
-              clickReservation={clickReservation}
-              userName={userInfo}
-            />
-            <FinButton
-              onClick={() => {
-                dispatch(__addReservation({ reqDatas, param, selectDay }));
-                navi(`/detail/${userId}`);
-              }}
-            >
-              예약 완료
-            </FinButton>
-          </ReservationCheckContain>
-        </div>
-      </div>
-    </>
+          <StReserCountBox>
+            <StReserCountButton onClick={delCount}>-</StReserCountButton>
+            <div>{count}</div>
+            <StReserCountButton onClick={addCount}>+</StReserCountButton>
+          </StReserCountBox>
+        </ScheduleUser>
+      </>
+      <ReservationCheck
+        param={param}
+        selectDay={selectDay}
+        clickReservation={clickReservation}
+        userName={userInfo}
+        dispatch={dispatch}
+        navi={navi}
+        userId={userId}
+        reqDatas={reqDatas}
+      />
+      {/* <FinButton
+        onClick={() => {
+          dispatch(__addReservation({ reqDatas, param, selectDay }));
+          navi(`/detail/${userId}`);
+        }}
+      >
+        예약 완료
+      </FinButton> */}
+    </SchContain>
   );
 }
 

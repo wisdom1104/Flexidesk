@@ -20,6 +20,7 @@ import {
 } from '../../shared/SpaceStyles';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 import Page from '../../components/Page';
+import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -62,7 +63,16 @@ function Space() {
       {/* <Row> */}
       {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
-        <StListTitle>스페이스</StListTitle>
+        <StListTitle>
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/space.png`}
+            alt="managementIcon"
+          />
+          <div>스페이스</div>
+        </StListTitle>
+
         <StListbox>
           <StSpaceList>
             {floors?.map(floor => {

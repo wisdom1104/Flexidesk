@@ -15,7 +15,6 @@ export const StOverall = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-
 `;
 
 export const StLoginContain = styled.div`
@@ -48,7 +47,6 @@ export const StForm = styled.div`
   flex-direction: column;
   align-items: end;
   gap: 16px;
-
 `;
 
 export const StFormBox = styled.div`
@@ -66,7 +64,7 @@ export const StLongButton = styled.button`
 
   align-items: center;
   border-radius: 8px;
-
+  border: none;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 22px;
@@ -106,7 +104,6 @@ export const StLoginInputIconBox = styled.div`
 
   align-items: center;
   display: flex;
-  
 `;
 
 export const StLoginIconDiv = styled.div`
@@ -124,17 +121,16 @@ export const StLoginIcon = styled.img`
 `;
 
 export const StLink = styled(Link)`
-width: 90px;
-margin-top: 10px;
+  width: 90px;
+  margin-top: 10px;
 
-font-weight: 400;
-font-size: 14px;
-line-height: 14px;
-text-align: end;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: end;
 
-color: var(--darkgrey);
-
-`
+  color: var(--darkgrey);
+`;
 
 // signup
 export const StTextInput = styled.div`
@@ -220,7 +216,7 @@ export const DropdownMenu = styled.div`
 export const DropdownButton = styled.button`
   width: 160px;
   height: 40px;
-  color: #15161A;
+  color: #15161a;
   padding: 12px;
   margin-bottom: 45px;
 
@@ -228,7 +224,7 @@ export const DropdownButton = styled.button`
   font-size: 16px;
   line-height: 19px;
 
-  border: 1px solid #65BAB6;
+  border: 1px solid #65bab6;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 5fr 1fr 1fr;
@@ -244,7 +240,7 @@ export const DropdownContent = styled.div`
   z-index: 1;
   margin-top: -45px;
 
-  border: 1px solid #65BAB6;
+  border: 1px solid #65bab6;
   border-radius: 8px;
 `;
 
@@ -262,9 +258,9 @@ export const DropdownItem = styled.button`
   background-color: #fff;
   border: 1px transparent;
   border-radius: ${props => props.borderRadius || '8px 8px 0 0'};
-  
+
   &:hover {
-    background-color: #E9F6F4;
-    color: #65BAB6;
+    background-color: #e9f6f4;
+    color: #65bab6;
   }
 `;
