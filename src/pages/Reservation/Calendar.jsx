@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import ReservationTime from './ReservationTime';
 import { useNavigate, useParams } from 'react-router-dom';
-import useFalseHook from '../../hooks/useFalseHook';
 import { useSelector } from 'react-redux';
 import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 import {
@@ -21,7 +20,6 @@ import {
   DateFont,
 } from './CalendarStyled';
 const Calendar = () => {
-  // useFalseHook();
   const param = useParams();
   const navi = useNavigate();
   const today = {

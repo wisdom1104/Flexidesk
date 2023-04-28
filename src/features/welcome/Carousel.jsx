@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { SliderContainer, StFont, StSlider, StSliderButton, StSliders, StSmallFont } from "../pages/Welcome/WelcomeStyled";
+import { SliderContainer, StFont, StSlider, StSliderButton, StSliders, StSmallFont } from "../../pages/Welcome/WelcomeStyled";
+
 
 const Button = ({ children, dir, onClick }) => {
   return (

@@ -18,8 +18,8 @@ import { isLoginActions } from '../redux/modules/loginSlice';
 function Header() {
   const [isModal, setIsModal] = useState(false);
 
-  const [loginTime, setLoginTime] = useState(Date.now());
-  const [expirationTime, setExpirationTime] = useState(loginTime + 3600000); // 토큰 만료 시간은 로그인 시간으로부터 1시간 후로 설정
+  const [loginTime, setLoginTime] = useState(Date.now());  //현재시간을 나타냄
+  const [expirationTime, setExpirationTime] = useState(loginTime + 7200000); // 토큰 만료 시간은 로그인 시간으로부터 2시간 후로 설정
 
   const navi = useNavigate();
   const dispatch = useDispatch();

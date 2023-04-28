@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { cookies } from '../shared/cookies';
+import { cookies } from '../../shared/cookies';
 
 function useTrueHook() {
     const navi = useNavigate();

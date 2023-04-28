@@ -27,7 +27,9 @@ api.interceptors.response.use(
         });
         const newToken = data.headers['authorization'].split(' ')[1];
 
-        cookies.set('token', newToken, { path: '/' , expires: 14});
+        cookies.set('token', newToken, { path: '/' , 
+        // expires: 14
+      });
 
         return await api.request(originalConfig);
       } catch (error) {

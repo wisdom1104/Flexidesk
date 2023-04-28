@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
-import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import useTrueHook from '../../hooks/useTrueHook';
+import useTrueHook from '../../hooks/user/useTrueHook';
 import {
   StBackground,
   StForm,
@@ -19,7 +18,7 @@ import {
   StOverall,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { LoginFormValidation } from '../../hooks/useLoginHook';
+import { LoginFormValidation } from '../../hooks/user/useLoginHook';
 
 function Login() {
 
@@ -27,13 +26,14 @@ function Login() {
 
   const [isError, setIsError] = useState(false);
 
+  useTrueHook();
+
   const navi = useNavigate();
 
   const onsubmitHandler = async e => {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', login );
-      console.log(' try문 login response:',response);
       if (!response) {
         alert('다시 입력해주세요😓');
         return;
@@ -43,10 +43,12 @@ function Login() {
       const payload = jwt_decode(token);
 
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
+      cookies.set('token', token.split(' ')[1], { path: '/', 
+      // maxAge: 3540 
+    });
       cookies.set('refresh_token', refreshToken.split(' ')[1], {
         path: '/',
-        maxAge: 3540,
+        // maxAge: 3540,
       });
       cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
       cookies.set('companyName', String(payload.companyName), {

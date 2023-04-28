@@ -11,10 +11,10 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { Input } from '../../components/Input';
-import useTrueHook from '../../hooks/useTrueHook';
+import useTrueHook from '../../hooks/user/useTrueHook';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
-import { useFormValidation } from '../../hooks/useSignUpUserHook';
+import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
 
 function SignUpUser() {
 
@@ -107,7 +107,6 @@ function SignUpUser() {
                       fontSize="0.875rem"
                       weight="400"
                       color="red">{errors.email}</StSmallFont>}
-
 
                 <StTextInput height="80px">
                   <CertificationCkeck

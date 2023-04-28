@@ -6,7 +6,7 @@ import {
   StSliderContain,
   StWrapDiv,
 } from '../../pages/Welcome/WelcomeStyled';
-import Carousel from '../Carousel';
+import Carousel from '../welcome/Carousel';
 
 function Welcome6() {
   return (

@@ -3,6 +3,8 @@ import {
   StBackground,
   StFont,
   StGradationFont,
+  StImgeContainer,
+  StImgeSecond,
   StOverall,
   StSmallFont,
   StSpaceDiv,
@@ -12,7 +14,7 @@ import {
 function Welcome5() {
   return (
     <>
-      <StBackground background="#fff" height="3300px">
+      <StBackground background="#fff" height="3600px">
         <div
           style={{
             display: 'flex',
@@ -39,8 +41,13 @@ function Welcome5() {
               <StSmallFont align="start" width="100%">
                 회사내에서도 나에게 맞는 공간을 찾아봐요
               </StSmallFont>
-
+              
+              <StImgeContainer>
               <StSpacePagePhoto src="img/page1.png" alt="page1" />
+              <StImgeSecond
+              src="img/pageIcon1.png" alt="pageIcon1" />
+              </StImgeContainer>
+              
             </StSpaceDiv>
 
             <StSpaceDiv>
@@ -58,7 +65,13 @@ function Welcome5() {
               <StSmallFont align="start" width="100%">
                 겹치는 시간은 피하고, 가능한 시간은 찾아줘요
               </StSmallFont>
+
+              <StImgeContainer>
               <StSpacePagePhoto src="img/page2.png" alt="page2" />
+              <StImgeSecond
+              src="img/pageIcon2.png" alt="pageIcon2" />
+              </StImgeContainer>
+              
             </StSpaceDiv>
 
             <StSpaceDiv>
@@ -74,7 +87,13 @@ function Welcome5() {
               <StSmallFont align="start" width="100%">
                 근무 일정과 연동되는 스케줄
               </StSmallFont>
+
+              <StImgeContainer>
               <StSpacePagePhoto src="img/page3.png" alt="page3" />
+              <StImgeSecond
+              src="img/pageIcon3.png" alt="pageIcon3" />
+              </StImgeContainer>
+
             </StSpaceDiv>
           </div>
         </StOverall>
