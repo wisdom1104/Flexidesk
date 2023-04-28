@@ -77,7 +77,6 @@ function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
   };
 
   useEffect(() => {
-    console.log(title, comment);
     if (selectDay !== undefined) {
       dispatch(__getSchedules({ param, selectDay }));
     } else {
