@@ -21,6 +21,7 @@ export const __getAllManagement = createAsyncThunk(
             Authorization:`Bearer ${token}`
           }
         })
+        console.log(data.data.data.userList);
         return thunk.fulfillWithValue(data.data.data.userList)
       }catch(error){
         return thunk.rejectWithValue(error)
@@ -56,7 +57,8 @@ export const __deleteAllManagement = createAsyncThunk(
       try{
         const token = cookies.get('token')
         const userId = cookies.get('userId')
-        await api.patch(`/admin/users/${userId}`,payload,{
+        console.log(userId);
+        await api.patch(`/admin/users/${payload.userId}`,payload,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -66,7 +68,7 @@ export const __deleteAllManagement = createAsyncThunk(
         return thunk.rejectWithValue(error)
       }
     }
-  )
+  );
 
 
   export const allManagementSlice = createSlice({

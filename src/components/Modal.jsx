@@ -25,7 +25,11 @@ function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
     };
 
   return (
-    <ModalFullBackground>
+    <ModalFullBackground
+    width= '2135px'
+    height= '1045px'
+    left= '-10px'
+    >
       <MoveModal>
         <MoveModalTitle>{modalTitle}</MoveModalTitle>
         

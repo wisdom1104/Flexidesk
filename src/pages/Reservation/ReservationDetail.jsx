@@ -63,14 +63,6 @@ function ReservationDetail() {
       }
     }, []);
 
-      const timer = setTimeout(() => {
-        loadData();
-        setShowSkeleton(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   return (
     <>
       <Page>
