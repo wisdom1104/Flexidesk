@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { __getAllSchedules } from '../../redux/modules/schedules';
 import {
-  __deleteSchedule,
-  __getAllSchedules,
-} from '../../redux/modules/schedules';
-import {
-  ReservationTitle,
-  BackCusor,
   InfoBox,
   InfoContain,
   Info,
   CommentBox,
-  ComFont,
-  DelBtn,
   PathBtn,
   StSubTitle,
+  ButtonContain,
 } from '../Reservation/CalendarStyled';
 import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
+import SchedulesDelete from './\bSchedulesDelete';
 
 function SchedulesDetail() {
-  const param = useParams();
   const dispatch = useDispatch();
   const navi = useNavigate();
   const { userSchedules, isLoading, isError } = useSelector(
@@ -109,7 +103,7 @@ function SchedulesDetail() {
                     <StSmallFont width>종료시간</StSmallFont>
                     <StSmallFont width>{item.scEnd.split('T')[1]}</StSmallFont>
                   </CommentBox>
-                  <div>
+                  <ButtonContain>
                     <PathBtn
                       onClick={() => {
                         navi(`/pathschedules/${item.scId}`, {
@@ -119,14 +113,8 @@ function SchedulesDetail() {
                     >
                       수정
                     </PathBtn>
-                    <DelBtn
-                      onClick={() => {
-                        dispatch(__deleteSchedule(item.scId));
-                      }}
-                    >
-                      삭제
-                    </DelBtn>
-                  </div>
+                    <SchedulesDelete scId={item.scId} />
+                  </ButtonContain>
                 </Info>
               </InfoBox>
             ))}

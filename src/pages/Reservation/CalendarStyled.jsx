@@ -127,7 +127,7 @@ export const ReservationCheckContain = styled.div`
   height: 100%;
 `;
 export const CheckContain = styled.div`
-  border: 1px solid;
+  border: none;
   width: 280px;
   display: flex;
   justify-content: space-between;
@@ -303,13 +303,13 @@ export const UserList = styled.div`
   margin-left: 10px;
   margin-right: 10px;
   padding: 10px 0px;
-  width: 300px;
-  height: 80px;
+  width: ${props => props.width || '300px'};
+  height: ${props => props.height || '80px'};
   gap: 10px;
   overflow: scroll;
   overflow-x: hidden;
-  border-top: 1px solid var(--lightgrey);
-  border-bottom: 1px solid var(--lightgrey);
+  border-top: ${props => props.border || '1px solid var(--lightgrey)'};
+  border-bottom: ${props => props.border || '1px solid var(--lightgrey)'};
   /* 스크롤바 스타일 변경 */
   ::-webkit-scrollbar {
     width: 5px; /* 스크롤바 너비 */
@@ -320,6 +320,15 @@ export const UserList = styled.div`
     background-color: #b6dfdd;
     border-radius: 50px; /* 스크롤바 모양 */
   }
+`;
+
+//작은 폰트
+export const StSmall = styled.p`
+  font-weight: ${props => props.weight || '500'};
+  font-size: ${props => props.fontSize || '1.25rem'};
+  text-align: ${props => props.align || 'center'};
+
+  color: ${props => props.color || '#6A7B8F'};
 `;
 
 export const FontSt = styled.div`
@@ -402,9 +411,13 @@ export const PathBtn = styled.button`
   padding: 7px;
   border: 1px solid #def1ef;
   margin-bottom: 10px;
-  border-radius: 3px;
+  border-radius: 8px;
+  margin-right: 10px;
   &:hover {
     background-color: #65bab6;
     color: #def1ef;
   }
+`;
+export const ButtonContain = styled.div`
+  display: flex;
 `;

@@ -37,7 +37,6 @@ function SpaceMrItem({ mr, navi }) {
     return () => clearInterval(intervalId);
   }, [days, time]);
 
-
   return (
     <>
       {startTime.length > 0 ? (

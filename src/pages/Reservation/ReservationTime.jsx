@@ -41,7 +41,6 @@ function ReservationTime({ param, selectDay, mrName }) {
   const [userIdInfo, setUserIdInfo] = useState([]);
   const { userData } = useSelector(state => state.reservation);
 
-
   // const [choseReservationTime, setChoseReservationTime] = useState('false');
 
   const [count, setCount] = useState(1);
@@ -146,7 +145,7 @@ function ReservationTime({ param, selectDay, mrName }) {
                 src={`${process.env.PUBLIC_URL}/img/user.png`}
                 alt="icon"
               />
-              예약 인원
+              사원 검색
             </StSubTitle>
             {/* <ScheduleUsers> */}
             {/* <Column> */}

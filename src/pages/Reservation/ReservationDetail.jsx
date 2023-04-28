@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  __deleteRervation,
-  __getReservationDetail,
-} from '../../redux/modules/detail';
+import { __getReservationDetail } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
-import SchedulesDetail from '../Schedules/SchedulesDetail';
-import UserSchedules from '../Schedules/UserSchedules';
-import AllReservation from './AllReservation';
 import {
   InfoContain,
   InfoBox,
   Info,
   CommentBox,
-  DelBtn,
   StSubTitle,
   UserList,
+  StSmall,
 } from './CalendarStyled';
+
 import { useNavigate } from 'react-router-dom';
 import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
+
+import ReservationDelete from './ReservationDelete';
 
 function ReservationDetail() {
   const navi = useNavigate();
@@ -31,10 +28,6 @@ function ReservationDetail() {
   );
   const [showSkeleton, setShowSkeleton] = useState(true);
 
-  const deleteHandler = id => {
-    dispatch(__deleteRervation(id));
-  };
-
   const token = getCookie('userId');
   // useEffect(() => {
   //   if (token) {
@@ -43,25 +36,24 @@ function ReservationDetail() {
   //   }
   // }, []);
 
-    useEffect(() => {
-      if (!token) {
-        navi('/');
-      } else {
-        const loadData = async () => {
-          try {
-            dispatch(__getReservationDetail());
-          } catch (error) {
-            console.log(error);
-          }
-        };
-
-        const timer = setTimeout(() => {
-          loadData();
-          setShowSkeleton(false);
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }, []);
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const loadData = async () => {
+        try {
+          dispatch(__getReservationDetail());
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const timer = setTimeout(() => {
+        loadData();
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <>
@@ -93,12 +85,12 @@ function ReservationDetail() {
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (
-                <InfoBox key={item.reservationId}>
+                <InfoBox height='350px' key={item.reservationId}>
                   <StSubTitle margin="1px">{item.username}</StSubTitle>
                   <Info>
                     <CommentBox>
                       <StSmallFont width>회의실 이름</StSmallFont>
-                      <StSmallFont width>{item.mrId}</StSmallFont>
+                      <StSmallFont width>{item.mrName}</StSmallFont>
                     </CommentBox>
 
                     <CommentBox>
@@ -110,20 +102,21 @@ function ReservationDetail() {
                     <CommentBox>
                       <StSmallFont width>회의 시간</StSmallFont>
                       <StSmallFont width>
-                        {item.start.split('T')[1]}~{item.end.split('T')[1]}
+                        {item.start.split('T')[1]} ~ {item.end.split('T')[1]}
                       </StSmallFont>
                     </CommentBox>
                     <CommentBox>
                       <StSmallFont width>예약 인원명</StSmallFont>
-                      <UserList>
+                      <UserList width="120px" height="30px" border="none">
                         {item.userList.map(e => (
-                          <StSmallFont width>{e.username}</StSmallFont>
+                          <StSmall>{e.username}</StSmall>
                         ))}
                       </UserList>
                     </CommentBox>
-                    <DelBtn onClick={() => deleteHandler(item.reservationId)}>
+                    <ReservationDelete reservationId={item.reservationId} />
+                    {/* <DelBtn onClick={() => deleteHandler(item.reservationId)}>
                       삭제
-                    </DelBtn>
+                    </DelBtn> */}
                   </Info>
                 </InfoBox>
               ))}
