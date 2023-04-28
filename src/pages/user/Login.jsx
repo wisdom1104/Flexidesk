@@ -10,12 +10,13 @@ import {
   StForm,
   StFormBox,
   StLink,
-  StLoginContain,
+  StLoginInputIconBox,
   StLoginForm,
   StLoginIcon,
   StLoginIconDiv,
   StLongButton,
   StOverall,
+  StLoginContain,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { LoginFormValidation } from '../../hooks/user/useLoginHook';
@@ -44,7 +45,7 @@ function Login() {
 
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       cookies.set('token', token.split(' ')[1], { path: '/', 
-      // maxAge: 3540 
+      maxAge: 3540 
     });
       cookies.set('refresh_token', refreshToken.split(' ')[1], {
         path: '/',
@@ -73,14 +74,7 @@ function Login() {
   return (
     <StBackground height="100vh">
       <StOverall>
-        <div
-          style={{
-            marginTop: '200px',
-            display: 'flex',
-            alignItems: 'center',
-            height: '100%',
-          }}
-        >
+        <StLoginContain>
           <StLoginForm onSubmit={onsubmitHandler} width="420px">
             <StForm>
               <StFormBox>
@@ -98,9 +92,10 @@ function Login() {
                 </StSmallFont>
               </StFormBox>
 
-              <StLoginContain>
+              <StLoginInputIconBox>
                 <StLoginIconDiv>
-                  <StLoginIcon src="img/loginIcon3.png" alt="img/loginIcon3" />
+                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`} alt="loginIcon3" />
+
                 </StLoginIconDiv>
 
                 <Input
@@ -112,11 +107,12 @@ function Login() {
                   required
                   border="none"
                 />
-              </StLoginContain>
+              </StLoginInputIconBox>
 
-              <StLoginContain>
+              <StLoginInputIconBox>
                 <StLoginIconDiv>
-                  <StLoginIcon src="img/loginIcon4.png" alt="img/loginIcon4" />
+                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon4.png`} alt="loginIcon4" />
+
                 </StLoginIconDiv>
                 <Input
                   type="password"
@@ -127,7 +123,7 @@ function Login() {
                   required
                   border="none"
                 />
-              </StLoginContain>
+              </StLoginInputIconBox>
               {isError && (
                 <StSmallFont
                   width="420px"
@@ -151,7 +147,7 @@ function Login() {
                 </div>
             </StForm>
           </StLoginForm>
-        </div>
+        </StLoginContain>
       </StOverall>
     </StBackground>
   );

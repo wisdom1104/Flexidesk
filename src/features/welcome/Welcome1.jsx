@@ -7,7 +7,6 @@ import {
   StIntroDiv,
   StOverall,
   StSmallFont,
-  StSpacePagePhoto,
   StWrapDiv,
 } from '../../pages/Welcome/WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +55,8 @@ function Welcome1() {
                display: 'inline-block',
              }}
            >
-             <img src="img/welcome1.png" alt="welcome1" />
+             <img src={`${process.env.PUBLIC_URL}/img/welcome1.png`} alt="welcome1" />
+
            </div>
            </>
 
@@ -109,7 +109,8 @@ function Welcome1() {
                   display: 'inline-block',
                 }}
               >
-             <img src="img/welcome1.png" alt="welcome1" />
+             <img src={`${process.env.PUBLIC_URL}/img/welcome1.png`} alt="welcome1" />
+
               </div>
               </>
               )}

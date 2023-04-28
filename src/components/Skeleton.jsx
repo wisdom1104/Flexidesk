@@ -28,7 +28,7 @@ export default Skeleton;
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.width || '50vw'};
+  width: ${props => props.width || '60vw'};
   height: ${props => props.height || '30vw'};
   margin: 1em;
   border: 1px solid #e8e7e6;

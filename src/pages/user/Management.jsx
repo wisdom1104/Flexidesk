@@ -18,6 +18,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BsPerson } from "react-icons/bs";
 
 function Management() {
+
   const { userList, isLoading, isError } = useSelector(state => state.userList);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
@@ -46,7 +47,6 @@ function Management() {
       const timer = setTimeout(() => {
         loadData();
       }, 4000);
-
       return () => clearTimeout(timer);
     }
   }, []);
@@ -59,7 +59,7 @@ function Management() {
             <StSpacePagePhoto 
             width='80px'
             marginTop
-            src="img/managementIcon.png" alt="managementIcon" />
+            src={`${process.env.PUBLIC_URL}/img/managementIcon.png`} alt="managementIcon" />
 
             <StFont width="60vw" fontSize="2rem" align="start">
               사용자 관리

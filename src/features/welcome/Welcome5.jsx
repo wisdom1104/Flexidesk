@@ -43,9 +43,10 @@ function Welcome5() {
               </StSmallFont>
               
               <StImgeContainer>
-              <StSpacePagePhoto src="img/page1.png" alt="page1" />
+              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page1.png`} alt="page1" />
+
               <StImgeSecond
-              src="img/pageIcon1.png" alt="pageIcon1" />
+              src={`${process.env.PUBLIC_URL}/img/pageIcon1.png`} alt="pageIcon1" />
               </StImgeContainer>
               
             </StSpaceDiv>
@@ -67,9 +68,9 @@ function Welcome5() {
               </StSmallFont>
 
               <StImgeContainer>
-              <StSpacePagePhoto src="img/page2.png" alt="page2" />
+              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page2.png`} alt="page2" />
               <StImgeSecond
-              src="img/pageIcon2.png" alt="pageIcon2" />
+              src={`${process.env.PUBLIC_URL}/img/pageIcon2.png`} alt="pageIcon2" />
               </StImgeContainer>
               
             </StSpaceDiv>
@@ -89,9 +90,9 @@ function Welcome5() {
               </StSmallFont>
 
               <StImgeContainer>
-              <StSpacePagePhoto src="img/page3.png" alt="page3" />
+              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page3.png`} alt="page3" />
               <StImgeSecond
-              src="img/pageIcon3.png" alt="pageIcon3" />
+              src={`${process.env.PUBLIC_URL}/img/pageIcon3.png`} alt="pageIcon3" />
               </StImgeContainer>
 
             </StSpaceDiv>
