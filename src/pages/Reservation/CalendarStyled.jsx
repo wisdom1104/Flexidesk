@@ -344,6 +344,7 @@ export const InfoBox = styled.div`
   background-color: #def1ef;
   border: none;
   border-radius: 8px;
+  padding-top: 15px;
 `;
 export const InfoContain = styled.div`
   display: grid;
