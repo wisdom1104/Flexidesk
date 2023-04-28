@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   __deleteRervation,
@@ -9,79 +9,117 @@ import SchedulesDetail from '../Schedules/SchedulesDetail';
 import UserSchedules from '../Schedules/UserSchedules';
 import AllReservation from './AllReservation';
 import {
-  BackCusor,
   InfoContain,
-  ReservationTitle,
   InfoBox,
   Info,
   CommentBox,
   DelBtn,
-  ComFont,
+  StSubTitle,
 } from './CalendarStyled';
 import { useNavigate } from 'react-router-dom';
-import { StFont, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import {  StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { StListTitle } from '../../shared/SpaceStyles';
+import Page from '../../components/Page';
+import Skeleton from '../../components/Skeleton';
 
 function ReservationDetail() {
   const navi = useNavigate();
   const dispatch = useDispatch();
-  const { reservationDetail } = useSelector(state => state.detail);
+  const { reservationDetail, isLoading, isError } = useSelector(state => state.detail);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const deleteHandler = id => {
     dispatch(__deleteRervation(id));
   };
 
   const token = getCookie('userId');
-  useEffect(() => {
-    if (token) {
-      dispatch(__getReservationDetail());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(__getReservationDetail());
+  //     setShowSkeleton(false);
+  //   }
+  // }, []);
+
+    useEffect(() => {
+      if (!token) {
+        navi('/');
+      } else {
+        const loadData = async () => {
+          try {
+            dispatch(__getReservationDetail());
+          } catch (error) {
+            console.log(error);
+          }
+        };
+
+        const timer = setTimeout(() => {
+          loadData();
+          setShowSkeleton(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    }, []);
+
 
   return (
     <>
-      <StOverall>
-        <StWrapDiv margin>
-          <ReservationTitle>
-            <BackCusor
+      <Page>
+        <div>
+          <StListTitle margin="30px 0px 0px 16px">
+          {/* <BackCusor
               onClick={() => {
                 navi('/space');
               }}
             >
               ←
-            </BackCusor>
-            <StFont width='60vw' fontSize="2rem" align="start">
-              내가 예약한 회의실
-            </StFont>
-          </ReservationTitle>
+            </BackCusor> */}
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/reservation.png`}
+            alt="managementIcon"
+          />
+          <div>회의실 예약 확인하기</div>
+        </StListTitle>
+        
+        {showSkeleton ? (
           <InfoContain>
-            {reservationDetail?.map(item => (
-              <InfoBox key={item.reservationId} >
-                <StFont width='18vw' fontSize="1.5rem" align="start">
-                  {item.username}
-                </StFont>
-                <Info>
-                  <CommentBox>
-                    <StSmallFont width>회의실 번호</StSmallFont>
-                    <StSmallFont width>{item.mrId}</StSmallFont>
-                  </CommentBox>
+          <Skeleton />
+        </InfoContain>
+        ) : isError ? (
+          <div>에러발생 ..⚙️</div>
+        ) : (
+          <InfoContain>
+          {reservationDetail?.map(item => (
+            <InfoBox key={item.reservationId} >
+              <StSubTitle>
+                {item.username}
+              </StSubTitle>
+              <Info>
+                <CommentBox>
+                  <StSmallFont width>회의실 번호</StSmallFont>
+                  <StSmallFont width>{item.mrId}</StSmallFont>
+                </CommentBox>
 
-                  <CommentBox>
-                    <StSmallFont width>시작시간</StSmallFont>
-                    <StSmallFont width>{item.start.split('T')[1]}</StSmallFont>
-                  </CommentBox>
-                  <CommentBox>
-                    <StSmallFont width>종료시간</StSmallFont>
-                    <StSmallFont width>{item.end.split('T')[1]}</StSmallFont>
-                  </CommentBox>
-                  <DelBtn onClick={() => deleteHandler(item.reservationId)}>
-                    삭제
-                  </DelBtn>
-                </Info>
-              </InfoBox>
-            ))}
-          </InfoContain>
-        </StWrapDiv>
-      </StOverall>
+                <CommentBox>
+                  <StSmallFont width>시작시간</StSmallFont>
+                  <StSmallFont width>{item.start.split('T')[1]}</StSmallFont>
+                </CommentBox>
+                <CommentBox>
+                  <StSmallFont width>종료시간</StSmallFont>
+                  <StSmallFont width>{item.end.split('T')[1]}</StSmallFont>
+                </CommentBox>
+                <DelBtn onClick={() => deleteHandler(item.reservationId)}>
+                  삭제
+                </DelBtn>
+              </Info>
+            </InfoBox>
+          ))}
+        </InfoContain>
+        )
+        }
+        </div>
+      </Page>
       {/* <div>
         <p>전체 조회</p>
         <AllReservation />
