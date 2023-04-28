@@ -97,9 +97,10 @@ function ReservationDetail() {
               </StSubTitle>
               <Info>
                 <CommentBox>
-                  <StSmallFont width>회의실 번호</StSmallFont>
+                  <StSmallFont width>회의실 이름</StSmallFont>
                   <StSmallFont width>{item.mrId}</StSmallFont>
                 </CommentBox>
+
 
                 <CommentBox>
                   <StSmallFont width>시작시간</StSmallFont>
