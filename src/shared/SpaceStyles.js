@@ -40,6 +40,10 @@ export const StSpaceList = styled.div`
 `;
 
 export const StListTitle = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 10px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -47,7 +51,7 @@ export const StListTitle = styled.div`
   line-height: 34px;
   letter-spacing: -0.03em;
   color: #000000;
-  margin: 16px;
+  margin: ${props => props.margin || '30px 16px'};
 
   /* color: var(--white); */
 `;
@@ -230,7 +234,7 @@ export const StSelect = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 50px 29px;
+  margin: 0px 29px;
   padding: 10px;
 `;
 
@@ -664,7 +668,7 @@ export const ModalFullBackground = styled.div`
   background: rgba(0, 0, 0, 0.2);
   z-index: 50;
 
-  width: 99vw;  
+  width: 99vw;
   height: 100vh;
   left: 1px;
   top: 78px;

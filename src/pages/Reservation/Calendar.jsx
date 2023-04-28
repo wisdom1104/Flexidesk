@@ -19,7 +19,17 @@ import {
   StDate,
   FontSt,
   DateFont,
+  SchContain,
+  StSubHeader,
+  StSubTitle,
+  StSelectDay,
 } from './CalendarStyled';
+import Page from '../../components/Page';
+import { StListTitle } from '../../shared/SpaceStyles';
+import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { Row } from '../../components/Flex';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import ReservationCheck from './ReservationCheck';
 const Calendar = () => {
   // useFalseHook();
   const param = useParams();
@@ -99,52 +109,60 @@ const Calendar = () => {
   };
 
   return (
-    <>
-      <Calcontain>
-        <ReservationTitle>
-          <BackCusor
+    <Page>
+      <div>
+        <StListTitle margin="30px 0px 0px 16px">
+          {/* <BackCusor
             onClick={() => {
               navi('/space');
             }}
           >
             ←
-          </BackCusor>
-          <h2>회의실 예약하기</h2>
-        </ReservationTitle>
+          </BackCusor> */}
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/reservation.png`}
+            alt="managementIcon"
+          />
+          <div>회의실 예약하기</div>
+        </StListTitle>
 
-        <MainContain>
-          <StMrNameBox>
-            <FontSt>회의실 이름</FontSt>
-            <StMrName>회의실 {mrId}</StMrName>
-          </StMrNameBox>
+        <Row>
+          <SchContain>
+            {/* <StMrNameBox>
+              <FontSt>회의실 이름</FontSt>
+              <StMrName>회의실 {mrId}</StMrName>
+            </StMrNameBox> */}
 
-          <StCalenHeader>
-            <FontSt>예약 날짜</FontSt>
-            <Header>
-              <VscArrowCircleLeft
-                onClick={() => {
-                  preMonth();
-                }}
-              />
-              <DateFont>{selectYear}년</DateFont>
-              <DateFont>{selectMonth}월</DateFont>
-              <VscArrowCircleRight
-                onClick={() => {
-                  nextMonth();
-                }}
-              />
-            </Header>
-          </StCalenHeader>
-          <DayContain>
-            {week?.map(item => {
-              return <Day key={item}>{item}</Day>;
-            })}
-          </DayContain>
-          <DayContain>{returnDay()}</DayContain>
+            <StSubHeader>
+              <StSubTitle>{mrId} 예약 날짜</StSubTitle>
+              <StSelectDay>
+                <IoIosArrowDropleft
+                  onClick={() => {
+                    preMonth();
+                  }}
+                />
+                <div>{selectYear}년</div>
+                <div>{selectMonth}월</div>
+                <IoIosArrowDropright
+                  onClick={() => {
+                    nextMonth();
+                  }}
+                />
+              </StSelectDay>
+            </StSubHeader>
+            <DayContain>
+              {week?.map(item => {
+                return <Day key={item}>{item}</Day>;
+              })}
+              {returnDay()}
+            </DayContain>
+          </SchContain>
           <ReservationTime param={param.id} selectDay={date} />
-        </MainContain>
-      </Calcontain>
-    </>
+        </Row>
+      </div>
+    </Page>
   );
 };
 

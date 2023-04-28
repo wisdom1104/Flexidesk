@@ -74,10 +74,15 @@ function Header() {
         <HeaderContain>
           <StHeaderContentBox>
             <StHeaderLogo
-              src="img/Logo.png"
+              src={`${process.env.PUBLIC_URL}/img/logo2.png`}
               alt="logo"
               onClick={onClcikHandelr}
             />
+            {/* <StHeaderLogo
+              src={`${process.env.PUBLIC_URL}/img/logo1.png`}
+              alt="logo"
+              onClick={onClcikHandelr}
+            /> */}
           </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
@@ -110,7 +115,12 @@ function Header() {
         <HeaderContain>
           <StHeaderContentBox>
             <StHeaderLogo
-              src="img/Logo.png"
+              src={`${process.env.PUBLIC_URL}/img/logo1.png`}
+              alt="logo"
+              onClick={onClcikHandelr}
+            />
+            <StHeaderLogo
+              src={`${process.env.PUBLIC_URL}/img/logo2.png`}
               alt="logo"
               onClick={onClcikHandelr}
             />

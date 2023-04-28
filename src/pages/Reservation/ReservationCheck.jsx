@@ -1,7 +1,24 @@
 import React from 'react';
-import { CheckContain, CheckTitle } from './CalendarStyled';
+import {
+  CheckContain,
+  CheckTitle,
+  FinButton,
+  SchContain,
+  StIcon,
+  StSubTitle,
+} from './CalendarStyled';
+import { __addReservation } from '../../redux/modules/reservation';
 
-function ReservationCheck({ param, selectDay, clickReservation, userName }) {
+function ReservationCheck({
+  param,
+  selectDay,
+  clickReservation,
+  userName,
+  dispatch,
+  navi,
+  userId,
+  reqDatas,
+}) {
   //예약시간 보여주기
   const timeArray = clickReservation.map(item => {
     const selectTime = item.split('T');
@@ -23,7 +40,10 @@ function ReservationCheck({ param, selectDay, clickReservation, userName }) {
 
   return (
     <>
-      <div>예약 확인하기</div>
+      <StSubTitle margin="20px 0px 10px 24px">
+        <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
+        예약 확인하기
+      </StSubTitle>
       <CheckContain>
         <CheckTitle>회의실 이름</CheckTitle>
         <div>회의실 {param}</div>
@@ -46,6 +66,14 @@ function ReservationCheck({ param, selectDay, clickReservation, userName }) {
           <div key={item.username}>{item.username}</div>
         ))}
       </CheckContain>
+      <FinButton
+        onClick={() => {
+          dispatch(__addReservation({ reqDatas, param, selectDay }));
+          navi(`/detail/${userId}`);
+        }}
+      >
+        예약 완료
+      </FinButton>
     </>
   );
 }

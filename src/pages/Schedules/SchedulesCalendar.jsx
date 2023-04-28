@@ -1,19 +1,21 @@
 import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import SchedulesTime from './SchedulesTime';
 import {
   StDate,
   DayContain,
-  Header,
   SchContain,
   Day,
-  StCalenHeader,
-  FontSt,
-  DateFont,
+  StSubTitle,
+  StSubHeader,
+  StSelectDay,
+  StIcon,
 } from '../Reservation/CalendarStyled';
-import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
-import { StIntroDiv, StOverall, StSmallFont, StWrapDiv } from '../Welcome/WelcomeStyled';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import Page from '../../components/Page';
+import { StListTitle } from '../../shared/SpaceStyles';
+import { Row } from '../../components/Flex';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -76,7 +78,7 @@ function SchedulesCalendar() {
               value={`${selectYear}-${selectMonth
                 .toString()
                 .padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`}
-              style={{ backgroundColor: isSelected ? 'pink' : 'white' }}
+              background={isSelected ? 'pink' : 'white'}
             >
               {i + 1}
             </StDate>,
@@ -90,58 +92,56 @@ function SchedulesCalendar() {
   };
 
   return (
-    <>
-      <StOverall>
-        <StWrapDiv margin>
-          <StIntroDiv>
-            <div
-              style={{
-                width: '32vw',
-                height:'20vw',
-                display: 'inline-block',
-              }}
-            >
-              <SchContain>
-                <StCalenHeader>
-                  <StSmallFont width='15vw' align='start'>스케줄 날짜</StSmallFont>
-                  <br />
-                  <Header>
-                    <VscArrowCircleLeft
-                      onClick={() => {
-                        preMonth();
-                      }}
-                    />
-                    <DateFont>{selectYear}년</DateFont>
-                    <DateFont>{selectMonth}월</DateFont>
-                    <VscArrowCircleRight
-                      onClick={() => {
-                        nextMonth();
-                      }}
-                    />
-                  </Header>
-                </StCalenHeader>
-                <DayContain>
-                  {week?.map(item => {
-                    return <Day key={item}>{item}</Day>;
-                  })}
-                </DayContain>
-                <DayContain>{returnDay()}</DayContain>
-              </SchContain>
-            </div>
+    <Page>
+      <div>
+        <StListTitle margin="30px 0px 0px 16px">
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
+            alt="managementIcon"
+          />
+          <div>스케줄 등록하기</div>
+        </StListTitle>
+        <Row>
+          <SchContain>
+            <StSubHeader>
+              <StSubTitle>
+                <StIcon
+                  src={`${process.env.PUBLIC_URL}/img/day.png`}
+                  alt="icon"
+                />
+                스케줄 날짜
+              </StSubTitle>
+              <StSelectDay>
+                <IoIosArrowDropleft
+                  onClick={() => {
+                    preMonth();
+                  }}
+                />
+                <div>{selectYear}년</div>
+                <div>{selectMonth}월</div>
+                <IoIosArrowDropright
+                  onClick={() => {
+                    nextMonth();
+                  }}
+                />
+              </StSelectDay>
+            </StSubHeader>
 
-            <div
-              style={{
-                width: '30vw',
-                height:'20vw',
-                display: 'inline-block',
-              }}
-            >
-              <SchedulesTime param={param.userId} selectDay={date} />
-            </div>
-          </StIntroDiv>
-        </StWrapDiv>
-      </StOverall>
-    </>
+            {/* ----- */}
+            <DayContain>
+              {week?.map(item => {
+                return <Day key={item}>{item}</Day>;
+              })}
+              {returnDay()}
+            </DayContain>
+            {/* <DayContain>{returnDay()}</DayContain> */}
+          </SchContain>
+          <SchedulesTime param={param.userId} selectDay={date} />
+        </Row>
+      </div>
+    </Page>
   );
 }
 export default SchedulesCalendar;

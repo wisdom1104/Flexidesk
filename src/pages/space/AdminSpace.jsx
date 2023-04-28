@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import {
   StBoard,
   StBtn,
+  StListTitle,
   StSubBtn,
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
-import { Row } from '../../components/Flex';
+import { Column, Row } from '../../components/Flex';
 import AdminList from '../../features/adminSpace/AdminList';
 import {
   useBoxs,
@@ -17,6 +18,7 @@ import {
 } from '../../hooks/useAdminSpaceHook';
 import AdminSelector from '../../features/adminSpace/AdminSelector';
 import Page from '../../components/Page';
+import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 
 function AdminSpace() {
   const navi = useNavigate();
@@ -38,13 +40,24 @@ function AdminSpace() {
         onClickSpaceListHandler={onClickSpaceListHandler}
       />
       {/* 셀렉터 영역 */}
-      <AdminSelector
-        mrBoxes={mrBoxes}
-        boxes={boxes}
-        multiBoxes={multiBoxes}
-        elRef={elRef}
-        handleDragStart={handleDragStart}
-      />
+      <Column>
+        <StListTitle>
+          <StSpacePagePhoto
+            width="52px"
+            marginTop
+            src={`${process.env.PUBLIC_URL}/img/space.png`}
+            alt="managementIcon"
+          />
+          <div>관리하기</div>
+        </StListTitle>
+        <AdminSelector
+          mrBoxes={mrBoxes}
+          boxes={boxes}
+          multiBoxes={multiBoxes}
+          elRef={elRef}
+          handleDragStart={handleDragStart}
+        />
+      </Column>
       {/* 보더 영역 */}
       {spaces.length > 0 ? (
         <>
