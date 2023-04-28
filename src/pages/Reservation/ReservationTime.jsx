@@ -56,7 +56,7 @@ function ReservationTime({ param, selectDay }) {
     // return reqData;
   };
 
-  const reqDatas = { startList: dataList(), useList: userIdInfo };
+  const reqDatas = { startList: dataList(), userList: userIdInfo };
   const dispatch = useDispatch();
 
   const { reservation } = useSelector(state => state.reservation);
