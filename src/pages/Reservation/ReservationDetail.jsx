@@ -55,7 +55,7 @@ function ReservationDetail() {
         const timer = setTimeout(() => {
           loadData();
           setShowSkeleton(false);
-        }, 2000);
+        }, 300);
         return () => clearTimeout(timer);
       }
     }, []);

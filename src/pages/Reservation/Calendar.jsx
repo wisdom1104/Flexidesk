@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReservationTime from './ReservationTime';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -23,6 +23,7 @@ import {
   StSubTitle,
   StSelectDay,
   StIcon,
+  InfoContain,
 } from './CalendarStyled';
 import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
@@ -30,6 +31,8 @@ import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { Row } from '../../components/Flex';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import ReservationCheck from './ReservationCheck';
+import { getCookie } from '../../shared/cookies';
+import Skeleton from '../../components/Skeleton';
 const Calendar = () => {
   const param = useParams();
   const navi = useNavigate();
@@ -48,7 +51,7 @@ const Calendar = () => {
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
-  const { reservation } = useSelector(state => state.reservation);
+  const { reservation, isLoading, isError } = useSelector(state => state.reservation);
   const { mrName } = reservation;
 
   //이전달
@@ -108,6 +111,20 @@ const Calendar = () => {
     return dayArr;
   };
 
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const token = getCookie('token');
+
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <Page>
       <div>
@@ -128,49 +145,61 @@ const Calendar = () => {
           <div>회의실 예약하기</div>
         </StListTitle>
 
-        <Row>
-          <SchContain width="500px" height="">
-            {/* <StMrNameBox>
-              <FontSt>회의실 이름</FontSt>
-              <StMrName>회의실 {mrId}</StMrName>
-            </StMrNameBox> */}
+        {showSkeleton ? (
+          <InfoContain>
+            <Skeleton />
+          </InfoContain>
+        ) : isError ? (
+          <div>에러발생 ..⚙️</div>
+        ) : (
+          <Row>
+            <SchContain width="500px" height="">
+              {/* <StMrNameBox>
+      <FontSt>회의실 이름</FontSt>
+      <StMrName>회의실 {mrId}</StMrName>
+    </StMrNameBox> */}
 
-            <StSubHeader>
-              <StSubTitle>
-                <StIcon
-                  src={`${process.env.PUBLIC_URL}/img/day.png`}
-                  alt="icon"
-                />{' '}
-                {mrName} 예약 날짜
-              </StSubTitle>
-              <StSelectDay>
-                <IoIosArrowDropleft
-                  onClick={() => {
-                    preMonth();
-                  }}
-                />
-                <div>{selectYear}년</div>
-                <div>{selectMonth}월</div>
-                <IoIosArrowDropright
-                  onClick={() => {
-                    nextMonth();
-                  }}
-                />
-              </StSelectDay>
-            </StSubHeader>
-            <DayContain width="88%" height="">
-              {week?.map(item => {
-                return (
-                  <Day width="calc(100% / 7.8)" key={item}>
-                    {item}
-                  </Day>
-                );
-              })}
-              {returnDay()}
-            </DayContain>
-          </SchContain>
-          <ReservationTime param={param.id} selectDay={date} mrName={mrName} />
-        </Row>
+              <StSubHeader>
+                <StSubTitle>
+                  <StIcon
+                    src={`${process.env.PUBLIC_URL}/img/day.png`}
+                    alt="icon"
+                  />{' '}
+                  {mrName} 예약 날짜
+                </StSubTitle>
+                <StSelectDay>
+                  <IoIosArrowDropleft
+                    onClick={() => {
+                      preMonth();
+                    }}
+                  />
+                  <div>{selectYear}년</div>
+                  <div>{selectMonth}월</div>
+                  <IoIosArrowDropright
+                    onClick={() => {
+                      nextMonth();
+                    }}
+                  />
+                </StSelectDay>
+              </StSubHeader>
+              <DayContain width="88%" height="">
+                {week?.map(item => {
+                  return (
+                    <Day width="calc(100% / 7.8)" key={item}>
+                      {item}
+                    </Day>
+                  );
+                })}
+                {returnDay()}
+              </DayContain>
+            </SchContain>
+            <ReservationTime
+              param={param.id}
+              selectDay={date}
+              mrName={mrName}
+            />
+          </Row>
+        )}
       </div>
     </Page>
   );
