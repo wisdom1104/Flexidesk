@@ -659,19 +659,31 @@ export const MoveModalBackground = styled.div`
   margin: auto;
 `;
 
+export const ModalWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vw;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+`;
+
 //전체 백그라운드 모달
 export const ModalFullBackground = styled.div`
-  position: absolute;
+  /* position: absolute; */
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
   z-index: 50;
-
-  width: 50vw;
-  height: 1030px;
-  top: 1px;
-
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
   /* min-width: 1800px; */
   /* max-width: 990px; */
   border-radius: 8px;

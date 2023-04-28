@@ -16,7 +16,7 @@ import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
-import SchedulesDelete from './\bSchedulesDelete';
+import SchedulesDelete from './SchedulesDelete';
 
 function SchedulesDetail() {
   const dispatch = useDispatch();
