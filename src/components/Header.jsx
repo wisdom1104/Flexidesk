@@ -18,7 +18,7 @@ import { isLoginActions } from '../redux/modules/loginSlice';
 function Header() {
   const [isModal, setIsModal] = useState(false);
 
-  const [loginTime, setLoginTime] = useState(Date.now());  //현재시간을 나타냄
+  const [loginTime, setLoginTime] = useState(Date.now()); //현재시간을 나타냄
   const [expirationTime, setExpirationTime] = useState(loginTime + 7200000); // 토큰 만료 시간은 로그인 시간으로부터 2시간 후로 설정
 
   const navi = useNavigate();
@@ -78,11 +78,6 @@ function Header() {
               alt="logo"
               onClick={onClcikHandelr}
             />
-            {/* <StHeaderLogo
-              src={`${process.env.PUBLIC_URL}/img/logo1.png`}
-              alt="logo"
-              onClick={onClcikHandelr}
-            /> */}
           </StHeaderContentBox>
           <StHeaderButtonBox>
             <StHeaderContentBox onClick={() => navi(`/space`)}>
@@ -114,11 +109,6 @@ function Header() {
       ) : (
         <HeaderContain>
           <StHeaderContentBox>
-            <StHeaderLogo
-              src={`${process.env.PUBLIC_URL}/img/logo1.png`}
-              alt="logo"
-              onClick={onClcikHandelr}
-            />
             <StHeaderLogo
               src={`${process.env.PUBLIC_URL}/img/logo2.png`}
               alt="logo"

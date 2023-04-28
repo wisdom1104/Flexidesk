@@ -16,6 +16,7 @@ import {
   DelBtn,
   StSubTitle,
   UserList,
+  StSmall,
 } from './CalendarStyled';
 import { useNavigate } from 'react-router-dom';
 import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
@@ -43,30 +44,22 @@ function ReservationDetail() {
   //   }
   // }, []);
 
-    useEffect(() => {
-      if (!token) {
-        navi('/');
-      } else {
-        const loadData = async () => {
-          try {
-            dispatch(__getReservationDetail());
-          } catch (error) {
-            console.log(error);
-          }
-        };
-
-        const timer = setTimeout(() => {
-          loadData();
-          setShowSkeleton(false);
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }, []);
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const loadData = async () => {
+        try {
+          dispatch(__getReservationDetail());
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
       const timer = setTimeout(() => {
         loadData();
         setShowSkeleton(false);
-      }, 2000);
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -101,12 +94,12 @@ function ReservationDetail() {
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (
-                <InfoBox key={item.reservationId}>
+                <InfoBox height='350px' key={item.reservationId}>
                   <StSubTitle margin="1px">{item.username}</StSubTitle>
                   <Info>
                     <CommentBox>
                       <StSmallFont width>회의실 이름</StSmallFont>
-                      <StSmallFont width>{item.mrId}</StSmallFont>
+                      <StSmallFont width>{item.mrName}</StSmallFont>
                     </CommentBox>
 
                     <CommentBox>
@@ -118,14 +111,14 @@ function ReservationDetail() {
                     <CommentBox>
                       <StSmallFont width>회의 시간</StSmallFont>
                       <StSmallFont width>
-                        {item.start.split('T')[1]}~{item.end.split('T')[1]}
+                        {item.start.split('T')[1]} ~ {item.end.split('T')[1]}
                       </StSmallFont>
                     </CommentBox>
                     <CommentBox>
                       <StSmallFont width>예약 인원명</StSmallFont>
-                      <UserList>
+                      <UserList width="120px" height="30px" border="none">
                         {item.userList.map(e => (
-                          <StSmallFont width>{e.username}</StSmallFont>
+                          <StSmall>{e.username}</StSmall>
                         ))}
                       </UserList>
                     </CommentBox>

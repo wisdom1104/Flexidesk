@@ -36,7 +36,6 @@ function SpaceBox({ spaceId, selectedSpace }) {
   const role = cookies.get('role');
 
   const { space } = useSelector(state => state.space);
-  console.log('space', space);
 
   useEffect(() => {
     dispatch(__getSpace(spaceId));
