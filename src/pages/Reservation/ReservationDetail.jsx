@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  __deleteRervation,
-  __getReservationDetail,
-} from '../../redux/modules/detail';
+import { __getReservationDetail } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
-import SchedulesDetail from '../Schedules/SchedulesDetail';
-import UserSchedules from '../Schedules/UserSchedules';
-import AllReservation from './AllReservation';
 import {
   InfoContain,
   InfoBox,
   Info,
   CommentBox,
-  DelBtn,
   StSubTitle,
   UserList,
 } from './CalendarStyled';
+
 import { useNavigate } from 'react-router-dom';
 import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
+
+import ReservationDelete from './ReservationDelete';
 
 function ReservationDetail() {
   const navi = useNavigate();
@@ -31,10 +27,6 @@ function ReservationDetail() {
   );
   const [showSkeleton, setShowSkeleton] = useState(true);
 
-  const deleteHandler = id => {
-    dispatch(__deleteRervation(id));
-  };
-
   const token = getCookie('userId');
   // useEffect(() => {
   //   if (token) {
@@ -43,30 +35,22 @@ function ReservationDetail() {
   //   }
   // }, []);
 
-    useEffect(() => {
-      if (!token) {
-        navi('/');
-      } else {
-        const loadData = async () => {
-          try {
-            dispatch(__getReservationDetail());
-          } catch (error) {
-            console.log(error);
-          }
-        };
-
-        const timer = setTimeout(() => {
-          loadData();
-          setShowSkeleton(false);
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }, []);
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const loadData = async () => {
+        try {
+          dispatch(__getReservationDetail());
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
       const timer = setTimeout(() => {
         loadData();
         setShowSkeleton(false);
-      }, 2000);
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -129,9 +113,10 @@ function ReservationDetail() {
                         ))}
                       </UserList>
                     </CommentBox>
-                    <DelBtn onClick={() => deleteHandler(item.reservationId)}>
+                    <ReservationDelete reservationId={item.reservationId} />
+                    {/* <DelBtn onClick={() => deleteHandler(item.reservationId)}>
                       삭제
-                    </DelBtn>
+                    </DelBtn> */}
                   </Info>
                 </InfoBox>
               ))}

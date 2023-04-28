@@ -402,9 +402,13 @@ export const PathBtn = styled.button`
   padding: 7px;
   border: 1px solid #def1ef;
   margin-bottom: 10px;
-  border-radius: 3px;
+  border-radius: 8px;
+  margin-right: 10px;
   &:hover {
     background-color: #65bab6;
     color: #def1ef;
   }
+`;
+export const ButtonContain = styled.div`
+  display: flex;
 `;

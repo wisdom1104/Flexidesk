@@ -3,15 +3,12 @@ import {
   CheckContain,
   CheckContainBox,
   CheckTitle,
-  FinButton,
   FontSt,
-  SchContain,
   StIcon,
   StSubTitle,
-  StSubmitButton,
 } from './CalendarStyled';
-import { __addReservation } from '../../redux/modules/reservation';
-import { Column, Row } from '../../components/Flex';
+
+import { Column } from '../../components/Flex';
 
 function ReservationCheck({
   param,

@@ -4,20 +4,14 @@ import PathSchedulesTime from './PathSchedulesTime';
 import {
   StDate,
   DayContain,
-  Header,
   SchContain,
   Day,
-  StCalenHeader,
-  FontSt,
-  DateFont,
   StSubHeader,
   StSubTitle,
   StIcon,
   StSelectDay,
 } from '../../Reservation/CalendarStyled';
-import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
-import styled from 'styled-components';
-import { StBackground, StSpacePagePhoto } from '../../Welcome/WelcomeStyled';
+import { StSpacePagePhoto } from '../../Welcome/WelcomeStyled';
 import Page from '../../../components/Page';
 import { StListTitle } from '../../../shared/SpaceStyles';
 import { Row } from '../../../components/Flex';
@@ -27,7 +21,6 @@ function PathScedules() {
   const param = useParams();
   const location = useLocation();
   const dataDay = location.state.scStart.split('T')[0];
-  console.log(location.state);
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
