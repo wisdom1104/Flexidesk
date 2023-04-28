@@ -148,7 +148,7 @@ function ReservationTime({ param, selectDay, mrName }) {
                 src={`${process.env.PUBLIC_URL}/img/user.png`}
                 alt="icon"
               />
-              예약 인원
+              사원 검색
             </StSubTitle>
             {/* <ScheduleUsers> */}
             {/* <Column> */}
