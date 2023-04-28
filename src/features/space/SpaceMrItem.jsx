@@ -36,8 +36,7 @@ function SpaceMrItem({ mr, navi }) {
     // 컴포넌트 언마운트 시 interval clear
     return () => clearInterval(intervalId);
   }, [days, time]);
-  console.log('days', days);
-  console.log('tagetTime', tagetTime);
+
 
   return (
     <>

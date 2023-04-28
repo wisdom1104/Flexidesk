@@ -36,7 +36,6 @@ function SignUpAdmin() {
     event.preventDefault();
     try {
       const response = await api.post('/users/signup/admin', admin);
-      console.log('Admin response', response);
       if (!response) {
         alert('다시 회원가입해주세요😓');
         return;

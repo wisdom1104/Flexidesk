@@ -40,9 +40,7 @@ function ReservationTime({ param, selectDay, mrName }) {
   const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
   const [userIdInfo, setUserIdInfo] = useState([]);
   const { userData } = useSelector(state => state.reservation);
-  console.log(userData);
-  console.log(userInfo);
-  console.log('유저아이디', userIdInfo);
+
 
   // const [choseReservationTime, setChoseReservationTime] = useState('false');
 
@@ -186,7 +184,6 @@ function ReservationTime({ param, selectDay, mrName }) {
                       )
                     );
                   } else {
-                    console.log(userId);
                     setUserInfo([...userInfo, { username: item.username }]);
                     setUserIdInfo([...userIdInfo, { userId: item.userId }]);
                   }
