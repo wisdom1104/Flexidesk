@@ -48,7 +48,6 @@ export const __addReservation=createAsyncThunk(
 export const __getUserData=createAsyncThunk(
   "getuserdata",
   async(payload,thunk) =>{
-    console.log(payload)
 
     try{
       const checkHanIncode= payload =>{
@@ -66,7 +65,6 @@ export const __getUserData=createAsyncThunk(
         Authorization: `Bearer ${token}`
       }
     })
-    console.log(userData.data.data)
     return thunk.fulfillWithValue(userData.data.data)
     }catch(error){
       return thunk.rejectWithValue(error)
