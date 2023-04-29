@@ -112,8 +112,10 @@ export const SubTitle = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 67px;
   margin: 16px;
+  max-width: 200px;
+  max-height: 20px;
+  overflow: hidden;
   margin-right: 0px;
   background: var(--white);
   border: 1px solid #b4bac6;
@@ -203,6 +205,7 @@ export const StBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   gap: 20px;
   transform: ${props => props.transformValue};
   &:hover {
@@ -395,7 +398,7 @@ export const ModalBackground = styled.div`
   z-index: 50;
 `;
 
-export const Modal = styled.div`
+export const ModalContain = styled.div`
   position: absolute;
   /* top: 134px; */
   /* left: 802px; */

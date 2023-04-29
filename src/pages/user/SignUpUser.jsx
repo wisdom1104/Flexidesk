@@ -15,49 +15,53 @@ import useTrueHook from '../../hooks/user/useTrueHook';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
 import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpUser() {
-
   const navi = useNavigate();
 
   // 가드
   useTrueHook();
 
-  const { user, setUser, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange } = useFormValidation();
+  const {
+    user,
+    setUser,
+    errors,
+    handleEmailChange,
+    handlePasswordChange,
+    handlepasswordCheckChange,
+  } = useFormValidation();
 
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/user', user);
-      if (!response) {
-        alert('다시 회원가입해주세요😓');
-        return;
-      }
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
+      toast.error(`${errorMsg}`);
       return error;
     }
   };
 
   return (
-    <StBackground height='100vh'>
+    <StBackground height="100vh">
       <StOverall>
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             height: '100%',
-            padding:'height="100%"'
+            padding: 'height="100%"',
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="570px">
             <StForm>
               <StFormBox>
-                <StFont width='100%' align="start" fontSize="28px">
+                <StFont width="100%" align="start" fontSize="28px">
                   회원가입
                 </StFont>
 
@@ -81,7 +85,7 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
-                <StTextInput marginTop='20px'>
+                <StTextInput marginTop="20px">
                   <StSmallFont
                     width
                     align="start"
@@ -100,13 +104,17 @@ function SignUpUser() {
                     required
                   />
                 </StTextInput>
-                {errors.email && 
-                <StSmallFont 
-                      width="420px"
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="400"
-                      color="red">{errors.email}</StSmallFont>}
+                {errors.email && (
+                  <StSmallFont
+                    width="420px"
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="400"
+                    color="red"
+                  >
+                    {errors.email}
+                  </StSmallFont>
+                )}
 
                 <StTextInput height="80px">
                   <CertificationCkeck
@@ -140,10 +148,10 @@ function SignUpUser() {
                 {errors.password && (
                   <StSmallFont
                     width="420px"
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="400"
-                      color="red"
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="400"
+                    color="red"
                   >
                     {errors.password}
                   </StSmallFont>
@@ -162,11 +170,11 @@ function SignUpUser() {
                 </StTextInput>
                 {errors.passwordCheck && (
                   <StSmallFont
-                     width="420px"
-                      align="start"
-                      fontSize="0.875rem"
-                      weight="400"
-                      color="red"
+                    width="420px"
+                    align="start"
+                    fontSize="0.875rem"
+                    weight="400"
+                    color="red"
                   >
                     {errors.passwordCheck}
                   </StSmallFont>
@@ -179,6 +187,19 @@ function SignUpUser() {
                 >
                   <StLongButton type="submit">확인</StLongButton>
                 </div>
+
+                <ToastContainer
+                  position="top-right" // 알람 위치 지정
+                  autoClose={3000} // 자동 off 시간
+                  hideProgressBar={false} // 진행시간바 숨김
+                  closeOnClick // 클릭으로 알람 닫기
+                  rtl={false} // 알림 좌우 반전
+                  pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+                  draggable // 드래그 가능
+                  pauseOnHover // 마우스를 올리면 알람 정지
+                  theme="light"
+                  limit={1} // 알람 개수 제한
+                />
               </StFormBox>
             </StForm>
           </StLoginForm>

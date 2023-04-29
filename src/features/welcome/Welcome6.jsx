@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import {
-  StBackground,
-  StFont,
-  StOverall,
-  StSliderContain,
-  StWrapDiv,
-} from '../../pages/Welcome/WelcomeStyled';
-import Carousel from '../welcome/Carousel';
+import React from 'react';
+import { StBackground, StFont, StOverall, StfontA, StWrapDiv, StSpacePagePhoto } from '../../pages/Welcome/WelcomeStyled';
 
 function Welcome6() {
+
   return (
     <>
-      <StBackground>
-        <StOverall height="200px">
+      <StBackground background="#fff">
+        <StOverall>
           <StWrapDiv>
-            <StFont fontSize='3rem' marginBottom="100px">
-              Flexidesk는 회사생활을 <br /> 어떻게 쉽게 만들어주나요?
-            </StFont>
+            <StfontA href="#signup">
+              <StFont>
+                간단한 회원가입으로 <br /> Flexidesk의 솔루션 만나보세요.
+              </StFont>
+              <StSpacePagePhoto 
+              height='30vh'
+              width='1000px'
+              
+              src={`${process.env.PUBLIC_URL}/img/welcome3.png`} alt="welcome3" />
+            </StfontA>
           </StWrapDiv>
         </StOverall>
-
-        <StSliderContain>
-          <Carousel />
-        </StSliderContain>
       </StBackground>
     </>
   );
