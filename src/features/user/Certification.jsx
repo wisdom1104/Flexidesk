@@ -10,8 +10,7 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Certification({ admin, email ,onChange, errors}) {
-  
+function Certification({ admin, email, onChange, errors }) {
   const submitBtnHandler = async e => {
     e.preventDefault();
 
@@ -36,7 +35,7 @@ function Certification({ admin, email ,onChange, errors}) {
           fontSize="0.875rem"
           weight="700"
           marginBottom="10px"
-          >
+        >
           회사 이메일
         </StSmallFont>
       </Container>

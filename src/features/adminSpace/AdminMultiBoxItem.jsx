@@ -31,63 +31,65 @@ function AdminMultiBoxItem({
 
   return (
     <>
-      <StBox
-        key={multiBox.multiBoxId}
-        onDrop={HandleDrop}
-        onDragOver={handleDragOver}
-        ref={el => (elRef.current[multiBox.multiBoxId] = el)}
-        onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
-        onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
-        transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
-      >
-        {!multiBoxEdit ? (
-          <>
-            <div>{multiBox.multiBoxName}</div>
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  setMultiBoxEdit(!multiBoxEdit);
-                }}
-              >
-                수정
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  onClickDeleteBoxHandler(multiBox.multiBoxId);
-                }}
-              >
-                삭제
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        ) : (
-          <>
-            <BoxInput
-              type="text"
-              value={editMultiBoxName}
-              onChange={e => {
-                setEditMultiBoxName(e.target.value);
+      {!multiBoxEdit ? (
+        <StBox
+          key={multiBox.multiBoxId}
+          onDrop={HandleDrop}
+          onDragOver={handleDragOver}
+          ref={el => (elRef.current[multiBox.multiBoxId] = el)}
+          onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
+          onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
+        >
+          <div>{multiBox.multiBoxName}</div>
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                setMultiBoxEdit(!multiBoxEdit);
               }}
-            />
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  onEditBoxNameHandler();
-                }}
-              >
-                완료
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  setMultiBoxEdit(!multiBoxEdit);
-                }}
-              >
-                취소
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        )}
-      </StBox>
+            >
+              수정
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                onClickDeleteBoxHandler(multiBox.multiBoxId);
+              }}
+            >
+              삭제
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      ) : (
+        <StBox
+          key={multiBox.multiBoxId}
+          transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
+        >
+          <BoxInput
+            maxLength={6}
+            type="text"
+            value={editMultiBoxName}
+            onChange={e => {
+              setEditMultiBoxName(e.target.value);
+            }}
+          />
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                onEditBoxNameHandler();
+              }}
+            >
+              완료
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                setMultiBoxEdit(!multiBoxEdit);
+              }}
+            >
+              취소
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      )}
     </>
   );
 }

@@ -31,63 +31,65 @@ function AdminBoxItem({
 
   return (
     <>
-      <StBox
-        key={box.boxId}
-        onDrop={HandleDrop}
-        onDragOver={handleDragOver}
-        ref={el => (elRef.current[box.boxId] = el)}
-        onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
-        onDragStart={e => handleDragStart(e, box.boxId)}
-        transformValue={`translate(${box.x}px, ${box.y}px)`}
-      >
-        {!boxEdit ? (
-          <>
-            <div>{box.boxName}</div>
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  setBoxEdit(!boxEdit);
-                }}
-              >
-                수정
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  onClickDeleteBoxHandler(box.boxId);
-                }}
-              >
-                삭제
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        ) : (
-          <>
-            <BoxInput
-              type="text"
-              value={editBoxName}
-              onChange={e => {
-                setEditBoxName(e.target.value);
+      {!boxEdit ? (
+        <StBox
+          key={box.boxId}
+          onDrop={HandleDrop}
+          onDragOver={handleDragOver}
+          ref={el => (elRef.current[box.boxId] = el)}
+          onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
+          onDragStart={e => handleDragStart(e, box.boxId)}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
+        >
+          <div>{box.boxName}</div>
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                setBoxEdit(!boxEdit);
               }}
-            />
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  onEditBoxNameHandler();
-                }}
-              >
-                완료
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  setBoxEdit(!boxEdit);
-                }}
-              >
-                취소
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        )}
-      </StBox>
+            >
+              수정
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                onClickDeleteBoxHandler(box.boxId);
+              }}
+            >
+              삭제
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      ) : (
+        <StBox
+          key={box.boxId}
+          transformValue={`translate(${box.x}px, ${box.y}px)`}
+        >
+          <BoxInput
+            maxLength={6}
+            type="text"
+            value={editBoxName}
+            onChange={e => {
+              setEditBoxName(e.target.value);
+            }}
+          />
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                onEditBoxNameHandler();
+              }}
+            >
+              완료
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                setBoxEdit(!boxEdit);
+              }}
+            >
+              취소
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      )}
     </>
   );
 }

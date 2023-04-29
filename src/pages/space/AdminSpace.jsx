@@ -11,17 +11,18 @@ import {
 } from '../../shared/SpaceStyles';
 import { Column, Row } from '../../components/Flex';
 import AdminList from '../../features/adminSpace/AdminList';
-import {
-  useBoxs,
-  useFloorsAndSpaces,
-  useSpaceSelection,
-} from '../../hooks/useAdminSpaceHook';
+
 import AdminSelector from '../../features/adminSpace/AdminSelector';
 import Page from '../../components/Page';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { getCookie } from '../../shared/cookies';
 import { InfoContain } from '../Reservation/CalendarStyled';
 import Skeleton from '../../components/Skeleton';
+import {
+  useBoxs,
+  useFloorsAndSpaces,
+  useSpaceSelect,
+} from '../../hooks/adminSpace/useAdminSpaceHook';
 
 function AdminSpace() {
   const navi = useNavigate();
@@ -30,7 +31,7 @@ function AdminSpace() {
   const { mrBoxes, boxes, multiBoxes, elRef, handleDragStart } = useBoxs();
 
   const { selectedSpace, onClickSpaceListHandler, isModal, setIsModal } =
-    useSpaceSelection(spaces);
+    useSpaceSelect(spaces);
 
   const [showSkeleton, setShowSkeleton] = useState(true);
   const token = getCookie('token');
