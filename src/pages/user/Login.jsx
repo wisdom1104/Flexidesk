@@ -35,6 +35,8 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', login );
+      console.log('response',response)
+
       if (!response) {
         alert('다시 입력해주세요😓');
         return;
@@ -65,8 +67,8 @@ function Login() {
       navi('/adminspace');
 
     } catch (e) {
+      console.log('catch error',e);
       setIsError(true);
-
       return Promise.reject(e);
     }
   };

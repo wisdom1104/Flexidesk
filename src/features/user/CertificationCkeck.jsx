@@ -11,15 +11,18 @@ function CertificationCkeck({ user,certification, onChange }) {
     e.preventDefault();
     try {
       const response = await api.post('/users/signup/match', user);
+      console.log('인증번호',response);
       const newResponse = response.data.message;
       alert(`${newResponse}`);
       return newResponse;
     } catch (error) {
+      console.log('인증번호',error);
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
       return error;
     }
   };
+
 
   return (
     <>
@@ -39,7 +42,7 @@ function CertificationCkeck({ user,certification, onChange }) {
       <Container>
       <InlineInput
         type="text"
-        value={certification || ''}
+        value={certification}
         onChange={onChange}
         name="certification"
         placeholder=" 인증번호는 관리자에게 문의하세요."
