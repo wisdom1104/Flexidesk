@@ -35,8 +35,7 @@ export const StHaderFont = styled.p`
   text-align: center;
 
   color: var(--black);
-
-  cursor: default;
+  cursor: pointer;
 `;
 
 export const StHeaderContentButtonBox = styled.div`
@@ -63,4 +62,5 @@ export const StHeaderButton = styled.button`
 export const StHeaderLogo = styled.img`
   width: 150px;
   margin-right: 50px;
+  cursor: pointer;
 `;
