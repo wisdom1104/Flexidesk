@@ -36,7 +36,7 @@ function Management() {
   useEffect(() => {
     if (!token) {
       navi('/');
-    } else if (role !== 'ADMIN') {
+    } else if (role === 'USER') {
       navi('/');
     } else {
       const loadData = async () => {
@@ -78,14 +78,11 @@ function Management() {
           <InfoContain>
             {userList.map(item => (
               <InfoBox key={item.userId}>
-                <StSubTitle>
-                  {item.username}
-                </StSubTitle>
+                <StSubTitle>{item.username}</StSubTitle>
 
                 <Info>
                   <CommentBox>
                     <StSmallFont width>
-                      
                       <HiOutlineMail /> 이메일
                     </StSmallFont>
                     <br />

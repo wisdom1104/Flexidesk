@@ -106,7 +106,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
           })}
         </Row>
         <Row>
-          {role === 'ADMIN' ? (
+          {role === 'ADMIN' || role === 'MANAGER' ? (
             <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
           ) : null}
         </Row>
