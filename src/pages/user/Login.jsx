@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { LoginFormValidation } from '../../hooks/user/useLoginHook';
+import { useState } from 'react';
 
 function Login() {
 
@@ -37,10 +38,6 @@ function Login() {
       const response = await api.post('/users/login', login );
       console.log('response',response)
 
-      if (!response) {
-        alert('다시 입력해주세요😓');
-        return;
-      }
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -66,10 +63,9 @@ function Login() {
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
 
-    } catch (e) {
-      console.log('catch error',e);
+    } catch (error) {
       setIsError(true);
-      return Promise.reject(e);
+      return error;
     }
   };
 

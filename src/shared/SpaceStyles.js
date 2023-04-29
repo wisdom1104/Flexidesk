@@ -398,7 +398,7 @@ export const ModalBackground = styled.div`
   z-index: 50;
 `;
 
-export const Modal = styled.div`
+export const ModalContain = styled.div`
   position: absolute;
   /* top: 134px; */
   /* left: 802px; */

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Modal,
+  ModalContain,
   ModalBackground,
   ModalHeader,
   ModalList,
@@ -35,7 +35,7 @@ function AdminList({
     <>
       {isModal ? (
         <ModalBackground>
-          <Modal>
+          <ModalContain>
             <ModalList>
               <ModalHeader>
                 <ModalTitle>관리하기</ModalTitle>
@@ -85,7 +85,7 @@ function AdminList({
                 if (space && space.floorId !== null) return null;
               })}
             </ModalList>
-          </Modal>
+          </ModalContain>
         </ModalBackground>
       ) : null}
     </>

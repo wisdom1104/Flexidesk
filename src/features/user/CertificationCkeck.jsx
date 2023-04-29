@@ -14,11 +14,11 @@ function CertificationCkeck({ user,certification, onChange }) {
     try {
       const response = await api.post('/users/signup/match', user);
       const newResponse = response.data.message;
-      toast(`${newResponse}`);
+      toast.success(`${newResponse}`);
       return newResponse;
     } catch (error) {
       const errorMsg = error.response.data.message;
-      toast(`${errorMsg}`);
+      toast.error(`${errorMsg}`);
       return error;
     }
   };

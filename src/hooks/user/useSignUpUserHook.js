@@ -18,11 +18,20 @@ export const useFormValidation = () => {
 
   const handlePasswordChange = useCallback(({ target: { value } }) => {
     setUser(pre => ({ ...pre, password: value }));
-
+    
+    const hasNumber = /\d/.test(value);
+    const hasLowercase = /[a-z]/.test(value);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    const hasWhitespace = /\s/.test(value);
+    
     if (value.length < 8) {
       setErrors(pre => ({ ...pre, password: '비밀번호는 최소 8자 이상이어야 합니다.' }));
+    } else if (!hasNumber || !hasLowercase || !hasSpecialChar) {
+      setErrors(pre => ({ ...pre, password: '비밀번호는 숫자, 소문자, 특수문자가 모두 포함되어야 합니다.' }));
+    } else if (hasWhitespace) {
+      setErrors(pre => ({ ...pre, password: '비밀번호에 공백이 포함될 수 없습니다.' }));
     } else {
-      setErrors(pre => ({ ...pre, password: '' }));
+      setErrors(pre => ({ ...pre, password: '' }))
     }
   }, []);
 
