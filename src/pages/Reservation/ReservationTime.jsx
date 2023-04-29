@@ -82,7 +82,7 @@ function ReservationTime({ param, selectDay, mrName }) {
 
   const onclickHandler = e => {
     if (clickReservation.find(item => item === e.target.value)) {
-      return setClickReservation(
+      setClickReservation(
         clickReservation.filter(item => item !== e.target.value),
       );
     } else {
@@ -132,6 +132,11 @@ function ReservationTime({ param, selectDay, mrName }) {
                     ? `${selectDay}T${item.start}`
                     : `${date}${item.start}`
                 }
+                isSelected={clickReservation.includes(
+                  selectDay
+                    ? `${selectDay}T${item.start}`
+                    : `${date}${item.start}`,
+                )}
               >
                 {item.start}
               </StReserTimeButton>

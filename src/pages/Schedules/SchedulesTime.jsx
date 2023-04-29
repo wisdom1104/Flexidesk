@@ -94,6 +94,7 @@ function SchedulesTime({ param, selectDay }) {
               onClick={onclickHandler}
               disabled={item.isCheckOut === true}
               value={`${selectDay}T${item.start}`}
+              isSelected={clickSchedules.includes(`${selectDay}T${item.start}`)}
             >
               {item.start}
             </StReserTimeButton>
