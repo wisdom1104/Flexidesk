@@ -72,6 +72,7 @@ function AdminSpaceList({
         ) : (
           <StList>
             <EditInput
+              maxLength={9}
               type="text"
               value={editSpaceName}
               onChange={e => {

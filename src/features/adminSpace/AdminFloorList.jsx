@@ -50,6 +50,7 @@ function AdminFloorList({
         ) : (
           <StList data-floor-id={floor.floorId}>
             <EditInput
+              maxLength={7}
               data-floor-id={floor.floorId}
               type="text"
               value={editFloorName}
