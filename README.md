@@ -33,7 +33,7 @@ MPA를 구현 "react-router-dom": "^6.9.0", <br />
 스타일 사용 "styled-components": "^5.3.9", <br />
 "universal-cookie": "^4.0.4", <br />
 "web-vitals": "^2.1.0" <br />
-/////////////////////////////////////////////////////은선만 설치
 팀원들과 기본적인 코드 통일 "prettier": "^2.8.7", <br />
 유효성 검사 라이브러리 "yup": "^1.0.2"
-react-icons
+아이콘 사용 : react-icons
+alert창 라이브러리 : react-toastify
