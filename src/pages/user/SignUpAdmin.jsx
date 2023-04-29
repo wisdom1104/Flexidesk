@@ -16,6 +16,8 @@ import { Input } from '../../components/Input';
 import Certification from '../../features/user/Certification';
 import useTrueHook from '../../hooks/user/useTrueHook';
 import { AdminFormValidation } from '../../hooks/user/useSignUpAdminHook';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpAdmin() {
   const {
@@ -36,16 +38,12 @@ function SignUpAdmin() {
     event.preventDefault();
     try {
       const response = await api.post('/users/signup/admin', admin);
-      if (!response) {
-        alert('다시 회원가입해주세요😓');
-        return;
-      }
-      alert(`${admin.username}님 회원가입을 축하합니다.`);
+      toast.success(`${admin.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
+      toast.error(`${errorMsg}`);
       return error;
     }
   };
@@ -58,7 +56,7 @@ function SignUpAdmin() {
             display: 'flex',
             alignItems: 'center',
             height: '100%',
-            padding:'26px'
+            padding: '26px',
           }}
         >
           <StLoginForm onSubmit={submitBtnHandler} height="650px">
@@ -204,6 +202,19 @@ function SignUpAdmin() {
                 >
                   <StLongButton type="submit">확인</StLongButton>
                 </div>
+
+                <ToastContainer
+                  position="top-right" // 알람 위치 지정
+                  autoClose={3000} // 자동 off 시간
+                  hideProgressBar={false} // 진행시간바 숨김
+                  closeOnClick // 클릭으로 알람 닫기
+                  rtl={false} // 알림 좌우 반전
+                  pauseOnFocusLoss // 화면을 벗어나면 알람 정지
+                  draggable // 드래그 가능
+                  pauseOnHover // 마우스를 올리면 알람 정지
+                  theme="light"
+                  limit={1} // 알람 개수 제한
+                />
               </StFormBox>
             </StForm>
           </StLoginForm>

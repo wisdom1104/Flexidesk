@@ -18,14 +18,11 @@ function Certification({ admin, email ,onChange, errors}) {
     try {
       const response = await api.post('/users/signup/email', admin);
       const newResponse = response.data.message;
-      console.log(newResponse);
-      toast(`${newResponse}`);
-      // alert('이메일로 인증번호를 보냈습니다.');
+      toast.success(`${newResponse}`);
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;      
-      console.log(errorMsg);
-      toast(`${errorMsg}`);
+      toast.error(`${errorMsg}`);
       return error;
     }
   };

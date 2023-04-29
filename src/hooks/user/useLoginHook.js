@@ -8,7 +8,8 @@ export const LoginFormValidation = () => {
     const [errors, setErrors] = useState({ email: '', password: ''});
   
     const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
-  
+    const passwordRegex = useMemo(() => /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, []);
+
     const handleEmailChange = useCallback(({ target: { value } }) => {
       setLogin(pre => ({ ...pre, email: value }));
     
@@ -22,12 +23,12 @@ export const LoginFormValidation = () => {
     const handlePasswordChange = useCallback(({ target: { value } }) => {
       setLogin(pre => ({ ...pre, password: value }));
   
-      if (value.length < 8) {
-        setErrors(pre => ({ ...pre, password: '비밀번호는 최소 8자 이상이어야 합니다.' }));
+      if (!passwordRegex.test(value)) {
+        setErrors(pre => ({ ...pre, password: '비밀번호는 최소 8자 이상이며, 특수문자, 숫자, 소문자를 모두 포함해야 합니다.' }));
       } else {
         setErrors(pre => ({ ...pre, password: '' }));
       }
-    }, []);
+    }, [passwordRegex]);
   
   
     return { login, setLogin, errors, handleEmailChange, handlePasswordChange };

@@ -12,9 +12,10 @@ api.interceptors.response.use(
 
   async function (error) {
     const originalConfig = error.config;
-    console.log(originalConfig);
-
-    if (error.response.data.statusCode === 401 && originalConfig._retry) {
+    // console.log('error',originalConfig);
+    console.log('error:',error);
+//리프레시 존재하지 않을 때 400 error
+    if (error.response.data.statusCode === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
 
       try {
