@@ -20,7 +20,7 @@ export const AdminFormValidation = () => {
         setErrors(pre => ({ ...pre, email: '' }));
       }
     }, [emailRegex]);
-  
+    
     const handlePasswordChange = useCallback(({ target: { value } }) => {
       setAdmin(pre => ({ ...pre, password: value }));
     

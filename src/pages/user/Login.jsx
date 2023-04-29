@@ -20,12 +20,14 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { LoginFormValidation } from '../../hooks/user/useLoginHook';
+import { useSelector } from 'react-redux';
 
 function Login() {
 
   const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
 
-  const [isError, setIsError] = useState(false);
+  // const [isError, setIsError] = useState(false);
+  const {isError} = useSelector(state => state.users);
 
   useTrueHook();
 

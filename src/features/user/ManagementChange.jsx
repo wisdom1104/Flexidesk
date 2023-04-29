@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SelectModal from '../../features/SelectModal';
 import { CommentBox } from '../../pages/Reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';

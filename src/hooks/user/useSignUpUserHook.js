@@ -5,7 +5,6 @@ export const useFormValidation = () => {
   const [errors, setErrors] = useState({ email: '', password: '', passwordCheck: '' });
 
   const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
-  const passwordRegex = useMemo(() => /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, []);
 
   const handleEmailChange = useCallback(({ target: { value } }) => {
     setUser(pre => ({ ...pre, email: value }));
