@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React from 'react';
 import { Input } from '../../components/Input';
 import { cookies } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
@@ -20,14 +20,13 @@ import {
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { LoginFormValidation } from '../../hooks/user/useLoginHook';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function Login() {
 
   const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
 
-  // const [isError, setIsError] = useState(false);
-  const {isError} = useSelector(state => state.users);
+  const [isError, setIsError] = useState(false);
 
   useTrueHook();
 
