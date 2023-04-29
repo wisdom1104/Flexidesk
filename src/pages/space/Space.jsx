@@ -183,7 +183,7 @@ function Space() {
                   {/* space name 부분 */}
                   <Row></Row>
                   <Row>
-                    {role === 'ADMIN' ? (
+                    {role === 'ADMIN' || role === 'MANAGER' ? (
                       <StBtn onClick={() => navi('/adminSpace')}>
                         관리하기
                       </StBtn>
