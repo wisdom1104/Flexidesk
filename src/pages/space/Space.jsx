@@ -162,38 +162,38 @@ function Space() {
       {/* 보더 영역 */}
       {showSkeleton ? (
         <InfoContain>
-        <Skeleton />
-      </InfoContain>
+          <Skeleton />
+        </InfoContain>
       ) : (
         <>
-        {spaces.length > 0 ? (
-          <>
-            {selectedSpace && (
-              <SpaceBox
-                spaceId={selectedSpace.spaceId}
-                selectedSpace={selectedSpace}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            {/* 초기 화면 */}
-            <Stmainspace>
-              <StSubHeader>
-                {/* space name 부분 */}
-                <Row></Row>
-                <Row>
-                  {role === 'ADMIN' ? (
-                    <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
-                  ) : (
-                    <div>1</div>
-                  )}
-                </Row>
-              </StSubHeader>
-              <StBoard></StBoard>
-            </Stmainspace>
-          </>
-        )}
+          {spaces.length > 0 ? (
+            <>
+              {selectedSpace && (
+                <SpaceBox
+                  spaceId={selectedSpace.spaceId}
+                  selectedSpace={selectedSpace}
+                />
+              )}
+            </>
+          ) : (
+            <>
+              {/* 초기 화면 */}
+              <Stmainspace>
+                <StSubHeader>
+                  {/* space name 부분 */}
+                  <Row></Row>
+                  <Row>
+                    {role === 'ADMIN' ? (
+                      <StBtn onClick={() => navi('/adminSpace')}>
+                        관리하기
+                      </StBtn>
+                    ) : null}
+                  </Row>
+                </StSubHeader>
+                <StBoard></StBoard>
+              </Stmainspace>
+            </>
+          )}
         </>
       )}
     </Page>
