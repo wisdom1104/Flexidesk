@@ -71,6 +71,7 @@ function AdminInnerItem({
       ) : (
         <StInner data-floor-id={space.floorId}>
           <EditInput
+            maxLength={10}
             data-floor-id={space.floorId}
             style={{ marginLeft: '25px' }}
             type="text"

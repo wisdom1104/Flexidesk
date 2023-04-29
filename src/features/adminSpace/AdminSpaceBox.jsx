@@ -56,12 +56,12 @@ function AdminSpaceBox({
     <Stmainspace>
       <AdminSubHeader space={space} isModal={isModal} setIsModal={setIsModal} />
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
-        <AdminShadowItem
+        {/* <AdminShadowItem
           newMrBoxes={newMrBoxes}
           newBoxes={newBoxes}
           newMultiBoxes={newMultiBoxes}
           elRef={elRef}
-        />
+        /> */}
         <AdminDropItem
           space={space}
           HandleDrop={HandleDrop}

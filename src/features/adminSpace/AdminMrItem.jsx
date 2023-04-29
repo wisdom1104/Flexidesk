@@ -31,63 +31,62 @@ function AdminMrItem({
 
   return (
     <>
-      <StBox
-        key={mr.mrId}
-        onDrop={HandleDrop}
-        onDragOver={handleDragOver}
-        ref={el => (elRef.current[mr.mrId] = el)}
-        onMouseDown={e => mrBoxMouseDownHandler(e, mr.mrId)}
-        onDragStart={e => handleDragStart(e, mr.mrId)}
-        transformValue={`translate(${mr.x}px, ${mr.y}px)`}
-      >
-        {!mrEdit ? (
-          <>
-            <div>{mr.mrName}</div>
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  setMrEdit(!mrEdit);
-                }}
-              >
-                수정
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  onClickDeleteMrHandler(mr.mrId);
-                }}
-              >
-                삭제
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        ) : (
-          <>
-            <BoxInput
-              type="text"
-              value={editMrName}
-              onChange={e => {
-                setEditMrName(e.target.value);
+      {!mrEdit ? (
+        <StBox
+          key={mr.mrId}
+          onDrop={HandleDrop}
+          onDragOver={handleDragOver}
+          ref={el => (elRef.current[mr.mrId] = el)}
+          onMouseDown={e => mrBoxMouseDownHandler(e, mr.mrId)}
+          onDragStart={e => handleDragStart(e, mr.mrId)}
+          transformValue={`translate(${mr.x}px, ${mr.y}px)`}
+        >
+          <div>{mr.mrName}</div>
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                setMrEdit(!mrEdit);
               }}
-            />
-            <StBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  onEditMrNameHandler();
-                }}
-              >
-                완료
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  setMrEdit(!mrEdit);
-                }}
-              >
-                취소
-              </BoxSubBtn>
-            </StBtnBox>
-          </>
-        )}
-      </StBox>
+            >
+              수정
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                onClickDeleteMrHandler(mr.mrId);
+              }}
+            >
+              삭제
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      ) : (
+        <StBox key={mr.mrId} transformValue={`translate(${mr.x}px, ${mr.y}px)`}>
+          <BoxInput
+            maxLength={6}
+            type="text"
+            value={editMrName}
+            onChange={e => {
+              setEditMrName(e.target.value);
+            }}
+          />
+          <StBtnBox>
+            <BoxBtn
+              onClick={() => {
+                onEditMrNameHandler();
+              }}
+            >
+              완료
+            </BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                setMrEdit(!mrEdit);
+              }}
+            >
+              취소
+            </BoxSubBtn>
+          </StBtnBox>
+        </StBox>
+      )}
     </>
   );
 }
