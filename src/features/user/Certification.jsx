@@ -10,8 +10,7 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Certification({ admin, email ,onChange, errors}) {
-  
+function Certification({ admin, email, onChange, errors }) {
   const submitBtnHandler = async e => {
     e.preventDefault();
 
@@ -23,7 +22,7 @@ function Certification({ admin, email ,onChange, errors}) {
       // alert('이메일로 인증번호를 보냈습니다.');
       return response;
     } catch (error) {
-      const errorMsg = error.response.data.message;      
+      const errorMsg = error.response.data.message;
       console.log(errorMsg);
       toast(`${errorMsg}`);
       return error;
@@ -39,7 +38,7 @@ function Certification({ admin, email ,onChange, errors}) {
           fontSize="0.875rem"
           weight="700"
           marginBottom="10px"
-          >
+        >
           회사 이메일
         </StSmallFont>
       </Container>
