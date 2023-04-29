@@ -56,7 +56,7 @@ export function useFloorsAndSpaces(navi) {
 
     if (token === undefined) {
       navi('/');
-    } else if (role === 'ADMIN') {
+    } else if (role === 'ADMIN' || role === 'MANAGER') {
       dispatch(__getSpaces());
       dispatch(__getFloors());
     } else {

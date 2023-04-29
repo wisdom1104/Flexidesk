@@ -34,12 +34,8 @@ function AdminList({
   return (
     <>
       {isModal ? (
-        <ModalBackground
-          onClick={() => {
-            setIsModal(!isModal);
-          }}
-        >
-          <Modal onClick={e => e.stopPropagation()}>
+        <ModalBackground>
+          <Modal>
             <ModalList>
               <ModalHeader>
                 <ModalTitle>관리하기</ModalTitle>
