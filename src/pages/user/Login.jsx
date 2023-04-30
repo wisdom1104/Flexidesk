@@ -36,8 +36,6 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', login );
-      console.log('response',response)
-
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
@@ -93,7 +91,6 @@ function Login() {
               <StLoginInputIconBox>
                 <StLoginIconDiv>
                   <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`} alt="loginIcon3" />
-
                 </StLoginIconDiv>
 
                 <Input

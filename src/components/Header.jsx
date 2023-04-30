@@ -23,28 +23,28 @@ function Header() {
 
   const navi = useNavigate();
   const dispatch = useDispatch();
-
+//전역적으로 사용 , 훅일까?
   const token = cookies.get('token');
   const userName = cookies.get('username');
   const userId = cookies.get('userId');
-
+  //로그아웃 시 모달을 띄워주는 '상태'
   const logout = () => {
     setLoginTime(null);
     setExpirationTime(null);
     setIsModal(true);
   };
-
-  const tokenLogout = () => {
+//시간이 지나면 토큰을 제거하고 페이지 이동(그려지는 행위)을 나타내는 '상태'
+const tokenLogout = () => {
     dispatch(isLoginActions.logout());
     setLoginTime(null);
     setExpirationTime(null);
     navi('/');
   };
-
+//삭제 버튼 -> 서버와 통신하여 로그아웃되는 '상태'
   const handleLogout = () => {
     dispatch(isLoginActions.logout());
   };
-
+//
   const onClcikHandelr = () => {
     navi('/');
   };

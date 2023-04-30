@@ -91,7 +91,6 @@ function SignUpAdmin() {
                     errors={errors}
                   />
                 </StTextInput>
-
                 <SignUpTextInput
                   type="text"
                   value={admin.certification}
@@ -125,7 +124,6 @@ function SignUpAdmin() {
                     </StSmallFont>
                   )}
                 </SterrorFont>
-
                 <SignUpTextInput
                   height="35px"
                   type="password"
