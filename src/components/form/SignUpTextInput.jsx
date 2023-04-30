@@ -1,33 +1,37 @@
-import React from 'react'
+import React from 'react';
 
 import styled from 'styled-components';
 import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
 import { StTextInput } from '../../pages/user/UserStyled';
 
-export const SignUpTextInput = ({type,value,placeholder,onChange,innerText,width,height,minlength,maxlength} ) => {  
+export const SignUpTextInput = ({
+  type,
+  value,
+  placeholder,
+  onChange,
+  innerText,
+  width,
+  height,
+  minlength,
+  maxlength,
+}) => {
   return (
     <StTextInput height={height}>
-      <StSmallFont
-        width
-        align="start"
-        fontSize="0.875rem"
-        weight="700"
-      >
+      <StSmallFont width align="start" fontSize="0.875rem" weight="700">
         {innerText}
       </StSmallFont>
       <StInput
-       required
-       type={type}
-       value={value}
-       onChange={onChange}
-       placeholder={placeholder}
-
-       minlength={minlength}
-       maxlength={maxlength}
+        required
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        minlength={minlength}
+        maxlength={maxlength}
       />
-  </StTextInput>
-  )
-}
+    </StTextInput>
+  );
+};
 
 const StInput = styled.input`
   display: block;
@@ -39,7 +43,7 @@ const StInput = styled.input`
 
   outline: none;
 
-  border: 1px solid #A6AEBB;
+  border: 1px solid #a6aebb;
   border-radius: 8px;
 
   font-weight: 700;
