@@ -7,15 +7,17 @@ import { __deleteSchedule } from '../../redux/modules/schedules';
 
 function SchedulesDelete({ scId }) {
   const dispatch = useDispatch();
-  const [isOpen, openModal, closeModal] = useModal();
+
+  const [isOpen, controlModal] = useModal();
+
   const deleteHandler = () => {
     dispatch(__deleteSchedule(scId));
-    closeModal();
+    controlModal(false);
   };
   return (
     <>
       <MoveModalbtn
-        onClick={openModal}
+        onClick={()=> controlModal(true)}
         width="50px"
         height="32px"
         left="100px"
@@ -28,7 +30,7 @@ function SchedulesDelete({ scId }) {
 
       {isOpen && (
         <Modal
-          setIsModal={closeModal}
+          setIsModal={()=> controlModal(false)}
           modalTitle="삭제 하시겠습니까?"
           onButtonClick={deleteHandler}
         ></Modal>
