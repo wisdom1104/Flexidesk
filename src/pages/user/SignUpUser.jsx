@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   StBackground,
@@ -10,14 +9,11 @@ import {
   StTextInput,
 } from './UserStyled';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { Input } from '../../components/Input';
 import useTrueHook from '../../hooks/user/useTrueHook';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
 import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 function SignUpUser() {
   const navi = useNavigate();
 
@@ -42,7 +38,7 @@ function SignUpUser() {
       return response;
     } catch (error) {
       const errorMsg = error.response.data.message;
-      toast.error(`${errorMsg}`);
+      alert(`${errorMsg}`);
       return error;
     }
   };
@@ -65,45 +61,22 @@ function SignUpUser() {
                   회원가입
                 </StFont>
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                    marginTop="10px"
-                  >
-                    사용자 이름
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    value={user.username}
-                    onChange={event =>
-                      setUser({ ...user, username: event.target.value })
-                    }
-                    placeholder="이름을 입력하세요."
-                    required
-                  />
-                </StTextInput>
-                <StTextInput marginTop="20px">
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    사용자 이메일
-                  </StSmallFont>
-
-                  <Input
-                    type="email"
-                    value={user.email}
-                    onChange={handleEmailChange}
-                    name="email"
-                    placeholder="이메일을 입력하세요."
-                    required
-                  />
-                </StTextInput>
+                <SignUpTextInput
+                  type="text"
+                  value={user.username}
+                  placeholder="이름을 입력하세요."
+                  onChange={event =>
+                    setUser({ ...user, username: event.target.value })
+                  }
+                  innerText="사용자 이름"
+                />
+                <SignUpTextInput
+                  type="email"
+                  value={user.email}
+                  placeholder="이메일을 입력하세요."
+                  onChange={handleEmailChange}
+                  innerText="사용자 이메일"
+                />
                 {errors.email && (
                   <StSmallFont
                     width="420px"
@@ -126,25 +99,14 @@ function SignUpUser() {
                   />
                 </StTextInput>
 
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    비밀번호
-                  </StSmallFont>
-                  <Input
-                    type="password"
-                    value={user.password}
-                    onChange={handlePasswordChange}
-                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                    required
-                    minlength="8"
-                    maxlength="16"
-                  />
-                </StTextInput>
+                <SignUpTextInput
+                  type="password"
+                  value={user.password}
+                  placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                  onChange={handlePasswordChange}
+                  innerText="비밀번호"
+                />
+
                 {errors.password && (
                   <StSmallFont
                     width="420px"
@@ -156,18 +118,13 @@ function SignUpUser() {
                     {errors.password}
                   </StSmallFont>
                 )}
-
-                <StTextInput height="45px">
-                  <Input
-                    type="password"
-                    value={user.passwordCheck}
-                    onChange={handlepasswordCheckChange}
-                    placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                    required
-                    minlength="8"
-                    maxlength="16"
-                  />
-                </StTextInput>
+                <SignUpTextInput
+                  height="45px"
+                  type="password"
+                  value={user.passwordCheck}
+                  placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
+                  onChange={handlepasswordCheckChange}
+                />
                 {errors.passwordCheck && (
                   <StSmallFont
                     width="420px"
@@ -187,19 +144,6 @@ function SignUpUser() {
                 >
                   <StLongButton type="submit">확인</StLongButton>
                 </div>
-
-                <ToastContainer
-                  position="top-right" // 알람 위치 지정
-                  autoClose={3000} // 자동 off 시간
-                  hideProgressBar={false} // 진행시간바 숨김
-                  closeOnClick // 클릭으로 알람 닫기
-                  rtl={false} // 알림 좌우 반전
-                  pauseOnFocusLoss // 화면을 벗어나면 알람 정지
-                  draggable // 드래그 가능
-                  pauseOnHover // 마우스를 올리면 알람 정지
-                  theme="light"
-                  limit={1} // 알람 개수 제한
-                />
               </StFormBox>
             </StForm>
           </StLoginForm>
