@@ -18,6 +18,7 @@ import useTrueHook from '../../hooks/user/useTrueHook';
 import { AdminFormValidation } from '../../hooks/user/useSignUpAdminHook';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 
 function SignUpAdmin() {
   const {
@@ -65,48 +66,26 @@ function SignUpAdmin() {
                 <StFont width="100%" align="start" fontSize="28px">
                   관리자 회원가입
                 </StFont>
+                <SignUpTextInput 
+                type='text'
+                value={admin.username}
+                placeholder='이름을 입력하세요.'
+                onChange={event =>
+                  setAdmin({ ...admin, username: event.target.value })
+                }
+                innerText='사용자 이름'
+                />
+                <SignUpTextInput 
+                type='text'
+                value={admin.companyName}
+                placeholder='회사를 입력하세요.'
+                onChange={event =>
+                  setAdmin({ ...admin, companyName: event.target.value })
+                }
+                innerText='회사'
+                />
 
                 <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    사용자 이름
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    value={admin.username}
-                    onChange={event =>
-                      setAdmin({ ...admin, username: event.target.value })
-                    }
-                    placeholder="이름을 입력하세요."
-                    required
-                  />
-                </StTextInput>
-                <StTextInput>
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    회사
-                  </StSmallFont>
-                  <Input
-                    type="text"
-                    id="companyName"
-                    value={admin.companyName}
-                    onChange={event =>
-                      setAdmin({ ...admin, companyName: event.target.value })
-                    }
-                    placeholder="회사를 입력하세요."
-                    required
-                  />
-                </StTextInput>
-
-                <StTextInput height="100%">
                   <Certification
                     admin={admin}
                     email={admin.email}
@@ -115,7 +94,16 @@ function SignUpAdmin() {
                   />
                 </StTextInput>
 
-                <StTextInput>
+                <SignUpTextInput 
+                type='text'
+                value={admin.certification}
+                placeholder='인증번호를 입력하세요.'
+                onChange={event =>
+                  setAdmin({ ...admin, certification: event.target.value })
+                }
+                innerText='인증번호'
+                />
+                {/* <StTextInput>
                   <StSmallFont
                     width
                     align="start"
@@ -134,26 +122,18 @@ function SignUpAdmin() {
                     placeholder="인증번호를 입력하세요."
                     required
                   />
-                </StTextInput>
-                <StTextInput height="65px">
-                  <StSmallFont
-                    width
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="700"
-                  >
-                    비밀번호
-                  </StSmallFont>
-                  <Input
-                    type="password"
-                    value={admin.password}
-                    onChange={handlePasswordChange}
-                    placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                    required
-                    minlength="8"
-                    maxlength="16"
-                  />
-                </StTextInput>
+                </StTextInput> */}
+
+                <SignUpTextInput 
+                height="65px"
+                type='password'
+                value={admin.password}
+                placeholder='영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)'
+                onChange={handlePasswordChange}
+                innerText='비밀번호'
+                minlength="8"
+                maxlength="16"
+                />
                 <SterrorFont>
                   {errors.password && (
                     <StSmallFont
@@ -168,19 +148,15 @@ function SignUpAdmin() {
                   )}
                 </SterrorFont>
 
-                <StTextInput height="35px">
-                  <Input
-                    type="password"
-                    name="passwordCheck"
-                    value={admin.passwordCheck}
-                    onChange={handlepasswordCheckChange}
-                    placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                    required
-                    minlength="8"
-                    maxlength="16"
-                  />
-                </StTextInput>
-
+                <SignUpTextInput 
+                height="35px"
+                type='password'
+                value={admin.passwordCheck}
+                placeholder='비밀번호 확인을 위해 한번 더 입력하세요.'
+                onChange={handlepasswordCheckChange}
+                minlength="8"
+                maxlength="16"
+                />
                 <SterrorFont>
                   {errors.passwordCheck && (
                     <StSmallFont
