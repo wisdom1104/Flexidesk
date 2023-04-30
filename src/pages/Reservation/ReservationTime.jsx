@@ -68,21 +68,9 @@ function ReservationTime({ param, selectDay, mrName }) {
   const userId = cookies.get('userId');
   const navi = useNavigate();
 
-  const addCount = () => {
-    setCount(count + 1);
-  };
-
-  const delCount = () => {
-    if (count === 1) {
-      setCount(1);
-    } else {
-      setCount(count - 1);
-    }
-  };
-
   const onclickHandler = e => {
     if (clickReservation.find(item => item === e.target.value)) {
-      return setClickReservation(
+      setClickReservation(
         clickReservation.filter(item => item !== e.target.value),
       );
     } else {
@@ -90,18 +78,6 @@ function ReservationTime({ param, selectDay, mrName }) {
     }
     setIsCheckOut(!isCheckOut);
     // setChoseReservationTime(!choseReservationTime);
-  };
-
-  const userClickHandler = e => {
-    if (userInfo.find(item => item === e.target.value)) {
-      return (
-        setUserInfo(userInfo.filter(item => item !== e.value.tartget)),
-        setUserIdInfo(userIdInfo.filter(item => item !== e.target.value))
-      );
-    } else {
-      setUserInfo([...userInfo, e.target.value]);
-      setUserIdInfo([...userIdInfo, e.value.target]);
-    }
   };
 
   useEffect(() => {
@@ -112,6 +88,29 @@ function ReservationTime({ param, selectDay, mrName }) {
     }
     setClickReservation([]);
   }, [selectDay]);
+
+  // useEffect(() => {
+  //   // clickReservation 값이 업데이트될 때마다 isSelected 값을 다시 결정
+  //   timeList.map((item, index) => {
+  //     const isSelected =
+  //       clickReservation.includes(
+  //         selectDay ? `${selectDay}T${item.start}` : `${date}${item.start}`,
+  //       ) ||
+  //       (index !== timeList.length - 1 &&
+  //         clickReservation.some(
+  //           time =>
+  //             time >
+  //               (selectDay
+  //                 ? `${selectDay}T${item.start}`
+  //                 : `${date}${item.start}`) &&
+  //             time <
+  //               (selectDay
+  //                 ? `${selectDay}T${timeList[index + 1].start}`
+  //                 : `${date}${timeList[index + 1].start}`),
+  //         ));
+  //     return { ...item, isSelected };
+  //   });
+  // }, [clickReservation]);
 
   return (
     <SchContain width="683px">
@@ -132,6 +131,11 @@ function ReservationTime({ param, selectDay, mrName }) {
                     ? `${selectDay}T${item.start}`
                     : `${date}${item.start}`
                 }
+                isSelected={clickReservation.includes(
+                  selectDay
+                    ? `${selectDay}T${item.start}`
+                    : `${date}${item.start}`,
+                )}
               >
                 {item.start}
               </StReserTimeButton>
@@ -147,8 +151,6 @@ function ReservationTime({ param, selectDay, mrName }) {
               />
               사원 검색
             </StSubTitle>
-            {/* <ScheduleUsers> */}
-            {/* <Column> */}
             <Input
               width="280px"
               height="40px"
@@ -157,14 +159,6 @@ function ReservationTime({ param, selectDay, mrName }) {
                 dispatch(__getUserData(e.target.value));
               }}
             />
-
-            {/* <StReserCountBox>
-            <StReserCountButton onClick={delCount}>-</StReserCountButton>
-            <div>{count}</div>
-            <StReserCountButton onClick={addCount}>+</StReserCountButton>
-          </StReserCountBox> */}
-            {/* </Column> */}
-            {/* </ScheduleUsers> */}
           </Column>
           <UserList>
             {userData?.map(item => (

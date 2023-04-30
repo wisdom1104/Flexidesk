@@ -20,7 +20,7 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 function PathScedules() {
   const param = useParams();
   const location = useLocation();
-  const dataDay = location.state.scStart.split('T')[0];
+  const dataDay = location.state.scStart;
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -32,7 +32,7 @@ function PathScedules() {
   const [selectYear, setSelectYear] = useState(today.year);
   const [selectMonth, setSelectMonth] = useState(today.month + 1);
   const [date, setDate] = useState();
-  const [selectedDate, setSelectedDate] = useState(dataDay);
+  const [selectedDate, setSelectedDate] = useState(dataDay.split('T')[0]);
 
   const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
   //선택한 연도, 달의 마지막 날짜
@@ -144,6 +144,7 @@ function PathScedules() {
             title={location.state.scTitle}
             comment={location.state.scComment}
             scId={location.state.scId}
+            initDate={dataDay}
           />
         </Row>
       </div>

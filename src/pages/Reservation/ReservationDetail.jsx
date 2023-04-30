@@ -73,7 +73,7 @@ function ReservationDetail() {
               src={`${process.env.PUBLIC_URL}/img/reservation.png`}
               alt="managementIcon"
             />
-            <div>회의실 예약 확인하기</div>
+            <div>회의실 예약현황</div>
           </StListTitle>
 
           {showSkeleton ? (
@@ -85,7 +85,7 @@ function ReservationDetail() {
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (
-                <InfoBox height='350px' key={item.reservationId}>
+                <InfoBox height="350px" key={item.reservationId}>
                   <StSubTitle margin="1px">{item.username}</StSubTitle>
                   <Info>
                     <CommentBox>
@@ -106,7 +106,7 @@ function ReservationDetail() {
                       </StSmallFont>
                     </CommentBox>
                     <CommentBox>
-                      <StSmallFont width>예약 인원명</StSmallFont>
+                      <StSmallFont width>예약 인원</StSmallFont>
                       <UserList width="120px" height="30px" border="none">
                         {item.userList.map(e => (
                           <StSmall>{e.username}</StSmall>

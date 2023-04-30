@@ -19,7 +19,14 @@ import {
 } from '../../Reservation/CalendarStyled';
 import { Input } from '../../../components/Input';
 
-function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
+function PathSchedulesTime({
+  param,
+  selectDay,
+  title,
+  comment,
+  scId,
+  initDate,
+}) {
   const now = new Date();
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -28,7 +35,7 @@ function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
   const [isCheckOut, setIsCheckOut] = useState('false');
-  const [clickSchedules, setClickSchedules] = useState([]);
+  const [clickSchedules, setClickSchedules] = useState([initDate]);
 
   const [scheduleValue, setScheduleValue] = useState({
     scTitle: title,
@@ -55,7 +62,6 @@ function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
   const reqDatas = { startList: dataListResult, useList: [] };
 
   //adddispatch로 보낼값
-  const startData = { startList: dataListResult };
   const { scComment, scTitle } = scheduleValue;
   const reqScheduleValue = {
     scComment,
@@ -103,6 +109,7 @@ function PathSchedulesTime({ param, selectDay, title, comment, scId }) {
               onClick={onclickHandler}
               disabled={item.isCheckOut === true}
               value={`${selectDay}T${item.start}`}
+              isSelected={clickSchedules.includes(`${selectDay}T${item.start}`)}
             >
               {item.start}
             </StReserTimeButton>

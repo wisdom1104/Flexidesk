@@ -187,8 +187,6 @@ export const InlinButton = styled.input`
   margin-left: 10px;
   padding: 8px 16px;
 
-  box-sizing: border-box;
-  background-color: #f1f2f4;
   cursor: pointer;
 
   border: 1px solid #a6aebb;
@@ -197,13 +195,16 @@ export const InlinButton = styled.input`
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  color: #a6aebb;
 
-  &:focus {
-    border: 1px solid #65bab6;
+  color: var(--white);
+  background: var(--blue);
+  &:hover {
+    background: var(--lightblue);
   }
-  &:active {
-    border: 1px solid #07133b;
+  &:focus {
+    color: var(--blue);
+    background: var(--white);
+    border: 1px solid var(--blue);
   }
 `;
 
