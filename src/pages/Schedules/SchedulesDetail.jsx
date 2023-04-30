@@ -68,7 +68,7 @@ function SchedulesDetail() {
             src={`${process.env.PUBLIC_URL}/img/schedule.png`}
             alt="managementIcon"
           />
-          <div>내가 등록한 스케줄</div>
+          <div>스케줄 조회</div>
         </StListTitle>
 
         {showSkeleton ? (

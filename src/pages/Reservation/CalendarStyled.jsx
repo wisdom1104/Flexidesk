@@ -36,31 +36,55 @@ export const StCalenHeader = styled.div`
   justify-content: space-between;
   width: 28vw;
 `;
-
 export const StReserTimeButton = styled.button`
-  background-color: white;
   border-radius: 5px;
   border: 1px solid var(--blue);
   margin: 5px;
   padding: ${props => props.padding || '5px 0px'};
   font-family: inherit;
-  color: #07133b;
+  color: ${props => (props.isSelected ? 'white' : '#07133b')};
+  background-color: ${props => (props.isSelected ? 'var(--blue)' : 'white')};
   width: ${props => props.width || '70px'};
 
-  &:hover {
+  /* &:hover:not(:disabled) {
     color: white;
     background-color: var(--blue);
   }
-  &:focus {
+  &:focus:not(:disabled) {
     color: white;
     background-color: var(--blue);
-  }
+  } */
   &:disabled {
     color: lightgray;
     border: 1px solid lightgray;
     background-color: white;
   }
 `;
+
+// export const StReserTimeButton = styled.button`
+//   background-color: ${props => (props.isSelected ? 'pink' : 'white')}
+//   border-radius: 5px;
+//   border: 1px solid var(--blue);
+//   margin: 5px;
+//   padding: ${props => props.padding || '5px 0px'};
+//   font-family: inherit;
+//   color: #07133b;
+//   width: ${props => props.width || '70px'};
+
+//   &:hover {
+//     color: white;
+//     background-color: var(--blue);
+//   }
+//   &:focus {
+//     color: white;
+//     background-color: var(--blue);
+//   }
+//   &:disabled {
+//     color: lightgray;
+//     border: 1px solid lightgray;
+//     background-color: white;
+//   }
+// `;
 
 export const StReserTimeBox = styled.div`
   display: flex;
