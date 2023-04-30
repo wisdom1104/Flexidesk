@@ -18,13 +18,15 @@ import {
   StOverall,
   StLoginContain,
 } from './UserStyled';
+import { Row } from '../../components/Flex';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import { LoginFormValidation } from '../../hooks/user/useLoginHook';
 import { useState } from 'react';
+import ValidationError from '../../components/form/ValidationError';
 
 function Login() {
-
-  const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
+  const { login, handleEmailChange, handlePasswordChange } =
+    LoginFormValidation();
 
   const [isError, setIsError] = useState(false);
 
@@ -35,15 +37,13 @@ function Login() {
   const onsubmitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/login', login );
+      const response = await api.post('/users/login', login);
       const token = response.headers.authorization;
       const refreshToken = response.headers.refresh_token;
       const payload = jwt_decode(token);
 
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      cookies.set('token', token.split(' ')[1], { path: '/', 
-      maxAge: 3540 
-    });
+      cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
       cookies.set('refresh_token', refreshToken.split(' ')[1], {
         path: '/',
         // maxAge: 3540,
@@ -60,7 +60,6 @@ function Login() {
       cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
       // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
       navi('/adminspace');
-
     } catch (error) {
       setIsError(true);
       return error;
@@ -90,7 +89,10 @@ function Login() {
 
               <StLoginInputIconBox>
                 <StLoginIconDiv>
-                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`} alt="loginIcon3" />
+                  <StLoginIcon
+                    src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`}
+                    alt="loginIcon3"
+                  />
                 </StLoginIconDiv>
 
                 <Input
@@ -106,8 +108,10 @@ function Login() {
 
               <StLoginInputIconBox>
                 <StLoginIconDiv>
-                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon4.png`} alt="loginIcon4" />
-
+                  <StLoginIcon
+                    src={`${process.env.PUBLIC_URL}/img/loginIcon4.png`}
+                    alt="loginIcon4"
+                  />
                 </StLoginIconDiv>
                 <Input
                   type="password"
@@ -119,27 +123,14 @@ function Login() {
                   border="none"
                 />
               </StLoginInputIconBox>
-              {isError && (
-                <StSmallFont
-                  width="420px"
-                  align="start"
-                  fontSize="0.87rem"
-                  weight="400"
-                  color="red"
-                >
-                  계정 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
-                  확인해주세요.
-                </StSmallFont>
-              )}
+
+              <ValidationError value={isError} />
+
               <StLongButton> 로그인 </StLongButton>
-              <div
-              style={{
-                display:'flex',
-                flexDirection:'row',
-              }}>
+              <Row>
                 <StLink to={'/signup'}> 관리자 회원가입 </StLink>
                 <StLink to={'/signupuser'}> 일반 회원가입 </StLink>
-                </div>
+              </Row>
             </StForm>
           </StLoginForm>
         </StLoginContain>

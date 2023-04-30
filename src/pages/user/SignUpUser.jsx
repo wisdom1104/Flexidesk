@@ -14,6 +14,7 @@ import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
 import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import ValidationError from '../../components/form/ValidationError';
 function SignUpUser() {
   const navi = useNavigate();
 
@@ -46,108 +47,63 @@ function SignUpUser() {
   return (
     <StBackground height="100vh">
       <StOverall>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            height: '100%',
-            padding: 'height="100%"',
-          }}
-        >
-          <StLoginForm onSubmit={submitBtnHandler} height="570px">
-            <StForm>
-              <StFormBox>
-                <StFont width="100%" align="start" fontSize="28px">
-                  회원가입
-                </StFont>
+        <StLoginForm onSubmit={submitBtnHandler} height="570px">
+          <StForm>
+            <StFormBox>
+              <StFont width="100%" align="start" fontSize="28px">
+                회원가입
+              </StFont>
 
-                <SignUpTextInput
-                  type="text"
-                  value={user.username}
-                  placeholder="이름을 입력하세요."
+              <SignUpTextInput
+                innerText="사용자 이름"
+                type="text"
+                value={user.username}
+                placeholder="이름을 입력하세요."
+                onChange={event =>
+                  setUser({ ...user, username: event.target.value })
+                }
+              />
+              <SignUpTextInput
+                innerText="사용자 이메일"
+                type="email"
+                value={user.email}
+                placeholder="이메일을 입력하세요."
+                onChange={handleEmailChange}
+              />
+              <ValidationError value={errors.email} />
+
+              <StTextInput height="80px">
+                <CertificationCkeck
+                  user={user}
+                  certification={user.certification}
                   onChange={event =>
-                    setUser({ ...user, username: event.target.value })
+                    setUser({ ...user, certification: event.target.value })
                   }
-                  innerText="사용자 이름"
                 />
-                <SignUpTextInput
-                  type="email"
-                  value={user.email}
-                  placeholder="이메일을 입력하세요."
-                  onChange={handleEmailChange}
-                  innerText="사용자 이메일"
-                />
-                {errors.email && (
-                  <StSmallFont
-                    width="420px"
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="400"
-                    color="red"
-                  >
-                    {errors.email}
-                  </StSmallFont>
-                )}
+              </StTextInput>
 
-                <StTextInput height="80px">
-                  <CertificationCkeck
-                    user={user}
-                    certification={user.certification}
-                    onChange={event =>
-                      setUser({ ...user, certification: event.target.value })
-                    }
-                  />
-                </StTextInput>
+              <SignUpTextInput
+                innerText="비밀번호"
+                type="password"
+                value={user.password}
+                placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+                onChange={handlePasswordChange}
+              />
+              <ValidationError value={errors.password} />
 
-                <SignUpTextInput
-                  type="password"
-                  value={user.password}
-                  placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                  onChange={handlePasswordChange}
-                  innerText="비밀번호"
-                />
+              <SignUpTextInput
+                height="45px"
+                type="password"
+                value={user.passwordCheck}
+                placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
+                onChange={handlepasswordCheckChange}
+              />
+              <ValidationError value={errors.passwordCheck} />
 
-                {errors.password && (
-                  <StSmallFont
-                    width="420px"
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="400"
-                    color="red"
-                  >
-                    {errors.password}
-                  </StSmallFont>
-                )}
-                <SignUpTextInput
-                  height="45px"
-                  type="password"
-                  value={user.passwordCheck}
-                  placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                  onChange={handlepasswordCheckChange}
-                />
-                {errors.passwordCheck && (
-                  <StSmallFont
-                    width="420px"
-                    align="start"
-                    fontSize="0.875rem"
-                    weight="400"
-                    color="red"
-                  >
-                    {errors.passwordCheck}
-                  </StSmallFont>
-                )}
-
-                <div
-                  style={{
-                    marginTop: '20px',
-                  }}
-                >
-                  <StLongButton type="submit">확인</StLongButton>
-                </div>
-              </StFormBox>
-            </StForm>
-          </StLoginForm>
-        </div>
+              <StLongButton type="submit">확인</StLongButton>
+            </StFormBox>
+          </StForm>
+        </StLoginForm>
       </StOverall>
     </StBackground>
   );

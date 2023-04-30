@@ -9,7 +9,7 @@ export const StBackground = styled.div`
 
 // 전체 공통 스타일 (min은 px)
 export const StOverall = styled.div`
-  max-width: 75vw;
+  max-width: 10vw;
   min-width: 21vw;
   min-height: 35vh;
   display: flex;
@@ -22,8 +22,7 @@ export const StLoginContain = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-`
-
+`;
 
 export const StLoginForm = styled.form`
   width: 420px;
@@ -31,11 +30,12 @@ export const StLoginForm = styled.form`
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
   border-radius: 8px;
   padding: 40px;
-
   display: flex;
   flex-direction: column;
   flex: 1;
   height: 100%;
+  align-items: center;
+  margin-top: 100px;
 `;
 
 // 폼 전체 감싸는 div
@@ -60,7 +60,7 @@ export const StFormBox = styled.div`
 export const StLongButton = styled.button`
   width: 420px;
   height: 60px;
-  margin-top: 5px;
+  margin-top: 20px;
 
   align-items: center;
   border-radius: 8px;
@@ -141,7 +141,7 @@ export const StTextInput = styled.div`
 //오류메시지
 export const SterrorFont = styled.p`
   text-align: start;
-  margin-top: 15px;
+  margin-top: 10px;
 `;
 
 //////////////////////////////////////////////////////////
@@ -150,6 +150,7 @@ export const Container = styled.div`
   height: 35px;
   display: flex;
   align-items: center;
+  margin-top: 5px;
 `;
 
 export const InlineInput = styled.input`

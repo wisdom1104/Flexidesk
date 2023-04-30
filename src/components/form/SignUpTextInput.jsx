@@ -10,7 +10,6 @@ export const SignUpTextInput = ({
   placeholder,
   onChange,
   innerText,
-  width,
   height,
   minlength,
   maxlength,
