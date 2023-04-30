@@ -7,15 +7,18 @@ import { __deleteRervation } from '../../redux/modules/detail';
 
 function ReservationDelete({ reservationId }) {
   const dispatch = useDispatch();
-  const [isOpen, openModal, closeModal] = useModal();
+
+  const [isOpen, controlModal] = useModal();
+
   const deleteHandler = () => {
     dispatch(__deleteRervation(reservationId));
-    closeModal();
+    controlModal(false);
   };
+
   return (
     <>
       <MoveModalbtn
-        onClick={openModal}
+        onClick={()=> controlModal(true)}
         width="84px"
         height="35px"
         left="100px"
@@ -28,7 +31,7 @@ function ReservationDelete({ reservationId }) {
 
       {isOpen && (
         <Modal
-          setIsModal={closeModal}
+          setIsModal={()=> controlModal(false)}
           modalTitle="삭제 하시겠습니까?"
           onButtonClick={deleteHandler}
         ></Modal>
