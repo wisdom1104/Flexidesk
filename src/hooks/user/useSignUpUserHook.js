@@ -1,10 +1,21 @@
 import { useState, useMemo, useCallback } from 'react';
+import { useEffect } from 'react';
+
 
 export const useFormValidation = () => {
+
   const [user, setUser] = useState({ email: '', password: '', passwordCheck: '' });
   const [errors, setErrors] = useState({ email: '', password: '', passwordCheck: '' });
 
   const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
+
+  useEffect(() => {
+    if (user.password && user.passwordCheck && user.password !== user.passwordCheck) {
+      setErrors(prev => ({ ...prev, passwordCheck: '비밀번호가 일치하지 않습니다.' }));
+    } else {
+      setErrors(prev => ({ ...prev, passwordCheck: '' }));
+    }
+  }, [user.password]);
 
   const handleEmailChange = useCallback(({ target: { value } }) => {
     setUser(pre => ({ ...pre, email: value }));
@@ -18,7 +29,6 @@ export const useFormValidation = () => {
 
   const handlePasswordChange = useCallback(({ target: { value } }) => {
     setUser(pre => ({ ...pre, password: value }));
-    
     const hasNumber = /\d/.test(value);
     const hasLowercase = /[a-z]/.test(value);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
@@ -30,10 +40,14 @@ export const useFormValidation = () => {
       setErrors(pre => ({ ...pre, password: '비밀번호는 숫자, 소문자, 특수문자가 모두 포함되어야 합니다.' }));
     } else if (hasWhitespace) {
       setErrors(pre => ({ ...pre, password: '비밀번호에 공백이 포함될 수 없습니다.' }));
-    } else {
+    }
+    else if (user.passwordCheck && value !== user.passwordCheck) {
+      setErrors(pre => ({ ...pre, password: '비밀번호와 일치하지 않습니다.' }));}
+     else {
       setErrors(pre => ({ ...pre, password: '' }))
     }
-  }, []);
+  }, [user.passwordCheck]);
+
 
   const handlepasswordCheckChange = useCallback(({ target: { value } }) => {
     setUser(pre => ({ ...pre, passwordCheck: value }));
@@ -42,8 +56,8 @@ export const useFormValidation = () => {
       setErrors(pre => ({ ...pre, passwordCheck: '비밀번호와 일치하지 않습니다.' }));
     } else {
       setErrors(pre => ({ ...pre, passwordCheck: '' }));
-    }
+  }
   }, [user.password]);
 
-  return { user, setUser, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange };
+  return { user, setUser, errors, handleEmailChange, handlePasswordChange,handlepasswordCheckChange};
 };

@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useEffect,useState, useMemo, useCallback } from 'react';
+
 
 export const AdminFormValidation = () => {
     const [admin, setAdmin] = useState({email: '',
@@ -10,6 +11,15 @@ export const AdminFormValidation = () => {
     const [errors, setErrors] = useState({ email: '', password: '', passwordCheck: '' });
   
     const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
+
+    useEffect(() => {
+      if (admin.password && admin.passwordCheck && admin.password !== admin.passwordCheck) {
+        setErrors(prev => ({ ...prev, passwordCheck: '비밀번호가 일치하지 않습니다.' }));
+      } else {
+        setErrors(prev => ({ ...prev, passwordCheck: '' }));
+      }
+    }, [admin.password]);
+  
 
     const handleEmailChange = useCallback(({ target: { value } }) => {
       setAdmin(pre => ({ ...pre, email: value }));
@@ -38,7 +48,7 @@ export const AdminFormValidation = () => {
       } else {
         setErrors(pre => ({ ...pre, password: '' }));
       }
-    }, []);
+    }, [admin.passwordCheck]);
   
     const handlepasswordCheckChange = useCallback(({ target: { value } }) => {
       setAdmin(pre => ({ ...pre, passwordCheck: value }));
