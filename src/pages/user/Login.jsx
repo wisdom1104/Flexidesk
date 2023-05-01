@@ -1,10 +1,20 @@
 import React from 'react';
-import { Input } from '../../components/Input';
-import { cookies } from '../../shared/cookies';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../axios/api';
+
 import jwt_decode from 'jwt-decode';
+import api from '../../axios/api';
+import { cookies } from '../../shared/cookies';
+
+import { Input } from '../../components/Input';
+import { Row } from '../../components/Flex';
+import ValidationError from '../../components/form/ValidationError';
+
 import useTrueHook from '../../hooks/user/useTrueHook';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
+
 import {
   StBackground,
   StForm,
@@ -18,11 +28,6 @@ import {
   StOverall,
   StLoginContain,
 } from './UserStyled';
-import { Row } from '../../components/Flex';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { useState } from 'react';
-import ValidationError from '../../components/form/ValidationError';
-import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 
 function Login() {
   const [login, setLogin] = useState({

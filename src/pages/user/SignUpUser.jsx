@@ -1,4 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import ValidationError from '../../components/form/ValidationError';
+
+import CertificationCkeck from '../../features/user/CertificationCkeck';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from 'hooks/user/useSignUpSubmitHandler';
+
+import { StFont } from '../Welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,
@@ -8,16 +17,10 @@ import {
   StOverall,
   StTextInput,
 } from './UserStyled';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import useTrueHook from '../../hooks/user/useTrueHook';
-import CertificationCkeck from '../../features/user/CertificationCkeck';
-import api from '../../axios/api';
-import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { SignUpTextInput } from '../../components/form/SignUpTextInput';
-import ValidationError from '../../components/form/ValidationError';
-import { useState } from 'react';
+
 function SignUpUser() {
   const [user, setUser] = useState({
+    type: 'user',
     username: '',
     email: '',
     password: '',
@@ -33,23 +36,8 @@ function SignUpUser() {
     handlePasswordChange,
     handlepasswordCheckChange,
   } = AuthFormValidation(user, setUser);
-  const navi = useNavigate();
 
-  // 가드
-  useTrueHook();
-  const submitBtnHandler = async e => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/users/signup/user', auth);
-      alert(`${user.username}님 회원가입을 축하합니다.`);
-      navi('/login');
-      return response;
-    } catch (error) {
-      const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
-      return error;
-    }
-  };
+  const { submitBtnHandler } = useSignUpSubmitHandler(user);
 
   return (
     <StBackground height="100vh">

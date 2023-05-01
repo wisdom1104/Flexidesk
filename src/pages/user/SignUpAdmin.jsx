@@ -1,5 +1,12 @@
-import api from '../../axios/api';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import ValidationError from '../../components/form/ValidationError';
+import Certification from '../../features/user/Certification';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
+
+import { StFont } from '../Welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,
@@ -8,15 +15,10 @@ import {
   StLongButton,
   StOverall,
 } from './UserStyled';
-import { StFont } from '../Welcome/WelcomeStyled';
-import Certification from '../../features/user/Certification';
-import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { SignUpTextInput } from '../../components/form/SignUpTextInput';
-import ValidationError from '../../components/form/ValidationError';
-import { useState } from 'react';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
+    type: 'admin',
     email: '',
     password: '',
     passwordCheck: '',
@@ -34,24 +36,7 @@ function SignUpAdmin() {
     handlepasswordCheckChange,
   } = AuthFormValidation(admin, setAdmin);
 
-  // // 가드
-  // useTrueHook();
-
-  const navi = useNavigate();
-
-  const submitBtnHandler = async event => {
-    event.preventDefault();
-    try {
-      const response = await api.post('/users/signup/admin', auth);
-      alert(`${auth.username}님 회원가입을 축하합니다.`);
-      navi('/login');
-      return response;
-    } catch (error) {
-      const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
-      return error;
-    }
-  };
+  const { submitBtnHandler } = useSignUpSubmitHandler(admin);
 
   return (
     <StBackground height="100vh">
