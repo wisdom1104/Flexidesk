@@ -2,31 +2,18 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
 import {
-  __pathScehdule,
-  __getSchedules,
-} from '../../../redux/modules/schedules';
-import {
-  ScheduleInput,
   StReserTimeBox,
   StReserTimeButton,
-  FontSt,
-  FinButton,
   SchContain,
   StSubTitle,
-  StIcon,
   StSubmitButton,
-} from '../../Reservation/CalendarStyled';
-import { Input } from '../../../components/Input';
+  StIcon,
+} from '../../pages/Reservation/CalendarStyled';
+import { Input } from '../../components/Input';
 
-function PathSchedulesTime({
-  param,
-  selectDay,
-  title,
-  comment,
-  scId,
-  initDate,
-}) {
+function SchedulesTime({ param, selectDay }) {
   const now = new Date();
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -35,11 +22,11 @@ function PathSchedulesTime({
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
   const [isCheckOut, setIsCheckOut] = useState('false');
-  const [clickSchedules, setClickSchedules] = useState([initDate]);
+  const [clickSchedules, setClickSchedules] = useState([]);
 
   const [scheduleValue, setScheduleValue] = useState({
-    scTitle: title,
-    scComment: comment,
+    scTitle: '',
+    scComment: '',
   });
 
   // const reqData = { start: clickReservation[0], userList: [] };
@@ -62,12 +49,9 @@ function PathSchedulesTime({
   const reqDatas = { startList: dataListResult, useList: [] };
 
   //adddispatch로 보낼값
+  const startData = { startList: dataListResult };
   const { scComment, scTitle } = scheduleValue;
-  const reqScheduleValue = {
-    scComment,
-    scTitle,
-    startList: dataListResult,
-  };
+  const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
 
   const { schedules } = useSelector(state => state.schedules);
 
@@ -93,6 +77,7 @@ function PathSchedulesTime({
         }),
       );
     }
+    setClickSchedules([]);
   }, [selectDay]);
 
   return (
@@ -119,7 +104,7 @@ function PathSchedulesTime({
       <form
         onSubmit={async e => {
           e.preventDefault();
-          await dispatch(__pathScehdule({ reqScheduleValue, scId }));
+          await dispatch(__addSchdule(reqScheduleValue));
           navi(`/scheduledetail/${param}`);
         }}
       >
@@ -140,6 +125,7 @@ function PathSchedulesTime({
               scTitle: e.target.value,
             })
           }
+          placeholder="제목을 입력하세요."
         />
         <StSubTitle margin="15px 0px 10px 24px">
           <StIcon src={`${process.env.PUBLIC_URL}/img/text.png`} alt="icon" />
@@ -158,11 +144,12 @@ function PathSchedulesTime({
               scComment: e.target.value,
             })
           }
+          placeholder="내용을 입력하세요."
         />
-        <StSubmitButton>수정하기</StSubmitButton>
+        <StSubmitButton>등록하기</StSubmitButton>
       </form>
     </SchContain>
   );
 }
 
-export default PathSchedulesTime;
+export default SchedulesTime;

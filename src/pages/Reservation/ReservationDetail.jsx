@@ -18,23 +18,15 @@ import { StListTitle } from '../../shared/SpaceStyles';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
 
-import ReservationDelete from './ReservationDelete';
+import ReservationDelete from '../../features/Reservation/ReservationDelete';
 
 function ReservationDetail() {
   const navi = useNavigate();
   const dispatch = useDispatch();
-  const { reservationDetail, isLoading, isError } = useSelector(
-    state => state.detail,
-  );
+  const { reservationDetail, isError } = useSelector(state => state.detail);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   const token = getCookie('userId');
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(__getReservationDetail());
-  //     setShowSkeleton(false);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (!token) {
@@ -60,13 +52,6 @@ function ReservationDetail() {
       <Page>
         <div>
           <StListTitle margin="30px 0px 0px 16px">
-            {/* <BackCusor
-              onClick={() => {
-                navi('/space');
-              }}
-            >
-              ←
-            </BackCusor> */}
             <StSpacePagePhoto
               width="52px"
               marginTop
@@ -114,9 +99,6 @@ function ReservationDetail() {
                       </UserList>
                     </CommentBox>
                     <ReservationDelete reservationId={item.reservationId} />
-                    {/* <DelBtn onClick={() => deleteHandler(item.reservationId)}>
-                      삭제
-                    </DelBtn> */}
                   </Info>
                 </InfoBox>
               ))}
@@ -124,10 +106,6 @@ function ReservationDetail() {
           )}
         </div>
       </Page>
-      {/* <div>
-        <p>전체 조회</p>
-        <AllReservation />
-      </div> */}
     </>
   );
 }
