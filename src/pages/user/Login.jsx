@@ -20,13 +20,20 @@ import {
 } from './UserStyled';
 import { Row } from '../../components/Flex';
 import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { LoginFormValidation } from '../../hooks/user/useLoginHook';
 import { useState } from 'react';
 import ValidationError from '../../components/form/ValidationError';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 
 function Login() {
-  const { login, handleEmailChange, handlePasswordChange } =
-    LoginFormValidation();
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { auth, handleEmailChange, handlePasswordChange } = AuthFormValidation(
+    login,
+    setLogin,
+  );
 
   const [isError, setIsError] = useState(false);
 
@@ -97,7 +104,7 @@ function Login() {
 
                 <Input
                   type="email"
-                  value={login.email}
+                  value={auth.email}
                   onChange={handleEmailChange}
                   name="email"
                   placeholder="이메일"
@@ -115,7 +122,7 @@ function Login() {
                 </StLoginIconDiv>
                 <Input
                   type="password"
-                  value={login.password}
+                  value={auth.password}
                   onChange={handlePasswordChange}
                   name="password"
                   placeholder="비밀번호"

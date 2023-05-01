@@ -1,29 +1,20 @@
-import { useEffect,useState, useMemo, useCallback } from 'react';
+import { useEffect,useState, useCallback } from 'react';
 
-
-export const AdminFormValidation = () => {
-    const [admin, setAdmin] = useState({email: '',
-    password: '',
-    passwordCheck: '',
-    username: '',
-    companyName: '',
-    certification: '',})
+export const AuthFormValidation = (auth,setAuth) => {
     const [errors, setErrors] = useState({ email: '', password: '', passwordCheck: '' });
   
-    const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
-
     useEffect(() => {
-      if (admin.password && admin.passwordCheck && admin.password !== admin.passwordCheck) {
+      if (auth.password && auth.passwordCheck && auth.password !== auth.passwordCheck) {
         setErrors(prev => ({ ...prev, passwordCheck: '비밀번호가 일치하지 않습니다.' }));
       } else {
         setErrors(prev => ({ ...prev, passwordCheck: '' }));
       }
-    }, [admin.password]);
+    }, [auth.password]);
   
-
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const handleEmailChange = useCallback(({ target: { value } }) => {
-      setAdmin(pre => ({ ...pre, email: value }));
-    
+      setAuth(pre => ({ ...pre, email: value }));
+
       if (!emailRegex.test(value)) {
         setErrors(pre => ({ ...pre, email: '올바른 이메일 형식이 아닙니다.' }));
       } else {
@@ -32,8 +23,8 @@ export const AdminFormValidation = () => {
     }, [emailRegex]);
     
     const handlePasswordChange = useCallback(({ target: { value } }) => {
-      setAdmin(pre => ({ ...pre, password: value }));
-    
+      setAuth(pre => ({ ...pre, password: value }));
+
       const hasNumber = /\d/.test(value);
       const hasLowercase = /[a-z]/.test(value);
       const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
@@ -48,17 +39,17 @@ export const AdminFormValidation = () => {
       } else {
         setErrors(pre => ({ ...pre, password: '' }));
       }
-    }, [admin.passwordCheck]);
+    }, [auth.passwordCheck]);
   
     const handlepasswordCheckChange = useCallback(({ target: { value } }) => {
-      setAdmin(pre => ({ ...pre, passwordCheck: value }));
+      setAuth(pre => ({ ...pre, passwordCheck: value }));
   
-      if (value !== admin.password) {
+      if (value !== auth.password) {
         setErrors(pre => ({ ...pre, passwordCheck: '비밀번호와 일치하지 않습니다.' }));
       } else {
         setErrors(pre => ({ ...pre, passwordCheck: '' }));
       }
-    }, [admin.password]);
+    }, [auth.password]);
   
-    return { admin, setAdmin, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange };
+    return { auth, setAuth, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange };
   };

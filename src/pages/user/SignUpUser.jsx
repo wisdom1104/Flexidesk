@@ -12,28 +12,35 @@ import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import useTrueHook from '../../hooks/user/useTrueHook';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import api from '../../axios/api';
-import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import ValidationError from '../../components/form/ValidationError';
+import { useState } from 'react';
 function SignUpUser() {
-  const navi = useNavigate();
-
-  // 가드
-  useTrueHook();
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    password: '',
+    passwordCheck: '',
+    certification: '',
+  });
 
   const {
-    user,
-    setUser,
+    auth,
+    setAuth,
     errors,
     handleEmailChange,
     handlePasswordChange,
     handlepasswordCheckChange,
-  } = useFormValidation();
+  } = AuthFormValidation(user, setUser);
+  const navi = useNavigate();
 
+  // 가드
+  useTrueHook();
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post('/users/signup/user', user);
+      const response = await api.post('/users/signup/user', auth);
       alert(`${user.username}님 회원가입을 축하합니다.`);
       navi('/login');
       return response;
@@ -57,16 +64,16 @@ function SignUpUser() {
               <SignUpTextInput
                 innerText="사용자 이름"
                 type="text"
-                value={user.username}
+                value={auth.username}
                 placeholder="이름을 입력하세요."
                 onChange={event =>
-                  setUser({ ...user, username: event.target.value })
+                  setAuth({ ...auth, username: event.target.value })
                 }
               />
               <SignUpTextInput
                 innerText="사용자 이메일"
                 type="email"
-                value={user.email}
+                value={auth.email}
                 placeholder="이메일을 입력하세요."
                 onChange={handleEmailChange}
               />
@@ -74,10 +81,10 @@ function SignUpUser() {
 
               <StTextInput height="80px">
                 <CertificationCkeck
-                  user={user}
-                  certification={user.certification}
+                  user={auth}
+                  certification={auth.certification}
                   onChange={event =>
-                    setUser({ ...user, certification: event.target.value })
+                    setAuth({ ...auth, certification: event.target.value })
                   }
                 />
               </StTextInput>
@@ -85,7 +92,7 @@ function SignUpUser() {
               <SignUpTextInput
                 innerText="비밀번호"
                 type="password"
-                value={user.password}
+                value={auth.password}
                 placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
                 onChange={handlePasswordChange}
               />
@@ -94,7 +101,7 @@ function SignUpUser() {
               <SignUpTextInput
                 height="45px"
                 type="password"
-                value={user.passwordCheck}
+                value={auth.passwordCheck}
                 placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
                 onChange={handlepasswordCheckChange}
               />

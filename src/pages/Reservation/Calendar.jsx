@@ -1,23 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ReservationTime from './ReservationTime';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { VscArrowCircleLeft, VscArrowCircleRight } from 'react-icons/vsc';
 import {
-  MainContain,
-  ReservationTitle,
-  StMrNameBox,
-  StMrName,
-  StCalenHeader,
-  BackCusor,
-  Calcontain,
-  Header,
   DayContain,
   Day,
   StDate,
-  FontSt,
-  DateFont,
   SchContain,
   StSubHeader,
   StSubTitle,
@@ -30,7 +18,6 @@ import { StListTitle } from '../../shared/SpaceStyles';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { Row } from '../../components/Flex';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import ReservationCheck from './ReservationCheck';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 const Calendar = () => {
