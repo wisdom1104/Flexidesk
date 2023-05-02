@@ -5,19 +5,20 @@ import AdminMultiBoxItem from './AdminMultiBoxItem';
 
 function AdminDropItem({
   space,
-  HandleDrop,
-  handleDragOver,
-  elRef,
-  handleDragStart,
+  // HandleDrop,
+  // handleDragOver,
+  // elRef,
+  // handleDragStart,
   spaceId,
-  mrBoxMouseDownHandler,
-  boxMouseDownHandler,
-  multiBoxMouseDownHandler,
+  boardEl,multiBoxList
+  // mrBoxMouseDownHandler,
+  // boxMouseDownHandler,
+  // multiBoxMouseDownHandler,
 }) {
   return (
     <>
       {/* 회의실 */}
-      {space?.map(item =>
+      {/* {space?.map(item =>
         item.mrList?.length > 0
           ? item.mrList?.map(mr => (
               <AdminMrItem
@@ -32,9 +33,9 @@ function AdminDropItem({
               />
             ))
           : null,
-      )}
+      )} */}
       {/* 박스 */}
-      {space?.map(item =>
+      {/* {space?.map(item =>
         item.boxList?.length > 0
           ? item.boxList?.map(box => (
               <AdminBoxItem
@@ -49,7 +50,7 @@ function AdminDropItem({
               />
             ))
           : null,
-      )}
+      )} */}
       {/* 공용공간 */}
       {space?.map(item =>
         item.multiBoxList?.length > 0
@@ -57,11 +58,13 @@ function AdminDropItem({
               <AdminMultiBoxItem
                 key={multiBox.multiBoxId}
                 multiBox={multiBox}
-                HandleDrop={HandleDrop}
-                handleDragOver={handleDragOver}
-                elRef={elRef}
-                multiBoxMouseDownHandler={multiBoxMouseDownHandler}
-                handleDragStart={handleDragStart}
+                multiBoxList={multiBoxList}
+                // HandleDrop={HandleDrop}
+                // handleDragOver={handleDragOver}
+                boardEl={boardEl}
+                // elRef={elRef}
+                // multiBoxMouseDownHandler={multiBoxMouseDownHandler}
+                // handleDragStart={handleDragStart}
                 spaceId={spaceId}
               />
             ))

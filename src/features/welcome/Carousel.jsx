@@ -13,14 +13,14 @@ const CarouselButton = ({ children, dir, onClick }) => {
 
 const Carousel = () => {
   
-  const { index, animate, genSlidersArray, clickLeftHandler, clickRightHandler} = useCarouselHook();
+  const { index, animate, genSlidersArray, onClickLeftHandler, onClickRightHandler} = useCarouselHook();
 
   return (
       <SliderContainer>
-        <CarouselButton dir="left" onClick={clickLeftHandler}>
+        <CarouselButton dir="left" onClick={onClickLeftHandler}>
         <TiChevronLeftOutline />
         </CarouselButton>
-        <CarouselButton dir="right" onClick={clickRightHandler}>
+        <CarouselButton dir="right" onClick={onClickRightHandler}>
         <TiChevronRightOutline />
         </CarouselButton>
 
