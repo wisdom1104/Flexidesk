@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpace } from './spaceSlice';
 
@@ -14,8 +14,8 @@ export const __addMultiBox = createAsyncThunk(
   '__addMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/multiBox/${companyName}/${payload.spaceId}`,
         {
@@ -42,8 +42,8 @@ export const __deleteMultiBox = createAsyncThunk(
   '__deleteMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(
         `/multiBox/${companyName}/${payload.multiBoxId}`,
         {
@@ -65,8 +65,8 @@ export const __editMultiBox = createAsyncThunk(
   'editMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/multiBox/${companyName}/${payload.multiBoxId}`,
         {
@@ -94,8 +94,8 @@ export const __editMultiBox = createAsyncThunk(
 //   'editMultiBoxUser',
 //   async (payload, thunk) => {
 //     try {
-//       const token = cookies.get('token');
-//       const companyName = cookies.get('companyName');
+//       const token = getCookie('token');
+//       const companyName = getCookie('companyName');
 //       const response = await api.patch(
 //         `/multiBoxes/${companyName}/${payload.tomultiBoxId}/move`,
 //         {

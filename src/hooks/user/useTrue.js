@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 
 function useTrue() {
     const navi = useNavigate();
 
     useEffect(()=> {
-        const token = cookies.get("token");
+        const token = getCookie("token");
         if(token) {
             navi('/')
         }

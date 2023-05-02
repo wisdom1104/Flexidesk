@@ -22,6 +22,7 @@ import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import SchedulesTime from '../../features/Schedules/SchedulesTime';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -37,20 +38,7 @@ function SchedulesCalendar() {
     returnDay,
   } = useCalendar(width, dataDay);
 
-  const [showSkeleton, setShowSkeleton] = useState(true);
-  const token = getCookie('token');
-  const navi = useNavigate();
-
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  const { showSkeleton } = useSkltTimeout();
 
   return (
     <Page>
