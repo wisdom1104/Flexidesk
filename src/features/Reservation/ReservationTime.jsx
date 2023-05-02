@@ -6,7 +6,7 @@ import {
   __getReservation,
   __getUserData,
 } from '../../redux/modules/reservation';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import {
   StReserTimeButton,
   StReserTimeBox,
@@ -27,7 +27,7 @@ function ReservationTime({ param, selectDay, mrName }) {
   const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
   const [userIdInfo, setUserIdInfo] = useState([]);
   const navi = useNavigate();
-  const userId = cookies.get('userId');
+  const userId = getCookie('userId');
 
   ///////////////////////////////////
   const dispatch = useDispatch();

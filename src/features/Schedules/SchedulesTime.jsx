@@ -16,7 +16,7 @@ import { useSchedulesTimeHook } from '../../hooks/schedules/useSchedulesTimeHook
 import {
   onChangeTitleHandler,
   onChangeCommentHandler,
-} from '../../util/schedulesChangeHandler';
+} from '../../utils/schedulesChangeHandler';
 
 function SchedulesTime({ param, selectDay }) {
   const navi = useNavigate();

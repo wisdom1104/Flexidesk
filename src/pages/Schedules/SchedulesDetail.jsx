@@ -17,33 +17,37 @@ import { StListTitle } from '../../shared/SpaceStyles';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 import SchedulesDelete from '../../features/Schedules/SchedulesDelete';
+import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
 
 function SchedulesDetail() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navi = useNavigate();
   const { userSchedules, isError } = useSelector(state => state.schedules);
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  // const [showSkeleton, setShowSkeleton] = useState(true);
   const token = getCookie('userId');
+  const dispatchValue = __getAllSchedules();
+  const {showSkeleton} = useSkltDsptTimeout(token,dispatchValue)
 
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const loadData = async () => {
-        try {
-          dispatch(__getAllSchedules());
-        } catch (error) {
-          console.log(error);
-        }
-      };
 
-      const timer = setTimeout(() => {
-        loadData();
-        setShowSkeleton(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navi('/');
+  //   } else {
+  //     const loadData = async () => {
+  //       try {
+  //         dispatch(__getAllSchedules());
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+
+  //     const timer = setTimeout(() => {
+  //       loadData();
+  //       setShowSkeleton(false);
+  //     }, 300);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, []);
 
   return (
     <Page>

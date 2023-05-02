@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { cookies } from '../../shared/cookies'
+import { getCookie } from '../../shared/cookies'
 import api from '../../axios/api'
 import { __getReservationDetail } from './detail'
 
@@ -13,7 +13,7 @@ export const __getReservation = createAsyncThunk(
   "getreservation",
   async(payload,thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       const data = await api.get(`/reservations/${payload.param}?selDate=${payload.selectDay}`,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -30,7 +30,7 @@ export const __addReservation=createAsyncThunk(
   "addreservation",
   async (payload, thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       await api.post(`/reservations/${payload.param} `, payload.reqDatas,
      { headers : {
         Authorization: `Bearer ${token}`
@@ -59,7 +59,7 @@ export const __getUserData=createAsyncThunk(
           return payload
         }
       }
-      const token = cookies.get('token')
+      const token = getCookie('token')
       const userData = await api.get(`/users/search?name=${checkHanIncode(payload)} `,
      { headers : {
         Authorization: `Bearer ${token}`

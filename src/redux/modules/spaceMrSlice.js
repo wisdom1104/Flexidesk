@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpace } from './spaceSlice';
 
@@ -12,8 +12,8 @@ const initialState = {
 // mr 추가
 export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
   try {
-    const token = cookies.get('token');
-    const companyName = cookies.get('companyName');
+    const token = getCookie('token');
+    const companyName = getCookie('companyName');
     const response = await api.post(
       `/mr/${companyName}/${payload.spaceId}`,
       {
@@ -39,8 +39,8 @@ export const __deleteMr = createAsyncThunk(
   'deleteMr',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       // /mr/{companyName}/{mrId}
       const response = await api.delete(`/mr/${companyName}/${payload.mrId}`, {
         headers: {
@@ -58,8 +58,8 @@ export const __deleteMr = createAsyncThunk(
 // mr 수정
 export const __editMr = createAsyncThunk('editMr', async (payload, thunk) => {
   try {
-    const token = cookies.get('token');
-    const companyName = cookies.get('companyName');
+    const token = getCookie('token');
+    const companyName = getCookie('companyName');
     const response = await api.patch(
       `/mr/${companyName}/${payload.mrId}`,
       {

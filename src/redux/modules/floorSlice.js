@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getFloors } from './floorsSlice';
 
@@ -14,8 +14,8 @@ export const __getFloor = createAsyncThunk(
   '__getFloor',
   async (floorId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.get(`/floors/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -33,8 +33,8 @@ export const __deleteFloor = createAsyncThunk(
   '__deleteFloor',
   async (floorId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(`/floors/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -53,8 +53,8 @@ export const __editFloor = createAsyncThunk(
   '__editFloor',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/floors/${companyName}/${payload.floorId}`,
         {
