@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { __editMr } from '../../redux/modules/spaceMrSlice';
+import { __editMr } from '../../../redux/modules/spaceMrSlice';
 
-export function useMrBoxDAD(spaceId, boardEl, mrList) {
+export function useDADMrBox(spaceId, boardEl, mrList) {
   const dispatch = useDispatch();
   const elRef = useRef([]);
 

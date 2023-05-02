@@ -6,9 +6,9 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteMultiBox } from '../../hooks/adminSpace/useDeleteMultiBox';
-import { useEditMultiBox } from '../../hooks/adminSpace/useEditMultiBox';
-import { useMultiBoxDAD } from '../../hooks/adminSpace/useMultiBoxDAD';
+import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
+import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
+import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
 
 function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
   const { submitDelete } = useDeleteMultiBox();
@@ -21,7 +21,7 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
     changeNameHandler,
   } = useEditMultiBox(multiBox, spaceId);
 
-  const { elRef, multiBoxMouseDownHandler } = useMultiBoxDAD(
+  const { elRef, multiBoxMouseDownHandler } = useDADMultiBox(
     spaceId,
     boardEl,
     multiBoxList,

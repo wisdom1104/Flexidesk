@@ -3,28 +3,28 @@ import styled from 'styled-components';
 
 function Skeleton() {
   return (
-    <Div>
-      <Img>
-        <Shimmer />
-      </Img>
-      <Wrap>
-        <Text>
-          <Shimmer />
-        </Text>
-        <Text>
-          <Shimmer />
-        </Text>
-        <Text>
-          <Shimmer />
-        </Text>
-      </Wrap>
-    </Div>
+    <SkeletonDiv>
+      <SkeletonImg>
+        <SkeletonShimmer />
+      </SkeletonImg>
+      <SkeletonWrap>
+        <SkeletonText>
+          <SkeletonShimmer />
+        </SkeletonText>
+        <SkeletonText>
+          <SkeletonShimmer />
+        </SkeletonText>
+        <SkeletonText>
+          <SkeletonShimmer />
+        </SkeletonText>
+      </SkeletonWrap>
+    </SkeletonDiv>
   );
 }
 
 export default Skeleton;
 
-export const Div = styled.div`
+export const SkeletonDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: ${props => props.width || '50vw'};
@@ -39,7 +39,7 @@ export const Div = styled.div`
   box-shadow: 6px 6px 8px 0px rgba(217, 217, 217, 1);
 `;
 
-export const Img = styled.div`
+export const SkeletonImg = styled.div`
   width: 100%;
   height: 150px;
   border-top-left-radius: 0.5em;
@@ -48,14 +48,14 @@ export const Img = styled.div`
   background-color: #eeeeee;
 `;
 
-export const Wrap = styled.div`
+export const SkeletonWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 0.4rem;
 `;
 
-export const Text = styled.div`
+export const SkeletonText = styled.div`
   width: 20vw;
   height: 5px;
   margin: 10px;
@@ -65,7 +65,7 @@ export const Text = styled.div`
   background-color: #eeeeee;
 `;
 
-export const Shimmer = styled.div`
+export const SkeletonShimmer = styled.div`
   width: 50%;
   height: 100%;
   background-color: #e0e0e0;

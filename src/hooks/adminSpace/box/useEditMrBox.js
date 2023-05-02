@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { __editMr } from '../../redux/modules/spaceMrSlice';
+import { __editMr } from '../../../redux/modules/spaceMrSlice';
 
 /**
  * 회의실 이름 수정

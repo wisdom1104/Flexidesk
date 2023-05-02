@@ -6,9 +6,9 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteMrBox } from '../../hooks/adminSpace/useDeleteMrBox';
-import { useEditMrBox } from '../../hooks/adminSpace/useEditMrBox';
-import { useMrBoxDAD } from '../../hooks/adminSpace/useMrBoxDAD';
+import { useDeleteMrBox } from '../../hooks/adminSpace/box/useDeleteMrBox';
+import { useEditMrBox } from '../../hooks/adminSpace/box/useEditMrBox';
+import { useDADMrBox } from '../../hooks/adminSpace/box/useDADMrBox';
 
 function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
   const { submitDelete } = useDeleteMrBox();
@@ -21,7 +21,7 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
     changeNameHandler,
   } = useEditMrBox(mr, spaceId);
 
-  const { elRef, mrMouseDownHandler } = useMrBoxDAD(spaceId, boardEl, mrList);
+  const { elRef, mrMouseDownHandler } = useDADMrBox(spaceId, boardEl, mrList);
 
   return (
     <>

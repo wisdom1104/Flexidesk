@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { __deleteMr } from '../../redux/modules/spaceMrSlice';
+import { __deleteMr } from '../../../redux/modules/spaceMrSlice';
 
 export const useDeleteMrBox = () => {
   const dispatch = useDispatch();

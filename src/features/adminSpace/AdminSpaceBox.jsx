@@ -4,7 +4,8 @@ import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
 import AdminSubHeader from './AdminSubHeader';
 import AdminDropItem from './AdminDropItem';
 import { useSpace } from '../../hooks/adminSpace/useAdminSpaceHook';
-import { useBoxDrop } from '../../hooks/adminSpace/useBoxDrop';
+import { handleDragOver } from '../../utils/dragOverHandler';
+import { useDropBox } from '../../hooks/adminSpace/box/useDropBox';
 
 function AdminSpaceBox({
   spaceId,
@@ -27,7 +28,7 @@ function AdminSpaceBox({
   );
 
   // 요소 드롭
-  const { HandleDrop, handleDragOver } = useBoxDrop(
+  const { HandleDrop } = useDropBox(
     dispatch,
     spaceId,
     mrList,
@@ -37,6 +38,7 @@ function AdminSpaceBox({
     boxes,
     multiBoxes,
   );
+
   const boardEl = useRef(null);
 
   return (

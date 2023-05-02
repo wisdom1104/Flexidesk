@@ -1,25 +1,23 @@
 import { useRef } from 'react';
-import { __editMultiBox } from '../../redux/modules/MultiBoxSlice';
 import { useDispatch } from 'react-redux';
+import { __editBox } from '../../../redux/modules/spaceBoxSlice';
 
-export function useMultiBoxDAD(spaceId, boardEl, multiBoxList) {
+export function useDADBox(spaceId, boardEl, boxList) {
   const dispatch = useDispatch();
   const elRef = useRef([]);
 
-  const multiBoxMouseDownHandler = (e, boxIndex) => {
+  const boxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    const multiBoxMoveHandler = e => {
-      const currentMultiBox = multiBoxList[0].find(
-        multiBox => multiBox.multiBoxId === boxIndex,
-      );
+    const boxMoveHandler = e => {
+      const currentBox = boxList[0].find(box => box.boxId === boxIndex);
 
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
-      const mrDiffX = mouseX - currentMultiBox.x;
-      const mrDiffY = mouseY - currentMultiBox.y;
+      const mrDiffX = mouseX - currentBox.x;
+      const mrDiffY = mouseY - currentBox.y;
 
       const newx = newMouseX - mrDiffX;
       const newy = newMouseY - mrDiffY;
@@ -40,25 +38,25 @@ export function useMultiBoxDAD(spaceId, boardEl, multiBoxList) {
       );
       const payload = {
         spaceId,
-        multiBoxId: currentMultiBox.multiBoxId,
-        multiBoxName: currentMultiBox.multiBoxName,
+        boxId: currentBox.boxId,
+        boxName: currentBox.boxName,
         x: Number(limitedX),
         y: Number(limitedY),
       };
       return payload;
     };
-    const multiBoxMouseUpHandler = (e, boxIndex) => {
-      document.removeEventListener('mousemove', multiBoxMoveHandler);
-      document.removeEventListener('mouseup', multiBoxMouseUpHandler);
-      const result = multiBoxMoveHandler(e, boxIndex);
-      dispatch(__editMultiBox(result));
+    const boxMouseUpHandler = (e, boxIndex) => {
+      document.removeEventListener('mousemove', boxMoveHandler);
+      document.removeEventListener('mouseup', boxMouseUpHandler);
+      const result = boxMoveHandler(e, boxIndex);
+      dispatch(__editBox(result));
     };
 
-    document.addEventListener('mousemove', multiBoxMoveHandler);
-    document.addEventListener('mouseup', multiBoxMouseUpHandler);
+    document.addEventListener('mousemove', boxMoveHandler);
+    document.addEventListener('mouseup', boxMouseUpHandler);
   };
   return {
     elRef,
-    multiBoxMouseDownHandler,
+    boxMouseDownHandler,
   };
 }

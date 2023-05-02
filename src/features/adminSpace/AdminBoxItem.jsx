@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   BoxBtn,
   BoxInput,
@@ -7,9 +6,9 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteBox } from '../../hooks/adminSpace/useDeleteBox';
-import { useEditBox } from '../../hooks/adminSpace/useEditBox';
-import { useBoxDAD } from '../../hooks/adminSpace/useBoxDAD';
+import { useDeleteBox } from '../../hooks/adminSpace/box/useDeleteBox';
+import { useEditBox } from '../../hooks/adminSpace/box/useEditBox';
+import { useDADBox } from '../../hooks/adminSpace/box/useDADBox';
 
 function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
   const { submitDelete } = useDeleteBox();
@@ -22,7 +21,7 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
     changeNameHandler,
   } = useEditBox(box, spaceId);
 
-  const { elRef, boxMouseDownHandler } = useBoxDAD(spaceId, boardEl, boxList);
+  const { elRef, boxMouseDownHandler } = useDADBox(spaceId, boardEl, boxList);
 
   return (
     <>

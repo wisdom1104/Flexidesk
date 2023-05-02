@@ -1,8 +1,8 @@
-import { __addMultiBox } from '../../redux/modules/MultiBoxSlice';
-import { __addBox } from '../../redux/modules/spaceBoxSlice';
-import { __addMr } from '../../redux/modules/spaceMrSlice';
+import { __addMultiBox } from '../../../redux/modules/MultiBoxSlice';
+import { __addBox } from '../../../redux/modules/spaceBoxSlice';
+import { __addMr } from '../../../redux/modules/spaceMrSlice';
 
-export function useBoxDrop(
+export function useDropBox(
   dispatch,
   spaceId,
   mrList,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { __editBox } from '../../redux/modules/spaceBoxSlice';
+import { __editBox } from '../../../redux/modules/spaceBoxSlice';
 
 /**
  * 회의실 이름 수정
