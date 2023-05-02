@@ -6,8 +6,8 @@ import api from '../../axios/api'
 const initialState = {
   schedules:[],
   userSchedules:[]
-  
 }
+console.log('initialState',initialState);
 
 export const __getSchedules = createAsyncThunk(
   "getschedules",

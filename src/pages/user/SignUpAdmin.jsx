@@ -1,5 +1,12 @@
-import api from '../../axios/api';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import ValidationError from '../../components/form/ValidationError';
+import Certification from '../../features/user/Certification';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
+
+import { StFont } from '../Welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,
@@ -8,46 +15,33 @@ import {
   StLongButton,
   StOverall,
 } from './UserStyled';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import Certification from '../../features/user/Certification';
-import useTrueHook from '../../hooks/user/useTrueHook';
-import { AdminFormValidation } from '../../hooks/user/useSignUpAdminHook';
-import { SignUpTextInput } from '../../components/form/SignUpTextInput';
-import ValidationError from '../../components/form/ValidationError';
 
 function SignUpAdmin() {
+  const [admin, setAdmin] = useState({
+    type: 'admin',
+    email: '',
+    password: '',
+    passwordCheck: '',
+    username: '',
+    companyName: '',
+    certification: '',
+  });
+
   const {
-    admin,
-    setAdmin,
+    auth,
+    setAuth,
     errors,
-    handleEmailChange,
-    handlePasswordChange,
-    handlepasswordCheckChange,
-  } = AdminFormValidation();
+    onChangeEmailHandler,
+    onChangePasswordHandler,
+    onChangePasswordCheckHandler,
+  } = AuthFormValidation(admin, setAdmin);
 
-  // 가드
-  useTrueHook();
-
-  const navi = useNavigate();
-
-  const submitBtnHandler = async event => {
-    event.preventDefault();
-    try {
-      const response = await api.post('/users/signup/admin', admin);
-      alert(`${admin.username}님 회원가입을 축하합니다.`);
-      navi('/login');
-      return response;
-    } catch (error) {
-      const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
-      return error;
-    }
-  };
+  const { onSubmitHandler } = useSignUpSubmitHandler(admin);
 
   return (
     <StBackground height="100vh">
       <StOverall>
-        <StLoginForm onSubmit={submitBtnHandler} height="650px">
+        <StLoginForm onSubmit={onSubmitHandler} height="650px">
           <StForm>
             <StFormBox>
               <StFont width="100%" align="start" fontSize="28px">
@@ -56,37 +50,37 @@ function SignUpAdmin() {
               <SignUpTextInput
                 innerText="사용자 이름"
                 type="text"
-                value={admin.username}
+                value={auth.username}
                 placeholder="이름을 입력하세요."
                 onChange={event =>
-                  setAdmin({ ...admin, username: event.target.value })
+                  setAuth({ ...auth, username: event.target.value })
                 }
               />
 
               <SignUpTextInput
                 innerText="회사"
                 type="text"
-                value={admin.companyName}
+                value={auth.companyName}
                 placeholder="회사를 입력하세요."
                 onChange={event =>
-                  setAdmin({ ...admin, companyName: event.target.value })
+                  setAuth({ ...auth, companyName: event.target.value })
                 }
               />
 
               <Certification
-                admin={admin}
-                email={admin.email}
-                onChange={handleEmailChange}
+                admin={auth}
+                email={auth.email}
+                onChange={onChangeEmailHandler}
                 errors={errors}
               />
 
               <SignUpTextInput
                 innerText="인증번호"
                 type="text"
-                value={admin.certification}
+                value={auth.certification}
                 placeholder="인증번호를 입력하세요."
                 onChange={event =>
-                  setAdmin({ ...admin, certification: event.target.value })
+                  setAuth({ ...auth, certification: event.target.value })
                 }
               />
 
@@ -94,9 +88,9 @@ function SignUpAdmin() {
                 innerText="비밀번호"
                 height="65px"
                 type="password"
-                value={admin.password}
+                value={auth.password}
                 placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                onChange={handlePasswordChange}
+                onChange={onChangePasswordHandler}
                 minlength="8"
                 maxlength="16"
               />
@@ -106,9 +100,9 @@ function SignUpAdmin() {
               <SignUpTextInput
                 height="35px"
                 type="password"
-                value={admin.passwordCheck}
+                value={auth.passwordCheck}
                 placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                onChange={handlepasswordCheckChange}
+                onChange={onChangePasswordCheckHandler}
                 minlength="8"
                 maxlength="16"
               />

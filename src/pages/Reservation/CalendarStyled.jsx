@@ -61,31 +61,6 @@ export const StReserTimeButton = styled.button`
   }
 `;
 
-// export const StReserTimeButton = styled.button`
-//   background-color: ${props => (props.isSelected ? 'pink' : 'white')}
-//   border-radius: 5px;
-//   border: 1px solid var(--blue);
-//   margin: 5px;
-//   padding: ${props => props.padding || '5px 0px'};
-//   font-family: inherit;
-//   color: #07133b;
-//   width: ${props => props.width || '70px'};
-
-//   &:hover {
-//     color: white;
-//     background-color: var(--blue);
-//   }
-//   &:focus {
-//     color: white;
-//     background-color: var(--blue);
-//   }
-//   &:disabled {
-//     color: lightgray;
-//     border: 1px solid lightgray;
-//     background-color: white;
-//   }
-// `;
-
 export const StReserTimeBox = styled.div`
   display: flex;
   flex-wrap: wrap;

@@ -1,4 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import ValidationError from '../../components/form/ValidationError';
+
+import CertificationCkeck from '../../features/user/CertificationCkeck';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
+
+import { StFont } from '../Welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,
@@ -8,46 +17,32 @@ import {
   StOverall,
   StTextInput,
 } from './UserStyled';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import useTrueHook from '../../hooks/user/useTrueHook';
-import CertificationCkeck from '../../features/user/CertificationCkeck';
-import api from '../../axios/api';
-import { useFormValidation } from '../../hooks/user/useSignUpUserHook';
-import { SignUpTextInput } from '../../components/form/SignUpTextInput';
-import ValidationError from '../../components/form/ValidationError';
-function SignUpUser() {
-  const navi = useNavigate();
 
-  // 가드
-  useTrueHook();
+function SignUpUser() {
+  const [user, setUser] = useState({
+    type: 'user',
+    username: '',
+    email: '',
+    password: '',
+    passwordCheck: '',
+    certification: '',
+  });
 
   const {
-    user,
-    setUser,
+    auth,
+    setAuth,
     errors,
-    handleEmailChange,
-    handlePasswordChange,
-    handlepasswordCheckChange,
-  } = useFormValidation();
+    onChangeEmailHandler,
+    onChangePasswordHandler,
+    onChangePasswordCheckHandler,
+  } = AuthFormValidation(user, setUser);
 
-  const submitBtnHandler = async e => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/users/signup/user', user);
-      alert(`${user.username}님 회원가입을 축하합니다.`);
-      navi('/login');
-      return response;
-    } catch (error) {
-      const errorMsg = error.response.data.message;
-      alert(`${errorMsg}`);
-      return error;
-    }
-  };
+  const { onSubmitHandler } = useSignUpSubmitHandler(user);
 
   return (
     <StBackground height="100vh">
       <StOverall>
-        <StLoginForm onSubmit={submitBtnHandler} height="570px">
+        <StLoginForm onSubmit={onSubmitHandler} height="570px">
           <StForm>
             <StFormBox>
               <StFont width="100%" align="start" fontSize="28px">
@@ -57,27 +52,27 @@ function SignUpUser() {
               <SignUpTextInput
                 innerText="사용자 이름"
                 type="text"
-                value={user.username}
+                value={auth.username}
                 placeholder="이름을 입력하세요."
                 onChange={event =>
-                  setUser({ ...user, username: event.target.value })
+                  setAuth({ ...auth, username: event.target.value })
                 }
               />
               <SignUpTextInput
                 innerText="사용자 이메일"
                 type="email"
-                value={user.email}
+                value={auth.email}
                 placeholder="이메일을 입력하세요."
-                onChange={handleEmailChange}
+                onChange={onChangeEmailHandler}
               />
               <ValidationError value={errors.email} />
 
               <StTextInput height="80px">
                 <CertificationCkeck
-                  user={user}
-                  certification={user.certification}
+                  user={auth}
+                  certification={auth.certification}
                   onChange={event =>
-                    setUser({ ...user, certification: event.target.value })
+                    setAuth({ ...auth, certification: event.target.value })
                   }
                 />
               </StTextInput>
@@ -85,18 +80,18 @@ function SignUpUser() {
               <SignUpTextInput
                 innerText="비밀번호"
                 type="password"
-                value={user.password}
+                value={auth.password}
                 placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                onChange={handlePasswordChange}
+                onChange={onChangePasswordHandler}
               />
               <ValidationError value={errors.password} />
 
               <SignUpTextInput
                 height="45px"
                 type="password"
-                value={user.passwordCheck}
+                value={auth.passwordCheck}
                 placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                onChange={handlepasswordCheckChange}
+                onChange={onChangePasswordCheckHandler}
               />
               <ValidationError value={errors.passwordCheck} />
 

@@ -16,20 +16,14 @@ import Page from '../../components/Page';
 import { StListTitle } from '../../shared/SpaceStyles';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
-import SchedulesDelete from './SchedulesDelete';
+import SchedulesDelete from '../../features/Schedules/SchedulesDelete';
 
 function SchedulesDetail() {
   const dispatch = useDispatch();
   const navi = useNavigate();
-  const { userSchedules, isLoading, isError } = useSelector(
-    state => state.schedules,
-  );
+  const { userSchedules, isError } = useSelector(state => state.schedules);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const token = getCookie('userId');
-
-  // useEffect(() => {
-  //   dispatch(__getAllSchedules());
-  // }, []);
 
   useEffect(() => {
     if (!token) {
@@ -55,13 +49,6 @@ function SchedulesDetail() {
     <Page>
       <div>
         <StListTitle margin="30px 0px 0px 16px">
-          {/* <BackCusor
-              onClick={() => {
-                navi('/space');
-              }}
-            >
-              ←
-            </BackCusor> */}
           <StSpacePagePhoto
             width="52px"
             marginTop

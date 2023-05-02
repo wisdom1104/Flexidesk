@@ -2,6 +2,9 @@ import React from 'react';
 import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
 import { SterrorFont } from '../../pages/user/UserStyled';
 export const ValidationError = ({ value }) => {
+  if (!value && value === undefined) {
+    return null;
+  }
   return (
     <SterrorFont>
       {value && (

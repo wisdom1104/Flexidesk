@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cookies } from '../../shared/cookies';
 
-function useTrueHook() {
+function useTrue() {
     const navi = useNavigate();
 
     useEffect(()=> {
@@ -14,4 +14,4 @@ function useTrueHook() {
   return ;
 }
 
-export default useTrueHook
+export default useTrue

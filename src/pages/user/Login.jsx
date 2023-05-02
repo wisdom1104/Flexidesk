@@ -1,10 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import { Input } from '../../components/Input';
-import { cookies } from '../../shared/cookies';
-import { useNavigate } from 'react-router-dom';
-import api from '../../axios/api';
-import jwt_decode from 'jwt-decode';
-import useTrueHook from '../../hooks/user/useTrueHook';
+import { Row } from '../../components/Flex';
+import ValidationError from '../../components/form/ValidationError';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,
@@ -18,53 +18,18 @@ import {
   StOverall,
   StLoginContain,
 } from './UserStyled';
-import { Row } from '../../components/Flex';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { LoginFormValidation } from '../../hooks/user/useLoginHook';
-import { useState } from 'react';
-import ValidationError from '../../components/form/ValidationError';
+import { LoginSubmitHandler } from '../../util/loginSubmitHandler';
 
 function Login() {
-  const { login, handleEmailChange, handlePasswordChange } =
-    LoginFormValidation();
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+  const [errorMsg, setErrorMsg] = useState('');
+  const { auth, onChangeEmailHandler, onChangePasswordHandler } =
+    AuthFormValidation(login, setLogin);
 
-  const [isError, setIsError] = useState(false);
-
-  useTrueHook();
-
-  const navi = useNavigate();
-
-  const onsubmitHandler = async e => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/users/login', login);
-      const token = response.headers.authorization;
-      const refreshToken = response.headers.refresh_token;
-      const payload = jwt_decode(token);
-
-      // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      cookies.set('token', token.split(' ')[1], { path: '/', maxAge: 3540 });
-      cookies.set('refresh_token', refreshToken.split(' ')[1], {
-        path: '/',
-        // maxAge: 3540,
-      });
-      cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
-      cookies.set('companyName', String(payload.companyName), {
-        path: '/',
-        maxAge: 3540,
-      });
-      cookies.set('username', String(payload.username), {
-        path: '/',
-        maxAge: 3540,
-      });
-      cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
-      // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      navi('/adminspace');
-    } catch (error) {
-      setIsError(true);
-      return error;
-    }
-  };
+  const { onsubmitHandler } = LoginSubmitHandler(login, setErrorMsg);
 
   return (
     <StBackground height="100vh">
@@ -97,8 +62,8 @@ function Login() {
 
                 <Input
                   type="email"
-                  value={login.email}
-                  onChange={handleEmailChange}
+                  value={auth.email}
+                  onChange={onChangeEmailHandler}
                   name="email"
                   placeholder="이메일"
                   required
@@ -115,8 +80,8 @@ function Login() {
                 </StLoginIconDiv>
                 <Input
                   type="password"
-                  value={login.password}
-                  onChange={handlePasswordChange}
+                  value={auth.password}
+                  onChange={onChangePasswordHandler}
                   name="password"
                   placeholder="비밀번호"
                   required
@@ -124,7 +89,7 @@ function Login() {
                 />
               </StLoginInputIconBox>
 
-              <ValidationError value={isError} />
+              <ValidationError value={errorMsg} />
 
               <StLongButton> 로그인 </StLongButton>
               <Row>
