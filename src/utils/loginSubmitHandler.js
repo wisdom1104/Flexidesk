@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import api from '../axios/api';
-import { getCookie } from '../shared/cookies';
+import { cookies, setCookie } from '../shared/cookies';
 import useTrue from '../hooks/user/useTrue';
 
 export const LoginSubmitHandler = (login, setErrorMsg) => {
