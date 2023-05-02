@@ -12,7 +12,7 @@ export const AuthFormValidation = (auth,setAuth) => {
     }, [auth.password]);
   
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const handleEmailChange = useCallback(({ target: { value } }) => {
+    const onChangeEmailHandler = useCallback(({ target: { value } }) => {
       setAuth(pre => ({ ...pre, email: value }));
 
       if (!emailRegex.test(value)) {
@@ -21,8 +21,8 @@ export const AuthFormValidation = (auth,setAuth) => {
         setErrors(pre => ({ ...pre, email: '' }));
       }
     }, [emailRegex]);
-    
-    const handlePasswordChange = useCallback(({ target: { value } }) => {
+
+    const onChangePasswordHandler = useCallback(({ target: { value } }) => {
       setAuth(pre => ({ ...pre, password: value }));
 
       const hasNumber = /\d/.test(value);
@@ -41,7 +41,7 @@ export const AuthFormValidation = (auth,setAuth) => {
       }
     }, [auth.passwordCheck]);
   
-    const handlepasswordCheckChange = useCallback(({ target: { value } }) => {
+    const onChangePasswordCheckHandler = useCallback(({ target: { value } }) => {
       setAuth(pre => ({ ...pre, passwordCheck: value }));
   
       if (value !== auth.password) {
@@ -51,5 +51,5 @@ export const AuthFormValidation = (auth,setAuth) => {
       }
     }, [auth.password]);
   
-    return { auth, setAuth, errors, handleEmailChange, handlePasswordChange, handlepasswordCheckChange };
+    return { auth, setAuth, errors, onChangeEmailHandler, onChangePasswordHandler, onChangePasswordCheckHandler };
   };

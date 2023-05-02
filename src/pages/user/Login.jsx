@@ -18,7 +18,7 @@ import {
   StOverall,
   StLoginContain,
 } from './UserStyled';
-import { LoginSubmitHandler } from 'util/loginSubmitHandler';
+import { LoginSubmitHandler } from '../../util/loginSubmitHandler';
 
 function Login() {
   const [login, setLogin] = useState({
@@ -26,11 +26,8 @@ function Login() {
     password: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
-
-  const { auth, handleEmailChange, handlePasswordChange } = AuthFormValidation(
-    login,
-    setLogin,
-  );
+  const { auth, onChangeEmailHandler, onChangePasswordHandler } =
+    AuthFormValidation(login, setLogin);
 
   const { onsubmitHandler } = LoginSubmitHandler(login, setErrorMsg);
 
@@ -66,7 +63,7 @@ function Login() {
                 <Input
                   type="email"
                   value={auth.email}
-                  onChange={handleEmailChange}
+                  onChange={onChangeEmailHandler}
                   name="email"
                   placeholder="이메일"
                   required
@@ -84,7 +81,7 @@ function Login() {
                 <Input
                   type="password"
                   value={auth.password}
-                  onChange={handlePasswordChange}
+                  onChange={onChangePasswordHandler}
                   name="password"
                   placeholder="비밀번호"
                   required

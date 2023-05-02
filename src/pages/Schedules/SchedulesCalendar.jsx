@@ -6,7 +6,7 @@ import { getCookie } from '../../shared/cookies';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { useCalendar } from 'hooks/useCalendar';
+import { useCalendar } from '../../hooks/useCalendar';
 
 import {
   DayContain,
@@ -25,8 +25,8 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 
 function SchedulesCalendar() {
   const param = useParams();
-
-  const width = 'calc(100% / 7.8)';
+  const width = 'calc(100% / 7.5)';
+  const dataDay = null;
   const {
     date,
     week,
@@ -35,7 +35,7 @@ function SchedulesCalendar() {
     preMonth,
     nextMonth,
     returnDay,
-  } = useCalendar(width);
+  } = useCalendar(width, dataDay);
 
   const [showSkeleton, setShowSkeleton] = useState(true);
   const token = getCookie('token');

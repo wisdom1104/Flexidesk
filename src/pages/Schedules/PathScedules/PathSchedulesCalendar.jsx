@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Page from '../../../components/Page';
-import { useCalendar } from 'hooks/useCalendar';
+import { useCalendar } from '../../../hooks/useCalendar';
 import PathSchedulesTime from '../../../features/Schedules/PathSchedules/PathSchedulesTime';
 import {
   DayContain,
@@ -20,8 +20,10 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 
 function PathScedules() {
   const location = useLocation();
-  const dataDay = location.state.scStart;
+  const data = location.state.scStart;
+  const dataDay = data.split('T')[0];
   const param = useParams();
+  const width = 'calc(100% / 7.5)';
 
   const {
     date,
@@ -31,7 +33,7 @@ function PathScedules() {
     preMonth,
     nextMonth,
     returnDay,
-  } = useCalendar();
+  } = useCalendar(width, dataDay);
 
   return (
     <Page>
@@ -83,7 +85,7 @@ function PathScedules() {
             title={location.state.scTitle}
             comment={location.state.scComment}
             scId={location.state.scId}
-            initDate={dataDay}
+            initDate={data}
           />
         </Row>
       </div>

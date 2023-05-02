@@ -31,17 +31,17 @@ function SignUpAdmin() {
     auth,
     setAuth,
     errors,
-    handleEmailChange,
-    handlePasswordChange,
-    handlepasswordCheckChange,
+    onChangeEmailHandler,
+    onChangePasswordHandler,
+    onChangePasswordCheckHandler,
   } = AuthFormValidation(admin, setAdmin);
 
-  const { submitBtnHandler } = useSignUpSubmitHandler(admin);
+  const { onSubmitHandler } = useSignUpSubmitHandler(admin);
 
   return (
     <StBackground height="100vh">
       <StOverall>
-        <StLoginForm onSubmit={submitBtnHandler} height="650px">
+        <StLoginForm onSubmit={onSubmitHandler} height="650px">
           <StForm>
             <StFormBox>
               <StFont width="100%" align="start" fontSize="28px">
@@ -70,7 +70,7 @@ function SignUpAdmin() {
               <Certification
                 admin={auth}
                 email={auth.email}
-                onChange={handleEmailChange}
+                onChange={onChangeEmailHandler}
                 errors={errors}
               />
 
@@ -90,7 +90,7 @@ function SignUpAdmin() {
                 type="password"
                 value={auth.password}
                 placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                onChange={handlePasswordChange}
+                onChange={onChangePasswordHandler}
                 minlength="8"
                 maxlength="16"
               />
@@ -102,7 +102,7 @@ function SignUpAdmin() {
                 type="password"
                 value={auth.passwordCheck}
                 placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                onChange={handlepasswordCheckChange}
+                onChange={onChangePasswordCheckHandler}
                 minlength="8"
                 maxlength="16"
               />

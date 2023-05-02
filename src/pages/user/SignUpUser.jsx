@@ -5,7 +5,7 @@ import ValidationError from '../../components/form/ValidationError';
 
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { useSignUpSubmitHandler } from 'hooks/user/useSignUpSubmitHandler';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
 
 import { StFont } from '../Welcome/WelcomeStyled';
 import {
@@ -32,17 +32,17 @@ function SignUpUser() {
     auth,
     setAuth,
     errors,
-    handleEmailChange,
-    handlePasswordChange,
-    handlepasswordCheckChange,
+    onChangeEmailHandler,
+    onChangePasswordHandler,
+    onChangePasswordCheckHandler,
   } = AuthFormValidation(user, setUser);
 
-  const { submitBtnHandler } = useSignUpSubmitHandler(user);
+  const { onSubmitHandler } = useSignUpSubmitHandler(user);
 
   return (
     <StBackground height="100vh">
       <StOverall>
-        <StLoginForm onSubmit={submitBtnHandler} height="570px">
+        <StLoginForm onSubmit={onSubmitHandler} height="570px">
           <StForm>
             <StFormBox>
               <StFont width="100%" align="start" fontSize="28px">
@@ -63,7 +63,7 @@ function SignUpUser() {
                 type="email"
                 value={auth.email}
                 placeholder="이메일을 입력하세요."
-                onChange={handleEmailChange}
+                onChange={onChangeEmailHandler}
               />
               <ValidationError value={errors.email} />
 
@@ -82,7 +82,7 @@ function SignUpUser() {
                 type="password"
                 value={auth.password}
                 placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                onChange={handlePasswordChange}
+                onChange={onChangePasswordHandler}
               />
               <ValidationError value={errors.password} />
 
@@ -91,7 +91,7 @@ function SignUpUser() {
                 type="password"
                 value={auth.passwordCheck}
                 placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                onChange={handlepasswordCheckChange}
+                onChange={onChangePasswordCheckHandler}
               />
               <ValidationError value={errors.passwordCheck} />
 

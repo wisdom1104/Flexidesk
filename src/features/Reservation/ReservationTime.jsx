@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,16 +10,10 @@ import { cookies } from '../../shared/cookies';
 import {
   StReserTimeButton,
   StReserTimeBox,
-  StReserCountBox,
-  StReserCountButton,
-  ReservationCheckContain,
-  FinButton,
   SchContain,
   StSubTitle,
   StIcon,
-  ScheduleInput,
   ScheduleUser,
-  FontSt,
   ScheduleUsers,
   UserList,
   CheckContainBox,
@@ -27,25 +21,23 @@ import {
 } from '../../pages/Reservation/CalendarStyled';
 import ReservationCheck from './ReservationCheck';
 import { Input } from '../../components/Input';
-import { Column, Row } from '../../components/Flex';
+import { Column } from '../../components/Flex';
 
 function ReservationTime({ param, selectDay, mrName }) {
+  const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
+  const [userIdInfo, setUserIdInfo] = useState([]);
+  const navi = useNavigate();
+  const userId = cookies.get('userId');
+
+  ///////////////////////////////////
+  const dispatch = useDispatch();
+  const [clickReservation, setClickReservation] = useState([]); //다르지만 존재//
   const now = new Date();
+
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
-
   const [isCheckOut, setIsCheckOut] = useState('false');
-  const [clickReservation, setClickReservation] = useState([]);
-  const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
-  const [userIdInfo, setUserIdInfo] = useState([]);
-  const { userData } = useSelector(state => state.reservation);
-
-  // const [choseReservationTime, setChoseReservationTime] = useState('false');
-
-  const [count, setCount] = useState(1);
-  // const reqData = { start: clickReservation[0], userList: [] };
-
   //연속되는 시간 추가하기 위한 request정리
   let reqData = [];
 
@@ -54,19 +46,7 @@ function ReservationTime({ param, selectDay, mrName }) {
       reqData.push({ start: clickReservation[index] });
     });
     return reqData;
-    // for (let i = 0; i < clickReservation.length; i++) {
-    //   reqData.push({ start: clickReservation[i] });
-    // }
-    // return reqData;
   };
-
-  const reqDatas = { startList: dataList(), userList: userIdInfo };
-  const dispatch = useDispatch();
-
-  const { reservation } = useSelector(state => state.reservation);
-  const { timeList } = reservation;
-  const userId = cookies.get('userId');
-  const navi = useNavigate();
 
   const onclickHandler = e => {
     if (clickReservation.find(item => item === e.target.value)) {
@@ -77,7 +57,6 @@ function ReservationTime({ param, selectDay, mrName }) {
       setClickReservation([...clickReservation, e.target.value]);
     }
     setIsCheckOut(!isCheckOut);
-    // setChoseReservationTime(!choseReservationTime);
   };
 
   useEffect(() => {
@@ -89,6 +68,22 @@ function ReservationTime({ param, selectDay, mrName }) {
     setClickReservation([]);
   }, [selectDay]);
 
+  ///////////////////////////////////
+
+  // const { userData } = useSelector(state => state.reservation);
+  // const { reservation } = useSelector(state => state.reservation);
+  // const reqDatas = { startList: dataList(), userList: userIdInfo };
+  // const { timeList } = reservation;
+
+  const { reservation, userData } = useSelector(state => ({
+    reservation: state.reservation.reservation,
+    userData: state.reservation.userData,
+  }));
+
+  const reqDatas = { startList: dataList(), userList: userIdInfo };
+  const timeList = reservation.timeList;
+
+  ///////////////////테스트 하고 있는 주웅 ~~~~//////////
   // useEffect(() => {
   //   // clickReservation 값이 업데이트될 때마다 isSelected 값을 다시 결정
   //   timeList.map((item, index) => {
@@ -111,6 +106,7 @@ function ReservationTime({ param, selectDay, mrName }) {
   //     return { ...item, isSelected };
   //   });
   // }, [clickReservation]);
+  ///////////////////테스트 하고 있는 주웅 ~~~~//////////
 
   return (
     <SchContain width="683px">

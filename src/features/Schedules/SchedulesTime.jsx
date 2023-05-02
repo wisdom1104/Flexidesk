@@ -1,8 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { __addSchdule, __getSchedules } from '../../redux/modules/schedules';
+import { __addSchdule } from '../../redux/modules/schedules';
 import {
   StReserTimeBox,
   StReserTimeButton,
@@ -13,72 +12,49 @@ import {
 } from '../../pages/Reservation/CalendarStyled';
 import { Input } from '../../components/Input';
 
+import { useSchedulesTimeHook } from '../../hooks/schedules/useSchedulesTimeHook';
+import {
+  onChangeTitleHandler,
+  onChangeCommentHandler,
+} from '../../util/schedulesChangeHandler';
+
 function SchedulesTime({ param, selectDay }) {
-  const now = new Date();
-  const dispatch = useDispatch();
   const navi = useNavigate();
-  const date = `${now.getFullYear()}-${(now.getMonth() + 1)
-    .toString()
-    .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
+  const dispatch = useDispatch();
 
-  const [isCheckOut, setIsCheckOut] = useState('false');
-  const [clickSchedules, setClickSchedules] = useState([]);
-
-  const [scheduleValue, setScheduleValue] = useState({
-    scTitle: '',
-    scComment: '',
-  });
-
-  // const reqData = { start: clickReservation[0], userList: [] };
-
-  //연속되는 시간 추가하기 위한 request정리
-  let reqData = [];
-
-  const dataList = () => {
-    clickSchedules.map((_, index) => {
-      reqData.push({ start: clickSchedules[index] });
-    });
-    return reqData;
-    // for (let i = 0; i < clickReservation.length; i++) {
-    //   reqData.push({ start: clickReservation[i] });
-    // }
-    // return reqData;
-  };
-  const dataListResult = dataList();
-
-  const reqDatas = { startList: dataListResult, useList: [] };
-
-  //adddispatch로 보낼값
-  const startData = { startList: dataListResult };
-  const { scComment, scTitle } = scheduleValue;
-  const reqScheduleValue = { scComment, scTitle, startList: dataListResult };
+  const initDate = [];
+  const title = '';
+  const comment = '';
+  const {
+    onClickHandler,
+    clickSchedules,
+    scheduleValue,
+    reqScheduleValue,
+    setScheduleValue,
+  } = useSchedulesTimeHook(selectDay, param, title, comment, initDate);
+  // const {onsubmitHandler,onChangeHandler} = useSchedulesHandler(reqScheduleValue, param, scheduleValue, setScheduleValue);
 
   const { schedules } = useSelector(state => state.schedules);
 
-  const onclickHandler = e => {
-    if (clickSchedules.find(item => item === e.target.value)) {
-      return setClickSchedules(
-        clickSchedules.filter(item => item !== e.target.value),
-      );
-    } else {
-      setClickSchedules([...clickSchedules, e.target.value]);
-    }
-    setIsCheckOut(!isCheckOut);
+  const onsubmitHandler = async e => {
+    e.preventDefault();
+    await dispatch(__addSchdule(reqScheduleValue));
+    navi(`/scheduledetail/${param}`);
   };
 
-  useEffect(() => {
-    if (selectDay !== undefined) {
-      dispatch(__getSchedules({ param, selectDay }));
-    } else {
-      dispatch(
-        __getSchedules({
-          param,
-          selectDay: date.slice(0, -1),
-        }),
-      );
-    }
-    setClickSchedules([]);
-  }, [selectDay]);
+  // const onChangeTitleHandler = e => {
+  //   setScheduleValue({
+  //     ...scheduleValue,
+  //     scTitle: e.target.value,
+  //   });
+  // };
+
+  // const onChangeCommentHandler = e => {
+  //   setScheduleValue({
+  //     ...scheduleValue,
+  //     scComment: e.target.value,
+  //   });
+  // };
 
   return (
     <SchContain width="383px">
@@ -91,7 +67,7 @@ function SchedulesTime({ param, selectDay }) {
           {schedules?.map(item => (
             <StReserTimeButton
               key={item.start}
-              onClick={onclickHandler}
+              onClick={onClickHandler}
               disabled={item.isCheckOut === true}
               value={`${selectDay}T${item.start}`}
               isSelected={clickSchedules.includes(`${selectDay}T${item.start}`)}
@@ -101,13 +77,7 @@ function SchedulesTime({ param, selectDay }) {
           ))}
         </StReserTimeBox>
       </div>
-      <form
-        onSubmit={async e => {
-          e.preventDefault();
-          await dispatch(__addSchdule(reqScheduleValue));
-          navi(`/scheduledetail/${param}`);
-        }}
-      >
+      <form onSubmit={onsubmitHandler}>
         <StSubTitle margin="15px 0px 10px 24px">
           <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
           스케줄 제목
@@ -119,12 +89,9 @@ function SchedulesTime({ param, selectDay }) {
           type="text"
           value={scheduleValue.scTitle}
           required
-          onChange={e =>
-            setScheduleValue({
-              ...scheduleValue,
-              scTitle: e.target.value,
-            })
-          }
+          onChange={e => {
+            onChangeTitleHandler(e, scheduleValue, setScheduleValue);
+          }}
           placeholder="제목을 입력하세요."
         />
         <StSubTitle margin="15px 0px 10px 24px">
@@ -138,12 +105,9 @@ function SchedulesTime({ param, selectDay }) {
           type="text"
           value={scheduleValue.scComment}
           required
-          onChange={e =>
-            setScheduleValue({
-              ...scheduleValue,
-              scComment: e.target.value,
-            })
-          }
+          onChange={e => {
+            onChangeCommentHandler(e, scheduleValue, setScheduleValue);
+          }}
           placeholder="내용을 입력하세요."
         />
         <StSubmitButton>등록하기</StSubmitButton>

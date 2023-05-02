@@ -1,8 +1,7 @@
 import React,{ useState, useCallback } from 'react';
-import { StDate } from 'pages/Reservation/CalendarStyled';
+import { StDate } from '../pages/Reservation/CalendarStyled';
 
-export const useCalendar = (width) =>{
-  
+export const useCalendar = (width,dataDay) =>{
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -14,9 +13,7 @@ export const useCalendar = (width) =>{
   const [selectYear, setSelectYear] = useState(today.year);
   const [selectMonth, setSelectMonth] = useState(today.month + 1);
   const [date, setDate] = useState();
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const dateTotalCount = new Date(selectYear, selectMonth, 0).getDate();
+   const [selectedDate, setSelectedDate] = useState(dataDay);
 
   //이전달
   const preMonth = useCallback(() => {
@@ -42,7 +39,7 @@ export const useCalendar = (width) =>{
     setDate(e.target.value);
     setSelectedDate(e.target.value);
   };
-
+  
   const returnDay = () => {
     const daysInMonth = new Date(selectYear, selectMonth, 0).getDate();
     const firstDayOfMonth = new Date(selectYear, selectMonth - 1, 1).getDay();

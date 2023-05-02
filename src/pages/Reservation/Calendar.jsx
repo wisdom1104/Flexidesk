@@ -7,7 +7,7 @@ import { getCookie } from '../../shared/cookies';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { useCalendar } from 'hooks/useCalendar';
+import { useCalendar } from '../../hooks/useCalendar';
 
 import { StListTitle } from '../../shared/SpaceStyles';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
@@ -30,6 +30,7 @@ const Calendar = () => {
   const navi = useNavigate();
   const param = useParams();
   const width = 'calc(100% / 7.8)';
+  const dataDay = null;
   const {
     date,
     week,
@@ -38,7 +39,7 @@ const Calendar = () => {
     preMonth,
     nextMonth,
     returnDay,
-  } = useCalendar(width);
+  } = useCalendar(width, dataDay);
 
   const [showSkeleton, setShowSkeleton] = useState(true);
   const token = getCookie('token');

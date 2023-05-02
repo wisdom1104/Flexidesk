@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
-import useTrueHook from './useTrueHook';
+import useTrue from './useTrue';
 
 export const useSignUpSubmitHandler=(auth)=> {
-  useTrueHook();
+  useTrue();
   
   const navi = useNavigate();
 
-  const submitBtnHandler = async e => {
+  const onSubmitHandler = async e => {
     e.preventDefault();
     try {
       const response = await api.post(`/users/signup/${auth.type}`, auth);
@@ -20,5 +20,5 @@ export const useSignUpSubmitHandler=(auth)=> {
       return error;
     }
   };
-  return {submitBtnHandler}
+  return {onSubmitHandler}
 }

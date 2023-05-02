@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import api from '../axios/api';
 import { cookies } from '../shared/cookies';
-import useTrueHook from 'hooks/user/useTrueHook';
+import useTrue from '../hooks/user/useTrue';
 
 export const LoginSubmitHandler=(login,setErrorMsg)=> {
-  useTrueHook();
+  useTrue();
 
   const navi = useNavigate();
 
