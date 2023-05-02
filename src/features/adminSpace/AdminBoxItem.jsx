@@ -7,52 +7,38 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useBoxDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
+import { useDeleteBox } from '../../hooks/adminSpace/useDeleteBox';
+import { useEditBox } from '../../hooks/adminSpace/useEditBox';
+import { useBoxDAD } from '../../hooks/adminSpace/useBoxDAD';
 
-function AdminBoxItem({
-  box,
-  HandleDrop,
-  handleDragOver,
-  elRef,
-  boxMouseDownHandler,
-  handleDragStart,
-  spaceId,
-}) {
-  const dispatch = useDispatch();
+function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
+  const { submitDelete } = useDeleteBox();
 
   const {
-    onClickDeleteBoxHandler,
-    onEditBoxNameHandler,
-    boxEdit,
-    setBoxEdit,
+    submitEdit,
+    isEditBox,
+    changeEditModeHandler,
     editBoxName,
-    setEditBoxName,
-  } = useBoxDeleteAndEdit(dispatch, box, spaceId);
+    changeNameHandler,
+  } = useEditBox(box, spaceId);
+
+  const { elRef, boxMouseDownHandler } = useBoxDAD(spaceId, boardEl, boxList);
 
   return (
     <>
-      {!boxEdit ? (
+      {!isEditBox ? (
         <StBox
           key={box.boxId}
-          onDrop={HandleDrop}
-          onDragOver={handleDragOver}
           ref={el => (elRef.current[box.boxId] = el)}
           onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
-          onDragStart={e => handleDragStart(e, box.boxId)}
           transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
           <div>{box.boxName}</div>
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                setBoxEdit(!boxEdit);
-              }}
-            >
-              수정
-            </BoxBtn>
+            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
             <BoxSubBtn
               onClick={() => {
-                onClickDeleteBoxHandler(box.boxId);
+                submitDelete(box.boxId, spaceId);
               }}
             >
               삭제
@@ -68,25 +54,11 @@ function AdminBoxItem({
             maxLength={6}
             type="text"
             value={editBoxName}
-            onChange={e => {
-              setEditBoxName(e.target.value);
-            }}
+            onChange={e => changeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                onEditBoxNameHandler();
-              }}
-            >
-              완료
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                setBoxEdit(!boxEdit);
-              }}
-            >
-              취소
-            </BoxSubBtn>
+            <BoxBtn onClick={submitEdit}>완료</BoxBtn>
+            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
           </StBtnBox>
         </StBox>
       )}

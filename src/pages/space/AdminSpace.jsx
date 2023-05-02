@@ -37,19 +37,19 @@ function AdminSpace() {
   // const { selectedSpace, onClickSpaceListHandler, isModal, setIsModal } =
   //   useSpaceSelect(spaces);
 
-  // const [showSkeleton, setShowSkeleton] = useState(true);
-  // const token = getCookie('token');
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const token = getCookie('token');
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navi('/');
-  //   } else {
-  //     const timer = setTimeout(() => {
-  //       setShowSkeleton(false);
-  //     }, 300);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!token) {
+      navi('/');
+    } else {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const [mrBoxes] = useState([{ mrId: 1, x: 1000, y: 1000, inner: '회의실' }]);
   const [boxes] = useState([{ boxId: 2, x: 1000, y: 1000, inner: '자리' }]);
@@ -59,9 +59,6 @@ function AdminSpace() {
 
   const elRef = useRef([]);
 
-  // const handleDragStart = (e, boxId) => {
-  //   e.dataTransfer.setData('boxId', boxId);
-  // };
   //-------------------------------------------------------------------------------
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -107,7 +104,6 @@ function AdminSpace() {
 
   const [isModal, setIsModal] = useState(false);
 
-
   return (
     <Page>
       {/* 리스트 영역 */}
@@ -138,11 +134,11 @@ function AdminSpace() {
         />
       </Column>
       {/* 보더 영역 */}
-      {/* {showSkeleton ? (
+      {showSkeleton ? (
         <InfoContain>
           <Skeleton />
         </InfoContain>
-      ) : ( */}
+      ) : (
         <>
           {spaces.length > 0 ? (
             <>
@@ -183,7 +179,7 @@ function AdminSpace() {
             </>
           )}
         </>
-      {/* )} */}
+      )}
     </Page>
   );
 }

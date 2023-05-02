@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   BoxBtn,
   BoxInput,
@@ -7,67 +6,42 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useMultiBoxDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
-import { useBoxDragAndDrop } from '../../hooks/adminSpace/useBoxDragAndDrop';
-import { handleDragStart } from '../../utils/dragStartHandler';
+import { useDeleteMultiBox } from '../../hooks/adminSpace/useDeleteMultiBox';
+import { useEditMultiBox } from '../../hooks/adminSpace/useEditMultiBox';
+import { useMultiBoxDAD } from '../../hooks/adminSpace/useMultiBoxDAD';
 
-function AdminMultiBoxItem({
-  multiBox,
-  // HandleDrop,
-  // handleDragOver,
-  // elRef,
-  // multiBoxMouseDownHandler,
-  boardEl,
-  // handleDragStart,
-  spaceId,
-  multiBoxList,
-}) {
-  const dispatch = useDispatch();
+function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
+  const { submitDelete } = useDeleteMultiBox();
 
   const {
-    onClickDeleteBoxHandler,
-    onEditBoxNameHandler,
-    multiBoxEdit,
-    setMultiBoxEdit,
+    submitEdit,
+    isEditMultiBox,
+    changeEditModeHandler,
     editMultiBoxName,
-    setEditMultiBoxName,
-  } = useMultiBoxDeleteAndEdit(dispatch, multiBox, spaceId);
-  const dispatchValue = '__editMultiBox';
-  const type = 'multiBox';
-  const { elRef, boxMouseDownHandler } = useBoxDragAndDrop(
-    dispatch,
+    changeNameHandler,
+  } = useEditMultiBox(multiBox, spaceId);
+
+  const { elRef, multiBoxMouseDownHandler } = useMultiBoxDAD(
     spaceId,
-    multiBox,
     boardEl,
     multiBoxList,
-    dispatchValue,
-    type,
   );
 
   return (
     <>
-      {!multiBoxEdit ? (
+      {!isEditMultiBox ? (
         <StBox
           key={multiBox.multiBoxId}
-          // onDrop={HandleDrop}
-          // onDragOver={handleDragOver}
           ref={el => (elRef.current[multiBox.multiBoxId] = el)}
-          onMouseDown={e => boxMouseDownHandler(e, multiBox.multiBoxId)}
-          onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
+          onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
           <div>{multiBox.multiBoxName}</div>
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                setMultiBoxEdit(!multiBoxEdit);
-              }}
-            >
-              수정
-            </BoxBtn>
+            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
             <BoxSubBtn
               onClick={() => {
-                onClickDeleteBoxHandler(multiBox.multiBoxId);
+                submitDelete(multiBox.multiBoxId, spaceId);
               }}
             >
               삭제
@@ -83,25 +57,11 @@ function AdminMultiBoxItem({
             maxLength={6}
             type="text"
             value={editMultiBoxName}
-            onChange={e => {
-              setEditMultiBoxName(e.target.value);
-            }}
+            onChange={e => changeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                onEditBoxNameHandler();
-              }}
-            >
-              완료
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                setMultiBoxEdit(!multiBoxEdit);
-              }}
-            >
-              취소
-            </BoxSubBtn>
+            <BoxBtn onClick={submitEdit}>완료</BoxBtn>
+            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
           </StBtnBox>
         </StBox>
       )}

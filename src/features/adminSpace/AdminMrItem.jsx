@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   BoxBtn,
   BoxInput,
@@ -7,52 +6,38 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useMrDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
+import { useDeleteMrBox } from '../../hooks/adminSpace/useDeleteMrBox';
+import { useEditMrBox } from '../../hooks/adminSpace/useEditMrBox';
+import { useMrBoxDAD } from '../../hooks/adminSpace/useMrBoxDAD';
 
-function AdminMrItem({
-  mr,
-  HandleDrop,
-  handleDragOver,
-  elRef,
-  mrBoxMouseDownHandler,
-  handleDragStart,
-  spaceId,
-}) {
-  const dispatch = useDispatch();
+function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
+  const { submitDelete } = useDeleteMrBox();
 
   const {
-    onClickDeleteMrHandler,
-    onEditMrNameHandler,
-    mrEdit,
-    setMrEdit,
+    submitEdit,
+    isEditMr,
+    changeEditModeHandler,
     editMrName,
-    setEditMrName,
-  } = useMrDeleteAndEdit(dispatch, mr, spaceId);
+    changeNameHandler,
+  } = useEditMrBox(mr, spaceId);
+
+  const { elRef, mrMouseDownHandler } = useMrBoxDAD(spaceId, boardEl, mrList);
 
   return (
     <>
-      {!mrEdit ? (
+      {!isEditMr ? (
         <StBox
           key={mr.mrId}
-          onDrop={HandleDrop}
-          onDragOver={handleDragOver}
           ref={el => (elRef.current[mr.mrId] = el)}
-          onMouseDown={e => mrBoxMouseDownHandler(e, mr.mrId)}
-          onDragStart={e => handleDragStart(e, mr.mrId)}
+          onMouseDown={e => mrMouseDownHandler(e, mr.mrId)}
           transformValue={`translate(${mr.x}px, ${mr.y}px)`}
         >
           <div>{mr.mrName}</div>
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                setMrEdit(!mrEdit);
-              }}
-            >
-              수정
-            </BoxBtn>
+            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
             <BoxSubBtn
               onClick={() => {
-                onClickDeleteMrHandler(mr.mrId);
+                submitDelete(mr.mrId, spaceId);
               }}
             >
               삭제
@@ -66,24 +51,12 @@ function AdminMrItem({
             type="text"
             value={editMrName}
             onChange={e => {
-              setEditMrName(e.target.value);
+              changeNameHandler(e.target.value);
             }}
           />
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                onEditMrNameHandler();
-              }}
-            >
-              완료
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                setMrEdit(!mrEdit);
-              }}
-            >
-              취소
-            </BoxSubBtn>
+            <BoxBtn onClick={submitEdit}>완료</BoxBtn>
+            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
           </StBtnBox>
         </StBox>
       )}
