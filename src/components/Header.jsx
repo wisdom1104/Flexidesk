@@ -141,7 +141,6 @@ const tokenLogout = () => {
 
 const StHeader = styled.div`
   height: 6vh;
-  /* width: 99%; */
   max-width: 1200px;
   min-width: 1200px;
   display: flex;

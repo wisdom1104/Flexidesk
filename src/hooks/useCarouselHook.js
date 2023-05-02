@@ -30,8 +30,7 @@ export const useCarouselHook = () => {
       ];
       };
     
-    
-      const clickLeftHandler = () => {
+      const onClickLeftHandler = () => {
         setAnimate(() => ({ on: true, value: "610px" }));
         setTimeout(() => {
           setAnimate(() => ({ on: false, value: "610px" }));
@@ -42,7 +41,7 @@ export const useCarouselHook = () => {
         }, 400);
       };
     
-      const clickRightHandler = () => {
+      const onClickRightHandler = () => {
         setAnimate(() => ({ on: true, value: "-610px" }));
         setTimeout(() => {
           setAnimate(() => ({ on: false, value: "-610px" }));
@@ -52,5 +51,5 @@ export const useCarouselHook = () => {
           });
         }, 400);
       };
-  return {index, animate, genSlidersArray, clickLeftHandler, clickRightHandler}
+  return {index, animate, genSlidersArray, onClickLeftHandler, onClickRightHandler}
 }

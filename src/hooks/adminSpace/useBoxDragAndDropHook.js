@@ -3,21 +3,20 @@ import { __editMr } from '../../redux/modules/spaceMrSlice';
 import { __editBox } from '../../redux/modules/spaceBoxSlice';
 import { __editMultiBox } from '../../redux/modules/MultiBoxSlice';
 
-export function useBoxDragAndDrop(
+export function useBoxDragAndDropHook(
   dispatch,
   spaceId,
   mrList,
   boxList,
   multiBoxList,
+  dispatchValue,
+  type,
 ) {
-  const [newMrBoxes, setNewMrBoxes] = useState([]);
-  const [newBoxes, setNewBoxes] = useState([]);
-  const [newMultiBoxes, setNewMultiBoxes] = useState([]);
 
   const elRef = useRef([]);
   const boardEl = useRef(null);
 
-  // 회의실 드래그 앤 드롭
+  // 회의실 드래그 앤 드롭 ----------------------------------------------------
   const mrBoxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
@@ -55,7 +54,6 @@ export function useBoxDragAndDrop(
         x: Number(limitedX),
         y: Number(limitedY),
       };
-      setNewMrBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
     const spaceMouseUpHandler = (e, boxIndex) => {
@@ -63,14 +61,13 @@ export function useBoxDragAndDrop(
       document.removeEventListener('mouseup', spaceMouseUpHandler);
       const result = mrBoxMoveHandler(e, boxIndex);
       dispatch(__editMr(result));
-      setNewMrBoxes([]);
     };
 
     document.addEventListener('mousemove', mrBoxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
 
-  // 박스 드래그 앤 드롭
+  // 박스 드래그 앤 드롭 ----------------------------------------------------
   const boxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
@@ -81,14 +78,13 @@ export function useBoxDragAndDrop(
       const newMouseX = e.clientX;
       const newMouseY = e.clientY;
 
-      const boxDiffY = mouseY - currentBox.y;
       const boxDiffX = mouseX - currentBox.x;
+      const boxDiffY = mouseY - currentBox.y;
 
       const newx = newMouseX - boxDiffX;
       const newy = newMouseY - boxDiffY;
 
       const boardRect = boardEl.current.getBoundingClientRect();
-
       const boxRect = elRef.current[boxIndex].getBoundingClientRect();
 
       const limitedX = Math.max(
@@ -110,7 +106,6 @@ export function useBoxDragAndDrop(
         x: Number(limitedX),
         y: Number(limitedY),
       };
-      setNewBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
 
@@ -119,14 +114,13 @@ export function useBoxDragAndDrop(
       document.removeEventListener('mouseup', spaceMouseUpHandler);
       const result = boxMoveHandler(e, boxIndex);
       dispatch(__editBox(result));
-      setNewBoxes([]);
     };
 
     document.addEventListener('mousemove', boxMoveHandler);
     document.addEventListener('mouseup', spaceMouseUpHandler);
   };
 
-  // 공용공간 드래그 앤 드롭
+  // 공용공간 드래그 앤 드롭 ----------------------------------------------------
   const multiBoxMouseDownHandler = (e, boxIndex) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
@@ -166,15 +160,13 @@ export function useBoxDragAndDrop(
         x: Number(limitedX),
         y: Number(limitedY),
       };
-      setNewMultiBoxes(prevBoxes => [...prevBoxes, payload]);
       return payload;
     };
     const spaceMouseUpHandler = (e, boxIndex) => {
       document.removeEventListener('mousemove', multiBoxMoveHandler);
       document.removeEventListener('mouseup', spaceMouseUpHandler);
       const result = multiBoxMoveHandler(e, boxIndex);
-      dispatch(__editMultiBox(result));
-      setNewMultiBoxes([]);
+      dispatch(dispatchValue(result));
     };
 
     document.addEventListener('mousemove', multiBoxMoveHandler);
@@ -183,9 +175,6 @@ export function useBoxDragAndDrop(
   return {
     elRef,
     boardEl,
-    newMrBoxes,
-    newBoxes,
-    newMultiBoxes,
     mrBoxMouseDownHandler,
     boxMouseDownHandler,
     multiBoxMouseDownHandler,
