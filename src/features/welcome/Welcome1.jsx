@@ -11,12 +11,12 @@ import {
 } from '../../pages/Welcome/WelcomeStyled';
 import { useNavigate } from 'react-router-dom';
 import Welcome2 from './Welcome2';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 
 function Welcome1() {
   const navi = useNavigate();
 
-  const token = cookies.get('token');
+  const token = getCookie('token');
 
   return (
     <>

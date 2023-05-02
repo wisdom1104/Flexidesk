@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpaces } from './spacesSlice';
 import { __getFloors } from './floorsSlice';
@@ -15,8 +15,8 @@ export const __getSpace = createAsyncThunk(
   '__getSpace',
   async (spaceId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.get(
         `/spaces/${companyName}/${spaceId}
       `,
@@ -38,8 +38,8 @@ export const __deleteSpace = createAsyncThunk(
   '__deleteSpace',
   async (spaceId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(`/spaces/${companyName}/${spaceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,8 +59,8 @@ export const __editSpace = createAsyncThunk(
   '__editSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/spaces/${companyName}/${payload.spaceId}`,
         {

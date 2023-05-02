@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getFloors } from './floorsSlice';
 
@@ -14,9 +14,9 @@ export const __getSpaces = createAsyncThunk(
   '__getSpaces',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      // const token = cookies.get('refresh_token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      // const token = getCookie('refresh_token');
+      const companyName = getCookie('companyName');
       const response = await api.get(`/spaces/${companyName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -34,8 +34,8 @@ export const __addSpace = createAsyncThunk(
   '__addSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/spaces/${companyName}`,
         {
@@ -60,8 +60,8 @@ export const __addInnerSpace = createAsyncThunk(
   '__addInnerSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/spaces/${companyName}/${payload.floorId}`,
         {

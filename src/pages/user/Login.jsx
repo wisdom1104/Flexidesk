@@ -18,8 +18,7 @@ import {
   StOverall,
   StLoginContain,
 } from './UserStyled';
-import { LoginSubmitHandler } from '../../util/loginSubmitHandler';
-
+import { LoginSubmitHandler } from '../../utils/loginSubmitHandler';
 function Login() {
   const [login, setLogin] = useState({
     email: '',

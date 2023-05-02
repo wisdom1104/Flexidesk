@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import api from '../axios/api';
-import { cookies } from '../shared/cookies';
+import { cookies, setCookie } from '../shared/cookies';
 import useTrue from '../hooks/user/useTrue';
 
-export const LoginSubmitHandler=(login,setErrorMsg)=> {
+export const LoginSubmitHandler = (login, setErrorMsg) => {
   useTrue();
 
   const navi = useNavigate();
@@ -34,5 +34,5 @@ export const LoginSubmitHandler=(login,setErrorMsg)=> {
       return errorMessage;
     }
   };
-  return {onsubmitHandler}
-}
+  return { onsubmitHandler };
+};

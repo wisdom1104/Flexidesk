@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { cookies } from '../../shared/cookies'
+import { getCookie } from '../../shared/cookies'
 import api from '../../axios/api'
 
 
@@ -13,7 +13,7 @@ export const __getSchedules = createAsyncThunk(
   "getschedules",
   async(payload,thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       const data = await api.get(`/schedules?selDate=${payload.selectDay}`,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -31,7 +31,7 @@ export const __addSchdule = createAsyncThunk(
   async(payload,thunk) =>{
     const selectdate = {selectDay : payload.startList[0].start.split('T')[0]}
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       await api.post('/schedules',payload,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -49,7 +49,7 @@ export const __getAllSchedules = createAsyncThunk(
   "getallschedules",
   async(payload,thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       const data = await api.get(`/schedules/all`,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -66,7 +66,7 @@ export const __deleteSchedule = createAsyncThunk(
   "deletschedule",
   async (payload,thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       await api.delete(`/schedules/${payload}`,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -84,7 +84,7 @@ export const __pathScehdule = createAsyncThunk(
   "pathschedule",
   async (payload,thunk)=>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       await api.patch(`/schedules/${payload.scId}`,payload.reqScheduleValue,{
         headers:{
           Authorization:`Bearer ${token}`

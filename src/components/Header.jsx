@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { cookies } from '../shared/cookies';
+import { getCookie } from '../shared/cookies';
 import {
   HeaderContain,
   StHeaderButtonBox,
@@ -24,9 +24,9 @@ function Header() {
   const navi = useNavigate();
   const dispatch = useDispatch();
 //전역적으로 사용 , 훅일까?
-  const token = cookies.get('token');
-  const userName = cookies.get('username');
-  const userId = cookies.get('userId');
+  const token = getCookie('token');
+  const userName = getCookie('username');
+  const userId = getCookie('userId');
   //로그아웃 시 모달을 띄워주는 '상태'
   const logout = () => {
     setLoginTime(null);

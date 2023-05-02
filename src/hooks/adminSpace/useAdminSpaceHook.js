@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import { __getFloors } from '../../redux/modules/floorsSlice';
 import { __getSpace } from '../../redux/modules/spaceSlice';
@@ -60,8 +60,8 @@ export function useFloorsAndSpaces(navi) {
 
   // token 유무에 따른 가드
   useEffect(() => {
-    const token = cookies.get('token');
-    const role = cookies.get('role');
+    const token = getCookie('token');
+    const role = getCookie('role');
 
     if (token === undefined) {
       navi('/');

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getSpaces } from '../../redux/modules/spacesSlice';
 import SpaceBox from '../../features/space/SpaceBox';
 import { Column, Row } from '../../components/Flex';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import {
   ClisckedListItem,
@@ -23,6 +23,7 @@ import Page from '../../components/Page';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { InfoContain } from '../Reservation/CalendarStyled';
 import Skeleton from '../../components/Skeleton';
+import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
 
 function Space() {
   // useFalseHook('/adminspace');
@@ -33,18 +34,9 @@ function Space() {
   const { floors } = useSelector(state => state.floors);
 
   // token 유무에 따른 가드
-  const token = cookies.get('token');
+  const token = getCookie('token');
   // 관리자 가드
-  const role = cookies.get('role');
-
-  // useEffect(() => {
-  //   if (token === undefined) {
-  //     navi('/');
-  //   } else {
-  //     dispatch(__getFloors());
-  //     dispatch(__getSpaces());
-  //   }
-  // }, []);
+  const role = getCookie('role');
 
   const [showSkeleton, setShowSkeleton] = useState(true);
 

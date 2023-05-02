@@ -6,7 +6,7 @@ import {
 } from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import { useNavigate } from 'react-router-dom';
 import {
   CommentBox,
@@ -29,9 +29,9 @@ function Management() {
   const navi = useNavigate();
 
   // token 유무에 따른 가드
-  const token = cookies.get('token');
+  const token = getCookie('token');
   // 관리자 가드
-  const role = cookies.get('role');
+  const role = getCookie('role');
   // 전체조회
   useEffect(() => {
     if (!token) {

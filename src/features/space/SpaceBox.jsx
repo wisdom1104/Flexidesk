@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getSpace } from '../../redux/modules/spaceSlice';
 import { useNavigate } from 'react-router-dom';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import { __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 import {
   ListDot,
@@ -33,7 +33,7 @@ function SpaceBox({ spaceId, selectedSpace }) {
   const navi = useNavigate();
 
   // 관리자 가드
-  const role = cookies.get('role');
+  const role = getCookie('role');
 
   const { space } = useSelector(state => state.space);
 

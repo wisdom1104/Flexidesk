@@ -23,11 +23,11 @@ import {
   InfoContain,
 } from './CalendarStyled';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);
   const { mrName } = reservation;
-  const navi = useNavigate();
   const param = useParams();
   const width = 'calc(100% / 7.8)';
   const dataDay = null;
@@ -41,19 +41,7 @@ const Calendar = () => {
     returnDay,
   } = useCalendar(width, dataDay);
 
-  const [showSkeleton, setShowSkeleton] = useState(true);
-  const token = getCookie('token');
-
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  const { showSkeleton } = useSkltTimeout();
 
   return (
     <Page>

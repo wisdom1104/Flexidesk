@@ -1,6 +1,6 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { cookies } from '../../shared/cookies'
+import { getCookie } from '../../shared/cookies'
 
 import api from '../../axios/api'
 
@@ -14,7 +14,7 @@ export const __getReservationDetail = createAsyncThunk(
   "getreservationdetail",
   async(payload,thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       const data = await api.get(`users/reservations`,{
         headers:{
           Authorization:`Bearer ${token}`
@@ -31,7 +31,7 @@ export const __deleteRervation = createAsyncThunk(
   "deletereservation",
   async (payload, thunk) =>{
     try{
-      const token = cookies.get('token')
+      const token = getCookie('token')
       await api.delete(`reservations/${payload}`,{
         headers:{
           Authorization:`Bearer ${token}`
