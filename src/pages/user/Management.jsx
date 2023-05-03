@@ -7,14 +7,14 @@ import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import {
   CommentBox,
   Info,
   InfoBox,
   InfoContain,
   StSubTitle,
-} from '../Reservation/CalendarStyled';
+} from '../reservation/CalendarStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import ManagementChange from '../../features/user/ManagementChange';
 

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../shared/cookies';
 
-function useTrue() {
+function useTokenCheck() {
     const navi = useNavigate();
-
     useEffect(()=> {
         const token = getCookie("token");
         if(token) {
@@ -13,5 +12,4 @@ function useTrue() {
     },[])
   return ;
 }
-
-export default useTrue
+export default useTokenCheck

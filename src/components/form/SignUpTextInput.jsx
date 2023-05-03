@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import { StTextInput } from '../../pages/user/UserStyled';
 
 export const SignUpTextInput = ({

@@ -5,7 +5,7 @@ import {
   StOverall,
   StSliderContain,
   StWrapDiv,
-} from '../../pages/Welcome/WelcomeStyled';
+} from '../../pages/welcome/WelcomeStyled';
 import Carousel from '../welcome/Carousel';
 
 function Welcome5() {
@@ -14,7 +14,7 @@ function Welcome5() {
       <StBackground>
         <StOverall height="200px">
           <StWrapDiv>
-            <StFont fontSize='3rem' marginBottom="100px">
+            <StFont fontSize="3rem" marginBottom="100px">
               Flexidesk는 회사생활을 <br /> 어떻게 쉽게 만들어주나요?
             </StFont>
           </StWrapDiv>

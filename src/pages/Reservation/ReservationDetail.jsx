@@ -14,9 +14,9 @@ import {
   UserList,
   StSmall,
 } from './CalendarStyled';
-import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
-import ReservationDelete from '../../features/Reservation/ReservationDelete';
+import ReservationDelete from '../../features/reservation/ReservationDelete';
 
 function ReservationDetail() {
   const { reservationDetail, isError } = useSelector(state => state.detail);

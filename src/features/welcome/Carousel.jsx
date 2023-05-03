@@ -8,7 +8,7 @@ import {
   StSliderButton,
   StSliders,
   StSmallFont,
-} from '../../pages/Welcome/WelcomeStyled';
+} from '../../pages/welcome/WelcomeStyled';
 
 const CarouselButton = ({ children, dir, onClick }) => {
   return (

@@ -18,7 +18,7 @@ import {
   UserList,
   CheckContainBox,
   StSubmitButton,
-} from '../../pages/Reservation/CalendarStyled';
+} from '../../pages/reservation/CalendarStyled';
 import ReservationCheck from './ReservationCheck';
 import { Input } from '../../components/Input';
 import { Column } from '../../components/Flex';

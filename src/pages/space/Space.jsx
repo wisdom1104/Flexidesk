@@ -13,7 +13,7 @@ import {
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
-import { InfoContain } from '../Reservation/CalendarStyled';
+import { InfoContain } from '../reservation/CalendarStyled';
 import SpaceList from '../../features/space/SpaceList';
 import SpaceBox from '../../features/space/SpaceBox';
 

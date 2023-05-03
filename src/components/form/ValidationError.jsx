@@ -1,5 +1,5 @@
 import React from 'react';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import { SterrorFont } from '../../pages/user/UserStyled';
 export const ValidationError = ({ value }) => {
   if (!value && value === undefined) {

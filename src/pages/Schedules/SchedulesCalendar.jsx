@@ -15,10 +15,10 @@ import {
   StSelectDay,
   StIcon,
   InfoContain,
-} from '../Reservation/CalendarStyled';
-import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+} from '../reservation/CalendarStyled';
+import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
-import SchedulesTime from '../../features/Schedules/SchedulesTime';
+import SchedulesTime from '../../features/schedules/SchedulesTime';
 
 function SchedulesCalendar() {
   const param = useParams();
