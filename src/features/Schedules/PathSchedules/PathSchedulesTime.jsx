@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { __pathScehdule } from '../../../redux/modules/schedules';
-
+import { useSchedulesTime } from '../../../hooks/schedules/useSchedulesTime';
+import { useSchedulesHandler } from '../../../hooks/schedules/useSchedulesHandler';
+import { Input } from '../../../components/Input';
 import {
   StReserTimeBox,
   StReserTimeButton,
@@ -11,8 +12,6 @@ import {
   StIcon,
   StSubmitButton,
 } from '../../../pages/Reservation/CalendarStyled';
-import { Input } from '../../../components/Input';
-import { useSchedulesTimeHook } from '../../../hooks/schedules/useSchedulesTimeHook';
 
 function PathSchedulesTime({
   param,
@@ -22,16 +21,23 @@ function PathSchedulesTime({
   scId,
   initDate,
 }) {
-  const navi = useNavigate();
-  const dispatch = useDispatch();
   const {
     onClickHandler,
     clickSchedules,
     reqScheduleValue,
     scheduleValue,
     setScheduleValue,
-  } = useSchedulesTimeHook(selectDay, param, title, comment, initDate);
+  } = useSchedulesTime(selectDay, param, title, comment, initDate);
   const { schedules } = useSelector(state => state.schedules);
+
+  const dispatchValue = __pathScehdule;
+  const { onSubmitHandler, onChangeHandler } = useSchedulesHandler(
+    reqScheduleValue,
+    param,
+    setScheduleValue,
+    dispatchValue,
+    scId,
+  );
 
   return (
     <SchContain width="383px">
@@ -54,13 +60,7 @@ function PathSchedulesTime({
           ))}
         </StReserTimeBox>
       </div>
-      <form
-        onSubmit={async e => {
-          e.preventDefault();
-          await dispatch(__pathScehdule({ reqScheduleValue, scId }));
-          navi(`/scheduledetail/${param}`);
-        }}
-      >
+      <form onSubmit={onSubmitHandler}>
         <StSubTitle margin="15px 0px 10px 24px">
           <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
           스케줄 제목
@@ -71,13 +71,9 @@ function PathSchedulesTime({
           margin="auto"
           type="text"
           value={scheduleValue.scTitle}
+          name="scTitle"
           required
-          onChange={e =>
-            setScheduleValue({
-              ...scheduleValue,
-              scTitle: e.target.value,
-            })
-          }
+          onChange={onChangeHandler}
         />
         <StSubTitle margin="15px 0px 10px 24px">
           <StIcon src={`${process.env.PUBLIC_URL}/img/text.png`} alt="icon" />
@@ -89,13 +85,9 @@ function PathSchedulesTime({
           margin="auto"
           type="text"
           value={scheduleValue.scComment}
+          name="scComment"
           required
-          onChange={e =>
-            setScheduleValue({
-              ...scheduleValue,
-              scComment: e.target.value,
-            })
-          }
+          onChange={onChangeHandler}
         />
         <StSubmitButton>수정하기</StSubmitButton>
       </form>

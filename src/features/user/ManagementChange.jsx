@@ -1,13 +1,13 @@
 import React from 'react';
-import SelectModal from '../../features/SelectModal';
+import { useDispatch } from 'react-redux';
+import { BsPersonGear } from 'react-icons/bs';
+import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
+import { useModal } from '../../hooks/useModalHook';
 import { CommentBox } from '../../pages/Reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
-import { useDispatch } from 'react-redux';
-import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
-import Modal from '../../components/Modal';
 import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
-import { useModal } from '../../hooks/useModalHook';
-import { BsPersonGear } from "react-icons/bs";
+import Modal from '../../components/Modal';
+import SelectModal from '../../features/SelectModal';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, openSelectModal, closeSelectModal] = useModal();
@@ -23,7 +23,10 @@ function ManagementChange({ item }) {
   return (
     <>
       <CommentBox>
-        <StSmallFont width> <BsPersonGear/> 권한 변경</StSmallFont>
+        <StSmallFont width>
+          {' '}
+          <BsPersonGear /> 권한 변경
+        </StSmallFont>
 
         <div
           style={{
@@ -43,7 +46,7 @@ function ManagementChange({ item }) {
           >
             직급 수정
           </MoveModalSubbtn>
- 
+
           <MoveModalbtn
             onClick={openDeleteModal}
             width="84px"
@@ -55,8 +58,8 @@ function ManagementChange({ item }) {
           >
             인원 삭제
           </MoveModalbtn>
-          
-         {isSelectModalOpen && (
+
+          {isSelectModalOpen && (
             <SelectModal
               setIsModal={closeSelectModal}
               role={item.role}

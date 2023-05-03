@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-
-import { getCookie } from '../../shared/cookies';
-
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
 import { useCalendar } from '../../hooks/useCalendar';
-
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import {
   DayContain,
   SchContain,
@@ -21,8 +19,6 @@ import {
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import SchedulesTime from '../../features/Schedules/SchedulesTime';
-import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 
 function SchedulesCalendar() {
   const param = useParams();

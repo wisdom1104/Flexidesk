@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { SliderContainer, StFont, StSlider, StSliderButton, StSliders, StSmallFont } from "../../pages/Welcome/WelcomeStyled";
-import { useCarouselHook } from '../../hooks/useCarouselHook'
+import { useCarouselHook } from '../../hooks/useCarouselHook';
+import {
+  SliderContainer,
+  StFont,
+  StSlider,
+  StSliderButton,
+  StSliders,
+  StSmallFont,
+} from '../../pages/Welcome/WelcomeStyled';
 
 const CarouselButton = ({ children, dir, onClick }) => {
   return (
@@ -12,28 +19,42 @@ const CarouselButton = ({ children, dir, onClick }) => {
 };
 
 const Carousel = () => {
-  
-  const { index, animate, genSlidersArray, onClickLeftHandler, onClickRightHandler} = useCarouselHook();
+  const {
+    index,
+    animate,
+    genSlidersArray,
+    onClickLeftHandler,
+    onClickRightHandler,
+  } = useCarouselHook();
 
   return (
-      <SliderContainer>
-        <CarouselButton dir="left" onClick={onClickLeftHandler}>
+    <SliderContainer>
+      <CarouselButton dir="left" onClick={onClickLeftHandler}>
         <TiChevronLeftOutline />
-        </CarouselButton>
-        <CarouselButton dir="right" onClick={onClickRightHandler}>
+      </CarouselButton>
+      <CarouselButton dir="right" onClick={onClickRightHandler}>
         <TiChevronRightOutline />
-        </CarouselButton>
+      </CarouselButton>
 
-          <StSliders animate={animate}>
-          {genSlidersArray(index).map((item, index) => (
+      <StSliders animate={animate}>
+        {genSlidersArray(index).map((item, index) => (
           <StSlider key={index}>
-            <StSmallFont height='50%' fontSize='1.5rem' align='start' weight='700'> "{item?.component}" </StSmallFont>
-            <StFont fontSize='20px' align='end' paddingTop='100px'>{item?.name}</StFont>
+            <StSmallFont
+              height="50%"
+              fontSize="1.5rem"
+              align="start"
+              weight="700"
+            >
+              {' '}
+              "{item?.component}"{' '}
+            </StSmallFont>
+            <StFont fontSize="20px" align="end" paddingTop="100px">
+              {item?.name}
+            </StFont>
           </StSlider>
-          ))}
-        </StSliders>
-        
-      </SliderContainer>
+        ))}
+      </StSliders>
+    </SliderContainer>
   );
 };
 

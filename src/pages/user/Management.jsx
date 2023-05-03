@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StFont,
-  StSmallFont,
-  StSpacePagePhoto,
-} from '../Welcome/WelcomeStyled';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { HiOutlineMail } from 'react-icons/hi';
+import { BsPerson } from 'react-icons/bs';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { getCookie } from '../../shared/cookies';
-import { useNavigate } from 'react-router-dom';
+import Skeleton from '../../components/Skeleton';
+import Page from '../../components/Page';
+import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import {
   CommentBox,
   Info,
@@ -15,15 +15,11 @@ import {
   InfoContain,
   StSubTitle,
 } from '../Reservation/CalendarStyled';
-import ManagementChange from '../../features/user/ManagementChange';
-import Skeleton from '../../components/Skeleton';
-import { HiOutlineMail } from 'react-icons/hi';
-import { BsPerson } from 'react-icons/bs';
 import { StListTitle } from '../../shared/SpaceStyles';
-import Page from '../../components/Page';
+import ManagementChange from '../../features/user/ManagementChange';
 
 function Management() {
-  const { userList, isLoading, isError } = useSelector(state => state.userList);
+  const { userList, isError } = useSelector(state => state.userList);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
   const navi = useNavigate();

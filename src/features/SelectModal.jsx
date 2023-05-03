@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { HiChevronDown } from 'react-icons/hi2';
+import { __patchAllManagement } from '../redux/modules/allManagementSlice';
 import {
   ModalFullBackground,
   MoveModal,
@@ -13,8 +15,6 @@ import {
   DropdownItem,
   DropdownMenu,
 } from '../pages/user/UserStyled';
-import { useDispatch } from 'react-redux';
-import {  __patchAllManagement } from '../redux/modules/allManagementSlice';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
@@ -33,7 +33,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
 
   const onPatchButtonHandler = () => {
     setIsModal(false);
-    dispatch(__patchAllManagement({ userId ,role: fav , updateRole:true}));
+    dispatch(__patchAllManagement({ userId, role: fav, updateRole: true }));
   };
 
   return (
