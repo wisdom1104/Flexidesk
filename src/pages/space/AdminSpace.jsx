@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import AdminSpaceBox from '../../features/adminSpace/AdminSpaceBox';
 import { useNavigate } from 'react-router-dom';
+import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
+import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import Skeleton from '../../components/Skeleton';
+import { Column, Row } from '../../components/Flex';
+import Page from '../../components/Page';
+import AdminSpaceBox from '../../features/adminSpace/AdminSpaceBox';
 import {
   StBoard,
   StBtn,
@@ -9,16 +15,10 @@ import {
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
-import { Column, Row } from '../../components/Flex';
-import AdminList from '../../features/adminSpace/AdminList';
-import AdminSelector from '../../features/adminSpace/AdminSelector';
-import Page from '../../components/Page';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { InfoContain } from '../Reservation/CalendarStyled';
-import Skeleton from '../../components/Skeleton';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
-import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
-import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
+import AdminList from '../../features/adminSpace/AdminList';
+import AdminSelector from '../../features/adminSpace/AdminSelector';
 
 function AdminSpace() {
   const navi = useNavigate();

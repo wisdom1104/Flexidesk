@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
+import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
 import {
   BoxBtn,
   BoxSubBtn,
@@ -7,9 +9,6 @@ import {
   StInnerItem,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
-import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
-
 function AdminInnerItem({
   space,
   onClickSpaceListHandler,

@@ -1,8 +1,7 @@
 import React from 'react';
+import { useAddInnerSpace } from '../../hooks/adminSpace/list/useAddInnerSpace';
 import { StAddInnerBtn, StInnerList } from '../../shared/SpaceStyles';
 import AdminInnerItem from './AdminInnerItem';
-import { useAddInnerSpace } from '../../hooks/adminSpace/list/useAddInnerSpace';
-
 function AdminInnerList({
   floor,
   onClickSpaceListHandler,

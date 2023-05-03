@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
+import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
 import {
   BoxBtn,
   BoxSubBtn,
@@ -7,8 +9,6 @@ import {
   StListBtnBox,
   StListItem,
 } from '../../shared/SpaceStyles';
-import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
-import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
 
 function AdminSpaceList({
   space,

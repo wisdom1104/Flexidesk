@@ -2,7 +2,6 @@ import React from 'react';
 import AdminMrItem from './AdminMrItem';
 import AdminBoxItem from './AdminBoxItem';
 import AdminMultiBoxItem from './AdminMultiBoxItem';
-
 function AdminDropItem({
   space,
   spaceId,

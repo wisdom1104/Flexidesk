@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminFloorItem from '../adminSpace/AdminFloorItem';
+import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
 import {
   BoxBtn,
   BoxSubBtn,
@@ -7,8 +7,7 @@ import {
   StList,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
-import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
-
+import AdminFloorItem from '../adminSpace/AdminFloorItem';
 function AdminFloorList({
   floor,
   onClickSpaceListHandler,
