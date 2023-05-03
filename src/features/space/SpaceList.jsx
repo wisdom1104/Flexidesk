@@ -9,7 +9,7 @@ import {
   StListbox,
   StSpaceList,
 } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../../pages/Welcome/WelcomeStyled';
+import { StSpacePagePhoto } from '../../pages/welcome/WelcomeStyled';
 
 function SpaceList({
   floors,

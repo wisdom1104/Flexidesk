@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import api from '../../axios/api';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import {
   Container,
   InlinButton,

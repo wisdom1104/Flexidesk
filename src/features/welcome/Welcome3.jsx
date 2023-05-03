@@ -6,7 +6,7 @@ import {
   StOverall,
   StSmallFont,
   StWrapDiv,
-} from '../../pages/Welcome/WelcomeStyled';
+} from '../../pages/welcome/WelcomeStyled';
 
 function Welcome3() {
   return (
@@ -27,11 +27,11 @@ function Welcome3() {
                   weight="700"
                   align="start"
                   width="100%"
-                  marginBottom='5vw'
+                  marginBottom="5vw"
                 >
                   업무 트렌드
                 </StSmallFont>
-                <StFont align="start" marginBottom='2vw' >
+                <StFont align="start" marginBottom="2vw">
                   자율 좌석제
                 </StFont>
 
@@ -50,8 +50,10 @@ function Welcome3() {
                   display: 'inline-block',
                 }}
               >
-                <img src={`${process.env.PUBLIC_URL}/img/welcome2.png`} alt="welcome2" />
-
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/welcome2.png`}
+                  alt="welcome2"
+                />
               </div>
             </StIntroDiv>
           </StWrapDiv>

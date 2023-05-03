@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import { useModal } from '../../hooks/useModalHook';
-import { CommentBox } from '../../pages/Reservation/CalendarStyled';
+import { CommentBox } from '../../pages/reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import Modal from '../../components/Modal';
 import SelectModal from '../../features/SelectModal';
 

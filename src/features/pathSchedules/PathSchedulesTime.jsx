@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { __pathScehdule } from '../../../redux/modules/schedules';
-import { useSchedulesTime } from '../../../hooks/schedules/useSchedulesTime';
-import { useSchedulesHandler } from '../../../hooks/schedules/useSchedulesHandler';
-import { Input } from '../../../components/Input';
+import { __pathScehdule } from '../../redux/modules/schedules';
+import { useSchedulesTime } from '../../hooks/schedules/useSchedulesTime';
+import { useSchedulesHandler } from '../../hooks/schedules/useSchedulesHandler';
+import { Input } from '../../components/Input';
 import {
   StReserTimeBox,
   StReserTimeButton,
@@ -11,7 +11,7 @@ import {
   StSubTitle,
   StIcon,
   StSubmitButton,
-} from '../../../pages/Reservation/CalendarStyled';
+} from '../../pages/reservation/CalendarStyled';
 
 function PathSchedulesTime({
   param,

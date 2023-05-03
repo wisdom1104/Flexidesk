@@ -4,7 +4,7 @@ import ValidationError from '../../components/form/ValidationError';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
-import { StFont } from '../Welcome/WelcomeStyled';
+import { StFont } from '../welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,

@@ -9,7 +9,7 @@ import {
   StSmallFont,
   StSpaceDiv,
   StSpacePagePhoto,
-} from '../../pages/Welcome/WelcomeStyled';
+} from '../../pages/welcome/WelcomeStyled';
 
 function Welcome4() {
   return (
@@ -37,18 +37,24 @@ function Welcome4() {
               >
                 스페이스
               </StSmallFont>
-              <StFont fontSize='3rem' align="start">업무 공간 이동</StFont>
+              <StFont fontSize="3rem" align="start">
+                업무 공간 이동
+              </StFont>
               <StSmallFont align="start" width="100%">
                 회사내에서도 나에게 맞는 공간을 찾아봐요
               </StSmallFont>
-              
-              <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page1.png`} alt="page1" />
 
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon1.png`} alt="pageIcon1" />
+              <StImgeContainer>
+                <StSpacePagePhoto
+                  src={`${process.env.PUBLIC_URL}/img/page1.png`}
+                  alt="page1"
+                />
+
+                <StImgeSecond
+                  src={`${process.env.PUBLIC_URL}/img/pageIcon1.png`}
+                  alt="pageIcon1"
+                />
               </StImgeContainer>
-              
             </StSpaceDiv>
 
             <StSpaceDiv>
@@ -60,7 +66,7 @@ function Welcome4() {
               >
                 회의실 예약
               </StSmallFont>
-              <StFont fontSize='3rem' align="start" width="100%">
+              <StFont fontSize="3rem" align="start" width="100%">
                 간편해진 회의실 예약
               </StFont>
               <StSmallFont align="start" width="100%">
@@ -68,11 +74,15 @@ function Welcome4() {
               </StSmallFont>
 
               <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page2.png`} alt="page2" />
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon2.png`} alt="pageIcon2" />
+                <StSpacePagePhoto
+                  src={`${process.env.PUBLIC_URL}/img/page2.png`}
+                  alt="page2"
+                />
+                <StImgeSecond
+                  src={`${process.env.PUBLIC_URL}/img/pageIcon2.png`}
+                  alt="pageIcon2"
+                />
               </StImgeContainer>
-              
             </StSpaceDiv>
 
             <StSpaceDiv>
@@ -84,17 +94,23 @@ function Welcome4() {
               >
                 스케줄
               </StSmallFont>
-              <StFont fontSize='3rem' align="start">내 스케줄 관리도 한번에</StFont>
+              <StFont fontSize="3rem" align="start">
+                내 스케줄 관리도 한번에
+              </StFont>
               <StSmallFont align="start" width="100%">
                 근무 일정과 연동되는 스케줄
               </StSmallFont>
 
               <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page3.png`} alt="page3" />
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon3.png`} alt="pageIcon3" />
+                <StSpacePagePhoto
+                  src={`${process.env.PUBLIC_URL}/img/page3.png`}
+                  alt="page3"
+                />
+                <StImgeSecond
+                  src={`${process.env.PUBLIC_URL}/img/pageIcon3.png`}
+                  alt="pageIcon3"
+                />
               </StImgeContainer>
-
             </StSpaceDiv>
           </div>
         </StOverall>

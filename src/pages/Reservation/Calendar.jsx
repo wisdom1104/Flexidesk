@@ -8,8 +8,8 @@ import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
 import { StListTitle } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
-import ReservationTime from '../../features/Reservation/ReservationTime';
+import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
+import ReservationTime from '../../features/reservation/ReservationTime';
 import {
   DayContain,
   Day,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import Page from '../../../components/Page';
-import PathSchedulesTime from '../../../features/Schedules/PathSchedules/PathSchedulesTime';
-import { useCalendar } from '../../../hooks/useCalendar';
-import { Row } from '../../../components/Flex';
+import Page from '../../components/Page';
+import PathSchedulesTime from '../../features/pathSchedules/PathSchedulesTime';
+import { useCalendar } from '../../hooks/useCalendar';
+import { Row } from '../../components/Flex';
 import {
   DayContain,
   SchContain,
@@ -13,9 +13,9 @@ import {
   StSubTitle,
   StIcon,
   StSelectDay,
-} from '../../Reservation/CalendarStyled';
-import { StSpacePagePhoto } from '../../Welcome/WelcomeStyled';
-import { StListTitle } from '../../../shared/SpaceStyles';
+} from '../reservation/CalendarStyled';
+import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
+import { StListTitle } from '../../shared/SpaceStyles';
 
 function PathScedules() {
   const location = useLocation();

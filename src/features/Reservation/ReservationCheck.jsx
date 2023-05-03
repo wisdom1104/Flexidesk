@@ -6,7 +6,7 @@ import {
   FontSt,
   StIcon,
   StSubTitle,
-} from '../../pages/Reservation/CalendarStyled';
+} from '../../pages/reservation/CalendarStyled';
 
 import { Column } from '../../components/Flex';
 

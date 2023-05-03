@@ -14,10 +14,10 @@ import {
   PathBtn,
   StSubTitle,
   ButtonContain,
-} from '../Reservation/CalendarStyled';
-import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
+} from '../reservation/CalendarStyled';
+import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
-import SchedulesDelete from '../../features/Schedules/SchedulesDelete';
+import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 
 function SchedulesDetail() {
   const navi = useNavigate();

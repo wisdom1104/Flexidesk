@@ -1,5 +1,5 @@
 import React,{ useState, useCallback } from 'react';
-import { StDate } from '../pages/Reservation/CalendarStyled';
+import { StDate } from '../pages/reservation/CalendarStyled';
 
 export const useCalendar = (width,dataDay) =>{
   const today = {

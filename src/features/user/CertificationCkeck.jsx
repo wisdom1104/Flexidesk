@@ -5,7 +5,7 @@ import {
   InlinButton,
   InlineInput,
 } from '../../pages/user/UserStyled';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 
 function CertificationCkeck({ user, certification, onChange }) {
   // form태그 핸들러

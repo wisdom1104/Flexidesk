@@ -11,7 +11,7 @@ import {
   StSubTitle,
   StSubmitButton,
   StIcon,
-} from '../../pages/Reservation/CalendarStyled';
+} from '../../pages/reservation/CalendarStyled';
 
 function SchedulesTime({ param, selectDay }) {
   const initDate = [];

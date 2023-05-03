@@ -15,8 +15,8 @@ import {
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
-import { InfoContain } from '../Reservation/CalendarStyled';
+import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
+import { InfoContain } from '../reservation/CalendarStyled';
 import AdminList from '../../features/adminSpace/AdminList';
 import AdminSelector from '../../features/adminSpace/AdminSelector';
 

@@ -4,7 +4,7 @@ import { Input } from '../../components/Input';
 import { Row } from '../../components/Flex';
 import ValidationError from '../../components/form/ValidationError';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
+import { StFont, StSmallFont } from '../welcome/WelcomeStyled';
 import {
   StBackground,
   StForm,

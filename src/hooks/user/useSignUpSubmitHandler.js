@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
-import useTrue from './useTrue';
+import useTokenCheck from './useTokenCheck';
 
 export const useSignUpSubmitHandler=(auth)=> {
-  useTrue();
+  useTokenCheck();
   
   const navi = useNavigate();
 
