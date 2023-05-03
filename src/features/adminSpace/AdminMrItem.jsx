@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDeleteMrBox } from '../../hooks/adminSpace/box/useDeleteMrBox';
+import { useEditMrBox } from '../../hooks/adminSpace/box/useEditMrBox';
+import { useDADMrBox } from '../../hooks/adminSpace/box/useDADMrBox';
 import {
   BoxBtn,
   BoxInput,
@@ -6,10 +9,6 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteMrBox } from '../../hooks/adminSpace/box/useDeleteMrBox';
-import { useEditMrBox } from '../../hooks/adminSpace/box/useEditMrBox';
-import { useDADMrBox } from '../../hooks/adminSpace/box/useDADMrBox';
-
 function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
   const { submitDelete } = useDeleteMrBox();
 

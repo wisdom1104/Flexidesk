@@ -1,4 +1,7 @@
 import React from 'react';
+import { useAddFloor } from '../../hooks/adminSpace/list/useAddFloor';
+import { useAddSpace } from '../../hooks/adminSpace/list/useAddSpace';
+import { useListDragAndDrop } from '../../hooks/adminSpace/list/useListDragAndDrop';
 import {
   ModalContain,
   ModalBackground,
@@ -11,9 +14,6 @@ import {
 } from '../../shared/SpaceStyles';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
-import { useAddFloor } from '../../hooks/adminSpace/list/useAddFloor';
-import { useAddSpace } from '../../hooks/adminSpace/list/useAddSpace';
-import { useListDragAndDrop } from '../../hooks/adminSpace/list/useListDragAndDrop';
 
 function AdminList({
   isModal,

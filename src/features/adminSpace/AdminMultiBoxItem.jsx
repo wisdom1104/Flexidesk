@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
+import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
+import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
 import {
   BoxBtn,
   BoxInput,
@@ -6,10 +9,6 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
-import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
-import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
-
 function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
   const { submitDelete } = useDeleteMultiBox();
 

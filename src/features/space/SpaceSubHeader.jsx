@@ -1,17 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Row } from '../../components/Flex';
+import { getCookie } from '../../shared/cookies';
 import {
   StBtn,
-  StSubBtn,
   StSubHeader,
   SubIcon,
   SubTitle,
 } from '../../shared/SpaceStyles';
+import { Row } from '../../components/Flex';
 
-function AdminSubHeader({ space, isModal, setIsModal }) {
-  const navigate = useNavigate();
-
+function SpaceSubHeader({ space }) {
+  const navi = useNavigate();
+  const role = getCookie('role');
   return (
     <StSubHeader>
       {/* space name 부분 */}
@@ -19,33 +19,23 @@ function AdminSubHeader({ space, isModal, setIsModal }) {
         {space?.map(item => {
           if (item && item.floorId !== null)
             return (
-              <Row key={item.spaceId}>
+              <Row key={item.floorId}>
                 <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
                 <SubIcon>&gt;</SubIcon>
                 <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
               </Row>
             );
           if (item && item.floorId === null)
-            return (
-              <SubTitle key={item.spaceId}>
-                {/* if(item.floorId) */}
-                {item.spaceName}
-              </SubTitle>
-            );
+            return <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>;
         })}
       </Row>
       <Row>
-        <StSubBtn
-          onClick={() => {
-            setIsModal(!isModal);
-          }}
-        >
-          스페이스 관리하기
-        </StSubBtn>
-        <StBtn onClick={() => navigate('/space')}>완료</StBtn>
+        {role === 'ADMIN' || role === 'MANAGER' ? (
+          <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
+        ) : null}
       </Row>
     </StSubHeader>
   );
 }
 
-export default AdminSubHeader;
+export default SpaceSubHeader;

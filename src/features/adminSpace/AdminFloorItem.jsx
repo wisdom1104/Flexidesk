@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDeleteFloor } from '../../hooks/adminSpace/list/useDeleteFloor';
+import { Row } from '../../components/Flex';
 import {
   BoxBtn,
   BoxSubBtn,
@@ -8,10 +10,7 @@ import {
   StOpenBtn,
   StOpenList,
 } from '../../shared/SpaceStyles';
-import { Row } from '../../components/Flex';
 import AdminInnerList from '../adminSpace/AdminInnerList';
-import { useDeleteFloor } from '../../hooks/adminSpace/list/useDeleteFloor';
-
 function AdminFloorItem({
   floor,
   onClickSpaceListHandler,
