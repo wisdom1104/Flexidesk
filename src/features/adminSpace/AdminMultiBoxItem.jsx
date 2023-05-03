@@ -9,6 +9,7 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
+
 function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
   const { submitDelete } = useDeleteMultiBox();
 

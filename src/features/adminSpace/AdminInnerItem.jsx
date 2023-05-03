@@ -9,6 +9,7 @@ import {
   StInnerItem,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
+
 function AdminInnerItem({
   space,
   onClickSpaceListHandler,

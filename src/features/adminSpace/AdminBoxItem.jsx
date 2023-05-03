@@ -9,6 +9,7 @@ import {
   StBox,
   StBtnBox,
 } from '../../shared/SpaceStyles';
+
 function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
   const { submitDelete } = useDeleteBox();
 
