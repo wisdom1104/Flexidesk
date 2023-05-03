@@ -9,11 +9,11 @@ import {
   StAddBtn,
   StAddBtnBox,
 } from '../../shared/SpaceStyles';
-import { useDispatch } from 'react-redux';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
-import { useListDragAndDrop } from '../../hooks/adminSpace/useListDragAndDropHook';
-import { useFloorAndSpaceAdd } from '../../hooks/adminSpace/useAdminListHook';
+import { useAddFloor } from '../../hooks/adminSpace/list/useAddFloor';
+import { useAddSpace } from '../../hooks/adminSpace/list/useAddSpace';
+import { useListDragAndDrop } from '../../hooks/adminSpace/list/useListDragAndDrop';
 
 function AdminList({
   isModal,
@@ -22,14 +22,12 @@ function AdminList({
   floors,
   onClickSpaceListHandler,
 }) {
-  const dispatch = useDispatch();
-
-  const { onClickAddFloorHandler, onClickAddSpaceHandler } =
-    useFloorAndSpaceAdd(dispatch);
+  const { submitAddFloor } = useAddFloor();
+  const { submitAddSpace } = useAddSpace();
 
   //리스트 드래그 앤 드롭
   const { dragStart, onAvailableItemDragEnter, onDragEnd, onDragOver } =
-    useListDragAndDrop(dispatch);
+    useListDragAndDrop();
 
   return (
     <>
@@ -48,8 +46,8 @@ function AdminList({
                 </Modalbtn>
               </ModalHeader>
               <StAddBtnBox>
-                <StAddBtn onClick={onClickAddFloorHandler}>층 추가</StAddBtn>
-                <StAddBtn onClick={onClickAddSpaceHandler}>
+                <StAddBtn onClick={() => submitAddFloor()}>층 추가</StAddBtn>
+                <StAddBtn onClick={() => submitAddSpace()}>
                   스페이스 추가
                 </StAddBtn>
               </StAddBtnBox>
@@ -60,7 +58,6 @@ function AdminList({
                       key={floor.floorId}
                       floor={floor}
                       onClickSpaceListHandler={onClickSpaceListHandler}
-                      dispatch={dispatch}
                       dragStart={dragStart}
                       onAvailableItemDragEnter={onAvailableItemDragEnter}
                       onDragOver={onDragOver}
@@ -75,7 +72,6 @@ function AdminList({
                       key={space.spaceId}
                       space={space}
                       onClickSpaceListHandler={onClickSpaceListHandler}
-                      dispatch={dispatch}
                       dragStart={dragStart}
                       onAvailableItemDragEnter={onAvailableItemDragEnter}
                       onDragOver={onDragOver}

@@ -5,52 +5,42 @@ import AdminMultiBoxItem from './AdminMultiBoxItem';
 
 function AdminDropItem({
   space,
-  // HandleDrop,
-  // handleDragOver,
-  // elRef,
-  // handleDragStart,
   spaceId,
-  boardEl,multiBoxList
-  // mrBoxMouseDownHandler,
-  // boxMouseDownHandler,
-  // multiBoxMouseDownHandler,
+  boardEl,
+  mrList,
+  boxList,
+  multiBoxList,
 }) {
   return (
     <>
       {/* 회의실 */}
-      {/* {space?.map(item =>
+      {space?.map(item =>
         item.mrList?.length > 0
           ? item.mrList?.map(mr => (
               <AdminMrItem
                 key={mr.mrId}
                 mr={mr}
-                HandleDrop={HandleDrop}
-                handleDragOver={handleDragOver}
-                elRef={elRef}
-                mrBoxMouseDownHandler={mrBoxMouseDownHandler}
-                handleDragStart={handleDragStart}
+                mrList={mrList}
+                boardEl={boardEl}
                 spaceId={spaceId}
               />
             ))
           : null,
-      )} */}
+      )}
       {/* 박스 */}
-      {/* {space?.map(item =>
+      {space?.map(item =>
         item.boxList?.length > 0
           ? item.boxList?.map(box => (
               <AdminBoxItem
                 key={box.boxId}
                 box={box}
-                HandleDrop={HandleDrop}
-                handleDragOver={handleDragOver}
-                elRef={elRef}
-                boxMouseDownHandler={boxMouseDownHandler}
-                handleDragStart={handleDragStart}
+                boxList={boxList}
+                boardEl={boardEl}
                 spaceId={spaceId}
               />
             ))
           : null,
-      )} */}
+      )}
       {/* 공용공간 */}
       {space?.map(item =>
         item.multiBoxList?.length > 0
@@ -59,12 +49,7 @@ function AdminDropItem({
                 key={multiBox.multiBoxId}
                 multiBox={multiBox}
                 multiBoxList={multiBoxList}
-                // HandleDrop={HandleDrop}
-                // handleDragOver={handleDragOver}
                 boardEl={boardEl}
-                // elRef={elRef}
-                // multiBoxMouseDownHandler={multiBoxMouseDownHandler}
-                // handleDragStart={handleDragStart}
                 spaceId={spaceId}
               />
             ))

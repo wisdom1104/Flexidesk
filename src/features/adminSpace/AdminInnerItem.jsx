@@ -7,10 +7,10 @@ import {
   StInnerItem,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
-import { useSpaceDeleteAndEdit } from '../../hooks/adminSpace/useAdminListHook';
+import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
+import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
 
 function AdminInnerItem({
-  dispatch,
   space,
   onClickSpaceListHandler,
   dragStart,
@@ -19,17 +19,18 @@ function AdminInnerItem({
   onDragEnd,
 }) {
   const {
-    onDeleteSpaceHandler,
-    onEditSpaceNameHandler,
-    spaceEdit,
-    setSpaceEdit,
+    submitEditSpace,
+    isEditSpace,
+    changeEditModeHandler,
+    changeNameHandler,
     editSpaceName,
-    setEditSpaceName,
-  } = useSpaceDeleteAndEdit(dispatch, space);
+  } = useEditSpace(space);
+
+  const { submitDeleteSpace } = useDeleteSpace();
 
   return (
     <>
-      {!spaceEdit ? (
+      {!isEditSpace ? (
         <StInner
           key={space.spaceId}
           draggable
@@ -49,9 +50,7 @@ function AdminInnerItem({
           <StListBtnBox data-floor-id={space.floorId}>
             <BoxBtn
               data-floor-id={space.floorId}
-              onClick={() => {
-                setSpaceEdit(!spaceEdit);
-              }}
+              onClick={() => changeEditModeHandler()}
             >
               수정
             </BoxBtn>
@@ -60,7 +59,7 @@ function AdminInnerItem({
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
-                  onDeleteSpaceHandler(space.spaceId);
+                  submitDeleteSpace(space.spaceId);
                 }
               }}
             >
@@ -76,24 +75,15 @@ function AdminInnerItem({
             style={{ marginLeft: '25px' }}
             type="text"
             value={editSpaceName}
-            onChange={e => {
-              setEditSpaceName(e.target.value);
-            }}
+            onChange={e => changeNameHandler(e.target.value)}
           />
           <StListBtnBox data-floor-id={space.floorId}>
-            <BoxBtn
-              data-floor-id={space.floorId}
-              onClick={() => {
-                onEditSpaceNameHandler(space);
-              }}
-            >
+            <BoxBtn data-floor-id={space.floorId} onClick={submitEditSpace}>
               완료
             </BoxBtn>
             <BoxSubBtn
               data-floor-id={space.floorId}
-              onClick={() => {
-                setSpaceEdit(!spaceEdit);
-              }}
+              onClick={() => changeEditModeHandler()}
             >
               취소
             </BoxSubBtn>

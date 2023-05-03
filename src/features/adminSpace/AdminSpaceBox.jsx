@@ -1,47 +1,28 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
 import AdminSubHeader from './AdminSubHeader';
 import AdminDropItem from './AdminDropItem';
-import { useSpace } from '../../hooks/adminSpace/useAdminSpaceHook';
-import { useBoxDrop } from '../../hooks/adminSpace/useBoxDrop';
-import { useBoxDragAndDrop } from '../../hooks/adminSpace/useBoxDragAndDropHook';
+import { handleDragOver } from '../../utils/dragOverHandler';
+import { useDropBox } from '../../hooks/adminSpace/box/useDropBox';
+import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
+import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList';
 
 function AdminSpaceBox({
   spaceId,
   selectedSpace,
-  // handleDragStart,
   isModal,
   setIsModal,
   spaces,
   id,
-  mrBoxes,
-  boxes,
-  multiBoxes,
 }) {
-  const dispatch = useDispatch();
-
-  const { space, mrList, boxList, multiBoxList } = useSpace(
-    dispatch,
+  const { mrBoxes, boxes, multiBoxes } = useSelectDropBoxs();
+  const { space, mrList, boxList, multiBoxList } = useSrchSpaceAndList(
     selectedSpace,
     id,
     spaces,
   );
 
-  // const {
-  //   elRef,
-  //   boardEl,
-  //   newMrBoxes,
-  //   newBoxes,
-  //   newMultiBoxes,
-  //   mrBoxMouseDownHandler,
-  //   boxMouseDownHandler,
-  //   multiBoxMouseDownHandler,
-  // } = useBoxDragAndDrop(dispatch, spaceId, mrList, boxList, multiBoxList);
-
-  // 요소 드롭
-  const { HandleDrop, handleDragOver } = useBoxDrop(
-    dispatch,
+  const { HandleDrop } = useDropBox(
     spaceId,
     mrList,
     boxList,
@@ -50,6 +31,7 @@ function AdminSpaceBox({
     boxes,
     multiBoxes,
   );
+
   const boardEl = useRef(null);
 
   return (
@@ -58,16 +40,11 @@ function AdminSpaceBox({
       <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
         <AdminDropItem
           space={space}
-          // HandleDrop={HandleDrop}
-          // handleDragOver={handleDragOver}
-          // elRef={elRef}
           boardEl={boardEl}
-          // handleDragStart={handleDragStart}
           spaceId={spaceId}
+          mrList={mrList}
+          boxList={boxList}
           multiBoxList={multiBoxList}
-          // mrBoxMouseDownHandler={mrBoxMouseDownHandler}
-          // boxMouseDownHandler={boxMouseDownHandler}
-          // multiBoxMouseDownHandler={multiBoxMouseDownHandler}
         />
       </StBoard>
     </Stmainspace>

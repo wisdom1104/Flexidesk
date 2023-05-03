@@ -10,6 +10,7 @@ import {
 } from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
 import AdminInnerList from '../adminSpace/AdminInnerList';
+import { useDeleteFloor } from '../../hooks/adminSpace/list/useDeleteFloor';
 
 function AdminFloorItem({
   floor,
@@ -18,12 +19,11 @@ function AdminFloorItem({
   onAvailableItemDragEnter,
   onDragOver,
   onDragEnd,
-  onDeleteFloorHandler,
-  floorEdit,
-  setFloorEdit,
-  isInner,
-  setIsInner,
+  changeEditModeHandler,
 }) {
+  const [isInner, setIsInner] = useState(false);
+  const { submitDeleteFloor } = useDeleteFloor();
+
   return (
     <>
       {!isInner ? (
@@ -53,9 +53,7 @@ function AdminFloorItem({
           <StListBtnBox data-floor-id={floor.floorId}>
             <BoxBtn
               data-floor-id={floor.floorId}
-              onClick={() => {
-                setFloorEdit(!floorEdit);
-              }}
+              onClick={() => changeEditModeHandler()}
             >
               수정
             </BoxBtn>
@@ -64,7 +62,7 @@ function AdminFloorItem({
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
-                  onDeleteFloorHandler(floor.floorId);
+                  submitDeleteFloor(floor.floorId);
                 }
               }}
             >
@@ -100,9 +98,7 @@ function AdminFloorItem({
             <StListBtnBox data-floor-id={floor.floorId}>
               <BoxBtn
                 data-floor-id={floor.floorId}
-                onClick={() => {
-                  setFloorEdit(!floorEdit);
-                }}
+                onClick={() => changeEditModeHandler()}
               >
                 수정
               </BoxBtn>
@@ -112,7 +108,7 @@ function AdminFloorItem({
                   const confirmDelete =
                     window.confirm('정말 삭제하시겠습니까?');
                   if (confirmDelete) {
-                    onDeleteFloorHandler(floor.floorId);
+                    submitDeleteFloor(floor.floorId);
                   }
                 }}
               >

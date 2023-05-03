@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
+import React from 'react';
 import AdminFloorItem from '../adminSpace/AdminFloorItem';
 import {
   BoxBtn,
@@ -8,11 +7,10 @@ import {
   StList,
   StListBtnBox,
 } from '../../shared/SpaceStyles';
-import { useFloorDeleteAndEdit } from '../../hooks/adminSpace/useAdminListHook';
+import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
 
 function AdminFloorList({
   floor,
-  dispatch,
   onClickSpaceListHandler,
   dragStart,
   onAvailableItemDragEnter,
@@ -20,66 +18,49 @@ function AdminFloorList({
   onDragEnd,
 }) {
   const {
-    onDeleteFloorHandler,
-    onEditFloorNameHandler,
-    isInner,
-    setIsInner,
-    floorEdit,
-    setFloorEdit,
+    submitEditFloor,
+    isEditFloor,
+    changeEditModeHandler,
+    changeNameHandler,
     editFloorName,
-    setEditFloorName,
-  } = useFloorDeleteAndEdit(dispatch, floor);
+  } = useEditFloor(floor);
 
   return (
-    <>
-      <div>
-        {!floorEdit ? (
-          <AdminFloorItem
-            floor={floor}
-            onClickSpaceListHandler={onClickSpaceListHandler}
-            dragStart={dragStart}
-            onAvailableItemDragEnter={onAvailableItemDragEnter}
-            onDragOver={onDragOver}
-            onDragEnd={onDragEnd}
-            onDeleteFloorHandler={onDeleteFloorHandler}
-            floorEdit={floorEdit}
-            setFloorEdit={setFloorEdit}
-            isInner={isInner}
-            setIsInner={setIsInner}
+    <div>
+      {!isEditFloor ? (
+        <AdminFloorItem
+          floor={floor}
+          onClickSpaceListHandler={onClickSpaceListHandler}
+          dragStart={dragStart}
+          onAvailableItemDragEnter={onAvailableItemDragEnter}
+          onDragOver={onDragOver}
+          onDragEnd={onDragEnd}
+          floorEdit={isEditFloor}
+          changeEditModeHandler={changeEditModeHandler}
+        />
+      ) : (
+        <StList data-floor-id={floor.floorId}>
+          <EditInput
+            maxLength={7}
+            data-floor-id={floor.floorId}
+            type="text"
+            value={editFloorName}
+            onChange={e => changeNameHandler(e.target.value)}
           />
-        ) : (
-          <StList data-floor-id={floor.floorId}>
-            <EditInput
-              maxLength={7}
+          <StListBtnBox>
+            <BoxBtn data-floor-id={floor.floorId} onClick={submitEditFloor}>
+              완료
+            </BoxBtn>
+            <BoxSubBtn
               data-floor-id={floor.floorId}
-              type="text"
-              value={editFloorName}
-              onChange={e => {
-                setEditFloorName(e.target.value);
-              }}
-            />
-            <StListBtnBox>
-              <BoxBtn
-                data-floor-id={floor.floorId}
-                onClick={() => {
-                  onEditFloorNameHandler(floor.floorId);
-                }}
-              >
-                완료
-              </BoxBtn>
-              <BoxSubBtn
-                data-floor-id={floor.floorId}
-                onClick={() => {
-                  setFloorEdit(!floorEdit);
-                }}
-              >
-                취소
-              </BoxSubBtn>
-            </StListBtnBox>
-          </StList>
-        )}
-      </div>
-    </>
+              onClick={() => changeEditModeHandler()}
+            >
+              취소
+            </BoxSubBtn>
+          </StListBtnBox>
+        </StList>
+      )}
+    </div>
   );
 }
 
