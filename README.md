@@ -27,7 +27,7 @@ Server : AWS S3
 "react": "^18.2.0", <br />
 "react-dom": "^18.2.0", <br />
 중앙상태관리 "react-redux": "^8.0.5", <br />
-MPA를 구현 "react-router-dom": "^6.9.0", <br />
+SPA를 구현 "react-router-dom": "^6.9.0", <br />
 "react-scripts": "5.0.1", <br />
 "redux": "^4.2.1", <br />
 스타일 사용 "styled-components": "^5.3.9", <br />
