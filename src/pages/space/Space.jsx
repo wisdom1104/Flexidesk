@@ -18,67 +18,33 @@ import {
   StSubHeader,
   Stmainspace,
 } from '../../shared/SpaceStyles';
-import { __getFloors } from '../../redux/modules/floorsSlice';
 import Page from '../../components/Page';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import { InfoContain } from '../Reservation/CalendarStyled';
 import Skeleton from '../../components/Skeleton';
-import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
+import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
 
 function Space() {
-  // useFalseHook('/adminspace');
-  //-------------------------------------------------------------------------------
-  const dispatch = useDispatch();
   const navi = useNavigate();
-  const { spaces } = useSelector(state => state.spaces);
-  const { floors } = useSelector(state => state.floors);
-
-  // token 유무에 따른 가드
-  const token = getCookie('token');
-  // 관리자 가드
-  const role = getCookie('role');
-
-  const [showSkeleton, setShowSkeleton] = useState(true);
-
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const loadData = async () => {
-        try {
-          dispatch(__getFloors());
-          dispatch(__getSpaces());
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      const timer = setTimeout(() => {
-        loadData();
-        setShowSkeleton(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   const [selectedSpace, setSelectedSpace] = useState(null);
 
-  useEffect(() => {
-    setSelectedSpace(spaces[0]);
-  }, [spaces]);
+  const type = 'space';
+  const { spaces, floors } = useSrchFloorsAndSpaces(type, setSelectedSpace);
 
-  const [clickedSpaceId, setClickedSpaceId] = useState(null);
+  const { clickedSpaceId, onClickSpaceListHandler } = useSelectSpace(
+    spaces,
+    selectedSpace,
+    setSelectedSpace,
+  );
 
-  const onClickSpaceListHandler = spaceId => {
-    const space = spaces.find(space => space.spaceId === spaceId);
-    setSelectedSpace(space);
-    setClickedSpaceId(spaceId);
-  };
+  const { showSkeleton } = useSkltTimeout();
+
+  const role = getCookie('role');
 
   return (
     <Page>
-      {/* <Row> */}
-      {/* ------------------------리스트 영역--------------------------------- */}
       <Column>
         <StListTitle>
           <StSpacePagePhoto
@@ -146,12 +112,10 @@ function Space() {
                     )}
                   </React.Fragment>
                 );
-              // if (space && space.floorId !== null) return null;
             })}
           </StSpaceList>
         </StListbox>
       </Column>
-      {/* 보더 영역 */}
       {showSkeleton ? (
         <InfoContain>
           <Skeleton />

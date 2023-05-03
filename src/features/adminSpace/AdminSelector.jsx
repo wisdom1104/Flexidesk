@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StBox, StSelect, StSelectTitle } from '../../shared/SpaceStyles';
+import { handleDragStart } from '../../utils/dragStartHandler';
+import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
 
-function AdminSelector({ mrBoxes, boxes, multiBoxes, elRef, handleDragStart }) {
+function AdminSelector() {
+  const { mrBoxes, boxes, multiBoxes } = useSelectDropBoxs();
+  const elRef = useRef([]);
   return (
     <StSelect>
       <StSelectTitle>AdminSpace</StSelectTitle>

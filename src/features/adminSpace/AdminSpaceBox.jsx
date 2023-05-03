@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
 import AdminSubHeader from './AdminSubHeader';
 import AdminDropItem from './AdminDropItem';
-import { useSpace } from '../../hooks/adminSpace/useAdminSpaceHook';
 import { handleDragOver } from '../../utils/dragOverHandler';
 import { useDropBox } from '../../hooks/adminSpace/box/useDropBox';
+import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
+import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList';
 
 function AdminSpaceBox({
   spaceId,
@@ -14,22 +14,15 @@ function AdminSpaceBox({
   setIsModal,
   spaces,
   id,
-  mrBoxes,
-  boxes,
-  multiBoxes,
 }) {
-  const dispatch = useDispatch();
-
-  const { space, mrList, boxList, multiBoxList } = useSpace(
-    dispatch,
+  const { mrBoxes, boxes, multiBoxes } = useSelectDropBoxs();
+  const { space, mrList, boxList, multiBoxList } = useSrchSpaceAndList(
     selectedSpace,
     id,
     spaces,
   );
 
-  // 요소 드롭
   const { HandleDrop } = useDropBox(
-    dispatch,
     spaceId,
     mrList,
     boxList,

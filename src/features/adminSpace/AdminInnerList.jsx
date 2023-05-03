@@ -1,8 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { __addInnerSpace } from '../../redux/modules/spacesSlice';
 import { StAddInnerBtn, StInnerList } from '../../shared/SpaceStyles';
 import AdminInnerItem from './AdminInnerItem';
+import { useAddInnerSpace } from '../../hooks/adminSpace/list/useAddInnerSpace';
 
 function AdminInnerList({
   floor,
@@ -12,27 +11,17 @@ function AdminInnerList({
   onDragOver,
   onDragEnd,
 }) {
-  const dispatch = useDispatch();
-
-  // inner space 추가
-  const onClickAddSpaceHandler = async () => {
-    const newSpace = {
-      floorId: floor.floorId,
-      spaceName: 'New 스페이스',
-    };
-    dispatch(__addInnerSpace(newSpace));
-  };
+  const { submitAddInnerSpace } = useAddInnerSpace();
 
   return (
     <StInnerList>
-      <StAddInnerBtn onClick={onClickAddSpaceHandler}>
+      <StAddInnerBtn onClick={() => submitAddInnerSpace(floor)}>
         스페이스 추가
       </StAddInnerBtn>
       {floor.spaceList?.length > 0
         ? floor.spaceList.map(space => (
             <AdminInnerItem
               key={space.spaceId}
-              dispatch={dispatch}
               space={space}
               onClickSpaceListHandler={onClickSpaceListHandler}
               dragStart={dragStart}

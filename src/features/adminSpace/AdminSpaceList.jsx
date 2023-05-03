@@ -7,97 +7,75 @@ import {
   StListBtnBox,
   StListItem,
 } from '../../shared/SpaceStyles';
-import { useSpaceDeleteAndEdit } from '../../hooks/adminSpace/useAdminListHook';
+import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
+import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
 
 function AdminSpaceList({
   space,
   onClickSpaceListHandler,
-  dispatch,
   dragStart,
   onAvailableItemDragEnter,
   onDragOver,
   onDragEnd,
 }) {
   const {
-    onDeleteSpaceHandler,
-    onEditSpaceNameHandler,
-    spaceEdit,
-    setSpaceEdit,
+    submitEditSpace,
+    isEditSpace,
+    changeEditModeHandler,
+    changeNameHandler,
     editSpaceName,
-    setEditSpaceName,
-  } = useSpaceDeleteAndEdit(dispatch, space);
+  } = useEditSpace(space);
+
+  const { submitDeleteSpace } = useDeleteSpace();
 
   return (
     <>
-      <>
-        {!spaceEdit ? (
-          <StList
-            key={space.spaceId}
-            draggable
-            data-space-id={space.spaceId}
-            data-space-name={space.spaceName}
+      {!isEditSpace ? (
+        <StList
+          key={space.spaceId}
+          draggable
+          data-space-id={space.spaceId}
+          data-space-name={space.spaceName}
+          data-floor-id={space.floorId}
+          onDragStart={e => dragStart(e, space)}
+          onDragEnter={e => onAvailableItemDragEnter(e, space)}
+          onDragOver={onDragOver}
+          onDragEnd={e => onDragEnd(e, space)}
+        >
+          <StListItem
             data-floor-id={space.floorId}
-            onDragStart={e => dragStart(e, space)}
-            onDragEnter={e => onAvailableItemDragEnter(e, space)}
-            onDragOver={onDragOver}
-            onDragEnd={e => onDragEnd(e, space)}
+            onClick={() => onClickSpaceListHandler(space.spaceId)}
           >
-            <StListItem
-              data-floor-id={space.floorId}
-              onClick={() => onClickSpaceListHandler(space.spaceId)}
-            >
-              {space.spaceName}
-            </StListItem>
-            <StListBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  setSpaceEdit(!spaceEdit);
-                }}
-              >
-                수정
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  const confirmDelete =
-                    window.confirm('정말 삭제하시겠습니까?');
-                  if (confirmDelete) {
-                    onDeleteSpaceHandler(space.spaceId);
-                  }
-                }}
-              >
-                삭제
-              </BoxSubBtn>
-            </StListBtnBox>
-          </StList>
-        ) : (
-          <StList>
-            <EditInput
-              maxLength={9}
-              type="text"
-              value={editSpaceName}
-              onChange={e => {
-                setEditSpaceName(e.target.value);
+            {space.spaceName}
+          </StListItem>
+          <StListBtnBox>
+            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
+            <BoxSubBtn
+              onClick={() => {
+                const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+                if (confirmDelete) {
+                  submitDeleteSpace(space.spaceId);
+                }
               }}
-            />
-            <StListBtnBox>
-              <BoxBtn
-                onClick={() => {
-                  onEditSpaceNameHandler(space);
-                }}
-              >
-                완료
-              </BoxBtn>
-              <BoxSubBtn
-                onClick={() => {
-                  setSpaceEdit(!spaceEdit);
-                }}
-              >
-                취소
-              </BoxSubBtn>
-            </StListBtnBox>
-          </StList>
-        )}
-      </>
+            >
+              삭제
+            </BoxSubBtn>
+          </StListBtnBox>
+        </StList>
+      ) : (
+        <StList>
+          <EditInput
+            maxLength={9}
+            type="text"
+            value={editSpaceName}
+            onChange={e => changeNameHandler(e.target.value)}
+          />
+          <StListBtnBox>
+            <BoxBtn onClick={submitEditSpace}>완료</BoxBtn>
+            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
+          </StListBtnBox>
+        </StList>
+      )}
     </>
   );
 }

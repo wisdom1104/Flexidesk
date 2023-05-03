@@ -1,9 +1,9 @@
+import { useDispatch } from 'react-redux';
 import { __addMultiBox } from '../../../redux/modules/MultiBoxSlice';
 import { __addBox } from '../../../redux/modules/spaceBoxSlice';
 import { __addMr } from '../../../redux/modules/spaceMrSlice';
 
 export function useDropBox(
-  dispatch,
   spaceId,
   mrList,
   boxList,
@@ -12,6 +12,8 @@ export function useDropBox(
   boxes,
   multiBoxes,
 ) {
+  const dispatch = useDispatch();
+
   // 모든 요소 드롭
   const HandleDrop = async e => {
     e.preventDefault();
