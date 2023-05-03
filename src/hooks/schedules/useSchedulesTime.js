@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { __getSchedules} from '../../redux/modules/schedules';
 
-export const useSchedulesTimeHook = (selectDay,param,title,comment,initDate) => {
+export const useSchedulesTime = (selectDay,param,title,comment,initDate,) => {
   const dispatch = useDispatch();
   const [clickSchedules, setClickSchedules] = useState([initDate]);
   const now = new Date();

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-
-import { getCookie } from '../../shared/cookies';
-
+import { useParams } from 'react-router-dom';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { useCalendar } from '../../hooks/useCalendar';
-
 import { StListTitle } from '../../shared/SpaceStyles';
 import { StSpacePagePhoto } from '../Welcome/WelcomeStyled';
 import ReservationTime from '../../features/Reservation/ReservationTime';
@@ -22,8 +20,6 @@ import {
   StIcon,
   InfoContain,
 } from './CalendarStyled';
-import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);

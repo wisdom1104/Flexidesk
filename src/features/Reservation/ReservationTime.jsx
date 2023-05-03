@@ -6,7 +6,7 @@ import {
   __getReservation,
   __getUserData,
 } from '../../redux/modules/reservation';
-import { getCookie } from '../../shared/cookies';
+import { cookies } from '../../shared/cookies';
 import {
   StReserTimeButton,
   StReserTimeBox,
@@ -27,7 +27,7 @@ function ReservationTime({ param, selectDay, mrName }) {
   const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
   const [userIdInfo, setUserIdInfo] = useState([]);
   const navi = useNavigate();
-  const userId = getCookie('userId');
+  const userId = cookies.get('userId');
 
   ///////////////////////////////////
   const dispatch = useDispatch();
@@ -63,25 +63,22 @@ function ReservationTime({ param, selectDay, mrName }) {
     if (selectDay) {
       dispatch(__getReservation({ param, selectDay }));
     } else {
-      dispatch(__getReservation({ param, selectDay: date.slice(0, -1) }));
+      dispatch(
+        __getReservation({
+          param,
+          selectDay: date.slice(0, -1),
+        }),
+      );
     }
     setClickReservation([]);
   }, [selectDay]);
 
   ///////////////////////////////////
 
-  // const { userData } = useSelector(state => state.reservation);
-  // const { reservation } = useSelector(state => state.reservation);
-  // const reqDatas = { startList: dataList(), userList: userIdInfo };
-  // const { timeList } = reservation;
-
-  const { reservation, userData } = useSelector(state => ({
-    reservation: state.reservation.reservation,
-    userData: state.reservation.userData,
-  }));
-
+  const { userData } = useSelector(state => state.reservation);
+  const { reservation } = useSelector(state => state.reservation);
   const reqDatas = { startList: dataList(), userList: userIdInfo };
-  const timeList = reservation.timeList;
+  const { timeList } = reservation;
 
   ///////////////////테스트 하고 있는 주웅 ~~~~//////////
   // useEffect(() => {

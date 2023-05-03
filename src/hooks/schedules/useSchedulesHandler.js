@@ -1,32 +1,38 @@
-// import React, {useState} from 'react'
-// import { useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { __addSchdule } from '../../redux/modules/schedules';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-// export const useSchedulesHandler=(reqScheduleValue , param, scheduleValue, setScheduleValue) =>{
+export const useSchedulesHandler =(
+  reqScheduleValue , 
+  param, 
+  setScheduleValue,
+  dispatchValue,
+  scId
+  ) => {
 
-//     const navi = useNavigate();
-//     const dispatch = useDispatch();
+    const navi = useNavigate();
+    const dispatch = useDispatch();
 
-//     const onsubmitHandler = async e => {
-//       e.preventDefault();
-//       await dispatch(__addSchdule(reqScheduleValue));
-//       // await dispatch(__pathScehdule({ reqScheduleValue, scId }));
-//       navi(`/scheduledetail/${param}`);
-//     }
+
+    const onSubmitHandler = async e => {
+      e.preventDefault();
+      const value = { ...reqScheduleValue };
+      if (scId) {
+        value.scId = scId;
+      } else {
+        delete value.scId;
+      }
+      await dispatch(dispatchValue(value));
+      navi(`/scheduledetail/${param}`);
+    };
     
-//     const onChangeHandler= e =>{
-//       setScheduleValue({
-//       ...scheduleValue,
-//       scTitle: e.target.value,
-//     })
-// }
+    const onChangeHandler = (e) => {
+      const { name, value } = e.target;
+        console.log(name)
 
-// //              e =>
-// //             setScheduleValue({
-// //               ...scheduleValue,
-// //               scComment: e.target.value,
-// //             })
-
-//     return{ onsubmitHandler, onChangeHandler }
-// }
+      setScheduleValue(prevState => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+    return { onSubmitHandler, onChangeHandler }
+}
