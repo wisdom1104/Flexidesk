@@ -1,6 +1,7 @@
 import React from 'react';
-import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import { SterrorFont } from '../../pages/user/UserStyled';
+import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
+
 export const ValidationError = ({ value }) => {
   if (!value && value === undefined) {
     return null;

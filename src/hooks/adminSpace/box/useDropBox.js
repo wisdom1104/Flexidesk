@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { __addMultiBox } from '../../../redux/modules/MultiBoxSlice';
+import { __addMultiBox } from '../../../redux/modules/multiBoxSlice';
 import { __addBox } from '../../../redux/modules/spaceBoxSlice';
 import { __addMr } from '../../../redux/modules/spaceMrSlice';
 

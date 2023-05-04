@@ -24,11 +24,9 @@ function AdminSpace() {
   const navi = useNavigate();
 
   const { showSkeleton } = useSkltTimeout();
-
   const [selectedSpace, setSelectedSpace] = useState(null);
   const type = 'admin';
   const { spaces, floors } = useSrchFloorsAndSpaces(type, setSelectedSpace);
-
   const { onClickSpaceListHandler, isModal, setIsModal } = useSelectSpace(
     spaces,
     selectedSpace,
