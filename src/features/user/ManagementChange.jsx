@@ -24,7 +24,6 @@ function ManagementChange({ item }) {
     <>
       <CommentBox>
         <StSmallFont width>
-          {' '}
           <BsPersonGear /> 권한 변경
         </StSmallFont>
 

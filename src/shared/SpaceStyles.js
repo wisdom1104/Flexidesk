@@ -49,6 +49,7 @@ export const StListTitle = styled.div`
   font-weight: 700;
   font-size: 28px;
   line-height: 34px;
+  /* ...typoes.T17_700, */
   letter-spacing: -0.03em;
   color: #000000;
   margin: ${props => props.margin || '30px 16px'};

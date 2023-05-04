@@ -68,7 +68,6 @@ export const StLongButton = styled.button`
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 22px;
-
   color: var(--white);
   background: var(--blue);
   &:hover {
@@ -80,6 +79,7 @@ export const StLongButton = styled.button`
     border: 1px solid var(--blue);
   }
 `;
+
 
 export const StSmallButton = styled.button`
   display: flex;
@@ -169,7 +169,6 @@ export const InlineInput = styled.input`
   box-sizing: border-box;
 
   font-weight: 700;
-  font-size: 14px;
   line-height: 17px;
   color: #a6aebb;
   &:focus {

@@ -36,6 +36,6 @@ const StDiv2 = styled.div`
 
 const StDiv3 = styled.div`
   font-size: 28px;
-  line-height: 1.6;
+  line-height: 22px;
   margin-bottom: 32px;
 `;

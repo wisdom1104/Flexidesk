@@ -65,14 +65,14 @@ export const StSmallFont = styled.p`
 
 //그라데이션 폰트
 export const StGradationFont = styled.p`
-  width: ${props => props.width || '48vw'};
+  width: 48vw;
   padding: 150px;
 
   font-weight: 800;
-  font-size: ${props => props.fontSize || '4rem'};
+  font-size: 64px;
   line-height: 150%;
-  text-align: ${props => props.align || 'center'};
-
+  text-align: center;
+  
   background: linear-gradient(180deg, var(--blue) 15.36%, #acdad8 119.53%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

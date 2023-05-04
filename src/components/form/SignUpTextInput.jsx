@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import { StTextInput } from '../../pages/user/UserStyled';

@@ -19,18 +19,17 @@ import SpaceBox from '../../features/space/SpaceBox';
 
 function Space() {
   const navi = useNavigate();
-  const [selectedSpace, setSelectedSpace] = useState(null);
+  const { showSkeleton } = useSkltTimeout();
 
+  const [selectedSpace, setSelectedSpace] = useState(null);
   const type = 'space';
   const { spaces, floors } = useSrchFloorsAndSpaces(type, setSelectedSpace);
-
   const { clickedSpaceId, onClickSpaceListHandler } = useSelectSpace(
     spaces,
     selectedSpace,
     setSelectedSpace,
   );
 
-  const { showSkeleton } = useSkltTimeout();
 
   const role = getCookie('role');
 

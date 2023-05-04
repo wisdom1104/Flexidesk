@@ -12,12 +12,12 @@ import Calendar from '../pages/reservation/Calendar';
 import SchedulesCalendar from '../pages/schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/schedules/SchedulesDetail';
 import Management from '../pages/user/Management';
-import PathSchedulesCalendar from '../pages/pathScedules/PathSchedulesCalendar'
+import PathSchedulesCalendar from '../pages/pathScedules/PathSchedulesCalendar';
 
 function Router() {
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
@@ -30,7 +30,10 @@ function Router() {
           element={<SchedulesCalendar />}
         />
         <Route path="/scheduledetail/:userId" element={<SchedulesDetail />} />
-        <Route path="/pathschedules/:scId" element={<PathSchedulesCalendar/>} />
+        <Route
+          path="/pathschedules/:scId"
+          element={<PathSchedulesCalendar />}
+        />
         <Route path="/detail/:userId" element={<ReservationDetail />} />
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />

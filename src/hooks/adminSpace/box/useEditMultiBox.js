@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { __editMultiBox } from '../../../redux/modules/MultiBoxSlice';
+import { __editMultiBox } from '../../../redux/modules/multiBoxSlice';
 import { useDispatch } from 'react-redux';
 
 /**
