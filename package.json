@@ -14,8 +14,6 @@
     "devtools": "^8.6.9",
     "json-server": "^0.17.3",
     "jwt-decode": "^3.1.2",
-    "polished": "^4.2.2",
-    "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
@@ -31,8 +29,7 @@
     "styled-components": "^5.3.9",
     "styled-reset": "^4.4.6",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^2.1.0",
-    "yup": "^1.0.2"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
