@@ -41,18 +41,18 @@ export const Void = ({
 };
 
 const StyledVoid = styled.div`
-  margin-top: ${({ mt }) => mt};
-  margin-bottom: ${({ mb }) => mb};
-  margin-left: ${({ ml }) => ml};
-  margin-right: ${({ mr }) => mr};
+  margin-top: ${({ mt }) => mt}px;
+  margin-bottom: ${({ mb }) => mb}px;
+  margin-left: ${({ ml }) => ml}px;
+  margin-right: ${({ mr }) => mr}px;
   margin: ${({ mg }) => mg};
-  padding-top: ${({ pt }) => pt};
-  padding-bottom: ${({ pb }) => pb};
-  padding-right: ${({ pr }) => pr};
-  padding-left: ${({ pl }) => pl};
-  padding: ${({ pd }) => pd};
+  padding-top: ${({ pt }) => pt}px;
+  padding-bottom: ${({ pb }) => pb}px;
+  padding-right: ${({ pr }) => pr}px;
+  padding-left: ${({ pl }) => pl}px;
+  padding: ${({ pd }) => pd}px;
   border: ${({ bd }) => bd};
-  border-top: ${({ bt }) => bt};
-  border-bottom: ${({ bb }) => bb};
-  border-radius: ${({ br }) => br};
+  border-top: ${({ bt }) => bt}px;
+  border-bottom: ${({ bb }) => bb}px;
+  border-radius: ${({ br }) => br}px;
 `;
