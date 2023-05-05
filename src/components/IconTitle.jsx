@@ -2,10 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { globalTypoes } from '../styles/typo';
 
-function IconTitle({ children, src, alt, shape = 'T18_700_22' }) {
+function IconTitle({
+  children,
+  src,
+  alt,
+  gap,
+  shape = 'T18_700_22',
+  margin,
+  height,
+}) {
   return (
-    <StIconTitle>
-      <StIcon src={`${process.env.PUBLIC_URL}/img/${src}.png`} alt={alt} />
+    <StIconTitle margin={margin} gap={gap}>
+      <StIcon
+        src={`${process.env.PUBLIC_URL}/img/${src}.png`}
+        alt={alt}
+        height={height}
+      />
       <StTitle shape={shape}>{children}</StTitle>
     </StIconTitle>
   );
@@ -16,7 +28,7 @@ export default IconTitle;
 const StIconTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: ${props => props.gap || '10px'};
   margin: ${props => props.margin || '30px 16px'};
 `;
 

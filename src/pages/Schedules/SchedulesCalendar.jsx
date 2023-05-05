@@ -19,6 +19,8 @@ import {
 import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import SchedulesTime from '../../features/schedules/SchedulesTime';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -39,15 +41,9 @@ function SchedulesCalendar() {
   return (
     <Page>
       <div>
-        <StListTitle margin="30px 0px 0px 16px">
-          <StSpacePagePhoto
-            width="52px"
-            marginTop
-            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
-            alt="managementIcon"
-          />
-          <div>스케줄 등록하기</div>
-        </StListTitle>
+        <IconTitle margin="30px 0px 0px 16px" src="schedule">
+          <Text shape="T28_700_34">스케줄 등록하기</Text>
+        </IconTitle>
         {showSkeleton ? (
           <InfoContain>
             <Skeleton />

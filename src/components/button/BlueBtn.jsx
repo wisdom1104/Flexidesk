@@ -11,8 +11,9 @@ const StBlueBtn = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: ${props => props.pd || ''};
-  margin: ${props => props.mg || ''};
+  padding: ${props => props.pd || '0'};
+  margin: ${props => props.mg || '0'};
+  margin-top: ${props => props.mgt || '0'};
 
   /* position: relative; */
   width: ${props => props.w || '420px'};
