@@ -2,13 +2,11 @@ import React from 'react';
 import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
 import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
 import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
-import {
-  BoxBtn,
-  BoxInput,
-  BoxSubBtn,
-  StBox,
-  StBtnBox,
-} from '../../shared/SpaceStyles';
+import { StBox, StBtnBox } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import { Input } from '../../components/Input';
 
 function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
   const { submitDelete } = useDeleteMultiBox();
@@ -36,16 +34,32 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
           onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
-          <div>{multiBox.multiBoxName}</div>
+          <Text shape="T16_600" color="var(--grey_002)">
+            {multiBox.multiBoxName}
+          </Text>
           <StBtnBox>
-            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
-            <BoxSubBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               onClick={() => {
                 submitDelete(multiBox.multiBoxId, spaceId);
               }}
             >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       ) : (
@@ -53,15 +67,31 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
           key={multiBox.multiBoxId}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
-          <BoxInput
+          <Input
+            w="60px"
+            h="20px"
+            br="2px"
             maxLength={6}
             type="text"
             value={editMultiBoxName}
             onChange={e => changeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <BoxBtn onClick={submitEdit}>완료</BoxBtn>
-            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={submitEdit}>
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       )}

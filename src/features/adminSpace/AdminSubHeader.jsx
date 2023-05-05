@@ -1,48 +1,61 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row } from '../../components/Flex';
-import {
-  StBtn,
-  StSubBtn,
-  StSubHeader,
-  SubIcon,
-  SubTitle,
-} from '../../shared/SpaceStyles';
+import { StSubHeader, SubIcon, SubTitle } from '../../shared/SpaceStyles';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
 
 function AdminSubHeader({ space, isModal, setIsModal }) {
-  const navigate = useNavigate();
+  const navi = useNavigate();
 
   return (
     <StSubHeader>
-      {/* space name 부분 */}
       <Row>
-        {space?.map(item => {
-          if (item && item.floorId !== null)
-            return (
+        {space?.map(item => (
+          <>
+            {item && item.floorId !== null && (
               <Row key={item.spaceId}>
-                <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
+                <SubTitle key={item.floorId}>
+                  <Text shape="T16_600">{item.floorName}</Text>
+                </SubTitle>
                 <SubIcon>&gt;</SubIcon>
-                <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
+                <SubTitle key={item.spaceId}>
+                  <Text shape="T16_600">{item.spaceName}</Text>
+                </SubTitle>
               </Row>
-            );
-          if (item && item.floorId === null)
-            return (
+            )}
+            {item && item.floorId === null && (
               <SubTitle key={item.spaceId}>
-                {/* if(item.floorId) */}
-                {item.spaceName}
+                <Text shape="T16_600">{item.spaceName}</Text>
               </SubTitle>
-            );
-        })}
+            )}
+          </>
+        ))}
       </Row>
+
       <Row>
-        <StSubBtn
+        <SubMintBtn
+          h="43px"
+          pd="8px 16px"
           onClick={() => {
             setIsModal(!isModal);
           }}
         >
-          스페이스 관리하기
-        </StSubBtn>
-        <StBtn onClick={() => navigate('/space')}>완료</StBtn>
+          <Text shape="T16_600" color="var(--mint_002)">
+            스페이스 관리하기
+          </Text>
+        </SubMintBtn>
+        <MainMintBtn
+          mg="0px 16px"
+          h="43px"
+          pd="8px 16px"
+          onClick={() => navi('/space')}
+        >
+          <Text shape="T16_600" color="var(--white)">
+            완료
+          </Text>
+        </MainMintBtn>
       </Row>
     </StSubHeader>
   );

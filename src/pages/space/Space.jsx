@@ -7,15 +7,12 @@ import Skeleton from '../../components/Skeleton';
 import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
-import {
-  StBoard,
-  StBtn,
-  StSubHeader,
-  Stmainspace,
-} from '../../shared/SpaceStyles';
+import { StBtn, StSubHeader } from '../../shared/SpaceStyles';
 import { InfoContain } from '../reservation/CalendarStyled';
 import SpaceList from '../../features/space/SpaceList';
 import SpaceBox from '../../features/space/SpaceBox';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
 
 function Space() {
   const navi = useNavigate();
@@ -29,7 +26,6 @@ function Space() {
     selectedSpace,
     setSelectedSpace,
   );
-
 
   const role = getCookie('role');
 
@@ -59,10 +55,8 @@ function Space() {
             </>
           ) : (
             <>
-              {/* 초기 화면 */}
-              <Stmainspace>
+              <SpaceBackBoard>
                 <StSubHeader>
-                  {/* space name 부분 */}
                   <Row></Row>
                   <Row>
                     {role === 'ADMIN' || role === 'MANAGER' ? (
@@ -72,8 +66,8 @@ function Space() {
                     ) : null}
                   </Row>
                 </StSubHeader>
-                <StBoard></StBoard>
-              </Stmainspace>
+                <SpaceMainBoard></SpaceMainBoard>
+              </SpaceBackBoard>
             </>
           )}
         </>

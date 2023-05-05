@@ -26,14 +26,14 @@ const StMainMintBtn = styled.button`
   border: none;
   border-radius: ${props => props.br || '8px'};
 
-  color: var(--white);
+  color: var(—-white);
 
   &:hover {
     background: var(--mint_001);
     color: var(--mint_004);
   }
   &:active {
-    background: var(--mint_001);
-    color: var(--white);
+    background: var(-—mint_001);
+    color: var(-—white);
   }
 `;

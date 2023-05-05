@@ -9,11 +9,12 @@ import {
   ModalList,
   ModalTitle,
   Modalbtn,
-  StAddBtn,
   StAddBtnBox,
 } from '../../shared/SpaceStyles';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import Text from '../../components/Text';
 
 function AdminList({
   isModal,
@@ -31,7 +32,7 @@ function AdminList({
 
   return (
     <>
-      {isModal ? (
+      {isModal && (
         <ModalBackground>
           <ModalContain>
             <ModalList>
@@ -46,14 +47,28 @@ function AdminList({
                 </Modalbtn>
               </ModalHeader>
               <StAddBtnBox>
-                <StAddBtn onClick={() => submitAddFloor()}>층 추가</StAddBtn>
-                <StAddBtn onClick={() => submitAddSpace()}>
-                  스페이스 추가
-                </StAddBtn>
+                <MainMintBtn
+                  w="131px"
+                  h="43px"
+                  onClick={() => submitAddFloor()}
+                >
+                  <Text shape="T16_700_19" color="var(--white)">
+                    층 추가
+                  </Text>
+                </MainMintBtn>
+                <MainMintBtn
+                  w="131px"
+                  h="43px"
+                  onClick={() => submitAddSpace()}
+                >
+                  <Text shape="T16_700_19" color="var(--white)">
+                    스페이스 추가
+                  </Text>
+                </MainMintBtn>
               </StAddBtnBox>
-              {floors?.map(floor => {
-                if (floor)
-                  return (
+              {floors?.map(floor => (
+                <>
+                  {floor && (
                     <AdminFloorList
                       key={floor.floorId}
                       floor={floor}
@@ -63,11 +78,12 @@ function AdminList({
                       onDragOver={onDragOver}
                       onDragEnd={onDragEnd}
                     />
-                  );
-              })}
-              {spaces?.map(space => {
-                if (space && space.floorId === null)
-                  return (
+                  )}
+                </>
+              ))}
+              {spaces?.map(space => (
+                <>
+                  {space && space.floorId === null && (
                     <AdminSpaceList
                       key={space.spaceId}
                       space={space}
@@ -77,13 +93,14 @@ function AdminList({
                       onDragOver={onDragOver}
                       onDragEnd={onDragEnd}
                     />
-                  );
-                if (space && space.floorId !== null) return null;
-              })}
+                  )}
+                  {space && space.floorId !== null && null}
+                </>
+              ))}
             </ModalList>
           </ModalContain>
         </ModalBackground>
-      ) : null}
+      )}
     </>
   );
 }

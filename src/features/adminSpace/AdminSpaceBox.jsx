@@ -6,6 +6,8 @@ import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList'
 import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
 import AdminSubHeader from './AdminSubHeader';
 import AdminDropItem from './AdminDropItem';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
 
 function AdminSpaceBox({
   spaceId,
@@ -35,9 +37,13 @@ function AdminSpaceBox({
   const boardEl = useRef(null);
 
   return (
-    <Stmainspace>
+    <SpaceBackBoard>
       <AdminSubHeader space={space} isModal={isModal} setIsModal={setIsModal} />
-      <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
+      <SpaceMainBoard
+        ref={boardEl}
+        onDrop={HandleDrop}
+        onDragOver={handleDragOver}
+      >
         <AdminDropItem
           space={space}
           boardEl={boardEl}
@@ -46,8 +52,8 @@ function AdminSpaceBox({
           boxList={boxList}
           multiBoxList={multiBoxList}
         />
-      </StBoard>
-    </Stmainspace>
+      </SpaceMainBoard>
+    </SpaceBackBoard>
   );
 }
 
