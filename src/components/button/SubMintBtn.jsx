@@ -23,16 +23,16 @@ const StMainMintBtn = styled.button`
   left: ${props => props.left || '0px'};
 
   background: var(--mint_004);
-  border: 1px solid var(—mint_002);
+  border: 1px solid var(--mint_002);
   border-radius: ${props => props.br || '8px'};
   color: var(--mint_002);
 
   &:hover {
-    background: var(—white);
-    color: var(—mint_002);
+    background: var(--white);
+    color: var(--mint_002);
   }
   &:active {
-    background: var(—white);
-    color: var(—mint_001);
+    background: var(--white);
+    color: var(--mint_001);
   }
 `;
