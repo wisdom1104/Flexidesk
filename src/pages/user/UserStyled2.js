@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const StStartText = styled.p`
   width: 420px;
 `;
+
 export const StFormContain = styled.div`
   background: #f5f5f5;
   padding: 30px;
@@ -30,8 +31,8 @@ export const StLink = styled(Link)`
 
   color: var(--blue_004);
 `;
-//인증하기
 
+//인증하기
 export const Container = styled.div`
   width: 420px;
   height: 35px;

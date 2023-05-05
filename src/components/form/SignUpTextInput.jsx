@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { StTextInput } from '../../pages/user/UserStyled';
 import Text from '../Text';
-import { HiOutlineMail } from 'react-icons/hi';
 
 export const SignUpTextInput = ({
   type,
