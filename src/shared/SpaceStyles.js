@@ -40,17 +40,17 @@ export const StSpaceList = styled.div`
 `;
 
 export const StListTitle = styled.div`
-  /* display: flex; */
+  display: flex;
   /* justify-content: center; */
-  /* align-items: center;
+  align-items: center;
   gap: 10px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
-  line-height: 34px; */
+  line-height: 34px;
   /* ...typoes.T17_700, */
-  /* letter-spacing: -0.03em; */
+  letter-spacing: -0.03em;
   color: #000000;
   margin: ${props => props.margin || '30px 16px'};
 
@@ -88,13 +88,13 @@ export const ClisckedListItem = styled.div`
 export const Stmainspace = styled.div`
   position: relative;
   /* width: 1162px; */
-  /* height: 686px; */
+  height: 686px;
   /* width: 60.5208vw; */
   /* width: 100%; */
-  /* min-width: 1020px; */
+  min-width: 1020px;
   /* height: 35.7292vh; */
   /* background: #f4fbf9; */
-  /* background: steelblue; */
+  background: steelblue;
   background: linear-gradient(291.78deg, #a2cecf 0%, #b6dfdd 100%);
   border-radius: 8px;
   margin-top: 16px;
@@ -378,14 +378,11 @@ export const BoxInput = styled.input`
   width: 80px;
   background: var(--white);
   border: 1px solid var(--darkgrey);
-  /* box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25); */
+  box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25);
   border-radius: 2px;
-  outline: none;
   &:focus {
-    border: 1px solid var(--mint_002);
-  }
-  &:active {
-    border: 1px solid var(--blue_001);
+    outline: none;
+    /* border: 2px solid var(--darkgrey); */
   }
 `;
 
@@ -640,12 +637,6 @@ export const EditInput = styled.input`
   outline: none;
   border: 1px solid var(--darkgrey);
   border-radius: 2px;
-  &:focus {
-    border: 1px solid var(--mint_002);
-  }
-  &:active {
-    border: 1px solid var(--blue_001);
-  }
 `;
 
 //유저 이동 모달 -----------------------------------------------------------

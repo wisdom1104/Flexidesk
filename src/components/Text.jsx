@@ -4,18 +4,18 @@ import { globalTypoes } from '../styles/typo';
 
 function Text({ children, shape, color, ta }) {
   return (
-    <StyledText shape={shape} color={color} ta={ta}>
+    <StText shape={shape} color={color} ta={ta}>
       {children}
-    </StyledText>
+    </StText>
   );
 }
 
 export default Text;
 
-const StyledText = styled.div`
+const StText = styled.div`
   ${({ shape }) => {
     return globalTypoes[shape];
   }}
-  color: ${({ color }) => color || 'var(—blue_001)'};
+  color: ${({ color }) => color || 'var(--blue_001)'};
   text-align: ${({ ta }) => ta};
 `;
