@@ -1,12 +1,9 @@
 import React from 'react';
 import api from '../../axios/api';
-import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
-import {
-  Container,
-  InlinButton,
-  InlineInput,
-} from '../../pages/user/UserStyled';
 import ValidationError from '../../components/form/ValidationError';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
+import { Container, InlineInput } from '../../pages/user/UserStyled2';
 
 function Certification({ admin, email, onChange, errors }) {
   const submitBtnHandler = async e => {
@@ -27,9 +24,9 @@ function Certification({ admin, email, onChange, errors }) {
   return (
     <>
       <Container>
-        <StSmallFont width align="start" fontSize="0.875rem" weight="700">
-          회사 이메일
-        </StSmallFont>
+        <Text shape="T14_700" color="var(--blue_004)">
+          회사 인증번호
+        </Text>
       </Container>
 
       <Container>
@@ -42,11 +39,9 @@ function Certification({ admin, email, onChange, errors }) {
           required
         />
 
-        <InlinButton
-          type="button"
-          onClick={submitBtnHandler}
-          value="인증받기"
-        />
+        <BlueBtn type="button" onClick={submitBtnHandler} w="25%" h="50px">
+          인증확인
+        </BlueBtn>
       </Container>
       <ValidationError value={errors.email} />
     </>

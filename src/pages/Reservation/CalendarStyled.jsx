@@ -375,6 +375,7 @@ export const Info = styled.div`
 
   min-height: 10vw;
 `;
+
 export const CommentBox = styled.div`
   display: flex;
   width: 90%;
