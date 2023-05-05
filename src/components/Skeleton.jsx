@@ -24,7 +24,7 @@ function Skeleton() {
 
 export default Skeleton;
 
-export const SkeletonDiv = styled.div`
+const SkeletonDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: ${props => props.width || '50vw'};
@@ -39,7 +39,7 @@ export const SkeletonDiv = styled.div`
   box-shadow: 6px 6px 8px 0px rgba(217, 217, 217, 1);
 `;
 
-export const SkeletonImg = styled.div`
+const SkeletonImg = styled.div`
   width: 100%;
   height: 150px;
   border-top-left-radius: 0.5em;
@@ -48,14 +48,14 @@ export const SkeletonImg = styled.div`
   background-color: #eeeeee;
 `;
 
-export const SkeletonWrap = styled.div`
+const SkeletonWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 0.4rem;
 `;
 
-export const SkeletonText = styled.div`
+const SkeletonText = styled.div`
   width: 20vw;
   height: 5px;
   margin: 10px;
@@ -65,7 +65,7 @@ export const SkeletonText = styled.div`
   background-color: #eeeeee;
 `;
 
-export const SkeletonShimmer = styled.div`
+const SkeletonShimmer = styled.div`
   width: 50%;
   height: 100%;
   background-color: #e0e0e0;

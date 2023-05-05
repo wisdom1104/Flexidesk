@@ -17,6 +17,15 @@ export const Void = ({
   bt,
   bb,
   br,
+  w,
+  h,
+  minw,
+  minh,
+  maxw,
+  maxh,
+  bg,
+  t,
+  r,
 }) => {
   return (
     <StyledVoid
@@ -34,6 +43,15 @@ export const Void = ({
       br={br}
       bt={bt}
       bb={bb}
+      bg={bg}
+      w={w}
+      h={h}
+      minw={minw}
+      minh={minh}
+      maxw={maxw}
+      maxh={maxh}
+      t={t}
+      r={r}
     >
       {children}
     </StyledVoid>
@@ -55,4 +73,13 @@ const StyledVoid = styled.div`
   border-top: ${({ bt }) => bt};
   border-bottom: ${({ bb }) => bb};
   border-radius: ${({ br }) => br}px;
+  background: ${({ bg }) => bg};
+  width: ${({ w }) => w};
+  height: ${({ h }) => h};
+  min-width: ${({ minw }) => minw};
+  max-width: ${({ maxw }) => maxw};
+  min-height: ${({ minh }) => minh};
+  max-height: ${({ maxw }) => maxw};
+  top: ${({ t }) => t};
+  right: ${({ r }) => r};
 `;
