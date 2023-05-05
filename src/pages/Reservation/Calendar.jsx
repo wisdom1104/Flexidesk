@@ -20,8 +20,6 @@ import {
   StIcon,
   InfoContain,
 } from './CalendarStyled';
-import { Dimension } from '../../components/Dimension';
-import { Void } from '../../components/Void';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);

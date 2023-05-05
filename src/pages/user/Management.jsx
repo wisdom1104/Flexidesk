@@ -7,16 +7,16 @@ import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
+import { StSmallFont } from '../welcome/WelcomeStyled';
 import {
   CommentBox,
   Info,
   InfoBox,
-  InfoContain,
   StSubTitle,
 } from '../reservation/CalendarStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
 import ManagementChange from '../../features/user/ManagementChange';
+import IconTitle from '../../components/IconTitle';
+import BackBoard from '../../components/BackBoard';
 
 function Management() {
   const { userList, isError } = useSelector(state => state.userList);
@@ -53,53 +53,43 @@ function Management() {
 
   return (
     <Page>
-      <div>
-        <StListTitle margin="30px 0px 0px 16px">
-          <StSpacePagePhoto
-            width="52px"
-            marginTop
-            src={`${process.env.PUBLIC_URL}/img/managementIcon.png`}
-            alt="managementIcon"
-          />
-          <div>사용자 관리</div>
-        </StListTitle>
+      <IconTitle src="managementIcon" alt="managementIcon">
+        사용자 관리
+      </IconTitle>
+      {showSkeleton ? (
+        <BackBoard>
+          <Skeleton />
+        </BackBoard>
+      ) : isError ? (
+        <div>에러발생 ..⚙️</div>
+      ) : (
+        <BackBoard>
+          {userList.map(item => (
+            <InfoBox key={item.userId}>
+              <StSubTitle>{item.username}</StSubTitle>
+              <Info>
+                <CommentBox>
+                  <StSmallFont width>
+                    <HiOutlineMail /> 이메일
+                  </StSmallFont>
+                  <br />
+                  <StSmallFont width>{item.email}</StSmallFont>
+                </CommentBox>
 
-        {showSkeleton ? (
-          <InfoContain>
-            <Skeleton />
-          </InfoContain>
-        ) : isError ? (
-          <div>에러발생 ..⚙️</div>
-        ) : (
-          <InfoContain>
-            {userList.map(item => (
-              <InfoBox key={item.userId}>
-                <StSubTitle>{item.username}</StSubTitle>
+                <CommentBox>
+                  <StSmallFont width>
+                    <BsPerson /> 권한
+                  </StSmallFont>
+                  <br />
+                  <StSmallFont width>{item.role}</StSmallFont>
+                </CommentBox>
 
-                <Info>
-                  <CommentBox>
-                    <StSmallFont width>
-                      <HiOutlineMail /> 이메일
-                    </StSmallFont>
-                    <br />
-                    <StSmallFont width>{item.email}</StSmallFont>
-                  </CommentBox>
-
-                  <CommentBox>
-                    <StSmallFont width>
-                      <BsPerson /> 권한
-                    </StSmallFont>
-                    <br />
-                    <StSmallFont width>{item.role}</StSmallFont>
-                  </CommentBox>
-
-                  <ManagementChange item={item} />
-                </Info>
-              </InfoBox>
-            ))}
-          </InfoContain>
-        )}
-      </div>
+                <ManagementChange item={item} />
+              </Info>
+            </InfoBox>
+          ))}
+        </BackBoard>
+      )}
     </Page>
   );
 }

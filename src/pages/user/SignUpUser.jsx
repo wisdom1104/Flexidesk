@@ -4,23 +4,10 @@ import ValidationError from '../../components/form/ValidationError';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
-import { StFont } from '../welcome/WelcomeStyled';
-import {
-  StBackground,
-  StForm,
-  StFormBox,
-  StLoginForm,
-  StLongButton,
-  StOverall,
-  StTextInput,
-} from './UserStyled';
 import Page from '../../components/Page';
-import { Flex } from '../../components/Flex';
-import { Dimension } from '../../components/Dimension';
 import Text from '../../components/Text';
-import LoginForm from '../../components/form/LoginForm';
-import { Input } from '../../components/Input';
-import { Void } from '../../components/Void';
+import { BlueBtn } from '../../components/button/BlueBtn';
+import { StFormContain, StForm, StStartText } from './UserStyled2';
 
 function SignUpUser() {
   const [user, setUser] = useState({
@@ -44,67 +31,69 @@ function SignUpUser() {
   const { onSubmitHandler } = useSignUpSubmitHandler(user);
 
   return (
-    <StBackground height="100vh">
-      <StOverall>
-        <StLoginForm onSubmit={onSubmitHandler} height="570px">
-          <StForm>
-            <StFormBox>
-              <StFont width="100%" align="start" fontSize="28px">
-                회원가입
-              </StFont>
+    <Page>
+      <StFormContain h="75%">
+        <StForm onSubmit={onSubmitHandler}>
+          <StStartText>
+            <Text shape="T28_700_30"> 회원가입 </Text>
+          </StStartText>
 
-              <SignUpTextInput
-                innerText="사용자 이름"
-                type="text"
-                value={auth.username}
-                placeholder="이름을 입력하세요."
-                onChange={event =>
-                  setAuth({ ...auth, username: event.target.value })
-                }
-              />
-              <SignUpTextInput
-                innerText="사용자 이메일"
-                type="email"
-                value={auth.email}
-                placeholder="이메일을 입력하세요."
-                onChange={onChangeEmailHandler}
-              />
-              <ValidationError value={errors.email} />
+          <SignUpTextInput
+            innerText="사용자 이름"
+            type="text"
+            value={auth.username}
+            placeholder="이름을 입력하세요."
+            required
+            onChange={event =>
+              setAuth({ ...auth, username: event.target.value })
+            }
+          />
 
-              <StTextInput height="80px">
-                <CertificationCkeck
-                  user={auth}
-                  certification={auth.certification}
-                  onChange={event =>
-                    setAuth({ ...auth, certification: event.target.value })
-                  }
-                />
-              </StTextInput>
+          <SignUpTextInput
+            innerText="사용자 이메일"
+            type="email"
+            value={auth.email}
+            placeholder="이메일을 입력하세요."
+            required
+            onChange={onChangeEmailHandler}
+          />
+          <ValidationError value={errors.email} />
 
-              <SignUpTextInput
-                innerText="비밀번호"
-                type="password"
-                value={auth.password}
-                placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
-                onChange={onChangePasswordHandler}
-              />
-              <ValidationError value={errors.password} />
+          <CertificationCkeck
+            user={auth}
+            certification={auth.certification}
+            onChange={event =>
+              setAuth({ ...auth, certification: event.target.value })
+            }
+          />
 
-              <SignUpTextInput
-                height="45px"
-                type="password"
-                value={auth.passwordCheck}
-                placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
-                onChange={onChangePasswordCheckHandler}
-              />
-              <ValidationError value={errors.passwordCheck} />
+          <SignUpTextInput
+            innerText="비밀번호"
+            type="password"
+            value={auth.password}
+            placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
+            required
+            onChange={onChangePasswordHandler}
+          />
+          <ValidationError value={errors.password} />
 
-              <StLongButton type="submit">확인</StLongButton>
-            </StFormBox>
-          </StForm>
-        </StLoginForm>
-      </StOverall>
-    </StBackground>
+          <SignUpTextInput
+            height="45px"
+            type="password"
+            value={auth.passwordCheck}
+            placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
+            required
+            onChange={onChangePasswordCheckHandler}
+          />
+          <ValidationError value={errors.passwordCheck} />
+          <BlueBtn type="submit" mg="20px">
+            <Text shape="T18_700_22" color="var(--white)">
+              확인
+            </Text>
+          </BlueBtn>
+        </StForm>
+      </StFormContain>
+    </Page>
   );
 }
 
