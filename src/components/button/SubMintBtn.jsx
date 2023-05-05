@@ -16,13 +16,15 @@ const StMainMintBtn = styled.button`
   padding: ${props => props.pd || '0'};
   margin: ${props => props.mg || '0'};
 
-  /* position: relative; */
+  position: ${props => props.position || 'static'};
   width: ${props => props.w || 'auto'};
   height: ${props => props.h || 'auto'};
+  top: ${props => props.top || '0px'};
+  left: ${props => props.left || '0px'};
 
   background: var(--mint_004);
-  border: none;
-  border-radius: 8px;
+  border: 1px solid var(--mint_002);
+  border-radius: ${props => props.br || '8px'};
   color: var(--mint_002);
 
   &:hover {

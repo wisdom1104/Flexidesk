@@ -15,9 +15,12 @@ import {
   StSmall,
 } from './CalendarStyled';
 import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
+import { StBoard, StListTitle } from '../../shared/SpaceStyles';
 import ReservationDelete from '../../features/reservation/ReservationDelete';
-
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import BackBoard from '../../components/BackBoard';
+import StMainBoard from '../../components/MainBoard';
 function ReservationDetail() {
   const { reservationDetail, isError } = useSelector(state => state.detail);
 
@@ -29,15 +32,9 @@ function ReservationDetail() {
     <>
       <Page>
         <div>
-          <StListTitle margin="30px 0px 0px 16px">
-            <StSpacePagePhoto
-              width="52px"
-              marginTop
-              src={`${process.env.PUBLIC_URL}/img/reservation.png`}
-              alt="managementIcon"
-            />
-            <div>회의실 예약현황</div>
-          </StListTitle>
+          <IconTitle margin="30px 0px 0px 16px" src="reservation">
+            <Text shape="T28_700_34">회의실 예약하기</Text>
+          </IconTitle>
 
           {showSkeleton ? (
             <InfoContain>

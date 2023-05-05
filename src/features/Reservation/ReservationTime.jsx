@@ -22,6 +22,9 @@ import {
 import ReservationCheck from './ReservationCheck';
 import { Input } from '../../components/Input';
 import { Column } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
 
 function ReservationTime({ param, selectDay, mrName }) {
   const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
@@ -109,10 +112,14 @@ function ReservationTime({ param, selectDay, mrName }) {
     <SchContain width="683px">
       <>
         <div>
-          <StSubTitle margin="20px 0px 10px 24px">
-            <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
-            예약 시간
-          </StSubTitle>
+          <IconTitle
+            gap="0px"
+            margin="15px 0px 10px 5px"
+            src="time"
+            height="20"
+          >
+            <Text>예약 시간</Text>
+          </IconTitle>
           <StReserTimeBox width="95%">
             {timeList?.map(item => (
               <StReserTimeButton
@@ -137,13 +144,14 @@ function ReservationTime({ param, selectDay, mrName }) {
         </div>
         <ScheduleUsers>
           <Column>
-            <StSubTitle margin="0px 0px 20px 5px">
-              <StIcon
-                src={`${process.env.PUBLIC_URL}/img/user.png`}
-                alt="icon"
-              />
-              사원 검색
-            </StSubTitle>
+            <IconTitle
+              gap="0px"
+              margin="0px 0px 15px -5px"
+              src="user"
+              height="20px"
+            >
+              <Text>사원 검색</Text>
+            </IconTitle>
             <Input
               width="280px"
               height="40px"
@@ -190,16 +198,16 @@ function ReservationTime({ param, selectDay, mrName }) {
         mrName={mrName}
       />
       <CheckContainBox>
-        <StSubmitButton
-          marginTop="0px"
-          marginLeft="0px"
+        <BlueBtn
           onClick={() => {
             dispatch(__addReservation({ reqDatas, param, selectDay }));
             navi(`/detail/${userId}`);
           }}
         >
-          예약 완료
-        </StSubmitButton>
+          <Text color="var(--white)" shape="T27_700_22">
+            예약 완료
+          </Text>
+        </BlueBtn>
       </CheckContainBox>
     </SchContain>
   );

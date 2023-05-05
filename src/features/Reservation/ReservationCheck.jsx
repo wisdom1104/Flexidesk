@@ -9,6 +9,8 @@ import {
 } from '../../pages/reservation/CalendarStyled';
 
 import { Column } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 
 function ReservationCheck({
   param,
@@ -38,24 +40,29 @@ function ReservationCheck({
 
   return (
     <>
-      <StSubTitle margin="0px 0px 10px 24px">
-        <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
-        예약 확인하기
-      </StSubTitle>
+      <IconTitle gap="0px" margin="0px 0px 10px 13px" src="title" height="20px">
+        <Text>예약 확인하기</Text>
+      </IconTitle>
       <CheckContainBox>
         <Column>
           <CheckContain>
-            <CheckTitle>회의실 이름</CheckTitle>
+            <Text shape="T18_700_96" color="var(--darkgrey)">
+              회의실 이름
+            </Text>
             <FontSt>{mrName}</FontSt>
           </CheckContain>
           <CheckContain>
-            <CheckTitle>예약 날짜</CheckTitle>
+            <Text shape="T18_700_96" color="var(--darkgrey)">
+              예약 날짜
+            </Text>
             <FontSt>{selectDay}</FontSt>
           </CheckContain>
         </Column>
         <Column>
           <CheckContain>
-            <CheckTitle>예약 시간</CheckTitle>
+            <Text shape="T18_700_96" color="var(--darkgrey)">
+              예약 시간
+            </Text>
             <FontSt>
               {timeArray.map(time => (
                 <div key={time}>{time}</div>
@@ -63,9 +70,11 @@ function ReservationCheck({
             </FontSt>
           </CheckContain>
           <CheckContain>
-            <CheckTitle>예약 인원</CheckTitle>
+            <Text shape="T18_700_96" color="var(--darkgrey)">
+              예약 인원
+            </Text>
             {userName?.map(item => (
-              <FontSt key={item.username}>{item.username}</FontSt>
+              <Text key={item.username}>{item.username}</Text>
             ))}
           </CheckContain>
         </Column>
