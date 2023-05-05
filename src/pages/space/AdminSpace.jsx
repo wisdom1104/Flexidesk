@@ -7,18 +7,16 @@ import Skeleton from '../../components/Skeleton';
 import { Column, Row } from '../../components/Flex';
 import Page from '../../components/Page';
 import AdminSpaceBox from '../../features/adminSpace/AdminSpaceBox';
-import {
-  StBoard,
-  StBtn,
-  StListTitle,
-  StSubBtn,
-  StSubHeader,
-  Stmainspace,
-} from '../../shared/SpaceStyles';
+import { StSubHeader } from '../../shared/SpaceStyles';
 import { InfoContain } from '../reservation/CalendarStyled';
 import AdminList from '../../features/adminSpace/AdminList';
 import AdminSelector from '../../features/adminSpace/AdminSelector';
 import IconTitle from '../../components/IconTitle';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import Text from '../../components/Text';
 
 function AdminSpace() {
   const navi = useNavigate();
@@ -35,7 +33,6 @@ function AdminSpace() {
 
   return (
     <Page>
-      {/* 리스트 영역 */}
       <AdminList
         isModal={isModal}
         setIsModal={setIsModal}
@@ -43,18 +40,10 @@ function AdminSpace() {
         floors={floors}
         onClickSpaceListHandler={onClickSpaceListHandler}
       />
-      {/* 셀렉터 영역 */}
       <Column>
-        <StListTitle>
-          {/* <Icon src="space" alt="managementIcon" />
-          <Text shape="T28_700_34">
-            <div>관리하기</div>
-          </Text> */}
-          <IconTitle src="space" alt="managementIcon" title="관리하기" shape />
-        </StListTitle>
+        <IconTitle src="space" alt="managementIcon" title="관리하기" />
         <AdminSelector />
       </Column>
-      {/* 보더 영역 */}
       {showSkeleton ? (
         <InfoContain>
           <Skeleton />
@@ -76,23 +65,35 @@ function AdminSpace() {
             </>
           ) : (
             <>
-              {/* 초기 화면 */}
-              <Stmainspace>
+              <SpaceBackBoard>
                 <StSubHeader>
-                  <Row>{/* space name 부분 */}</Row>
+                  <Row></Row>
                   <Row>
-                    <StSubBtn
+                    <SubMintBtn
+                      h="43px"
+                      pd="8px 16px"
                       onClick={() => {
                         setIsModal(!isModal);
                       }}
                     >
-                      스페이스 관리하기
-                    </StSubBtn>
-                    <StBtn onClick={() => navi('/space')}>완료</StBtn>
+                      <Text shape="T16_600" color="var(--mint_002)">
+                        스페이스 관리하기
+                      </Text>
+                    </SubMintBtn>
+                    <MainMintBtn
+                      mg="0px 16px"
+                      h="43px"
+                      pd="8px 16px"
+                      onClick={() => navi('/space')}
+                    >
+                      <Text shape="T16_600" color="var(--white)">
+                        완료
+                      </Text>
+                    </MainMintBtn>
                   </Row>
                 </StSubHeader>
-                <StBoard>{/* board 부분 */}</StBoard>
-              </Stmainspace>
+                <SpaceMainBoard></SpaceMainBoard>
+              </SpaceBackBoard>
             </>
           )}
         </>

@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { globalTypoes } from '../styles/typo';
 
-function IconTitle({ children, src, alt, shape = 'T18_700_22' }) {
+function IconTitle({ title, src, alt, shape = 'T28_700_34' }) {
   return (
     <StIconTitle>
       <StIcon src={`${process.env.PUBLIC_URL}/img/${src}.png`} alt={alt} />
-      <StTitle shape={shape}>{children}</StTitle>
+      <StTitle shape={shape}>{title}</StTitle>
     </StIconTitle>
   );
 }
@@ -15,9 +15,9 @@ export default IconTitle;
 
 const StIconTitle = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: ${props => props.margin || '30px 16px'};
 `;
 
 const StIcon = styled.img`

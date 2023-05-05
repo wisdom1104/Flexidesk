@@ -1,13 +1,11 @@
 import React from 'react';
 import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
-import {
-  BoxBtn,
-  BoxSubBtn,
-  EditInput,
-  StList,
-  StListBtnBox,
-} from '../../shared/SpaceStyles';
+import { StList, StListBtnBox } from '../../shared/SpaceStyles';
 import AdminFloorItem from '../adminSpace/AdminFloorItem';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
+import { Input } from '../../components/Input';
 
 function AdminFloorList({
   floor,
@@ -26,7 +24,7 @@ function AdminFloorList({
   } = useEditFloor(floor);
 
   return (
-    <div>
+    <>
       {!isEditFloor ? (
         <AdminFloorItem
           floor={floor}
@@ -40,7 +38,10 @@ function AdminFloorList({
         />
       ) : (
         <StList data-floor-id={floor.floorId}>
-          <EditInput
+          <Input
+            w="120px"
+            h="25px"
+            br="5px"
             maxLength={7}
             data-floor-id={floor.floorId}
             type="text"
@@ -48,19 +49,32 @@ function AdminFloorList({
             onChange={e => changeNameHandler(e.target.value)}
           />
           <StListBtnBox>
-            <BoxBtn data-floor-id={floor.floorId} onClick={submitEditFloor}>
-              완료
-            </BoxBtn>
-            <BoxSubBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              data-floor-id={floor.floorId}
+              onClick={submitEditFloor}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               data-floor-id={floor.floorId}
               onClick={() => changeEditModeHandler()}
             >
-              취소
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StListBtnBox>
         </StList>
       )}
-    </div>
+    </>
   );
 }
 

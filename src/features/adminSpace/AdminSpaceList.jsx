@@ -9,6 +9,10 @@ import {
   StListBtnBox,
   StListItem,
 } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import { Input } from '../../components/Input';
 
 function AdminSpaceList({
   space,
@@ -42,15 +46,29 @@ function AdminSpaceList({
           onDragOver={onDragOver}
           onDragEnd={e => onDragEnd(e, space)}
         >
-          <StListItem
+          <Text
+            shape="T18_700_22"
+            mg="0px 10px"
             data-floor-id={space.floorId}
             onClick={() => onClickSpaceListHandler(space.spaceId)}
           >
             {space.spaceName}
-          </StListItem>
+          </Text>
           <StListBtnBox>
-            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
-            <BoxSubBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
@@ -58,21 +76,44 @@ function AdminSpaceList({
                 }
               }}
             >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StListBtnBox>
         </StList>
       ) : (
         <StList>
-          <EditInput
+          <Input
+            w="120px"
+            h="25px"
+            br="5px"
             maxLength={9}
             type="text"
             value={editSpaceName}
             onChange={e => changeNameHandler(e.target.value)}
           />
           <StListBtnBox>
-            <BoxBtn onClick={submitEditSpace}>완료</BoxBtn>
-            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={submitEditSpace}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StListBtnBox>
         </StList>
       )}

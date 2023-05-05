@@ -128,7 +128,6 @@ export const SubTitle = styled.div`
 
 export const SubIcon = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   margin: 16px 0px;
   margin-left: 16px;

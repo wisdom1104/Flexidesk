@@ -2,13 +2,11 @@ import React from 'react';
 import { useDeleteBox } from '../../hooks/adminSpace/box/useDeleteBox';
 import { useEditBox } from '../../hooks/adminSpace/box/useEditBox';
 import { useDADBox } from '../../hooks/adminSpace/box/useDADBox';
-import {
-  BoxBtn,
-  BoxInput,
-  BoxSubBtn,
-  StBox,
-  StBtnBox,
-} from '../../shared/SpaceStyles';
+import { StBox, StBtnBox } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import { Input } from '../../components/Input';
 
 function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
   const { submitDelete } = useDeleteBox();
@@ -32,16 +30,32 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
           onMouseDown={e => boxMouseDownHandler(e, box.boxId)}
           transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
-          <div>{box.boxName}</div>
+          <Text shape="T16_600" color="var(--grey_002)">
+            {box.boxName}
+          </Text>
           <StBtnBox>
-            <BoxBtn onClick={() => changeEditModeHandler()}>수정</BoxBtn>
-            <BoxSubBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               onClick={() => {
                 submitDelete(box.boxId, spaceId);
               }}
             >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       ) : (
@@ -49,15 +63,31 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
           key={box.boxId}
           transformValue={`translate(${box.x}px, ${box.y}px)`}
         >
-          <BoxInput
+          <Input
+            w="60px"
+            h="20px"
+            br="2px"
             maxLength={6}
             type="text"
             value={editBoxName}
             onChange={e => changeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <BoxBtn onClick={submitEdit}>완료</BoxBtn>
-            <BoxSubBtn onClick={() => changeEditModeHandler()}>취소</BoxSubBtn>
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={submitEdit}>
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => changeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       )}
