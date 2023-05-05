@@ -30,7 +30,7 @@ export const StLoginForm = styled.form`
 
   background: var(--white);
   box-shadow: 0px 8px 20px rgba(175, 200, 197, 0.25);
-  
+
   border-radius: 8px;
   padding: 40px;
   display: flex;
@@ -52,11 +52,11 @@ export const StForm = styled.div`
   gap: 16px;
 `;
 
-export const StFormBox = styled.div`
+export const StFormBox = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 500px;
 `;
 
 // 버튼
@@ -82,7 +82,6 @@ export const StLongButton = styled.button`
     border: 1px solid var(--blue);
   }
 `;
-
 
 export const StSmallButton = styled.button`
   display: flex;

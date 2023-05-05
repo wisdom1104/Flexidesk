@@ -15,9 +15,9 @@ export default IconTitle;
 
 const StIconTitle = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: ${props => props.margin || '30px 16px'};
 `;
 
 const StIcon = styled.img`

@@ -32,6 +32,6 @@ const StBoard = styled.div`
   width: 90%;
   justify-content: space-between;
   margin: 5px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid var(--grey_003);
   padding-bottom: 5px;
 `;
