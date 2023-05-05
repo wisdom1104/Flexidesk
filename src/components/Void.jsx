@@ -52,7 +52,7 @@ const StyledVoid = styled.div`
   padding-left: ${({ pl }) => pl}px;
   padding: ${({ pd }) => pd}px;
   border: ${({ bd }) => bd};
-  border-top: ${({ bt }) => bt}px;
-  border-bottom: ${({ bb }) => bb}px;
+  border-top: ${({ bt }) => bt};
+  border-bottom: ${({ bb }) => bb};
   border-radius: ${({ br }) => br}px;
 `;

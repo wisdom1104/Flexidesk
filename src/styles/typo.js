@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const globalTypo = (fw, fs, lh) => {
   return css`
-    font-weight: ${fw}px;
+    font-weight: ${fw};
     font-size: ${fs}px;
     line-height: ${lh}px;
   `;
@@ -13,7 +13,7 @@ export const globalTypoes = {
   T32_000: globalTypo(0, 32, 0),
   T28_000: globalTypo(0, 28, 22),
 
-  T12_400: globalTypo(400, 12, 15), 
+  T12_400: globalTypo(400, 12, 15),
 
   T14_400_14: globalTypo(400, 14, 14),
   T14_400_17: globalTypo(400, 14, 17),
@@ -40,7 +40,7 @@ export const globalTypoes = {
 
   T18_700: globalTypo(700, 18, 0),
   T18_700_22: globalTypo(700, 18, 22),
-  T20_700_24: globalTypo(700, 20, 24),  
+  T20_700_24: globalTypo(700, 20, 24),
   T20_700_30: globalTypo(700, 20, 30),
   T18_700_96: globalTypo(700, 18, 96),
 

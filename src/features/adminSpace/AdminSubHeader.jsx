@@ -8,6 +8,10 @@ import {
   SubIcon,
   SubTitle,
 } from '../../shared/SpaceStyles';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import Text from '../../components/Text';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import BlueBtn from '../../components/button/BlueBtn';
 
 function AdminSubHeader({ space, isModal, setIsModal }) {
   const navigate = useNavigate();
@@ -35,6 +39,10 @@ function AdminSubHeader({ space, isModal, setIsModal }) {
         })}
       </Row>
       <Row>
+        <BlueBtn pd="8px 20px">
+          <Text shape="T28_700_34">안녕</Text>
+        </BlueBtn>
+
         <StSubBtn
           onClick={() => {
             setIsModal(!isModal);

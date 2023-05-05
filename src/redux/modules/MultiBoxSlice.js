@@ -89,34 +89,6 @@ export const __editMultiBox = createAsyncThunk(
   },
 );
 
-// multiBox user 수정
-// export const __editMultiBoxUser = createAsyncThunk(
-//   'editMultiBoxUser',
-//   async (payload, thunk) => {
-//     try {
-//       const token = getCookie('token');
-//       const companyName = getCookie('companyName');
-//       const response = await api.patch(
-//         `/multiBoxes/${companyName}/${payload.tomultiBoxId}/move`,
-//         {
-//           multiBoxName: payload.multiBoxName,
-//           x: payload.x,
-//           y: payload.y,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         },
-//       );
-//       thunk.dispatch(__getSpace(payload.spaceId));
-//       return thunk.fulfillWithValue(response.data.data);
-//     } catch (error) {
-//       return error;
-//     }
-//   },
-// );
-
 export const multiBoxSlice = createSlice({
   name: 'multiBox',
   initialState,
