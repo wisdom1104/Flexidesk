@@ -40,7 +40,9 @@ function AdminSubHeader({ space, isModal, setIsModal }) {
       </Row>
       <Row>
         <BlueBtn pd="8px 20px">
-          <Text shape="T28_700_34">안녕</Text>
+          <Text shape="T28_700_34" color="blue_001">
+            안녕
+          </Text>
         </BlueBtn>
 
         <StSubBtn

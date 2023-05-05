@@ -37,10 +37,12 @@ body {
     --darkgrey: #8B93A6;
     --grey: #C9CDD6;
     --lightgrey: #F1F2F4; 
+
 /* 어두운 순 */
     --blue_001: #07133B;
     --blue_002: #0B2475;
     --blue_003: #314563;
+    --blue_004: #A6AEBB;
 
     --mint_001: #4A8E8B;
     --mint_002: #65BAB6;
@@ -55,6 +57,10 @@ body {
     --error: #FF5353;
     
     --white: #ffffff;
+
+    --buttonGradation: linear-gradient(276.35deg, #07133B 10.61%, #0B2475 85.36%);
+    --spaceGradation:linear-gradient(291.78deg, #a2cecf 0%, #b6dfdd 100%);
+    --welcomeGradation:linear-gradient(180deg, #FFFFFF 0%, #DEF1EF 100%);
   };
 `;
 

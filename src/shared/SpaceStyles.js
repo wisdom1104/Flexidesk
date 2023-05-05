@@ -378,11 +378,14 @@ export const BoxInput = styled.input`
   width: 80px;
   background: var(--white);
   border: 1px solid var(--darkgrey);
-  box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25);
+  /* box-shadow: 0px 4px 4px rgba(140, 159, 157, 0.25); */
   border-radius: 2px;
+  outline: none;
   &:focus {
-    outline: none;
-    /* border: 2px solid var(--darkgrey); */
+    border: 1px solid var(--mint_002);
+  }
+  &:active {
+    border: 1px solid var(--blue_001);
   }
 `;
 
@@ -637,6 +640,12 @@ export const EditInput = styled.input`
   outline: none;
   border: 1px solid var(--darkgrey);
   border-radius: 2px;
+  &:focus {
+    border: 1px solid var(--mint_002);
+  }
+  &:active {
+    border: 1px solid var(--blue_001);
+  }
 `;
 
 //유저 이동 모달 -----------------------------------------------------------
