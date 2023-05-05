@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Dimension = ({ children, w, h, minw, minh, maxw, maxh }) => {
+export const Dimension = ({ children, w, h, minw, minh, maxw, maxh, bg }) => {
   return (
     <StyledDimension
+      bg={bg}
       w={w}
       h={h}
       minw={minw}
@@ -17,6 +18,7 @@ export const Dimension = ({ children, w, h, minw, minh, maxw, maxh }) => {
 };
 
 const StyledDimension = styled.div`
+  background-color: ${({ bg }) => bg};
   width: ${({ w }) => w};
   height: ${({ h }) => h};
   min-width: ${({ minw }) => minw};
