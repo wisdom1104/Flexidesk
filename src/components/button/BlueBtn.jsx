@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function BlueBtn({ children, ...rest }) {
+export function BlueBtn({ children, ...rest }) {
   return <StBlueBtn {...rest}>{children}</StBlueBtn>;
 }
-
-export default BlueBtn;
 
 const StBlueBtn = styled.button`
   display: flex;
