@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const OfHidden = styled.div`
@@ -121,4 +122,23 @@ export const CalendarDateBtn = styled.button`
   align-items: flex-start;
   padding: 10px 0px;
   margin: 0px 3px;
+`;
+
+export const StLoginIcon = styled.img`
+  width: 20px;
+  display: inline-block;
+  margin-left: 20px;
+  z-index: 1;
+`;
+
+export const StLink = styled(Link)`
+  width: 90px;
+  margin-top: 10px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: end;
+
+  color: var(--darkgrey);
 `;
