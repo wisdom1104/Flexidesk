@@ -156,17 +156,17 @@ export const CheckTitle = styled.div`
   font-weight: 700;
   color: #5c6373;
 `;
-export const FinButton = styled.button`
-  border: none;
-  width: 400px;
-  padding: 20px;
-  margin: auto;
-  background-color: #07133b;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-`;
+// export const FinButton = styled.button`
+//   border: none;
+//   width: 400px;
+//   padding: 20px;
+//   margin: auto;
+//   background-color: #07133b;
+//   color: white;
+//   border-radius: 8px;
+//   cursor: pointer;
+//   font-family: inherit;
+// `;
 
 export const Calcontain = styled.div`
   width: 100vw;
