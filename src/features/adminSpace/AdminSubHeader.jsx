@@ -11,7 +11,7 @@ import {
 import MainMintBtn from '../../components/button/MainMintBtn';
 import Text from '../../components/Text';
 import SubMintBtn from '../../components/button/SubMintBtn';
-import BlueBtn from '../../components/button/BlueBtn';
+import {BlueBtn} from '../../components/button/BlueBtn';
 
 function AdminSubHeader({ space, isModal, setIsModal }) {
   const navigate = useNavigate();

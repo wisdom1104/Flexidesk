@@ -10,7 +10,6 @@ const StPage = styled.div`
   height: calc(94vh - 20px);
   max-width: 1200px;
   min-width: 800px;
-  background-color: #ffffff;
   display: flex;
   justify-content: center;
   margin: 0 auto;

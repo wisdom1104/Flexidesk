@@ -18,7 +18,7 @@ export const Dimension = ({ children, w, h, minw, minh, maxw, maxh, bg }) => {
 };
 
 const StyledDimension = styled.div`
-  background-color: ${({ bg }) => bg};
+  background: ${({ bg }) => bg};
   width: ${({ w }) => w};
   height: ${({ h }) => h};
   min-width: ${({ minw }) => minw};

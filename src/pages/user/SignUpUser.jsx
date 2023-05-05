@@ -14,6 +14,13 @@ import {
   StOverall,
   StTextInput,
 } from './UserStyled';
+import Page from '../../components/Page';
+import { Flex } from '../../components/Flex';
+import { Dimension } from '../../components/Dimension';
+import Text from '../../components/Text';
+import LoginForm from '../../components/form/LoginForm';
+import { Input } from '../../components/Input';
+import { Void } from '../../components/Void';
 
 function SignUpUser() {
   const [user, setUser] = useState({
