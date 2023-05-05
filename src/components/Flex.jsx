@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 `;
 
 export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+display: flex;
+flex-direction: row;
 `;
 
 export const Flex = ({ children, gap, dir, jc, ai, po, zi }) => {
