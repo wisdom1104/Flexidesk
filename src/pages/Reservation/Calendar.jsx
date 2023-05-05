@@ -5,7 +5,7 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
-import { Row } from '../../components/Flex';
+import { Flex, Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
 import { StListTitle } from '../../shared/SpaceStyles';
 import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
@@ -20,6 +20,8 @@ import {
   StIcon,
   InfoContain,
 } from './CalendarStyled';
+import { Dimension } from '../../components/Dimension';
+import { Void } from '../../components/Void';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);
