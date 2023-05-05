@@ -1,11 +1,8 @@
 import React from 'react';
 import api from '../../axios/api';
-import {
-  Container,
-  InlinButton,
-  InlineInput,
-} from '../../pages/user/UserStyled';
-import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
+import { BlueBtn } from '../../components/button/BlueBtn';
+import Text from '../../components/Text';
+import { Container, InlineInput } from '../../pages/user/UserStyled2';
 
 function CertificationCkeck({ user, certification, onChange }) {
   // form태그 핸들러
@@ -26,15 +23,9 @@ function CertificationCkeck({ user, certification, onChange }) {
   return (
     <>
       <Container>
-        <StSmallFont
-          width
-          align="start"
-          fontSize="0.875rem"
-          weight="700"
-          marginBottom="10px"
-        >
+        <Text shape="T14_700" color="var(--blue_004)">
           회사 인증번호
-        </StSmallFont>
+        </Text>
       </Container>
 
       <Container>
@@ -46,12 +37,9 @@ function CertificationCkeck({ user, certification, onChange }) {
           placeholder=" 인증번호는 관리자에게 문의하세요."
           required
         />
-
-        <InlinButton
-          type="button"
-          onClick={submitBtnHandler}
-          value="인증확인"
-        />
+        <BlueBtn type="button" onClick={submitBtnHandler} w="25%" h="50px">
+          인증확인
+        </BlueBtn>
       </Container>
     </>
   );

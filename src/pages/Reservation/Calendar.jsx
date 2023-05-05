@@ -20,8 +20,8 @@ import {
   StIcon,
   InfoContain,
 } from './CalendarStyled';
-import { Dimension } from '../../components/Dimension';
-import { Void } from '../../components/Void';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);
@@ -44,15 +44,9 @@ const Calendar = () => {
   return (
     <Page>
       <div>
-        <StListTitle margin="30px 0px 0px 16px">
-          <StSpacePagePhoto
-            width="52px"
-            marginTop
-            src={`${process.env.PUBLIC_URL}/img/reservation.png`}
-            alt="managementIcon"
-          />
-          <div>회의실 예약하기</div>
-        </StListTitle>
+        <IconTitle margin="30px 0px 0px 16px" src="reservation">
+          <Text shape="T28_700_34">회의실 예약하기</Text>
+        </IconTitle>
 
         {showSkeleton ? (
           <InfoContain>
@@ -64,13 +58,10 @@ const Calendar = () => {
           <Row>
             <SchContain width="500px" height="">
               <StSubHeader>
-                <StSubTitle>
-                  <StIcon
-                    src={`${process.env.PUBLIC_URL}/img/day.png`}
-                    alt="icon"
-                  />{' '}
-                  {mrName} 예약 날짜
-                </StSubTitle>
+                <IconTitle margin="20px 10px" src="day" height="20px">
+                  <Text shape="T18_700">{mrName} 예약 날짜</Text>
+                </IconTitle>
+
                 <StSelectDay>
                   <IoIosArrowDropleft
                     onClick={() => {

@@ -4,6 +4,7 @@ import { useModal } from '../../hooks/useModalHook';
 import { MoveModalbtn } from '../../shared/SpaceStyles';
 import Modal from '../../components/Modal';
 import { __deleteRervation } from '../../redux/modules/detail';
+import MainMintBtn from '../../components/button/MainMintBtn';
 
 function ReservationDelete({ reservationId }) {
   const dispatch = useDispatch();
@@ -17,21 +18,30 @@ function ReservationDelete({ reservationId }) {
 
   return (
     <>
-      <MoveModalbtn
-        onClick={()=> controlModal(true)}
+      <MainMintBtn
+        w="84px"
+        h="35px"
+        mg="5px 0px"
+        onClick={() => controlModal(true)}
+      >
+        삭제
+      </MainMintBtn>
+      {/* <MoveModalbtn
+        onClick={() => controlModal(true)}
         width="84px"
         height="35px"
+        mg="5px 0px"
         left="100px"
         top="130px"
         position="sticky"
         padding="8px, 16px, 8px, 16px"
       >
         삭제
-      </MoveModalbtn>
+      </MoveModalbtn> */}
 
       {isOpen && (
         <Modal
-          setIsModal={()=> controlModal(false)}
+          setIsModal={() => controlModal(false)}
           modalTitle="삭제 하시겠습니까?"
           onButtonClick={deleteHandler}
         ></Modal>

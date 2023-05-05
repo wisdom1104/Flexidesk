@@ -1,24 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { Input } from '../../components/Input';
-import { Flex, Row } from '../../components/Flex';
+import { Row } from '../../components/Flex';
 import ValidationError from '../../components/form/ValidationError';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { StFont, StSmallFont } from '../welcome/WelcomeStyled';
-import {
-  StBackground,
-  StForm,
-  StFormBox,
-  StLink,
-  StLoginInputIconBox,
-  StLoginForm,
-  StLoginIcon,
-  StLoginIconDiv,
-  StLongButton,
-  StOverall,
-  StLoginContain,
-} from './UserStyled';
 import { LoginSubmitHandler } from '../../utils/loginSubmitHandler';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import { BlueBtn } from '../../components/button/BlueBtn';
+
+import { StForm, StFormContain, StLink, StStartText } from './UserStyled2';
 
 function Login() {
   const [login, setLogin] = useState({
@@ -32,76 +23,50 @@ function Login() {
   const { onsubmitHandler } = LoginSubmitHandler(login, setErrorMsg);
 
   return (
-    <StBackground height="100vh">
-      <StOverall>
-        <StLoginContain>
-          <StLoginForm onSubmit={onsubmitHandler} width="420px">
-            <StForm>
-              <StFormBox>
-                <StFont width="100%" align="start" fontSize="28px">
-                  로그인
-                </StFont>
+    <Page>
+      <StFormContain>
+        <StForm onSubmit={onsubmitHandler}>
+          <StStartText>
+            <Text shape="T28_700_30"> 로그인 </Text>
+            <Text shape="T16_500" color="var(--blue_004)">
+              이메일 주소와 비밀번호를 입력해주세요.
+            </Text>
+          </StStartText>
 
-                <StSmallFont
-                  width="100%"
-                  align="start"
-                  fontSize="16px"
-                  marginTop="10px"
-                >
-                  이메일 주소와 비밀번호를 입력해주세요.
-                </StSmallFont>
-              </StFormBox>
+          <SignUpTextInput
+            innerText="이메일"
+            type="email"
+            value={auth.email}
+            onChange={onChangeEmailHandler}
+            name="email"
+            placeholder="✉️  이메일을 입력하세요."
+            required
+          />
 
-              <StLoginInputIconBox>
-                <StLoginIconDiv>
-                  <StLoginIcon
-                    src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`}
-                    alt="loginIcon3"
-                  />
-                </StLoginIconDiv>
+          <SignUpTextInput
+            innerText="비밀번호"
+            type="password"
+            value={auth.password}
+            name="password"
+            placeholder="🔑  비밀번호를 입력하세요."
+            required
+            onChange={onChangePasswordHandler}
+          />
 
-                <Input
-                  type="email"
-                  value={auth.email}
-                  onChange={onChangeEmailHandler}
-                  name="email"
-                  placeholder="이메일"
-                  required
-                  border="none"
-                />
-              </StLoginInputIconBox>
+          <ValidationError value={errorMsg} />
 
-              <StLoginInputIconBox>
-                <StLoginIconDiv>
-                  <StLoginIcon
-                    src={`${process.env.PUBLIC_URL}/img/loginIcon4.png`}
-                    alt="loginIcon4"
-                  />
-                </StLoginIconDiv>
-                <Input
-                  type="password"
-                  value={auth.password}
-                  onChange={onChangePasswordHandler}
-                  name="password"
-                  placeholder="비밀번호"
-                  required
-                  border="none"
-                />
-              </StLoginInputIconBox>
-
-              <ValidationError value={errorMsg} />
-
-              <StLongButton> 로그인 </StLongButton>
-
-              <Row>
-                <StLink to={'/signup'}> 관리자 회원가입 </StLink>
-                <StLink to={'/signupuser'}> 일반 회원가입 </StLink>
-              </Row>
-            </StForm>
-          </StLoginForm>
-        </StLoginContain>
-      </StOverall>
-    </StBackground>
+          <BlueBtn type="submit" mg="20px">
+            <Text shape="T18_700_22" color="var(--white)">
+              로그인
+            </Text>
+          </BlueBtn>
+          <Row>
+            <StLink to={'/signup'}> 관리자 회원가입 </StLink>
+            <StLink to={'/signupuser'}> 일반 회원가입 </StLink>
+          </Row>
+        </StForm>
+      </StFormContain>
+    </Page>
   );
 }
 

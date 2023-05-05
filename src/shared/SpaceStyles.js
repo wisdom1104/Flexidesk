@@ -741,6 +741,7 @@ export const MoveModalbtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin:${props => props.mg || '0px'}; ;
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
   position: ${props => props.position || 'absolute'};

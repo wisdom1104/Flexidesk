@@ -35,8 +35,8 @@ body {
 
     --black: #15161A;
     --darkgrey: #8B93A6;
-    --grey: #C9CDD6;
-    --lightgrey: #F1F2F4; 
+    --gray: #C9CDD6;
+    --lightgray: #F1F2F4; 
 
 /* 어두운 순 */
     --blue_001: #07133B;

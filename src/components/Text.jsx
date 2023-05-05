@@ -16,7 +16,7 @@ const StText = styled.div`
   ${({ shape }) => {
     return globalTypoes[shape];
   }}
-  color: ${({ color }) => color || 'var(--blue_001)'};
+  color: ${({ color }) => color || 'var(—blue_001)'};
   text-align: ${({ ta }) => ta};
   margin: ${props => props.mg};
 `;
