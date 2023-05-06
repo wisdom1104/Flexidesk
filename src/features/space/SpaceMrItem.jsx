@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StBox, StUser } from '../../shared/SpaceStyles';
+import { StBox } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
 
 function SpaceMrItem({ mr, navi }) {
   const start = mr.reservationList?.map(reservation => reservation.start);
@@ -54,13 +55,20 @@ function SpaceMrItem({ mr, navi }) {
                         background="#def1ef"
                         color="#65bab6"
                       >
-                        {/* <div>
-                          현재시각 <br />
-                          예약있는 <br />
-                          회의실
-                        </div> */}
-                        <div>{mr.mrName}</div>
-                        <StUser>- 사용중 -</StUser>
+                        <Text
+                          shape="T16_600"
+                          color="var(--mint_002)"
+                          ta="center"
+                        >
+                          {mr.mrName}
+                        </Text>
+                        <Text
+                          shape="T12_400"
+                          color="var(--grey_002)"
+                          ta="center"
+                        >
+                          - 사용중 -
+                        </Text>
                       </StBox>
                     ) : (
                       <StBox
@@ -68,7 +76,13 @@ function SpaceMrItem({ mr, navi }) {
                         onClick={() => navi(`/calender/${mr.mrId}`)}
                         transformValue={`translate(${mr.x}px, ${mr.y}px)`}
                       >
-                        <div>{mr.mrName}</div>
+                        <Text
+                          shape="T16_600"
+                          color="var(--grey_002)"
+                          ta="center"
+                        >
+                          {mr.mrName}
+                        </Text>
                       </StBox>
                     )}
                   </>
@@ -80,7 +94,9 @@ function SpaceMrItem({ mr, navi }) {
                 onClick={() => navi(`/calender/${mr.mrId}`)}
                 transformValue={`translate(${mr.x}px, ${mr.y}px)`}
               >
-                <div>{mr.mrName}</div>
+                <Text shape="T16_600" color="var(--grey_002)" ta="center">
+                  {mr.mrName}
+                </Text>
               </StBox>
             ),
           )}
@@ -91,7 +107,9 @@ function SpaceMrItem({ mr, navi }) {
           onClick={() => navi(`/calender/${mr.mrId}`)}
           transformValue={`translate(${mr.x}px, ${mr.y}px)`}
         >
-          <div>{mr.mrName}</div>
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
+            {mr.mrName}
+          </Text>
         </StBox>
       )}
     </>

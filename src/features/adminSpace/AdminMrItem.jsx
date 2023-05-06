@@ -30,7 +30,7 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
           onMouseDown={e => mrMouseDownHandler(e, mr.mrId)}
           transformValue={`translate(${mr.x}px, ${mr.y}px)`}
         >
-          <Text shape="T16_600" color="var(--grey_002)">
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
             {mr.mrName}
           </Text>
           <StBtnBox>

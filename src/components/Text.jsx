@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { globalTypoes } from '../styles/typo';
 
-function Text({ children, shape, color, ta, mg, mt, pd, onClick }) {
+function Text({ children, shape, color, ta, mg, mt, pd, onClick, cursor }) {
   return (
     <StText
       shape={shape}
@@ -12,6 +12,7 @@ function Text({ children, shape, color, ta, mg, mt, pd, onClick }) {
       mt={mt}
       pd={pd}
       onClick={onClick}
+      cursor={cursor}
     >
       {children}
     </StText>
@@ -29,4 +30,5 @@ const StText = styled.div`
   margin: ${props => props.mg};
   margin-top: ${props => props.mt};
   padding: ${props => props.pd};
+  cursor: ${props => props.cursor};
 `;

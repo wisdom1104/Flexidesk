@@ -14,7 +14,6 @@ function SpaceDropItem({
 
   return (
     <>
-      {/* 박스 */}
       {space?.map(
         item =>
           item.boxList?.length > 0 &&
@@ -27,7 +26,6 @@ function SpaceDropItem({
             />
           )),
       )}
-      {/* 회의실 */}
       {space?.map(
         item =>
           item.mrList?.length > 0 &&
@@ -35,7 +33,6 @@ function SpaceDropItem({
             <SpaceMrItem key={mr.mrId} mr={mr} navi={navi} />
           )),
       )}
-      {/* 공용공간 */}
       {space?.map(
         item =>
           item.multiBoxList?.length > 0 &&

@@ -34,7 +34,7 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
           onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
-          <Text shape="T16_600" color="var(--grey_002)">
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
             {multiBox.multiBoxName}
           </Text>
           <StBtnBox>

@@ -7,12 +7,14 @@ import Skeleton from '../../components/Skeleton';
 import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
-import { StBtn, StSubHeader } from '../../shared/SpaceStyles';
+import { StSubHeader } from '../../shared/SpaceStyles';
 import { InfoContain } from '../reservation/CalendarStyled';
 import SpaceList from '../../features/space/SpaceList';
 import SpaceBox from '../../features/space/SpaceBox';
 import SpaceBackBoard from '../../components/SpaceBackBoard';
 import SpaceMainBoard from '../../components/SpaceMainBoard';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import Text from '../../components/Text';
 
 function Space() {
   const navi = useNavigate();
@@ -59,11 +61,19 @@ function Space() {
                 <StSubHeader>
                   <Row></Row>
                   <Row>
-                    {role === 'ADMIN' || role === 'MANAGER' ? (
-                      <StBtn onClick={() => navi('/adminSpace')}>
-                        관리하기
-                      </StBtn>
-                    ) : null}
+                    {role === 'ADMIN' ||
+                      (role === 'MANAGER' && (
+                        <MainMintBtn
+                          mg="0px 16px"
+                          h="43px"
+                          pd="8px 16px"
+                          onClick={() => navi('/adminSpace')}
+                        >
+                          <Text shape="T16_600" color="var(--white)">
+                            관리하기
+                          </Text>
+                        </MainMintBtn>
+                      ))}
                   </Row>
                 </StSubHeader>
                 <SpaceMainBoard></SpaceMainBoard>
