@@ -23,7 +23,7 @@ Server : AWS S3
 "@tanstack/react-query": "^4.28.0", <br />
 비동기통신 "axios": "^1.3.4", <br />
 "devtools": "^8.6.9", <br />
-가짜서버를 이용 "json-server": "^0.17.3", <br />
+가상서버를 이용 "json-server": "^0.17.3", <br />
 "react": "^18.2.0", <br />
 "react-dom": "^18.2.0", <br />
 중앙상태관리 "react-redux": "^8.0.5", <br />
