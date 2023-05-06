@@ -7,7 +7,7 @@ function IconTitle({
   src,
   alt,
   gap,
-  shape = 'T18_700_22',
+  shape = 'T28_700_34',
   margin,
   height,
 }) {
@@ -54,4 +54,5 @@ const StTitle = styled.h2`
   ${({ shape }) => {
     return globalTypoes[shape];
   }}
+  color: ${({ color }) => color || 'var(--blue_001)'};
 `;

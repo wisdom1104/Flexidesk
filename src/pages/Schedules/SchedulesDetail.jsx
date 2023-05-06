@@ -18,6 +18,9 @@ import {
 import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import { StListTitle } from '../../shared/SpaceStyles';
 import SchedulesDelete from '../../features/schedules/SchedulesDelete';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import SubMintBtn from '../../components/button/SubMintBtn';
 
 function SchedulesDetail() {
   const navi = useNavigate();
@@ -29,16 +32,9 @@ function SchedulesDetail() {
   return (
     <Page>
       <div>
-        <StListTitle margin="30px 0px 0px 16px">
-          <StSpacePagePhoto
-            width="52px"
-            marginTop
-            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
-            alt="managementIcon"
-          />
-          <div>스케줄 조회</div>
-        </StListTitle>
-
+        <IconTitle margin="30px 0px 0px 16px" src="schedule">
+          <Text shape="T28_700_34">스케줄 조회</Text>
+        </IconTitle>
         {showSkeleton ? (
           <InfoContain>
             <Skeleton />
@@ -72,15 +68,20 @@ function SchedulesDetail() {
                     <StSmallFont width>{item.scEnd.split('T')[1]}</StSmallFont>
                   </CommentBox>
                   <ButtonContain>
-                    <PathBtn
+                    <SubMintBtn
+                      w="50px"
+                      h="32px"
+                      mg="5px 10px"
                       onClick={() => {
                         navi(`/pathschedules/${item.scId}`, {
                           state: { ...item },
                         });
                       }}
                     >
-                      수정
-                    </PathBtn>
+                      <Text shape="T14_700_17" color="var(--mint_002)">
+                        수정
+                      </Text>
+                    </SubMintBtn>
                     <SchedulesDelete scId={item.scId} />
                   </ButtonContain>
                 </Info>

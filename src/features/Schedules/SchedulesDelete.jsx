@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../hooks/useModalHook';
-import { MoveModalbtn } from '../../shared/SpaceStyles';
 import Modal from '../../components/Modal';
 import { __deleteSchedule } from '../../redux/modules/schedules';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import Text from '../../components/Text';
 
 function SchedulesDelete({ scId }) {
   const dispatch = useDispatch();
@@ -16,21 +17,20 @@ function SchedulesDelete({ scId }) {
   };
   return (
     <>
-      <MoveModalbtn
-        onClick={()=> controlModal(true)}
-        width="50px"
-        height="32px"
-        left="100px"
-        top="130px"
-        position="sticky"
-        padding="7px"
+      <MainMintBtn
+        w="50px"
+        h="32px"
+        mg="5px 10px"
+        onClick={() => controlModal(true)}
       >
-        삭제
-      </MoveModalbtn>
+        <Text shape="T14_700_17" color="var(--white)">
+          삭제
+        </Text>
+      </MainMintBtn>
 
       {isOpen && (
         <Modal
-          setIsModal={()=> controlModal(false)}
+          setIsModal={() => controlModal(false)}
           modalTitle="삭제 하시겠습니까?"
           onButtonClick={deleteHandler}
         ></Modal>
