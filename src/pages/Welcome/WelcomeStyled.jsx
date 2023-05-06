@@ -3,14 +3,14 @@ import styled, { css, keyframes } from 'styled-components';
 //배경
 export const StBackground = styled.div`
   background: ${props => props.background || '#DEF1EF'};
-  height: ${props => props.height || ''};
+  height: 100vh;
 `;
 
-//그라데이션 배경
-export const StGradationBackground = styled.div`
-  background: linear-gradient(180deg, #ffffff 0%, #def1ef 100%);
-  height: 155vh;
-`;
+// //그라데이션 배경
+// export const StGradationBackground = styled.div`
+//   background: linear-gradient(180deg, #ffffff 0%, #def1ef 100%);
+//   height: 155vh;
+// `;
 
 // 전체 공통 스타일
 export const StOverall = styled.div`
@@ -39,7 +39,7 @@ export const StFont = styled.p`
   margin-bottom: ${props => props.marginBottom || ''};
 
   font-weight: 700;
-  font-size: ${props => props.fontSize || '4rem'};
+  font-size: ${props => props.fontSize || '64px'};
   line-height: 150%;
   text-align: ${props => props.align || 'center'};
 
@@ -56,7 +56,7 @@ export const StSmallFont = styled.p`
   margin-top: ${props => props.marginTop || ''};
 
   font-weight: ${props => props.weight || '500'};
-  font-size: ${props => props.fontSize || '1.25rem'};
+  font-size: ${props => props.fontSize || '20px'};
   line-height: 200%;
   text-align: ${props => props.align || 'center'};
 
@@ -72,7 +72,7 @@ export const StGradationFont = styled.p`
   font-size: 64px;
   line-height: 150%;
   text-align: center;
-  
+
   background: linear-gradient(180deg, var(--blue) 15.36%, #acdad8 119.53%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

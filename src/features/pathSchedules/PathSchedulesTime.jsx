@@ -8,10 +8,10 @@ import {
   StReserTimeBox,
   StReserTimeButton,
   SchContain,
-  StSubTitle,
-  StIcon,
-  StSubmitButton,
 } from '../../pages/reservation/CalendarStyled';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
 
 function PathSchedulesTime({
   param,
@@ -42,10 +42,9 @@ function PathSchedulesTime({
   return (
     <SchContain width="383px">
       <div>
-        <StSubTitle margin="20px 0px 10px 24px">
-          <StIcon src={`${process.env.PUBLIC_URL}/img/time.png`} alt="icon" />
-          스케줄 시간
-        </StSubTitle>
+        <IconTitle gap="0px" margin="15px 0px 10px 5px" src="time" height="20">
+          <Text shape="T18_700_22">스케줄 시간</Text>
+        </IconTitle>
         <StReserTimeBox>
           {schedules?.map(item => (
             <StReserTimeButton
@@ -61,35 +60,37 @@ function PathSchedulesTime({
         </StReserTimeBox>
       </div>
       <form onSubmit={onSubmitHandler}>
-        <StSubTitle margin="15px 0px 10px 24px">
-          <StIcon src={`${process.env.PUBLIC_URL}/img/title.png`} alt="icon" />
-          스케줄 제목
-        </StSubTitle>
+        <IconTitle gap="0px" margin="15px 0px 10px 5px" src="time" height="20">
+          <Text shape="T18_700_22">스케줄 제목</Text>
+        </IconTitle>
         <Input
-          width="85%"
-          height="50px"
-          margin="auto"
+          w="85%"
+          h="50px"
+          mg="auto"
           type="text"
           value={scheduleValue.scTitle}
           name="scTitle"
           required
           onChange={onChangeHandler}
         />
-        <StSubTitle margin="15px 0px 10px 24px">
-          <StIcon src={`${process.env.PUBLIC_URL}/img/text.png`} alt="icon" />
-          스케줄 내용
-        </StSubTitle>
+        <IconTitle gap="0px" margin="15px 0px 10px 5px" src="text" height="20">
+          <Text shape="T18_700_22">스케줄 내용</Text>
+        </IconTitle>
         <Input
-          width="85%"
-          height="50px"
-          margin="auto"
+          w="85%"
+          h="50px"
+          mg="auto"
           type="text"
           value={scheduleValue.scComment}
           name="scComment"
           required
           onChange={onChangeHandler}
         />
-        <StSubmitButton>수정하기</StSubmitButton>
+        <BlueBtn w="90%" mg="auto" mgt="20px">
+          <Text color="var(--white)" shape="T27_700_22">
+            수정하기
+          </Text>
+        </BlueBtn>
       </form>
     </SchContain>
   );

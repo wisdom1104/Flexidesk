@@ -12,6 +12,7 @@ export const SignUpTextInput = ({
   height,
   minlength,
   maxlength,
+  required,
 }) => {
   return (
     <StTextInput height={height}>

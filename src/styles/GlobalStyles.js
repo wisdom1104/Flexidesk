@@ -16,6 +16,7 @@ body {
     font-family: 'Pretendard-Regular', sans-serif;
     scroll-behavior: smooth;
     box-sizing: border-box;
+    
   }
 
   button {
@@ -60,7 +61,7 @@ body {
 
     --buttonGradation: linear-gradient(276.35deg, #07133B 10.61%, #0B2475 85.36%);
     --spaceGradation:linear-gradient(291.78deg, #a2cecf 0%, #b6dfdd 100%);
-    --welcomeGradation:linear-gradient(180deg, #FFFFFF 0%, #DEF1EF 100%);
+    --welcomeGradation:linear-gradient(180deg, #07133B 15.36%, #ACDAD8 119.53%);
   };
 `;
 

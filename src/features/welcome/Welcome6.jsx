@@ -1,34 +1,27 @@
 import React from 'react';
-import {
-  StBackground,
-  StFont,
-  StOverall,
-  StfontA,
-  StWrapDiv,
-  StSpacePagePhoto,
-} from '../../pages/welcome/WelcomeStyled';
+import { Column } from '../../components/Flex';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
 
 function Welcome6() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
+  };
   return (
-    <>
-      <StBackground background="#fff">
-        <StOverall>
-          <StWrapDiv>
-            <StfontA href="#signup">
-              <StFont>
-                간단한 회원가입으로 <br /> Flexidesk의 솔루션 만나보세요.
-              </StFont>
-              <StSpacePagePhoto
-                height="30vh"
-                width="1000px"
-                src={`${process.env.PUBLIC_URL}/img/welcome3.png`}
-                alt="welcome3"
-              />
-            </StfontA>
-          </StWrapDiv>
-        </StOverall>
-      </StBackground>
-    </>
+    <Page h="94vh">
+      <Column>
+        <Text shape="T64_900" ta="center" mt="150px" onClick={scrollToTop}>
+          간단한 회원가입으로 <br /> Flexidesk의 솔루션 만나보세요.
+        </Text>
+        <img
+          src={`${process.env.PUBLIC_URL}/img/welcome3.png`}
+          alt="welcome3"
+        />
+      </Column>
+    </Page>
   );
 }
 

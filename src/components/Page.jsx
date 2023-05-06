@@ -7,7 +7,7 @@ function Page({ children, ...rest }) {
 
 const StPage = styled.div`
   position: relative;
-  height: calc(94vh - 20px);
+  height: ${props => props.h || 'calc(94vh - 20px)'};
   max-width: 1200px;
   min-width: 800px;
   display: flex;

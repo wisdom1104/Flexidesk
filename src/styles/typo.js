@@ -44,14 +44,19 @@ export const globalTypoes = {
   T20_700_30: globalTypo(700, 20, '30px'),
   T18_700_96: globalTypo(700, 18, '96px'),
 
-  T24_700: globalTypo(700, 24, '30px'),
+  T24_700: globalTypo(700, 24, '36px'),
   T27_700_22: globalTypo(700, 27, '22px'),
   T28_700_30: globalTypo(700, 28, '30px'),
   T28_700_34: globalTypo(700, 28, '34px'),
 
   T40_700: globalTypo(700, 40, ' 0px'),
-  T48_700: globalTypo(700, 48, '30px'),
+  T48_700: globalTypo(700, 48, '70px'),
   T64_700: globalTypo(700, 64, '30px'),
 
-  T64_800C: globalTypo(800, 64, '96px'),
+  T32_700: globalTypo(700, 28, 34px),
+
+  T64_800: globalTypo(800, 48, 96px),
+
+  T64_900: globalTypo(900, 64, 90px),
+
 };

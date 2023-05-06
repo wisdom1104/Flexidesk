@@ -1,41 +1,26 @@
 import React from 'react';
-import {
-  StFont,
-  StSmallFont,
-  StOverall,
-  StWrapDiv,
-} from '../../pages/welcome/WelcomeStyled';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { Column } from '../../components/Flex';
 
 function Welcome2() {
   return (
-    <>
-      <StOverall height="55vw">
-        <StWrapDiv>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '55px',
-            }}
-          >
-            <StFont>
-              이런 고민을 하고 있다면, <br /> Flexidesk를 시작하세요!
-            </StFont>
-            <div>
-              <StSmallFont marginTop="15px" color="--darkblue" weight="700">
-                내가 일할 자리 내가 자유롭게 정하고 싶다.
-              </StSmallFont>
-              <StSmallFont color="rgba(49, 69, 99, 0.8)" weight="700">
-                회의실 사용 겹치지 않도록 미리 예약하고 싶다.
-              </StSmallFont>
-              <StSmallFont color="rgba(49, 69, 99, 0.6);" weight="700">
-                내 스케줄을 다른 사람들과 쉽게 공유하고 싶다.
-              </StSmallFont>
-            </div>
-          </div>
-        </StWrapDiv>
-      </StOverall>
-    </>
+    <Page>
+      <Column>
+        <Text shape="T64_800" mt="20%">
+          이런 고민을 하고 있다면, <br /> Flexidesk를 시작하세요!
+        </Text>
+        <Text shape="T20_600" color="#314563" mt="10%" ta="center">
+          내가 일할 자리 내가 자유롭게 정하고 싶다.
+        </Text>
+        <Text shape="T20_600" color="rgba(49, 69, 99, 0.8)" ta="center">
+          회의실 사용 겹치지 않도록 미리 예약하고 싶다.
+        </Text>
+        <Text shape="T20_600" color="rgba(49, 69, 99, 0.6)" ta="center">
+          내 스케줄을 다른 사람들과 쉽게 공유하고 싶다.
+        </Text>
+      </Column>
+    </Page>
   );
 }
 

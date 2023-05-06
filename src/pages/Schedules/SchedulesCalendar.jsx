@@ -10,14 +10,10 @@ import {
   DayContain,
   SchContain,
   Day,
-  StSubTitle,
   StSubHeader,
   StSelectDay,
-  StIcon,
   InfoContain,
 } from '../reservation/CalendarStyled';
-import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
 import SchedulesTime from '../../features/schedules/SchedulesTime';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
@@ -52,13 +48,9 @@ function SchedulesCalendar() {
           <Row>
             <SchContain>
               <StSubHeader>
-                <StSubTitle>
-                  <StIcon
-                    src={`${process.env.PUBLIC_URL}/img/day.png`}
-                    alt="icon"
-                  />
-                  스케줄 날짜
-                </StSubTitle>
+                <IconTitle margin="20px 10px" src="day" height="20px">
+                  <Text shape="T18_700">스케줄 날짜</Text>
+                </IconTitle>
                 <StSelectDay>
                   <IoIosArrowDropleft
                     onClick={() => {

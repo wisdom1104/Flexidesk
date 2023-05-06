@@ -41,7 +41,7 @@ function ReservationCheck({
   return (
     <>
       <IconTitle gap="0px" margin="0px 0px 10px 13px" src="title" height="20px">
-        <Text>예약 확인하기</Text>
+        <Text shape="T18_700_22">예약 확인하기</Text>
       </IconTitle>
       <CheckContainBox>
         <Column>

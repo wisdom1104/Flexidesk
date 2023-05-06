@@ -118,7 +118,7 @@ function ReservationTime({ param, selectDay, mrName }) {
             src="time"
             height="20"
           >
-            <Text>예약 시간</Text>
+            <Text shape="T18_700_22">예약 시간</Text>
           </IconTitle>
           <StReserTimeBox width="95%">
             {timeList?.map(item => (
@@ -150,7 +150,7 @@ function ReservationTime({ param, selectDay, mrName }) {
               src="user"
               height="20px"
             >
-              <Text>사원 검색</Text>
+              <Text shape="T18_700_22">사원 검색</Text>
             </IconTitle>
             <Input
               width="280px"
