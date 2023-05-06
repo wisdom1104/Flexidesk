@@ -14,8 +14,8 @@ import {
   StIcon,
   StSelectDay,
 } from '../reservation/CalendarStyled';
-import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 
 function PathScedules() {
   const location = useLocation();
@@ -37,25 +37,15 @@ function PathScedules() {
   return (
     <Page>
       <div>
-        <StListTitle margin="30px 0px 0px 16px">
-          <StSpacePagePhoto
-            width="52px"
-            marginTop
-            src={`${process.env.PUBLIC_URL}/img/schedule.png`}
-            alt="managementIcon"
-          />
-          <div>스케줄 수정하기</div>
-        </StListTitle>
+        <IconTitle margin="30px 0px 0px 16px" src="schedule">
+          <Text shape="T28_700_34">스케줄 수정하기</Text>
+        </IconTitle>
         <Row>
           <SchContain>
             <StSubHeader>
-              <StSubTitle>
-                <StIcon
-                  src={`${process.env.PUBLIC_URL}/img/day.png`}
-                  alt="icon"
-                />
-                스케줄 날짜
-              </StSubTitle>
+              <IconTitle margin="20px 10px" src="day" height="20px">
+                <Text shape="T18_700">스케줄 날짜</Text>
+              </IconTitle>
               <StSelectDay>
                 <IoIosArrowDropleft
                   onClick={() => {

@@ -11,6 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import MainMintBtn from './button/MainMintBtn';
 import SubMintBtn from './button/SubMintBtn';
+import Text from './Text';
 
 function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
   const navi = useNavigate();
@@ -39,7 +40,9 @@ function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
             top="121px"
             pd="4px 10px"
           >
-            네
+            <Text shape="T14_700_17" color="var(--white)">
+              네
+            </Text>
           </MainMintBtn>
           <SubMintBtn
             onClick={closeModal}
@@ -50,7 +53,9 @@ function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
             top="121px"
             pd="4px 10px"
           >
-            아니요
+            <Text shape="T14_700_17" color="var(--mint_002)">
+              아니요
+            </Text>
           </SubMintBtn>
         </MoveModal>
       </ModalWrapper>

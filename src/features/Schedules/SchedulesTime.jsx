@@ -42,7 +42,7 @@ function SchedulesTime({ param, selectDay }) {
     <SchContain width="383px">
       <div>
         <IconTitle gap="0px" margin="15px 0px 10px 5px" src="time" height="20">
-          <Text>등록 시간</Text>
+          <Text shape="T18_700_22">스케줄 시간</Text>
         </IconTitle>
         <StReserTimeBox>
           {schedules?.map(item => (
@@ -60,7 +60,7 @@ function SchedulesTime({ param, selectDay }) {
       </div>
       <form onSubmit={onSubmitHandler}>
         <IconTitle gap="0px" margin="15px 0px 10px 5px" src="time" height="20">
-          <Text>스케줄 제목</Text>
+          <Text shape="T18_700_22">스케줄 제목</Text>
         </IconTitle>
         <Input
           w="85%"
@@ -74,7 +74,7 @@ function SchedulesTime({ param, selectDay }) {
           placeholder="제목을 입력하세요."
         />
         <IconTitle gap="0px" margin="15px 0px 10px 5px" src="text" height="20">
-          <Text>스케줄 내용</Text>
+          <Text shape="T18_700_22">스케줄 내용</Text>
         </IconTitle>
         <Input
           w="85%"
