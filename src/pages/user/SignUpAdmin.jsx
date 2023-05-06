@@ -32,8 +32,8 @@ function SignUpAdmin() {
   const { onSubmitHandler } = useSignUpSubmitHandler(admin);
 
   return (
-    <Page>
-      <StFormContain mt="50px" h="85%">
+    <Page h="">
+      <StFormContain mt="50px">
         <StForm onSubmit={onSubmitHandler}>
           <StStartText>
             <Text shape="T28_700_30">관리자 회원가입</Text>
@@ -103,7 +103,7 @@ function SignUpAdmin() {
           />
 
           <ValidationError value={errors.passwordCheck} />
-          <BlueBtn type="submit" mg="20px">
+          <BlueBtn type="submit" mgt="20px">
             <Text shape="T18_700_22" color="var(--white)">
               확인
             </Text>

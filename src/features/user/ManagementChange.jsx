@@ -7,7 +7,7 @@ import { CommentBox } from '../../pages/reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import Modal from '../../components/Modal';
-import SelectModal from '../../features/SelectModal';
+import SelectModal from '../../components/modal/SelectModal';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, openSelectModal, closeSelectModal] = useModal();
@@ -63,7 +63,7 @@ function ManagementChange({ item }) {
               setIsModal={closeSelectModal}
               role={item.role}
               userId={item.userId}
-            ></SelectModal>
+            />
           )}
 
           {isDeleteModalOpen && (
@@ -71,7 +71,7 @@ function ManagementChange({ item }) {
               setIsModal={closeDeleteModal}
               modalTitle="삭제 하시겠습니까?"
               onButtonClick={handleLogout}
-            ></Modal>
+            />
           )}
         </div>
       </CommentBox>

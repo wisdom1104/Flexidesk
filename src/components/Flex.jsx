@@ -8,4 +8,6 @@ export const Column = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: ${props => props.mt || ''};
+  gap: ${props => props.gap || ''};
 `;
