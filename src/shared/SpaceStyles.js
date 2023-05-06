@@ -712,8 +712,6 @@ export const MoveModalSubTitle = styled.div`
   height: 17px;
   left: 16px;
   top: 16px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;

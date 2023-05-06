@@ -5,27 +5,28 @@ import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import { useModal } from '../../hooks/useModalHook';
 import { CommentBox } from '../../pages/reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
-import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
 import Modal from '../../components/Modal';
 import SelectModal from '../../components/modal/SelectModal';
+import Text from '../../components/Text';
 
 function ManagementChange({ item }) {
-  const [isSelectModalOpen, openSelectModal, closeSelectModal] = useModal();
-  const [isDeleteModalOpen, openDeleteModal, closeDeleteModal] = useModal();
+  const [isSelectModalOpen, controlSelectModal] = useModal();
+  const [isDeleteModalOpen, controlDeleteModal] = useModal();
 
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(__deleteAllManagement(item.userId));
-    closeDeleteModal();
+    controlSelectModal(false);
+    controlDeleteModal(false);
   };
 
   return (
     <>
       <CommentBox>
-        <StSmallFont width>
+        <Text shape="T16_400" color="var(--grey_002)">
           <BsPersonGear /> 권한 변경
-        </StSmallFont>
+        </Text>
 
         <div
           style={{
@@ -35,7 +36,7 @@ function ManagementChange({ item }) {
           }}
         >
           <MoveModalSubbtn
-            onClick={openSelectModal}
+            onClick={() => controlSelectModal(true)}
             width="84px"
             height="35px"
             left="18px"
@@ -47,7 +48,7 @@ function ManagementChange({ item }) {
           </MoveModalSubbtn>
 
           <MoveModalbtn
-            onClick={openDeleteModal}
+            onClick={() => controlDeleteModal(true)}
             width="84px"
             height="35px"
             left="100px"
@@ -60,7 +61,7 @@ function ManagementChange({ item }) {
 
           {isSelectModalOpen && (
             <SelectModal
-              setIsModal={closeSelectModal}
+              setIsModal={() => controlSelectModal(false)}
               role={item.role}
               userId={item.userId}
             />
@@ -68,7 +69,7 @@ function ManagementChange({ item }) {
 
           {isDeleteModalOpen && (
             <Modal
-              setIsModal={closeDeleteModal}
+              setIsModal={() => controlDeleteModal(false)}
               modalTitle="삭제 하시겠습니까?"
               onButtonClick={handleLogout}
             />

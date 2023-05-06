@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Modal from '../components/Modal';
-import { isLoginActions } from '../redux/modules/loginSlice';
-import { LoginHeader } from './header/LoginHeader';
-import { LogoutHeader } from './header/LogoutHeader';
-import { TokenControlHadler } from '../hooks/user/useTokenControlHandler';
+import Modal from '../Modal';
+import { isLoginActions } from '../../redux/modules/loginSlice';
+import { LoginHeader } from './LoginHeader';
+import { LogoutHeader } from './LogoutHeader';
+import { TokenControlHadler } from '../../hooks/user/useTokenControlHandler';
 
 function Header() {
   const {

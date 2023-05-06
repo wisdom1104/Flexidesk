@@ -7,12 +7,12 @@ import AdminSpace from '../pages/space/AdminSpace';
 import Space from '../pages/space/Space';
 import ReservationDetail from '../pages/reservation/ReservationDetail';
 import NotFound from '../pages/NotFound';
-import Header from '../components/Header';
 import Calendar from '../pages/reservation/Calendar';
 import SchedulesCalendar from '../pages/schedules/SchedulesCalendar';
 import SchedulesDetail from '../pages/schedules/SchedulesDetail';
 import Management from '../pages/user/Management';
 import PathSchedulesCalendar from '../pages/pathScedules/PathSchedulesCalendar';
+import Header from '../components/header/Header';
 
 function Router() {
   return (

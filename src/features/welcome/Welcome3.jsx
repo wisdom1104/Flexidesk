@@ -12,7 +12,7 @@ function Welcome3() {
         <Page>
           <WelcomeTitle>
             <Column>
-              <Text shape="T32_700" color="var(--mint_001)" mt="20%">
+              <Text shape="T28_700" color="var(--mint_001)" mt="20%">
                 업무 트렌드
               </Text>
               <Text shape="T64_900" mt="10%">

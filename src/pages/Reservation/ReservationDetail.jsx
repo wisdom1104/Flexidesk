@@ -5,20 +5,14 @@ import { getCookie } from '../../shared/cookies';
 import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
-import {
-  InfoContain,
-  InfoBox,
-  Info,
-  CommentBox,
-  StSubTitle,
-  UserList,
-  StSmall,
-} from './CalendarStyled';
-import { StSmallFont } from '../welcome/WelcomeStyled';
-
+import { InfoContain, Info, UserList } from './CalendarStyled';
+import { CardInfo } from '../../components/CardInfo';
+import { Card } from '../../components/Card';
+import { Row } from '../../components/Flex';
 import ReservationDelete from '../../features/reservation/ReservationDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
+
 function ReservationDetail() {
   const { reservationDetail, isError } = useSelector(state => state.detail);
 
@@ -43,37 +37,43 @@ function ReservationDetail() {
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (
-                <InfoBox height="350px" key={item.reservationId}>
-                  <StSubTitle margin="1px">{item.username}</StSubTitle>
+                <Card height="350px" key={item.username} value={item.username}>
                   <Info>
-                    <CommentBox>
-                      <StSmallFont width>회의실 이름</StSmallFont>
-                      <StSmallFont width>{item.mrName}</StSmallFont>
-                    </CommentBox>
-
-                    <CommentBox>
-                      <StSmallFont width>예약날짜</StSmallFont>
-                      <StSmallFont width>
-                        {item.start.split('T')[0]}
-                      </StSmallFont>
-                    </CommentBox>
-                    <CommentBox>
-                      <StSmallFont width>회의 시간</StSmallFont>
-                      <StSmallFont width>
-                        {item.start.split('T')[1]} ~ {item.end.split('T')[1]}
-                      </StSmallFont>
-                    </CommentBox>
-                    <CommentBox>
-                      <StSmallFont width>예약 인원</StSmallFont>
-                      <UserList width="120px" height="30px" border="none">
-                        {item.userList.map(e => (
-                          <StSmall>{e.username}</StSmall>
-                        ))}
-                      </UserList>
-                    </CommentBox>
+                    <CardInfo color="var(--grey_002)" value={item.mrName}>
+                      회의실 이름
+                    </CardInfo>
+                    <CardInfo
+                      color="var(--grey_002)"
+                      value={item.start.split('T')[0]}
+                    >
+                      예약날짜
+                    </CardInfo>
+                    <CardInfo
+                      color="var(--grey_002)"
+                      value={`${item.start.split('T')[1]} ~ ${
+                        item.end.split('T')[1]
+                      }`}
+                    >
+                      회의 시간
+                    </CardInfo>
+                    <CardInfo>
+                      <Row>
+                        <Text color="var(--grey_002)">예약 인원</Text>
+                        <UserList
+                          width="100px"
+                          height="20px"
+                          border="none"
+                          ml="120px"
+                        >
+                          {item.userList.map(e => (
+                            <Text>{e.username}</Text>
+                          ))}
+                        </UserList>
+                      </Row>
+                    </CardInfo>
                     <ReservationDelete reservationId={item.reservationId} />
                   </Info>
-                </InfoBox>
+                </Card>
               ))}
             </InfoContain>
           )}

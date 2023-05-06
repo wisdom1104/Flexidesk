@@ -17,7 +17,7 @@ function Welcome4() {
           이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
         </Text>
         <WelcomeTitle>
-          <Text shape="T32_700" color="var(--mint_001)" mt="10%">
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
             스페이스
           </Text>
           <Text shape="T48_700" mt="5%">
@@ -35,7 +35,7 @@ function Welcome4() {
         />
 
         <WelcomeTitle>
-          <Text shape="T32_700" color="var(--mint_001)" mt="10%">
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
             회의실 예약
           </Text>
           <Text shape="T48_700" mt="5%">
@@ -53,7 +53,7 @@ function Welcome4() {
         />
 
         <WelcomeTitle>
-          <Text shape="T32_700" color="var(--mint_001)" mt="10%">
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
             스케줄
           </Text>
           <Text shape="T48_700" mt="5%">

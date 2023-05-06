@@ -24,11 +24,11 @@ function Login() {
 
   return (
     <Page>
-      <StFormContain>
+      <StFormContain h="400px">
         <StForm onSubmit={onsubmitHandler}>
           <StStartText>
             <Text shape="T28_700_30"> 로그인 </Text>
-            <Text shape="T16_500" color="var(--blue_004)">
+            <Text shape="T16_500" color="var(--blue_004)" mt="3%">
               이메일 주소와 비밀번호를 입력해주세요.
             </Text>
           </StStartText>

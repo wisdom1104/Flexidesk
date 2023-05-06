@@ -30,7 +30,11 @@ function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
     <ModalFullBackground>
       <ModalWrapper>
         <MoveModal>
-          <MoveModalTitle>{modalTitle}</MoveModalTitle>
+          <MoveModalTitle>
+            <Text shape="T18_700" ta="center">
+              {modalTitle}
+            </Text>
+          </MoveModalTitle>
           <MainMintBtn
             onClick={handleButtonClick}
             position="absolute"
