@@ -13,7 +13,6 @@ function AdminDropItem({
 }) {
   return (
     <>
-      {/* 회의실 */}
       {space?.map(
         item =>
           item.mrList?.length > 0 &&
@@ -27,7 +26,6 @@ function AdminDropItem({
             />
           )),
       )}
-      {/* 박스 */}
       {space?.map(
         item =>
           item.boxList?.length > 0 &&
@@ -41,7 +39,6 @@ function AdminDropItem({
             />
           )),
       )}
-      {/* 공용공간 */}
       {space?.map(
         item =>
           item.multiBoxList?.length > 0 &&

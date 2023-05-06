@@ -41,7 +41,7 @@ function AdminSpace() {
         onClickSpaceListHandler={onClickSpaceListHandler}
       />
       <Column>
-        <IconTitle src="space" alt="managementIcon" title="관리하기" />
+        <IconTitle src="space" alt="managementIcon" children="관리하기" />
         <AdminSelector />
       </Column>
       {showSkeleton ? (

@@ -8,31 +8,49 @@ import {
   SubTitle,
 } from '../../shared/SpaceStyles';
 import { Row } from '../../components/Flex';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
 
 function SpaceSubHeader({ space }) {
   const navi = useNavigate();
   const role = getCookie('role');
   return (
     <StSubHeader>
-      {/* space name 부분 */}
       <Row>
-        {space?.map(item => {
-          if (item && item.floorId !== null)
-            return (
+        {space?.map(item => (
+          <>
+            {item && item.floorId !== null && (
               <Row key={item.floorId}>
-                <SubTitle key={item.floorId}>{item.floorName}</SubTitle>
+                <SubTitle key={item.floorId}>
+                  <Text shape="T16_600">{item.floorName}</Text>
+                </SubTitle>
                 <SubIcon>&gt;</SubIcon>
-                <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>
+                <SubTitle key={item.spaceId}>
+                  <Text shape="T16_600">{item.spaceName}</Text>
+                </SubTitle>
               </Row>
-            );
-          if (item && item.floorId === null)
-            return <SubTitle key={item.spaceId}>{item.spaceName}</SubTitle>;
-        })}
+            )}
+            {item && item.floorId === null && (
+              <SubTitle key={item.spaceId}>
+                <Text shape="T16_600">{item.spaceName}</Text>
+              </SubTitle>
+            )}
+          </>
+        ))}
       </Row>
       <Row>
-        {role === 'ADMIN' || role === 'MANAGER' ? (
-          <StBtn onClick={() => navi('/adminSpace')}>관리하기</StBtn>
-        ) : null}
+        {(role === 'ADMIN' || role === 'MANAGER') && (
+          <MainMintBtn
+            mg="0px 16px"
+            h="43px"
+            pd="8px 16px"
+            onClick={() => navi('/adminSpace')}
+          >
+            <Text shape="T16_600" color="var(--white)">
+              관리하기
+            </Text>
+          </MainMintBtn>
+        )}
       </Row>
     </StSubHeader>
   );

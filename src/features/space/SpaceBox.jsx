@@ -7,6 +7,8 @@ import SpaceBoxModal from './SpaceBoxModal';
 import SpaceMultiBoxModal from './SpaceMultiBoxModal';
 import SpaceSubHeader from './SpaceSubHeader';
 import SpaceDropItem from './SpaceDropItem';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
 function SpaceBox({ spaces, spaceId, selectedSpace }) {
   const { space } = useSrchSpaceAndList(selectedSpace, spaceId, spaces);
   const [moveBox, setMoveBox] = useState(null);
@@ -26,10 +28,10 @@ function SpaceBox({ spaces, spaceId, selectedSpace }) {
   } = useMoveMultiBox({ setMoveBox, setIsClicked, spaceId });
 
   return (
-    <Stmainspace>
+    <SpaceBackBoard>
       <SpaceSubHeader space={space} />
       {/* space board 부분 */}
-      <StBoard>
+      <SpaceMainBoard>
         <SpaceBoxModal
           moveBox={moveBox}
           isModal={isModal}
@@ -50,8 +52,8 @@ function SpaceBox({ spaces, spaceId, selectedSpace }) {
           onClickMoveUserHandler={onClickMoveUserHandler}
           onClickMoveMultiHandler={onClickMoveMultiHandler}
         />
-      </StBoard>
-    </Stmainspace>
+      </SpaceMainBoard>
+    </SpaceBackBoard>
   );
 }
 

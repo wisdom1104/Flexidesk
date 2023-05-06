@@ -2,14 +2,12 @@ import React from 'react';
 import { Column } from '../../components/Flex';
 import {
   ClisckedListItem,
-  ListFloor,
-  ListItem,
   SpaceInnerList,
-  StListTitle,
   StListbox,
   StSpaceList,
 } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../../pages/welcome/WelcomeStyled';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 
 function SpaceList({
   floors,
@@ -19,22 +17,28 @@ function SpaceList({
 }) {
   return (
     <Column>
-      <StListTitle>
-        <StSpacePagePhoto
-          width="52px"
-          marginTop
-          src={`${process.env.PUBLIC_URL}/img/space.png`}
-          alt="managementIcon"
-        />
-        <div>스페이스</div>
-      </StListTitle>
+      <IconTitle src="space" alt="managementIcon" children="스페이스" />
       <StListbox>
         <StSpaceList>
-          {floors?.map(floor => {
-            if (floor && floor.spaceList?.length > 0)
-              return (
+          {floors?.map(
+            floor =>
+              floor &&
+              floor.spaceList?.length > 0 && (
                 <div key={floor.floorId}>
-                  <ListFloor>{floor.floorName}</ListFloor>
+                  <Text
+                    shape="T18_700_22"
+                    mg="15px 0 0 0"
+                    pd="5px 10px"
+                    cursor="default"
+                  >
+                    {floor.floorName}
+                  </Text>
+                  <Text
+                    shape="T18_700_22"
+                    mg="0px 10px"
+                    data-floor-id={floor.floorId}
+                    key={floor.floorId}
+                  ></Text>
                   <SpaceInnerList>
                     {floor.spaceList.map(space => {
                       const isClicked = space.spaceId === clickedSpaceId;
@@ -46,24 +50,37 @@ function SpaceList({
                                 onClickSpaceListHandler(space.spaceId)
                               }
                             >
-                              {space.spaceName}
+                              <Text
+                                shape="T16_400"
+                                // mg="15px 0 0 0"
+                                pd="5px 10px"
+                                cursor="pointer"
+                                onClick={() =>
+                                  onClickSpaceListHandler(space.spaceId)
+                                }
+                              >
+                                {space.spaceName}
+                              </Text>
                             </ClisckedListItem>
                           ) : (
-                            <ListItem
+                            <Text
+                              shape="T16_400"
+                              pd="5px 10px"
+                              cursor="pointer"
                               onClick={() =>
                                 onClickSpaceListHandler(space.spaceId)
                               }
                             >
                               {space.spaceName}
-                            </ListItem>
+                            </Text>
                           )}
                         </React.Fragment>
                       );
                     })}
                   </SpaceInnerList>
                 </div>
-              );
-          })}
+              ),
+          )}
           {spaces?.map(space => {
             const isClicked = space.spaceId === clickedSpaceId;
             if (space && space.floorId === null)
@@ -73,14 +90,19 @@ function SpaceList({
                     <ClisckedListItem
                       onClick={() => onClickSpaceListHandler(space.spaceId)}
                     >
-                      {space.spaceName}
+                      <Text shape="T18_700_22" pd="5px 10px" cursor="pointer">
+                        {space.spaceName}
+                      </Text>
                     </ClisckedListItem>
                   ) : (
-                    <ListItem
+                    <Text
+                      shape="T18_700_22"
+                      pd="5px 10px"
+                      cursor="pointer"
                       onClick={() => onClickSpaceListHandler(space.spaceId)}
                     >
                       {space.spaceName}
-                    </ListItem>
+                    </Text>
                   )}
                 </React.Fragment>
               );

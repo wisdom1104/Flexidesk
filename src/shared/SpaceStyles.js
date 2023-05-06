@@ -77,8 +77,8 @@ export const ListFloor = styled.div`
 `;
 
 export const ClisckedListItem = styled.div`
-  cursor: pointer;
-  padding: 5px 10px;
+  /* cursor: pointer; */
+  /* padding: 5px 10px; */
   background: #def1ef;
   border: 1px solid #b6dfdd;
   border-radius: 8px;
@@ -185,12 +185,12 @@ export const StBoard = styled.div`
 // 박스
 export const StBox = styled.div`
   //글자
-  font-family: 'Inter';
+  /* font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  text-align: center;
+  text-align: center; */
   color: ${props => props.color || '#8b93a6'};
   //박스
   position: ${props => props.position || 'absolute'};
@@ -217,11 +217,11 @@ export const StBox = styled.div`
 
 // 유저네임
 export const StUser = styled.div`
-  font-family: 'Inter';
+  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 15px;
+  line-height: 14px;
   text-align: center;
   color: #5c6373;
 `;
@@ -727,13 +727,6 @@ export const MoveModalTitle = styled.div`
   height: 54px;
   left: 23px;
   top: 41px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 150%;
-  text-align: center;
-  color: var(--blue);
 `;
 
 export const MoveModalbtn = styled.button`
@@ -741,7 +734,7 @@ export const MoveModalbtn = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin:${props => props.mg || '0px'}; ;
+  margin: ${props => props.mg || '0px'};
   padding: ${props => props.padding || '12px 24px'};
   gap: 5px;
   position: ${props => props.position || 'absolute'};
@@ -868,21 +861,20 @@ export const MoveModalList = styled.div`
 export const MoveModalItem = styled.div`
   display: flex;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   //글자
-  font-family: 'Inter';
+  /* font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
   text-align: right;
-  color: #5c6373;
+  color: #5c6373; */
 `;
 
 export const ListDot = styled.div`
   width: 4px;
   height: 4px;
-  margin: 0px 10px;
-  margin-left: 20px;
+  margin: 6px 10px 6px 20px;
   background: #5c6373;
 `;

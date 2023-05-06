@@ -1,12 +1,10 @@
 import React from 'react';
 import SpaceModal from '../../components/modal/SpaceModal';
-import {
-  MoveModalErrorbtn,
-  MoveModalSubTitle,
-  MoveModalSubbtn,
-  MoveModalTitle,
-  MoveModalbtn,
-} from '../../shared/SpaceStyles';
+import { MoveModalSubTitle, MoveModalTitle } from '../../shared/SpaceStyles';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
+import { Row } from '../../components/Flex';
 
 function SpaceBoxModal({
   moveBox,
@@ -17,52 +15,81 @@ function SpaceBoxModal({
 }) {
   return (
     <>
-      {moveBox !== null && isModal ? (
-        <>
+      {moveBox !== null && isModal && (
+        <SpaceModal>
+          <MoveModalSubTitle>자리선택</MoveModalSubTitle>
           {moveBox.username === null ? (
-            <SpaceModal>
-              <MoveModalSubTitle>자리선택</MoveModalSubTitle>
+            <>
               <MoveModalTitle>
-                {moveBox.boxName}
-                <br />
-                선택하시겠습니까?
+                <Text shape="T18_700" ta="center">
+                  &quot;{moveBox.boxName}&quot;
+                  <div>선택하시겠습니까</div>
+                </Text>
               </MoveModalTitle>
-              <MoveModalbtn
+              <MainMintBtn
+                h="41px"
+                pd="12px 24px"
+                position="absolute"
+                left="16px"
+                top="117px"
                 onClick={() => {
                   MoveUser(moveBox);
                 }}
               >
-                예
-              </MoveModalbtn>
-              <MoveModalSubbtn
+                <Text shape="T16_600" color="var(--white)">
+                  네
+                </Text>
+              </MainMintBtn>
+              <SubMintBtn
+                h="41px"
+                pd="12px 24px"
+                position="absolute"
+                left="85px"
+                top="117px"
                 onClick={() => {
                   setIsModal(!isModal);
                   setIsClicked(null);
                 }}
               >
-                아니요
-              </MoveModalSubbtn>
-            </SpaceModal>
+                <Text shape="T16_600" color="var(--mint_002)">
+                  아니요
+                </Text>
+              </SubMintBtn>
+            </>
           ) : (
-            <SpaceModal>
-              <MoveModalSubTitle>자리선택</MoveModalSubTitle>
+            <>
               <MoveModalTitle>
-                {moveBox.boxName}
-                <br />
-                이미 <span style={{ color: '#FF5454' }}>사용중</span>입니다.
+                <Text shape="T18_700" ta="center">
+                  &quot;{moveBox.boxName}&quot;
+                  <Row>
+                    이미
+                    <Text shape="T18_700" color="var(--error)">
+                      &nbsp;사용중&nbsp;
+                    </Text>
+                    입니다.
+                  </Row>
+                </Text>
               </MoveModalTitle>
-              <MoveModalErrorbtn
+              <MainMintBtn
+                w="157px"
+                h="41px"
+                pd="12px 24px"
+                position="absolute"
+                left="16px"
+                top="117px"
                 onClick={() => {
                   setIsModal(!isModal);
                   setIsClicked(null);
                 }}
               >
-                다른 자리 찾기
-              </MoveModalErrorbtn>
-            </SpaceModal>
+                <Text shape="T16_600" color="var(--white)">
+                  다른 자리 찾기
+                </Text>
+              </MainMintBtn>
+            </>
           )}
-        </>
-      ) : null}
+        </SpaceModal>
+      )}
     </>
   );
 }
