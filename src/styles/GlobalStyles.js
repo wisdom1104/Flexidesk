@@ -16,7 +16,6 @@ body {
     font-family: 'Pretendard-Regular', sans-serif;
     scroll-behavior: smooth;
     box-sizing: border-box;
-    
   }
 
   button {

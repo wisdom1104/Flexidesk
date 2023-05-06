@@ -15,6 +15,9 @@ import {
   DropdownItem,
   DropdownMenu,
 } from '../../pages/user/UserStyled';
+import SubMintBtn from '../button/SubMintBtn';
+import MainMintBtn from '../button/MainMintBtn';
+import Text from '../Text';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
@@ -61,26 +64,30 @@ const SelectModal = ({ setIsModal, role, userId }) => {
             </DropdownContent>
           ) : null}
         </DropdownMenu>
-        <MoveModalSubbtn
+        <SubMintBtn
           onClick={onPatchButtonHandler}
-          width="80px"
-          height="35px"
+          position="absolute"
+          w="80px"
+          h="35px"
           left="18px"
-          top="130px"
-          padding="8px, 16px, 8px, 16px"
+          top="121px"
+          pd="4px 10px"
         >
           수정하기
-        </MoveModalSubbtn>
-        <MoveModalbtn
+        </SubMintBtn>
+        <MainMintBtn
           onClick={closeModal}
-          width="79px"
-          height="35px"
+          position="absolute"
+          w="79px"
+          h="35px"
           left="100px"
-          top="130px"
-          padding="8px, 16px, 8px, 16px"
+          top="121px"
+          pd="4px 10px"
         >
-          닫기
-        </MoveModalbtn>
+          <Text shape="T14_700_17" color="var(--white)">
+            닫기
+          </Text>
+        </MainMintBtn>
       </MoveModal>
     </ModalFullBackground>
   );

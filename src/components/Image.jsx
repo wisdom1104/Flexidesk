@@ -1,7 +1,6 @@
 //웰컴페이지 이미지 사용
-
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export function WelcomeImage({ src, alt }) {
   return (
@@ -74,7 +73,7 @@ const StSpacePagePhoto = styled.img`
 const StImgeSecond = styled.img`
   position: absolute;
   height: 80%;
-  top: 20%;
+  top: 5%;
   left: 100%;
   transform: translate(-50%, -50%);
   z-index: 1;

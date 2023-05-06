@@ -33,7 +33,7 @@ function SignUpAdmin() {
 
   return (
     <Page h="">
-      <StFormContain mt="50px">
+      <StFormContain h="80%" mt="50px">
         <StForm onSubmit={onSubmitHandler}>
           <StStartText>
             <Text shape="T28_700_30">관리자 회원가입</Text>

@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function SubMintBtn({ children, ...rest }) {
-  return <StMainMintBtn {...rest}>{children}</StMainMintBtn>;
+function SubMintBtn({ children, onClick, ...rest }) {
+  return (
+    <StMainMintBtn onClick={onClick} {...rest}>
+      {children}
+    </StMainMintBtn>
+  );
 }
 
 export default SubMintBtn;

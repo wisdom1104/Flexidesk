@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { HiOutlineMail } from 'react-icons/hi';
-import { BsPerson } from 'react-icons/bs';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { StSmallFont } from '../welcome/WelcomeStyled';
 import {
-  CommentBox,
-  Info,
-  InfoBox,
-  StSubTitle,
+  InfoContain,
 } from '../reservation/CalendarStyled';
 import ManagementChange from '../../features/user/ManagementChange';
 import IconTitle from '../../components/IconTitle';
-import BackBoard from '../../components/BackBoard';
 import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
+import { CardInfo } from '../../components/CardInfo';
+import { Card } from '../../components/Card';
 
 function Management() {
   const { userList, isError } = useSelector(state => state.userList);
@@ -34,42 +29,36 @@ function Management() {
 
   return (
     <Page>
-      <IconTitle src="space" alt="managementIcon" title="사용자 관리" />
+      <div>
+        <IconTitle
+          src="space"
+          alt="managementIcon"
+          children="사용자 관리하기"
+        />
+        {showSkeleton ? (
+          <InfoContain>
+            <Skeleton />
+          </InfoContain>
+        ) : isError ? (
+          <div>에러발생 ..⚙️</div>
+        ) : (
+          <InfoContain>
+            {userList.map(item => (
+              <Card key={item.userId} value={item.username}>
+                <CardInfo color="var(--grey_002)" value={item.email}>
+                  <HiOutlineMail /> 이메일
+                </CardInfo>
 
-      {showSkeleton ? (
-        <BackBoard>
-          <Skeleton />
-        </BackBoard>
-      ) : isError ? (
-        <div>에러발생 ..⚙️</div>
-      ) : (
-        <BackBoard>
-          {userList.map(item => (
-            <InfoBox key={item.userId}>
-              <StSubTitle>{item.username}</StSubTitle>
-              <Info>
-                <CommentBox>
-                  <StSmallFont width>
-                    <HiOutlineMail /> 이메일
-                  </StSmallFont>
-                  <br />
-                  <StSmallFont width>{item.email}</StSmallFont>
-                </CommentBox>
-
-                <CommentBox>
-                  <StSmallFont width>
-                    <BsPerson /> 권한
-                  </StSmallFont>
-                  <br />
-                  <StSmallFont width>{item.role}</StSmallFont>
-                </CommentBox>
+                <CardInfo color="var(--grey_002)" value={item.role}>
+                  <HiOutlineMail /> 권한
+                </CardInfo>
 
                 <ManagementChange item={item} />
-              </Info>
-            </InfoBox>
-          ))}
-        </BackBoard>
-      )}
+              </Card>
+            ))}
+          </InfoContain>
+        )}
+      </div>
     </Page>
   );
 }

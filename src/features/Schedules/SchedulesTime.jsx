@@ -88,7 +88,7 @@ function SchedulesTime({ param, selectDay }) {
           placeholder="내용을 입력하세요."
         />
         <BlueBtn w="90%" mg="auto" mgt="20px">
-          <Text color="var(--white)" shape="T27_700_22">
+          <Text color="var(--white)" shape="T16_700">
             등록 완료
           </Text>
         </BlueBtn>

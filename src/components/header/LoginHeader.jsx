@@ -4,10 +4,10 @@ import {
   HeaderContain,
   StHeaderContentBox,
   StHeaderLogo,
-  StHaderFont,
   StHeaderContentButtonBox,
-  StHeaderButton,
-} from '../HeaderStyled';
+} from './HeaderStyled';
+import { BlueBtn } from '../button/BlueBtn';
+import Text from '../Text';
 
 export const LoginHeader = ({ onClickHomeHandler }) => {
   const navi = useNavigate();
@@ -23,12 +23,17 @@ export const LoginHeader = ({ onClickHomeHandler }) => {
       </StHeaderContentBox>
       <StHeaderContentBox>
         <StHeaderContentBox onClick={() => navi(`/`)}>
-          <StHaderFont>서비스 소개</StHaderFont>
+          <Text shape="T16_700_19">서비스 소개</Text>
         </StHeaderContentBox>
         <StHeaderContentButtonBox>
-          <StHeaderButton type="button" onClick={() => navi('/login')}>
+          <BlueBtn
+            w="80px"
+            h="40px"
+            type="button"
+            onClick={() => navi('/login')}
+          >
             LogIn
-          </StHeaderButton>
+          </BlueBtn>
         </StHeaderContentButtonBox>
       </StHeaderContentBox>
     </HeaderContain>

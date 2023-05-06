@@ -153,9 +153,9 @@ function ReservationTime({ param, selectDay, mrName }) {
               <Text shape="T18_700_22">사원 검색</Text>
             </IconTitle>
             <Input
-              width="280px"
-              height="40px"
-              margin="0px 10px"
+              w="280px"
+              h="40px"
+              mg="0px 10px"
               onChange={e => {
                 dispatch(__getUserData(e.target.value));
               }}
@@ -204,7 +204,7 @@ function ReservationTime({ param, selectDay, mrName }) {
             navi(`/detail/${userId}`);
           }}
         >
-          <Text color="var(--white)" shape="T27_700_22">
+          <Text color="var(--white)" shape="T16_700">
             예약 완료
           </Text>
         </BlueBtn>

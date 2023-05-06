@@ -21,6 +21,8 @@ import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 import SubMintBtn from '../../components/button/SubMintBtn';
+import { CardInfo } from '../../components/CardInfo';
+import { Card } from '../../components/Card';
 
 function SchedulesDetail() {
   const navi = useNavigate();
@@ -44,29 +46,29 @@ function SchedulesDetail() {
         ) : (
           <InfoContain>
             {userSchedules?.map(item => (
-              <InfoBox key={item.scId} height="350px">
-                <StSubTitle>{item.scTitle}</StSubTitle>
+              <Card key={item.scId} value={item.scTitle} height="300px">
                 <Info>
-                  <CommentBox>
-                    <StSmallFont width>내용</StSmallFont>
-                    <StSmallFont width>{item.scComment}</StSmallFont>
-                  </CommentBox>
-                  <CommentBox>
-                    <StSmallFont width>날짜</StSmallFont>
-                    <StSmallFont width>
-                      {item.scStart.split('T')[0]}
-                    </StSmallFont>
-                  </CommentBox>
-                  <CommentBox>
-                    <StSmallFont width>시작시간</StSmallFont>
-                    <StSmallFont width>
-                      {item.scStart.split('T')[1]}
-                    </StSmallFont>
-                  </CommentBox>
-                  <CommentBox>
-                    <StSmallFont width>종료시간</StSmallFont>
-                    <StSmallFont width>{item.scEnd.split('T')[1]}</StSmallFont>
-                  </CommentBox>
+                  <CardInfo color="var(--grey_002)" value={item.scComment}>
+                    내용
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={item.scStart.split('T')[0]}
+                  >
+                    날짜
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={item.scStart.split('T')[1]}
+                  >
+                    시작시간
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={item.scEnd.split('T')[1]}
+                  >
+                    종료시간
+                  </CardInfo>
                   <ButtonContain>
                     <SubMintBtn
                       w="50px"
@@ -85,7 +87,7 @@ function SchedulesDetail() {
                     <SchedulesDelete scId={item.scId} />
                   </ButtonContain>
                 </Info>
-              </InfoBox>
+              </Card>
             ))}
           </InfoContain>
         )}

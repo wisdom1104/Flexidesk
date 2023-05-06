@@ -299,9 +299,9 @@ export const UserList = styled.div`
   /* background-color: steelblue; */
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: ${props => props.ml || '10px'};
   margin-right: 10px;
-  padding: 10px 0px;
+  padding: ${props => props.padding || '10px 0px'};
   width: ${props => props.width || '300px'};
   height: ${props => props.height || '80px'};
   gap: 10px;
@@ -342,7 +342,7 @@ export const DateFont = styled.div`
 
 export const InfoBox = styled.div`
   width: ${props => props.width || '400px'};
-  height: ${props => props.height || '300px'};
+  height: ${props => props.height || '250px'};
 
   display: flex;
   flex-direction: column;
@@ -373,7 +373,7 @@ export const Info = styled.div`
   padding: 0px;
   margin-top: 20px;
 
-  min-height: 10vw;
+  min-height: 12vw;
 `;
 
 export const CommentBox = styled.div`
@@ -382,7 +382,7 @@ export const CommentBox = styled.div`
   justify-content: space-between;
   margin: 5px;
   border-bottom: 1px solid lightgray;
-  padding-bottom: 5px;
+  padding-bottom: 5%;
 `;
 
 export const ComFont = styled.div`

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StStartText = styled.p`
+export const StStartText = styled.div`
   width: 420px;
 `;
 
@@ -9,7 +9,7 @@ export const StFormContain = styled.div`
   background: #f5f5f5;
   padding: 30px;
   margin-top: ${props => props.mt || '100px'};
-  height: ${props => props.h || '55%'};
+  height: ${props => props.h || '65%'};
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
@@ -22,8 +22,8 @@ export const StForm = styled.form`
 
 export const StLink = styled(Link)`
   width: 90px;
-  margin-top: 10px;
-
+  margin-top: 10%;
+//text로 해주기
   font-weight: 400;
   font-size: 14px;
   line-height: 14px;

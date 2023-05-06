@@ -53,10 +53,9 @@ export const globalTypoes = {
   T48_700: globalTypo(700, 48, '70px'),
   T64_700: globalTypo(700, 64, '30px'),
 
-  T32_700: globalTypo(700, 28, 34px),
+  T28_700: globalTypo(700, 28, '34px'),
 
-  T64_800: globalTypo(800, 48, 96px),
+  T64_800: globalTypo(800, 48, '96px'),
 
-  T64_900: globalTypo(900, 64, 90px),
-
+  T64_900: globalTypo(900, 64, '90px'),
 };

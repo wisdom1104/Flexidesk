@@ -5,11 +5,11 @@ import {
   HeaderContain,
   StHeaderContentBox,
   StHeaderLogo,
-  StHaderFont,
   StHeaderContentButtonBox,
-  StHeaderButton,
   StHeaderButtonBox,
-} from '../HeaderStyled';
+} from './HeaderStyled';
+import { BlueBtn } from '../button/BlueBtn';
+import Text from '../Text';
 
 export const LogoutHeader = ({ onClickHomeHandler, logout }) => {
   const navi = useNavigate();
@@ -27,26 +27,26 @@ export const LogoutHeader = ({ onClickHomeHandler, logout }) => {
       </StHeaderContentBox>
       <StHeaderButtonBox>
         <StHeaderContentBox onClick={() => navi(`/space`)}>
-          <StHaderFont>스페이스</StHaderFont>
+          <Text shape="T16_700_19">스페이스</Text>
         </StHeaderContentBox>
         <StHeaderContentBox
           onClick={() => navi(`/schedulescalendar/${userId}`)}
         >
-          <StHaderFont>스케줄 등록</StHaderFont>
+          <Text shape="T16_700_19">스케줄 등록</Text>
         </StHeaderContentBox>
         <StHeaderContentBox onClick={() => navi(`/scheduledetail/${userId}`)}>
-          <StHaderFont>스케줄 조회</StHaderFont>
+          <Text shape="T16_700_19">스케줄 조회</Text>
         </StHeaderContentBox>
         <StHeaderContentBox onClick={() => navi(`/detail/${userId}`)}>
-          <StHaderFont>회의실 예약현황</StHaderFont>
+          <Text shape="T16_700_19">회의실 예약현황</Text>
         </StHeaderContentBox>
         <StHeaderContentBox onClick={() => navi('/management')}>
-          <StHaderFont>{`${userName}님 환영합니다`}</StHaderFont>
+          <Text shape="T16_700_19">{`${userName}님 환영합니다`}</Text>
         </StHeaderContentBox>
         <StHeaderContentButtonBox>
-          <StHeaderButton type="button" onClick={logout}>
+          <BlueBtn w="80px" h="40px" type="button" onClick={logout}>
             Logout
-          </StHeaderButton>
+          </BlueBtn>
         </StHeaderContentButtonBox>
       </StHeaderButtonBox>
     </HeaderContain>
