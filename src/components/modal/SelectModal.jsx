@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { HiChevronDown } from 'react-icons/hi2';
-import { __patchAllManagement } from '../redux/modules/allManagementSlice';
+import { __patchAllManagement } from '../../redux/modules/allManagementSlice';
 import {
   ModalFullBackground,
   MoveModal,
   MoveModalSubTitle,
   MoveModalSubbtn,
   MoveModalbtn,
-} from '../shared/SpaceStyles';
+} from '../../shared/SpaceStyles';
 import {
   DropdownButton,
   DropdownContent,
   DropdownItem,
   DropdownMenu,
-} from '../pages/user/UserStyled';
+} from '../../pages/user/UserStyled';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {

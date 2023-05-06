@@ -55,7 +55,7 @@ function Login() {
 
           <ValidationError value={errorMsg} />
 
-          <BlueBtn type="submit" mg="20px" mgt="20px">
+          <BlueBtn type="submit" mgt="20px">
             <Text shape="T18_700_22" color="var(--white)">
               로그인
             </Text>

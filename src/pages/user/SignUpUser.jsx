@@ -31,8 +31,8 @@ function SignUpUser() {
   const { onSubmitHandler } = useSignUpSubmitHandler(user);
 
   return (
-    <Page>
-      <StFormContain h="75%">
+    <Page h="">
+      <StFormContain>
         <StForm onSubmit={onSubmitHandler}>
           <StStartText>
             <Text shape="T28_700_30"> 회원가입 </Text>
@@ -86,7 +86,7 @@ function SignUpUser() {
             onChange={onChangePasswordCheckHandler}
           />
           <ValidationError value={errors.passwordCheck} />
-          <BlueBtn type="submit" mg="20px">
+          <BlueBtn type="submit" mgt="20px">
             <Text shape="T18_700_22" color="var(--white)">
               확인
             </Text>
