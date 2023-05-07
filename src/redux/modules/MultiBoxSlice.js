@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpace } from './spaceSlice';
 
@@ -9,13 +9,12 @@ const initialState = {
   error: null,
 };
 
-// multiBox 추가
 export const __addMultiBox = createAsyncThunk(
-  '__addMultiBox',
+  'addMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/multiBox/${companyName}/${payload.spaceId}`,
         {
@@ -37,13 +36,12 @@ export const __addMultiBox = createAsyncThunk(
   },
 );
 
-// multiBox 삭제
 export const __deleteMultiBox = createAsyncThunk(
-  '__deleteMultiBox',
+  'deleteMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(
         `/multiBox/${companyName}/${payload.multiBoxId}`,
         {
@@ -65,8 +63,8 @@ export const __editMultiBox = createAsyncThunk(
   'editMultiBox',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/multiBox/${companyName}/${payload.multiBoxId}`,
         {
@@ -89,38 +87,10 @@ export const __editMultiBox = createAsyncThunk(
   },
 );
 
-// multiBox user 수정
-// export const __editMultiBoxUser = createAsyncThunk(
-//   'editMultiBoxUser',
-//   async (payload, thunk) => {
-//     try {
-//       const token = cookies.get('token');
-//       const companyName = cookies.get('companyName');
-//       const response = await api.patch(
-//         `/multiBoxes/${companyName}/${payload.tomultiBoxId}/move`,
-//         {
-//           multiBoxName: payload.multiBoxName,
-//           x: payload.x,
-//           y: payload.y,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         },
-//       );
-//       thunk.dispatch(__getSpace(payload.spaceId));
-//       return thunk.fulfillWithValue(response.data.data);
-//     } catch (error) {
-//       return error;
-//     }
-//   },
-// );
-
-export const MultiBoxSlice = createSlice({
+export const multiBoxSlice = createSlice({
   name: 'multiBox',
   initialState,
   reducers: {},
   extraReducers: {},
 });
-export default MultiBoxSlice.reducer;
+export default multiBoxSlice.reducer;

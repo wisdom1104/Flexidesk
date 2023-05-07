@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import styled, { css } from 'styled-components';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { SliderContainer, StFont, StSlider, StSliderButton, StSliders, StSmallFont } from "../../pages/Welcome/WelcomeStyled";
-import { useCarouselHook } from '../../hooks/useCarouselHook'
+import { useCarousel } from '../../hooks/useCarousel';
+import Text from '../../components/Text';
 
 const CarouselButton = ({ children, dir, onClick }) => {
   return (
@@ -12,29 +13,114 @@ const CarouselButton = ({ children, dir, onClick }) => {
 };
 
 const Carousel = () => {
-  
-  const { index, animate, genSlidersArray, clickLeftHandler, clickRightHandler} = useCarouselHook();
+  const {
+    index,
+    animate,
+    genSlidersArray,
+    onClickLeftHandler,
+    onClickRightHandler,
+  } = useCarousel();
 
   return (
-      <SliderContainer>
-        <CarouselButton dir="left" onClick={clickLeftHandler}>
+    <SliderContainer>
+      <CarouselButton dir="left" onClick={onClickLeftHandler}>
         <TiChevronLeftOutline />
-        </CarouselButton>
-        <CarouselButton dir="right" onClick={clickRightHandler}>
+      </CarouselButton>
+      <CarouselButton dir="right" onClick={onClickRightHandler}>
         <TiChevronRightOutline />
-        </CarouselButton>
+      </CarouselButton>
 
-          <StSliders animate={animate}>
-          {genSlidersArray(index).map((item, index) => (
+      <StSliders animate={animate}>
+        {genSlidersArray(index).map((item, index) => (
           <StSlider key={index}>
-            <StSmallFont height='50%' fontSize='1.5rem' align='start' weight='700'> "{item?.component}" </StSmallFont>
-            <StFont fontSize='20px' align='end' paddingTop='100px'>{item?.name}</StFont>
+            <Text shape="T24_700" color="var(--grey_002)" pd="120px">
+              {item?.component}
+            </Text>
+            <Text shape="T20_500" mg="50px" ta="end">
+              {item?.name}
+            </Text>
           </StSlider>
-          ))}
-        </StSliders>
-        
-      </SliderContainer>
+        ))}
+      </StSliders>
+    </SliderContainer>
   );
 };
 
 export default Carousel;
+
+const SliderContainer = styled.div`
+  width: 100%;
+  height: 800px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+`;
+
+const StSliders = styled.div`
+  display: flex;
+  gap: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${animate => {
+    if (animate.on) {
+      return css`
+        transform: translate(${({ animate }) => animate.value});
+        transition: transform 350ms ease-in-out;
+      `;
+    }
+  }};
+`;
+
+const StSlider = styled.div`
+  width: 1100px;
+  height: 518px;
+
+  background: var(--white);
+  box-shadow: 0px 8px 20px rgba(140, 159, 157, 0.2);
+  border-radius: 8px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StSliderButton = styled.button`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+
+  ${({ dir }) => {
+    if (dir === 'left') {
+      return css`
+        left: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+
+    if (dir === 'right') {
+      return css`
+        right: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+      `;
+    }
+  }}
+`;

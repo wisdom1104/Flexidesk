@@ -1,19 +1,19 @@
 import React from 'react';
+import { useAddFloor } from '../../hooks/adminSpace/list/useAddFloor';
+import { useAddSpace } from '../../hooks/adminSpace/list/useAddSpace';
+import { useListDragAndDrop } from '../../hooks/adminSpace/list/useListDragAndDrop';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
 import {
   ModalContain,
   ModalBackground,
   ModalHeader,
   ModalList,
-  ModalTitle,
   Modalbtn,
-  StAddBtn,
-  StAddBtnBox,
-} from '../../shared/SpaceStyles';
-import { useDispatch } from 'react-redux';
+  StBtnBox,
+} from '../../pages/space/SpaceStyles';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
-import { useListDragAndDrop } from '../../hooks/adminSpace/useListDragAndDropHook';
-import { useFloorAndSpaceAdd } from '../../hooks/adminSpace/useAdminListHook';
 
 function AdminList({
   isModal,
@@ -22,23 +22,23 @@ function AdminList({
   floors,
   onClickSpaceListHandler,
 }) {
-  const dispatch = useDispatch();
-
-  const { onClickAddFloorHandler, onClickAddSpaceHandler } =
-    useFloorAndSpaceAdd(dispatch);
+  const { onSubmitAddFloor } = useAddFloor();
+  const { onSubmitAddSpace } = useAddSpace();
 
   //리스트 드래그 앤 드롭
   const { dragStart, onAvailableItemDragEnter, onDragEnd, onDragOver } =
-    useListDragAndDrop(dispatch);
+    useListDragAndDrop();
 
   return (
     <>
-      {isModal ? (
+      {isModal && (
         <ModalBackground>
           <ModalContain>
             <ModalList>
               <ModalHeader>
-                <ModalTitle>관리하기</ModalTitle>
+                <Text shape="T18_700_22" color="var(--blue_003)">
+                  관리하기
+                </Text>
                 <Modalbtn
                   onClick={() => {
                     setIsModal(!isModal);
@@ -47,47 +47,61 @@ function AdminList({
                   <img alt="모달 닫기 버튼" src="img/modalBtnIcon.png" />
                 </Modalbtn>
               </ModalHeader>
-              <StAddBtnBox>
-                <StAddBtn onClick={onClickAddFloorHandler}>층 추가</StAddBtn>
-                <StAddBtn onClick={onClickAddSpaceHandler}>
-                  스페이스 추가
-                </StAddBtn>
-              </StAddBtnBox>
-              {floors?.map(floor => {
-                if (floor)
-                  return (
+              <StBtnBox>
+                <MainMintBtn
+                  w="131px"
+                  h="43px"
+                  onClick={() => onSubmitAddFloor()}
+                >
+                  <Text shape="T16_700_19" color="var(--white)">
+                    층 추가
+                  </Text>
+                </MainMintBtn>
+                <MainMintBtn
+                  w="131px"
+                  h="43px"
+                  onClick={() => onSubmitAddSpace()}
+                >
+                  <Text shape="T16_700_19" color="var(--white)">
+                    스페이스 추가
+                  </Text>
+                </MainMintBtn>
+              </StBtnBox>
+              {floors?.map(floor => (
+                <>
+                  {floor && (
                     <AdminFloorList
                       key={floor.floorId}
                       floor={floor}
                       onClickSpaceListHandler={onClickSpaceListHandler}
-                      dispatch={dispatch}
                       dragStart={dragStart}
                       onAvailableItemDragEnter={onAvailableItemDragEnter}
                       onDragOver={onDragOver}
                       onDragEnd={onDragEnd}
                     />
-                  );
-              })}
-              {spaces?.map(space => {
-                if (space && space.floorId === null)
-                  return (
+                  )}
+                </>
+              ))}
+              {spaces?.map(space => (
+                <>
+                  {space && space.floorId === null && (
                     <AdminSpaceList
                       key={space.spaceId}
                       space={space}
                       onClickSpaceListHandler={onClickSpaceListHandler}
-                      dispatch={dispatch}
                       dragStart={dragStart}
                       onAvailableItemDragEnter={onAvailableItemDragEnter}
                       onDragOver={onDragOver}
                       onDragEnd={onDragEnd}
                     />
-                  );
-                if (space && space.floorId !== null) return null;
-              })}
+                  )}
+                  {space && space.floorId !== null && null}
+                </>
+              ))}
             </ModalList>
           </ModalContain>
         </ModalBackground>
-      ) : null}
+      )}
     </>
   );
 }

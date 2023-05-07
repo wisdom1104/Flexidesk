@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getFloors } from './floorsSlice';
 
@@ -11,12 +11,12 @@ const initialState = {
 
 //space 전체 조회
 export const __getSpaces = createAsyncThunk(
-  '__getSpaces',
+  'getSpaces',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      // const token = cookies.get('refresh_token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      // const token = getCookie('refresh_token');
+      const companyName = getCookie('companyName');
       const response = await api.get(`/spaces/${companyName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,11 +31,11 @@ export const __getSpaces = createAsyncThunk(
 
 // space 추가
 export const __addSpace = createAsyncThunk(
-  '__addSpace',
+  'addSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/spaces/${companyName}`,
         {
@@ -57,11 +57,11 @@ export const __addSpace = createAsyncThunk(
 
 // floor 안에 space 추가
 export const __addInnerSpace = createAsyncThunk(
-  '__addInnerSpace',
+  'addInnerSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.post(
         `/spaces/${companyName}/${payload.floorId}`,
         {
@@ -87,7 +87,6 @@ export const spacesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //전체 조회
     [__getSpaces.pending]: state => {
       state.isLoading = true;
     },

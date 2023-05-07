@@ -1,105 +1,76 @@
 import React from 'react';
-import {
-  StBackground,
-  StFont,
-  StGradationFont,
-  StImgeContainer,
-  StImgeSecond,
-  StOverall,
-  StSmallFont,
-  StSpaceDiv,
-  StSpacePagePhoto,
-} from '../../pages/Welcome/WelcomeStyled';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { Column } from '../../components/Flex';
+import { Images, WelcomeTitle } from '../../components/WelcomeImage';
 
 function Welcome4() {
   return (
-    <>
-      <StBackground background="#fff" height="3600px">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
+    <Page>
+      <Column>
+        <Text
+          shape="T64_800"
+          color="var(--buttonGradation)"
+          ta="center"
+          mt="10%"
         >
-          <StGradationFont>
-            이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
-          </StGradationFont>
-        </div>
+          이제, 새로운 Flexidesk를 <br /> 시작할 시간입니다.
+        </Text>
+        <WelcomeTitle>
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
+            스페이스
+          </Text>
+          <Text shape="T48_700" mt="5%">
+            업무 공간 이동
+          </Text>
+          <Text shape="T20_600" color="rgba(49, 69, 99, 0.8)" mt="5%">
+            회사 내에서도 나에게 맞는 공간을 찾아봐요
+          </Text>
+        </WelcomeTitle>
+        <Images
+          src_001="readme1"
+          alt_001="page1"
+          src_002="space"
+          alt_002="space"
+        />
 
-        <StOverall>
-          <div>
-            <StSpaceDiv>
-              <StSmallFont
-                color="#ACDAD8"
-                weight="700"
-                align="start"
-                width="100%"
-              >
-                스페이스
-              </StSmallFont>
-              <StFont fontSize='3rem' align="start">업무 공간 이동</StFont>
-              <StSmallFont align="start" width="100%">
-                회사내에서도 나에게 맞는 공간을 찾아봐요
-              </StSmallFont>
-              
-              <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page1.png`} alt="page1" />
+        <WelcomeTitle>
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
+            회의실 예약
+          </Text>
+          <Text shape="T48_700" mt="5%">
+            간편해진 회의실 예약
+          </Text>
+          <Text shape="T20_600" color="rgba(49, 69, 99, 0.8)" mt="5%">
+            겹치는 시간은 피하고, 가능한 시간은 찾아줘요
+          </Text>
+        </WelcomeTitle>
+        <Images
+          src_001="readme2"
+          alt_001="readme2"
+          src_002="schedule"
+          alt_002="schedule"
+        />
 
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon1.png`} alt="pageIcon1" />
-              </StImgeContainer>
-              
-            </StSpaceDiv>
-
-            <StSpaceDiv>
-              <StSmallFont
-                color="#ACDAD8"
-                weight="700"
-                align="start"
-                width="100%"
-              >
-                회의실 예약
-              </StSmallFont>
-              <StFont fontSize='3rem' align="start" width="100%">
-                간편해진 회의실 예약
-              </StFont>
-              <StSmallFont align="start" width="100%">
-                겹치는 시간은 피하고, 가능한 시간은 찾아줘요
-              </StSmallFont>
-
-              <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page2.png`} alt="page2" />
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon2.png`} alt="pageIcon2" />
-              </StImgeContainer>
-              
-            </StSpaceDiv>
-
-            <StSpaceDiv>
-              <StSmallFont
-                color="#ACDAD8"
-                weight="700"
-                align="start"
-                width="100%"
-              >
-                스케줄
-              </StSmallFont>
-              <StFont fontSize='3rem' align="start">내 스케줄 관리도 한번에</StFont>
-              <StSmallFont align="start" width="100%">
-                근무 일정과 연동되는 스케줄
-              </StSmallFont>
-
-              <StImgeContainer>
-              <StSpacePagePhoto src={`${process.env.PUBLIC_URL}/img/page3.png`} alt="page3" />
-              <StImgeSecond
-              src={`${process.env.PUBLIC_URL}/img/pageIcon3.png`} alt="pageIcon3" />
-              </StImgeContainer>
-
-            </StSpaceDiv>
-          </div>
-        </StOverall>
-      </StBackground>
-    </>
+        <WelcomeTitle>
+          <Text shape="T28_700" color="var(--mint_001)" mt="10%">
+            스케줄
+          </Text>
+          <Text shape="T48_700" mt="5%">
+            내 스케줄 관리도 한번에
+          </Text>
+          <Text shape="T20_600" color="rgba(49, 69, 99, 0.8)" mt="5%">
+            근무 일정과 연동되는 스케줄
+          </Text>
+        </WelcomeTitle>
+        <Images
+          src_001="readme3"
+          alt_001="readme3"
+          src_002="reservation"
+          alt_002="reservation"
+        />
+      </Column>
+    </Page>
   );
 }
 

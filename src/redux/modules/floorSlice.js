@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getFloors } from './floorsSlice';
 
@@ -9,13 +9,12 @@ const initialState = {
   error: null,
 };
 
-// floor 선택 조회
 export const __getFloor = createAsyncThunk(
-  '__getFloor',
+  'getFloor',
   async (floorId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.get(`/floors/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -30,11 +29,11 @@ export const __getFloor = createAsyncThunk(
 
 // floor 삭제
 export const __deleteFloor = createAsyncThunk(
-  '__deleteFloor',
+  'deleteFloor',
   async (floorId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(`/floors/${companyName}/${floorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -50,11 +49,11 @@ export const __deleteFloor = createAsyncThunk(
 
 // floor name 수정
 export const __editFloor = createAsyncThunk(
-  '__editFloor',
+  'editFloor',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/floors/${companyName}/${payload.floorId}`,
         {
@@ -79,7 +78,6 @@ export const floorSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //space 부분 조회
     [__getFloor.pending]: state => {
       state.isLoading = true;
     },

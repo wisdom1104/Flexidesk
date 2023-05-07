@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import { __deleteFloor, __editFloor } from '../../redux/modules/floorSlice';
+import React from 'react';
+import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
 import AdminFloorItem from '../adminSpace/AdminFloorItem';
-import {
-  BoxBtn,
-  BoxSubBtn,
-  EditInput,
-  StList,
-  StListBtnBox,
-} from '../../shared/SpaceStyles';
-import { useFloorDeleteAndEdit } from '../../hooks/adminSpace/useAdminListHook';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
+import { Input } from '../../components/Input';
+import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminFloorList({
   floor,
-  dispatch,
   onClickSpaceListHandler,
   dragStart,
   onAvailableItemDragEnter,
@@ -20,65 +16,64 @@ function AdminFloorList({
   onDragEnd,
 }) {
   const {
-    onDeleteFloorHandler,
-    onEditFloorNameHandler,
-    isInner,
-    setIsInner,
-    floorEdit,
-    setFloorEdit,
+    onSubmitEditFloor,
+    isEditFloor,
+    onChangeEditModeHandler,
+    onChangeNameHandler,
     editFloorName,
-    setEditFloorName,
-  } = useFloorDeleteAndEdit(dispatch, floor);
+  } = useEditFloor(floor);
 
   return (
     <>
-      <div>
-        {!floorEdit ? (
-          <AdminFloorItem
-            floor={floor}
-            onClickSpaceListHandler={onClickSpaceListHandler}
-            dragStart={dragStart}
-            onAvailableItemDragEnter={onAvailableItemDragEnter}
-            onDragOver={onDragOver}
-            onDragEnd={onDragEnd}
-            onDeleteFloorHandler={onDeleteFloorHandler}
-            floorEdit={floorEdit}
-            setFloorEdit={setFloorEdit}
-            isInner={isInner}
-            setIsInner={setIsInner}
+      {!isEditFloor ? (
+        <AdminFloorItem
+          floor={floor}
+          onClickSpaceListHandler={onClickSpaceListHandler}
+          dragStart={dragStart}
+          onAvailableItemDragEnter={onAvailableItemDragEnter}
+          onDragOver={onDragOver}
+          onDragEnd={onDragEnd}
+          floorEdit={isEditFloor}
+          onChangeEditModeHandler={onChangeEditModeHandler}
+        />
+      ) : (
+        <StList data-floor-id={floor.floorId}>
+          <Input
+            w="120px"
+            h="25px"
+            br="5px"
+            maxLength={7}
+            data-floor-id={floor.floorId}
+            type="text"
+            value={editFloorName}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
-        ) : (
-          <StList data-floor-id={floor.floorId}>
-            <EditInput
-              maxLength={7}
+          <StListBtnBox>
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               data-floor-id={floor.floorId}
-              type="text"
-              value={editFloorName}
-              onChange={e => {
-                setEditFloorName(e.target.value);
-              }}
-            />
-            <StListBtnBox>
-              <BoxBtn
-                data-floor-id={floor.floorId}
-                onClick={() => {
-                  onEditFloorNameHandler(floor.floorId);
-                }}
-              >
+              onClick={onSubmitEditFloor}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
                 완료
-              </BoxBtn>
-              <BoxSubBtn
-                data-floor-id={floor.floorId}
-                onClick={() => {
-                  setFloorEdit(!floorEdit);
-                }}
-              >
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              data-floor-id={floor.floorId}
+              onClick={() => onChangeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--mint_002)">
                 취소
-              </BoxSubBtn>
-            </StListBtnBox>
-          </StList>
-        )}
-      </div>
+              </Text>
+            </SubMintBtn>
+          </StListBtnBox>
+        </StList>
+      )}
     </>
   );
 }

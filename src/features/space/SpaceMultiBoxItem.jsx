@@ -1,5 +1,6 @@
 import React from 'react';
-import { StBox, StUser } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
+import { StBox } from '../../pages/space/SpaceStyles';
 
 function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
   return (
@@ -15,8 +16,12 @@ function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
           background={isClicked === multiBox.multiBoxId ? '#07133b' : '#def1ef'}
           color={isClicked === multiBox.multiBoxId ? '#8b93a6' : '#65bab6'}
         >
-          <div>{multiBox.multiBoxName}</div>
-          <StUser>{multiBox.userlist.length}명</StUser>
+          <Text shape="T16_600" color="var(--mint_002)" ta="center">
+            {multiBox.multiBoxName}
+          </Text>
+          <Text shape="T12_400" color="var(--grey_002)" ta="center">
+            {multiBox.userlist.length}명
+          </Text>
         </StBox>
       ) : (
         <StBox
@@ -26,10 +31,12 @@ function SpaceMultiBoxItem({ multiBox, onClickMoveUserHandler, isClicked }) {
             onClickMoveUserHandler(multiBox);
           }}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
-          background={isClicked === multiBox.multiBoxId ? '#07133b' : undefined}
-          color={isClicked === multiBox.multiBoxId ? '#8b93a6' : undefined}
+          background={isClicked === multiBox.multiBoxId && '#07133b'}
+          color={isClicked === multiBox.multiBoxId && '#8b93a6'}
         >
-          <div>{multiBox.multiBoxName}</div>
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
+            {multiBox.multiBoxName}
+          </Text>
         </StBox>
       )}
     </>

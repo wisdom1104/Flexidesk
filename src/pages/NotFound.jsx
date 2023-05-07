@@ -1,41 +1,38 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { StBlueButton } from './Welcome/WelcomeStyled';
+import Page from '../components/Page';
+import Text from '../components/Text';
+import { Column } from '../components/Flex';
+import { Pointer } from '../styles/etc';
 
 function NotFound() {
   const navi = useNavigate();
   return (
-    <StDiv>
-      <StDiv2>해당 페이지를 찾지 못했습니다.</StDiv2>
-      <StDiv3>주소가 잘못되었거나 더 이상 제공되지 않는 페이지입니다 😅</StDiv3>
-      <StBlueButton onClick={() => navi('/')}>홈으로 이동</StBlueButton>
-    </StDiv>
+    <Page>
+      <Column>
+        <StImageSize
+          src={`${process.env.PUBLIC_URL}/img/stop2.png`}
+          alt="stop2"
+        />
+        <br />
+        <Pointer>
+          <Text shape="T28_700" ta="center" onClick={() => navi('/')}>
+            해당 페이지를 찾지 못했습니다. <br />
+            주소가 잘못되었거나 더 이상 제공되지 않는 페이지입니다.
+          </Text>
+        </Pointer>
+      </Column>
+    </Page>
   );
 }
 
 export default NotFound;
 
-const StDiv = styled.div`
-  max-width: 1400px;
-  height: 80vh;
+const StImageSize = styled.img`
+  width: 35%;
+  height: auto;
   margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StDiv2 = styled.div`
-  margin-top: 64px;
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 32px;
-`;
-
-const StDiv3 = styled.div`
-  font-size: 28px;
-  line-height: 1.6;
-  margin-bottom: 32px;
+  margin-top: 15%;
+  margin-bottom: 5%;
 `;

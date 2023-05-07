@@ -1,89 +1,92 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  BoxBtn,
-  BoxInput,
-  BoxSubBtn,
-  StBox,
-  StBtnBox,
-} from '../../shared/SpaceStyles';
-import { useMrDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
+import { useDeleteMrBox } from '../../hooks/adminSpace/box/useDeleteMrBox';
+import { useEditMrBox } from '../../hooks/adminSpace/box/useEditMrBox';
+import { useDADMrBox } from '../../hooks/adminSpace/box/useDADMrBox';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import { Input } from '../../components/Input';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 
-function AdminMrItem({
-  mr,
-  HandleDrop,
-  handleDragOver,
-  elRef,
-  mrBoxMouseDownHandler,
-  handleDragStart,
-  spaceId,
-}) {
-  const dispatch = useDispatch();
+function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
+  const { onSubmitDelete } = useDeleteMrBox();
 
   const {
-    onClickDeleteMrHandler,
-    onEditMrNameHandler,
-    mrEdit,
-    setMrEdit,
+    onSubmitEdit,
+    isEditMr,
+    onChangeEditModeHandler,
     editMrName,
-    setEditMrName,
-  } = useMrDeleteAndEdit(dispatch, mr, spaceId);
+    onChangeNameHandler,
+  } = useEditMrBox(mr, spaceId);
+
+  const { elRef, mrMouseDownHandler } = useDADMrBox(spaceId, boardEl, mrList);
 
   return (
     <>
-      {!mrEdit ? (
+      {!isEditMr ? (
         <StBox
           key={mr.mrId}
-          onDrop={HandleDrop}
-          onDragOver={handleDragOver}
           ref={el => (elRef.current[mr.mrId] = el)}
-          onMouseDown={e => mrBoxMouseDownHandler(e, mr.mrId)}
-          onDragStart={e => handleDragStart(e, mr.mrId)}
+          onMouseDown={e => mrMouseDownHandler(e, mr.mrId)}
           transformValue={`translate(${mr.x}px, ${mr.y}px)`}
         >
-          <div>{mr.mrName}</div>
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
+            {mr.mrName}
+          </Text>
           <StBtnBox>
-            <BoxBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => onChangeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               onClick={() => {
-                setMrEdit(!mrEdit);
+                onSubmitDelete(mr.mrId, spaceId);
               }}
             >
-              수정
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                onClickDeleteMrHandler(mr.mrId);
-              }}
-            >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       ) : (
         <StBox key={mr.mrId} transformValue={`translate(${mr.x}px, ${mr.y}px)`}>
-          <BoxInput
+          <Input
+            w="60px"
+            h="20px"
+            br="2px"
             maxLength={6}
             type="text"
             value={editMrName}
             onChange={e => {
-              setEditMrName(e.target.value);
+              onChangeNameHandler(e.target.value);
             }}
           />
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                onEditMrNameHandler();
-              }}
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={onSubmitEdit}>
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => onChangeEditModeHandler()}
             >
-              완료
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                setMrEdit(!mrEdit);
-              }}
-            >
-              취소
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       )}

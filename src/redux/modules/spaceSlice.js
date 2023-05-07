@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cookies } from '../../shared/cookies';
+import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
 import { __getSpaces } from './spacesSlice';
 import { __getFloors } from './floorsSlice';
@@ -12,11 +12,11 @@ const initialState = {
 
 // space 선택 조회
 export const __getSpace = createAsyncThunk(
-  '__getSpace',
+  'getSpace',
   async (spaceId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.get(
         `/spaces/${companyName}/${spaceId}
       `,
@@ -35,11 +35,11 @@ export const __getSpace = createAsyncThunk(
 
 // space 삭제
 export const __deleteSpace = createAsyncThunk(
-  '__deleteSpace',
+  'deleteSpace',
   async (spaceId, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.delete(`/spaces/${companyName}/${spaceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,11 +56,11 @@ export const __deleteSpace = createAsyncThunk(
 
 // space 수정
 export const __editSpace = createAsyncThunk(
-  '__editSpace',
+  'editSpace',
   async (payload, thunk) => {
     try {
-      const token = cookies.get('token');
-      const companyName = cookies.get('companyName');
+      const token = getCookie('token');
+      const companyName = getCookie('companyName');
       const response = await api.patch(
         `/spaces/${companyName}/${payload.spaceId}`,
         {
@@ -87,7 +87,6 @@ export const spaceSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //space 부분 조회
     [__getSpace.pending]: state => {
       state.isLoading = true;
     },

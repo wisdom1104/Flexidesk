@@ -1,133 +1,83 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { __getReservationDetail } from '../../redux/modules/detail';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { getCookie } from '../../shared/cookies';
-import {
-  InfoContain,
-  InfoBox,
-  Info,
-  CommentBox,
-  StSubTitle,
-  UserList,
-  StSmall,
-} from './CalendarStyled';
-
-import { useNavigate } from 'react-router-dom';
-import { StSmallFont, StSpacePagePhoto } from '../Welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
+import { __getReservationDetail } from '../../redux/modules/detailSlice';
+import { useSkltDsptTimeout } from '../../hooks/useTimeout';
+import NotFound from '../NotFound';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
-
-import ReservationDelete from './ReservationDelete';
+import { CardInfo } from '../../components/CardInfo';
+import { Card } from '../../components/Card';
+import { Row } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import { InfoContain, UserList } from './ReservationAllStyle';
+import ReservationDelete from '../../features/reservation/ReservationDelete';
 
 function ReservationDetail() {
-  const navi = useNavigate();
-  const dispatch = useDispatch();
-  const { reservationDetail, isLoading, isError } = useSelector(
-    state => state.detail,
-  );
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  const { reservationDetail, isError } = useSelector(state => state.detail);
 
   const token = getCookie('userId');
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(__getReservationDetail());
-  //     setShowSkeleton(false);
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    if (!token) {
-      navi('/');
-    } else {
-      const loadData = async () => {
-        try {
-          dispatch(__getReservationDetail());
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      const timer = setTimeout(() => {
-        loadData();
-        setShowSkeleton(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  const dispatchValue = __getReservationDetail();
+  const { showSkeleton } = useSkltDsptTimeout(token, dispatchValue);
 
   return (
     <>
       <Page>
         <div>
-          <StListTitle margin="30px 0px 0px 16px">
-            {/* <BackCusor
-              onClick={() => {
-                navi('/space');
-              }}
-            >
-              ←
-            </BackCusor> */}
-            <StSpacePagePhoto
-              width="52px"
-              marginTop
-              src={`${process.env.PUBLIC_URL}/img/reservation.png`}
-              alt="managementIcon"
-            />
-            <div>회의실 예약현황</div>
-          </StListTitle>
+          <IconTitle margin="30px 0px 0px 16px" src="reservation">
+            <Text shape="T28_700_34">회의실 예약현황</Text>
+          </IconTitle>
 
           {showSkeleton ? (
             <InfoContain>
               <Skeleton />
             </InfoContain>
           ) : isError ? (
-            <div>에러발생 ..⚙️</div>
+            <NotFound />
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (
-                <InfoBox height="350px" key={item.reservationId}>
-                  <StSubTitle margin="1px">{item.username}</StSubTitle>
-                  <Info>
-                    <CommentBox>
-                      <StSmallFont width>회의실 이름</StSmallFont>
-                      <StSmallFont width>{item.mrName}</StSmallFont>
-                    </CommentBox>
-
-                    <CommentBox>
-                      <StSmallFont width>예약날짜</StSmallFont>
-                      <StSmallFont width>
-                        {item.start.split('T')[0]}
-                      </StSmallFont>
-                    </CommentBox>
-                    <CommentBox>
-                      <StSmallFont width>회의 시간</StSmallFont>
-                      <StSmallFont width>
-                        {item.start.split('T')[1]} ~ {item.end.split('T')[1]}
-                      </StSmallFont>
-                    </CommentBox>
-                    <CommentBox>
-                      <StSmallFont width>예약 인원</StSmallFont>
-                      <UserList width="120px" height="30px" border="none">
+                <Card height="350px" key={item.username} value={item.username}>
+                  <CardInfo color="var(--grey_002)" value={item.mrName}>
+                    회의실 이름
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={item.start.split('T')[0]}
+                  >
+                    예약날짜
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={`${item.start.split('T')[1]} ~ ${
+                      item.end.split('T')[1]
+                    }`}
+                  >
+                    회의 시간
+                  </CardInfo>
+                  <CardInfo>
+                    <Row>
+                      <Text color="var(--grey_002)">예약 인원</Text>
+                      <UserList
+                        width="100px"
+                        height="20px"
+                        border="none"
+                        ml="120px"
+                      >
                         {item.userList.map(e => (
-                          <StSmall>{e.username}</StSmall>
+                          <Text>{e.username}</Text>
                         ))}
                       </UserList>
-                    </CommentBox>
-                    <ReservationDelete reservationId={item.reservationId} />
-                    {/* <DelBtn onClick={() => deleteHandler(item.reservationId)}>
-                      삭제
-                    </DelBtn> */}
-                  </Info>
-                </InfoBox>
+                    </Row>
+                  </CardInfo>
+                  <ReservationDelete reservationId={item.reservationId} />
+                </Card>
               ))}
             </InfoContain>
           )}
         </div>
       </Page>
-      {/* <div>
-        <p>전체 조회</p>
-        <AllReservation />
-      </div> */}
     </>
   );
 }

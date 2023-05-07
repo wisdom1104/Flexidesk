@@ -1,80 +1,89 @@
 import React from 'react';
-import SelectModal from '../../features/SelectModal';
-import { CommentBox } from '../../pages/Reservation/CalendarStyled';
-import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
+import { useModal } from '../../hooks/useModal';
 import Modal from '../../components/Modal';
-import { StSmallFont } from '../../pages/Welcome/WelcomeStyled';
-import { useModal } from '../../hooks/useModalHook';
-import { BsPersonGear } from "react-icons/bs";
+import SelectModal from '../../components/modal/SelectModal';
+import Text from '../../components/Text';
+import { Row } from '../../components/Flex';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import MainMintBtn from '../../components/button/MainMintBtn';
 
 function ManagementChange({ item }) {
-  const [isSelectModalOpen, openSelectModal, closeSelectModal] = useModal();
-  const [isDeleteModalOpen, openDeleteModal, closeDeleteModal] = useModal();
+  const [isSelectModalOpen, controlSelectModal] = useModal();
+  const [isDeleteModalOpen, controlDeleteModal] = useModal();
 
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const logoutHandler = () => {
     dispatch(__deleteAllManagement(item.userId));
-    closeDeleteModal();
+    controlSelectModal(false);
+    controlDeleteModal(false);
   };
 
   return (
-    <>
-      <CommentBox>
-        <StSmallFont width> <BsPersonGear/> 권한 변경</StSmallFont>
+    <StContainer>
+      <Text shape="T16_700" color="var(--grey_002)">
+        <BsPersonGear /> 권한 변경
+      </Text>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '10px',
-          }}
+      <Row gap="10px">
+        <MainMintBtn
+          onClick={() => controlSelectModal(true)}
+          w="84px"
+          h="35px"
+          left="18px"
+          top="130px"
+          position="sticky"
+          pd="4px 10px"
         >
-          <MoveModalSubbtn
-            onClick={openSelectModal}
-            width="84px"
-            height="35px"
-            left="18px"
-            top="130px"
-            position="sticky"
-            padding="8px, 16px, 8px, 16px"
-          >
+          <Text shape="T14_700_17" color="var(--white)">
             직급 수정
-          </MoveModalSubbtn>
- 
-          <MoveModalbtn
-            onClick={openDeleteModal}
-            width="84px"
-            height="35px"
+          </Text>
+        </MainMintBtn>
+
+          <SubMintBtn
+            onClick={() => controlDeleteModal(true)}
+            w="84px"
+            h="35px"
             left="100px"
             top="130px"
             position="sticky"
-            padding="8px, 16px, 8px, 16px"
+            pd="4px 10px"
           >
-            인원 삭제
-          </MoveModalbtn>
-          
-         {isSelectModalOpen && (
-            <SelectModal
-              setIsModal={closeSelectModal}
-              role={item.role}
-              userId={item.userId}
-            ></SelectModal>
-          )}
+            <Text shape="T14_700_17" color="var(--mint_002)">
+              인원 삭제
+            </Text>
+          </SubMintBtn>
 
-          {isDeleteModalOpen && (
-            <Modal
-              setIsModal={closeDeleteModal}
-              modalTitle="삭제 하시겠습니까?"
-              onButtonClick={handleLogout}
-            ></Modal>
-          )}
-        </div>
-      </CommentBox>
-    </>
+        {isSelectModalOpen && (
+          <SelectModal
+            setIsModal={() => controlSelectModal(false)}
+            role={item.role}
+            userId={item.userId}
+          />
+        )}
+      </Row>
+
+      {isDeleteModalOpen && (
+        <Modal
+          setIsModal={() => controlDeleteModal(false)}
+          modalTitle="삭제 하시겠습니까?"
+          onButtonClick={logoutHandler}
+        />
+      )}
+    </StContainer>
   );
 }
 
 export default ManagementChange;
+const StContainer = styled.div`
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 5px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5%;
+`;

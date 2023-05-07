@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
-import {
-  StBackground,
-  StFont,
-  StOverall,
-  StSliderContain,
-  StWrapDiv,
-} from '../../pages/Welcome/WelcomeStyled';
+import React from 'react';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { StBackground } from '../../pages/welcome/WelcomeStyled';
 import Carousel from '../welcome/Carousel';
 
 function Welcome5() {
   return (
     <>
-      <StBackground>
-        <StOverall height="200px">
-          <StWrapDiv>
-            <StFont fontSize='3rem' marginBottom="100px">
-              Flexidesk는 회사생활을 <br /> 어떻게 쉽게 만들어주나요?
-            </StFont>
-          </StWrapDiv>
-        </StOverall>
+      <Page h="2600px">
+        <Text shape="T48_700">
+          <br />
+        </Text>
+      </Page>
 
-        <StSliderContain>
-          <Carousel />
-        </StSliderContain>
+      <StBackground>
+        <Text shape="T48_700" ta="center">
+          Flexidesk는 회사생활을 <br /> 어떻게 쉽게 만들어주나요?
+        </Text>
+        <Carousel />
       </StBackground>
     </>
   );

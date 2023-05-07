@@ -1,62 +1,65 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  BoxBtn,
-  BoxInput,
-  BoxSubBtn,
-  StBox,
-  StBtnBox,
-} from '../../shared/SpaceStyles';
-import { useMultiBoxDeleteAndEdit } from '../../hooks/adminSpace/useAdminSpaceHook';
+import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
+import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
+import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import { Input } from '../../components/Input';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 
-function AdminMultiBoxItem({
-  multiBox,
-  HandleDrop,
-  handleDragOver,
-  elRef,
-  multiBoxMouseDownHandler,
-  handleDragStart,
-  spaceId,
-}) {
-  const dispatch = useDispatch();
+function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
+  const { onSubmitDelete } = useDeleteMultiBox();
 
   const {
-    onClickDeleteBoxHandler,
-    onEditBoxNameHandler,
-    multiBoxEdit,
-    setMultiBoxEdit,
+    onSubmitEdit,
+    isEditMultiBox,
+    onChangeEditModeHandler,
     editMultiBoxName,
-    setEditMultiBoxName,
-  } = useMultiBoxDeleteAndEdit(dispatch, multiBox, spaceId);
+    onChangeNameHandler,
+  } = useEditMultiBox(multiBox, spaceId);
+
+  const { elRef, multiBoxMouseDownHandler } = useDADMultiBox(
+    spaceId,
+    boardEl,
+    multiBoxList,
+  );
 
   return (
     <>
-      {!multiBoxEdit ? (
+      {!isEditMultiBox ? (
         <StBox
           key={multiBox.multiBoxId}
-          onDrop={HandleDrop}
-          onDragOver={handleDragOver}
           ref={el => (elRef.current[multiBox.multiBoxId] = el)}
           onMouseDown={e => multiBoxMouseDownHandler(e, multiBox.multiBoxId)}
-          onDragStart={e => handleDragStart(e, multiBox.multiBoxId)}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
-          <div>{multiBox.multiBoxName}</div>
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
+            {multiBox.multiBoxName}
+          </Text>
           <StBtnBox>
-            <BoxBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => onChangeEditModeHandler()}
+            >
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               onClick={() => {
-                setMultiBoxEdit(!multiBoxEdit);
+                onSubmitDelete(multiBox.multiBoxId, spaceId);
               }}
             >
-              수정
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                onClickDeleteBoxHandler(multiBox.multiBoxId);
-              }}
-            >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       ) : (
@@ -64,29 +67,31 @@ function AdminMultiBoxItem({
           key={multiBox.multiBoxId}
           transformValue={`translate(${multiBox.x}px, ${multiBox.y}px)`}
         >
-          <BoxInput
+          <Input
+            w="60px"
+            h="20px"
+            br="2px"
             maxLength={6}
             type="text"
             value={editMultiBoxName}
-            onChange={e => {
-              setEditMultiBoxName(e.target.value);
-            }}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <BoxBtn
-              onClick={() => {
-                onEditBoxNameHandler();
-              }}
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={onSubmitEdit}>
+              <Text shape="T14_700_17" color="var(--white)">
+                완료
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
+              onClick={() => onChangeEditModeHandler()}
             >
-              완료
-            </BoxBtn>
-            <BoxSubBtn
-              onClick={() => {
-                setMultiBoxEdit(!multiBoxEdit);
-              }}
-            >
-              취소
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                취소
+              </Text>
+            </SubMintBtn>
           </StBtnBox>
         </StBox>
       )}

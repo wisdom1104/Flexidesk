@@ -1,23 +1,23 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Welcome from '../pages/Welcome/Welcome';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Welcome from '../pages/welcome/Welcome';
 import Login from '../pages/user/Login';
 import SignUpAdmin from '../pages/user/SignUpAdmin';
 import SignUpUser from '../pages/user/SignUpUser';
 import AdminSpace from '../pages/space/AdminSpace';
 import Space from '../pages/space/Space';
-import ReservationDetail from '../pages/Reservation/ReservationDetail';
+import ReservationDetail from '../pages/reservation/ReservationDetail';
 import NotFound from '../pages/NotFound';
-import Header from '../components/Header';
-import Calendar from '../pages/Reservation/Calendar';
-import SchedulesCalendar from '../pages/Schedules/SchedulesCalendar';
-import SchedulesDetail from '../pages/Schedules/SchedulesDetail';
+import Calendar from '../pages/reservation/Calendar';
+import SchedulesCalendar from '../pages/schedules/SchedulesCalendar';
+import SchedulesDetail from '../pages/schedules/SchedulesDetail';
 import Management from '../pages/user/Management';
-import PathSchedulesCalendar from '../pages/Schedules/PathScedules/PathSchedulesCalendar'
+import PathSchedulesCalendar from '../pages/pathScedules/PathSchedulesCalendar';
+import Header from '../components/header/Header';
 
 function Router() {
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
@@ -30,7 +30,10 @@ function Router() {
           element={<SchedulesCalendar />}
         />
         <Route path="/scheduledetail/:userId" element={<SchedulesDetail />} />
-        <Route path="/pathschedules/:scId" element={<PathSchedulesCalendar/>} />
+        <Route
+          path="/pathschedules/:scId"
+          element={<PathSchedulesCalendar />}
+        />
         <Route path="/detail/:userId" element={<ReservationDetail />} />
         <Route path="/adminspace" element={<AdminSpace />} />
         <Route path="/space" element={<Space />} />

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useDeleteFloor } from '../../hooks/adminSpace/list/useDeleteFloor';
+import { Row } from '../../components/Flex';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
 import {
-  BoxBtn,
-  BoxSubBtn,
   StList,
   StListBtnBox,
-  StListItem,
-  StOpenBtn,
+  Modalbtn,
   StOpenList,
-} from '../../shared/SpaceStyles';
-import { Row } from '../../components/Flex';
+} from '../../pages/space/SpaceStyles';
 import AdminInnerList from '../adminSpace/AdminInnerList';
 
 function AdminFloorItem({
@@ -18,12 +19,11 @@ function AdminFloorItem({
   onAvailableItemDragEnter,
   onDragOver,
   onDragEnd,
-  onDeleteFloorHandler,
-  floorEdit,
-  setFloorEdit,
-  isInner,
-  setIsInner,
+  onChangeEditModeHandler,
 }) {
+  const [isInner, setIsInner] = useState(false);
+  const { onSubmitDeleteFloor } = useDeleteFloor();
+
   return (
     <>
       {!isInner ? (
@@ -34,10 +34,15 @@ function AdminFloorItem({
           onDragEnd={e => onDragEnd(e, floor)}
         >
           <Row data-floor-id={floor.floorId}>
-            <StListItem data-floor-id={floor.floorId} key={floor.floorId}>
+            <Text
+              shape="T18_700_22"
+              mg="0px 10px"
+              data-floor-id={floor.floorId}
+              key={floor.floorId}
+            >
               {floor.floorName}
-            </StListItem>
-            <StOpenBtn
+            </Text>
+            <Modalbtn
               data-floor-id={floor.floorId}
               onClick={() => {
                 setIsInner(!isInner);
@@ -48,32 +53,40 @@ function AdminFloorItem({
                 data-floor-id={floor.floorId}
                 src="img/listOpenIcon.png"
               />
-            </StOpenBtn>
+            </Modalbtn>
           </Row>
           <StListBtnBox data-floor-id={floor.floorId}>
-            <BoxBtn
+            <MainMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               data-floor-id={floor.floorId}
-              onClick={() => {
-                setFloorEdit(!floorEdit);
-              }}
+              onClick={() => onChangeEditModeHandler()}
             >
-              수정
-            </BoxBtn>
-            <BoxSubBtn
+              <Text shape="T14_700_17" color="var(--white)">
+                수정
+              </Text>
+            </MainMintBtn>
+            <SubMintBtn
+              h="23px"
+              pd="2px 6px"
+              br="4px"
               data-floor-id={floor.floorId}
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
-                  onDeleteFloorHandler(floor.floorId);
+                  onSubmitDeleteFloor(floor.floorId);
                 }
               }}
             >
-              삭제
-            </BoxSubBtn>
+              <Text shape="T14_700_17" color="var(--mint_002)">
+                삭제
+              </Text>
+            </SubMintBtn>
           </StListBtnBox>
         </StList>
       ) : (
-        <>
+        <div>
           <StOpenList
             key={floor.floorId}
             data-floor-id={floor.floorId}
@@ -81,10 +94,15 @@ function AdminFloorItem({
             onDragEnd={e => onDragEnd(e, floor)}
           >
             <Row data-floor-id={floor.floorId}>
-              <StListItem data-floor-id={floor.floorId} key={floor.floorId}>
+              <Text
+                shape="T18_700_22"
+                mg="0px 10px"
+                data-floor-id={floor.floorId}
+                key={floor.floorId}
+              >
                 {floor.floorName}
-              </StListItem>
-              <StOpenBtn
+              </Text>
+              <Modalbtn
                 data-floor-id={floor.floorId}
                 onClick={() => {
                   setIsInner(!isInner);
@@ -95,29 +113,37 @@ function AdminFloorItem({
                   data-floor-id={floor.floorId}
                   src="img/listCloseIcon.png"
                 />
-              </StOpenBtn>
+              </Modalbtn>
             </Row>
             <StListBtnBox data-floor-id={floor.floorId}>
-              <BoxBtn
+              <MainMintBtn
+                h="23px"
+                pd="2px 6px"
+                br="4px"
                 data-floor-id={floor.floorId}
-                onClick={() => {
-                  setFloorEdit(!floorEdit);
-                }}
+                onClick={() => onChangeEditModeHandler()}
               >
-                수정
-              </BoxBtn>
-              <BoxSubBtn
+                <Text shape="T14_700_17" color="var(--white)">
+                  수정
+                </Text>
+              </MainMintBtn>
+              <SubMintBtn
+                h="23px"
+                pd="2px 6px"
+                br="4px"
                 data-floor-id={floor.floorId}
                 onClick={() => {
                   const confirmDelete =
                     window.confirm('정말 삭제하시겠습니까?');
                   if (confirmDelete) {
-                    onDeleteFloorHandler(floor.floorId);
+                    onSubmitDeleteFloor(floor.floorId);
                   }
                 }}
               >
-                삭제
-              </BoxSubBtn>
+                <Text shape="T14_700_17" color="var(--mint_002)">
+                  삭제
+                </Text>
+              </SubMintBtn>
             </StListBtnBox>
           </StOpenList>
           <AdminInnerList
@@ -128,7 +154,7 @@ function AdminFloorItem({
             onDragOver={onDragOver}
             onDragEnd={onDragEnd}
           />
-        </>
+        </div>
       )}
     </>
   );

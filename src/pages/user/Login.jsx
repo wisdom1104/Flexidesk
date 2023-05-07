@@ -1,153 +1,81 @@
 import React from 'react';
-import { Input } from '../../components/Input';
-import { cookies } from '../../shared/cookies';
-import { useNavigate } from 'react-router-dom';
-import api from '../../axios/api';
-import jwt_decode from 'jwt-decode';
-import useTrueHook from '../../hooks/user/useTrueHook';
-import {
-  StBackground,
-  StForm,
-  StFormBox,
-  StLink,
-  StLoginInputIconBox,
-  StLoginForm,
-  StLoginIcon,
-  StLoginIconDiv,
-  StLongButton,
-  StOverall,
-  StLoginContain,
-} from './UserStyled';
-import { StFont, StSmallFont } from '../Welcome/WelcomeStyled';
-import { LoginFormValidation } from '../../hooks/user/useLoginHook';
 import { useState } from 'react';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { LoginSubmitHandler } from '../../utils/loginSubmitHandler';
+import { Row } from '../../components/Flex';
+import ValidationError from '../../components/form/ValidationError';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { SignUpTextInput } from '../../components/form/SignUpTextInput';
+import { BlueBtn } from '../../components/button/BlueBtn';
+import { StForm, StFormContain, StLink, StStartText } from './UserStyled';
 
 function Login() {
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+  const [errorMsg, setErrorMsg] = useState('');
+  const { auth, onChangeEmailHandler, onChangePwHandler } = AuthFormValidation(
+    login,
+    setLogin,
+  );
 
-  const { login, handleEmailChange, handlePasswordChange } = LoginFormValidation();
-
-  const [isError, setIsError] = useState(false);
-
-  useTrueHook();
-
-  const navi = useNavigate();
-
-  const onsubmitHandler = async e => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/users/login', login );
-      console.log('response',response)
-
-      const token = response.headers.authorization;
-      const refreshToken = response.headers.refresh_token;
-      const payload = jwt_decode(token);
-
-      // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      cookies.set('token', token.split(' ')[1], { path: '/', 
-      maxAge: 3540 
-    });
-      cookies.set('refresh_token', refreshToken.split(' ')[1], {
-        path: '/',
-        // maxAge: 3540,
-      });
-      cookies.set('userId', payload.userId, { path: '/', maxAge: 3540 });
-      cookies.set('companyName', String(payload.companyName), {
-        path: '/',
-        maxAge: 3540,
-      });
-      cookies.set('username', String(payload.username), {
-        path: '/',
-        maxAge: 3540,
-      });
-      cookies.set('role', payload.role, { path: '/', maxAge: 3540 });
-      // cookies에 저장////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      navi('/adminspace');
-
-    } catch (error) {
-      setIsError(true);
-      return error;
-    }
-  };
+  const { onsubmitHandler } = LoginSubmitHandler(login, setErrorMsg);
 
   return (
-    <StBackground height="100vh">
-      <StOverall>
-        <StLoginContain>
-          <StLoginForm onSubmit={onsubmitHandler} width="420px">
-            <StForm>
-              <StFormBox>
-                <StFont width="100%" align="start" fontSize="28px">
-                  로그인
-                </StFont>
+    <Page>
+      <StFormContain h="400px">
+        <StForm onSubmit={onsubmitHandler}>
+          <StStartText>
+            <Text shape="T28_700_30"> 로그인 </Text>
+            <Text shape="T16_500" color="var(--blue_004)" mt="3%">
+              이메일 주소와 비밀번호를 입력해주세요.
+            </Text>
+          </StStartText>
 
-                <StSmallFont
-                  width="100%"
-                  align="start"
-                  fontSize="1rem"
-                  marginTop="10px"
-                >
-                  이메일 주소와 비밀번호를 입력해주세요.
-                </StSmallFont>
-              </StFormBox>
+          <SignUpTextInput
+            innerText="이메일"
+            type="email"
+            value={auth.email}
+            onChange={onChangeEmailHandler}
+            name="email"
+            placeholder="✉️  이메일을 입력하세요."
+            required
+          />
 
-              <StLoginInputIconBox>
-                <StLoginIconDiv>
-                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon3.png`} alt="loginIcon3" />
+          <SignUpTextInput
+            innerText="비밀번호"
+            type="password"
+            value={auth.password}
+            name="password"
+            placeholder="🔑  비밀번호를 입력하세요."
+            required
+            onChange={onChangePwHandler}
+          />
 
-                </StLoginIconDiv>
+          <ValidationError value={errorMsg} />
 
-                <Input
-                  type="email"
-                  value={login.email}
-                  onChange={handleEmailChange}
-                  name="email"
-                  placeholder="이메일"
-                  required
-                  border="none"
-                />
-              </StLoginInputIconBox>
-
-              <StLoginInputIconBox>
-                <StLoginIconDiv>
-                  <StLoginIcon src={`${process.env.PUBLIC_URL}/img/loginIcon4.png`} alt="loginIcon4" />
-
-                </StLoginIconDiv>
-                <Input
-                  type="password"
-                  value={login.password}
-                  onChange={handlePasswordChange}
-                  name="password"
-                  placeholder="비밀번호"
-                  required
-                  border="none"
-                />
-              </StLoginInputIconBox>
-              {isError && (
-                <StSmallFont
-                  width="420px"
-                  align="start"
-                  fontSize="0.87rem"
-                  weight="400"
-                  color="red"
-                >
-                  계정 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
-                  확인해주세요.
-                </StSmallFont>
-              )}
-              <StLongButton> 로그인 </StLongButton>
-              <div
-              style={{
-                display:'flex',
-                flexDirection:'row',
-              }}>
-                <StLink to={'/signup'}> 관리자 회원가입 </StLink>
-                <StLink to={'/signupuser'}> 일반 회원가입 </StLink>
-                </div>
-            </StForm>
-          </StLoginForm>
-        </StLoginContain>
-      </StOverall>
-    </StBackground>
+          <BlueBtn type="submit" mgt="20px">
+            <Text shape="T18_700_22" color="var(--white)">
+              로그인
+            </Text>
+          </BlueBtn>
+          <Row>
+            <StLink to={'/signup'}>
+              <Text shape="T14_400_14" color="var(--blue_004)" ta="end">
+                관리자 회원가입
+              </Text>
+            </StLink>
+            <StLink to={'/signupuser'}>
+              <Text shape="T14_400_14" color="var(--blue_004)" ta="end">
+                일반 회원가입
+              </Text>
+            </StLink>
+          </Row>
+        </StForm>
+      </StFormContain>
+    </Page>
   );
 }
 

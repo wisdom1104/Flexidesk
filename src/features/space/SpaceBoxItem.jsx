@@ -1,5 +1,6 @@
 import React from 'react';
-import { StBox, StUser } from '../../shared/SpaceStyles';
+import Text from '../../components/Text';
+import { StBox } from '../../pages/space/SpaceStyles';
 
 function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
   return (
@@ -15,8 +16,12 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
           background={isClicked === box.boxId ? '#07133b' : '#def1ef'}
           color={isClicked === box.boxId ? '#8b93a6' : '#65bab6'}
         >
-          <div>{box.boxName}</div>
-          <StUser>{box.username}</StUser>
+          <Text shape="T16_600" color="var(--mint_002)" ta="center">
+            {box.boxName}
+          </Text>
+          <Text shape="T12_400" color="var(--grey_002)" ta="center">
+            {box.username}
+          </Text>
         </StBox>
       ) : (
         <StBox
@@ -26,10 +31,12 @@ function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
             onClickMoveUserHandler(box);
           }}
           transformValue={`translate(${box.x}px, ${box.y}px)`}
-          background={isClicked === box.boxId ? '#07133b' : undefined}
-          color={isClicked === box.boxId ? '#8b93a6' : undefined}
+          background={isClicked === box.boxId && '#07133b'}
+          color={isClicked === box.boxId && '#8b93a6'}
         >
-          <div>{box.boxName}</div>
+          <Text shape="T16_600" color="var(--grey_002)" ta="center">
+            {box.boxName}
+          </Text>
         </StBox>
       )}
     </>

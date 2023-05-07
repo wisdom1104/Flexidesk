@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 export const Input = ({
@@ -26,26 +26,20 @@ export const Input = ({
 
 const StInput = styled.input`
   display: block;
-  width: ${props => props.width || '400px'};
-  margin: ${props => props.margin || '0px'};
-  height: ${props => props.height || '50px'};
-  padding: ${props => props.padding || '0 10px'};
   background: var(--white);
-
   outline: none;
-
-  border: ${props => props.border || '1px solid #A6AEBB'};
-  border-radius: ${props => props.borderRadius || '8px'};
-
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 17px;
-  color: #a6aebb;
-
+  width: ${props => props.w || '400px'};
+  height: ${props => props.h || '50px'};
+  margin: ${props => props.mg || '0px'};
+  padding: ${props => props.pd || '0 10px'};
+  border: 1px solid;
+  border-color: ${props => props.border || 'var(--blue_004)'};
+  border-radius: ${props => props.br || '8px'};
+  color: var(--blue_004);
   &:focus {
-    border: 1px solid #65bab6;
+    border: 1px solid var(--mint_002);
   }
   &:active {
-    border: 1px solid var(--blue);
+    border: 1px solid var(--blue_001);
   }
 `;

@@ -1,48 +1,29 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
+import React, { useRef } from 'react';
+import { useDropBox } from '../../hooks/adminSpace/box/useDropBox';
+import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
+import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList';
+import { handleDragOver } from '../../utils/dragOverHandler';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
 import AdminSubHeader from './AdminSubHeader';
-import AdminShadowItem from './AdminShadowItem';
 import AdminDropItem from './AdminDropItem';
-import { useSpace } from '../../hooks/adminSpace/useAdminSpaceHook';
-import { useBoxDrop } from '../../hooks/adminSpace/useBoxDrop';
-import { useBoxDragAndDrop } from '../../hooks/adminSpace/useBoxDragAndDropHook';
 
 function AdminSpaceBox({
   spaceId,
   selectedSpace,
-  handleDragStart,
   isModal,
   setIsModal,
   spaces,
   id,
-  mrBoxes,
-  boxes,
-  multiBoxes,
 }) {
-  const dispatch = useDispatch();
-
-  const { space, mrList, boxList, multiBoxList } = useSpace(
-    dispatch,
+  const { mrBoxes, boxes, multiBoxes } = useSelectDropBoxs();
+  const { space, mrList, boxList, multiBoxList } = useSrchSpaceAndList(
     selectedSpace,
     id,
     spaces,
   );
 
-  const {
-    elRef,
-    boardEl,
-    newMrBoxes,
-    newBoxes,
-    newMultiBoxes,
-    mrBoxMouseDownHandler,
-    boxMouseDownHandler,
-    multiBoxMouseDownHandler,
-  } = useBoxDragAndDrop(dispatch, spaceId, mrList, boxList, multiBoxList);
-
-  // 요소 드롭
-  const { HandleDrop, handleDragOver } = useBoxDrop(
-    dispatch,
+  const { HandleDrop } = useDropBox(
     spaceId,
     mrList,
     boxList,
@@ -52,29 +33,26 @@ function AdminSpaceBox({
     multiBoxes,
   );
 
+  const boardEl = useRef(null);
+
   return (
-    <Stmainspace>
+    <SpaceBackBoard>
       <AdminSubHeader space={space} isModal={isModal} setIsModal={setIsModal} />
-      <StBoard ref={boardEl} onDrop={HandleDrop} onDragOver={handleDragOver}>
-        {/* <AdminShadowItem
-          newMrBoxes={newMrBoxes}
-          newBoxes={newBoxes}
-          newMultiBoxes={newMultiBoxes}
-          elRef={elRef}
-        /> */}
+      <SpaceMainBoard
+        ref={boardEl}
+        onDrop={HandleDrop}
+        onDragOver={handleDragOver}
+      >
         <AdminDropItem
           space={space}
-          HandleDrop={HandleDrop}
-          handleDragOver={handleDragOver}
-          elRef={elRef}
-          handleDragStart={handleDragStart}
+          boardEl={boardEl}
           spaceId={spaceId}
-          mrBoxMouseDownHandler={mrBoxMouseDownHandler}
-          boxMouseDownHandler={boxMouseDownHandler}
-          multiBoxMouseDownHandler={multiBoxMouseDownHandler}
+          mrList={mrList}
+          boxList={boxList}
+          multiBoxList={multiBoxList}
         />
-      </StBoard>
-    </Stmainspace>
+      </SpaceMainBoard>
+    </SpaceBackBoard>
   );
 }
 
