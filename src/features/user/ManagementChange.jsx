@@ -53,7 +53,11 @@ function ManagementChange({ item }) {
             top="130px"
             position="sticky"
             pd="4px 10px"
-          />
+          >
+            <Text shape="T14_700_17" color="var(--mint_002)">
+              인원 삭제
+            </Text>
+          </SubMintBtn>
 
           {isSelectModalOpen && (
             <SelectModal

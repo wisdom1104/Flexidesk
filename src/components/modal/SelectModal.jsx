@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { HiChevronDown } from 'react-icons/hi2';
 import { __patchAllManagement } from '../../redux/modules/allManagementSlice';
-import {
 import SubMintBtn from '../button/SubMintBtn';
 import MainMintBtn from '../button/MainMintBtn';
 import Text from '../Text';
 import { StModal, StModalFullBackground } from '../Modal';
-import styled from 'styled-components';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
