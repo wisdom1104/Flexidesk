@@ -1,25 +1,21 @@
 import React from 'react';
-import { SterrorFont } from '../../pages/user/UserStyled';
-import { StSmallFont } from '../../pages/welcome/WelcomeStyled';
+import Text from '../Text';
+import { StStartText } from '../../pages/user/UserStyled';
 
 export const ValidationError = ({ value }) => {
   if (!value && value === undefined) {
     return null;
   }
   return (
-    <SterrorFont>
-      {value && (
-        <StSmallFont
-          width="420px"
-          align="start"
-          fontSize="0.875rem"
-          weight="400"
-          color="red"
-        >
-          {value}
-        </StSmallFont>
-      )}
-    </SterrorFont>
+    <StStartText>
+      <Text shape ta="start" mt="2.5%">
+        {value && (
+          <Text shape="T14_400_17" color="var(--error)">
+            {value}
+          </Text>
+        )}
+      </Text>
+    </StStartText>
   );
 };
 

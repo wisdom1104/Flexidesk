@@ -2,14 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
-import { useModal } from '../../hooks/useModalHook';
-import { CommentBox } from '../../pages/reservation/CalendarStyled';
-import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
+import { useModal } from '../../hooks/useModal';
 import Modal from '../../components/Modal';
 import SelectModal from '../../components/modal/SelectModal';
 import Text from '../../components/Text';
 import { Row } from '../../components/Flex';
-import { CardInfo } from '../../components/CardInfo';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import styled from 'styled-components';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, controlSelectModal] = useModal();
@@ -25,35 +25,35 @@ function ManagementChange({ item }) {
 
   return (
     <>
-      <CommentBox>
+      <StContainer>
         <Text shape="T16_700" color="var(--grey_002)">
           <BsPersonGear /> 권한 변경
         </Text>
 
         <Row gap="10px">
-          <MoveModalSubbtn
+          <MainMintBtn
             onClick={() => controlSelectModal(true)}
-            width="84px"
-            height="35px"
+            w="84px"
+            h="35px"
             left="18px"
             top="130px"
             position="sticky"
-            padding="8px, 16px, 8px, 16px"
+            pd="4px 10px"
           >
-            직급 수정
-          </MoveModalSubbtn>
+            <Text shape="T14_700_17" color="var(--white)">
+              직급 수정
+            </Text>
+          </MainMintBtn>
 
-          <MoveModalbtn
+          <SubMintBtn
             onClick={() => controlDeleteModal(true)}
-            width="84px"
-            height="35px"
+            w="84px"
+            h="35px"
             left="100px"
             top="130px"
             position="sticky"
-            padding="8px, 16px, 8px, 16px"
-          >
-            인원 삭제
-          </MoveModalbtn>
+            pd="4px 10px"
+          />
 
           {isSelectModalOpen && (
             <SelectModal
@@ -71,9 +71,18 @@ function ManagementChange({ item }) {
             onButtonClick={handleLogout}
           />
         )}
-      </CommentBox>
+      </StContainer>
     </>
   );
 }
 
 export default ManagementChange;
+
+const StContainer = styled.div`
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 5px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5%;
+`;

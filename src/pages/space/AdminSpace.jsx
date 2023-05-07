@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeout';
 import Skeleton from '../../components/Skeleton';
 import { Column, Row } from '../../components/Flex';
 import Page from '../../components/Page';

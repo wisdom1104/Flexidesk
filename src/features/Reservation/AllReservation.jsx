@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getAllReservation } from '../../redux/modules/allReservationSlice';
 
 function AllReservation() {
-  const { reservationList, isLoading, isError } = useSelector(
+  const { reservationList } = useSelector(
     state => state.reservationList,
   );
 

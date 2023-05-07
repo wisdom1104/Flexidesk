@@ -3,10 +3,10 @@ import api from '../../axios/api';
 import ValidationError from '../../components/form/ValidationError';
 import Text from '../../components/Text';
 import { BlueBtn } from '../../components/button/BlueBtn';
-import { Container, InlineInput } from '../../pages/user/UserStyled2';
+import { Container, InlineInput } from '../../pages/user/UserStyled';
 
 function Certification({ admin, email, onChange, errors }) {
-  const submitBtnHandler = async e => {
+  const onSubmitHandler = async e => {
     e.preventDefault();
 
     try {
@@ -39,7 +39,7 @@ function Certification({ admin, email, onChange, errors }) {
           required
         />
 
-        <BlueBtn type="button" onClick={submitBtnHandler} w="25%" h="50px">
+        <BlueBtn type="button" onClick={onSubmitHandler} w="25%" h="50px">
           인증확인
         </BlueBtn>
       </Container>

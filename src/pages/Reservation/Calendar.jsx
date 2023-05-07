@@ -2,26 +2,23 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeout';
 import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
-import { Flex, Row } from '../../components/Flex';
+import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { StListTitle } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import ReservationTime from '../../features/reservation/ReservationTime';
 import {
   DayContain,
   Day,
   SchContain,
   StSubHeader,
-  StSubTitle,
   StSelectDay,
-  StIcon,
   InfoContain,
 } from './CalendarStyled';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
+import NotFound from '../NotFound';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);
@@ -53,7 +50,7 @@ const Calendar = () => {
             <Skeleton />
           </InfoContain>
         ) : isError ? (
-          <div>에러발생 ..⚙️</div>
+          <NotFound />
         ) : (
           <Row>
             <SchContain width="500px" height="">
