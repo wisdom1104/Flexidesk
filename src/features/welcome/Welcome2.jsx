@@ -23,5 +23,4 @@ function Welcome2() {
     </Page>
   );
 }
-
 export default Welcome2;

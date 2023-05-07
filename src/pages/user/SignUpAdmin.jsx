@@ -7,7 +7,7 @@ import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler'
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { BlueBtn } from '../../components/button/BlueBtn';
-import { StFormContain, StForm, StStartText } from './UserStyled2';
+import { StFormContain, StForm, StStartText } from './UserStyled';
 
 function SignUpAdmin() {
   const [admin, setAdmin] = useState({
@@ -88,6 +88,7 @@ function SignUpAdmin() {
             minlength="8"
             maxlength="16"
           />
+          <br />
 
           <ValidationError value={errors.password} />
 
@@ -101,6 +102,7 @@ function SignUpAdmin() {
             minlength="8"
             maxlength="16"
           />
+          <br />
 
           <ValidationError value={errors.passwordCheck} />
           <BlueBtn type="submit" mgt="20px">

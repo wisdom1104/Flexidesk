@@ -8,7 +8,7 @@ import {
   StReserTimeBox,
   StReserTimeButton,
   SchContain,
-} from '../../pages/reservation/CalendarStyled';
+} from '../../pages/reservation/ReservationAllStyle';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 import { BlueBtn } from '../../components/button/BlueBtn';

@@ -5,7 +5,7 @@ import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
 import { useCalendar } from '../../hooks/useCalendar';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeout';
 import {
   DayContain,
   SchContain,
@@ -13,7 +13,7 @@ import {
   StSubHeader,
   StSelectDay,
   InfoContain,
-} from '../reservation/CalendarStyled';
+} from '../reservation/ReservationAllStyle';
 import SchedulesTime from '../../features/schedules/SchedulesTime';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';

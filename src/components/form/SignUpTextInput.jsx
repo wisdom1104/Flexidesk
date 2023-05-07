@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StTextInput } from '../../pages/user/UserStyled';
 import Text from '../Text';
 
 export const SignUpTextInput = ({
@@ -31,6 +30,11 @@ export const SignUpTextInput = ({
     </StTextInput>
   );
 };
+
+const StTextInput = styled.div`
+height: ${props => props.height || '75px'};
+margin-top: ${props => props.marginTop || '16px'};
+`;
 
 const StInput = styled.input`
   display: block;

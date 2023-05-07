@@ -2,7 +2,7 @@ import React from 'react';
 import api from '../../axios/api';
 import { BlueBtn } from '../../components/button/BlueBtn';
 import Text from '../../components/Text';
-import { Container, InlineInput } from '../../pages/user/UserStyled2';
+import { Container, InlineInput } from '../../pages/user/UserStyled';
 
 function CertificationCkeck({ user, certification, onChange }) {
   // form태그 핸들러

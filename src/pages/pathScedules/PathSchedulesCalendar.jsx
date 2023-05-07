@@ -10,10 +10,8 @@ import {
   SchContain,
   Day,
   StSubHeader,
-  StSubTitle,
-  StIcon,
   StSelectDay,
-} from '../reservation/CalendarStyled';
+} from '../reservation/ReservationAllStyle';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 
