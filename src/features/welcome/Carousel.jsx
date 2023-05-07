@@ -1,7 +1,7 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 import { useCarousel } from '../../hooks/useCarousel';
-import styled, { css } from 'styled-components';
 import Text from '../../components/Text';
 
 const CarouselButton = ({ children, dir, onClick }) => {

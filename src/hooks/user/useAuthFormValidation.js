@@ -1,4 +1,3 @@
-//변수명 PW로 변경할까?
 import { useEffect, useState } from 'react';
 
 export const AuthFormValidation = (auth, setAuth) => {
@@ -34,7 +33,7 @@ export const AuthFormValidation = (auth, setAuth) => {
     }
   };
 
-  const onChangePasswordHandler = ({ target: { value } }) => {
+  const onChangePwHandler = ({ target: { value } }) => {
     setAuth(pre => ({ ...pre, password: value }));
 
     const hasNumber = /\d/.test(value);
@@ -62,7 +61,7 @@ export const AuthFormValidation = (auth, setAuth) => {
     }
   };
 
-  const onChangePasswordCheckHandler = ({ target: { value } }) => {
+  const onChangePwCheckHandler = ({ target: { value } }) => {
     setAuth(pre => ({ ...pre, passwordCheck: value }));
 
     if (value !== auth.password) {
@@ -80,7 +79,7 @@ export const AuthFormValidation = (auth, setAuth) => {
     setAuth,
     errors,
     onChangeEmailHandler,
-    onChangePasswordHandler,
-    onChangePasswordCheckHandler,
+    onChangePwHandler,
+    onChangePwCheckHandler,
   };
 };

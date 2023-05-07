@@ -13,15 +13,15 @@ export const useEditMrBox = (mr, spaceId) => {
   // 변경 이름
   const [editMrName, setEditMrName] = useState(mr.mrName);
 
-  const changeNameHandler = value => {
+  const onChangeNameHandler = value => {
     setEditMrName(value);
   };
 
-  const changeEditModeHandler = () => {
+  const onChangeEditModeHandler = () => {
     setisMrEdit(pre => !pre);
   };
 
-  const submitEdit = async () => {
+  const onSubmitEdit = async () => {
     const payload = {
       spaceId,
       mrId: mr.mrId,
@@ -34,13 +34,10 @@ export const useEditMrBox = (mr, spaceId) => {
   };
 
   return {
-    submitEdit,
-
-    // 상태 값
+    onSubmitEdit,
     isEditMr,
-    changeEditModeHandler,
-    // 이름
+    onChangeEditModeHandler,
     editMrName,
-    changeNameHandler,
+    onChangeNameHandler,
   };
 };

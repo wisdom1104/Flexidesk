@@ -2,21 +2,21 @@ import React from 'react';
 import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
 import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
 import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
-import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import { Input } from '../../components/Input';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
-  const { submitDelete } = useDeleteMultiBox();
+  const { onSubmitDelete } = useDeleteMultiBox();
 
   const {
-    submitEdit,
+    onSubmitEdit,
     isEditMultiBox,
-    changeEditModeHandler,
+    onChangeEditModeHandler,
     editMultiBoxName,
-    changeNameHandler,
+    onChangeNameHandler,
   } = useEditMultiBox(multiBox, spaceId);
 
   const { elRef, multiBoxMouseDownHandler } = useDADMultiBox(
@@ -42,7 +42,7 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 수정
@@ -53,7 +53,7 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
               pd="2px 6px"
               br="4px"
               onClick={() => {
-                submitDelete(multiBox.multiBoxId, spaceId);
+                onSubmitDelete(multiBox.multiBoxId, spaceId);
               }}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
@@ -74,10 +74,10 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
             maxLength={6}
             type="text"
             value={editMultiBoxName}
-            onChange={e => changeNameHandler(e.target.value)}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={submitEdit}>
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={onSubmitEdit}>
               <Text shape="T14_700_17" color="var(--white)">
                 완료
               </Text>
@@ -86,7 +86,7 @@ function AdminMultiBoxItem({ multiBox, boardEl, spaceId, multiBoxList }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
                 취소

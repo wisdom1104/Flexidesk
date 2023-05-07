@@ -32,8 +32,8 @@ export const SignUpTextInput = ({
 };
 
 const StTextInput = styled.div`
-height: ${props => props.height || '75px'};
-margin-top: ${props => props.marginTop || '16px'};
+  height: ${props => props.height || '75px'};
+  margin-top: ${props => props.marginTop || '16px'};
 `;
 
 const StInput = styled.input`
@@ -62,6 +62,6 @@ const StInput = styled.input`
     border: 1px solid #65bab6;
   }
   &:active {
-    border: 1px solid var(--blue);
+    border: 1px solid var(--blue_001);
   }
 `;

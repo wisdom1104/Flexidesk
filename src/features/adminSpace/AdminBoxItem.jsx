@@ -2,21 +2,21 @@ import React from 'react';
 import { useDeleteBox } from '../../hooks/adminSpace/box/useDeleteBox';
 import { useEditBox } from '../../hooks/adminSpace/box/useEditBox';
 import { useDADBox } from '../../hooks/adminSpace/box/useDADBox';
-import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import { Input } from '../../components/Input';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
-  const { submitDelete } = useDeleteBox();
+  const { onSubmitDelete } = useDeleteBox();
 
   const {
-    submitEdit,
+    onSubmitEdit,
     isEditBox,
-    changeEditModeHandler,
+    onChangeEditModeHandler,
     editBoxName,
-    changeNameHandler,
+    onChangeNameHandler,
   } = useEditBox(box, spaceId);
 
   const { elRef, boxMouseDownHandler } = useDADBox(spaceId, boardEl, boxList);
@@ -38,7 +38,7 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 수정
@@ -49,7 +49,7 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
               pd="2px 6px"
               br="4px"
               onClick={() => {
-                submitDelete(box.boxId, spaceId);
+                onSubmitDelete(box.boxId, spaceId);
               }}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
@@ -70,10 +70,10 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
             maxLength={6}
             type="text"
             value={editBoxName}
-            onChange={e => changeNameHandler(e.target.value)}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
           <StBtnBox>
-            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={submitEdit}>
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={onSubmitEdit}>
               <Text shape="T14_700_17" color="var(--white)">
                 완료
               </Text>
@@ -82,7 +82,7 @@ function AdminBoxItem({ box, boardEl, spaceId, boxList }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
                 취소

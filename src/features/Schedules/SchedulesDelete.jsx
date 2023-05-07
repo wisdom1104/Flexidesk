@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { __deleteSchedule } from '../../redux/modules/schedulesSlice';
 import { useModal } from '../../hooks/useModal';
 import Modal from '../../components/Modal';
-import { __deleteSchedule } from '../../redux/modules/schedules';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import Text from '../../components/Text';
 

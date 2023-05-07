@@ -1,22 +1,13 @@
 import React from 'react';
-import {
-  CheckContain,
-  CheckContainBox,
-  FontSt,
-} from '../../pages/reservation/ReservationAllStyle';
-
 import { Column } from '../../components/Flex';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
+import {
+  CheckContain,
+  CheckContainBox,
+} from '../../pages/reservation/ReservationAllStyle';
 
-function ReservationCheck({
-  param,
-  selectDay,
-  clickReservation,
-  userName,
-  mrName,
-}) {
-  //예약시간 보여주기
+function ReservationCheck({ selectDay, clickReservation, userName, mrName }) {
   const timeArray = clickReservation.map(item => {
     const selectTime = item.split('T');
     let time = selectTime[1];
@@ -43,35 +34,37 @@ function ReservationCheck({
       <CheckContainBox>
         <Column>
           <CheckContain>
-            <Text shape="T18_700_96" color="var(--darkgrey)">
+            <Text shape="T16_600" color="var(--grey_002)">
               회의실 이름
             </Text>
-            <FontSt>{mrName}</FontSt>
+            <Text shape="T16_600">{mrName}</Text>
           </CheckContain>
           <CheckContain>
-            <Text shape="T18_700_96" color="var(--darkgrey)">
+            <Text shape="T16_600" color="var(--grey_002)">
               예약 날짜
             </Text>
-            <FontSt>{selectDay}</FontSt>
+            <Text shape="T16_600">{selectDay}</Text>
           </CheckContain>
         </Column>
         <Column>
           <CheckContain>
-            <Text shape="T18_700_96" color="var(--darkgrey)">
+            <Text shape="T16_600" color="var(--grey_002)">
               예약 시간
             </Text>
-            <FontSt>
+            <Text shape="T16_600">
               {timeArray.map(time => (
                 <div key={time}>{time}</div>
               ))}
-            </FontSt>
+            </Text>
           </CheckContain>
           <CheckContain>
-            <Text shape="T18_700_96" color="var(--darkgrey)">
+            <Text shape="T16_600" color="var(--grey_002)">
               예약 인원
             </Text>
             {userName?.map(item => (
-              <Text key={item.username}>{item.username}</Text>
+              <Text shape="T16_600" key={item.username}>
+                {item.username}
+              </Text>
             ))}
           </CheckContain>
         </Column>

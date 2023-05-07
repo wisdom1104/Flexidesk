@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StListbox = styled.div`
-  border-top: 1px solid var(--darkgrey);
-  border-bottom: 1px solid var(--darkgrey);
+  border-top: 1px solid var(--grey_002);
+  border-bottom: 1px solid var(--grey_002);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,14 +24,14 @@ export const StSpaceList = styled.div`
     width: 5px;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--darkgrey);
+    background: var(--grey_002);
     border-radius: 50px;
   }
 `;
 
 export const ClisckedListItem = styled.div`
-  background: #def1ef;
-  border: 1px solid #b6dfdd;
+  background: var(--);
+  border: 1px solid var(--mint_003);
   border-radius: 8px;
 `;
 
@@ -69,10 +69,10 @@ export const SubIcon = styled.div`
 `;
 
 export const StBox = styled.div`
-  color: ${props => props.color || '#8b93a6'};
+  color: ${props => props.color || 'var(--grey_002)'};
   position: ${props => props.position || 'absolute'};
   background: ${props => props.background || '#f1f2f4'};
-  border: 1px solid ${props => props.color || '#8b93a6'};
+  border: 1px solid ${props => props.color || 'var(--grey_002)'};
   border-radius: 4px;
   width: 90px;
   height: 90px;
@@ -86,15 +86,15 @@ export const StBox = styled.div`
   gap: 20px;
   transform: ${props => props.transformValue};
   &:hover {
-    background: ${props => props.hoverBackground || '#ffffff'};
-    border: 1px solid ${props => props.color || '#8b93a6'};
+    background: ${props => props.hoverBackground || 'var(--white)'};
+    border: 1px solid ${props => props.color || 'var(--grey_002)'};
   }
 `;
 
 export const StSelect = styled.div`
   width: 130px;
   height: 400px;
-  background: #07133b;
+  background: var(--blue_001);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -151,7 +151,7 @@ export const ModalList = styled.div`
     width: 5px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #b6dfdd;
+    background-color: var(--mint_003);
     border-radius: 50px;
   }
 `;
@@ -186,7 +186,7 @@ export const StList = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border: 1px solid var(--grey);
+  border: 1px solid var(--grey_003);
   border-radius: 8px;
   width: 290px;
   height: 45px;
@@ -211,7 +211,7 @@ export const StOpenList = styled.div`
   align-items: center;
   box-sizing: border-box;
   background: var(--white);
-  border: 1px solid #c9cdd6;
+  border: 1px solid var(--grey_003);
   border-radius: 8px 8px 0px 0px;
   width: 290px;
   height: 45px;
@@ -223,8 +223,8 @@ export const StOpenList = styled.div`
 export const StInnerList = styled.div`
   box-sizing: border-box;
   width: 290px;
-  background: var(--lightgrey);
-  border: 1px solid var(--lightgrey);
+  background: var(--grey_004);
+  border: 1px solid var(--grey_004);
   border-radius: 0px 0px 8px 8px;
   display: flex;
   flex-direction: column;
@@ -253,7 +253,7 @@ export const MoveModalSubTitle = styled.div`
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: var(--darkgrey);
+  color: var(--grey_002);
 `;
 
 export const MoveModalTitle = styled.div`
@@ -283,7 +283,7 @@ export const MoveModalList = styled.div`
     width: 5px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #b6dfdd;
+    background-color: var(--mint_003);
     border-radius: 50px;
   }
 `;

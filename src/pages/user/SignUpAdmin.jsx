@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import ValidationError from '../../components/form/ValidationError';
 import Certification from '../../features/user/Certification';
-import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { BlueBtn } from '../../components/button/BlueBtn';
@@ -25,8 +25,8 @@ function SignUpAdmin() {
     setAuth,
     errors,
     onChangeEmailHandler,
-    onChangePasswordHandler,
-    onChangePasswordCheckHandler,
+    onChangePwdHandler,
+    onChangePwCheckHandler,
   } = AuthFormValidation(admin, setAdmin);
 
   const { onSubmitHandler } = useSignUpSubmitHandler(admin);
@@ -84,7 +84,7 @@ function SignUpAdmin() {
             value={auth.password}
             placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
             required
-            onChange={onChangePasswordHandler}
+            onChange={onChangePwdHandler}
             minlength="8"
             maxlength="16"
           />
@@ -98,7 +98,7 @@ function SignUpAdmin() {
             value={auth.passwordCheck}
             placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
             required
-            onChange={onChangePasswordCheckHandler}
+            onChange={onChangePwCheckHandler}
             minlength="8"
             maxlength="16"
           />

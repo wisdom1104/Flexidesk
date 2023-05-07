@@ -1,14 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { Row } from '../../components/Flex';
-import ValidationError from '../../components/form/ValidationError';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 import { LoginSubmitHandler } from '../../utils/loginSubmitHandler';
+import { Row } from '../../components/Flex';
+import ValidationError from '../../components/form/ValidationError';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import { BlueBtn } from '../../components/button/BlueBtn';
-
 import { StForm, StFormContain, StLink, StStartText } from './UserStyled';
 
 function Login() {
@@ -17,8 +16,10 @@ function Login() {
     password: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
-  const { auth, onChangeEmailHandler, onChangePasswordHandler } =
-    AuthFormValidation(login, setLogin);
+  const { auth, onChangeEmailHandler, onChangePwHandler } = AuthFormValidation(
+    login,
+    setLogin,
+  );
 
   const { onsubmitHandler } = LoginSubmitHandler(login, setErrorMsg);
 
@@ -50,7 +51,7 @@ function Login() {
             name="password"
             placeholder="🔑  비밀번호를 입력하세요."
             required
-            onChange={onChangePasswordHandler}
+            onChange={onChangePwHandler}
           />
 
           <ValidationError value={errorMsg} />

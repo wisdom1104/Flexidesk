@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
 import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
-import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import { Input } from '../../components/Input';
+import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminSpaceList({
   space,
@@ -16,14 +16,14 @@ function AdminSpaceList({
   onDragEnd,
 }) {
   const {
-    submitEditSpace,
+    onSubmitEditSpace,
     isEditSpace,
-    changeEditModeHandler,
-    changeNameHandler,
+    onChangeEditModeHandler,
+    onChangeNameHandler,
     editSpaceName,
   } = useEditSpace(space);
 
-  const { submitDeleteSpace } = useDeleteSpace();
+  const { onSubmitDeleteSpace } = useDeleteSpace();
 
   return (
     <>
@@ -52,7 +52,7 @@ function AdminSpaceList({
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 수정
@@ -65,7 +65,7 @@ function AdminSpaceList({
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
-                  submitDeleteSpace(space.spaceId);
+                  onSubmitDeleteSpace(space.spaceId);
                 }
               }}
             >
@@ -84,14 +84,14 @@ function AdminSpaceList({
             maxLength={9}
             type="text"
             value={editSpaceName}
-            onChange={e => changeNameHandler(e.target.value)}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
           <StListBtnBox>
             <MainMintBtn
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={submitEditSpace}
+              onClick={onSubmitEditSpace}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 완료
@@ -101,7 +101,7 @@ function AdminSpaceList({
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
                 취소

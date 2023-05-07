@@ -4,7 +4,7 @@ import { __addInnerSpace } from '../../../redux/modules/spacesSlice';
 export const useAddInnerSpace = () => {
   const dispatch = useDispatch();
 
-  const submitAddInnerSpace = floor => {
+  const onSubmitAddInnerSpace = floor => {
     const InnserSpace = {
       floorId: floor.floorId,
       spaceName: 'New 스페이스',
@@ -12,5 +12,5 @@ export const useAddInnerSpace = () => {
     dispatch(__addInnerSpace(InnserSpace));
   };
 
-  return { submitAddInnerSpace };
+  return { onSubmitAddInnerSpace };
 };

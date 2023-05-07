@@ -1,10 +1,11 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
-import Page from '../../components/Page';
-import PathSchedulesTime from '../../features/pathSchedules/PathSchedulesTime';
 import { useCalendar } from '../../hooks/useCalendar';
+import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 import {
   DayContain,
   SchContain,
@@ -12,8 +13,7 @@ import {
   StSubHeader,
   StSelectDay,
 } from '../reservation/ReservationAllStyle';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
+import PathSchedulesTime from '../../features/pathSchedules/PathSchedulesTime';
 
 function PathScedules() {
   const location = useLocation();
@@ -50,8 +50,12 @@ function PathScedules() {
                     preMonth();
                   }}
                 />
-                <div>{selectYear}년</div>
-                <div>{selectMonth}월</div>
+                <Text shape="T16_700_19" color="var(--mint_002)">
+                  {selectYear}년
+                </Text>
+                <Text shape="T16_700_19" color="var(--mint_002)">
+                  {selectMonth}월
+                </Text>
                 <IoIosArrowDropright
                   onClick={() => {
                     nextMonth();
@@ -61,7 +65,13 @@ function PathScedules() {
             </StSubHeader>
             <DayContain>
               {week?.map(item => {
-                return <Day key={item}>{item}</Day>;
+                return (
+                  <Day key={item}>
+                    <Text shape="T16_700_19" color="var(--mint_002)">
+                      {item}
+                    </Text>
+                  </Day>
+                );
               })}
               {returnDay()}
             </DayContain>

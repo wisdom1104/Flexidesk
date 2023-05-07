@@ -2,12 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../shared/cookies';
-import { __getAllSchedules } from '../../redux/modules/schedules';
+import { __getAllSchedules } from '../../redux/modules/schedulesSlice';
 import { useSkltDsptTimeout } from '../../hooks/useTimeout';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { InfoContain } from '../reservation/ReservationAllStyle';
-import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 import SubMintBtn from '../../components/button/SubMintBtn';
@@ -15,6 +13,8 @@ import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
 import { Row } from '../../components/Flex';
 import NotFound from '../NotFound';
+import { InfoContain } from '../reservation/ReservationAllStyle';
+import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 
 function SchedulesDetail() {
   const navi = useNavigate();
@@ -34,8 +34,8 @@ function SchedulesDetail() {
             <Skeleton />
           </InfoContain>
         ) : isError ? (
-          <NotFound/>
-          ) : (
+          <NotFound />
+        ) : (
           <InfoContain>
             {userSchedules?.map(item => (
               <Card key={item.scId} value={item.scTitle} height="300px">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { HiChevronDown } from 'react-icons/hi2';
-import { __patchAllManagement } from '../../redux/modules/allManagementSlice';
+import { __editAllManagement } from '../../redux/modules/allManagementSlice';
 import SubMintBtn from '../button/SubMintBtn';
 import MainMintBtn from '../button/MainMintBtn';
 import Text from '../Text';
@@ -25,7 +25,7 @@ const SelectModal = ({ setIsModal, role, userId }) => {
 
   const onPatchButtonHandler = () => {
     setIsModal(false);
-    dispatch(__patchAllManagement({ userId, role: fav, updateRole: true }));
+    dispatch(__editAllManagement({ userId, role: fav, updateRole: true }));
   };
 
   return (
@@ -94,7 +94,7 @@ export const StModalSubTitle = styled.div`
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: var(--darkgrey);
+  color: var(--grey_002);
 `;
 
 const DropdownMenu = styled.div`

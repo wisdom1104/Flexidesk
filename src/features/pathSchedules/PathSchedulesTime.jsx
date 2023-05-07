@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { __pathScehdule } from '../../redux/modules/schedules';
+import { __pathScehdule } from '../../redux/modules/schedulesSlice';
 import { useSchedulesTime } from '../../hooks/schedules/useSchedulesTime';
 import { useSchedulesHandler } from '../../hooks/schedules/useSchedulesHandler';
 import { Input } from '../../components/Input';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
 import {
   StReserTimeBox,
   StReserTimeButton,
   SchContain,
 } from '../../pages/reservation/ReservationAllStyle';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
-import { BlueBtn } from '../../components/button/BlueBtn';
 
 function PathSchedulesTime({
   param,

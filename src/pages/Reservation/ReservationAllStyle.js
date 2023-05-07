@@ -25,11 +25,6 @@ export const StSelectDay = styled.div`
   gap: 5px;
   margin: 0px 30px;
   color: #59aba7;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
 `;
 export const DayContain = styled.div`
   display: flex;
@@ -53,23 +48,13 @@ export const Day = styled.button`
   justify-content: center;
   padding: 0px 0px 15px 0px;
   margin: 0px 3px;
-  //글자
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #65bab6;
 `;
 
 export const StDate = styled.button`
   min-width: ${props => props.width || 'calc(100% / 7.5)'};
   background-color: ${props => props.background || '#ffffff'};
-  /* background-color: lightblue; */
   border: none;
   border-top: 0.627857px solid #c9cdd6;
-  /* height: 6vh; */
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -77,7 +62,6 @@ export const StDate = styled.button`
   margin: 0px 3px;
 `;
 export const UserList = styled.div`
-  /* background-color: steelblue; */
   display: flex;
   flex-direction: column;
   margin-left: ${props => props.ml || '10px'};
@@ -90,14 +74,12 @@ export const UserList = styled.div`
   overflow-x: hidden;
   border-top: ${props => props.border || '1px solid var(--lightgrey)'};
   border-bottom: ${props => props.border || '1px solid var(--lightgrey)'};
-  /* 스크롤바 스타일 변경 */
   ::-webkit-scrollbar {
-    width: 5px; /* 스크롤바 너비 */
+    width: 5px;
   }
-  /* 스크롤바 썸네일 스타일 변경 */
   ::-webkit-scrollbar-thumb {
     background-color: #b6dfdd;
-    border-radius: 50px; /* 스크롤바 모양 */
+    border-radius: 50px;
   }
 `;
 export const CheckContainBox = styled.div`
@@ -105,8 +87,6 @@ export const CheckContainBox = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  /* background-color: transparent; */
-  /* background-color: steelblue;s */
   padding: 10px 0px;
   width: ${props => props.width || '95%'};
   margin: auto;
@@ -125,11 +105,6 @@ export const CheckContain = styled.div`
   border-radius: 5px;
   background-color: white;
 `;
-export const FontSt = styled.div`
-  font-family: 'Pretendard';
-  font-style: normal;
-  color: #07133b;
-`;
 
 export const StReserTimeBox = styled.div`
   display: flex;
@@ -144,12 +119,13 @@ export const StReserTimeBox = styled.div`
 `;
 export const StReserTimeButton = styled.button`
   border-radius: 5px;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--blue_001);
   margin: 5px;
   padding: ${props => props.padding || '5px 0px'};
   font-family: inherit;
   color: ${props => (props.isSelected ? 'white' : '#07133b')};
-  background-color: ${props => (props.isSelected ? 'var(--blue)' : 'white')};
+  background-color: ${props =>
+    props.isSelected ? 'var(--blue_001)' : 'white'};
   width: ${props => props.width || '70px'};
   &:disabled {
     color: lightgray;

@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const StHeader = styled.div`
+  height: 6vh;
+  max-width: 1200px;
+  min-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+`;
+
 export const HeaderContain = styled.div`
   display: flex;
   width: 100%;

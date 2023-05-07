@@ -32,7 +32,7 @@ export const useCheckTime = mr => {
       },
       time === '' && day === '' ? 1 : 60000,
     );
-    // 컴포넌트 언마운트 시 interval clear
+
     return () => clearInterval(intervalId);
   }, [day, time]);
 

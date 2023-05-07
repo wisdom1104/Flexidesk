@@ -1,7 +1,7 @@
 import React from 'react';
-import { StBox } from '../../pages/space/SpaceStyles';
-import Text from '../../components/Text';
 import { useCheckTime } from '../../hooks/space/useCheckTime';
+import Text from '../../components/Text';
+import { StBox } from '../../pages/space/SpaceStyles';
 
 function SpaceMrItem({ mr, navi }) {
   const { startTime, startDay, day, targetTime } = useCheckTime(mr);
