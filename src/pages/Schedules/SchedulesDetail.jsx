@@ -47,46 +47,44 @@ function SchedulesDetail() {
           <InfoContain>
             {userSchedules?.map(item => (
               <Card key={item.scId} value={item.scTitle} height="300px">
-                <Info>
-                  <CardInfo color="var(--grey_002)" value={item.scComment}>
-                    내용
-                  </CardInfo>
-                  <CardInfo
-                    color="var(--grey_002)"
-                    value={item.scStart.split('T')[0]}
+                <CardInfo color="var(--grey_002)" value={item.scComment}>
+                  내용
+                </CardInfo>
+                <CardInfo
+                  color="var(--grey_002)"
+                  value={item.scStart.split('T')[0]}
+                >
+                  날짜
+                </CardInfo>
+                <CardInfo
+                  color="var(--grey_002)"
+                  value={item.scStart.split('T')[1]}
+                >
+                  시작시간
+                </CardInfo>
+                <CardInfo
+                  color="var(--grey_002)"
+                  value={item.scEnd.split('T')[1]}
+                >
+                  종료시간
+                </CardInfo>
+                <ButtonContain>
+                  <SubMintBtn
+                    w="50px"
+                    h="32px"
+                    mg="5px 10px"
+                    onClick={() => {
+                      navi(`/pathschedules/${item.scId}`, {
+                        state: { ...item },
+                      });
+                    }}
                   >
-                    날짜
-                  </CardInfo>
-                  <CardInfo
-                    color="var(--grey_002)"
-                    value={item.scStart.split('T')[1]}
-                  >
-                    시작시간
-                  </CardInfo>
-                  <CardInfo
-                    color="var(--grey_002)"
-                    value={item.scEnd.split('T')[1]}
-                  >
-                    종료시간
-                  </CardInfo>
-                  <ButtonContain>
-                    <SubMintBtn
-                      w="50px"
-                      h="32px"
-                      mg="5px 10px"
-                      onClick={() => {
-                        navi(`/pathschedules/${item.scId}`, {
-                          state: { ...item },
-                        });
-                      }}
-                    >
-                      <Text shape="T14_700_17" color="var(--mint_002)">
-                        수정
-                      </Text>
-                    </SubMintBtn>
-                    <SchedulesDelete scId={item.scId} />
-                  </ButtonContain>
-                </Info>
+                    <Text shape="T14_700_17" color="var(--mint_002)">
+                      수정
+                    </Text>
+                  </SubMintBtn>
+                  <SchedulesDelete scId={item.scId} />
+                </ButtonContain>
               </Card>
             ))}
           </InfoContain>
