@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import MainMintBtn from './button/MainMintBtn';
 import SubMintBtn from './button/SubMintBtn';
 import Text from './Text';
-import styled from 'styled-components';
 
 function Modal({ setIsModal, modalTitle, onButtonClick, redirectPath }) {
   const navi = useNavigate();

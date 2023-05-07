@@ -1,11 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
+import { useCalendar } from '../../hooks/useCalendar';
+import { useSkltTimeout } from '../../hooks/useTimeout';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { useCalendar } from '../../hooks/useCalendar';
-import { useSkltTimeout } from '../../hooks/useTimeout';
 import {
   DayContain,
   SchContain,
@@ -15,8 +17,6 @@ import {
   InfoContain,
 } from '../reservation/ReservationAllStyle';
 import SchedulesTime from '../../features/schedules/SchedulesTime';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
 
 function SchedulesCalendar() {
   const param = useParams();
@@ -57,8 +57,12 @@ function SchedulesCalendar() {
                       preMonth();
                     }}
                   />
-                  <div>{selectYear}년</div>
-                  <div>{selectMonth}월</div>
+                  <Text shape="T16_700_19" color="var(--mint_002)">
+                    {selectYear}년
+                  </Text>
+                  <Text shape="T16_700_19" color="var(--mint_002)">
+                    {selectMonth}월
+                  </Text>
                   <IoIosArrowDropright
                     onClick={() => {
                       nextMonth();
@@ -68,7 +72,13 @@ function SchedulesCalendar() {
               </StSubHeader>
               <DayContain>
                 {week?.map(item => {
-                  return <Day key={item}>{item}</Day>;
+                  return (
+                    <Day key={item}>
+                      <Text shape="T16_700_19" color="var(--mint_002)">
+                        {item}
+                      </Text>
+                    </Day>
+                  );
                 })}
                 {returnDay()}
               </DayContain>

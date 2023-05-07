@@ -1,12 +1,12 @@
 import React from 'react';
 import { Column } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
 import {
   ClisckedListItem,
   StListbox,
   StSpaceList,
 } from '../../pages/space/SpaceStyles';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
 
 function SpaceList({
   floors,

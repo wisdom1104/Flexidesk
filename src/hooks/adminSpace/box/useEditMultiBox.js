@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { __editMultiBox } from '../../../redux/modules/MultiBoxSlice';
+import { __editMultiBox } from '../../../redux/modules/multiBoxSlice';
 import { useDispatch } from 'react-redux';
 
 /**
@@ -15,15 +15,15 @@ export const useEditMultiBox = (multiBox, spaceId) => {
     multiBox.multiBoxName,
   );
 
-  const changeNameHandler = value => {
+  const onChangeNameHandler = value => {
     setEditMultiBoxName(value);
   };
 
-  const changeEditModeHandler = () => {
+  const onChangeEditModeHandler = () => {
     setisMultiBoxEdit(pre => !pre);
   };
 
-  const submitEdit = async () => {
+  const onSubmitEdit = async () => {
     const payload = {
       spaceId,
       multiBoxId: multiBox.multiBoxId,
@@ -36,13 +36,10 @@ export const useEditMultiBox = (multiBox, spaceId) => {
   };
 
   return {
-    submitEdit,
-
-    // 상태 값
+    onSubmitEdit,
     isEditMultiBox,
-    changeEditModeHandler,
-    // 이름
+    onChangeEditModeHandler,
     editMultiBoxName,
-    changeNameHandler,
+    onChangeNameHandler,
   };
 };

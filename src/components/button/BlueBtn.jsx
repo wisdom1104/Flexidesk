@@ -15,7 +15,6 @@ const StBlueBtn = styled.button`
   margin: ${props => props.mg || ''};
   margin-top: ${props => props.mgt || ''};
 
-  /* position: relative; */
   width: ${props => props.w || '420px'};
   height: ${props => props.h || '60px'};
 

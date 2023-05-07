@@ -7,7 +7,9 @@ import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import ReservationTime from '../../features/reservation/ReservationTime';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import NotFound from '../NotFound';
 import {
   DayContain,
   Day,
@@ -16,9 +18,7 @@ import {
   StSelectDay,
   InfoContain,
 } from './ReservationAllStyle';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
-import NotFound from '../NotFound';
+import ReservationTime from '../../features/reservation/ReservationTime';
 
 const Calendar = () => {
   const { reservation, isError } = useSelector(state => state.reservation);
@@ -65,8 +65,12 @@ const Calendar = () => {
                       preMonth();
                     }}
                   />
-                  <div>{selectYear}년</div>
-                  <div>{selectMonth}월</div>
+                  <Text shape="T16_700_19" color="var(--mint_002)">
+                    {selectYear}년
+                  </Text>
+                  <Text shape="T16_700_19" color="var(--mint_002)">
+                    {selectMonth}월
+                  </Text>
                   <IoIosArrowDropright
                     onClick={() => {
                       nextMonth();
@@ -78,7 +82,9 @@ const Calendar = () => {
                 {week?.map(item => {
                   return (
                     <Day width="calc(100% / 7.8)" key={item}>
-                      {item}
+                      <Text shape="T16_700_19" color="var(--mint_002)">
+                        {item}
+                      </Text>
                     </Day>
                   );
                 })}

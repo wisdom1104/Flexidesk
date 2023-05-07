@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { __deleteMultiBox } from '../../../redux/modules/MultiBoxSlice';
+import { __deleteMultiBox } from '../../../redux/modules/multiBoxSlice';
 
 export const useDeleteMultiBox = () => {
   const dispatch = useDispatch();
 
-  const submitDelete = (multiBoxId, spaceId) => {
+  const onSubmitDelete = (multiBoxId, spaceId) => {
     dispatch(
       __deleteMultiBox({
         multiBoxId,
@@ -14,6 +14,6 @@ export const useDeleteMultiBox = () => {
   };
 
   return {
-    submitDelete,
+    onSubmitDelete,
   };
 };

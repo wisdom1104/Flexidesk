@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { StFormContain, StForm, StStartText } from './UserStyled';
+import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
+import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { BlueBtn } from '../../components/button/BlueBtn';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import ValidationError from '../../components/form/ValidationError';
+import { StFormContain, StForm, StStartText } from './UserStyled';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
-import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
-import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
 
 function SignUpUser() {
   const [user, setUser] = useState({
@@ -24,8 +24,8 @@ function SignUpUser() {
     setAuth,
     errors,
     onChangeEmailHandler,
-    onChangePasswordHandler,
-    onChangePasswordCheckHandler,
+    onChangePwHandler,
+    onChangePwCheckHandler,
   } = AuthFormValidation(user, setUser);
 
   const { onSubmitHandler } = useSignUpSubmitHandler(user);
@@ -69,7 +69,7 @@ function SignUpUser() {
             value={auth.password}
             placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
             required
-            onChange={onChangePasswordHandler}
+            onChange={onChangePwHandler}
           />
           <ValidationError value={errors.password} />
 
@@ -79,7 +79,7 @@ function SignUpUser() {
             value={auth.passwordCheck}
             placeholder="비밀번호 확인을 위해 한번 더 입력하세요."
             required
-            onChange={onChangePasswordCheckHandler}
+            onChange={onChangePwCheckHandler}
           />
           <ValidationError value={errors.passwordCheck} />
           <BlueBtn type="submit" mgt="20px">

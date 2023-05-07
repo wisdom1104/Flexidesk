@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
-import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 import AdminFloorItem from '../adminSpace/AdminFloorItem';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import Text from '../../components/Text';
 import { Input } from '../../components/Input';
+import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminFloorList({
   floor,
@@ -16,10 +16,10 @@ function AdminFloorList({
   onDragEnd,
 }) {
   const {
-    submitEditFloor,
+    onSubmitEditFloor,
     isEditFloor,
-    changeEditModeHandler,
-    changeNameHandler,
+    onChangeEditModeHandler,
+    onChangeNameHandler,
     editFloorName,
   } = useEditFloor(floor);
 
@@ -34,7 +34,7 @@ function AdminFloorList({
           onDragOver={onDragOver}
           onDragEnd={onDragEnd}
           floorEdit={isEditFloor}
-          changeEditModeHandler={changeEditModeHandler}
+          onChangeEditModeHandler={onChangeEditModeHandler}
         />
       ) : (
         <StList data-floor-id={floor.floorId}>
@@ -46,7 +46,7 @@ function AdminFloorList({
             data-floor-id={floor.floorId}
             type="text"
             value={editFloorName}
-            onChange={e => changeNameHandler(e.target.value)}
+            onChange={e => onChangeNameHandler(e.target.value)}
           />
           <StListBtnBox>
             <MainMintBtn
@@ -54,7 +54,7 @@ function AdminFloorList({
               pd="2px 6px"
               br="4px"
               data-floor-id={floor.floorId}
-              onClick={submitEditFloor}
+              onClick={onSubmitEditFloor}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 완료
@@ -65,7 +65,7 @@ function AdminFloorList({
               pd="2px 6px"
               br="4px"
               data-floor-id={floor.floorId}
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
                 취소

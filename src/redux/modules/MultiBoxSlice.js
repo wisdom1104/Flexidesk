@@ -9,9 +9,8 @@ const initialState = {
   error: null,
 };
 
-// multiBox 추가
 export const __addMultiBox = createAsyncThunk(
-  '__addMultiBox',
+  'addMultiBox',
   async (payload, thunk) => {
     try {
       const token = getCookie('token');
@@ -37,9 +36,8 @@ export const __addMultiBox = createAsyncThunk(
   },
 );
 
-// multiBox 삭제
 export const __deleteMultiBox = createAsyncThunk(
-  '__deleteMultiBox',
+  'deleteMultiBox',
   async (payload, thunk) => {
     try {
       const token = getCookie('token');

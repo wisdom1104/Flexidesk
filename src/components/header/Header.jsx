@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 import Modal from '../Modal';
 import { isLoginActions } from '../../redux/modules/loginSlice';
+import { TokenControlHadler } from '../../hooks/user/useTokenControlHandler';
+import { StHeader } from './HeaderStyled';
 import { LoginHeader } from './LoginHeader';
 import { LogoutHeader } from './LogoutHeader';
-import { TokenControlHadler } from '../../hooks/user/useTokenControlHandler';
 
 function Header() {
   const {
@@ -44,15 +44,5 @@ function Header() {
     </StHeader>
   );
 }
-
-const StHeader = styled.div`
-  height: 6vh;
-  max-width: 1200px;
-  min-width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
-`;
 
 export default Header;

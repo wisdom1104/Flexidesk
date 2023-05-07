@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Text from '../Text';
+import { BlueBtn } from '../button/BlueBtn';
 import {
   HeaderContain,
   StHeaderContentBox,
   StHeaderLogo,
   StHeaderContentButtonBox,
 } from './HeaderStyled';
-import { BlueBtn } from '../button/BlueBtn';
-import Text from '../Text';
 
 export const LoginHeader = ({ onClickHomeHandler }) => {
   const navi = useNavigate();
@@ -23,7 +23,9 @@ export const LoginHeader = ({ onClickHomeHandler }) => {
       </StHeaderContentBox>
       <StHeaderContentBox>
         <StHeaderContentBox onClick={() => navi(`/`)}>
-          <Text shape="T16_700_19">서비스 소개</Text>
+          <Text cursor="pointer" shape="T16_700_19">
+            서비스 소개
+          </Text>
         </StHeaderContentBox>
         <StHeaderContentButtonBox>
           <BlueBtn

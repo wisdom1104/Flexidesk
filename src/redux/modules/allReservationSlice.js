@@ -9,7 +9,6 @@ const initialState = {
   isSuccess: false,
 };
 
-
 export const __getAllReservation = createAsyncThunk(
   'getAllReservation',
   async (payload, thunk) => {

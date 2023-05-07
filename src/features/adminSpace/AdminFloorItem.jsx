@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useDeleteFloor } from '../../hooks/adminSpace/list/useDeleteFloor';
 import { Row } from '../../components/Flex';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+import Text from '../../components/Text';
 import {
   StList,
   StListBtnBox,
@@ -8,9 +11,6 @@ import {
   StOpenList,
 } from '../../pages/space/SpaceStyles';
 import AdminInnerList from '../adminSpace/AdminInnerList';
-import MainMintBtn from '../../components/button/MainMintBtn';
-import SubMintBtn from '../../components/button/SubMintBtn';
-import Text from '../../components/Text';
 
 function AdminFloorItem({
   floor,
@@ -19,10 +19,10 @@ function AdminFloorItem({
   onAvailableItemDragEnter,
   onDragOver,
   onDragEnd,
-  changeEditModeHandler,
+  onChangeEditModeHandler,
 }) {
   const [isInner, setIsInner] = useState(false);
-  const { submitDeleteFloor } = useDeleteFloor();
+  const { onSubmitDeleteFloor } = useDeleteFloor();
 
   return (
     <>
@@ -61,7 +61,7 @@ function AdminFloorItem({
               pd="2px 6px"
               br="4px"
               data-floor-id={floor.floorId}
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 수정
@@ -75,7 +75,7 @@ function AdminFloorItem({
               onClick={() => {
                 const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
                 if (confirmDelete) {
-                  submitDeleteFloor(floor.floorId);
+                  onSubmitDeleteFloor(floor.floorId);
                 }
               }}
             >
@@ -121,7 +121,7 @@ function AdminFloorItem({
                 pd="2px 6px"
                 br="4px"
                 data-floor-id={floor.floorId}
-                onClick={() => changeEditModeHandler()}
+                onClick={() => onChangeEditModeHandler()}
               >
                 <Text shape="T14_700_17" color="var(--white)">
                   수정
@@ -136,7 +136,7 @@ function AdminFloorItem({
                   const confirmDelete =
                     window.confirm('정말 삭제하시겠습니까?');
                   if (confirmDelete) {
-                    submitDeleteFloor(floor.floorId);
+                    onSubmitDeleteFloor(floor.floorId);
                   }
                 }}
               >

@@ -1,6 +1,6 @@
 import React from 'react';
-import { StBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
+import { StBox } from '../../pages/space/SpaceStyles';
 
 function SpaceBoxItem({ box, onClickMoveUserHandler, isClicked }) {
   return (

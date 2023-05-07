@@ -5,7 +5,6 @@ import Text from '../../components/Text';
 import { Container, InlineInput } from '../../pages/user/UserStyled';
 
 function CertificationCkeck({ user, certification, onChange }) {
-  // form태그 핸들러
   const submitBtnHandler = async e => {
     e.preventDefault();
     try {

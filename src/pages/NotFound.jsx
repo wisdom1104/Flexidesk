@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import Page from '../components/Page';
 import Text from '../components/Text';
 import { Column } from '../components/Flex';
-import styled from 'styled-components';
 import { Pointer } from '../styles/etc';
 
 function NotFound() {

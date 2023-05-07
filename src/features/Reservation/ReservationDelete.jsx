@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { __deleteRervation } from '../../redux/modules/detailSlice';
 import { useModal } from '../../hooks/useModal';
 import Modal from '../../components/Modal';
-import { __deleteRervation } from '../../redux/modules/detail';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import Text from '../../components/Text';
 
@@ -28,19 +28,6 @@ function ReservationDelete({ reservationId }) {
           삭제
         </Text>
       </MainMintBtn>
-      {/* <MoveModalbtn
-        onClick={() => controlModal(true)}
-        width="84px"
-        height="35px"
-        mg="5px 0px"
-        left="100px"
-        top="130px"
-        position="sticky"
-        padding="8px, 16px, 8px, 16px"
-      >
-        삭제
-      </MoveModalbtn> */}
-
       {isOpen && (
         <Modal
           setIsModal={() => controlModal(false)}
