@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { __editMultiBox } from '../../../redux/modules/multiBoxSlice';
+import { __editMultiBox } from '../../../redux/modules/spaceMultiBoxSlice';
 
 export function useDADMultiBox(spaceId, boardEl, multiBoxList) {
   const dispatch = useDispatch();
