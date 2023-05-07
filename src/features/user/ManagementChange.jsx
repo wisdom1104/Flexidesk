@@ -44,15 +44,19 @@ function ManagementChange({ item }) {
           </Text>
         </MainMintBtn>
 
-        <SubMintBtn
-          onClick={() => controlDeleteModal(true)}
-          w="84px"
-          h="35px"
-          left="100px"
-          top="130px"
-          position="sticky"
-          pd="4px 10px"
-        />
+          <SubMintBtn
+            onClick={() => controlDeleteModal(true)}
+            w="84px"
+            h="35px"
+            left="100px"
+            top="130px"
+            position="sticky"
+            pd="4px 10px"
+          >
+            <Text shape="T14_700_17" color="var(--mint_002)">
+              인원 삭제
+            </Text>
+          </SubMintBtn>
 
         {isSelectModalOpen && (
           <SelectModal
