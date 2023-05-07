@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAddInnerSpace } from '../../hooks/adminSpace/list/useAddInnerSpace';
-import { StInnerList } from '../../shared/SpaceStyles';
+import { StInnerList } from '../../pages/space/SpaceStyles';
 import AdminInnerItem from './AdminInnerItem';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import Text from '../../components/Text';

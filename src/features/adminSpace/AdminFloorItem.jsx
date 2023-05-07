@@ -4,9 +4,9 @@ import { Row } from '../../components/Flex';
 import {
   StList,
   StListBtnBox,
-  StOpenBtn,
+  Modalbtn,
   StOpenList,
-} from '../../shared/SpaceStyles';
+} from '../../pages/space/SpaceStyles';
 import AdminInnerList from '../adminSpace/AdminInnerList';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
@@ -42,7 +42,7 @@ function AdminFloorItem({
             >
               {floor.floorName}
             </Text>
-            <StOpenBtn
+            <Modalbtn
               data-floor-id={floor.floorId}
               onClick={() => {
                 setIsInner(!isInner);
@@ -53,7 +53,7 @@ function AdminFloorItem({
                 data-floor-id={floor.floorId}
                 src="img/listOpenIcon.png"
               />
-            </StOpenBtn>
+            </Modalbtn>
           </Row>
           <StListBtnBox data-floor-id={floor.floorId}>
             <MainMintBtn
@@ -102,7 +102,7 @@ function AdminFloorItem({
               >
                 {floor.floorName}
               </Text>
-              <StOpenBtn
+              <Modalbtn
                 data-floor-id={floor.floorId}
                 onClick={() => {
                   setIsInner(!isInner);
@@ -113,7 +113,7 @@ function AdminFloorItem({
                   data-floor-id={floor.floorId}
                   src="img/listCloseIcon.png"
                 />
-              </StOpenBtn>
+              </Modalbtn>
             </Row>
             <StListBtnBox data-floor-id={floor.floorId}>
               <MainMintBtn

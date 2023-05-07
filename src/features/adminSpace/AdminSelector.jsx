@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { handleDragStart } from '../../utils/dragStartHandler';
 import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
-import { StBox, StSelect, StSelectTitle } from '../../shared/SpaceStyles';
+import { StBox, StSelect } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 
 function AdminSelector() {

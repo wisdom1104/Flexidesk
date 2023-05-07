@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEditFloor } from '../../hooks/adminSpace/list/useEditFloor';
-import { StList, StListBtnBox } from '../../shared/SpaceStyles';
+import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 import AdminFloorItem from '../adminSpace/AdminFloorItem';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';

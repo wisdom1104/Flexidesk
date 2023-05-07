@@ -1,5 +1,5 @@
 import React from 'react';
-import { StBox } from '../../shared/SpaceStyles';
+import { StBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import { useCheckTime } from '../../hooks/space/useCheckTime';
 

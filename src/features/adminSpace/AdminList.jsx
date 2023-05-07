@@ -7,10 +7,9 @@ import {
   ModalBackground,
   ModalHeader,
   ModalList,
-  ModalTitle,
   Modalbtn,
-  StAddBtnBox,
-} from '../../shared/SpaceStyles';
+  StBtnBox,
+} from '../../pages/space/SpaceStyles';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
 import MainMintBtn from '../../components/button/MainMintBtn';
@@ -37,7 +36,9 @@ function AdminList({
           <ModalContain>
             <ModalList>
               <ModalHeader>
-                <ModalTitle>관리하기</ModalTitle>
+                <Text shape="T18_700_22" color="var(--blue_003)">
+                  관리하기
+                </Text>
                 <Modalbtn
                   onClick={() => {
                     setIsModal(!isModal);
@@ -46,7 +47,7 @@ function AdminList({
                   <img alt="모달 닫기 버튼" src="img/modalBtnIcon.png" />
                 </Modalbtn>
               </ModalHeader>
-              <StAddBtnBox>
+              <StBtnBox>
                 <MainMintBtn
                   w="131px"
                   h="43px"
@@ -65,7 +66,7 @@ function AdminList({
                     스페이스 추가
                   </Text>
                 </MainMintBtn>
-              </StAddBtnBox>
+              </StBtnBox>
               {floors?.map(floor => (
                 <>
                   {floor && (

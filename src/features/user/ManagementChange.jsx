@@ -4,7 +4,7 @@ import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import { useModal } from '../../hooks/useModalHook';
 import { CommentBox } from '../../pages/reservation/CalendarStyled';
-import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
+// import { MoveModalSubbtn, MoveModalbtn } from '../../pages/space/SpaceStyles';
 import Modal from '../../components/Modal';
 import SelectModal from '../../components/modal/SelectModal';
 import Text from '../../components/Text';
@@ -31,7 +31,7 @@ function ManagementChange({ item }) {
         </Text>
 
         <Row gap="10px">
-          <MoveModalSubbtn
+          {/* <MoveModalSubbtn
             onClick={() => controlSelectModal(true)}
             width="84px"
             height="35px"
@@ -41,9 +41,9 @@ function ManagementChange({ item }) {
             padding="8px, 16px, 8px, 16px"
           >
             직급 수정
-          </MoveModalSubbtn>
+          </MoveModalSubbtn> */}
 
-          <MoveModalbtn
+          {/* <MoveModalbtn
             onClick={() => controlDeleteModal(true)}
             width="84px"
             height="35px"
@@ -53,7 +53,7 @@ function ManagementChange({ item }) {
             padding="8px, 16px, 8px, 16px"
           >
             인원 삭제
-          </MoveModalbtn>
+          </MoveModalbtn> */}
 
           {isSelectModalOpen && (
             <SelectModal

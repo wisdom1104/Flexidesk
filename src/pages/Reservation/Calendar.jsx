@@ -7,7 +7,7 @@ import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
 import { Flex, Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { StListTitle } from '../../shared/SpaceStyles';
+import { StListTitle } from '../../pages/space/SpaceStyles';
 import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
 import ReservationTime from '../../features/reservation/ReservationTime';
 import {

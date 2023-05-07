@@ -16,7 +16,7 @@ import {
   ButtonContain,
 } from '../reservation/CalendarStyled';
 import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
+import { StListTitle } from '../../pages/space/SpaceStyles';
 import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
