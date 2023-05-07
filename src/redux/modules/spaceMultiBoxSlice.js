@@ -87,10 +87,10 @@ export const __editMultiBox = createAsyncThunk(
   },
 );
 
-export const multiBoxSlice = createSlice({
+export const spaceMultiBoxSlice = createSlice({
   name: 'multiBox',
   initialState,
   reducers: {},
   extraReducers: {},
 });
-export default multiBoxSlice.reducer;
+export default spaceMultiBoxSlice.reducer;

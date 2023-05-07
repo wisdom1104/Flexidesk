@@ -11,7 +11,7 @@ import floors from '../modules/floorsSlice';
 import floor from '../modules/floorSlice';
 import schedules from '../modules/schedulesSlice';
 import userList from '../modules/allManagementSlice';
-import multiBox from '../modules/multiBoxSlice';
+import multiBox from '../modules/spaceMultiBoxSlice';
 import userData from '../modules/reservationSlice';
 
 const store = configureStore({
