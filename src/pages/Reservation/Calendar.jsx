@@ -5,21 +5,18 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import { useCalendar } from '../../hooks/useCalendar';
 import Page from '../../components/Page';
-import { Flex, Row } from '../../components/Flex';
+import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
-import { StListTitle } from '../../shared/SpaceStyles';
-import { StSpacePagePhoto } from '../welcome/WelcomeStyled';
+
 import ReservationTime from '../../features/reservation/ReservationTime';
 import {
   DayContain,
   Day,
   SchContain,
   StSubHeader,
-  StSubTitle,
   StSelectDay,
-  StIcon,
   InfoContain,
-} from './CalendarStyled';
+} from './ReservationAllStyle';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 

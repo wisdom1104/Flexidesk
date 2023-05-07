@@ -5,7 +5,7 @@ import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import { getCookie } from '../../shared/cookies';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { Info, InfoContain } from '../reservation/CalendarStyled';
+import { InfoContain } from '../reservation/ReservationAllStyle';
 import ManagementChange from '../../features/user/ManagementChange';
 import IconTitle from '../../components/IconTitle';
 import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';

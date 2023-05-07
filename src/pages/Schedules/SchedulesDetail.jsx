@@ -6,23 +6,14 @@ import { __getAllSchedules } from '../../redux/modules/schedules';
 import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import {
-  InfoBox,
-  InfoContain,
-  Info,
-  CommentBox,
-  PathBtn,
-  StSubTitle,
-  ButtonContain,
-} from '../reservation/CalendarStyled';
-import { StSmallFont, StSpacePagePhoto } from '../welcome/WelcomeStyled';
-import { StListTitle } from '../../shared/SpaceStyles';
+import { InfoContain } from '../reservation/ReservationAllStyle';
 import SchedulesDelete from '../../features/schedules/SchedulesDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
+import { Row } from '../../components/Flex';
 
 function SchedulesDetail() {
   const navi = useNavigate();
@@ -68,7 +59,7 @@ function SchedulesDetail() {
                 >
                   종료시간
                 </CardInfo>
-                <ButtonContain>
+                <Row>
                   <SubMintBtn
                     w="50px"
                     h="32px"
@@ -84,7 +75,7 @@ function SchedulesDetail() {
                     </Text>
                   </SubMintBtn>
                   <SchedulesDelete scId={item.scId} />
-                </ButtonContain>
+                </Row>
               </Card>
             ))}
           </InfoContain>

@@ -11,14 +11,11 @@ import {
   StReserTimeButton,
   StReserTimeBox,
   SchContain,
-  StSubTitle,
-  StIcon,
   ScheduleUser,
   ScheduleUsers,
   UserList,
   CheckContainBox,
-  StSubmitButton,
-} from '../../pages/reservation/CalendarStyled';
+} from '../../pages/reservation/ReservationAllStyle';
 import ReservationCheck from './ReservationCheck';
 import { Input } from '../../components/Input';
 import { Column } from '../../components/Flex';

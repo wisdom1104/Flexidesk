@@ -3,13 +3,12 @@ import { useDispatch } from 'react-redux';
 import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import { useModal } from '../../hooks/useModalHook';
-import { CommentBox } from '../../pages/reservation/CalendarStyled';
 import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import Modal from '../../components/Modal';
 import SelectModal from '../../components/modal/SelectModal';
 import Text from '../../components/Text';
 import { Row } from '../../components/Flex';
-import { CardInfo } from '../../components/CardInfo';
+import styled from 'styled-components';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, controlSelectModal] = useModal();
@@ -77,3 +76,11 @@ function ManagementChange({ item }) {
 }
 
 export default ManagementChange;
+export const CommentBox = styled.div`
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 5px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5%;
+`;

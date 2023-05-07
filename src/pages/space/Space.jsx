@@ -8,7 +8,7 @@ import { useSkltTimeout } from '../../hooks/useTimeoutHook';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
 import { StSubHeader } from '../../shared/SpaceStyles';
-import { InfoContain } from '../reservation/CalendarStyled';
+import { InfoContain } from '../reservation/ReservationAllStyle';
 import SpaceList from '../../features/space/SpaceList';
 import SpaceBox from '../../features/space/SpaceBox';
 import SpaceBackBoard from '../../components/SpaceBackBoard';
