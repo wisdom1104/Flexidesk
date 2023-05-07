@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const useCarousel = () => {
-  const [components, setComponents] = useState([
+  const [components] = useState([
     {
       id: 1,
       component:

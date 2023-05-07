@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAddInnerSpace } from '../../hooks/adminSpace/list/useAddInnerSpace';
-import { StInnerList } from '../../pages/space/SpaceStyles';
-import AdminInnerItem from './AdminInnerItem';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import Text from '../../components/Text';
+import { StInnerList } from '../../pages/space/SpaceStyles';
+import AdminInnerItem from './AdminInnerItem';
 
 function AdminInnerList({
   floor,
@@ -13,7 +13,7 @@ function AdminInnerList({
   onDragOver,
   onDragEnd,
 }) {
-  const { submitAddInnerSpace } = useAddInnerSpace();
+  const { onSubmitAddInnerSpace } = useAddInnerSpace();
 
   return (
     <StInnerList>
@@ -21,7 +21,7 @@ function AdminInnerList({
         w="274px"
         h="35px"
         mg="11px"
-        onClick={() => submitAddInnerSpace(floor)}
+        onClick={() => onSubmitAddInnerSpace(floor)}
       >
         <Text shape="T16_700_19" color="var(--mint_002)">
           스페이스 추가

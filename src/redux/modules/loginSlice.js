@@ -12,8 +12,6 @@ if (getCookie('token')) {
   initialState.isLogin = true;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
 const loginSlice = createSlice({
   name: 'login',
   initialState,

@@ -9,8 +9,7 @@ const initialState = {
   error: null,
 };
 
-// box 추가
-export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
+export const __addBox = createAsyncThunk('addBox', async (payload, thunk) => {
   try {
     const token = getCookie('token');
     const companyName = getCookie('companyName');
@@ -34,9 +33,8 @@ export const __addBox = createAsyncThunk('__addBox', async (payload, thunk) => {
   }
 });
 
-// box 삭제
 export const __deleteBox = createAsyncThunk(
-  '__deleteBox',
+  'deleteBox',
   async (payload, thunk) => {
     try {
       const token = getCookie('token');
@@ -57,7 +55,6 @@ export const __deleteBox = createAsyncThunk(
   },
 );
 
-// box 수정
 export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
   try {
     const token = getCookie('token');
@@ -83,8 +80,6 @@ export const __editBox = createAsyncThunk('editBox', async (payload, thunk) => {
   }
 });
 
-// box user 수정
-//  /locations/{companyName}/{locationId}
 export const __editBoxUser = createAsyncThunk(
   'editBoxUser',
   async (payload, thunk) => {

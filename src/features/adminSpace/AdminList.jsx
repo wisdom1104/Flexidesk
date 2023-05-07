@@ -2,6 +2,8 @@ import React from 'react';
 import { useAddFloor } from '../../hooks/adminSpace/list/useAddFloor';
 import { useAddSpace } from '../../hooks/adminSpace/list/useAddSpace';
 import { useListDragAndDrop } from '../../hooks/adminSpace/list/useListDragAndDrop';
+import Text from '../../components/Text';
+import MainMintBtn from '../../components/button/MainMintBtn';
 import {
   ModalContain,
   ModalBackground,
@@ -12,8 +14,6 @@ import {
 } from '../../pages/space/SpaceStyles';
 import AdminFloorList from './AdminFloorList';
 import AdminSpaceList from './AdminSpaceList';
-import MainMintBtn from '../../components/button/MainMintBtn';
-import Text from '../../components/Text';
 
 function AdminList({
   isModal,
@@ -22,8 +22,8 @@ function AdminList({
   floors,
   onClickSpaceListHandler,
 }) {
-  const { submitAddFloor } = useAddFloor();
-  const { submitAddSpace } = useAddSpace();
+  const { onSubmitAddFloor } = useAddFloor();
+  const { onSubmitAddSpace } = useAddSpace();
 
   //리스트 드래그 앤 드롭
   const { dragStart, onAvailableItemDragEnter, onDragEnd, onDragOver } =
@@ -51,7 +51,7 @@ function AdminList({
                 <MainMintBtn
                   w="131px"
                   h="43px"
-                  onClick={() => submitAddFloor()}
+                  onClick={() => onSubmitAddFloor()}
                 >
                   <Text shape="T16_700_19" color="var(--white)">
                     층 추가
@@ -60,7 +60,7 @@ function AdminList({
                 <MainMintBtn
                   w="131px"
                   h="43px"
-                  onClick={() => submitAddSpace()}
+                  onClick={() => onSubmitAddSpace()}
                 >
                   <Text shape="T16_700_19" color="var(--white)">
                     스페이스 추가

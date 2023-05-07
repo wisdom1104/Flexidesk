@@ -1,14 +1,15 @@
 import React from 'react';
 import SpaceModal from '../../components/modal/SpaceModal';
+import Text from '../../components/Text';
+import { Row } from '../../components/Flex';
+import MainMintBtn from '../../components/button/MainMintBtn';
+import SubMintBtn from '../../components/button/SubMintBtn';
+
 import {
   MoveModalList,
   MoveModalSubTitle,
   MoveModalTitle,
 } from '../../pages/space/SpaceStyles';
-import Text from '../../components/Text';
-import { Row } from '../../components/Flex';
-import MainMintBtn from '../../components/button/MainMintBtn';
-import SubMintBtn from '../../components/button/SubMintBtn';
 
 function SpaceMultiBoxModal({
   moveBox,

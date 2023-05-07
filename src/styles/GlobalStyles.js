@@ -11,7 +11,6 @@ ${reset}
     font-weight: 400;
     font-style: normal;
 }
-//Inter
 body {
     font-family: 'Pretendard-Regular', sans-serif;
     scroll-behavior: smooth;
@@ -23,21 +22,6 @@ body {
   }
 
 :root {
-			/* color */
-    --blue: #07133B;
-    --lightblue: #0B2475;
-    --darkblue: #314563;
-
-    --mint1: #151515;
-    --mint2: #B6DFDD;
-    --mint3: #DEF1EF;
-    --mint4: #F4FBF9;
-
-    --black: #15161A;
-    --darkgrey: #8B93A6;
-    --gray: #C9CDD6;
-    --lightgray: #F1F2F4; 
-
 /* 어두운 순 */
     --blue_001: #07133B;
     --blue_002: #0B2475;

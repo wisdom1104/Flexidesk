@@ -1,8 +1,8 @@
 import React from 'react';
-import Carousel from '../welcome/Carousel';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { StBackground } from '../../pages/welcome/WelcomeStyled';
+import Carousel from '../welcome/Carousel';
 
 function Welcome5() {
   return (

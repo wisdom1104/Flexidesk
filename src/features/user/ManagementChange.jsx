@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { BsPersonGear } from 'react-icons/bs';
 import { __deleteAllManagement } from '../../redux/modules/allManagementSlice';
 import { useModal } from '../../hooks/useModal';
@@ -9,7 +10,6 @@ import Text from '../../components/Text';
 import { Row } from '../../components/Flex';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import MainMintBtn from '../../components/button/MainMintBtn';
-import styled from 'styled-components';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, controlSelectModal] = useModal();
@@ -17,62 +17,60 @@ function ManagementChange({ item }) {
 
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const logoutHandler = () => {
     dispatch(__deleteAllManagement(item.userId));
     controlSelectModal(false);
     controlDeleteModal(false);
   };
 
   return (
-    <>
-      <StContainer>
-        <Text shape="T16_700" color="var(--grey_002)">
-          <BsPersonGear /> 권한 변경
-        </Text>
+    <StContainer>
+      <Text shape="T16_700" color="var(--grey_002)">
+        <BsPersonGear /> 권한 변경
+      </Text>
 
-        <Row gap="10px">
-          <MainMintBtn
-            onClick={() => controlSelectModal(true)}
-            w="84px"
-            h="35px"
-            left="18px"
-            top="130px"
-            position="sticky"
-            pd="4px 10px"
-          >
-            <Text shape="T14_700_17" color="var(--white)">
-              직급 수정
-            </Text>
-          </MainMintBtn>
+      <Row gap="10px">
+        <MainMintBtn
+          onClick={() => controlSelectModal(true)}
+          w="84px"
+          h="35px"
+          left="18px"
+          top="130px"
+          position="sticky"
+          pd="4px 10px"
+        >
+          <Text shape="T14_700_17" color="var(--white)">
+            직급 수정
+          </Text>
+        </MainMintBtn>
 
-          <SubMintBtn
-            onClick={() => controlDeleteModal(true)}
-            w="84px"
-            h="35px"
-            left="100px"
-            top="130px"
-            position="sticky"
-            pd="4px 10px"
-          />
+        <SubMintBtn
+          onClick={() => controlDeleteModal(true)}
+          w="84px"
+          h="35px"
+          left="100px"
+          top="130px"
+          position="sticky"
+          pd="4px 10px"
+        />
 
-          {isSelectModalOpen && (
-            <SelectModal
-              setIsModal={() => controlSelectModal(false)}
-              role={item.role}
-              userId={item.userId}
-            />
-          )}
-        </Row>
-
-        {isDeleteModalOpen && (
-          <Modal
-            setIsModal={() => controlDeleteModal(false)}
-            modalTitle="삭제 하시겠습니까?"
-            onButtonClick={handleLogout}
+        {isSelectModalOpen && (
+          <SelectModal
+            setIsModal={() => controlSelectModal(false)}
+            role={item.role}
+            userId={item.userId}
           />
         )}
-      </StContainer>
-    </>
+      </Row>
+
+      {isDeleteModalOpen && (
+        <Modal
+          setIsModal={() => controlDeleteModal(false)}
+          modalTitle="삭제 하시겠습니까?"
+          onButtonClick={logoutHandler}
+        />
+      )}
+    </StContainer>
   );
 }
 

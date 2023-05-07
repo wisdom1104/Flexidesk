@@ -12,7 +12,7 @@ const initialState = {
 
 // space 선택 조회
 export const __getSpace = createAsyncThunk(
-  '__getSpace',
+  'getSpace',
   async (spaceId, thunk) => {
     try {
       const token = getCookie('token');
@@ -35,7 +35,7 @@ export const __getSpace = createAsyncThunk(
 
 // space 삭제
 export const __deleteSpace = createAsyncThunk(
-  '__deleteSpace',
+  'deleteSpace',
   async (spaceId, thunk) => {
     try {
       const token = getCookie('token');
@@ -56,7 +56,7 @@ export const __deleteSpace = createAsyncThunk(
 
 // space 수정
 export const __editSpace = createAsyncThunk(
-  '__editSpace',
+  'editSpace',
   async (payload, thunk) => {
     try {
       const token = getCookie('token');
@@ -87,7 +87,6 @@ export const spaceSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //space 부분 조회
     [__getSpace.pending]: state => {
       state.isLoading = true;
     },

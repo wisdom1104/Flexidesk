@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getCookie } from '../../shared/cookies';
 import api from '../../axios/api';
-import { __getReservationDetail } from './detail';
+import { __getReservationDetail } from './detailSlice';
 
 const initialState = {
   reservation: [],

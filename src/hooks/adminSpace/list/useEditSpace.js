@@ -4,20 +4,18 @@ import { __editSpace } from '../../../redux/modules/spaceSlice';
 
 export const useEditSpace = space => {
   const dispatch = useDispatch();
-  //space name 수정
   const [editSpaceName, setEditSpaceName] = useState(space.spaceName);
   const [isEditSpace, setIsEditSpace] = useState(false);
 
-  const changeNameHandler = value => {
+  const onChangeNameHandler = value => {
     setEditSpaceName(value);
   };
 
-  const changeEditModeHandler = () => {
+  const onChangeEditModeHandler = () => {
     setIsEditSpace(pre => !pre);
   };
 
-  //space name 수정 핸들러
-  const submitEditSpace = async () => {
+  const onSubmitEditSpace = async () => {
     const payload = {
       spaceId: space.spaceId,
       spaceName: editSpaceName,
@@ -27,10 +25,10 @@ export const useEditSpace = space => {
     setIsEditSpace(!isEditSpace);
   };
   return {
-    submitEditSpace,
+    onSubmitEditSpace,
     isEditSpace,
-    changeEditModeHandler,
-    changeNameHandler,
+    onChangeEditModeHandler,
+    onChangeNameHandler,
     editSpaceName,
   };
 };

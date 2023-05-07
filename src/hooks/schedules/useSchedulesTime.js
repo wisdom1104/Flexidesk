@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useDispatch} from 'react-redux';
-import { __getSchedules} from '../../redux/modules/schedules';
+import { useDispatch } from 'react-redux';
+import { __getSchedules } from '../../redux/modules/schedulesSlice';
 
-export const useSchedulesTime = (selectDay,param,title,comment,initDate,) => {
+export const useSchedulesTime = (
+  selectDay,
+  param,
+  title,
+  comment,
+  initDate,
+) => {
   const dispatch = useDispatch();
   const [clickSchedules, setClickSchedules] = useState([initDate]);
   const now = new Date();
@@ -12,12 +18,12 @@ export const useSchedulesTime = (selectDay,param,title,comment,initDate,) => {
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
   const [isCheckOut, setIsCheckOut] = useState('false');
- 
+
   const [scheduleValue, setScheduleValue] = useState({
     scTitle: title,
-    scComment: comment,    
+    scComment: comment,
   });
- 
+
   let reqData = [];
 
   const schedulesList = () => {
@@ -26,11 +32,15 @@ export const useSchedulesTime = (selectDay,param,title,comment,initDate,) => {
     });
     return reqData;
   };
-  
+
   const scheduleListResult = schedulesList();
 
   const { scComment, scTitle } = scheduleValue;
-  const reqScheduleValue = { scComment, scTitle, startList: scheduleListResult };
+  const reqScheduleValue = {
+    scComment,
+    scTitle,
+    startList: scheduleListResult,
+  };
 
   const onClickHandler = e => {
     if (clickSchedules.find(item => item === e.target.value)) {
@@ -55,8 +65,13 @@ export const useSchedulesTime = (selectDay,param,title,comment,initDate,) => {
         }),
       );
     }
-    
   }, [selectDay]);
 
-  return { onClickHandler, clickSchedules, reqScheduleValue, scheduleValue, setScheduleValue}
-}
+  return {
+    onClickHandler,
+    clickSchedules,
+    reqScheduleValue,
+    scheduleValue,
+    setScheduleValue,
+  };
+};

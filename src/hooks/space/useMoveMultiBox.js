@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 import { useDispatch } from 'react-redux';
+import { __editBoxUser } from '../../redux/modules/spaceBoxSlice';
 
 export const useMoveMultiBox = ({ setMoveBox, setIsClicked, spaceId }) => {
-  //유저 이동 핸들러
   const dispatch = useDispatch();
   const [isMultiModal, setIsMultiModal] = useState(false);
   const onClickMoveMultiHandler = multiBox => {

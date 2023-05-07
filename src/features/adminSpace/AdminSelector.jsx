@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { handleDragStart } from '../../utils/dragStartHandler';
 import { useSelectDropBoxs } from '../../hooks/adminSpace/box/useSelectDropBoxs';
-import { StBox, StSelect } from '../../pages/space/SpaceStyles';
+import { handleDragStart } from '../../utils/dragStartHandler';
 import Text from '../../components/Text';
+import { StBox, StSelect } from '../../pages/space/SpaceStyles';
 
 function AdminSelector() {
   const { mrBoxes, boxes, multiBoxes } = useSelectDropBoxs();
@@ -12,7 +12,6 @@ function AdminSelector() {
       <Text shape="T14_600" color="var(--white)">
         AdminSpace
       </Text>
-      {/* 회의실 셀렉터 */}
       {mrBoxes.map((box, i) => (
         <StBox
           key={box.mrId}
@@ -26,7 +25,6 @@ function AdminSelector() {
           </Text>
         </StBox>
       ))}
-      {/* 박스 셀렉터 */}
       {boxes.map((box, i) => (
         <StBox
           key={box.boxId}
@@ -40,7 +38,6 @@ function AdminSelector() {
           </Text>
         </StBox>
       ))}
-      {/* 공용공간 셀렉터 */}
       {multiBoxes.map((box, i) => (
         <StBox
           key={box.multiBoxId}

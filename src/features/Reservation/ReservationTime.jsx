@@ -5,8 +5,13 @@ import {
   __addReservation,
   __getReservation,
   __getUserData,
-} from '../../redux/modules/reservation';
+} from '../../redux/modules/reservationSlice';
 import { cookies } from '../../shared/cookies';
+import { Input } from '../../components/Input';
+import { Column } from '../../components/Flex';
+import IconTitle from '../../components/IconTitle';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
 import {
   StReserTimeButton,
   StReserTimeBox,
@@ -17,28 +22,21 @@ import {
   CheckContainBox,
 } from '../../pages/reservation/ReservationAllStyle';
 import ReservationCheck from './ReservationCheck';
-import { Input } from '../../components/Input';
-import { Column } from '../../components/Flex';
-import IconTitle from '../../components/IconTitle';
-import Text from '../../components/Text';
-import { BlueBtn } from '../../components/button/BlueBtn';
 
 function ReservationTime({ param, selectDay, mrName }) {
-  const [userInfo, setUserInfo] = useState([]); //예약인원에 이름 묶음 state
+  const [userInfo, setUserInfo] = useState([]);
   const [userIdInfo, setUserIdInfo] = useState([]);
   const navi = useNavigate();
   const userId = cookies.get('userId');
 
-  ///////////////////////////////////
   const dispatch = useDispatch();
-  const [clickReservation, setClickReservation] = useState([]); //다르지만 존재//
+  const [clickReservation, setClickReservation] = useState([]);
   const now = new Date();
 
   const date = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
   const [isCheckOut, setIsCheckOut] = useState('false');
-  //연속되는 시간 추가하기 위한 request정리
   let reqData = [];
 
   const dataList = () => {
@@ -73,37 +71,10 @@ function ReservationTime({ param, selectDay, mrName }) {
     setClickReservation([]);
   }, [selectDay]);
 
-  ///////////////////////////////////
-
   const { userData } = useSelector(state => state.reservation);
   const { reservation } = useSelector(state => state.reservation);
   const reqDatas = { startList: dataList(), userList: userIdInfo };
   const { timeList } = reservation;
-
-  ///////////////////테스트 하고 있는 주웅 ~~~~//////////
-  // useEffect(() => {
-  //   // clickReservation 값이 업데이트될 때마다 isSelected 값을 다시 결정
-  //   timeList.map((item, index) => {
-  //     const isSelected =
-  //       clickReservation.includes(
-  //         selectDay ? `${selectDay}T${item.start}` : `${date}${item.start}`,
-  //       ) ||
-  //       (index !== timeList.length - 1 &&
-  //         clickReservation.some(
-  //           time =>
-  //             time >
-  //               (selectDay
-  //                 ? `${selectDay}T${item.start}`
-  //                 : `${date}${item.start}`) &&
-  //             time <
-  //               (selectDay
-  //                 ? `${selectDay}T${timeList[index + 1].start}`
-  //                 : `${date}${timeList[index + 1].start}`),
-  //         ));
-  //     return { ...item, isSelected };
-  //   });
-  // }, [clickReservation]);
-  ///////////////////테스트 하고 있는 주웅 ~~~~//////////
 
   return (
     <SchContain width="683px">
@@ -188,7 +159,6 @@ function ReservationTime({ param, selectDay, mrName }) {
         </ScheduleUsers>
       </>
       <ReservationCheck
-        param={param}
         selectDay={selectDay}
         clickReservation={clickReservation}
         userName={userInfo}

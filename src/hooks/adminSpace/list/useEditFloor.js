@@ -2,23 +2,21 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __editFloor } from '../../../redux/modules/floorSlice';
 
-// floor 수정
 export const useEditFloor = floor => {
   const dispatch = useDispatch();
 
-  //floor name 수정
   const [editFloorName, setEditFloorName] = useState(floor.floorName);
   const [isEditFloor, setIsEditFloor] = useState(false);
 
-  const changeNameHandler = value => {
+  const onChangeNameHandler = value => {
     setEditFloorName(value);
   };
 
-  const changeEditModeHandler = () => {
+  const onChangeEditModeHandler = () => {
     setIsEditFloor(pre => !pre);
   };
 
-  const submitEditFloor = async () => {
+  const onSubmitEditFloor = async () => {
     const payload = {
       floorId: floor.floorId,
       floorName: editFloorName,
@@ -27,10 +25,10 @@ export const useEditFloor = floor => {
     setIsEditFloor(!isEditFloor);
   };
   return {
-    submitEditFloor,
+    onSubmitEditFloor,
     isEditFloor,
-    changeEditModeHandler,
-    changeNameHandler,
+    onChangeEditModeHandler,
+    onChangeNameHandler,
     editFloorName,
   };
 };

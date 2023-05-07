@@ -10,7 +10,7 @@ const initialState = {
 
 // floor 전체 조회
 export const __getFloors = createAsyncThunk(
-  '__getFloors',
+  'getFloors',
   async (payload, thunk) => {
     try {
       const token = cookies.get('token');
@@ -30,7 +30,7 @@ export const __getFloors = createAsyncThunk(
 
 // floor 추가
 export const __addFloor = createAsyncThunk(
-  '__addFloor',
+  'addFloor',
   async (newFloor, thunk) => {
     try {
       const token = cookies.get('token');

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 function Skeleton() {
   return (
-    <SkeletonDiv>
+    <SkeletonContain>
       <SkeletonImg>
         <SkeletonShimmer />
       </SkeletonImg>
@@ -18,13 +18,13 @@ function Skeleton() {
           <SkeletonShimmer />
         </SkeletonText>
       </SkeletonWrap>
-    </SkeletonDiv>
+    </SkeletonContain>
   );
 }
 
 export default Skeleton;
 
-const SkeletonDiv = styled.div`
+const SkeletonContain = styled.div`
   display: flex;
   flex-direction: column;
   width: ${props => props.width || '50vw'};

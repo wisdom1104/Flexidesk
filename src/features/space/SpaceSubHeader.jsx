@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../shared/cookies';
-import { StSubHeader, SubIcon, SubTitle } from '../../pages/space/SpaceStyles';
 import { Row } from '../../components/Flex';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
+import { StSubHeader, SubIcon, SubTitle } from '../../pages/space/SpaceStyles';
 
 function SpaceSubHeader({ space }) {
   const navi = useNavigate();

@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../../components/Page';
-import { WelcomeImage, WelcomeTitle } from '../../components/Image';
+import { WelcomeImage, WelcomeTitle } from '../../components/WelcomeImage';
 import { Column } from '../../components/Flex';
 import Text from '../../components/Text';
 import { StBackground } from '../../pages/welcome/WelcomeStyled';
@@ -8,7 +8,7 @@ import { StBackground } from '../../pages/welcome/WelcomeStyled';
 function Welcome3() {
   return (
     <>
-      <StBackground  pd>
+      <StBackground pd>
         <Page>
           <WelcomeTitle>
             <Column>
@@ -26,8 +26,6 @@ function Welcome3() {
               </Text>
             </Column>
           </WelcomeTitle>
-
-          {/* 이미지 자리 */}
           <WelcomeImage src="welcome2" alt="welcome2" />
         </Page>
       </StBackground>

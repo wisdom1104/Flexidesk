@@ -1,18 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { __getReservationDetail } from '../../redux/modules/detail';
 import { getCookie } from '../../shared/cookies';
+import { __getReservationDetail } from '../../redux/modules/detailSlice';
 import { useSkltDsptTimeout } from '../../hooks/useTimeout';
+import NotFound from '../NotFound';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
-import { InfoContain, UserList } from './ReservationAllStyle';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
 import { Row } from '../../components/Flex';
-import ReservationDelete from '../../features/reservation/ReservationDelete';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
-import NotFound from '../NotFound';
+import { InfoContain, UserList } from './ReservationAllStyle';
+import ReservationDelete from '../../features/reservation/ReservationDelete';
 
 function ReservationDetail() {
   const { reservationDetail, isError } = useSelector(state => state.detail);
@@ -34,7 +34,7 @@ function ReservationDetail() {
               <Skeleton />
             </InfoContain>
           ) : isError ? (
-            <NotFound/>
+            <NotFound />
           ) : (
             <InfoContain>
               {reservationDetail?.map(item => (

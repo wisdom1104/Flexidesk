@@ -9,7 +9,6 @@ const initialState = {
   error: null,
 };
 
-// mr 추가
 export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
   try {
     const token = getCookie('token');
@@ -34,7 +33,6 @@ export const __addMr = createAsyncThunk('addMr', async (payload, thunk) => {
   }
 });
 
-// mr 삭제
 export const __deleteMr = createAsyncThunk(
   'deleteMr',
   async (payload, thunk) => {
@@ -55,7 +53,6 @@ export const __deleteMr = createAsyncThunk(
   },
 );
 
-// mr 수정
 export const __editMr = createAsyncThunk('editMr', async (payload, thunk) => {
   try {
     const token = getCookie('token');
