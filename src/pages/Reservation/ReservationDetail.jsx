@@ -38,41 +38,39 @@ function ReservationDetail() {
             <InfoContain>
               {reservationDetail?.map(item => (
                 <Card height="350px" key={item.username} value={item.username}>
-                  <Info>
-                    <CardInfo color="var(--grey_002)" value={item.mrName}>
-                      회의실 이름
-                    </CardInfo>
-                    <CardInfo
-                      color="var(--grey_002)"
-                      value={item.start.split('T')[0]}
-                    >
-                      예약날짜
-                    </CardInfo>
-                    <CardInfo
-                      color="var(--grey_002)"
-                      value={`${item.start.split('T')[1]} ~ ${
-                        item.end.split('T')[1]
-                      }`}
-                    >
-                      회의 시간
-                    </CardInfo>
-                    <CardInfo>
-                      <Row>
-                        <Text color="var(--grey_002)">예약 인원</Text>
-                        <UserList
-                          width="100px"
-                          height="20px"
-                          border="none"
-                          ml="120px"
-                        >
-                          {item.userList.map(e => (
-                            <Text>{e.username}</Text>
-                          ))}
-                        </UserList>
-                      </Row>
-                    </CardInfo>
-                    <ReservationDelete reservationId={item.reservationId} />
-                  </Info>
+                  <CardInfo color="var(--grey_002)" value={item.mrName}>
+                    회의실 이름
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={item.start.split('T')[0]}
+                  >
+                    예약날짜
+                  </CardInfo>
+                  <CardInfo
+                    color="var(--grey_002)"
+                    value={`${item.start.split('T')[1]} ~ ${
+                      item.end.split('T')[1]
+                    }`}
+                  >
+                    회의 시간
+                  </CardInfo>
+                  <CardInfo>
+                    <Row>
+                      <Text color="var(--grey_002)">예약 인원</Text>
+                      <UserList
+                        width="100px"
+                        height="20px"
+                        border="none"
+                        ml="120px"
+                      >
+                        {item.userList.map(e => (
+                          <Text>{e.username}</Text>
+                        ))}
+                      </UserList>
+                    </Row>
+                  </CardInfo>
+                  <ReservationDelete reservationId={item.reservationId} />
                 </Card>
               ))}
             </InfoContain>

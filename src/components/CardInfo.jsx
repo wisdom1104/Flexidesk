@@ -16,6 +16,7 @@ export function CardInfo({ children, shape = 'T16_700', color, value }) {
 
 const StCardInfo = styled.div`
   display: flex;
+  background-color: var(--white);
   width: 90%;
   justify-content: space-between;
   margin: 5px;
