@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineMail } from 'react-icons/hi';
-import { InfoContain } from '../reservation/CalendarStyled';
+import { InfoContain } from '../reservation/ReservationAllStyle';
 import { getCookie } from '../../shared/cookies';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import Skeleton from '../../components/Skeleton';
