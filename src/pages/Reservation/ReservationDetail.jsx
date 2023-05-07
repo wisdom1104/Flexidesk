@@ -5,7 +5,7 @@ import { getCookie } from '../../shared/cookies';
 import { useSkltDsptTimeout } from '../../hooks/useTimeout';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
-import { InfoContain, Info, UserList } from './CalendarStyled';
+import { InfoContain, UserList } from './ReservationAllStyle';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
 import { Row } from '../../components/Flex';

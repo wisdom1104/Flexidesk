@@ -8,7 +8,7 @@ import { Column, Row } from '../../components/Flex';
 import Page from '../../components/Page';
 import AdminSpaceBox from '../../features/adminSpace/AdminSpaceBox';
 import { StSubHeader } from '../../shared/SpaceStyles';
-import { InfoContain } from '../reservation/CalendarStyled';
+import { InfoContain } from '../reservation/ReservationAllStyle';
 import AdminList from '../../features/adminSpace/AdminList';
 import AdminSelector from '../../features/adminSpace/AdminSelector';
 import IconTitle from '../../components/IconTitle';

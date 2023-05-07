@@ -2,11 +2,8 @@ import React from 'react';
 import {
   CheckContain,
   CheckContainBox,
-  CheckTitle,
   FontSt,
-  StIcon,
-  StSubTitle,
-} from '../../pages/reservation/CalendarStyled';
+} from '../../pages/reservation/ReservationAllStyle';
 
 import { Column } from '../../components/Flex';
 import IconTitle from '../../components/IconTitle';

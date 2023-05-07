@@ -15,7 +15,7 @@ import {
   StSubHeader,
   StSelectDay,
   InfoContain,
-} from './CalendarStyled';
+} from './ReservationAllStyle';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';
 import NotFound from '../NotFound';

@@ -13,7 +13,7 @@ import {
   StSubHeader,
   StSelectDay,
   InfoContain,
-} from '../reservation/CalendarStyled';
+} from '../reservation/ReservationAllStyle';
 import SchedulesTime from '../../features/schedules/SchedulesTime';
 import IconTitle from '../../components/IconTitle';
 import Text from '../../components/Text';

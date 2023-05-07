@@ -77,7 +77,6 @@ function ManagementChange({ item }) {
 }
 
 export default ManagementChange;
-
 const StContainer = styled.div`
   display: flex;
   width: 90%;
