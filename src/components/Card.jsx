@@ -13,7 +13,8 @@ export function Card({ children, shape = 'T20_600', value, key, height }) {
 
 const StCard = styled.div`
   width: ${props => props.width || '400px'};
-  height: ${props => props.height || '250px'};
+  /* height: ${props => props.height || '280px'}; */
+  height: ${props => props.height || '90%'};
 
   display: flex;
   flex-direction: column;
