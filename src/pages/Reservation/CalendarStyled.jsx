@@ -366,7 +366,7 @@ export const Info = styled.div`
 
   flex-direction: column;
   align-items: center;
-  background-color: var(--white);
+  /* background-color: var(--white); */
 
   box-shadow: 0px 5.02286px 37.6714px rgba(140, 159, 157, 0.25);
   border-radius: 8px;

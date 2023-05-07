@@ -32,7 +32,7 @@ function SignUpUser() {
 
   return (
     <Page h="">
-      <StFormContain>
+      <StFormContain h="600px">
         <StForm onSubmit={onSubmitHandler}>
           <StStartText>
             <Text shape="T28_700_30"> 회원가입 </Text>

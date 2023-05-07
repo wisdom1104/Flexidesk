@@ -8,6 +8,8 @@ import { MoveModalSubbtn, MoveModalbtn } from '../../shared/SpaceStyles';
 import Modal from '../../components/Modal';
 import SelectModal from '../../components/modal/SelectModal';
 import Text from '../../components/Text';
+import { Row } from '../../components/Flex';
+import { CardInfo } from '../../components/CardInfo';
 
 function ManagementChange({ item }) {
   const [isSelectModalOpen, controlSelectModal] = useModal();
@@ -24,17 +26,11 @@ function ManagementChange({ item }) {
   return (
     <>
       <CommentBox>
-        <Text shape="T16_400" color="var(--grey_002)">
+        <Text shape="T16_700" color="var(--grey_002)">
           <BsPersonGear /> 권한 변경
         </Text>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '10px',
-          }}
-        >
+        <Row gap="10px">
           <MoveModalSubbtn
             onClick={() => controlSelectModal(true)}
             width="84px"
@@ -66,15 +62,15 @@ function ManagementChange({ item }) {
               userId={item.userId}
             />
           )}
+        </Row>
 
-          {isDeleteModalOpen && (
-            <Modal
-              setIsModal={() => controlDeleteModal(false)}
-              modalTitle="삭제 하시겠습니까?"
-              onButtonClick={handleLogout}
-            />
-          )}
-        </div>
+        {isDeleteModalOpen && (
+          <Modal
+            setIsModal={() => controlDeleteModal(false)}
+            modalTitle="삭제 하시겠습니까?"
+            onButtonClick={handleLogout}
+          />
+        )}
       </CommentBox>
     </>
   );

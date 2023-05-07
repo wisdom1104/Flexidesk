@@ -6,7 +6,8 @@ export const StStartText = styled.div`
 `;
 
 export const StFormContain = styled.div`
-  background: #f5f5f5;
+  background: var(--mint_004);
+
   padding: 30px;
   margin-top: ${props => props.mt || '100px'};
   height: ${props => props.h || '65%'};
@@ -23,7 +24,7 @@ export const StForm = styled.form`
 export const StLink = styled(Link)`
   width: 90px;
   margin-top: 10%;
-//text로 해주기
+  //text로 해주기
   font-weight: 400;
   font-size: 14px;
   line-height: 14px;
