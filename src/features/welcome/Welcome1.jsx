@@ -7,7 +7,7 @@ import { Column, Row } from '../../components/Flex';
 import Text from '../../components/Text';
 import { GradationBtn } from '../../styles/etc';
 import { WelcomeImage, WelcomeTitle } from '../../components/Image';
-import styled from 'styled-components';
+import {StGradationBg} from '../../pages/welcome/WelcomeStyled'
 
 function Welcome1() {
   const navi = useNavigate();
@@ -57,8 +57,3 @@ function Welcome1() {
 }
 
 export default Welcome1;
-
-const StGradationBg = styled.div`
-  background: linear-gradient(180deg, #ffffff 0%, #def1ef 100%);
-  height: 155vh;
-`;

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from '../welcome/Carousel';
 import Page from '../../components/Page';
-import styled from 'styled-components';
 import Text from '../../components/Text';
+import { StBackground } from '../../pages/welcome/WelcomeStyled';
 
 function Welcome5() {
   return (
@@ -24,9 +24,3 @@ function Welcome5() {
 }
 
 export default Welcome5;
-
-const StBackground = styled.div`
-  background: ${props => props.background || '#DEF1EF'};
-  height: 100%;
-  padding: 100px;
-`;

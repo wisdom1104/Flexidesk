@@ -1,9 +1,8 @@
 import React from 'react';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { useCarouselHook } from '../../hooks/useCarouselHook';
+import { useCarousel } from '../../hooks/useCarousel';
 import styled, { css } from 'styled-components';
 import Text from '../../components/Text';
-import Page from '../../components/Page';
 
 const CarouselButton = ({ children, dir, onClick }) => {
   return (
@@ -20,7 +19,7 @@ const Carousel = () => {
     genSlidersArray,
     onClickLeftHandler,
     onClickRightHandler,
-  } = useCarouselHook();
+  } = useCarousel();
 
   return (
     <SliderContainer>
@@ -49,7 +48,6 @@ const Carousel = () => {
 
 export default Carousel;
 
-//캐러셀 슬라이드
 const SliderContainer = styled.div`
   width: 100%;
   height: 800px;

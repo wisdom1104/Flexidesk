@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { StFormContain, StForm, StStartText } from './UserStyled';
+import Page from '../../components/Page';
+import Text from '../../components/Text';
+import { BlueBtn } from '../../components/button/BlueBtn';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import ValidationError from '../../components/form/ValidationError';
 import CertificationCkeck from '../../features/user/CertificationCkeck';
 import { AuthFormValidation } from '../../hooks/user/useAuthFormValidation';
 import { useSignUpSubmitHandler } from '../../hooks/user/useSignUpSubmitHandler';
-import Page from '../../components/Page';
-import Text from '../../components/Text';
-import { BlueBtn } from '../../components/button/BlueBtn';
-import { StFormContain, StForm, StStartText } from './UserStyled2';
 
 function SignUpUser() {
   const [user, setUser] = useState({
@@ -44,9 +44,7 @@ function SignUpUser() {
             value={auth.username}
             placeholder="이름을 입력하세요."
             required
-            onChange={event =>
-              setAuth({ ...auth, username: event.target.value })
-            }
+            onChange={e => setAuth({ ...auth, username: e.target.value })}
           />
 
           <SignUpTextInput
@@ -62,9 +60,7 @@ function SignUpUser() {
           <CertificationCkeck
             user={auth}
             certification={auth.certification}
-            onChange={event =>
-              setAuth({ ...auth, certification: event.target.value })
-            }
+            onChange={e => setAuth({ ...auth, certification: e.target.value })}
           />
 
           <SignUpTextInput

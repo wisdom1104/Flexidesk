@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useModal } from '../../hooks/useModalHook';
+import { useModal } from '../../hooks/useModal';
 import Modal from '../../components/Modal';
 import { __deleteRervation } from '../../redux/modules/detail';
 import MainMintBtn from '../../components/button/MainMintBtn';

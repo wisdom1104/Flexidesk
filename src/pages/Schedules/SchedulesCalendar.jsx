@@ -5,7 +5,7 @@ import Page from '../../components/Page';
 import { Row } from '../../components/Flex';
 import Skeleton from '../../components/Skeleton';
 import { useCalendar } from '../../hooks/useCalendar';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeout';
 import {
   DayContain,
   SchContain,

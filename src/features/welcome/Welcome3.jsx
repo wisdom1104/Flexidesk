@@ -3,12 +3,12 @@ import Page from '../../components/Page';
 import { WelcomeImage, WelcomeTitle } from '../../components/Image';
 import { Column } from '../../components/Flex';
 import Text from '../../components/Text';
-import styled from 'styled-components';
+import { StBackground } from '../../pages/welcome/WelcomeStyled';
 
 function Welcome3() {
   return (
     <>
-      <StBackground>
+      <StBackground  pd>
         <Page>
           <WelcomeTitle>
             <Column>
@@ -36,8 +36,3 @@ function Welcome3() {
 }
 
 export default Welcome3;
-
-const StBackground = styled.div`
-  background: ${props => props.background || '#DEF1EF'};
-  height: 100vh;
-`;
