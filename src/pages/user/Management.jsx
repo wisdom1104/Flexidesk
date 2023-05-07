@@ -1,16 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineMail } from 'react-icons/hi';
-import { __getAllManagement } from '../../redux/modules/allManagementSlice';
+import { InfoContain } from '../reservation/CalendarStyled';
 import { getCookie } from '../../shared/cookies';
+import { __getAllManagement } from '../../redux/modules/allManagementSlice';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
-import { InfoContain } from '../reservation/ReservationAllStyle';
-import ManagementChange from '../../features/user/ManagementChange';
-import IconTitle from '../../components/IconTitle';
-import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
+import IconTitle from '../../components/IconTitle';
+import ManagementChange from '../../features/user/ManagementChange';
+import { useSkltDsptTimeout } from '../../hooks/useTimeout';
+import Access from '../Access';
+import NotFound from '../NotFound';
 
 function Management() {
   const { userList, isError } = useSelector(state => state.userList);
@@ -22,7 +24,7 @@ function Management() {
   const { showSkeleton } = useSkltDsptTimeout(token, dispatchValue);
 
   if (role === 'USER') {
-    return <div>권한이 없습니다.</div>;
+    return <Access />;
   }
 
   return (
@@ -38,7 +40,7 @@ function Management() {
             <Skeleton />
           </InfoContain>
         ) : isError ? (
-          <div>에러발생 ..⚙️</div>
+          <NotFound />
         ) : (
           <InfoContain>
             {userList.map(item => (

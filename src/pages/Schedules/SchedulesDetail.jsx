@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../shared/cookies';
 import { __getAllSchedules } from '../../redux/modules/schedules';
-import { useSkltDsptTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltDsptTimeout } from '../../hooks/useTimeout';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
 import { InfoContain } from '../reservation/ReservationAllStyle';
@@ -14,6 +14,7 @@ import SubMintBtn from '../../components/button/SubMintBtn';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
 import { Row } from '../../components/Flex';
+import NotFound from '../NotFound';
 
 function SchedulesDetail() {
   const navi = useNavigate();
@@ -33,8 +34,8 @@ function SchedulesDetail() {
             <Skeleton />
           </InfoContain>
         ) : isError ? (
-          <div>에러발생 ..⚙️</div>
-        ) : (
+          <NotFound/>
+          ) : (
           <InfoContain>
             {userSchedules?.map(item => (
               <Card key={item.scId} value={item.scTitle} height="300px">

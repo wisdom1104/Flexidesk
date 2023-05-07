@@ -4,7 +4,7 @@ import { getCookie } from '../../shared/cookies';
 import { Row } from '../../components/Flex';
 import Page from '../../components/Page';
 import Skeleton from '../../components/Skeleton';
-import { useSkltTimeout } from '../../hooks/useTimeoutHook';
+import { useSkltTimeout } from '../../hooks/useTimeout';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
 import { StSubHeader } from '../../shared/SpaceStyles';

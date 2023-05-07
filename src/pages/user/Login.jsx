@@ -9,7 +9,7 @@ import Text from '../../components/Text';
 import { SignUpTextInput } from '../../components/form/SignUpTextInput';
 import { BlueBtn } from '../../components/button/BlueBtn';
 
-import { StForm, StFormContain, StLink, StStartText } from './UserStyled2';
+import { StForm, StFormContain, StLink, StStartText } from './UserStyled';
 
 function Login() {
   const [login, setLogin] = useState({
@@ -61,8 +61,16 @@ function Login() {
             </Text>
           </BlueBtn>
           <Row>
-            <StLink to={'/signup'}> 관리자 회원가입 </StLink>
-            <StLink to={'/signupuser'}> 일반 회원가입 </StLink>
+            <StLink to={'/signup'}>
+              <Text shape="T14_400_14" color="var(--blue_004)" ta="end">
+                관리자 회원가입
+              </Text>
+            </StLink>
+            <StLink to={'/signupuser'}>
+              <Text shape="T14_400_14" color="var(--blue_004)" ta="end">
+                일반 회원가입
+              </Text>
+            </StLink>
           </Row>
         </StForm>
       </StFormContain>

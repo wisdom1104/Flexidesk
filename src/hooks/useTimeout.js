@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getCookie } from '../shared/cookies';
 
-export const useSkltDsptTimeout = (token,dispatchValue) => {
+export const useSkltDsptTimeout = (token, dispatchValue) => {
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   const navi = useNavigate();
@@ -48,5 +48,5 @@ export const useSkltTimeout = () => {
     }
   }, []);
 
-  return {showSkeleton}
-}
+  return { showSkeleton };
+};

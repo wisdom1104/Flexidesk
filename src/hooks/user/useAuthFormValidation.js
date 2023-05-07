@@ -1,3 +1,4 @@
+//변수명 PW로 변경할까?
 import { useEffect, useState } from 'react';
 
 export const AuthFormValidation = (auth, setAuth) => {
