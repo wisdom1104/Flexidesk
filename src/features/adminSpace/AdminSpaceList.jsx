@@ -1,14 +1,7 @@
 import React from 'react';
 import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
 import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
-import {
-  BoxBtn,
-  BoxSubBtn,
-  EditInput,
-  StList,
-  StListBtnBox,
-  StListItem,
-} from '../../shared/SpaceStyles';
+import { StList, StListBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';

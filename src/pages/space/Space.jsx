@@ -7,7 +7,7 @@ import Skeleton from '../../components/Skeleton';
 import { useSkltTimeout } from '../../hooks/useTimeout';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
-import { StSubHeader } from '../../shared/SpaceStyles';
+import { StSubHeader } from '../../pages/space/SpaceStyles';
 import { InfoContain } from '../reservation/ReservationAllStyle';
 import SpaceList from '../../features/space/SpaceList';
 import SpaceBox from '../../features/space/SpaceBox';

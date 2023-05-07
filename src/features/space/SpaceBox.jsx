@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList';
 import { useMoveMultiBox } from '../../hooks/space/useMoveMultiBox';
 import { useMoveBox } from '../../hooks/space/useMoveBox';
-import { StBoard, Stmainspace } from '../../shared/SpaceStyles';
 import SpaceBoxModal from './SpaceBoxModal';
 import SpaceMultiBoxModal from './SpaceMultiBoxModal';
 import SpaceSubHeader from './SpaceSubHeader';
@@ -30,7 +29,6 @@ function SpaceBox({ spaces, spaceId, selectedSpace }) {
   return (
     <SpaceBackBoard>
       <SpaceSubHeader space={space} />
-      {/* space board 부분 */}
       <SpaceMainBoard>
         <SpaceBoxModal
           moveBox={moveBox}

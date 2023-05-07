@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row } from '../../components/Flex';
-import { StSubHeader, SubIcon, SubTitle } from '../../shared/SpaceStyles';
+import { StSubHeader, SubIcon, SubTitle } from '../../pages/space/SpaceStyles';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';

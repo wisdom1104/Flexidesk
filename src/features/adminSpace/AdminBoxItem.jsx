@@ -2,7 +2,7 @@ import React from 'react';
 import { useDeleteBox } from '../../hooks/adminSpace/box/useDeleteBox';
 import { useEditBox } from '../../hooks/adminSpace/box/useEditBox';
 import { useDADBox } from '../../hooks/adminSpace/box/useDADBox';
-import { StBox, StBtnBox } from '../../shared/SpaceStyles';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';

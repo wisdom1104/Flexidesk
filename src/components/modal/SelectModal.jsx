@@ -4,13 +4,11 @@ import { useDispatch } from 'react-redux';
 import { HiChevronDown } from 'react-icons/hi2';
 import { __patchAllManagement } from '../../redux/modules/allManagementSlice';
 import {
-  ModalFullBackground,
-  MoveModal,
-  MoveModalSubTitle,
-} from '../../shared/SpaceStyles';
 import SubMintBtn from '../button/SubMintBtn';
 import MainMintBtn from '../button/MainMintBtn';
 import Text from '../Text';
+import { StModal, StModalFullBackground } from '../Modal';
+import styled from 'styled-components';
 
 const SelectModal = ({ setIsModal, role, userId }) => {
   const choose = e => {
@@ -33,9 +31,9 @@ const SelectModal = ({ setIsModal, role, userId }) => {
   };
 
   return (
-    <ModalFullBackground>
-      <MoveModal>
-        <MoveModalSubTitle width="65px">권한수정</MoveModalSubTitle> <br />
+    <StModalFullBackground>
+      <StModal>
+        <StModalSubTitle width="65px">권한수정</StModalSubTitle> <br />
         <DropdownMenu>
           <DropdownButton onClick={e => setList(pre => !pre)}>
             {fav}
@@ -81,12 +79,25 @@ const SelectModal = ({ setIsModal, role, userId }) => {
             닫기
           </Text>
         </MainMintBtn>
-      </MoveModal>
-    </ModalFullBackground>
+      </StModal>
+    </StModalFullBackground>
   );
 };
 
 export default SelectModal;
+
+export const StModalSubTitle = styled.div`
+  position: absolute;
+  width: ${props => props.width || '52px'};
+  height: 17px;
+  left: 16px;
+  top: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: var(--darkgrey);
+`;
 
 const DropdownMenu = styled.div`
 display: inline-block;

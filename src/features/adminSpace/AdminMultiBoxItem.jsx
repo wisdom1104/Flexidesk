@@ -2,7 +2,7 @@ import React from 'react';
 import { useDeleteMultiBox } from '../../hooks/adminSpace/box/useDeleteMultiBox';
 import { useEditMultiBox } from '../../hooks/adminSpace/box/useEditMultiBox';
 import { useDADMultiBox } from '../../hooks/adminSpace/box/useDADMultiBox';
-import { StBox, StBtnBox } from '../../shared/SpaceStyles';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';

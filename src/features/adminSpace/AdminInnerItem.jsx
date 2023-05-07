@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDeleteSpace } from '../../hooks/adminSpace/list/useDeleteSpace';
 import { useEditSpace } from '../../hooks/adminSpace/list/useEditSpace';
-import { StInner, StInnerItem, StListBtnBox } from '../../shared/SpaceStyles';
+import { StInner, StListBtnBox } from '../../pages/space/SpaceStyles';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import Text from '../../components/Text';
 import SubMintBtn from '../../components/button/SubMintBtn';

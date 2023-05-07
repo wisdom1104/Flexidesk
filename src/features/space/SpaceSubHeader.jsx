@@ -1,12 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../shared/cookies';
-import {
-  StBtn,
-  StSubHeader,
-  SubIcon,
-  SubTitle,
-} from '../../shared/SpaceStyles';
+import { StSubHeader, SubIcon, SubTitle } from '../../pages/space/SpaceStyles';
 import { Row } from '../../components/Flex';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';

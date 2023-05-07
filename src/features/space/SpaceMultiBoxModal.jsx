@@ -1,11 +1,10 @@
 import React from 'react';
 import SpaceModal from '../../components/modal/SpaceModal';
 import {
-  ListDot,
   MoveModalList,
   MoveModalSubTitle,
   MoveModalTitle,
-} from '../../shared/SpaceStyles';
+} from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import { Row } from '../../components/Flex';
 import MainMintBtn from '../../components/button/MainMintBtn';
@@ -37,10 +36,7 @@ function SpaceMultiBoxModal({
               </Text>
             </Row>
             {moveBox.userlist.map(user => (
-              <Row>
-                <ListDot />
-                <div>{user.username}</div>
-              </Row>
+              <div>• {user.username}</div>
             ))}
           </MoveModalList>
           <MainMintBtn
