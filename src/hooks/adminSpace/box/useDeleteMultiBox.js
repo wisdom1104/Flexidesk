@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { __deleteMultiBox } from '../../../redux/modules/multiBoxSlice';
+import { __deleteMultiBox } from '../../../redux/modules/spaceMultiBoxSlice';
 
 export const useDeleteMultiBox = () => {
   const dispatch = useDispatch();
