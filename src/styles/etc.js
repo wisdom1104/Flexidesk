@@ -37,14 +37,14 @@ export const GradationBtn = styled.button`
 
   background: linear-gradient(
     276.35deg,
-    var(--blue) 10.61%,
-    var(--lightblue) 85.36%
+    var(--blue_001) 10.61%,
+    var(--blue_002) 85.36%
   );
   border-radius: 64px;
   &:hover {
-    background: var(--lightblue);
+    background: var(--blue_002);
   }
   &:focus {
-    background: var(--blue);
+    background: var(--blue_001);
   }
 `;

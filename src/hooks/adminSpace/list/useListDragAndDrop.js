@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import { __editSpace } from '../../../redux/modules/spaceSlice';
 import { useDispatch } from 'react-redux';
+import { __editSpace } from '../../../redux/modules/spaceSlice';
 
 export function useListDragAndDrop() {
   const dispatch = useDispatch();
@@ -10,17 +10,6 @@ export function useListDragAndDrop() {
   const dragFloor = useRef(); // floor 드래그 시작위치
   const dragOverSpace = useRef(); //드래그 중인 space가 들어가려는 위치
   const dragOverFloor = useRef(); //드래그 중인 floor가 들어가려는 위치
-
-  // const dragRefs = useRef({
-  //   dragSpace: null, // space 드래그 시작위치
-  //   dragName: null, // 드래그 되는 Space 이름
-  //   dragFloor: null, // floor 드래그 시작위치
-  //   dragOverSpace: null, //드래그 중인 space가 들어가려는 위치
-  //   dragOverFloor: null, //드래그 중인 floor가 들어가려는 위치
-  // });
-
-  // const { dragSpace, dragName, dragFloor, dragOverSpace, dragOverFloor } =
-  //   dragRefs.current;
 
   const [moveSpace, setMoveSpace] = useState({
     spaceId: null,

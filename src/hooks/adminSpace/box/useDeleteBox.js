@@ -4,7 +4,7 @@ import { __deleteBox } from '../../../redux/modules/spaceBoxSlice';
 export const useDeleteBox = () => {
   const dispatch = useDispatch();
 
-  const submitDelete = (boxId, spaceId) => {
+  const onSubmitDelete = (boxId, spaceId) => {
     dispatch(
       __deleteBox({
         boxId,
@@ -14,6 +14,6 @@ export const useDeleteBox = () => {
   };
 
   return {
-    submitDelete,
+    onSubmitDelete,
   };
 };

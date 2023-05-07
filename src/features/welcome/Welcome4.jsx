@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { Column } from '../../components/Flex';
-import { Images, WelcomeTitle } from '../../components/Image';
+import { Images, WelcomeTitle } from '../../components/WelcomeImage';
 
 function Welcome4() {
   return (
@@ -28,10 +28,10 @@ function Welcome4() {
           </Text>
         </WelcomeTitle>
         <Images
-          src_001="page1"
+          src_001="readme1"
           alt_001="page1"
-          src_002="pageIcon1"
-          alt_002="pageIcon1"
+          src_002="space"
+          alt_002="space"
         />
 
         <WelcomeTitle>
@@ -46,10 +46,10 @@ function Welcome4() {
           </Text>
         </WelcomeTitle>
         <Images
-          src_001="page2"
-          alt_001="page2"
-          src_002="pageIcon2"
-          alt_002="pageIcon2"
+          src_001="readme2"
+          alt_001="readme2"
+          src_002="schedule"
+          alt_002="schedule"
         />
 
         <WelcomeTitle>
@@ -64,10 +64,10 @@ function Welcome4() {
           </Text>
         </WelcomeTitle>
         <Images
-          src_001="page3"
-          alt_001="page3"
-          src_002="pageIcon3"
-          alt_002="pageIcon3"
+          src_001="readme3"
+          alt_001="readme3"
+          src_002="reservation"
+          alt_002="reservation"
         />
       </Column>
     </Page>

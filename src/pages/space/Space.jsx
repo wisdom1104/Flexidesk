@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../shared/cookies';
-import { Row } from '../../components/Flex';
-import Page from '../../components/Page';
-import Skeleton from '../../components/Skeleton';
 import { useSkltTimeout } from '../../hooks/useTimeout';
 import { useSelectSpace } from '../../hooks/adminSpace/box/useSelectSpace';
 import { useSrchFloorsAndSpaces } from '../../hooks/adminSpace/useSrchFloorsAndSpaces';
-import { StSubHeader } from '../../pages/space/SpaceStyles';
-import { InfoContain } from '../reservation/ReservationAllStyle';
-import SpaceList from '../../features/space/SpaceList';
-import SpaceBox from '../../features/space/SpaceBox';
+import { Row } from '../../components/Flex';
+import Page from '../../components/Page';
+import Skeleton from '../../components/Skeleton';
 import SpaceBackBoard from '../../components/SpaceBackBoard';
 import SpaceMainBoard from '../../components/SpaceMainBoard';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import Text from '../../components/Text';
+import { StSubHeader } from '../../pages/space/SpaceStyles';
+import { InfoContain } from '../reservation/ReservationAllStyle';
+import SpaceList from '../../features/space/SpaceList';
+import SpaceBox from '../../features/space/SpaceBox';
 
 function Space() {
   const navi = useNavigate();

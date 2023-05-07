@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Welcome2 from './Welcome2';
 import { getCookie } from '../../shared/cookies';
 import Page from '../../components/Page';
 import { Column, Row } from '../../components/Flex';
 import Text from '../../components/Text';
+import { WelcomeImage, WelcomeTitle } from '../../components/WelcomeImage';
 import { GradationBtn } from '../../styles/etc';
-import { WelcomeImage, WelcomeTitle } from '../../components/Image';
-import {StGradationBg} from '../../pages/welcome/WelcomeStyled'
+import { StGradationBg } from '../../pages/welcome/WelcomeStyled';
+import Welcome2 from './Welcome2';
 
 function Welcome1() {
   const navi = useNavigate();
@@ -47,8 +47,6 @@ function Welcome1() {
             ) : null}
           </Column>
         </WelcomeTitle>
-
-        {/* 이미지 자리 */}
         <WelcomeImage src="welcome1" alt="welcome1" />
       </Page>
       <Welcome2 />

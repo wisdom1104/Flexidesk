@@ -1,18 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineMail } from 'react-icons/hi';
-import { InfoContain } from '../reservation/CalendarStyled';
 import { getCookie } from '../../shared/cookies';
 import { __getAllManagement } from '../../redux/modules/allManagementSlice';
+import { useSkltDsptTimeout } from '../../hooks/useTimeout';
 import Skeleton from '../../components/Skeleton';
 import Page from '../../components/Page';
 import { CardInfo } from '../../components/CardInfo';
 import { Card } from '../../components/Card';
 import IconTitle from '../../components/IconTitle';
-import ManagementChange from '../../features/user/ManagementChange';
-import { useSkltDsptTimeout } from '../../hooks/useTimeout';
 import Access from '../Access';
 import NotFound from '../NotFound';
+import { InfoContain } from '../../pages/reservation/ReservationAllStyle';
+import ManagementChange from '../../features/user/ManagementChange';
 
 function Management() {
   const { userList, isError } = useSelector(state => state.userList);

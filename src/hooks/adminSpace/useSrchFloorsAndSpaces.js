@@ -28,7 +28,6 @@ export const useSrchFloorsAndSpaces = (type, setSelectedSpace) => {
         dispatch(__getFloors());
       }
     }
-    // cleanup 함수
     return () => {
       setSelectedSpace(null);
     };

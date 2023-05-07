@@ -9,9 +9,8 @@ const initialState = {
   error: null,
 };
 
-// floor 선택 조회
 export const __getFloor = createAsyncThunk(
-  '__getFloor',
+  'getFloor',
   async (floorId, thunk) => {
     try {
       const token = getCookie('token');
@@ -30,7 +29,7 @@ export const __getFloor = createAsyncThunk(
 
 // floor 삭제
 export const __deleteFloor = createAsyncThunk(
-  '__deleteFloor',
+  'deleteFloor',
   async (floorId, thunk) => {
     try {
       const token = getCookie('token');
@@ -50,7 +49,7 @@ export const __deleteFloor = createAsyncThunk(
 
 // floor name 수정
 export const __editFloor = createAsyncThunk(
-  '__editFloor',
+  'editFloor',
   async (payload, thunk) => {
     try {
       const token = getCookie('token');
@@ -79,7 +78,6 @@ export const floorSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //space 부분 조회
     [__getFloor.pending]: state => {
       state.isLoading = true;
     },

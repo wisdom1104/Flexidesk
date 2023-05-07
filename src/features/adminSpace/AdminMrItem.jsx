@@ -2,21 +2,21 @@ import React from 'react';
 import { useDeleteMrBox } from '../../hooks/adminSpace/box/useDeleteMrBox';
 import { useEditMrBox } from '../../hooks/adminSpace/box/useEditMrBox';
 import { useDADMrBox } from '../../hooks/adminSpace/box/useDADMrBox';
-import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 import Text from '../../components/Text';
 import MainMintBtn from '../../components/button/MainMintBtn';
 import SubMintBtn from '../../components/button/SubMintBtn';
 import { Input } from '../../components/Input';
+import { StBox, StBtnBox } from '../../pages/space/SpaceStyles';
 
 function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
-  const { submitDelete } = useDeleteMrBox();
+  const { onSubmitDelete } = useDeleteMrBox();
 
   const {
-    submitEdit,
+    onSubmitEdit,
     isEditMr,
-    changeEditModeHandler,
+    onChangeEditModeHandler,
     editMrName,
-    changeNameHandler,
+    onChangeNameHandler,
   } = useEditMrBox(mr, spaceId);
 
   const { elRef, mrMouseDownHandler } = useDADMrBox(spaceId, boardEl, mrList);
@@ -38,7 +38,7 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--white)">
                 수정
@@ -49,7 +49,7 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
               pd="2px 6px"
               br="4px"
               onClick={() => {
-                submitDelete(mr.mrId, spaceId);
+                onSubmitDelete(mr.mrId, spaceId);
               }}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
@@ -68,11 +68,11 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
             type="text"
             value={editMrName}
             onChange={e => {
-              changeNameHandler(e.target.value);
+              onChangeNameHandler(e.target.value);
             }}
           />
           <StBtnBox>
-            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={submitEdit}>
+            <MainMintBtn h="23px" pd="2px 6px" br="4px" onClick={onSubmitEdit}>
               <Text shape="T14_700_17" color="var(--white)">
                 완료
               </Text>
@@ -81,7 +81,7 @@ function AdminMrItem({ mr, mrList, boardEl, spaceId }) {
               h="23px"
               pd="2px 6px"
               br="4px"
-              onClick={() => changeEditModeHandler()}
+              onClick={() => onChangeEditModeHandler()}
             >
               <Text shape="T14_700_17" color="var(--mint_002)">
                 취소

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useSrchSpaceAndList } from '../../hooks/adminSpace/useSrchSpaceAndList';
 import { useMoveMultiBox } from '../../hooks/space/useMoveMultiBox';
 import { useMoveBox } from '../../hooks/space/useMoveBox';
+import SpaceBackBoard from '../../components/SpaceBackBoard';
+import SpaceMainBoard from '../../components/SpaceMainBoard';
 import SpaceBoxModal from './SpaceBoxModal';
 import SpaceMultiBoxModal from './SpaceMultiBoxModal';
 import SpaceSubHeader from './SpaceSubHeader';
 import SpaceDropItem from './SpaceDropItem';
-import SpaceBackBoard from '../../components/SpaceBackBoard';
-import SpaceMainBoard from '../../components/SpaceMainBoard';
+
 function SpaceBox({ spaces, spaceId, selectedSpace }) {
   const { space } = useSrchSpaceAndList(selectedSpace, spaceId, spaces);
   const [moveBox, setMoveBox] = useState(null);

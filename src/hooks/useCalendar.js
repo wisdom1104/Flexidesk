@@ -1,7 +1,7 @@
-import React,{ useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StDate } from '../pages/reservation/ReservationAllStyle';
 
-export const useCalendar = (width,dataDay) =>{
+export const useCalendar = (width, dataDay) => {
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -9,13 +9,12 @@ export const useCalendar = (width,dataDay) =>{
     day: new Date().getDay(),
   };
 
-  const week = ['일', '월', '화', '수', '목', '금', '토']; //일주일
+  const week = ['일', '월', '화', '수', '목', '금', '토'];
   const [selectYear, setSelectYear] = useState(today.year);
   const [selectMonth, setSelectMonth] = useState(today.month + 1);
   const [date, setDate] = useState();
-   const [selectedDate, setSelectedDate] = useState(dataDay);
+  const [selectedDate, setSelectedDate] = useState(dataDay);
 
-  //이전달
   const preMonth = useCallback(() => {
     if (selectMonth === 1) {
       setSelectMonth(12);
@@ -25,7 +24,6 @@ export const useCalendar = (width,dataDay) =>{
     }
   }, [selectMonth]);
 
-  //다음달
   const nextMonth = useCallback(() => {
     if (selectMonth === 12) {
       setSelectMonth(1);
@@ -39,24 +37,22 @@ export const useCalendar = (width,dataDay) =>{
     setDate(e.target.value);
     setSelectedDate(e.target.value);
   };
-  
+
   const returnDay = () => {
     const daysInMonth = new Date(selectYear, selectMonth, 0).getDate();
     const firstDayOfMonth = new Date(selectYear, selectMonth - 1, 1).getDay();
-  
+
     const dayArr = [...Array(firstDayOfMonth)].map((_, index) => (
-      <StDate key={`empty-${index}`} 
-      width={width}
-       />
+      <StDate key={`empty-${index}`} width={width} />
     ));
-  
+
     const dateArr = [...Array(daysInMonth)].map((_, index) => {
       const day = index + 1;
-      const dateStr = `${selectYear}-${selectMonth.toString().padStart(2, '0')}-${day
+      const dateStr = `${selectYear}-${selectMonth
         .toString()
-        .padStart(2, '0')}`;
+        .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
       const isSelected = selectedDate === dateStr;
-  
+
       return (
         <StDate
           key={day}
@@ -69,9 +65,17 @@ export const useCalendar = (width,dataDay) =>{
         </StDate>
       );
     });
-  
+
     return [...dayArr, ...dateArr];
   };
 
-  return {date,week,selectYear,selectMonth,preMonth,nextMonth,returnDay}
-}
+  return {
+    date,
+    week,
+    selectYear,
+    selectMonth,
+    preMonth,
+    nextMonth,
+    returnDay,
+  };
+};
