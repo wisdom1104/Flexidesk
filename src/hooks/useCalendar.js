@@ -4,7 +4,7 @@ import { StDate } from '../pages/reservation/ReservationAllStyle';
 export const useCalendar = (width, dataDay) => {
   const today = {
     year: new Date().getFullYear(),
-    month: new Date().getMonth(),
+    month: new Date().getMonth()+1,
     date: new Date().getDate(),
     day: new Date().getDay(),
   };
@@ -51,14 +51,15 @@ export const useCalendar = (width, dataDay) => {
       const dateStr = `${selectYear}-${selectMonth
         .toString()
         .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-      const isSelected = selectedDate === dateStr;
-
+      const nowday = `${today.year}-${today.month.toString()
+        .padStart(2, '0')}-${today.date.toString().padStart(2, '0')}`
+        const isSelected = selectedDate === dateStr || nowday === dateStr;
       return (
         <StDate
           key={day}
           onClick={dayClickHandler}
-          value={dateStr}
-          background={isSelected ? 'pink' : 'white'}
+          value={dateStr ? dateStr : nowday}
+          background={isSelected ? 'pink' : 'white' }
           width={width}
         >
           {day}
