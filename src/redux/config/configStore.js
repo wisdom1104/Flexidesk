@@ -6,7 +6,6 @@ import mr from '../modules/spaceMrSlice';
 import box from '../modules/spaceBoxSlice';
 import detail from '../modules/detailSlice';
 import loginSlice from '../modules/loginSlice';
-import reservationList from '../modules/allReservationSlice';
 import floors from '../modules/floorsSlice';
 import floor from '../modules/floorSlice';
 import schedules from '../modules/schedulesSlice';
@@ -21,7 +20,6 @@ const store = configureStore({
     space,
     detail,
     loginSlice,
-    reservationList,
     mr,
     box,
     schedules,
