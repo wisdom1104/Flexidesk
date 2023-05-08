@@ -25,7 +25,7 @@ function SignUpAdmin() {
     setAuth,
     errors,
     onChangeEmailHandler,
-    onChangePwdHandler,
+    onChangePwHandler,
     onChangePwCheckHandler,
   } = AuthFormValidation(admin, setAdmin);
 
@@ -84,7 +84,7 @@ function SignUpAdmin() {
             value={auth.password}
             placeholder="영문, 숫자, 특수문자를 조합하여 입력하세요.(8~16자)"
             required
-            onChange={onChangePwdHandler}
+            onChange={onChangePwHandler}
             minlength="8"
             maxlength="16"
           />
