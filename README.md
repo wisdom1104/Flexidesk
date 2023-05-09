@@ -49,7 +49,6 @@
 
 배포
 
-
 > Client : Vercel  
 > Server : AWS S3
 
@@ -92,11 +91,11 @@
 
 ---
 
-## 배포 사이트
+## Flexidesk 관련 사이트
 
 [Flexidesk 서비스 이용하기](https://www.flexidesks.click/)
 
-<!-- [Flexidesk노션](https://www.notion.so/Flexidesk-91bdaba3920f405295e81ef6f1f44c7e?pvs=4) -->
+[Flexidesk노션](https://shocking-bike-e49.notion.site/Flexidesk-91bdaba3920f405295e81ef6f1f44c7e)
 
 ---
 
@@ -124,26 +123,22 @@
 
 ## 서비스 이미지 소개
 
+> 손쉽게 만드는 회사 내의 모든 업무공간
+
+![관리자 스페이스 공간](./public/img/관리자스페이스.gif)
+
 > 회사 내에서도 나에게 맞는 공간을 찾는 업무 공간 이동
 
-![스페이스 공간](./public/img/readme1.png)
+![스페이스 공간](./public/img/유저스페이스.gif)
 
-> 겹치는 시간은 피하고, 가능한 시간은 찾아주는 간편한 회의실 예약
+> 회의실 예약 및 조회
 
-![회의실 예약](./public/img/readme2.png)
+![회의실 예약현황](./public/img/회의실.gif)
 
 > 근무 일정과 연동되는 스케줄 관리
 
-![스케줄 등록하기](./public/img/readme3.png)
+![스케줄 등록하기](./public/img/스케줄.gif)
 
-> 내가 예약한 회의실을 한 눈에 확인
+> 권한 및 사용자 관리하기
 
-![회의실 예약현황](./public/img/readme4.png)
-
-> 내가 등록한 스케줄을 한 눈에 확인
-
-![스케줄 조회](./public/img/readme5.png)
-
-> 권한 관리하기
-
-![사용자 관리하기](./public/img/readme6.png)
+![사용자 관리하기](./public/img/사용자관리.gif)
