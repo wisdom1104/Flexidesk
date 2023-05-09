@@ -37,7 +37,9 @@ function CertificationCkeck({ user, certification, onChange }) {
           required
         />
         <BlueBtn type="button" onClick={submitBtnHandler} w="25%" h="50px">
-          인증확인
+          <Text shape="T14_700" color="var(--white)">
+            인증확인
+          </Text>
         </BlueBtn>
       </Container>
     </>
