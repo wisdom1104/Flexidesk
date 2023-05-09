@@ -53,13 +53,15 @@ export const useCalendar = (width, dataDay) => {
         .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
       const nowday = `${today.year}-${today.month.toString()
         .padStart(2, '0')}-${today.date.toString().padStart(2, '0')}`
-        const isSelected = selectedDate === dateStr || nowday === dateStr;
+        const isSelected = selectedDate === dateStr
+        const isToday = nowday === dateStr;
       return (
         <StDate
           key={day}
           onClick={dayClickHandler}
           value={dateStr ? dateStr : nowday}
-          background={isSelected ? 'pink' : 'white' }
+          isSelected={isSelected}
+          isToday={isToday}
           width={width}
         >
           {day}
