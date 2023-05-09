@@ -81,7 +81,6 @@ export const __deleteSchedule = createAsyncThunk(
 export const __pathScehdule = createAsyncThunk(
   'pathschedule',
   async (payload, thunk) => {
-    console.log(payload);
     try {
       const token = cookies.get('token');
       await api.patch(`/schedules/${payload.scId}`, payload, {

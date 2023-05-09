@@ -15,6 +15,9 @@ function Certification({ admin, email, onChange, errors }) {
       alert(`${newResponse}`);
       return response;
     } catch (error) {
+      if (error.response.status === 401) {
+        return alert('인증에 실패하였습니다.');
+      }
       const errorMsg = error.response.data.message;
       alert(`${errorMsg}`);
       return error;
@@ -40,7 +43,9 @@ function Certification({ admin, email, onChange, errors }) {
         />
 
         <BlueBtn type="button" onClick={onSubmitHandler} w="25%" h="50px">
-          인증확인
+          <Text shape="T14_700" color="var(--white)">
+            인증확인
+          </Text>
         </BlueBtn>
       </Container>
       <ValidationError value={errors.email} />

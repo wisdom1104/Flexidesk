@@ -2,13 +2,19 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../axios/api';
 import useTokenCheck from './useTokenCheck';
 
-export const useSignUpSubmitHandler=(auth)=> {
+export const useSignUpSubmitHandler = auth => {
   useTokenCheck();
-  
+
   const navi = useNavigate();
 
   const onSubmitHandler = async e => {
     e.preventDefault();
+    // if (
+    //   !auth.certification ||
+    //   auth.certification !== '인증번호가 유효하지 않습니다'
+    // ) {
+    //   return alert('인증번호를 다시 확인해주세요.');
+    // }
     try {
       const response = await api.post(`/users/signup/${auth.type}`, auth);
       alert(`${auth.username}님 회원가입을 축하합니다.`);
@@ -20,5 +26,5 @@ export const useSignUpSubmitHandler=(auth)=> {
       return error;
     }
   };
-  return {onSubmitHandler}
-}
+  return { onSubmitHandler };
+};
