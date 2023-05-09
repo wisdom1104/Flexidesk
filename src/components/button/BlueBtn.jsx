@@ -29,7 +29,7 @@ const StBlueBtn = styled.button`
   }
   &:active {
     color: var(--blue_001);
-    background: var(--white);
+    background: var(--blue_003);
     border: 1px solid var(--blue_001);
   }
 `;

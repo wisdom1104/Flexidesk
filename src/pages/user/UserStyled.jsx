@@ -44,6 +44,10 @@ export const InlineInput = styled.input`
   padding: 0 10px;
   padding-left: 5px;
   outline: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 30px;
+  color: #a6aebb;
   color: var(--blue_004);
   &::placeholder {
     color: #a6aebb;
