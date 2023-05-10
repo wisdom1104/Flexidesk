@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 
 export const InfoContain = styled.div`
   display: grid;
@@ -52,7 +52,19 @@ export const Day = styled.button`
 
 export const StDate = styled.button`
   min-width: ${props => props.width || 'calc(100% / 7.5)'};
-  background-color: ${props => props.background || '#ffffff'};
+  /* background-color: ${props => props.background || '#ffffff'}; */
+  background-color: white ;
+  ${props =>
+    props.isSelected &&
+    css`
+      background-color: pink;
+    `}
+
+  ${props =>
+    props.isToday &&
+    css`
+      background-color: var(--mint_003);
+    `}
   border: none;
   border-top: 0.627857px solid #c9cdd6;
   display: flex;
