@@ -9,24 +9,6 @@ const initialState = {
   error: null,
 };
 
-export const __getFloor = createAsyncThunk(
-  'getFloor',
-  async (floorId, thunk) => {
-    try {
-      const token = getCookie('token');
-      const companyName = getCookie('companyName');
-      const response = await api.get(`/floors/${companyName}/${floorId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return thunk.fulfillWithValue(response.data.data);
-    } catch (error) {
-      return error;
-    }
-  },
-);
-
 // floor 삭제
 export const __deleteFloor = createAsyncThunk(
   'deleteFloor',
@@ -77,18 +59,6 @@ export const floorSlice = createSlice({
   name: 'floor',
   initialState,
   reducers: {},
-  extraReducers: {
-    [__getFloor.pending]: state => {
-      state.isLoading = true;
-    },
-    [__getFloor.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.floor = action.payload;
-    },
-    [__getFloor.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-  },
+  extraReducers: {},
 });
 export default floorSlice.reducer;
