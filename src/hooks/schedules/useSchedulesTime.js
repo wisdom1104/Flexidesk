@@ -17,8 +17,6 @@ export const useSchedulesTime = (
     .toString()
     .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T`;
 
-  const [isCheckOut, setIsCheckOut] = useState('false');
-
   const [scheduleValue, setScheduleValue] = useState({
     scTitle: title,
     scComment: comment,
@@ -42,17 +40,6 @@ export const useSchedulesTime = (
     startList: scheduleListResult,
   };
 
-  const onClickHandler = e => {
-    if (clickSchedules.find(item => item === e.target.value)) {
-      return setClickSchedules(
-        clickSchedules.filter(item => item !== e.target.value),
-      );
-    } else {
-      setClickSchedules([...clickSchedules, e.target.value]);
-    }
-    setIsCheckOut(!isCheckOut);
-  };
-
   useEffect(() => {
     if (selectDay !== undefined) {
       dispatch(__getSchedules({ param, selectDay }));
@@ -68,8 +55,8 @@ export const useSchedulesTime = (
   }, [selectDay]);
 
   return {
-    onClickHandler,
     clickSchedules,
+    setClickSchedules,
     reqScheduleValue,
     scheduleValue,
     setScheduleValue,

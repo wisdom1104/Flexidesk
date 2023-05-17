@@ -27,6 +27,7 @@ function PathSchedulesTime({
     reqScheduleValue,
     scheduleValue,
     setScheduleValue,
+    setClickSchedules,
   } = useSchedulesTime(selectDay, param, title, comment, initDate);
   const { schedules } = useSelector(state => state.schedules);
 
@@ -36,6 +37,8 @@ function PathSchedulesTime({
     param,
     setScheduleValue,
     dispatchValue,
+    setClickSchedules,
+    clickSchedules,
     scId,
   );
 

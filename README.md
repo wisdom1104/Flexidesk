@@ -121,7 +121,10 @@
 
 ---
 
-## 서비스 이미지 소개
+## 서비스 소개
+
+[간단 소개 영상](https://youtu.be/BUG3pPoojPA)  
+[최종 발표 영상](https://youtu.be/Y6sI1O_joP4)
 
 > 손쉽게 만드는 회사 내의 모든 업무공간
 
