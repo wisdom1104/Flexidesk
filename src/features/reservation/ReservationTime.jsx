@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { useReservationTime } from '../../hooks/reservation/useReservationTime';
+import { useReservationHandler } from '../../hooks/reservation/useReservationHandler';
+
 import { Input } from '../../components/Input';
 import { Column } from '../../components/Flex';
 import IconTitle from '../../components/IconTitle';
@@ -17,6 +20,11 @@ import {
 import ReservationCheck from './ReservationCheck';
 
 function ReservationTime({ param, selectDay, mrName }) {
+  // const [userInfo, setUserInfo] = useState([]);
+  // const [userIdInfo, setUserIdInfo] = useState([]);
+  // const navi = useNavigate();
+  // const userId = cookies.get('userId');
+
   const {
     userIdInfo,
     setUserIdInfo,
@@ -33,7 +41,7 @@ function ReservationTime({ param, selectDay, mrName }) {
     onSubmitHandler,
     onChangeHandler,
     userInfo,
-  } = useReservationTime(
+  } = useReservationHandler(
     clickReservation,
     setClickReservation,
     userIdInfo,
