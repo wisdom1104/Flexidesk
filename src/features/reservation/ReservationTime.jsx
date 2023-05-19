@@ -15,7 +15,6 @@ import {
   CheckContainBox,
 } from '../../pages/reservation/ReservationAllStyle';
 import ReservationCheck from './ReservationCheck';
-import { useReservatiionHandler } from '../../hooks/reservation/useReservationHandler';
 
 function ReservationTime({ param, selectDay, mrName }) {
   const {
@@ -34,7 +33,7 @@ function ReservationTime({ param, selectDay, mrName }) {
     onSubmitHandler,
     onChangeHandler,
     userInfo,
-  } = useReservatiionHandler(
+  } = useReservationTime(
     clickReservation,
     setClickReservation,
     userIdInfo,
